@@ -1,0 +1,63 @@
+{
+  "schema": "nomad.mission.v016.plan.v1",
+  "claim": "restartable, witnessed, bounded single-file programming missions",
+  "source_freeze_before_release_seeds": "required",
+  "development_seed_excluded": 9117,
+  "cases": [
+    {
+      "name": "bin",
+      "seed": 32101,
+      "family": "bin",
+      "interrupt_at": "after_patch_write",
+      "interrupt_attempt": 1
+    },
+    {
+      "name": "const",
+      "seed": 32101,
+      "family": "const",
+      "interrupt_at": "after_rollback_write",
+      "interrupt_attempt": 1
+    },
+    {
+      "name": "neg",
+      "seed": 32203,
+      "family": "neg",
+      "interrupt_at": "after_witness",
+      "interrupt_attempt": 1
+    },
+    {
+      "name": "zero",
+      "seed": 32203,
+      "family": "zero",
+      "interrupt_at": "after_public",
+      "interrupt_attempt": 1
+    },
+    {
+      "name": "cmp",
+      "seed": 32309,
+      "family": "cmp",
+      "interrupt_at": "after_final",
+      "interrupt_attempt": 1
+    },
+    {
+      "name": "id",
+      "seed": 32309,
+      "family": "id",
+      "interrupt_at": "after_completed",
+      "interrupt_attempt": 1
+    }
+  ],
+  "control": "same task with uninterrupted mission execution",
+  "primary_gate": "identical decision projections and committed source after interrupted recovery",
+  "other_gates": [
+    "independent final evaluation",
+    "no duplicate logical action receipts",
+    "all known tamper holds"
+  ],
+  "not_claimed": [
+    "untrusted repository sandbox",
+    "external transfer improvement",
+    "exactly-once arbitrary test side effects",
+    "native Windows acceptance"
+  ]
+}

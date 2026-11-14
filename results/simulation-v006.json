@@ -1,0 +1,5253 @@
+{
+  "schema": "nomad.v0.6.witness-simulation.v1",
+  "codename": "WITNESS",
+  "claim": "independent consequence attestation and provenance gating in bounded synthetic overfit/contamination tests; not a cryptographic trust boundary or universal truth oracle",
+  "domains": [
+    "code",
+    "math",
+    "data",
+    "workflow"
+  ],
+  "families": [
+    "shift_up",
+    "shift_down",
+    "amplify",
+    "dampen",
+    "invert"
+  ],
+  "protocol": {
+    "search_evidence": "four public probes",
+    "witness_evidence": "first half of six held-out probes; never used to construct the public-overfit decoy",
+    "final_revalidation": "second half of six held-out probes; never visible to WITNESS or search",
+    "stressor": "a public-null-space polynomial candidate exactly fits all public target examples but deviates off those points",
+    "stress_mode": "overfit candidate appears on every evaluation task",
+    "mixed_mode": "deterministic approximately 25% of evaluation tasks include the overfit candidate",
+    "witness_role": "recompute factual consequence claims from observations; does not choose goals or transformations",
+    "promotion_boundary": "durable skill memory accepts outcome evidence only through context-bound WITNESS receipts",
+    "stale_rule": "receipt epoch must exactly match the current world epoch",
+    "integrity_rule": "receipt checksum detects field mutation when the checksum is not recomputed; this is not a digital signature",
+    "controls": [
+      "public-only self-certification",
+      "inline held-out challenge without durable receipt",
+      "fixed search with WITNESS",
+      "ECHO MAP search with WITNESS"
+    ]
+  },
+  "seeds": [
+    11,
+    17,
+    23,
+    31,
+    47
+  ],
+  "stress": {
+    "runs": [
+      {
+        "seed": 11,
+        "mode": "stress",
+        "rows": [
+          {
+            "held_out_domain": "code",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.3,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 8,
+            "contested_skills": 11
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.3,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 8,
+            "contested_skills": 11
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.32,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 8
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.32,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 8
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.26,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 12
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.26,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 12
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 10
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.1,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 10
+          }
+        ],
+        "echo_maps": {
+          "code": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "absolute.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.6970627870508799,
+              "ratio.rms": 1.1297724112386676,
+              "absolute.spread": 6.39,
+              "absolute.rms": 5.113693587352348
+            },
+            "scale": {
+              "ratio.mean": 0.9893582323151455,
+              "ratio.rms": 0.508641967285151,
+              "absolute.spread": 7.609559777017327,
+              "absolute.rms": 5.3812398256664
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3112470726633611,
+                -0.06981120343667843,
+                -0.8397332023462531,
+                -0.7644508924749358
+              ],
+              "shift_down": [
+                0.28630024825924416,
+                -0.14779326769015477,
+                -0.8397332023462531,
+                -0.7644508924749358
+              ],
+              "amplify": [
+                1.316951909219156,
+                1.7108843641159324,
+                0.38022348442177767,
+                0.3241093685762987
+              ],
+              "dampen": [
+                -0.19918244030753504,
+                -1.238144808616646,
+                -0.18704542378813252,
+                -0.3113304736001006
+              ],
+              "invert": [
+                -1.715316789834226,
+                -0.2551350843724532,
+                1.4862883440588612,
+                1.5161228899736734
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 46.705479758258534,
+              "ratio.rms": 10.159175907155268,
+              "absolute.spread": 3.1628945035091753,
+              "absolute.rms": 2.757625626160959
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "math": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "absolute.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7019453611951929,
+              "ratio.rms": 1.126756753026869,
+              "absolute.spread": 6.266666666666667,
+              "absolute.rms": 5.126896635295221
+            },
+            "scale": {
+              "ratio.mean": 0.9907488912671647,
+              "ratio.rms": 0.5085003607439869,
+              "absolute.spread": 7.681507375219759,
+              "absolute.rms": 5.5365107896880215
+            },
+            "prototypes": {
+              "shift_up": [
+                0.31937161206166126,
+                -0.04428611750764448,
+                -0.8158121004846897,
+                -0.7453966572198749
+              ],
+              "shift_down": [
+                0.29212146042688464,
+                -0.19117043309188025,
+                -0.8158121004846897,
+                -0.7453966572198749
+              ],
+              "amplify": [
+                1.310175212151486,
+                1.717291302793746,
+                0.3862089199103052,
+                0.3245630975266155
+              ],
+              "dampen": [
+                -0.2038310241628486,
+                -1.232559111875282,
+                -0.22998958151961996,
+                -0.35576446133754724
+              ],
+              "invert": [
+                -1.7178372604771832,
+                -0.2492756403189393,
+                1.475404862578694,
+                1.5219946782506812
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 47.26450522553595,
+              "ratio.rms": 10.599235886989906,
+              "absolute.spread": 2.875881296800528,
+              "absolute.rms": 2.730256804638567
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "data": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "absolute.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7039560751330617,
+              "ratio.rms": 1.132038029508786,
+              "absolute.spread": 6.151666666666666,
+              "absolute.rms": 5.021344298191735
+            },
+            "scale": {
+              "ratio.mean": 0.9888095564817847,
+              "ratio.rms": 0.502085508915184,
+              "absolute.spread": 7.358266137858535,
+              "absolute.rms": 5.196749523084985
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3087667342721877,
+                -0.08627820278813868,
+                -0.8360212244860413,
+                -0.7738191498990151
+              ],
+              "shift_down": [
+                0.31002605690615753,
+                -0.12063059985406424,
+                -0.8360212244860413,
+                -0.7738191498990151
+              ],
+              "amplify": [
+                1.3107113663811087,
+                1.7287134463740053,
+                0.4550437930079808,
+                0.39764189365567587
+              ],
+              "dampen": [
+                -0.20626426372611503,
+                -1.2588254755138821,
+                -0.2074764133376358,
+                -0.32379898373445143
+              ],
+              "invert": [
+                -1.723239893833339,
+                -0.2629791682179196,
+                1.4244750693017378,
+                1.4737953898768055
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 62.70888912814706,
+              "ratio.rms": 13.891831846613162,
+              "absolute.spread": 2.779585216237536,
+              "absolute.rms": 2.656654377409589
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "workflow": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "absolute.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.6981225058814321,
+              "ratio.rms": 1.1241808572917842,
+              "absolute.spread": 6.851666666666667,
+              "absolute.rms": 5.38335915963099
+            },
+            "scale": {
+              "ratio.mean": 0.987139040635767,
+              "ratio.rms": 0.502607290343208,
+              "absolute.spread": 8.302464326264154,
+              "absolute.rms": 5.711197553206373
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3111012285051016,
+                -0.11334899896775023,
+                -0.8252569836394226,
+                -0.7675026329933361
+              ],
+              "shift_down": [
+                0.29101001740559973,
+                -0.1402434788445235,
+                -0.8252569836394226,
+                -0.7675026329933361
+              ],
+              "amplify": [
+                1.31883902928213,
+                1.7425516094487175,
+                0.32299646963654366,
+                0.2858617095083862
+              ],
+              "dampen": [
+                -0.20070374863690052,
+                -1.2418858008716092,
+                -0.19191089184122792,
+                -0.2998442898087197
+              ],
+              "invert": [
+                -1.7202465265559308,
+                -0.24707333076483362,
+                1.5194283894835294,
+                1.548987846287006
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 61.76462867982258,
+              "ratio.rms": 14.259157576006007,
+              "absolute.spread": 3.208461312119389,
+              "absolute.rms": 2.997145866266648
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          }
+        }
+      },
+      {
+        "seed": 17,
+        "mode": "stress",
+        "rows": [
+          {
+            "held_out_domain": "code",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.22,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 12
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.22,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 12
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.18,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 10
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.18,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 10
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.28,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 8,
+            "contested_skills": 9
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.28,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 8,
+            "contested_skills": 9
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.18,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 10
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.18,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 10
+          }
+        ],
+        "echo_maps": {
+          "code": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7073410315403086,
+              "ratio.rms": 1.141542683869266,
+              "absolute.rms": 5.70397233065079,
+              "difference.rms": 5.70397233065079
+            },
+            "scale": {
+              "ratio.mean": 0.9930732913691717,
+              "ratio.rms": 0.5045228949574514,
+              "absolute.rms": 6.266844938603757,
+              "difference.rms": 6.266844938603757
+            },
+            "prototypes": {
+              "shift_up": [
+                0.30290871316350465,
+                -0.11427697555492262,
+                -0.7506125293884848,
+                -0.7506125293884848
+              ],
+              "shift_down": [
+                0.32345300658764187,
+                -0.035115547847922084,
+                -0.7506125293884848,
+                -0.7506125293884848
+              ],
+              "amplify": [
+                1.3016752939528506,
+                1.7015230125545273,
+                0.2753185992194074,
+                0.2753185992194074
+              ],
+              "dampen": [
+                -0.20878723991704884,
+                -1.2715828960019149,
+                -0.31995222588714006,
+                -0.31995222588714006
+              ],
+              "invert": [
+                -1.7192497737869483,
+                -0.28054759314976746,
+                1.5458586854447023,
+                1.5458586854447023
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 44.514957479865465,
+              "ratio.rms": 11.661526396948839,
+              "absolute.rms": 2.8304993961100875,
+              "difference.rms": 2.8304993961100875
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "math": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "difference.spread",
+              "absolute.spread"
+            ],
+            "center": {
+              "ratio.mean": 0.694051285940399,
+              "ratio.rms": 1.1348702858600739,
+              "difference.spread": 11.83,
+              "absolute.spread": 7.56
+            },
+            "scale": {
+              "ratio.mean": 0.991023488652984,
+              "ratio.rms": 0.5052697913849429,
+              "difference.spread": 15.164413385730862,
+              "absolute.spread": 10.096644657178608
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3242366431924357,
+                -0.03534363658959226,
+                -0.7801159002386193,
+                -0.7487635998583866
+              ],
+              "shift_down": [
+                0.26319025888076375,
+                -0.15344489588593413,
+                -0.7801159002386193,
+                -0.7487635998583866
+              ],
+              "amplify": [
+                1.3177777610848245,
+                1.7122134132907656,
+                0.1881598226554686,
+                0.14262163806826417
+              ],
+              "dampen": [
+                -0.19580896735773318,
+                -1.2564976111472972,
+                -0.21959306405702472,
+                -0.26345385920943226
+              ],
+              "invert": [
+                -1.7093956958002905,
+                -0.26692726966794283,
+                1.5916650418787948,
+                1.6183594208579415
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 37.85352185645064,
+              "ratio.rms": 11.706664216227358,
+              "difference.spread": 3.288843206838084,
+              "absolute.spread": 3.273978939423727
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "data": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7027295142589132,
+              "ratio.rms": 1.136730598945035,
+              "absolute.rms": 5.982318201794931,
+              "difference.rms": 5.982318201794931
+            },
+            "scale": {
+              "ratio.mean": 0.9926294701131853,
+              "ratio.rms": 0.5054068540499307,
+              "absolute.rms": 6.674890306150336,
+              "difference.rms": 6.674890306150336
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3175743164413537,
+                -0.054525829737575034,
+                -0.7464269783136593,
+                -0.7464269783136593
+              ],
+              "shift_down": [
+                0.29513018316149425,
+                -0.12316903618132362,
+                -0.7464269783136593,
+                -0.7464269783136593
+              ],
+              "amplify": [
+                1.3069030537579795,
+                1.7080682506329445,
+                0.2317476399716892,
+                0.2317476399716892
+              ],
+              "dampen": [
+                -0.2042348332009494,
+                -1.259837680955016,
+                -0.2922900303612002,
+                -0.2922900303612002
+              ],
+              "invert": [
+                -1.7153727201598783,
+                -0.27053570375902913,
+                1.5533963470168295,
+                1.5533963470168295
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 40.72448969061062,
+              "ratio.rms": 11.376892485304555,
+              "absolute.rms": 2.7494950629461834,
+              "difference.rms": 2.7494950629461834
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "workflow": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.693744776465842,
+              "ratio.rms": 1.12946137262826,
+              "absolute.rms": 5.739802958162792,
+              "difference.rms": 5.739802958162792
+            },
+            "scale": {
+              "ratio.mean": 0.9889083904399727,
+              "ratio.rms": 0.5002592399066197,
+              "absolute.rms": 6.611674926582446,
+              "difference.rms": 6.611674926582446
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3095373304051158,
+                -0.10772131910376366,
+                -0.7168838472542359,
+                -0.7168838472542359
+              ],
+              "shift_down": [
+                0.2782161309027921,
+                -0.11539476394160848,
+                -0.7168838472542359,
+                -0.7168838472542359
+              ],
+              "amplify": [
+                1.320906199362911,
+                1.7401750091297423,
+                0.22074782511179195,
+                0.22074782511179195
+              ],
+              "dampen": [
+                -0.19591782043596928,
+                -1.258270357476571,
+                -0.3387538146896514,
+                -0.3387538146896514
+              ],
+              "invert": [
+                -1.7127418402348495,
+                -0.25878856860779986,
+                1.5517736840863317,
+                1.5517736840863317
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 44.404668651536646,
+              "ratio.rms": 15.854579051418739,
+              "absolute.rms": 2.569720757834,
+              "difference.rms": 2.569720757834
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          }
+        }
+      },
+      {
+        "seed": 23,
+        "mode": "stress",
+        "rows": [
+          {
+            "held_out_domain": "code",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.24,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 9
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.24,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 9
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.2,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 8,
+            "contested_skills": 12
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.2,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 8,
+            "contested_skills": 12
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.22,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 10
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.22,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 10
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.24,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 10
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.24,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 10
+          }
+        ],
+        "echo_maps": {
+          "code": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "difference.spread"
+            ],
+            "center": {
+              "ratio.mean": 0.713585444865592,
+              "ratio.rms": 1.1501649137338756,
+              "absolute.spread": 6.696666666666666,
+              "difference.spread": 11.516666666666667
+            },
+            "scale": {
+              "ratio.mean": 0.9972280291612717,
+              "ratio.rms": 0.5101479266618245,
+              "absolute.spread": 8.659031251948582,
+              "difference.spread": 15.511626463899766
+            },
+            "prototypes": {
+              "shift_up": [
+                0.37028935206625807,
+                0.010517951708710536,
+                -0.7733736571466565,
+                -0.7424538421853714
+              ],
+              "shift_down": [
+                0.27224807754820035,
+                -0.10755893964786134,
+                -0.7733736571466565,
+                -0.7424538421853714
+              ],
+              "amplify": [
+                1.289990370824574,
+                1.6658601198814191,
+                0.12741995048060897,
+                0.1386057100461836
+              ],
+              "dampen": [
+                -0.2141791432048195,
+                -1.2744635031416445,
+                -0.14012345007535237,
+                -0.16331835602341024
+              ],
+              "invert": [
+                -1.7183486572342133,
+                -0.2943556288006233,
+                1.5594508138880567,
+                1.5096203303479692
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 38.6520736639103,
+              "ratio.rms": 8.953654763155681,
+              "absolute.spread": 2.7424334351923347,
+              "difference.spread": 2.179272942423343
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "math": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "absolute.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7107051415431833,
+              "ratio.rms": 1.1453588268091228,
+              "absolute.spread": 6.378333333333333,
+              "absolute.rms": 5.182610513183284
+            },
+            "scale": {
+              "ratio.mean": 0.9939211453653836,
+              "ratio.rms": 0.5068432060438014,
+              "absolute.spread": 7.596695370722427,
+              "absolute.rms": 5.7161254303338
+            },
+            "prototypes": {
+              "shift_up": [
+                0.37748211035643314,
+                0.031422651971679025,
+                -0.83961946900166,
+                -0.7317212619211254
+              ],
+              "shift_down": [
+                0.2584993531400225,
+                -0.15754354855346636,
+                -0.83961946900166,
+                -0.7317212619211254
+              ],
+              "amplify": [
+                1.2971802285007714,
+                1.6862042600153135,
+                0.23102150531976695,
+                0.1552226219001675
+              ],
+              "dampen": [
+                -0.21199382116548518,
+                -1.2732908700631786,
+                -0.10794167200125857,
+                -0.20365524987609807
+              ],
+              "invert": [
+                -1.7211678708317417,
+                -0.28679249337034796,
+                1.5561591046848118,
+                1.5118751518181812
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 48.677801794137494,
+              "ratio.rms": 10.698964122249679,
+              "absolute.spread": 3.5313464250136093,
+              "absolute.rms": 2.1689051976171565
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "data": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "difference.spread"
+            ],
+            "center": {
+              "ratio.mean": 0.7108825908821523,
+              "ratio.rms": 1.1465925510171664,
+              "absolute.spread": 6.92,
+              "difference.spread": 11.465
+            },
+            "scale": {
+              "ratio.mean": 0.997869138831348,
+              "ratio.rms": 0.5118003172133696,
+              "absolute.spread": 8.841866318826586,
+              "difference.spread": 14.64718488310979
+            },
+            "prototypes": {
+              "shift_up": [
+                0.4184729160822557,
+                0.08728710238946694,
+                -0.7826401972698408,
+                -0.7827442673452367
+              ],
+              "shift_down": [
+                0.21552581985157693,
+                -0.20495476480202038,
+                -0.7826401972698408,
+                -0.7827442673452367
+              ],
+              "amplify": [
+                1.2918702051729893,
+                1.6674617429497371,
+                0.14476581683603992,
+                0.19127680090236124
+              ],
+              "dampen": [
+                -0.2113329119779443,
+                -1.2633687969122573,
+                -0.16436952119925363,
+                -0.18706666310736578
+              ],
+              "invert": [
+                -1.7145360291288778,
+                -0.2864252836249258,
+                1.5848840989028952,
+                1.561278396895478
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 38.93450178287463,
+              "ratio.rms": 9.166616986277816,
+              "absolute.spread": 3.114831601292528,
+              "difference.spread": 2.951157871796156
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "workflow": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "difference.spread"
+            ],
+            "center": {
+              "ratio.mean": 0.704309137855513,
+              "ratio.rms": 1.1400613688101986,
+              "absolute.spread": 6.665,
+              "difference.spread": 11.171666666666667
+            },
+            "scale": {
+              "ratio.mean": 0.9929750442349072,
+              "ratio.rms": 0.506877240170102,
+              "absolute.spread": 8.345099859598246,
+              "difference.spread": 14.572352151324859
+            },
+            "prototypes": {
+              "shift_up": [
+                0.38442355857138377,
+                0.04365981838941655,
+                -0.7986722881852811,
+                -0.7666344149973746
+              ],
+              "shift_down": [
+                0.23284010492662782,
+                -0.20112574355626495,
+                -0.7986722881852811,
+                -0.7666344149973746
+              ],
+              "amplify": [
+                1.3048574278549205,
+                1.6965422059613806,
+                0.22787823976479266,
+                0.27186185356538256
+              ],
+              "dampen": [
+                -0.2057545544993372,
+                -1.262754209668995,
+                -0.1406014730888817,
+                -0.1861973485925296
+              ],
+              "invert": [
+                -1.716366536853595,
+                -0.27632207112553653,
+                1.5100678096946516,
+                1.4476043250218962
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 45.68443386524503,
+              "ratio.rms": 11.240359992497783,
+              "absolute.spread": 2.643669270361204,
+              "difference.spread": 2.0856450169270584
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          }
+        }
+      },
+      {
+        "seed": 31,
+        "mode": "stress",
+        "rows": [
+          {
+            "held_out_domain": "code",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.26,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 10
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.26,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 10
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.34,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 10
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.34,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 10
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.32,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 8
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.32,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 8
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.14,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 12
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.14,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 12
+          }
+        ],
+        "echo_maps": {
+          "code": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7061039639412194,
+              "ratio.rms": 1.1353045223421625,
+              "absolute.rms": 5.4352551442547545,
+              "difference.rms": 5.4352551442547545
+            },
+            "scale": {
+              "ratio.mean": 0.9919026101833556,
+              "ratio.rms": 0.5074163760197098,
+              "absolute.rms": 5.927239507858519,
+              "difference.rms": 5.927239507858519
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3140733660968798,
+                -0.05579714434775708,
+                -0.7482834358851798,
+                -0.7482834358851798
+              ],
+              "shift_down": [
+                0.3092861104039046,
+                -0.1296253950498638,
+                -0.7482834358851798,
+                -0.7482834358851798
+              ],
+              "amplify": [
+                1.3044587470332403,
+                1.704114251181065,
+                0.18486795380265628,
+                0.18486795380265628
+              ],
+              "dampen": [
+                -0.20778649216692818,
+                -1.2520378773062797,
+                -0.2852338454463782,
+                -0.2852338454463782
+              ],
+              "invert": [
+                -1.7200317313670968,
+                -0.2666538344771648,
+                1.5969327634140813,
+                1.5969327634140813
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 47.82668656546825,
+              "ratio.rms": 10.43182614055872,
+              "absolute.rms": 3.1172085569566805,
+              "difference.rms": 3.1172085569566805
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "math": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "absolute.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.701985398741552,
+              "ratio.rms": 1.1304411924755187,
+              "absolute.spread": 6.991666666666666,
+              "absolute.rms": 5.415053679880853
+            },
+            "scale": {
+              "ratio.mean": 0.9898195466892976,
+              "ratio.rms": 0.5056460160756798,
+              "absolute.spread": 8.29926787266336,
+              "absolute.rms": 5.614546388089498
+            },
+            "prototypes": {
+              "shift_up": [
+                0.28749253804754177,
+                -0.11362628447983596,
+                -0.8424437882883921,
+                -0.7863598187106965
+              ],
+              "shift_down": [
+                0.3246960151603941,
+                -0.10129961055021236,
+                -0.8424437882883921,
+                -0.7863598187106965
+              ],
+              "amplify": [
+                1.3113648902974153,
+                1.7196987217918371,
+                0.42071984182698013,
+                0.28847906739696866
+              ],
+              "dampen": [
+                -0.2040628510693119,
+                -1.2468034404154404,
+                -0.20684555469297822,
+                -0.25822278117530234
+              ],
+              "invert": [
+                -1.7194905924360389,
+                -0.25796938634634786,
+                1.4710132894427823,
+                1.5424633511997263
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 52.2180314744485,
+              "ratio.rms": 11.550303516563313,
+              "absolute.spread": 3.1774355362997944,
+              "absolute.rms": 3.0512594377104083
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "data": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7019832265941534,
+              "ratio.rms": 1.1295268886429357,
+              "absolute.rms": 5.480130574338004,
+              "difference.rms": 5.480130574338004
+            },
+            "scale": {
+              "ratio.mean": 0.9905350350766007,
+              "ratio.rms": 0.5036371539229608,
+              "absolute.rms": 6.093921333717654,
+              "difference.rms": 6.093921333717654
+            },
+            "prototypes": {
+              "shift_up": [
+                0.2556578394985237,
+                -0.17272730913530152,
+                -0.7351802442131063,
+                -0.7351802442131063
+              ],
+              "shift_down": [
+                0.35608193579937925,
+                -0.04850206841025607,
+                -0.7351802442131063,
+                -0.7351802442131063
+              ],
+              "amplify": [
+                1.3104198513336456,
+                1.728373501789379,
+                0.14411138433756723,
+                0.14411138433756723
+              ],
+              "dampen": [
+                -0.2039132584326343,
+                -1.2499611749041686,
+                -0.2864669452887108,
+                -0.2864669452887108
+              ],
+              "invert": [
+                -1.7182463681989144,
+                -0.25718294933965274,
+                1.612716049377356,
+                1.612716049377356
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 50.70987033745407,
+              "ratio.rms": 13.204874092603108,
+              "absolute.rms": 3.11409010607862,
+              "difference.rms": 3.11409010607862
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "workflow": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7040017687355155,
+              "ratio.rms": 1.1334670937563633,
+              "absolute.rms": 5.43527808100468,
+              "difference.rms": 5.43527808100468
+            },
+            "scale": {
+              "ratio.mean": 0.989575156002008,
+              "ratio.rms": 0.5039053731890332,
+              "absolute.rms": 5.686574292326628,
+              "difference.rms": 5.686574292326628
+            },
+            "prototypes": {
+              "shift_up": [
+                0.2901114607956629,
+                -0.10302854355500647,
+                -0.7799560601871627,
+                -0.7799560601871627
+              ],
+              "shift_down": [
+                0.32834111705513386,
+                -0.09462507164775692,
+                -0.7799560601871627,
+                -0.7799560601871627
+              ],
+              "amplify": [
+                1.3096511400917332,
+                1.7196341859973951,
+                0.21431115162039002,
+                0.21431115162039002
+              ],
+              "dampen": [
+                -0.20615085928359897,
+                -1.257115179676258,
+                -0.2577568359581449,
+                -0.2577568359581449
+              ],
+              "invert": [
+                -1.7219528586589314,
+                -0.2648653911183737,
+                1.6033578047120802,
+                1.6033578047120802
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 57.670628075101796,
+              "ratio.rms": 12.412116782771143,
+              "absolute.rms": 3.544574623956168,
+              "difference.rms": 3.544574623956168
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          }
+        }
+      },
+      {
+        "seed": 47,
+        "mode": "stress",
+        "rows": [
+          {
+            "held_out_domain": "code",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.32,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 9
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.32,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 9
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.2,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 13
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.2,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 13
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.32,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 11
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.32,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 11
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 0,
+            "false_certifications": 50,
+            "total": 50,
+            "mean_attempts": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.24,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 4,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 12
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 2.24,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 12
+          }
+        ],
+        "echo_maps": {
+          "code": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.mean",
+              "absolute.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7005810899880693,
+              "ratio.rms": 1.143361990057309,
+              "absolute.mean": 4.6475,
+              "absolute.rms": 5.347110388831838
+            },
+            "scale": {
+              "ratio.mean": 0.9948353917865956,
+              "ratio.rms": 0.504574760851781,
+              "absolute.mean": 5.012444305592498,
+              "absolute.rms": 5.918216411187296
+            },
+            "prototypes": {
+              "shift_up": [
+                0.35709741385097704,
+                -0.026259166653765733,
+                -0.7276888834316625,
+                -0.7345304880393403
+              ],
+              "shift_down": [
+                0.24776975807739118,
+                -0.11230113253767658,
+                -0.7276888834316625,
+                -0.7345304880393403
+              ],
+              "amplify": [
+                1.3061647391518132,
+                1.6977424881430576,
+                0.2748160210903674,
+                0.2860409962730824
+              ],
+              "dampen": [
+                -0.2016223906427893,
+                -1.2750578109995814,
+                -0.3926893174927089,
+                -0.37136148384328166
+              ],
+              "invert": [
+                -1.7094095204373918,
+                -0.284124377952035,
+                1.5732510632656664,
+                1.55438146364888
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 34.13882193063197,
+              "ratio.rms": 11.566910241039386,
+              "absolute.mean": 3.0450124969151275,
+              "absolute.rms": 2.890749659103538
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "math": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7236134863268635,
+              "ratio.rms": 1.1590049581656587,
+              "absolute.rms": 5.793655728889633,
+              "difference.rms": 5.793655728889633
+            },
+            "scale": {
+              "ratio.mean": 1.0017637542095559,
+              "ratio.rms": 0.5068759678002006,
+              "absolute.rms": 6.426792159528032,
+              "difference.rms": 6.426792159528032
+            },
+            "prototypes": {
+              "shift_up": [
+                0.36709644530486535,
+                0.014300285839332757,
+                -0.745886222846464,
+                -0.745886222846464
+              ],
+              "shift_down": [
+                0.3025628991879077,
+                -0.059646932678356974,
+                -0.745886222846464,
+                -0.745886222846464
+              ],
+              "amplify": [
+                1.2741392452158267,
+                1.6591732401206345,
+                0.32401775023964813,
+                0.32401775023964813
+              ],
+              "dampen": [
+                -0.223219781497591,
+                -1.3001306039930938,
+                -0.3218471775684266,
+                -0.3218471775684266
+              ],
+              "invert": [
+                -1.7205788082110087,
+                -0.3136959892885176,
+                1.4896018730217067,
+                1.4896018730217067
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 34.70240966574915,
+              "ratio.rms": 9.997781574854875,
+              "absolute.rms": 2.425078310166998,
+              "difference.rms": 2.425078310166998
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "data": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7072504787183597,
+              "ratio.rms": 1.1486364586879665,
+              "absolute.rms": 5.51529864133946,
+              "difference.rms": 5.51529864133946
+            },
+            "scale": {
+              "ratio.mean": 0.9975368897111305,
+              "ratio.rms": 0.5058885718158228,
+              "absolute.rms": 6.033743798850962,
+              "difference.rms": 6.033743798850962
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3907256682231671,
+                0.032554751073533617,
+                -0.7483411281399341,
+                -0.7483411281399341
+              ],
+              "shift_down": [
+                0.23256099171692537,
+                -0.13947676305326512,
+                -0.7483411281399341,
+                -0.7483411281399341
+              ],
+              "amplify": [
+                1.2959415682922746,
+                1.6829072423126148,
+                0.32465565044567624,
+                0.32465565044567624
+              ],
+              "dampen": [
+                -0.20776221998003083,
+                -1.282172586662253,
+                -0.3440218364456148,
+                -0.3440218364456148
+              ],
+              "invert": [
+                -1.7114660082523365,
+                -0.2938126436706304,
+                1.516048442279807,
+                1.516048442279807
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 34.33487709948195,
+              "ratio.rms": 10.989912462500888,
+              "absolute.rms": 2.682384288339276,
+              "difference.rms": 2.682384288339276
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "workflow": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7265793757853367,
+              "ratio.rms": 1.158533282709974,
+              "absolute.rms": 5.523285219469078,
+              "difference.rms": 5.523285219469078
+            },
+            "scale": {
+              "ratio.mean": 0.9996890620610598,
+              "ratio.rms": 0.5059246992255985,
+              "absolute.rms": 6.281511194322145,
+              "difference.rms": 6.281511194322145
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3848131984233666,
+                0.03580872864238683,
+                -0.7200950662250946,
+                -0.7200950662250946
+              ],
+              "shift_down": [
+                0.295136351044138,
+                -0.08403754986306758,
+                -0.7200950662250946,
+                -0.7200950662250946
+              ],
+              "amplify": [
+                1.273816702154619,
+                1.6632252162782926,
+                0.22915512312744804,
+                0.22915512312744804
+              ],
+              "dampen": [
+                -0.22664984982250164,
+                -1.3016428802902253,
+                -0.33098396876716984,
+                -0.33098396876716984
+              ],
+              "invert": [
+                -1.7271164017996221,
+                -0.31335351476738604,
+                1.5420189780899107,
+                1.5420189780899107
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 45.33786042765705,
+              "ratio.rms": 10.550740183357673,
+              "absolute.rms": 2.513601703619723,
+              "difference.rms": 2.513601703619723
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          }
+        }
+      }
+    ],
+    "summary": {
+      "domains": {
+        "code": {
+          "public_only_self": {
+            "total": 250,
+            "final_correct": 0,
+            "final_correct_rate": 0.0,
+            "false_certifications": 250,
+            "false_certification_rate": 1.0,
+            "mean_attempts_across_runs": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "inline_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 2.268,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "witness_fixed": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 4,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 7.2,
+            "contested_skills_mean": 10.2
+          },
+          "witness_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 2.268,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 7.2,
+            "contested_skills_mean": 10.2
+          }
+        },
+        "math": {
+          "public_only_self": {
+            "total": 250,
+            "final_correct": 0,
+            "final_correct_rate": 0.0,
+            "false_certifications": 250,
+            "false_certification_rate": 1.0,
+            "mean_attempts_across_runs": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "inline_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 2.248,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "witness_fixed": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 4,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 6.8,
+            "contested_skills_mean": 10.6
+          },
+          "witness_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 2.248,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 6.8,
+            "contested_skills_mean": 10.6
+          }
+        },
+        "data": {
+          "public_only_self": {
+            "total": 250,
+            "final_correct": 0,
+            "final_correct_rate": 0.0,
+            "false_certifications": 250,
+            "false_certification_rate": 1.0,
+            "mean_attempts_across_runs": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "inline_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 2.28,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "witness_fixed": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 4,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 6.8,
+            "contested_skills_mean": 10
+          },
+          "witness_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 2.28,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 6.8,
+            "contested_skills_mean": 10
+          }
+        },
+        "workflow": {
+          "public_only_self": {
+            "total": 250,
+            "final_correct": 0,
+            "final_correct_rate": 0.0,
+            "false_certifications": 250,
+            "false_certification_rate": 1.0,
+            "mean_attempts_across_runs": 1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "inline_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 2.18,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "witness_fixed": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 4,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 7,
+            "contested_skills_mean": 10.8
+          },
+          "witness_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 2.18,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 7,
+            "contested_skills_mean": 10.8
+          }
+        }
+      },
+      "overall": {
+        "public_only_self_mean_attempts": 1,
+        "public_only_self_final_correct_rate": 0.0,
+        "public_only_self_false_certification_rate": 1.0,
+        "inline_echo_mean_attempts": 2.2439999999999998,
+        "inline_echo_final_correct_rate": 1.0,
+        "inline_echo_false_certification_rate": 0.0,
+        "witness_fixed_mean_attempts": 4,
+        "witness_fixed_final_correct_rate": 1.0,
+        "witness_fixed_false_certification_rate": 0.0,
+        "witness_echo_mean_attempts": 2.2439999999999998,
+        "witness_echo_final_correct_rate": 1.0,
+        "witness_echo_false_certification_rate": 0.0,
+        "witness_echo_attempt_reduction_vs_witness_fixed": 0.43900000000000006,
+        "witness_stale_rejection_rate": 1.0,
+        "witness_tamper_detection_rate": 1.0
+      }
+    }
+  },
+  "mixed": {
+    "runs": [
+      {
+        "seed": 11,
+        "mode": "mixed",
+        "rows": [
+          {
+            "held_out_domain": "code",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 33,
+            "false_certifications": 17,
+            "total": 50,
+            "mean_attempts": 1.18,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.64,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.34,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 8,
+            "contested_skills": 9
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.64,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 8,
+            "contested_skills": 9
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 42,
+            "false_certifications": 8,
+            "total": 50,
+            "mean_attempts": 1.32,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.48,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.16,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 5
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.48,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 5
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 37,
+            "false_certifications": 13,
+            "total": 50,
+            "mean_attempts": 1.14,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.52,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.26,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 7
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.52,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 7
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 34,
+            "false_certifications": 16,
+            "total": 50,
+            "mean_attempts": 1.08,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.42,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.32,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 6
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.42,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 6
+          }
+        ],
+        "echo_maps": {
+          "code": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "absolute.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.6970627870508799,
+              "ratio.rms": 1.1297724112386676,
+              "absolute.spread": 6.39,
+              "absolute.rms": 5.113693587352348
+            },
+            "scale": {
+              "ratio.mean": 0.9893582323151455,
+              "ratio.rms": 0.508641967285151,
+              "absolute.spread": 7.609559777017327,
+              "absolute.rms": 5.3812398256664
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3112470726633611,
+                -0.06981120343667843,
+                -0.8397332023462531,
+                -0.7644508924749358
+              ],
+              "shift_down": [
+                0.28630024825924416,
+                -0.14779326769015477,
+                -0.8397332023462531,
+                -0.7644508924749358
+              ],
+              "amplify": [
+                1.316951909219156,
+                1.7108843641159324,
+                0.38022348442177767,
+                0.3241093685762987
+              ],
+              "dampen": [
+                -0.19918244030753504,
+                -1.238144808616646,
+                -0.18704542378813252,
+                -0.3113304736001006
+              ],
+              "invert": [
+                -1.715316789834226,
+                -0.2551350843724532,
+                1.4862883440588612,
+                1.5161228899736734
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 46.705479758258534,
+              "ratio.rms": 10.159175907155268,
+              "absolute.spread": 3.1628945035091753,
+              "absolute.rms": 2.757625626160959
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "math": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "absolute.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7019453611951929,
+              "ratio.rms": 1.126756753026869,
+              "absolute.spread": 6.266666666666667,
+              "absolute.rms": 5.126896635295221
+            },
+            "scale": {
+              "ratio.mean": 0.9907488912671647,
+              "ratio.rms": 0.5085003607439869,
+              "absolute.spread": 7.681507375219759,
+              "absolute.rms": 5.5365107896880215
+            },
+            "prototypes": {
+              "shift_up": [
+                0.31937161206166126,
+                -0.04428611750764448,
+                -0.8158121004846897,
+                -0.7453966572198749
+              ],
+              "shift_down": [
+                0.29212146042688464,
+                -0.19117043309188025,
+                -0.8158121004846897,
+                -0.7453966572198749
+              ],
+              "amplify": [
+                1.310175212151486,
+                1.717291302793746,
+                0.3862089199103052,
+                0.3245630975266155
+              ],
+              "dampen": [
+                -0.2038310241628486,
+                -1.232559111875282,
+                -0.22998958151961996,
+                -0.35576446133754724
+              ],
+              "invert": [
+                -1.7178372604771832,
+                -0.2492756403189393,
+                1.475404862578694,
+                1.5219946782506812
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 47.26450522553595,
+              "ratio.rms": 10.599235886989906,
+              "absolute.spread": 2.875881296800528,
+              "absolute.rms": 2.730256804638567
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "data": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "absolute.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7039560751330617,
+              "ratio.rms": 1.132038029508786,
+              "absolute.spread": 6.151666666666666,
+              "absolute.rms": 5.021344298191735
+            },
+            "scale": {
+              "ratio.mean": 0.9888095564817847,
+              "ratio.rms": 0.502085508915184,
+              "absolute.spread": 7.358266137858535,
+              "absolute.rms": 5.196749523084985
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3087667342721877,
+                -0.08627820278813868,
+                -0.8360212244860413,
+                -0.7738191498990151
+              ],
+              "shift_down": [
+                0.31002605690615753,
+                -0.12063059985406424,
+                -0.8360212244860413,
+                -0.7738191498990151
+              ],
+              "amplify": [
+                1.3107113663811087,
+                1.7287134463740053,
+                0.4550437930079808,
+                0.39764189365567587
+              ],
+              "dampen": [
+                -0.20626426372611503,
+                -1.2588254755138821,
+                -0.2074764133376358,
+                -0.32379898373445143
+              ],
+              "invert": [
+                -1.723239893833339,
+                -0.2629791682179196,
+                1.4244750693017378,
+                1.4737953898768055
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 62.70888912814706,
+              "ratio.rms": 13.891831846613162,
+              "absolute.spread": 2.779585216237536,
+              "absolute.rms": 2.656654377409589
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "workflow": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "absolute.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.6981225058814321,
+              "ratio.rms": 1.1241808572917842,
+              "absolute.spread": 6.851666666666667,
+              "absolute.rms": 5.38335915963099
+            },
+            "scale": {
+              "ratio.mean": 0.987139040635767,
+              "ratio.rms": 0.502607290343208,
+              "absolute.spread": 8.302464326264154,
+              "absolute.rms": 5.711197553206373
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3111012285051016,
+                -0.11334899896775023,
+                -0.8252569836394226,
+                -0.7675026329933361
+              ],
+              "shift_down": [
+                0.29101001740559973,
+                -0.1402434788445235,
+                -0.8252569836394226,
+                -0.7675026329933361
+              ],
+              "amplify": [
+                1.31883902928213,
+                1.7425516094487175,
+                0.32299646963654366,
+                0.2858617095083862
+              ],
+              "dampen": [
+                -0.20070374863690052,
+                -1.2418858008716092,
+                -0.19191089184122792,
+                -0.2998442898087197
+              ],
+              "invert": [
+                -1.7202465265559308,
+                -0.24707333076483362,
+                1.5194283894835294,
+                1.548987846287006
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 61.76462867982258,
+              "ratio.rms": 14.259157576006007,
+              "absolute.spread": 3.208461312119389,
+              "absolute.rms": 2.997145866266648
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          }
+        }
+      },
+      {
+        "seed": 17,
+        "mode": "mixed",
+        "rows": [
+          {
+            "held_out_domain": "code",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 37,
+            "false_certifications": 13,
+            "total": 50,
+            "mean_attempts": 1.18,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.48,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.26,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 6
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.48,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 6
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 31,
+            "false_certifications": 19,
+            "total": 50,
+            "mean_attempts": 1.1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.56,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.38,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 8
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.56,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 8
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 40,
+            "false_certifications": 10,
+            "total": 50,
+            "mean_attempts": 1.22,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.48,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.2,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 8,
+            "contested_skills": 6
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.48,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 8,
+            "contested_skills": 6
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 41,
+            "false_certifications": 9,
+            "total": 50,
+            "mean_attempts": 1.12,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.36,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.18,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 4
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.36,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 4
+          }
+        ],
+        "echo_maps": {
+          "code": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7073410315403086,
+              "ratio.rms": 1.141542683869266,
+              "absolute.rms": 5.70397233065079,
+              "difference.rms": 5.70397233065079
+            },
+            "scale": {
+              "ratio.mean": 0.9930732913691717,
+              "ratio.rms": 0.5045228949574514,
+              "absolute.rms": 6.266844938603757,
+              "difference.rms": 6.266844938603757
+            },
+            "prototypes": {
+              "shift_up": [
+                0.30290871316350465,
+                -0.11427697555492262,
+                -0.7506125293884848,
+                -0.7506125293884848
+              ],
+              "shift_down": [
+                0.32345300658764187,
+                -0.035115547847922084,
+                -0.7506125293884848,
+                -0.7506125293884848
+              ],
+              "amplify": [
+                1.3016752939528506,
+                1.7015230125545273,
+                0.2753185992194074,
+                0.2753185992194074
+              ],
+              "dampen": [
+                -0.20878723991704884,
+                -1.2715828960019149,
+                -0.31995222588714006,
+                -0.31995222588714006
+              ],
+              "invert": [
+                -1.7192497737869483,
+                -0.28054759314976746,
+                1.5458586854447023,
+                1.5458586854447023
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 44.514957479865465,
+              "ratio.rms": 11.661526396948839,
+              "absolute.rms": 2.8304993961100875,
+              "difference.rms": 2.8304993961100875
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "math": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "difference.spread",
+              "absolute.spread"
+            ],
+            "center": {
+              "ratio.mean": 0.694051285940399,
+              "ratio.rms": 1.1348702858600739,
+              "difference.spread": 11.83,
+              "absolute.spread": 7.56
+            },
+            "scale": {
+              "ratio.mean": 0.991023488652984,
+              "ratio.rms": 0.5052697913849429,
+              "difference.spread": 15.164413385730862,
+              "absolute.spread": 10.096644657178608
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3242366431924357,
+                -0.03534363658959226,
+                -0.7801159002386193,
+                -0.7487635998583866
+              ],
+              "shift_down": [
+                0.26319025888076375,
+                -0.15344489588593413,
+                -0.7801159002386193,
+                -0.7487635998583866
+              ],
+              "amplify": [
+                1.3177777610848245,
+                1.7122134132907656,
+                0.1881598226554686,
+                0.14262163806826417
+              ],
+              "dampen": [
+                -0.19580896735773318,
+                -1.2564976111472972,
+                -0.21959306405702472,
+                -0.26345385920943226
+              ],
+              "invert": [
+                -1.7093956958002905,
+                -0.26692726966794283,
+                1.5916650418787948,
+                1.6183594208579415
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 37.85352185645064,
+              "ratio.rms": 11.706664216227358,
+              "difference.spread": 3.288843206838084,
+              "absolute.spread": 3.273978939423727
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "data": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7027295142589132,
+              "ratio.rms": 1.136730598945035,
+              "absolute.rms": 5.982318201794931,
+              "difference.rms": 5.982318201794931
+            },
+            "scale": {
+              "ratio.mean": 0.9926294701131853,
+              "ratio.rms": 0.5054068540499307,
+              "absolute.rms": 6.674890306150336,
+              "difference.rms": 6.674890306150336
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3175743164413537,
+                -0.054525829737575034,
+                -0.7464269783136593,
+                -0.7464269783136593
+              ],
+              "shift_down": [
+                0.29513018316149425,
+                -0.12316903618132362,
+                -0.7464269783136593,
+                -0.7464269783136593
+              ],
+              "amplify": [
+                1.3069030537579795,
+                1.7080682506329445,
+                0.2317476399716892,
+                0.2317476399716892
+              ],
+              "dampen": [
+                -0.2042348332009494,
+                -1.259837680955016,
+                -0.2922900303612002,
+                -0.2922900303612002
+              ],
+              "invert": [
+                -1.7153727201598783,
+                -0.27053570375902913,
+                1.5533963470168295,
+                1.5533963470168295
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 40.72448969061062,
+              "ratio.rms": 11.376892485304555,
+              "absolute.rms": 2.7494950629461834,
+              "difference.rms": 2.7494950629461834
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "workflow": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.693744776465842,
+              "ratio.rms": 1.12946137262826,
+              "absolute.rms": 5.739802958162792,
+              "difference.rms": 5.739802958162792
+            },
+            "scale": {
+              "ratio.mean": 0.9889083904399727,
+              "ratio.rms": 0.5002592399066197,
+              "absolute.rms": 6.611674926582446,
+              "difference.rms": 6.611674926582446
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3095373304051158,
+                -0.10772131910376366,
+                -0.7168838472542359,
+                -0.7168838472542359
+              ],
+              "shift_down": [
+                0.2782161309027921,
+                -0.11539476394160848,
+                -0.7168838472542359,
+                -0.7168838472542359
+              ],
+              "amplify": [
+                1.320906199362911,
+                1.7401750091297423,
+                0.22074782511179195,
+                0.22074782511179195
+              ],
+              "dampen": [
+                -0.19591782043596928,
+                -1.258270357476571,
+                -0.3387538146896514,
+                -0.3387538146896514
+              ],
+              "invert": [
+                -1.7127418402348495,
+                -0.25878856860779986,
+                1.5517736840863317,
+                1.5517736840863317
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 44.404668651536646,
+              "ratio.rms": 15.854579051418739,
+              "absolute.rms": 2.569720757834,
+              "difference.rms": 2.569720757834
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          }
+        }
+      },
+      {
+        "seed": 23,
+        "mode": "mixed",
+        "rows": [
+          {
+            "held_out_domain": "code",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 44,
+            "false_certifications": 6,
+            "total": 50,
+            "mean_attempts": 1.18,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.36,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.12,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 4
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.36,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 4
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 42,
+            "false_certifications": 8,
+            "total": 50,
+            "mean_attempts": 1.18,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.36,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.16,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 8,
+            "contested_skills": 5
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.36,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 8,
+            "contested_skills": 5
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 40,
+            "false_certifications": 10,
+            "total": 50,
+            "mean_attempts": 1.2,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.42,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.2,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 5
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.42,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 5
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 38,
+            "false_certifications": 12,
+            "total": 50,
+            "mean_attempts": 1.18,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.48,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.24,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 6
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.48,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 6
+          }
+        ],
+        "echo_maps": {
+          "code": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "difference.spread"
+            ],
+            "center": {
+              "ratio.mean": 0.713585444865592,
+              "ratio.rms": 1.1501649137338756,
+              "absolute.spread": 6.696666666666666,
+              "difference.spread": 11.516666666666667
+            },
+            "scale": {
+              "ratio.mean": 0.9972280291612717,
+              "ratio.rms": 0.5101479266618245,
+              "absolute.spread": 8.659031251948582,
+              "difference.spread": 15.511626463899766
+            },
+            "prototypes": {
+              "shift_up": [
+                0.37028935206625807,
+                0.010517951708710536,
+                -0.7733736571466565,
+                -0.7424538421853714
+              ],
+              "shift_down": [
+                0.27224807754820035,
+                -0.10755893964786134,
+                -0.7733736571466565,
+                -0.7424538421853714
+              ],
+              "amplify": [
+                1.289990370824574,
+                1.6658601198814191,
+                0.12741995048060897,
+                0.1386057100461836
+              ],
+              "dampen": [
+                -0.2141791432048195,
+                -1.2744635031416445,
+                -0.14012345007535237,
+                -0.16331835602341024
+              ],
+              "invert": [
+                -1.7183486572342133,
+                -0.2943556288006233,
+                1.5594508138880567,
+                1.5096203303479692
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 38.6520736639103,
+              "ratio.rms": 8.953654763155681,
+              "absolute.spread": 2.7424334351923347,
+              "difference.spread": 2.179272942423343
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "math": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "absolute.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7107051415431833,
+              "ratio.rms": 1.1453588268091228,
+              "absolute.spread": 6.378333333333333,
+              "absolute.rms": 5.182610513183284
+            },
+            "scale": {
+              "ratio.mean": 0.9939211453653836,
+              "ratio.rms": 0.5068432060438014,
+              "absolute.spread": 7.596695370722427,
+              "absolute.rms": 5.7161254303338
+            },
+            "prototypes": {
+              "shift_up": [
+                0.37748211035643314,
+                0.031422651971679025,
+                -0.83961946900166,
+                -0.7317212619211254
+              ],
+              "shift_down": [
+                0.2584993531400225,
+                -0.15754354855346636,
+                -0.83961946900166,
+                -0.7317212619211254
+              ],
+              "amplify": [
+                1.2971802285007714,
+                1.6862042600153135,
+                0.23102150531976695,
+                0.1552226219001675
+              ],
+              "dampen": [
+                -0.21199382116548518,
+                -1.2732908700631786,
+                -0.10794167200125857,
+                -0.20365524987609807
+              ],
+              "invert": [
+                -1.7211678708317417,
+                -0.28679249337034796,
+                1.5561591046848118,
+                1.5118751518181812
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 48.677801794137494,
+              "ratio.rms": 10.698964122249679,
+              "absolute.spread": 3.5313464250136093,
+              "absolute.rms": 2.1689051976171565
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "data": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "difference.spread"
+            ],
+            "center": {
+              "ratio.mean": 0.7108825908821523,
+              "ratio.rms": 1.1465925510171664,
+              "absolute.spread": 6.92,
+              "difference.spread": 11.465
+            },
+            "scale": {
+              "ratio.mean": 0.997869138831348,
+              "ratio.rms": 0.5118003172133696,
+              "absolute.spread": 8.841866318826586,
+              "difference.spread": 14.64718488310979
+            },
+            "prototypes": {
+              "shift_up": [
+                0.4184729160822557,
+                0.08728710238946694,
+                -0.7826401972698408,
+                -0.7827442673452367
+              ],
+              "shift_down": [
+                0.21552581985157693,
+                -0.20495476480202038,
+                -0.7826401972698408,
+                -0.7827442673452367
+              ],
+              "amplify": [
+                1.2918702051729893,
+                1.6674617429497371,
+                0.14476581683603992,
+                0.19127680090236124
+              ],
+              "dampen": [
+                -0.2113329119779443,
+                -1.2633687969122573,
+                -0.16436952119925363,
+                -0.18706666310736578
+              ],
+              "invert": [
+                -1.7145360291288778,
+                -0.2864252836249258,
+                1.5848840989028952,
+                1.561278396895478
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 38.93450178287463,
+              "ratio.rms": 9.166616986277816,
+              "absolute.spread": 3.114831601292528,
+              "difference.spread": 2.951157871796156
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "workflow": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "difference.spread"
+            ],
+            "center": {
+              "ratio.mean": 0.704309137855513,
+              "ratio.rms": 1.1400613688101986,
+              "absolute.spread": 6.665,
+              "difference.spread": 11.171666666666667
+            },
+            "scale": {
+              "ratio.mean": 0.9929750442349072,
+              "ratio.rms": 0.506877240170102,
+              "absolute.spread": 8.345099859598246,
+              "difference.spread": 14.572352151324859
+            },
+            "prototypes": {
+              "shift_up": [
+                0.38442355857138377,
+                0.04365981838941655,
+                -0.7986722881852811,
+                -0.7666344149973746
+              ],
+              "shift_down": [
+                0.23284010492662782,
+                -0.20112574355626495,
+                -0.7986722881852811,
+                -0.7666344149973746
+              ],
+              "amplify": [
+                1.3048574278549205,
+                1.6965422059613806,
+                0.22787823976479266,
+                0.27186185356538256
+              ],
+              "dampen": [
+                -0.2057545544993372,
+                -1.262754209668995,
+                -0.1406014730888817,
+                -0.1861973485925296
+              ],
+              "invert": [
+                -1.716366536853595,
+                -0.27632207112553653,
+                1.5100678096946516,
+                1.4476043250218962
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 45.68443386524503,
+              "ratio.rms": 11.240359992497783,
+              "absolute.spread": 2.643669270361204,
+              "difference.spread": 2.0856450169270584
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          }
+        }
+      },
+      {
+        "seed": 31,
+        "mode": "mixed",
+        "rows": [
+          {
+            "held_out_domain": "code",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 38,
+            "false_certifications": 12,
+            "total": 50,
+            "mean_attempts": 1.18,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.5,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.24,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 7
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.5,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 7
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 43,
+            "false_certifications": 7,
+            "total": 50,
+            "mean_attempts": 1.32,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.48,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.14,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 4
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.48,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 4
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 43,
+            "false_certifications": 7,
+            "total": 50,
+            "mean_attempts": 1.28,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.46,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.14,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 5
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.46,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 5
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 34,
+            "false_certifications": 16,
+            "total": 50,
+            "mean_attempts": 1.1,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.46,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.32,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 9
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.46,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 9
+          }
+        ],
+        "echo_maps": {
+          "code": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7061039639412194,
+              "ratio.rms": 1.1353045223421625,
+              "absolute.rms": 5.4352551442547545,
+              "difference.rms": 5.4352551442547545
+            },
+            "scale": {
+              "ratio.mean": 0.9919026101833556,
+              "ratio.rms": 0.5074163760197098,
+              "absolute.rms": 5.927239507858519,
+              "difference.rms": 5.927239507858519
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3140733660968798,
+                -0.05579714434775708,
+                -0.7482834358851798,
+                -0.7482834358851798
+              ],
+              "shift_down": [
+                0.3092861104039046,
+                -0.1296253950498638,
+                -0.7482834358851798,
+                -0.7482834358851798
+              ],
+              "amplify": [
+                1.3044587470332403,
+                1.704114251181065,
+                0.18486795380265628,
+                0.18486795380265628
+              ],
+              "dampen": [
+                -0.20778649216692818,
+                -1.2520378773062797,
+                -0.2852338454463782,
+                -0.2852338454463782
+              ],
+              "invert": [
+                -1.7200317313670968,
+                -0.2666538344771648,
+                1.5969327634140813,
+                1.5969327634140813
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 47.82668656546825,
+              "ratio.rms": 10.43182614055872,
+              "absolute.rms": 3.1172085569566805,
+              "difference.rms": 3.1172085569566805
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "math": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.spread",
+              "absolute.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.701985398741552,
+              "ratio.rms": 1.1304411924755187,
+              "absolute.spread": 6.991666666666666,
+              "absolute.rms": 5.415053679880853
+            },
+            "scale": {
+              "ratio.mean": 0.9898195466892976,
+              "ratio.rms": 0.5056460160756798,
+              "absolute.spread": 8.29926787266336,
+              "absolute.rms": 5.614546388089498
+            },
+            "prototypes": {
+              "shift_up": [
+                0.28749253804754177,
+                -0.11362628447983596,
+                -0.8424437882883921,
+                -0.7863598187106965
+              ],
+              "shift_down": [
+                0.3246960151603941,
+                -0.10129961055021236,
+                -0.8424437882883921,
+                -0.7863598187106965
+              ],
+              "amplify": [
+                1.3113648902974153,
+                1.7196987217918371,
+                0.42071984182698013,
+                0.28847906739696866
+              ],
+              "dampen": [
+                -0.2040628510693119,
+                -1.2468034404154404,
+                -0.20684555469297822,
+                -0.25822278117530234
+              ],
+              "invert": [
+                -1.7194905924360389,
+                -0.25796938634634786,
+                1.4710132894427823,
+                1.5424633511997263
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 52.2180314744485,
+              "ratio.rms": 11.550303516563313,
+              "absolute.spread": 3.1774355362997944,
+              "absolute.rms": 3.0512594377104083
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "data": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7019832265941534,
+              "ratio.rms": 1.1295268886429357,
+              "absolute.rms": 5.480130574338004,
+              "difference.rms": 5.480130574338004
+            },
+            "scale": {
+              "ratio.mean": 0.9905350350766007,
+              "ratio.rms": 0.5036371539229608,
+              "absolute.rms": 6.093921333717654,
+              "difference.rms": 6.093921333717654
+            },
+            "prototypes": {
+              "shift_up": [
+                0.2556578394985237,
+                -0.17272730913530152,
+                -0.7351802442131063,
+                -0.7351802442131063
+              ],
+              "shift_down": [
+                0.35608193579937925,
+                -0.04850206841025607,
+                -0.7351802442131063,
+                -0.7351802442131063
+              ],
+              "amplify": [
+                1.3104198513336456,
+                1.728373501789379,
+                0.14411138433756723,
+                0.14411138433756723
+              ],
+              "dampen": [
+                -0.2039132584326343,
+                -1.2499611749041686,
+                -0.2864669452887108,
+                -0.2864669452887108
+              ],
+              "invert": [
+                -1.7182463681989144,
+                -0.25718294933965274,
+                1.612716049377356,
+                1.612716049377356
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 50.70987033745407,
+              "ratio.rms": 13.204874092603108,
+              "absolute.rms": 3.11409010607862,
+              "difference.rms": 3.11409010607862
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "workflow": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7040017687355155,
+              "ratio.rms": 1.1334670937563633,
+              "absolute.rms": 5.43527808100468,
+              "difference.rms": 5.43527808100468
+            },
+            "scale": {
+              "ratio.mean": 0.989575156002008,
+              "ratio.rms": 0.5039053731890332,
+              "absolute.rms": 5.686574292326628,
+              "difference.rms": 5.686574292326628
+            },
+            "prototypes": {
+              "shift_up": [
+                0.2901114607956629,
+                -0.10302854355500647,
+                -0.7799560601871627,
+                -0.7799560601871627
+              ],
+              "shift_down": [
+                0.32834111705513386,
+                -0.09462507164775692,
+                -0.7799560601871627,
+                -0.7799560601871627
+              ],
+              "amplify": [
+                1.3096511400917332,
+                1.7196341859973951,
+                0.21431115162039002,
+                0.21431115162039002
+              ],
+              "dampen": [
+                -0.20615085928359897,
+                -1.257115179676258,
+                -0.2577568359581449,
+                -0.2577568359581449
+              ],
+              "invert": [
+                -1.7219528586589314,
+                -0.2648653911183737,
+                1.6033578047120802,
+                1.6033578047120802
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 57.670628075101796,
+              "ratio.rms": 12.412116782771143,
+              "absolute.rms": 3.544574623956168,
+              "difference.rms": 3.544574623956168
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          }
+        }
+      },
+      {
+        "seed": 47,
+        "mode": "mixed",
+        "rows": [
+          {
+            "held_out_domain": "code",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 40,
+            "false_certifications": 10,
+            "total": 50,
+            "mean_attempts": 1.24,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.52,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.2,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 6
+          },
+          {
+            "held_out_domain": "code",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.52,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 6
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 39,
+            "false_certifications": 11,
+            "total": 50,
+            "mean_attempts": 1.18,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.42,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.22,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 7
+          },
+          {
+            "held_out_domain": "math",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.42,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 7
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 37,
+            "false_certifications": 13,
+            "total": 50,
+            "mean_attempts": 1.28,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.58,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.26,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 7
+          },
+          {
+            "held_out_domain": "data",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.58,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 6,
+            "contested_skills": 7
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "public_only_self",
+            "solved_public": 50,
+            "witness_supported": 0,
+            "final_correct": 38,
+            "false_certifications": 12,
+            "total": 50,
+            "mean_attempts": 1.2,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "inline_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.48,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills": 0,
+            "contested_skills": 0
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_fixed",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 3.24,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 9
+          },
+          {
+            "held_out_domain": "workflow",
+            "policy": "witness_echo",
+            "solved_public": 50,
+            "witness_supported": 50,
+            "final_correct": 50,
+            "false_certifications": 0,
+            "total": 50,
+            "mean_attempts": 1.48,
+            "stale_receipts_rejected": 50,
+            "tampered_receipts_rejected": 50,
+            "promoted_skills": 7,
+            "contested_skills": 9
+          }
+        ],
+        "echo_maps": {
+          "code": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.mean",
+              "absolute.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7005810899880693,
+              "ratio.rms": 1.143361990057309,
+              "absolute.mean": 4.6475,
+              "absolute.rms": 5.347110388831838
+            },
+            "scale": {
+              "ratio.mean": 0.9948353917865956,
+              "ratio.rms": 0.504574760851781,
+              "absolute.mean": 5.012444305592498,
+              "absolute.rms": 5.918216411187296
+            },
+            "prototypes": {
+              "shift_up": [
+                0.35709741385097704,
+                -0.026259166653765733,
+                -0.7276888834316625,
+                -0.7345304880393403
+              ],
+              "shift_down": [
+                0.24776975807739118,
+                -0.11230113253767658,
+                -0.7276888834316625,
+                -0.7345304880393403
+              ],
+              "amplify": [
+                1.3061647391518132,
+                1.6977424881430576,
+                0.2748160210903674,
+                0.2860409962730824
+              ],
+              "dampen": [
+                -0.2016223906427893,
+                -1.2750578109995814,
+                -0.3926893174927089,
+                -0.37136148384328166
+              ],
+              "invert": [
+                -1.7094095204373918,
+                -0.284124377952035,
+                1.5732510632656664,
+                1.55438146364888
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 34.13882193063197,
+              "ratio.rms": 11.566910241039386,
+              "absolute.mean": 3.0450124969151275,
+              "absolute.rms": 2.890749659103538
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "math": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7236134863268635,
+              "ratio.rms": 1.1590049581656587,
+              "absolute.rms": 5.793655728889633,
+              "difference.rms": 5.793655728889633
+            },
+            "scale": {
+              "ratio.mean": 1.0017637542095559,
+              "ratio.rms": 0.5068759678002006,
+              "absolute.rms": 6.426792159528032,
+              "difference.rms": 6.426792159528032
+            },
+            "prototypes": {
+              "shift_up": [
+                0.36709644530486535,
+                0.014300285839332757,
+                -0.745886222846464,
+                -0.745886222846464
+              ],
+              "shift_down": [
+                0.3025628991879077,
+                -0.059646932678356974,
+                -0.745886222846464,
+                -0.745886222846464
+              ],
+              "amplify": [
+                1.2741392452158267,
+                1.6591732401206345,
+                0.32401775023964813,
+                0.32401775023964813
+              ],
+              "dampen": [
+                -0.223219781497591,
+                -1.3001306039930938,
+                -0.3218471775684266,
+                -0.3218471775684266
+              ],
+              "invert": [
+                -1.7205788082110087,
+                -0.3136959892885176,
+                1.4896018730217067,
+                1.4896018730217067
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 34.70240966574915,
+              "ratio.rms": 9.997781574854875,
+              "absolute.rms": 2.425078310166998,
+              "difference.rms": 2.425078310166998
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "data": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7072504787183597,
+              "ratio.rms": 1.1486364586879665,
+              "absolute.rms": 5.51529864133946,
+              "difference.rms": 5.51529864133946
+            },
+            "scale": {
+              "ratio.mean": 0.9975368897111305,
+              "ratio.rms": 0.5058885718158228,
+              "absolute.rms": 6.033743798850962,
+              "difference.rms": 6.033743798850962
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3907256682231671,
+                0.032554751073533617,
+                -0.7483411281399341,
+                -0.7483411281399341
+              ],
+              "shift_down": [
+                0.23256099171692537,
+                -0.13947676305326512,
+                -0.7483411281399341,
+                -0.7483411281399341
+              ],
+              "amplify": [
+                1.2959415682922746,
+                1.6829072423126148,
+                0.32465565044567624,
+                0.32465565044567624
+              ],
+              "dampen": [
+                -0.20776221998003083,
+                -1.282172586662253,
+                -0.3440218364456148,
+                -0.3440218364456148
+              ],
+              "invert": [
+                -1.7114660082523365,
+                -0.2938126436706304,
+                1.516048442279807,
+                1.516048442279807
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 34.33487709948195,
+              "ratio.rms": 10.989912462500888,
+              "absolute.rms": 2.682384288339276,
+              "difference.rms": 2.682384288339276
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          },
+          "workflow": {
+            "schema": "nomad.v0.5.echo-map.v1",
+            "dimensions": 4,
+            "selected": [
+              "ratio.mean",
+              "ratio.rms",
+              "absolute.rms",
+              "difference.rms"
+            ],
+            "center": {
+              "ratio.mean": 0.7265793757853367,
+              "ratio.rms": 1.158533282709974,
+              "absolute.rms": 5.523285219469078,
+              "difference.rms": 5.523285219469078
+            },
+            "scale": {
+              "ratio.mean": 0.9996890620610598,
+              "ratio.rms": 0.5059246992255985,
+              "absolute.rms": 6.281511194322145,
+              "difference.rms": 6.281511194322145
+            },
+            "prototypes": {
+              "shift_up": [
+                0.3848131984233666,
+                0.03580872864238683,
+                -0.7200950662250946,
+                -0.7200950662250946
+              ],
+              "shift_down": [
+                0.295136351044138,
+                -0.08403754986306758,
+                -0.7200950662250946,
+                -0.7200950662250946
+              ],
+              "amplify": [
+                1.273816702154619,
+                1.6632252162782926,
+                0.22915512312744804,
+                0.22915512312744804
+              ],
+              "dampen": [
+                -0.22664984982250164,
+                -1.3016428802902253,
+                -0.33098396876716984,
+                -0.33098396876716984
+              ],
+              "invert": [
+                -1.7271164017996221,
+                -0.31335351476738604,
+                1.5420189780899107,
+                1.5420189780899107
+              ]
+            },
+            "selected_feature_scores": {
+              "ratio.mean": 45.33786042765705,
+              "ratio.rms": 10.550740183357673,
+              "absolute.rms": 2.513601703619723,
+              "difference.rms": 2.513601703619723
+            },
+            "bit_encoding": "sign of standardized learned coordinates; ranking uses continuous prototype distance"
+          }
+        }
+      }
+    ],
+    "summary": {
+      "domains": {
+        "code": {
+          "public_only_self": {
+            "total": 250,
+            "final_correct": 192,
+            "final_correct_rate": 0.768,
+            "false_certifications": 58,
+            "false_certification_rate": 0.232,
+            "mean_attempts_across_runs": 1.192,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "inline_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 1.5,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "witness_fixed": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 3.232,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 7.2,
+            "contested_skills_mean": 6.4
+          },
+          "witness_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 1.5,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 7.2,
+            "contested_skills_mean": 6.4
+          }
+        },
+        "math": {
+          "public_only_self": {
+            "total": 250,
+            "final_correct": 197,
+            "final_correct_rate": 0.788,
+            "false_certifications": 53,
+            "false_certification_rate": 0.212,
+            "mean_attempts_across_runs": 1.22,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "inline_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 1.46,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "witness_fixed": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 3.212,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 6.8,
+            "contested_skills_mean": 5.8
+          },
+          "witness_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 1.46,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 6.8,
+            "contested_skills_mean": 5.8
+          }
+        },
+        "data": {
+          "public_only_self": {
+            "total": 250,
+            "final_correct": 197,
+            "final_correct_rate": 0.788,
+            "false_certifications": 53,
+            "false_certification_rate": 0.212,
+            "mean_attempts_across_runs": 1.224,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "inline_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 1.492,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "witness_fixed": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 3.212,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 6.8,
+            "contested_skills_mean": 6
+          },
+          "witness_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 1.492,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 6.8,
+            "contested_skills_mean": 6
+          }
+        },
+        "workflow": {
+          "public_only_self": {
+            "total": 250,
+            "final_correct": 185,
+            "final_correct_rate": 0.74,
+            "false_certifications": 65,
+            "false_certification_rate": 0.26,
+            "mean_attempts_across_runs": 1.1360000000000001,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "inline_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 1.44,
+            "stale_receipts_rejected": 0,
+            "tampered_receipts_rejected": 0,
+            "promoted_skills_mean": 0,
+            "contested_skills_mean": 0
+          },
+          "witness_fixed": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 3.2600000000000002,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 7,
+            "contested_skills_mean": 6.8
+          },
+          "witness_echo": {
+            "total": 250,
+            "final_correct": 250,
+            "final_correct_rate": 1.0,
+            "false_certifications": 0,
+            "false_certification_rate": 0.0,
+            "mean_attempts_across_runs": 1.44,
+            "stale_receipts_rejected": 250,
+            "tampered_receipts_rejected": 250,
+            "promoted_skills_mean": 7,
+            "contested_skills_mean": 6.8
+          }
+        }
+      },
+      "overall": {
+        "public_only_self_mean_attempts": 1.193,
+        "public_only_self_final_correct_rate": 0.771,
+        "public_only_self_false_certification_rate": 0.229,
+        "inline_echo_mean_attempts": 1.4729999999999999,
+        "inline_echo_final_correct_rate": 1.0,
+        "inline_echo_false_certification_rate": 0.0,
+        "witness_fixed_mean_attempts": 3.229,
+        "witness_fixed_final_correct_rate": 1.0,
+        "witness_fixed_false_certification_rate": 0.0,
+        "witness_echo_mean_attempts": 1.4729999999999999,
+        "witness_echo_final_correct_rate": 1.0,
+        "witness_echo_false_certification_rate": 0.0,
+        "witness_echo_attempt_reduction_vs_witness_fixed": 0.5438216165995665,
+        "witness_stale_rejection_rate": 1.0,
+        "witness_tamper_detection_rate": 1.0
+      }
+    }
+  }
+}

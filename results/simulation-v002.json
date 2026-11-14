@@ -1,0 +1,6439 @@
+{
+  "schema": "nomad.v0.2.multiedit-simulation.v1",
+  "seeds": [
+    11,
+    17,
+    23,
+    31,
+    47
+  ],
+  "training": {
+    "single_edit_pretraining": "v0.1 bounded tasks",
+    "multi_edit_training_templates": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "withheld_composition_templates": [
+      6,
+      7,
+      8
+    ],
+    "search_time_examples": 9,
+    "withheld_challenge_examples": 14,
+    "max_depth": 4,
+    "max_expansions": 320,
+    "frontier_cap": 512
+  },
+  "runs": [
+    {
+      "seed": 11,
+      "seen_tasks": 24,
+      "unseen_tasks": 12,
+      "seen_results": [
+        {
+          "policy": "fixed",
+          "public_solved": 24,
+          "challenge_correct": 24,
+          "total": 24,
+          "mean_expansions": 43.25,
+          "median_expansions": 14.5,
+          "p95_expansions": 122.0,
+          "max_expansions": 149,
+          "mean_depth": 2.4166666666666665,
+          "expansions": [
+            35,
+            3,
+            3,
+            2,
+            2,
+            52,
+            7,
+            149,
+            122,
+            2,
+            97,
+            15,
+            46,
+            3,
+            2,
+            58,
+            100,
+            3,
+            14,
+            12,
+            3,
+            85,
+            122,
+            101
+          ]
+        },
+        {
+          "policy": "global",
+          "public_solved": 24,
+          "challenge_correct": 24,
+          "total": 24,
+          "mean_expansions": 34.541666666666664,
+          "median_expansions": 21.5,
+          "p95_expansions": 101.0,
+          "max_expansions": 145,
+          "mean_depth": 2.8333333333333335,
+          "expansions": [
+            46,
+            23,
+            3,
+            4,
+            5,
+            34,
+            20,
+            37,
+            145,
+            5,
+            75,
+            23,
+            17,
+            3,
+            6,
+            18,
+            101,
+            3,
+            27,
+            71,
+            3,
+            96,
+            10,
+            54
+          ]
+        },
+        {
+          "policy": "contextual",
+          "public_solved": 24,
+          "challenge_correct": 24,
+          "total": 24,
+          "mean_expansions": 27.708333333333332,
+          "median_expansions": 11.0,
+          "p95_expansions": 91.0,
+          "max_expansions": 103,
+          "mean_depth": 2.5833333333333335,
+          "expansions": [
+            62,
+            3,
+            2,
+            4,
+            4,
+            33,
+            3,
+            60,
+            103,
+            4,
+            71,
+            12,
+            10,
+            2,
+            6,
+            21,
+            15,
+            3,
+            19,
+            6,
+            3,
+            55,
+            91,
+            73
+          ]
+        }
+      ],
+      "unseen_results": [
+        {
+          "policy": "fixed",
+          "public_solved": 12,
+          "challenge_correct": 12,
+          "total": 12,
+          "mean_expansions": 102,
+          "median_expansions": 96.5,
+          "p95_expansions": 171.0,
+          "max_expansions": 171,
+          "mean_depth": 2.9166666666666665,
+          "expansions": [
+            45,
+            50,
+            170,
+            125,
+            46,
+            152,
+            51,
+            171,
+            70,
+            151,
+            91,
+            102
+          ]
+        },
+        {
+          "policy": "global",
+          "public_solved": 12,
+          "challenge_correct": 12,
+          "total": 12,
+          "mean_expansions": 48.333333333333336,
+          "median_expansions": 35.0,
+          "p95_expansions": 140.0,
+          "max_expansions": 140,
+          "mean_depth": 2.9166666666666665,
+          "expansions": [
+            60,
+            37,
+            12,
+            74,
+            14,
+            88,
+            5,
+            92,
+            13,
+            12,
+            33,
+            140
+          ]
+        },
+        {
+          "policy": "contextual",
+          "public_solved": 12,
+          "challenge_correct": 12,
+          "total": 12,
+          "mean_expansions": 64.16666666666667,
+          "median_expansions": 56.0,
+          "p95_expansions": 177.0,
+          "max_expansions": 177,
+          "mean_depth": 2.8333333333333335,
+          "expansions": [
+            32,
+            38,
+            80,
+            21,
+            58,
+            117,
+            54,
+            115,
+            2,
+            17,
+            59,
+            177
+          ]
+        }
+      ],
+      "contextual_learner": {
+        "contextual": true,
+        "global": {
+          "constant": {
+            "success": 57,
+            "failure": 294
+          },
+          "negate": {
+            "success": 33,
+            "failure": 142
+          },
+          "root_operator": {
+            "success": 41,
+            "failure": 158
+          },
+          "swap_operands": {
+            "success": 23,
+            "failure": 53
+          },
+          "variable": {
+            "success": 43,
+            "failure": 96
+          }
+        },
+        "contexts": {
+          "18:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "18:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "18:root_operator": {
+            "success": 0,
+            "failure": 1
+          },
+          "18:swap_operands": {
+            "success": 2,
+            "failure": 0
+          },
+          "18:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1024:constant": {
+            "success": 0,
+            "failure": 8
+          },
+          "1024:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1024:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1024:swap_operands": {
+            "success": 1,
+            "failure": 0
+          },
+          "1024:variable": {
+            "success": 1,
+            "failure": 3
+          },
+          "1025:constant": {
+            "success": 19,
+            "failure": 14
+          },
+          "1025:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1025:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1025:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1025:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1026:constant": {
+            "success": 2,
+            "failure": 22
+          },
+          "1026:negate": {
+            "success": 12,
+            "failure": 28
+          },
+          "1026:root_operator": {
+            "success": 7,
+            "failure": 32
+          },
+          "1026:swap_operands": {
+            "success": 0,
+            "failure": 7
+          },
+          "1026:variable": {
+            "success": 2,
+            "failure": 14
+          },
+          "1030:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1030:negate": {
+            "success": 8,
+            "failure": 10
+          },
+          "1030:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1030:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1030:variable": {
+            "success": 0,
+            "failure": 9
+          },
+          "1034:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1034:negate": {
+            "success": 9,
+            "failure": 1
+          },
+          "1034:root_operator": {
+            "success": 8,
+            "failure": 6
+          },
+          "1034:swap_operands": {
+            "success": 0,
+            "failure": 3
+          },
+          "1034:variable": {
+            "success": 2,
+            "failure": 4
+          },
+          "1040:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1040:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1040:root_operator": {
+            "success": 1,
+            "failure": 0
+          },
+          "1040:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1040:variable": {
+            "success": 1,
+            "failure": 0
+          },
+          "1042:constant": {
+            "success": 0,
+            "failure": 2
+          },
+          "1042:negate": {
+            "success": 2,
+            "failure": 1
+          },
+          "1042:root_operator": {
+            "success": 1,
+            "failure": 0
+          },
+          "1042:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1042:variable": {
+            "success": 5,
+            "failure": 2
+          },
+          "1058:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:swap_operands": {
+            "success": 2,
+            "failure": 0
+          },
+          "1058:variable": {
+            "success": 1,
+            "failure": 2
+          },
+          "1062:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1062:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1062:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1062:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1062:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1074:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1074:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1074:root_operator": {
+            "success": 0,
+            "failure": 1
+          },
+          "1074:swap_operands": {
+            "success": 12,
+            "failure": 0
+          },
+          "1074:variable": {
+            "success": 1,
+            "failure": 0
+          },
+          "1152:constant": {
+            "success": 0,
+            "failure": 23
+          },
+          "1152:negate": {
+            "success": 2,
+            "failure": 8
+          },
+          "1152:root_operator": {
+            "success": 0,
+            "failure": 27
+          },
+          "1152:swap_operands": {
+            "success": 1,
+            "failure": 8
+          },
+          "1152:variable": {
+            "success": 0,
+            "failure": 6
+          },
+          "1153:constant": {
+            "success": 17,
+            "failure": 16
+          },
+          "1153:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1153:root_operator": {
+            "success": 0,
+            "failure": 1
+          },
+          "1153:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1153:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1154:constant": {
+            "success": 7,
+            "failure": 151
+          },
+          "1154:negate": {
+            "success": 0,
+            "failure": 55
+          },
+          "1154:root_operator": {
+            "success": 14,
+            "failure": 55
+          },
+          "1154:swap_operands": {
+            "success": 2,
+            "failure": 19
+          },
+          "1154:variable": {
+            "success": 2,
+            "failure": 27
+          },
+          "1158:constant": {
+            "success": 7,
+            "failure": 35
+          },
+          "1158:negate": {
+            "success": 0,
+            "failure": 13
+          },
+          "1158:root_operator": {
+            "success": 0,
+            "failure": 11
+          },
+          "1158:swap_operands": {
+            "success": 0,
+            "failure": 6
+          },
+          "1158:variable": {
+            "success": 0,
+            "failure": 12
+          },
+          "1162:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1162:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1162:root_operator": {
+            "success": 6,
+            "failure": 0
+          },
+          "1162:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1162:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1168:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1168:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1168:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1168:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1168:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1170:constant": {
+            "success": 0,
+            "failure": 6
+          },
+          "1170:negate": {
+            "success": 0,
+            "failure": 11
+          },
+          "1170:root_operator": {
+            "success": 4,
+            "failure": 17
+          },
+          "1170:swap_operands": {
+            "success": 1,
+            "failure": 2
+          },
+          "1170:variable": {
+            "success": 13,
+            "failure": 8
+          },
+          "1186:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1190:constant": {
+            "success": 4,
+            "failure": 3
+          },
+          "1190:negate": {
+            "success": 0,
+            "failure": 4
+          },
+          "1190:root_operator": {
+            "success": 0,
+            "failure": 4
+          },
+          "1190:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1190:variable": {
+            "success": 1,
+            "failure": 0
+          },
+          "1194:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:variable": {
+            "success": 1,
+            "failure": 0
+          },
+          "1202:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1202:negate": {
+            "success": 0,
+            "failure": 4
+          },
+          "1202:root_operator": {
+            "success": 0,
+            "failure": 2
+          },
+          "1202:swap_operands": {
+            "success": 2,
+            "failure": 2
+          },
+          "1202:variable": {
+            "success": 12,
+            "failure": 0
+          },
+          "1218:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1222:constant": {
+            "success": 1,
+            "failure": 14
+          },
+          "1222:negate": {
+            "success": 0,
+            "failure": 6
+          },
+          "1222:root_operator": {
+            "success": 0,
+            "failure": 1
+          },
+          "1222:swap_operands": {
+            "success": 0,
+            "failure": 4
+          },
+          "1222:variable": {
+            "success": 0,
+            "failure": 3
+          },
+          "1234:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1250:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1250:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1250:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1250:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1250:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:variable": {
+            "success": 1,
+            "failure": 0
+          },
+          "1282:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1408:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1408:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1408:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1408:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1408:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:variable": {
+            "success": 0,
+            "failure": 2
+          },
+          "1474:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1478:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1478:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1478:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1478:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1478:variable": {
+            "success": 0,
+            "failure": 0
+          }
+        }
+      },
+      "skill_registry": {
+        "schema": "nomad.v0.2.skill-registry.v1",
+        "records": [
+          {
+            "signature": 1024,
+            "sequence": [
+              "swap_operands",
+              "constant"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-6-30011-0",
+              "multi-6-30013-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-6-30012-1",
+              "multi-6-30014-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "variable"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-4-20027-0",
+              "multi-4-20028-1",
+              "multi-4-20030-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "variable",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-8-30022-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "variable",
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-0-20013-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "swap_operands",
+              "constant",
+              "variable"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-0-20011-0",
+              "multi-0-20014-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "swap_operands",
+              "constant",
+              "variable",
+              "negate"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-8-30020-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "variable",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-0-20012-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1034,
+            "sequence": [
+              "root_operator",
+              "swap_operands"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-2-20021-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "constant",
+              "negate"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-3-20025-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "constant"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-5-20032-1",
+              "multi-5-20033-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "negate",
+              "negate",
+              "variable"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-1-20017-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "swap_operands",
+              "constant",
+              "constant"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-3-20023-0",
+              "multi-3-20024-1",
+              "multi-3-20026-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "variable"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-1-20015-0",
+              "multi-1-20016-1",
+              "multi-1-20018-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "variable",
+              "constant"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-7-30015-0",
+              "multi-7-30017-2",
+              "multi-7-30018-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "variable",
+              "root_operator",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-7-30016-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "variable",
+              "constant",
+              "negate"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-8-30021-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "variable",
+              "negate"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-4-20029-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "variable",
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-8-30019-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1158,
+            "sequence": [
+              "constant",
+              "root_operator",
+              "negate"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-5-20034-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1162,
+            "sequence": [
+              "root_operator",
+              "negate"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-2-20019-0",
+              "multi-2-20020-1",
+              "multi-2-20022-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1190,
+            "sequence": [
+              "constant",
+              "root_operator",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-5-20031-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          }
+        ]
+      },
+      "promoted_skills": 5
+    },
+    {
+      "seed": 17,
+      "seen_tasks": 24,
+      "unseen_tasks": 12,
+      "seen_results": [
+        {
+          "policy": "fixed",
+          "public_solved": 24,
+          "challenge_correct": 24,
+          "total": 24,
+          "mean_expansions": 43.083333333333336,
+          "median_expansions": 9.5,
+          "p95_expansions": 170.0,
+          "max_expansions": 215,
+          "mean_depth": 2.4166666666666665,
+          "expansions": [
+            215,
+            12,
+            90,
+            61,
+            110,
+            118,
+            12,
+            2,
+            7,
+            71,
+            7,
+            51,
+            2,
+            170,
+            7,
+            3,
+            52,
+            7,
+            2,
+            2,
+            6,
+            18,
+            2,
+            7
+          ]
+        },
+        {
+          "policy": "global",
+          "public_solved": 24,
+          "challenge_correct": 24,
+          "total": 24,
+          "mean_expansions": 39,
+          "median_expansions": 23.0,
+          "p95_expansions": 127.0,
+          "max_expansions": 146,
+          "mean_depth": 2.7916666666666665,
+          "expansions": [
+            93,
+            66,
+            30,
+            10,
+            62,
+            146,
+            70,
+            6,
+            13,
+            116,
+            27,
+            40,
+            2,
+            127,
+            20,
+            3,
+            25,
+            7,
+            6,
+            6,
+            27,
+            21,
+            6,
+            7
+          ]
+        },
+        {
+          "policy": "contextual",
+          "public_solved": 24,
+          "challenge_correct": 24,
+          "total": 24,
+          "mean_expansions": 23.625,
+          "median_expansions": 7.0,
+          "p95_expansions": 116.0,
+          "max_expansions": 118,
+          "mean_depth": 2.375,
+          "expansions": [
+            50,
+            8,
+            5,
+            10,
+            49,
+            118,
+            6,
+            4,
+            11,
+            60,
+            21,
+            30,
+            2,
+            116,
+            3,
+            2,
+            34,
+            2,
+            4,
+            4,
+            3,
+            19,
+            4,
+            2
+          ]
+        }
+      ],
+      "unseen_results": [
+        {
+          "policy": "fixed",
+          "public_solved": 12,
+          "challenge_correct": 12,
+          "total": 12,
+          "mean_expansions": 123.41666666666667,
+          "median_expansions": 90.5,
+          "p95_expansions": 234.0,
+          "max_expansions": 234,
+          "mean_depth": 2.8333333333333335,
+          "expansions": [
+            63,
+            217,
+            45,
+            31,
+            227,
+            195,
+            118,
+            58,
+            170,
+            61,
+            62,
+            234
+          ]
+        },
+        {
+          "policy": "global",
+          "public_solved": 12,
+          "challenge_correct": 12,
+          "total": 12,
+          "mean_expansions": 77,
+          "median_expansions": 42.0,
+          "p95_expansions": 283.0,
+          "max_expansions": 283,
+          "mean_depth": 2.9166666666666665,
+          "expansions": [
+            23,
+            151,
+            46,
+            60,
+            118,
+            283,
+            138,
+            14,
+            9,
+            6,
+            38,
+            38
+          ]
+        },
+        {
+          "policy": "contextual",
+          "public_solved": 12,
+          "challenge_correct": 12,
+          "total": 12,
+          "mean_expansions": 26.666666666666668,
+          "median_expansions": 22.0,
+          "p95_expansions": 102.0,
+          "max_expansions": 102,
+          "mean_depth": 2.6666666666666665,
+          "expansions": [
+            2,
+            22,
+            32,
+            32,
+            14,
+            102,
+            25,
+            53,
+            12,
+            2,
+            2,
+            22
+          ]
+        }
+      ],
+      "contextual_learner": {
+        "contextual": true,
+        "global": {
+          "constant": {
+            "success": 61,
+            "failure": 197
+          },
+          "negate": {
+            "success": 26,
+            "failure": 107
+          },
+          "root_operator": {
+            "success": 34,
+            "failure": 119
+          },
+          "swap_operands": {
+            "success": 20,
+            "failure": 45
+          },
+          "variable": {
+            "success": 46,
+            "failure": 82
+          }
+        },
+        "contexts": {
+          "1024:constant": {
+            "success": 0,
+            "failure": 4
+          },
+          "1024:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1024:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1024:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1024:variable": {
+            "success": 2,
+            "failure": 0
+          },
+          "1025:constant": {
+            "success": 17,
+            "failure": 3
+          },
+          "1025:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1025:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1025:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1025:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1026:constant": {
+            "success": 4,
+            "failure": 35
+          },
+          "1026:negate": {
+            "success": 10,
+            "failure": 28
+          },
+          "1026:root_operator": {
+            "success": 2,
+            "failure": 32
+          },
+          "1026:swap_operands": {
+            "success": 0,
+            "failure": 12
+          },
+          "1026:variable": {
+            "success": 1,
+            "failure": 16
+          },
+          "1030:constant": {
+            "success": 3,
+            "failure": 8
+          },
+          "1030:negate": {
+            "success": 6,
+            "failure": 9
+          },
+          "1030:root_operator": {
+            "success": 1,
+            "failure": 5
+          },
+          "1030:swap_operands": {
+            "success": 0,
+            "failure": 3
+          },
+          "1030:variable": {
+            "success": 3,
+            "failure": 2
+          },
+          "1034:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1034:negate": {
+            "success": 5,
+            "failure": 0
+          },
+          "1034:root_operator": {
+            "success": 7,
+            "failure": 0
+          },
+          "1034:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1034:variable": {
+            "success": 0,
+            "failure": 2
+          },
+          "1040:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1040:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1040:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1040:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1040:variable": {
+            "success": 2,
+            "failure": 0
+          },
+          "1042:constant": {
+            "success": 0,
+            "failure": 1
+          },
+          "1042:negate": {
+            "success": 1,
+            "failure": 2
+          },
+          "1042:root_operator": {
+            "success": 4,
+            "failure": 4
+          },
+          "1042:swap_operands": {
+            "success": 4,
+            "failure": 2
+          },
+          "1042:variable": {
+            "success": 6,
+            "failure": 4
+          },
+          "1058:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1062:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1062:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1062:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1062:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1062:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1066:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1066:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1066:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1066:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1066:variable": {
+            "success": 1,
+            "failure": 0
+          },
+          "1074:constant": {
+            "success": 0,
+            "failure": 4
+          },
+          "1074:negate": {
+            "success": 0,
+            "failure": 3
+          },
+          "1074:root_operator": {
+            "success": 0,
+            "failure": 1
+          },
+          "1074:swap_operands": {
+            "success": 13,
+            "failure": 0
+          },
+          "1074:variable": {
+            "success": 2,
+            "failure": 2
+          },
+          "1152:constant": {
+            "success": 0,
+            "failure": 5
+          },
+          "1152:negate": {
+            "success": 0,
+            "failure": 2
+          },
+          "1152:root_operator": {
+            "success": 0,
+            "failure": 6
+          },
+          "1152:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1152:variable": {
+            "success": 0,
+            "failure": 2
+          },
+          "1153:constant": {
+            "success": 17,
+            "failure": 3
+          },
+          "1153:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1153:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1153:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1153:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1154:constant": {
+            "success": 3,
+            "failure": 63
+          },
+          "1154:negate": {
+            "success": 4,
+            "failure": 26
+          },
+          "1154:root_operator": {
+            "success": 7,
+            "failure": 42
+          },
+          "1154:swap_operands": {
+            "success": 0,
+            "failure": 8
+          },
+          "1154:variable": {
+            "success": 0,
+            "failure": 26
+          },
+          "1158:constant": {
+            "success": 13,
+            "failure": 37
+          },
+          "1158:negate": {
+            "success": 0,
+            "failure": 14
+          },
+          "1158:root_operator": {
+            "success": 0,
+            "failure": 13
+          },
+          "1158:swap_operands": {
+            "success": 0,
+            "failure": 8
+          },
+          "1158:variable": {
+            "success": 0,
+            "failure": 10
+          },
+          "1162:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1162:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1162:root_operator": {
+            "success": 9,
+            "failure": 0
+          },
+          "1162:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1162:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1170:constant": {
+            "success": 0,
+            "failure": 3
+          },
+          "1170:negate": {
+            "success": 0,
+            "failure": 5
+          },
+          "1170:root_operator": {
+            "success": 4,
+            "failure": 10
+          },
+          "1170:swap_operands": {
+            "success": 1,
+            "failure": 2
+          },
+          "1170:variable": {
+            "success": 12,
+            "failure": 6
+          },
+          "1186:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1186:variable": {
+            "success": 1,
+            "failure": 0
+          },
+          "1190:constant": {
+            "success": 1,
+            "failure": 3
+          },
+          "1190:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1190:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1190:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1190:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1194:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1202:constant": {
+            "success": 0,
+            "failure": 2
+          },
+          "1202:negate": {
+            "success": 0,
+            "failure": 2
+          },
+          "1202:root_operator": {
+            "success": 0,
+            "failure": 5
+          },
+          "1202:swap_operands": {
+            "success": 2,
+            "failure": 2
+          },
+          "1202:variable": {
+            "success": 15,
+            "failure": 2
+          },
+          "1218:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:negate": {
+            "success": 0,
+            "failure": 2
+          },
+          "1218:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:variable": {
+            "success": 0,
+            "failure": 4
+          },
+          "1222:constant": {
+            "success": 1,
+            "failure": 15
+          },
+          "1222:negate": {
+            "success": 0,
+            "failure": 6
+          },
+          "1222:root_operator": {
+            "success": 0,
+            "failure": 1
+          },
+          "1222:swap_operands": {
+            "success": 0,
+            "failure": 3
+          },
+          "1222:variable": {
+            "success": 0,
+            "failure": 3
+          },
+          "1234:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1254:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:variable": {
+            "success": 1,
+            "failure": 0
+          },
+          "1282:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:constant": {
+            "success": 1,
+            "failure": 7
+          },
+          "1292:negate": {
+            "success": 0,
+            "failure": 3
+          },
+          "1292:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1292:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1408:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1408:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1408:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1408:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1408:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:constant": {
+            "success": 1,
+            "failure": 4
+          },
+          "1410:negate": {
+            "success": 0,
+            "failure": 2
+          },
+          "1410:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1474:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:variable": {
+            "success": 0,
+            "failure": 0
+          }
+        }
+      },
+      "skill_registry": {
+        "schema": "nomad.v0.2.skill-registry.v1",
+        "records": [
+          {
+            "signature": 1024,
+            "sequence": [
+              "swap_operands",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-6-30019-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "constant",
+              "swap_operands",
+              "variable"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-0-20019-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-6-30017-0",
+              "multi-6-30018-1",
+              "multi-6-30020-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "variable"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-4-20033-0",
+              "multi-4-20035-2",
+              "multi-4-20036-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "variable",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-8-30026-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "variable",
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-0-20018-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "variable",
+              "constant"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-0-20017-0",
+              "multi-0-20020-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "constant",
+              "constant",
+              "swap_operands",
+              "root_operator"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-3-20030-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-3-20029-0",
+              "multi-3-20032-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "negate",
+              "variable"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-4-20034-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "negate",
+              "variable",
+              "constant"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-8-30025-0",
+              "multi-8-30027-2",
+              "multi-8-30028-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "constant"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-5-20038-1",
+              "multi-5-20039-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "negate",
+              "constant",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-3-20031-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "variable"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-1-20022-1",
+              "multi-1-20023-2",
+              "multi-1-20024-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "variable",
+              "constant"
+            ],
+            "challenge_successes": 4,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-7-30021-0",
+              "multi-7-30022-1",
+              "multi-7-30023-2",
+              "multi-7-30024-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1158,
+            "sequence": [
+              "constant",
+              "root_operator"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-5-20040-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1162,
+            "sequence": [
+              "root_operator",
+              "swap_operands"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-2-20025-0",
+              "multi-2-20027-2",
+              "multi-2-20028-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1170,
+            "sequence": [
+              "variable",
+              "root_operator"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-1-20021-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1190,
+            "sequence": [
+              "constant",
+              "root_operator",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-5-20037-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1194,
+            "sequence": [
+              "variable",
+              "root_operator",
+              "variable"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-2-20026-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          }
+        ]
+      },
+      "promoted_skills": 6
+    },
+    {
+      "seed": 23,
+      "seen_tasks": 24,
+      "unseen_tasks": 12,
+      "seen_results": [
+        {
+          "policy": "fixed",
+          "public_solved": 24,
+          "challenge_correct": 24,
+          "total": 24,
+          "mean_expansions": 33.833333333333336,
+          "median_expansions": 13.5,
+          "p95_expansions": 106.0,
+          "max_expansions": 151,
+          "mean_depth": 2.5,
+          "expansions": [
+            2,
+            79,
+            7,
+            106,
+            50,
+            12,
+            151,
+            46,
+            20,
+            71,
+            3,
+            5,
+            13,
+            14,
+            2,
+            53,
+            7,
+            62,
+            6,
+            69,
+            7,
+            2,
+            7,
+            18
+          ]
+        },
+        {
+          "policy": "global",
+          "public_solved": 24,
+          "challenge_correct": 24,
+          "total": 24,
+          "mean_expansions": 43.958333333333336,
+          "median_expansions": 20.0,
+          "p95_expansions": 132.0,
+          "max_expansions": 241,
+          "mean_depth": 2.7083333333333335,
+          "expansions": [
+            4,
+            17,
+            20,
+            241,
+            132,
+            118,
+            104,
+            74,
+            7,
+            20,
+            3,
+            13,
+            32,
+            26,
+            7,
+            65,
+            7,
+            43,
+            30,
+            59,
+            7,
+            6,
+            7,
+            13
+          ]
+        },
+        {
+          "policy": "contextual",
+          "public_solved": 24,
+          "challenge_correct": 24,
+          "total": 24,
+          "mean_expansions": 17.458333333333332,
+          "median_expansions": 7.0,
+          "p95_expansions": 83.0,
+          "max_expansions": 111,
+          "mean_depth": 2.3333333333333335,
+          "expansions": [
+            8,
+            21,
+            18,
+            7,
+            111,
+            7,
+            83,
+            13,
+            4,
+            5,
+            3,
+            6,
+            20,
+            18,
+            2,
+            18,
+            2,
+            5,
+            4,
+            43,
+            2,
+            3,
+            2,
+            14
+          ]
+        }
+      ],
+      "unseen_results": [
+        {
+          "policy": "fixed",
+          "public_solved": 12,
+          "challenge_correct": 12,
+          "total": 12,
+          "mean_expansions": 64.58333333333333,
+          "median_expansions": 48.0,
+          "p95_expansions": 180.0,
+          "max_expansions": 180,
+          "mean_depth": 2.9166666666666665,
+          "expansions": [
+            68,
+            180,
+            33,
+            38,
+            48,
+            62,
+            74,
+            47,
+            104,
+            48,
+            42,
+            31
+          ]
+        },
+        {
+          "policy": "global",
+          "public_solved": 12,
+          "challenge_correct": 12,
+          "total": 12,
+          "mean_expansions": 75.08333333333333,
+          "median_expansions": 43.0,
+          "p95_expansions": 209.0,
+          "max_expansions": 209,
+          "mean_depth": 3,
+          "expansions": [
+            33,
+            176,
+            6,
+            6,
+            22,
+            6,
+            174,
+            13,
+            147,
+            209,
+            56,
+            53
+          ]
+        },
+        {
+          "policy": "contextual",
+          "public_solved": 12,
+          "challenge_correct": 12,
+          "total": 12,
+          "mean_expansions": 36.666666666666664,
+          "median_expansions": 29.0,
+          "p95_expansions": 111.0,
+          "max_expansions": 111,
+          "mean_depth": 2.8333333333333335,
+          "expansions": [
+            32,
+            67,
+            26,
+            3,
+            34,
+            2,
+            111,
+            9,
+            16,
+            92,
+            9,
+            39
+          ]
+        }
+      ],
+      "contextual_learner": {
+        "contextual": true,
+        "global": {
+          "constant": {
+            "success": 56,
+            "failure": 136
+          },
+          "negate": {
+            "success": 35,
+            "failure": 97
+          },
+          "root_operator": {
+            "success": 34,
+            "failure": 133
+          },
+          "swap_operands": {
+            "success": 20,
+            "failure": 38
+          },
+          "variable": {
+            "success": 44,
+            "failure": 94
+          }
+        },
+        "contexts": {
+          "146:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "146:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "146:root_operator": {
+            "success": 0,
+            "failure": 1
+          },
+          "146:swap_operands": {
+            "success": 3,
+            "failure": 0
+          },
+          "146:variable": {
+            "success": 0,
+            "failure": 2
+          },
+          "1024:constant": {
+            "success": 0,
+            "failure": 2
+          },
+          "1024:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1024:root_operator": {
+            "success": 0,
+            "failure": 6
+          },
+          "1024:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1024:variable": {
+            "success": 0,
+            "failure": 2
+          },
+          "1025:constant": {
+            "success": 17,
+            "failure": 4
+          },
+          "1025:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1025:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1025:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1025:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1026:constant": {
+            "success": 6,
+            "failure": 22
+          },
+          "1026:negate": {
+            "success": 10,
+            "failure": 19
+          },
+          "1026:root_operator": {
+            "success": 3,
+            "failure": 25
+          },
+          "1026:swap_operands": {
+            "success": 0,
+            "failure": 8
+          },
+          "1026:variable": {
+            "success": 1,
+            "failure": 9
+          },
+          "1030:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1030:negate": {
+            "success": 5,
+            "failure": 0
+          },
+          "1030:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1030:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1030:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1034:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1034:negate": {
+            "success": 5,
+            "failure": 1
+          },
+          "1034:root_operator": {
+            "success": 8,
+            "failure": 0
+          },
+          "1034:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1034:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1040:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1040:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1040:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1040:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1040:variable": {
+            "success": 1,
+            "failure": 0
+          },
+          "1042:constant": {
+            "success": 0,
+            "failure": 2
+          },
+          "1042:negate": {
+            "success": 0,
+            "failure": 4
+          },
+          "1042:root_operator": {
+            "success": 3,
+            "failure": 4
+          },
+          "1042:swap_operands": {
+            "success": 3,
+            "failure": 2
+          },
+          "1042:variable": {
+            "success": 5,
+            "failure": 5
+          },
+          "1058:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:swap_operands": {
+            "success": 2,
+            "failure": 0
+          },
+          "1058:variable": {
+            "success": 1,
+            "failure": 2
+          },
+          "1062:constant": {
+            "success": 2,
+            "failure": 0
+          },
+          "1062:negate": {
+            "success": 1,
+            "failure": 2
+          },
+          "1062:root_operator": {
+            "success": 0,
+            "failure": 2
+          },
+          "1062:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1062:variable": {
+            "success": 2,
+            "failure": 1
+          },
+          "1066:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1066:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1066:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1066:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1066:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1074:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1074:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1074:root_operator": {
+            "success": 0,
+            "failure": 1
+          },
+          "1074:swap_operands": {
+            "success": 11,
+            "failure": 0
+          },
+          "1074:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1152:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1152:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1152:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1152:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1152:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1153:constant": {
+            "success": 18,
+            "failure": 11
+          },
+          "1153:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1153:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1153:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1153:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1154:constant": {
+            "success": 4,
+            "failure": 79
+          },
+          "1154:negate": {
+            "success": 7,
+            "failure": 38
+          },
+          "1154:root_operator": {
+            "success": 9,
+            "failure": 53
+          },
+          "1154:swap_operands": {
+            "success": 0,
+            "failure": 14
+          },
+          "1154:variable": {
+            "success": 1,
+            "failure": 35
+          },
+          "1158:constant": {
+            "success": 5,
+            "failure": 14
+          },
+          "1158:negate": {
+            "success": 0,
+            "failure": 9
+          },
+          "1158:root_operator": {
+            "success": 1,
+            "failure": 7
+          },
+          "1158:swap_operands": {
+            "success": 0,
+            "failure": 3
+          },
+          "1158:variable": {
+            "success": 1,
+            "failure": 11
+          },
+          "1162:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1162:negate": {
+            "success": 5,
+            "failure": 2
+          },
+          "1162:root_operator": {
+            "success": 6,
+            "failure": 9
+          },
+          "1162:swap_operands": {
+            "success": 0,
+            "failure": 3
+          },
+          "1162:variable": {
+            "success": 1,
+            "failure": 3
+          },
+          "1170:constant": {
+            "success": 0,
+            "failure": 2
+          },
+          "1170:negate": {
+            "success": 2,
+            "failure": 10
+          },
+          "1170:root_operator": {
+            "success": 4,
+            "failure": 24
+          },
+          "1170:swap_operands": {
+            "success": 0,
+            "failure": 4
+          },
+          "1170:variable": {
+            "success": 19,
+            "failure": 6
+          },
+          "1186:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1190:constant": {
+            "success": 3,
+            "failure": 0
+          },
+          "1190:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1190:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1190:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1190:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1202:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1202:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1202:root_operator": {
+            "success": 0,
+            "failure": 1
+          },
+          "1202:swap_operands": {
+            "success": 1,
+            "failure": 0
+          },
+          "1202:variable": {
+            "success": 12,
+            "failure": 1
+          },
+          "1216:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1216:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1216:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1216:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1216:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:negate": {
+            "success": 0,
+            "failure": 6
+          },
+          "1218:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:variable": {
+            "success": 0,
+            "failure": 12
+          },
+          "1222:constant": {
+            "success": 1,
+            "failure": 0
+          },
+          "1222:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1222:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1222:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1222:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1250:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1250:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1250:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1250:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1250:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1410:variable": {
+            "success": 0,
+            "failure": 2
+          },
+          "1474:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:variable": {
+            "success": 0,
+            "failure": 0
+          }
+        }
+      },
+      "skill_registry": {
+        "schema": "nomad.v0.2.skill-registry.v1",
+        "records": [
+          {
+            "signature": 1024,
+            "sequence": [
+              "swap_operands",
+              "constant"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-6-30024-1",
+              "multi-6-30025-2",
+              "multi-6-30026-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "constant",
+              "swap_operands"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-6-30023-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "constant",
+              "variable"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-0-20024-1",
+              "multi-0-20025-2",
+              "multi-0-20026-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-3-20037-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "constant",
+              "variable"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-8-30032-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "constant",
+              "variable",
+              "negate"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-0-20023-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "variable"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-4-20039-0",
+              "multi-4-20040-1",
+              "multi-4-20041-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1034,
+            "sequence": [
+              "root_operator",
+              "swap_operands"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-2-20031-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1066,
+            "sequence": [
+              "variable",
+              "root_operator",
+              "negate",
+              "variable"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-2-20033-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-3-20035-0",
+              "multi-3-20036-1",
+              "multi-3-20038-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "negate",
+              "variable"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-4-20042-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "negate",
+              "variable",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-8-30033-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "constant"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-5-20044-1",
+              "multi-5-20045-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "constant",
+              "negate",
+              "variable"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-7-30027-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "constant",
+              "variable"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-7-30030-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "variable"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-1-20027-0",
+              "multi-1-20029-2",
+              "multi-1-20030-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "variable",
+              "constant"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-7-30028-1",
+              "multi-7-30029-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "variable",
+              "constant",
+              "negate"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-8-30031-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "variable",
+              "constant",
+              "swap_operands",
+              "root_operator"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-8-30034-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1158,
+            "sequence": [
+              "root_operator",
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-5-20043-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1162,
+            "sequence": [
+              "root_operator",
+              "swap_operands"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-2-20032-1",
+              "multi-2-20034-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1170,
+            "sequence": [
+              "root_operator",
+              "negate",
+              "negate",
+              "variable"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-1-20028-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1190,
+            "sequence": [
+              "constant",
+              "root_operator",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-5-20046-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          }
+        ]
+      },
+      "promoted_skills": 5
+    },
+    {
+      "seed": 31,
+      "seen_tasks": 24,
+      "unseen_tasks": 12,
+      "seen_results": [
+        {
+          "policy": "fixed",
+          "public_solved": 24,
+          "challenge_correct": 24,
+          "total": 24,
+          "mean_expansions": 41.875,
+          "median_expansions": 24.5,
+          "p95_expansions": 104.0,
+          "max_expansions": 142,
+          "mean_depth": 2.5833333333333335,
+          "expansions": [
+            95,
+            89,
+            51,
+            2,
+            3,
+            6,
+            2,
+            54,
+            5,
+            8,
+            142,
+            41,
+            83,
+            65,
+            2,
+            2,
+            57,
+            3,
+            79,
+            2,
+            2,
+            104,
+            101,
+            7
+          ]
+        },
+        {
+          "policy": "global",
+          "public_solved": 24,
+          "challenge_correct": 24,
+          "total": 24,
+          "mean_expansions": 44.75,
+          "median_expansions": 22.5,
+          "p95_expansions": 179.0,
+          "max_expansions": 236,
+          "mean_depth": 2.625,
+          "expansions": [
+            10,
+            77,
+            80,
+            7,
+            20,
+            22,
+            6,
+            236,
+            4,
+            28,
+            47,
+            33,
+            179,
+            19,
+            2,
+            6,
+            84,
+            23,
+            42,
+            2,
+            7,
+            83,
+            50,
+            7
+          ]
+        },
+        {
+          "policy": "contextual",
+          "public_solved": 24,
+          "challenge_correct": 24,
+          "total": 24,
+          "mean_expansions": 30.25,
+          "median_expansions": 11.0,
+          "p95_expansions": 82.0,
+          "max_expansions": 111,
+          "mean_depth": 2.7083333333333335,
+          "expansions": [
+            13,
+            16,
+            73,
+            2,
+            9,
+            22,
+            2,
+            9,
+            2,
+            28,
+            66,
+            35,
+            82,
+            6,
+            2,
+            8,
+            63,
+            8,
+            111,
+            4,
+            2,
+            79,
+            82,
+            2
+          ]
+        }
+      ],
+      "unseen_results": [
+        {
+          "policy": "fixed",
+          "public_solved": 12,
+          "challenge_correct": 12,
+          "total": 12,
+          "mean_expansions": 65.08333333333333,
+          "median_expansions": 44.5,
+          "p95_expansions": 199.0,
+          "max_expansions": 199,
+          "mean_depth": 2.75,
+          "expansions": [
+            24,
+            46,
+            40,
+            68,
+            39,
+            199,
+            14,
+            62,
+            161,
+            31,
+            54,
+            43
+          ]
+        },
+        {
+          "policy": "global",
+          "public_solved": 12,
+          "challenge_correct": 12,
+          "total": 12,
+          "mean_expansions": 56.25,
+          "median_expansions": 33.5,
+          "p95_expansions": 221.0,
+          "max_expansions": 221,
+          "mean_depth": 3,
+          "expansions": [
+            26,
+            14,
+            31,
+            119,
+            27,
+            66,
+            221,
+            36,
+            71,
+            52,
+            6,
+            6
+          ]
+        },
+        {
+          "policy": "contextual",
+          "public_solved": 12,
+          "challenge_correct": 12,
+          "total": 12,
+          "mean_expansions": 63.333333333333336,
+          "median_expansions": 46.5,
+          "p95_expansions": 192.0,
+          "max_expansions": 192,
+          "mean_depth": 2.9166666666666665,
+          "expansions": [
+            92,
+            55,
+            29,
+            12,
+            27,
+            106,
+            192,
+            38,
+            100,
+            25,
+            81,
+            3
+          ]
+        }
+      ],
+      "contextual_learner": {
+        "contextual": true,
+        "global": {
+          "constant": {
+            "success": 88,
+            "failure": 349
+          },
+          "negate": {
+            "success": 35,
+            "failure": 123
+          },
+          "root_operator": {
+            "success": 43,
+            "failure": 180
+          },
+          "swap_operands": {
+            "success": 28,
+            "failure": 53
+          },
+          "variable": {
+            "success": 40,
+            "failure": 90
+          }
+        },
+        "contexts": {
+          "1024:constant": {
+            "success": 0,
+            "failure": 10
+          },
+          "1024:negate": {
+            "success": 0,
+            "failure": 3
+          },
+          "1024:root_operator": {
+            "success": 0,
+            "failure": 8
+          },
+          "1024:swap_operands": {
+            "success": 0,
+            "failure": 2
+          },
+          "1024:variable": {
+            "success": 1,
+            "failure": 1
+          },
+          "1025:constant": {
+            "success": 20,
+            "failure": 0
+          },
+          "1025:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1025:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1025:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1025:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1026:constant": {
+            "success": 6,
+            "failure": 61
+          },
+          "1026:negate": {
+            "success": 13,
+            "failure": 30
+          },
+          "1026:root_operator": {
+            "success": 8,
+            "failure": 31
+          },
+          "1026:swap_operands": {
+            "success": 1,
+            "failure": 10
+          },
+          "1026:variable": {
+            "success": 1,
+            "failure": 16
+          },
+          "1030:constant": {
+            "success": 0,
+            "failure": 2
+          },
+          "1030:negate": {
+            "success": 6,
+            "failure": 4
+          },
+          "1030:root_operator": {
+            "success": 1,
+            "failure": 2
+          },
+          "1030:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1030:variable": {
+            "success": 0,
+            "failure": 2
+          },
+          "1034:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1034:negate": {
+            "success": 5,
+            "failure": 1
+          },
+          "1034:root_operator": {
+            "success": 9,
+            "failure": 0
+          },
+          "1034:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1034:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1040:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1040:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1040:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1040:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1040:variable": {
+            "success": 1,
+            "failure": 0
+          },
+          "1042:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1042:negate": {
+            "success": 0,
+            "failure": 5
+          },
+          "1042:root_operator": {
+            "success": 2,
+            "failure": 3
+          },
+          "1042:swap_operands": {
+            "success": 6,
+            "failure": 2
+          },
+          "1042:variable": {
+            "success": 5,
+            "failure": 2
+          },
+          "1058:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1074:constant": {
+            "success": 0,
+            "failure": 2
+          },
+          "1074:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1074:root_operator": {
+            "success": 1,
+            "failure": 2
+          },
+          "1074:swap_operands": {
+            "success": 9,
+            "failure": 0
+          },
+          "1074:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1152:constant": {
+            "success": 1,
+            "failure": 18
+          },
+          "1152:negate": {
+            "success": 2,
+            "failure": 3
+          },
+          "1152:root_operator": {
+            "success": 1,
+            "failure": 20
+          },
+          "1152:swap_operands": {
+            "success": 2,
+            "failure": 6
+          },
+          "1152:variable": {
+            "success": 0,
+            "failure": 3
+          },
+          "1153:constant": {
+            "success": 16,
+            "failure": 3
+          },
+          "1153:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1153:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1153:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1153:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1154:constant": {
+            "success": 18,
+            "failure": 201
+          },
+          "1154:negate": {
+            "success": 9,
+            "failure": 48
+          },
+          "1154:root_operator": {
+            "success": 10,
+            "failure": 85
+          },
+          "1154:swap_operands": {
+            "success": 4,
+            "failure": 24
+          },
+          "1154:variable": {
+            "success": 4,
+            "failure": 42
+          },
+          "1158:constant": {
+            "success": 22,
+            "failure": 29
+          },
+          "1158:negate": {
+            "success": 0,
+            "failure": 4
+          },
+          "1158:root_operator": {
+            "success": 0,
+            "failure": 6
+          },
+          "1158:swap_operands": {
+            "success": 0,
+            "failure": 3
+          },
+          "1158:variable": {
+            "success": 0,
+            "failure": 5
+          },
+          "1162:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1162:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1162:root_operator": {
+            "success": 8,
+            "failure": 0
+          },
+          "1162:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1162:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1170:constant": {
+            "success": 1,
+            "failure": 9
+          },
+          "1170:negate": {
+            "success": 0,
+            "failure": 12
+          },
+          "1170:root_operator": {
+            "success": 3,
+            "failure": 19
+          },
+          "1170:swap_operands": {
+            "success": 3,
+            "failure": 2
+          },
+          "1170:variable": {
+            "success": 15,
+            "failure": 8
+          },
+          "1186:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1202:constant": {
+            "success": 0,
+            "failure": 2
+          },
+          "1202:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1202:root_operator": {
+            "success": 0,
+            "failure": 4
+          },
+          "1202:swap_operands": {
+            "success": 3,
+            "failure": 2
+          },
+          "1202:variable": {
+            "success": 12,
+            "failure": 3
+          },
+          "1218:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:negate": {
+            "success": 0,
+            "failure": 5
+          },
+          "1218:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:variable": {
+            "success": 0,
+            "failure": 4
+          },
+          "1222:constant": {
+            "success": 1,
+            "failure": 3
+          },
+          "1222:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1222:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1222:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1222:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1266:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:constant": {
+            "success": 0,
+            "failure": 3
+          },
+          "1292:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1292:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1408:constant": {
+            "success": 0,
+            "failure": 4
+          },
+          "1408:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1408:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1408:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1408:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:constant": {
+            "success": 3,
+            "failure": 2
+          },
+          "1410:negate": {
+            "success": 0,
+            "failure": 2
+          },
+          "1410:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:variable": {
+            "success": 1,
+            "failure": 0
+          },
+          "1472:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1472:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1472:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1472:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1472:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:variable": {
+            "success": 0,
+            "failure": 0
+          }
+        }
+      },
+      "skill_registry": {
+        "schema": "nomad.v0.2.skill-registry.v1",
+        "records": [
+          {
+            "signature": 1024,
+            "sequence": [
+              "swap_operands",
+              "constant"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-6-30032-1",
+              "multi-6-30033-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-6-30031-0",
+              "multi-6-30034-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "variable"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-4-20047-0",
+              "multi-4-20048-1",
+              "multi-4-20049-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "variable",
+              "constant"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-8-30039-0",
+              "multi-8-30042-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "root_operator",
+              "constant",
+              "constant",
+              "negate"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-3-20046-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "root_operator",
+              "variable",
+              "constant",
+              "root_operator"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-0-20034-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "swap_operands",
+              "constant",
+              "variable"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-0-20031-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "variable",
+              "constant"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-0-20032-1",
+              "multi-0-20033-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1034,
+            "sequence": [
+              "root_operator",
+              "swap_operands"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-2-20041-2",
+              "multi-2-20042-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "constant",
+              "constant",
+              "swap_operands",
+              "root_operator"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-3-20044-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-3-20043-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "negate",
+              "variable"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-4-20050-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "negate",
+              "variable",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-8-30040-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "constant"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-5-20052-1",
+              "multi-5-20053-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "constant",
+              "constant",
+              "negate"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-3-20045-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "negate",
+              "negate",
+              "variable"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-1-20037-2",
+              "multi-1-20038-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "swap_operands",
+              "variable",
+              "root_operator",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-7-30036-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "variable",
+              "constant",
+              "negate"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-8-30041-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "variable",
+              "root_operator"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-1-20035-0",
+              "multi-1-20036-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "variable",
+              "root_operator",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-7-30037-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "variable",
+              "root_operator",
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-7-30035-0",
+              "multi-7-30038-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1158,
+            "sequence": [
+              "constant",
+              "root_operator",
+              "negate"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-5-20054-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1158,
+            "sequence": [
+              "root_operator",
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-5-20051-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1162,
+            "sequence": [
+              "root_operator",
+              "swap_operands"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-2-20040-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1194,
+            "sequence": [
+              "variable",
+              "root_operator",
+              "negate",
+              "variable"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-2-20039-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          }
+        ]
+      },
+      "promoted_skills": 1
+    },
+    {
+      "seed": 47,
+      "seen_tasks": 24,
+      "unseen_tasks": 12,
+      "seen_results": [
+        {
+          "policy": "fixed",
+          "public_solved": 24,
+          "challenge_correct": 24,
+          "total": 24,
+          "mean_expansions": 34.541666666666664,
+          "median_expansions": 10.5,
+          "p95_expansions": 117.0,
+          "max_expansions": 132,
+          "mean_depth": 2.3333333333333335,
+          "expansions": [
+            3,
+            14,
+            5,
+            117,
+            21,
+            53,
+            6,
+            2,
+            2,
+            132,
+            7,
+            57,
+            2,
+            65,
+            2,
+            3,
+            2,
+            117,
+            111,
+            7,
+            14,
+            36,
+            3,
+            48
+          ]
+        },
+        {
+          "policy": "global",
+          "public_solved": 24,
+          "challenge_correct": 24,
+          "total": 24,
+          "mean_expansions": 34.5,
+          "median_expansions": 16.5,
+          "p95_expansions": 110.0,
+          "max_expansions": 129,
+          "mean_depth": 2.5833333333333335,
+          "expansions": [
+            3,
+            13,
+            4,
+            82,
+            13,
+            66,
+            29,
+            4,
+            2,
+            24,
+            15,
+            106,
+            6,
+            110,
+            6,
+            24,
+            4,
+            43,
+            129,
+            18,
+            13,
+            35,
+            3,
+            76
+          ]
+        },
+        {
+          "policy": "contextual",
+          "public_solved": 24,
+          "challenge_correct": 24,
+          "total": 24,
+          "mean_expansions": 25.458333333333332,
+          "median_expansions": 9.0,
+          "p95_expansions": 79.0,
+          "max_expansions": 122,
+          "mean_depth": 2.625,
+          "expansions": [
+            6,
+            58,
+            2,
+            76,
+            9,
+            44,
+            9,
+            8,
+            5,
+            3,
+            12,
+            9,
+            6,
+            122,
+            6,
+            9,
+            2,
+            4,
+            50,
+            12,
+            69,
+            9,
+            2,
+            79
+          ]
+        }
+      ],
+      "unseen_results": [
+        {
+          "policy": "fixed",
+          "public_solved": 12,
+          "challenge_correct": 12,
+          "total": 12,
+          "mean_expansions": 117.33333333333333,
+          "median_expansions": 80.0,
+          "p95_expansions": 319.0,
+          "max_expansions": 319,
+          "mean_depth": 3,
+          "expansions": [
+            190,
+            130,
+            86,
+            62,
+            46,
+            12,
+            150,
+            319,
+            235,
+            74,
+            40,
+            64
+          ]
+        },
+        {
+          "policy": "global",
+          "public_solved": 12,
+          "challenge_correct": 12,
+          "total": 12,
+          "mean_expansions": 104.33333333333333,
+          "median_expansions": 83.5,
+          "p95_expansions": 210.0,
+          "max_expansions": 210,
+          "mean_depth": 2.8333333333333335,
+          "expansions": [
+            164,
+            70,
+            59,
+            23,
+            10,
+            197,
+            172,
+            210,
+            143,
+            44,
+            63,
+            97
+          ]
+        },
+        {
+          "policy": "contextual",
+          "public_solved": 12,
+          "challenge_correct": 12,
+          "total": 12,
+          "mean_expansions": 55.666666666666664,
+          "median_expansions": 26.0,
+          "p95_expansions": 242.0,
+          "max_expansions": 242,
+          "mean_depth": 2.9166666666666665,
+          "expansions": [
+            25,
+            23,
+            27,
+            4,
+            3,
+            242,
+            9,
+            149,
+            84,
+            19,
+            52,
+            31
+          ]
+        }
+      ],
+      "contextual_learner": {
+        "contextual": true,
+        "global": {
+          "constant": {
+            "success": 68,
+            "failure": 302
+          },
+          "negate": {
+            "success": 43,
+            "failure": 131
+          },
+          "root_operator": {
+            "success": 35,
+            "failure": 187
+          },
+          "swap_operands": {
+            "success": 8,
+            "failure": 42
+          },
+          "variable": {
+            "success": 52,
+            "failure": 110
+          }
+        },
+        "contexts": {
+          "1024:constant": {
+            "success": 0,
+            "failure": 10
+          },
+          "1024:negate": {
+            "success": 0,
+            "failure": 5
+          },
+          "1024:root_operator": {
+            "success": 0,
+            "failure": 11
+          },
+          "1024:swap_operands": {
+            "success": 0,
+            "failure": 2
+          },
+          "1024:variable": {
+            "success": 1,
+            "failure": 3
+          },
+          "1025:constant": {
+            "success": 20,
+            "failure": 2
+          },
+          "1025:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1025:root_operator": {
+            "success": 0,
+            "failure": 1
+          },
+          "1025:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1025:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1026:constant": {
+            "success": 11,
+            "failure": 92
+          },
+          "1026:negate": {
+            "success": 12,
+            "failure": 42
+          },
+          "1026:root_operator": {
+            "success": 6,
+            "failure": 69
+          },
+          "1026:swap_operands": {
+            "success": 0,
+            "failure": 11
+          },
+          "1026:variable": {
+            "success": 1,
+            "failure": 22
+          },
+          "1030:constant": {
+            "success": 2,
+            "failure": 3
+          },
+          "1030:negate": {
+            "success": 7,
+            "failure": 4
+          },
+          "1030:root_operator": {
+            "success": 1,
+            "failure": 6
+          },
+          "1030:swap_operands": {
+            "success": 0,
+            "failure": 3
+          },
+          "1030:variable": {
+            "success": 0,
+            "failure": 3
+          },
+          "1034:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1034:negate": {
+            "success": 5,
+            "failure": 2
+          },
+          "1034:root_operator": {
+            "success": 9,
+            "failure": 0
+          },
+          "1034:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1034:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1040:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1040:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1040:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1040:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1040:variable": {
+            "success": 1,
+            "failure": 0
+          },
+          "1042:constant": {
+            "success": 0,
+            "failure": 2
+          },
+          "1042:negate": {
+            "success": 1,
+            "failure": 8
+          },
+          "1042:root_operator": {
+            "success": 1,
+            "failure": 2
+          },
+          "1042:swap_operands": {
+            "success": 1,
+            "failure": 0
+          },
+          "1042:variable": {
+            "success": 5,
+            "failure": 3
+          },
+          "1058:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:negate": {
+            "success": 1,
+            "failure": 0
+          },
+          "1058:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1058:variable": {
+            "success": 0,
+            "failure": 2
+          },
+          "1062:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1062:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1062:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1062:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1062:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1066:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1066:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1066:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1066:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1066:variable": {
+            "success": 1,
+            "failure": 0
+          },
+          "1074:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1074:negate": {
+            "success": 9,
+            "failure": 4
+          },
+          "1074:root_operator": {
+            "success": 0,
+            "failure": 2
+          },
+          "1074:swap_operands": {
+            "success": 2,
+            "failure": 0
+          },
+          "1074:variable": {
+            "success": 3,
+            "failure": 2
+          },
+          "1152:constant": {
+            "success": 0,
+            "failure": 4
+          },
+          "1152:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1152:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1152:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1152:variable": {
+            "success": 0,
+            "failure": 2
+          },
+          "1153:constant": {
+            "success": 15,
+            "failure": 7
+          },
+          "1153:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1153:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1153:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1153:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1154:constant": {
+            "success": 10,
+            "failure": 141
+          },
+          "1154:negate": {
+            "success": 4,
+            "failure": 36
+          },
+          "1154:root_operator": {
+            "success": 8,
+            "failure": 64
+          },
+          "1154:swap_operands": {
+            "success": 0,
+            "failure": 13
+          },
+          "1154:variable": {
+            "success": 5,
+            "failure": 39
+          },
+          "1158:constant": {
+            "success": 3,
+            "failure": 11
+          },
+          "1158:negate": {
+            "success": 0,
+            "failure": 6
+          },
+          "1158:root_operator": {
+            "success": 0,
+            "failure": 3
+          },
+          "1158:swap_operands": {
+            "success": 0,
+            "failure": 2
+          },
+          "1158:variable": {
+            "success": 0,
+            "failure": 6
+          },
+          "1162:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1162:negate": {
+            "success": 3,
+            "failure": 1
+          },
+          "1162:root_operator": {
+            "success": 3,
+            "failure": 6
+          },
+          "1162:swap_operands": {
+            "success": 0,
+            "failure": 2
+          },
+          "1162:variable": {
+            "success": 2,
+            "failure": 4
+          },
+          "1168:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1168:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1168:root_operator": {
+            "success": 0,
+            "failure": 1
+          },
+          "1168:swap_operands": {
+            "success": 0,
+            "failure": 1
+          },
+          "1168:variable": {
+            "success": 1,
+            "failure": 0
+          },
+          "1170:constant": {
+            "success": 0,
+            "failure": 2
+          },
+          "1170:negate": {
+            "success": 1,
+            "failure": 4
+          },
+          "1170:root_operator": {
+            "success": 6,
+            "failure": 17
+          },
+          "1170:swap_operands": {
+            "success": 3,
+            "failure": 4
+          },
+          "1170:variable": {
+            "success": 11,
+            "failure": 9
+          },
+          "1186:constant": {
+            "success": 1,
+            "failure": 0
+          },
+          "1186:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1186:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1186:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1190:constant": {
+            "success": 1,
+            "failure": 4
+          },
+          "1190:negate": {
+            "success": 0,
+            "failure": 3
+          },
+          "1190:root_operator": {
+            "success": 1,
+            "failure": 2
+          },
+          "1190:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1190:variable": {
+            "success": 2,
+            "failure": 2
+          },
+          "1194:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1194:variable": {
+            "success": 2,
+            "failure": 0
+          },
+          "1202:constant": {
+            "success": 0,
+            "failure": 4
+          },
+          "1202:negate": {
+            "success": 0,
+            "failure": 5
+          },
+          "1202:root_operator": {
+            "success": 0,
+            "failure": 3
+          },
+          "1202:swap_operands": {
+            "success": 2,
+            "failure": 2
+          },
+          "1202:variable": {
+            "success": 14,
+            "failure": 2
+          },
+          "1216:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1216:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1216:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1216:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1216:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1218:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1218:variable": {
+            "success": 0,
+            "failure": 3
+          },
+          "1222:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1222:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1222:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1222:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1222:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1234:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1234:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1250:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1250:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1250:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1250:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1250:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1254:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1266:variable": {
+            "success": 3,
+            "failure": 0
+          },
+          "1282:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1282:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1292:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1408:constant": {
+            "success": 0,
+            "failure": 4
+          },
+          "1408:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1408:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1408:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1408:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:constant": {
+            "success": 5,
+            "failure": 13
+          },
+          "1410:negate": {
+            "success": 0,
+            "failure": 4
+          },
+          "1410:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1410:variable": {
+            "success": 0,
+            "failure": 4
+          },
+          "1426:constant": {
+            "success": 0,
+            "failure": 3
+          },
+          "1426:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1426:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1426:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1426:variable": {
+            "success": 0,
+            "failure": 1
+          },
+          "1442:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1442:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1442:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1442:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1442:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1472:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1472:negate": {
+            "success": 0,
+            "failure": 1
+          },
+          "1472:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1472:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1472:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1474:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1478:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1478:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1478:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1478:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1478:variable": {
+            "success": 0,
+            "failure": 0
+          },
+          "1490:constant": {
+            "success": 0,
+            "failure": 0
+          },
+          "1490:negate": {
+            "success": 0,
+            "failure": 0
+          },
+          "1490:root_operator": {
+            "success": 0,
+            "failure": 0
+          },
+          "1490:swap_operands": {
+            "success": 0,
+            "failure": 0
+          },
+          "1490:variable": {
+            "success": 0,
+            "failure": 1
+          }
+        }
+      },
+      "skill_registry": {
+        "schema": "nomad.v0.2.skill-registry.v1",
+        "records": [
+          {
+            "signature": 1024,
+            "sequence": [
+              "swap_operands",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-6-30049-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "constant",
+              "swap_operands"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-6-30050-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "constant",
+              "swap_operands",
+              "negate"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-3-20061-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "constant",
+              "variable"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-0-20047-0",
+              "multi-0-20049-2",
+              "multi-0-20050-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-3-20060-1",
+              "multi-6-30047-0",
+              "multi-6-30048-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "constant",
+              "variable"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-8-30055-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "variable"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-4-20063-0",
+              "multi-4-20064-1",
+              "multi-4-20065-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1026,
+            "sequence": [
+              "negate",
+              "variable",
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-0-20048-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1034,
+            "sequence": [
+              "root_operator",
+              "negate"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-2-20055-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "constant",
+              "constant",
+              "swap_operands",
+              "root_operator"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-3-20059-0",
+              "multi-3-20062-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "constant"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-5-20068-1",
+              "multi-5-20069-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "constant",
+              "variable",
+              "root_operator"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-7-30052-1"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "root_operator",
+              "negate",
+              "negate",
+              "variable"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-1-20052-1",
+              "multi-1-20054-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "variable",
+              "constant",
+              "root_operator",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-7-30054-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "variable",
+              "constant",
+              "root_operator",
+              "negate"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-7-30051-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "variable",
+              "negate"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-4-20066-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "variable",
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 3,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-8-30056-1",
+              "multi-8-30057-2",
+              "multi-8-30058-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "promoted"
+          },
+          {
+            "signature": 1154,
+            "sequence": [
+              "variable",
+              "root_operator",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-7-30053-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1158,
+            "sequence": [
+              "root_operator",
+              "negate",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-5-20070-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1162,
+            "sequence": [
+              "variable",
+              "root_operator",
+              "variable"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-2-20058-3"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1170,
+            "sequence": [
+              "variable",
+              "root_operator"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-1-20051-0",
+              "multi-1-20053-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1190,
+            "sequence": [
+              "root_operator",
+              "constant"
+            ],
+            "challenge_successes": 1,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-5-20067-0"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          },
+          {
+            "signature": 1194,
+            "sequence": [
+              "variable",
+              "root_operator",
+              "variable"
+            ],
+            "challenge_successes": 2,
+            "challenge_failures": 0,
+            "task_ids": [
+              "multi-2-20056-1",
+              "multi-2-20057-2"
+            ],
+            "evaluators": [
+              "withheld-expression-challenge-v2"
+            ],
+            "status": "provisional"
+          }
+        ]
+      },
+      "promoted_skills": 4
+    }
+  ],
+  "seen_summary": {
+    "fixed": {
+      "public_solve_rate": 1.0,
+      "challenge_correct_rate": 1.0,
+      "mean_expansions_across_runs": 39.31666666666667,
+      "median_expansions_across_runs": 14.5,
+      "p95_expansions_across_runs": 123.8,
+      "total_tasks": 120,
+      "total_challenge_correct": 120
+    },
+    "global": {
+      "public_solve_rate": 1.0,
+      "challenge_correct_rate": 1.0,
+      "mean_expansions_across_runs": 39.35,
+      "median_expansions_across_runs": 20.7,
+      "p95_expansions_across_runs": 129.8,
+      "total_tasks": 120,
+      "total_challenge_correct": 120,
+      "expansion_reduction_vs_fixed": -0.0008478168715556957
+    },
+    "contextual": {
+      "public_solve_rate": 1.0,
+      "challenge_correct_rate": 1.0,
+      "mean_expansions_across_runs": 24.9,
+      "median_expansions_across_runs": 9.0,
+      "p95_expansions_across_runs": 90.2,
+      "total_tasks": 120,
+      "total_challenge_correct": 120,
+      "expansion_reduction_vs_fixed": 0.3666807969478594
+    }
+  },
+  "unseen_composition_summary": {
+    "fixed": {
+      "public_solve_rate": 1.0,
+      "challenge_correct_rate": 1.0,
+      "mean_expansions_across_runs": 94.48333333333333,
+      "median_expansions_across_runs": 71.9,
+      "p95_expansions_across_runs": 220.6,
+      "total_tasks": 60,
+      "total_challenge_correct": 60
+    },
+    "global": {
+      "public_solve_rate": 1.0,
+      "challenge_correct_rate": 1.0,
+      "mean_expansions_across_runs": 72.2,
+      "median_expansions_across_runs": 47.4,
+      "p95_expansions_across_runs": 212.6,
+      "total_tasks": 60,
+      "total_challenge_correct": 60,
+      "expansion_reduction_vs_fixed": 0.23584406420885515
+    },
+    "contextual": {
+      "public_solve_rate": 1.0,
+      "challenge_correct_rate": 1.0,
+      "mean_expansions_across_runs": 49.3,
+      "median_expansions_across_runs": 35.9,
+      "p95_expansions_across_runs": 164.8,
+      "total_tasks": 60,
+      "total_challenge_correct": 60,
+      "expansion_reduction_vs_fixed": 0.47821485270770864
+    }
+  },
+  "promoted_skill_records_across_runs": 21
+}

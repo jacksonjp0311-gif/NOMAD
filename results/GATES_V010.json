@@ -1,0 +1,34 @@
+{
+  "schema": "nomad.v0.10.release-gates.v1",
+  "version": "0.10.0",
+  "status": "passed",
+  "gates": {
+    "heldout_case_count": true,
+    "old_fixed_v9_exhausted": true,
+    "witness_supported": true,
+    "final_correct": true,
+    "zero_false_witness": true,
+    "context_better_than_global": true,
+    "context_better_than_enumeration": true,
+    "context_better_than_rotated_state": true,
+    "independent_numeric_audit": true,
+    "original_training_records_witnessed": true,
+    "integrated_python_files": true,
+    "persistent_prior_matches_trained_model": true
+  },
+  "metrics": {
+    "evaluation_tasks": 24,
+    "final_correct": 24,
+    "v9_fixed_correct": 0,
+    "context_mean_evaluations": 1203.25,
+    "global_mean_evaluations": 3083.25,
+    "enumeration_mean_evaluations": 6693,
+    "shifted_mean_evaluations": 3083.25,
+    "reduction_vs_enumeration_percent": 82.02226206484386,
+    "reduction_vs_global_percent": 60.97462093570096,
+    "verified_training_skills": 24,
+    "on_disk_repos": 8,
+    "reference_checked_programs": 96
+  },
+  "limitations": "Internal synthetic integer grammar, not an external benchmark or whole-process CPU estimate"
+}

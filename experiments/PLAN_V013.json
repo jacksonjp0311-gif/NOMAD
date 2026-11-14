@@ -1,0 +1,79 @@
+{
+  "AST_node_limit": 7,
+  "WITNESS_heldout_examples": 10,
+  "cases_per_family_per_seed": 2,
+  "final_heldout_examples": 10,
+  "heldout_families": [
+    "difference_product",
+    "sum_times_x_shift",
+    "bilinear_plus",
+    "shifted_product"
+  ],
+  "heldout_seeds": {
+    "javascript": [
+      6211,
+      6217,
+      6221
+    ],
+    "python": [
+      7211,
+      7213,
+      7229
+    ]
+  },
+  "limitations": [
+    "shared fixed arithmetic IR",
+    "hand-designed Bitwork failure bits",
+    "fixed GENESIS grammar",
+    "generated synthetic cases",
+    "Rust native compiler absent here",
+    "full CPU and memory cost unmeasured"
+  ],
+  "max_candidate_evaluations": 65000,
+  "objective": "Transfer a frozen Bitwork failure-conditioned GENESIS grammar prior from Python to native JavaScript and vice versa with no target training",
+  "policies": [
+    "cold",
+    "global",
+    "shuffled_context",
+    "bitwork_transfer"
+  ],
+  "release_gates": {
+    "independent_audit": "all native contextual candidates independently reexecuted; all policy candidates scalar rechecked",
+    "learning_effect": "contextual candidate evaluations strictly less than cold and global in BOTH directions",
+    "native_correctness": "all 48 targets pass public, WITNESS challenge and independent final",
+    "no_false_certifications": "zero cases falsely WITNESS-supported",
+    "source_isolation": "training languages never contain target-language source data"
+  },
+  "rust_status": "rustc unavailable; emit bounded source but do not claim native Rust verification",
+  "schema": "nomad.v013.preregistered-study.v1",
+  "separation": "source-language training in distinct process, saved frozen witnessed ledger; release heldout generated and evaluated only in later process",
+  "source_languages": [
+    "python",
+    "javascript"
+  ],
+  "source_seeds": {
+    "javascript": [
+      5219,
+      5249,
+      5297
+    ],
+    "python": [
+      4211,
+      4241,
+      4283
+    ]
+  },
+  "status": "registered_before_release_holdout",
+  "target_count": 48,
+  "target_languages": [
+    "javascript",
+    "python"
+  ],
+  "train_families": [
+    "square_plus",
+    "sum_times_y",
+    "times_shift",
+    "shift_times_y"
+  ],
+  "visible_examples": 12
+}

@@ -1,0 +1,73 @@
+{
+  "schema": "nomad.v0.9.frozen-study-plan.v1",
+  "study": "NOMAD-009-INQUIRY-001",
+  "development_seeds": [
+    17,
+    29,
+    41
+  ],
+  "frozen_evaluation_seeds": [
+    101,
+    137,
+    181,
+    223
+  ],
+  "training_repositories_per_seed": 16,
+  "evaluation_repositories_per_seed": 16,
+  "evaluation_seed_offset": 20000,
+  "integration_seed_offset": 40000,
+  "training_and_evaluation_share_four_predeclared_fault_families": true,
+  "control_policies": [
+    "world",
+    "prior_only",
+    "random",
+    "all",
+    "shuffled"
+  ],
+  "treatment_policy": "active",
+  "max_probes": 3,
+  "max_probe_proxy_cost": 0.9,
+  "patch_attempt_proxy_cost": 1,
+  "public_probe_costs": {
+    "core": 0.24,
+    "config": 0.2,
+    "middle": 0.34,
+    "entry": 0.5
+  },
+  "report": [
+    "withheld_final_correct",
+    "WITNESS_challenge_admission",
+    "first_file_localization",
+    "candidate_attempts",
+    "number_of_probes",
+    "total_proxy_cost"
+  ],
+  "release_gates": {
+    "treatment_final_correct_rate": 1,
+    "probe_budget_violations": 0,
+    "minimum_proxy_cost_reduction_vs_world": 0.05,
+    "minimum_proxy_cost_reduction_vs_random": 0.05,
+    "minimum_proxy_cost_reduction_vs_all": 0.01,
+    "minimum_candidate_reduction_vs_world": 0.1,
+    "minimum_witnessed_on_disk_integrations": 4
+  },
+  "source_sha256": {
+    "nomad/repo_world.py": "aeeda5adb8dcf5ae4352f3a4e0b4b1afbc75263b231ea9c9801c816cc151eb41",
+    "nomad/inquiry.py": "afd5375e0f7960d2f846175d6f4215f01b13a7127f63990883137fdd61ef162e",
+    "nomad/simulation_v9.py": "90fa3761646beded11a678951d92367f35b3b549b0155db12a79b2019e3f5acf",
+    "tests/test_inquiry.py": "3777decca719a4521f9b99ecba2bc01c417a7f5f32718423912589871bc2ced7",
+    "scripts/run_simulation_v9.py": "292637b3bc4f682a7048285c21d579c1b0c85b0c30e76e3eb64f27a962288349",
+    "scripts/inquiry_demo.py": "a5f46fb40ede7b01eea66a1cc83855a284281cde4fc3cafa9736d5248adad4a9",
+    "nomad/cli.py": "79cf54caf88e1ba08b54565939e14a0b49c3b955917214774c1596fcb143a548"
+  },
+  "predecessor_archive_sha256": "26ca3564f483bd37373d3f95ccc0f0884e1f5bd4bc5ed67f4d46439fe2b205e5",
+  "limits": [
+    "Synthesized six-file Python repos; limited single-fault task families and source API roles",
+    "Public diagnostic contracts authored by benchmark; no real-world data or generalized probing",
+    "Supplied fixed patch vocabulary; no arbitrary code synthesis",
+    "Proxy costs are declared units, not physical CPU, energy, latency, or GPU cost",
+    "Frozen evaluation seeds were not used in initial development comparisons",
+    "File-name randomization does not equal cross-family generalization",
+    "The held-out evaluator knows fault labels, but query policy does not"
+  ]
+}

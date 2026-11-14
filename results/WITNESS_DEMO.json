@@ -1,0 +1,50 @@
+{
+  "schema": "nomad.v0.6.witness-demo.v1",
+  "contradicted_receipt": {
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "witness_id": "nomad-witness-v0.6-demo",
+    "task_id": "demo-task",
+    "transmission_id": "tx-overfit",
+    "world_epoch": 3,
+    "claim_kind": "matches_target",
+    "tolerance": 1e-09,
+    "verdict": "contradicted",
+    "public_match": true,
+    "challenge_match": false,
+    "public_rmse_before": 1.0,
+    "public_rmse_after": 0.0,
+    "challenge_rmse_before": 1.0,
+    "challenge_rmse_after": 0.31091263510296063,
+    "public_evidence_digest": "7a8ca1c50e9c3da39ba74624e8cabea06617586e160e89556ce0842e136bddab",
+    "challenge_evidence_digest": "4eb2e5c81d554761bf75d857c04a0d800aff10f9c55f36c19315fa115fe06233",
+    "effect_digest": "659172d035257f57b0719fdb4c19ee80a2d300e5544d316066f506ca6eeb0734",
+    "receipt_hash": "53ce6644b0ac1e98bb6295b05f491830d008e4ae051fd18467442f38e00af3eb"
+  },
+  "supported_receipt": {
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "witness_id": "nomad-witness-v0.6-demo",
+    "task_id": "demo-task",
+    "transmission_id": "tx-supported",
+    "world_epoch": 3,
+    "claim_kind": "matches_target",
+    "tolerance": 1e-09,
+    "verdict": "supported",
+    "public_match": true,
+    "challenge_match": true,
+    "public_rmse_before": 1.0,
+    "public_rmse_after": 0.0,
+    "challenge_rmse_before": 1.0,
+    "challenge_rmse_after": 0.0,
+    "public_evidence_digest": "7a8ca1c50e9c3da39ba74624e8cabea06617586e160e89556ce0842e136bddab",
+    "challenge_evidence_digest": "d2291807630e10fe235435cbb02b15787513f212a1d890a451032db8faef5f2e",
+    "effect_digest": "7550fd1a70c760935ae10345aa9611bc9d9942f8e0565f20a03dcee87d743bdb",
+    "receipt_hash": "6f1bc2e04b0f3d0cea4f41048b5e879ccc9005e9d84f7a597d5359e851037c68"
+  },
+  "checks": {
+    "supported_authorizes_exact_context": true,
+    "supported_rejected_when_stale": true,
+    "contradicted_not_authorized": true,
+    "field_mutation_detected": true
+  },
+  "boundary": "receipt hashes detect accidental/unsynchronized mutation; they are not digital signatures against an actor able to recompute hashes"
+}

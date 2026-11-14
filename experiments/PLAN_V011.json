@@ -1,0 +1,53 @@
+{
+  "schema": "nomad.v011.predeclared-plan.v1",
+  "baseline": "NOMAD-v0.10.0.zip (SHA-256 5e7d82807f34d8ec669d16fea6eb0778ce5c0154d74c700b50eb6509e6f3d86b)",
+  "scope": "Synthetic Python repositories only; no inference about arbitrary real projects",
+  "training_seeds": [
+    907,
+    947
+  ],
+  "heldout_seeds": [
+    4321,
+    4357,
+    4397
+  ],
+  "families": [
+    "square_plus",
+    "sum_times_y",
+    "difference_product",
+    "shifted_product"
+  ],
+  "cases_per_family_per_seed": 2,
+  "heldout_repositories": 24,
+  "holdout_contracts_per_repository": 9,
+  "policies": [
+    "import_graph",
+    "direct_call_graph",
+    "learned_atlas",
+    "shuffled_evidence"
+  ],
+  "integration_policies": [
+    "flat",
+    "graph"
+  ],
+  "integration_cases": 4,
+  "source_identity": "Freshly randomized module names; names excluded from feature vectors",
+  "gates": {
+    "integration_final_correct_count": 4,
+    "learned_false_negative_count": 0,
+    "learned_false_positive_count_max": 0,
+    "impact_f1_min": 0.95,
+    "learned_f1_greater_than_direct_call_graph": true,
+    "graph_file_visits_less_than_flat": true,
+    "unresolved_dynamic_calls_must_abstain": true,
+    "full_regression_pass": true,
+    "freeze_before_heldout": true
+  },
+  "limitations": "Hand-designed AST features and shared synthetic causal grammar; frozen seeds are reproducible, not independently contributed external projects. No code changes are made outside ephemeral fixture roots.",
+  "development_seeds": [
+    2601,
+    2633,
+    2671
+  ],
+  "evaluation_policy": "Holdout seeds predeclared in plan and source frozen after developmental testing on development_seeds, before heldout study."
+}

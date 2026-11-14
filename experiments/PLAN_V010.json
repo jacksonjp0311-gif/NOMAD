@@ -1,0 +1,31 @@
+{
+  "schema": "nomad.genesis.frozen-plan.v1",
+  "version": "0.10.0",
+  "objective": "Test construction of typed AST compositions absent from the original v0.9 one-edit vocabulary, and quantify whether WITNESS-derived Bitwork-contextual operator priors reduce candidate enumeration versus global and noncontextual controls.",
+  "freeze_rule": "Record SHA-256 of synthesis/evaluation source and these exact seeds before first canonical held-out run. Never tune using canonical held-out outcomes without marking a new study.",
+  "training_families": ["square_plus", "sum_times_y", "times_shift", "shift_times_y"],
+  "heldout_families": ["difference_product", "sum_times_x_shift", "bilinear_plus", "shifted_product"],
+  "training_seeds": [313,337,359],
+  "evaluation_seeds": [17011,17047,17101],
+  "cases_per_family_per_seed": 2,
+  "training_cases": 24,
+  "heldout_cases": 24,
+  "public_examples_per_case": 12,
+  "challenge_examples_per_case": 10,
+  "additional_final_examples_per_case": 10,
+  "max_ast_nodes": 7,
+  "max_candidate_vector_evaluations": 65000,
+  "competing_policies": ["v0.9 one-edit", "uninformed typed grammar", "global prior", "shuffled Bitwork context", "witness-trained Bitwork context"],
+  "predeclared_pass_gates": {
+    "v9_fixed_success_on_public": 0,
+    "genesis_witness_supported_min": 22,
+    "genesis_final_correct_min": 22,
+    "genesis_false_witness_support_max": 0,
+    "bitwork_context_mean_vector_cost_lte_global": true,
+    "bitwork_context_mean_vector_cost_lte_uninformed": true,
+    "on_disk_python_unittest_witness_final_min": 8,
+    "inherited_and_new_unit_test_failures_max": 0,
+    "independent_audit_result_disagreements_max": 0
+  },
+  "caveats": "Synthetic two-variable integer arithmetic expression synthesis; fixed grammar and human-specified feature bits; no arbitrary repository or language-model performance claim. Numeric performance metric counts candidate vectors, not CPU, energy or execution-time equivalence. The WITNESS checksum is not a digital signature."
+}

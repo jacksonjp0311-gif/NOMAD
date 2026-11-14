@@ -1,0 +1,1341 @@
+{
+  "schema": "nomad.v0.7.codeworld-causal-study.v1",
+  "version": "0.7.0",
+  "codename": "CAUSAL SKILLS / CODEWORLD",
+  "seeds": [
+    17,
+    29,
+    41
+  ],
+  "runs": [
+    {
+      "seed": 17,
+      "training_tasks": 36,
+      "evaluation_tasks": 24,
+      "causal_registry": {
+        "schema": "nomad.v0.7.causal-skills.v1",
+        "min_support": 4,
+        "max_terms": 3,
+        "observation_count": 84,
+        "skills": [
+          {
+            "family": "binary_operator",
+            "preconditions": [
+              "ast_binop_Add",
+              "ast_binop_rhs_name",
+              "runtime_ok"
+            ],
+            "positives": 5,
+            "negatives": 19,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s17-bin-0",
+              "s17-bin-1",
+              "s17-bin-2",
+              "s17-bin-3",
+              "s17-bin-4"
+            ],
+            "counterexample_tasks": []
+          },
+          {
+            "family": "comparison",
+            "preconditions": [
+              "target_boolean"
+            ],
+            "positives": 5,
+            "negatives": 1,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s17-cmp-0",
+              "s17-cmp-1",
+              "s17-cmp-2",
+              "s17-cmp-3",
+              "s17-cmp-4"
+            ],
+            "counterexample_tasks": []
+          },
+          {
+            "family": "constant",
+            "preconditions": [
+              "target_constant_offset_single_input"
+            ],
+            "positives": 5,
+            "negatives": 1,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s17-const-0",
+              "s17-const-1",
+              "s17-const-2",
+              "s17-const-3",
+              "s17-const-4"
+            ],
+            "counterexample_tasks": []
+          },
+          {
+            "family": "identifier",
+            "preconditions": [
+              "zero_case_target_nonzero_arg"
+            ],
+            "positives": 5,
+            "negatives": 1,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s17-id-0",
+              "s17-id-1",
+              "s17-id-2",
+              "s17-id-3",
+              "s17-id-4"
+            ],
+            "counterexample_tasks": []
+          },
+          {
+            "family": "negate",
+            "preconditions": [
+              "target_identity_single_input"
+            ],
+            "positives": 5,
+            "negatives": 31,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s17-neg-0",
+              "s17-neg-1",
+              "s17-neg-2",
+              "s17-neg-3",
+              "s17-neg-4"
+            ],
+            "counterexample_tasks": []
+          },
+          {
+            "family": "zero_guard",
+            "preconditions": [
+              "zero_case_target_nonzero_arg"
+            ],
+            "positives": 5,
+            "negatives": 1,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s17-zero-0",
+              "s17-zero-1",
+              "s17-zero-2",
+              "s17-zero-3",
+              "s17-zero-4"
+            ],
+            "counterexample_tasks": []
+          }
+        ]
+      },
+      "all": {
+        "fixed": {
+          "tasks": 24,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 2.6666666666666665,
+          "mean_family_attempts": 1.4583333333333333,
+          "predictions": 0,
+          "prediction_precision": null,
+          "abstentions": 24,
+          "false_skill_predictions": 0
+        },
+        "global": {
+          "tasks": 24,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 2.6666666666666665,
+          "mean_family_attempts": 1.4583333333333333,
+          "predictions": 0,
+          "prediction_precision": null,
+          "abstentions": 24,
+          "false_skill_predictions": 0
+        },
+        "causal": {
+          "tasks": 24,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 2.2916666666666665,
+          "mean_family_attempts": 1.3333333333333333,
+          "predictions": 18,
+          "prediction_precision": 1.0,
+          "abstentions": 6,
+          "false_skill_predictions": 0
+        }
+      },
+      "registered": {
+        "fixed": {
+          "tasks": 18,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 1.8888888888888888,
+          "mean_family_attempts": 1.1666666666666667,
+          "predictions": 0,
+          "prediction_precision": null,
+          "abstentions": 18,
+          "false_skill_predictions": 0
+        },
+        "global": {
+          "tasks": 18,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 1.8888888888888888,
+          "mean_family_attempts": 1.1666666666666667,
+          "predictions": 0,
+          "prediction_precision": null,
+          "abstentions": 18,
+          "false_skill_predictions": 0
+        },
+        "causal": {
+          "tasks": 18,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 1.3888888888888888,
+          "mean_family_attempts": 1,
+          "predictions": 18,
+          "prediction_precision": 1.0,
+          "abstentions": 0,
+          "false_skill_predictions": 0
+        }
+      },
+      "ood": {
+        "fixed": [
+          {
+            "task_id": "s10017-ood-pow",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10017-ood-cmp",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10017-ood-const",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 8,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10017-ood-id",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 6,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10017-ood-zero",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10017-ood-neg",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 1,
+            "family_attempts": 1,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          }
+        ],
+        "global": [
+          {
+            "task_id": "s10017-ood-pow",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10017-ood-cmp",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10017-ood-const",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 8,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10017-ood-id",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 6,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10017-ood-zero",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10017-ood-neg",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 1,
+            "family_attempts": 1,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          }
+        ],
+        "causal": [
+          {
+            "task_id": "s10017-ood-pow",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10017-ood-cmp",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10017-ood-const",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 8,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10017-ood-id",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 6,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10017-ood-zero",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10017-ood-neg",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 1,
+            "family_attempts": 1,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          }
+        ]
+      }
+    },
+    {
+      "seed": 29,
+      "training_tasks": 36,
+      "evaluation_tasks": 24,
+      "causal_registry": {
+        "schema": "nomad.v0.7.causal-skills.v1",
+        "min_support": 4,
+        "max_terms": 3,
+        "observation_count": 84,
+        "skills": [
+          {
+            "family": "binary_operator",
+            "preconditions": [
+              "ast_binop_Add",
+              "ast_binop_rhs_name",
+              "runtime_ok"
+            ],
+            "positives": 5,
+            "negatives": 19,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s29-bin-0",
+              "s29-bin-1",
+              "s29-bin-2",
+              "s29-bin-3",
+              "s29-bin-4"
+            ],
+            "counterexample_tasks": []
+          },
+          {
+            "family": "comparison",
+            "preconditions": [
+              "target_boolean"
+            ],
+            "positives": 5,
+            "negatives": 1,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s29-cmp-0",
+              "s29-cmp-1",
+              "s29-cmp-2",
+              "s29-cmp-3",
+              "s29-cmp-4"
+            ],
+            "counterexample_tasks": []
+          },
+          {
+            "family": "constant",
+            "preconditions": [
+              "target_constant_offset_single_input"
+            ],
+            "positives": 5,
+            "negatives": 1,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s29-const-0",
+              "s29-const-1",
+              "s29-const-2",
+              "s29-const-3",
+              "s29-const-4"
+            ],
+            "counterexample_tasks": []
+          },
+          {
+            "family": "identifier",
+            "preconditions": [
+              "zero_case_target_nonzero_arg"
+            ],
+            "positives": 5,
+            "negatives": 1,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s29-id-0",
+              "s29-id-1",
+              "s29-id-2",
+              "s29-id-3",
+              "s29-id-4"
+            ],
+            "counterexample_tasks": []
+          },
+          {
+            "family": "negate",
+            "preconditions": [
+              "target_identity_single_input"
+            ],
+            "positives": 5,
+            "negatives": 31,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s29-neg-0",
+              "s29-neg-1",
+              "s29-neg-2",
+              "s29-neg-3",
+              "s29-neg-4"
+            ],
+            "counterexample_tasks": []
+          },
+          {
+            "family": "zero_guard",
+            "preconditions": [
+              "zero_case_target_nonzero_arg"
+            ],
+            "positives": 5,
+            "negatives": 1,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s29-zero-0",
+              "s29-zero-1",
+              "s29-zero-2",
+              "s29-zero-3",
+              "s29-zero-4"
+            ],
+            "counterexample_tasks": []
+          }
+        ]
+      },
+      "all": {
+        "fixed": {
+          "tasks": 24,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 2.6666666666666665,
+          "mean_family_attempts": 1.4583333333333333,
+          "predictions": 0,
+          "prediction_precision": null,
+          "abstentions": 24,
+          "false_skill_predictions": 0
+        },
+        "global": {
+          "tasks": 24,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 2.6666666666666665,
+          "mean_family_attempts": 1.4583333333333333,
+          "predictions": 0,
+          "prediction_precision": null,
+          "abstentions": 24,
+          "false_skill_predictions": 0
+        },
+        "causal": {
+          "tasks": 24,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 2.2916666666666665,
+          "mean_family_attempts": 1.3333333333333333,
+          "predictions": 18,
+          "prediction_precision": 1.0,
+          "abstentions": 6,
+          "false_skill_predictions": 0
+        }
+      },
+      "registered": {
+        "fixed": {
+          "tasks": 18,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 1.8888888888888888,
+          "mean_family_attempts": 1.1666666666666667,
+          "predictions": 0,
+          "prediction_precision": null,
+          "abstentions": 18,
+          "false_skill_predictions": 0
+        },
+        "global": {
+          "tasks": 18,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 1.8888888888888888,
+          "mean_family_attempts": 1.1666666666666667,
+          "predictions": 0,
+          "prediction_precision": null,
+          "abstentions": 18,
+          "false_skill_predictions": 0
+        },
+        "causal": {
+          "tasks": 18,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 1.3888888888888888,
+          "mean_family_attempts": 1,
+          "predictions": 18,
+          "prediction_precision": 1.0,
+          "abstentions": 0,
+          "false_skill_predictions": 0
+        }
+      },
+      "ood": {
+        "fixed": [
+          {
+            "task_id": "s10029-ood-pow",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10029-ood-cmp",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10029-ood-const",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 8,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10029-ood-id",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 6,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10029-ood-zero",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10029-ood-neg",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 1,
+            "family_attempts": 1,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          }
+        ],
+        "global": [
+          {
+            "task_id": "s10029-ood-pow",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10029-ood-cmp",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10029-ood-const",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 8,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10029-ood-id",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 6,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10029-ood-zero",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10029-ood-neg",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 1,
+            "family_attempts": 1,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          }
+        ],
+        "causal": [
+          {
+            "task_id": "s10029-ood-pow",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10029-ood-cmp",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10029-ood-const",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 8,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10029-ood-id",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 6,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10029-ood-zero",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10029-ood-neg",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 1,
+            "family_attempts": 1,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          }
+        ]
+      }
+    },
+    {
+      "seed": 41,
+      "training_tasks": 36,
+      "evaluation_tasks": 24,
+      "causal_registry": {
+        "schema": "nomad.v0.7.causal-skills.v1",
+        "min_support": 4,
+        "max_terms": 3,
+        "observation_count": 84,
+        "skills": [
+          {
+            "family": "binary_operator",
+            "preconditions": [
+              "ast_binop_Add",
+              "ast_binop_rhs_name",
+              "runtime_ok"
+            ],
+            "positives": 5,
+            "negatives": 19,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s41-bin-0",
+              "s41-bin-1",
+              "s41-bin-2",
+              "s41-bin-3",
+              "s41-bin-4"
+            ],
+            "counterexample_tasks": []
+          },
+          {
+            "family": "comparison",
+            "preconditions": [
+              "target_boolean"
+            ],
+            "positives": 5,
+            "negatives": 1,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s41-cmp-0",
+              "s41-cmp-1",
+              "s41-cmp-2",
+              "s41-cmp-3",
+              "s41-cmp-4"
+            ],
+            "counterexample_tasks": []
+          },
+          {
+            "family": "constant",
+            "preconditions": [
+              "target_constant_offset_single_input"
+            ],
+            "positives": 5,
+            "negatives": 1,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s41-const-0",
+              "s41-const-1",
+              "s41-const-2",
+              "s41-const-3",
+              "s41-const-4"
+            ],
+            "counterexample_tasks": []
+          },
+          {
+            "family": "identifier",
+            "preconditions": [
+              "zero_case_target_nonzero_arg"
+            ],
+            "positives": 5,
+            "negatives": 1,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s41-id-0",
+              "s41-id-1",
+              "s41-id-2",
+              "s41-id-3",
+              "s41-id-4"
+            ],
+            "counterexample_tasks": []
+          },
+          {
+            "family": "negate",
+            "preconditions": [
+              "target_identity_single_input"
+            ],
+            "positives": 5,
+            "negatives": 31,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s41-neg-0",
+              "s41-neg-1",
+              "s41-neg-2",
+              "s41-neg-3",
+              "s41-neg-4"
+            ],
+            "counterexample_tasks": []
+          },
+          {
+            "family": "zero_guard",
+            "preconditions": [
+              "zero_case_target_nonzero_arg"
+            ],
+            "positives": 5,
+            "negatives": 1,
+            "matched_positives": 5,
+            "matched_negatives": 0,
+            "precision": 1.0,
+            "coverage": 1.0,
+            "status": "promoted",
+            "positive_tasks": [
+              "s41-zero-0",
+              "s41-zero-1",
+              "s41-zero-2",
+              "s41-zero-3",
+              "s41-zero-4"
+            ],
+            "counterexample_tasks": []
+          }
+        ]
+      },
+      "all": {
+        "fixed": {
+          "tasks": 24,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 2.6666666666666665,
+          "mean_family_attempts": 1.4583333333333333,
+          "predictions": 0,
+          "prediction_precision": null,
+          "abstentions": 24,
+          "false_skill_predictions": 0
+        },
+        "global": {
+          "tasks": 24,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 2.6666666666666665,
+          "mean_family_attempts": 1.4583333333333333,
+          "predictions": 0,
+          "prediction_precision": null,
+          "abstentions": 24,
+          "false_skill_predictions": 0
+        },
+        "causal": {
+          "tasks": 24,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 2.2916666666666665,
+          "mean_family_attempts": 1.3333333333333333,
+          "predictions": 18,
+          "prediction_precision": 1.0,
+          "abstentions": 6,
+          "false_skill_predictions": 0
+        }
+      },
+      "registered": {
+        "fixed": {
+          "tasks": 18,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 1.8888888888888888,
+          "mean_family_attempts": 1.1666666666666667,
+          "predictions": 0,
+          "prediction_precision": null,
+          "abstentions": 18,
+          "false_skill_predictions": 0
+        },
+        "global": {
+          "tasks": 18,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 1.8888888888888888,
+          "mean_family_attempts": 1.1666666666666667,
+          "predictions": 0,
+          "prediction_precision": null,
+          "abstentions": 18,
+          "false_skill_predictions": 0
+        },
+        "causal": {
+          "tasks": 18,
+          "solved": 18,
+          "final_correct": 18,
+          "mean_attempts": 1.3888888888888888,
+          "mean_family_attempts": 1,
+          "predictions": 18,
+          "prediction_precision": 1.0,
+          "abstentions": 0,
+          "false_skill_predictions": 0
+        }
+      },
+      "ood": {
+        "fixed": [
+          {
+            "task_id": "s10041-ood-pow",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10041-ood-cmp",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10041-ood-const",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 8,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10041-ood-id",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 6,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10041-ood-zero",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10041-ood-neg",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 1,
+            "family_attempts": 1,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          }
+        ],
+        "global": [
+          {
+            "task_id": "s10041-ood-pow",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10041-ood-cmp",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10041-ood-const",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 8,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10041-ood-id",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 6,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10041-ood-zero",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10041-ood-neg",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 1,
+            "family_attempts": 1,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          }
+        ],
+        "causal": [
+          {
+            "task_id": "s10041-ood-pow",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10041-ood-cmp",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 2,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10041-ood-const",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 8,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10041-ood-id",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 6,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10041-ood-zero",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 5,
+            "family_attempts": 3,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          },
+          {
+            "task_id": "s10041-ood-neg",
+            "solved": false,
+            "final_correct": false,
+            "attempts": 1,
+            "family_attempts": 1,
+            "chosen_family": null,
+            "predicted_family": null,
+            "predicted_family_correct": null,
+            "witness_supported": false,
+            "abstained_reason": "frontier_exhausted"
+          }
+        ]
+      }
+    }
+  ],
+  "integration": {
+    "tasks": 6,
+    "solved": 6,
+    "final_correct": 6,
+    "witness_supported": 6,
+    "actual_unittest_process_required": true
+  },
+  "summary": {
+    "registered_evaluation_tasks": 54,
+    "registered_causal_final_correct": 54,
+    "registered_causal_final_correct_rate": 1.0,
+    "fixed_mean_attempts": 1.8888888888888888,
+    "global_mean_attempts": 1.8888888888888888,
+    "causal_mean_attempts": 1.3888888888888888,
+    "causal_attempt_reduction_vs_fixed": 0.2647058823529412,
+    "causal_attempt_reduction_vs_global": 0.2647058823529412,
+    "causal_skill_predictions": 54,
+    "causal_false_skill_predictions": 0,
+    "causal_skill_precision": 1.0,
+    "ood_causal_abstentions": 18,
+    "ood_false_skill_predictions": 0,
+    "ood_count": 18
+  },
+  "claim_boundary": "Small generated Python repositories with real file edits and unittest execution. The operator vocabulary and context predicates are supplied; this is not arbitrary repository engineering."
+}

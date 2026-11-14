@@ -1,0 +1,441 @@
+{
+  "bgr_runtime_archive_sha256": "93177c5cc628ac0c6426d8c612c0d769b86ed53cbd7b2a3f872d2706c601a8c2",
+  "external_retro": {
+    "admitted_training_receipts": 2,
+    "all_match_cold": true,
+    "contested_keys": [
+      "33153:and\u2192or"
+    ],
+    "eligible_keys": 0,
+    "new_blind_accepted_repairs": "NOT_TESTED",
+    "previous_v14_cold_witnessed": 2,
+    "previous_v14_transferred_witnessed": 1,
+    "ranking_comparisons": [
+      {
+        "candidates": 145,
+        "ranking_same_as_cold": true,
+        "task_id": "affine-rectilinear"
+      },
+      {
+        "candidates": 145,
+        "ranking_same_as_cold": true,
+        "task_id": "affine-vector"
+      },
+      {
+        "candidates": 33,
+        "ranking_same_as_cold": true,
+        "task_id": "catalogue-names"
+      },
+      {
+        "candidates": 144,
+        "ranking_same_as_cold": true,
+        "task_id": "confection-merge"
+      }
+    ],
+    "required_distinct_witnessed_task_ids_per_signature": 3,
+    "schema": "nomad.recursion.external-prior-gate.v1",
+    "study_scope": "retrospective reanalysis of previously seen v0.14 tasks; NOT a new blind external benchmark",
+    "training_witnessed_task_ids": [
+      "affine-almost",
+      "catalogue-contains"
+    ],
+    "witness_status": "integrity and scoped compatibility; not cryptographic authentication"
+  },
+  "interpretation": "Self-revision works as pure AST candidate synthesis and evidence-gated evaluation; no general autonomous self-improvement established.",
+  "native_bitwork": {
+    "action_semantics": {
+      "0": "relational edit",
+      "1": "other edit"
+    },
+    "bgr_better_than_fixed": false,
+    "events": 28,
+    "external_repair_advantage": "NOT_ESTABLISHED \u2014 shadow predictor does not choose patches",
+    "mean_bgr_logloss": 0.47750651968742036,
+    "mean_fixed_logloss": 0.4379582492624565,
+    "model": "bgr140.GovernedBitworkV14",
+    "native_runtime_sha256": "93177c5cc628ac0c6426d8c612c0d769b86ed53cbd7b2a3f872d2706c601a8c2",
+    "observed_label": "public_test_pass only; WITNESS acceptance is not supplied to BGR",
+    "schema": "nomad.bitwork.native-shadow.v1",
+    "scope": "retrospective replay of v0.14 public-test executions, not independently held-out repair tasks",
+    "trace": [
+      {
+        "action": 1,
+        "bgr_loss": 0.6662288524571008,
+        "bgr_p": 0.4863580504,
+        "fixed_loss": 0.6931471805599453,
+        "fixed_p": 0.5,
+        "observed": 0,
+        "source_task": "affine-almost"
+      },
+      {
+        "action": 0,
+        "bgr_loss": 0.6069827059882051,
+        "bgr_p": 0.4550072058,
+        "fixed_loss": 0.6931471805599453,
+        "fixed_p": 0.5,
+        "observed": 0,
+        "source_task": "affine-almost"
+      },
+      {
+        "action": 0,
+        "bgr_loss": 0.3714385107000935,
+        "bgr_p": 0.3102585838,
+        "fixed_loss": 0.4054651081081643,
+        "fixed_p": 0.3333333333,
+        "observed": 0,
+        "source_task": "affine-almost"
+      },
+      {
+        "action": 0,
+        "bgr_loss": 1.7562968085074844,
+        "bgr_p": 0.17268316,
+        "fixed_loss": 1.3862943611198906,
+        "fixed_p": 0.25,
+        "observed": 1,
+        "source_task": "affine-almost"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.4392688920098154,
+        "bgr_p": 0.3554925466,
+        "fixed_loss": 0.4054651081081643,
+        "fixed_p": 0.3333333333,
+        "observed": 0,
+        "source_task": "catalogue-contains"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.3634035845520819,
+        "bgr_p": 0.3046942378,
+        "fixed_loss": 0.2876820724517809,
+        "fixed_p": 0.25,
+        "observed": 0,
+        "source_task": "catalogue-contains"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.23578252802918578,
+        "bgr_p": 0.2100475522,
+        "fixed_loss": 0.2231435513142097,
+        "fixed_p": 0.2,
+        "observed": 0,
+        "source_task": "catalogue-contains"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 1.9720762375606846,
+        "bgr_p": 0.139167611,
+        "fixed_loss": 1.791759469228055,
+        "fixed_p": 0.1666666667,
+        "observed": 1,
+        "source_task": "catalogue-contains"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.4239426987528941,
+        "bgr_p": 0.3455386177,
+        "fixed_loss": 0.3364722366212129,
+        "fixed_p": 0.2857142857,
+        "observed": 0,
+        "source_task": "affine-rectilinear"
+      },
+      {
+        "action": 0,
+        "bgr_loss": 0.9556193476443909,
+        "bgr_p": 0.3845738858,
+        "fixed_loss": 0.916290731874155,
+        "fixed_p": 0.4,
+        "observed": 1,
+        "source_task": "affine-rectilinear"
+      },
+      {
+        "action": 0,
+        "bgr_loss": 0.7122361510101749,
+        "bgr_p": 0.5094539649,
+        "fixed_loss": 0.6931471805599453,
+        "fixed_p": 0.5,
+        "observed": 0,
+        "source_task": "affine-vector"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.3500584866094905,
+        "bgr_p": 0.2953531239,
+        "fixed_loss": 0.2876820724517809,
+        "fixed_p": 0.25,
+        "observed": 0,
+        "source_task": "affine-vector"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.29892904462034214,
+        "bgr_p": 0.2583879711,
+        "fixed_loss": 0.25131442828090605,
+        "fixed_p": 0.2222222222,
+        "observed": 0,
+        "source_task": "affine-vector"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.28266138958217585,
+        "bgr_p": 0.2462250193,
+        "fixed_loss": 0.2231435513142097,
+        "fixed_p": 0.2,
+        "observed": 0,
+        "source_task": "affine-vector"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.211584778266486,
+        "bgr_p": 0.190699333,
+        "fixed_loss": 0.20067069546215124,
+        "fixed_p": 0.1818181818,
+        "observed": 0,
+        "source_task": "affine-vector"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.1649701796118234,
+        "bgr_p": 0.152081011,
+        "fixed_loss": 0.1823215567939546,
+        "fixed_p": 0.1666666667,
+        "observed": 0,
+        "source_task": "affine-vector"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.14056110302487815,
+        "bgr_p": 0.1311294273,
+        "fixed_loss": 0.1670540846631662,
+        "fixed_p": 0.1538461538,
+        "observed": 0,
+        "source_task": "affine-vector"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.12450279342733261,
+        "bgr_p": 0.1170642051,
+        "fixed_loss": 0.15415067982725822,
+        "fixed_p": 0.1428571429,
+        "observed": 0,
+        "source_task": "affine-vector"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.11286479143973126,
+        "bgr_p": 0.1067285701,
+        "fixed_loss": 0.1431008436406733,
+        "fixed_p": 0.1333333333,
+        "observed": 0,
+        "source_task": "affine-vector"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.10393142159549733,
+        "bgr_p": 0.0987128959,
+        "fixed_loss": 0.13353139262452263,
+        "fixed_p": 0.125,
+        "observed": 0,
+        "source_task": "affine-vector"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.09679957470344108,
+        "bgr_p": 0.0922620785,
+        "fixed_loss": 0.12516314295400605,
+        "fixed_p": 0.1176470588,
+        "observed": 0,
+        "source_task": "affine-vector"
+      },
+      {
+        "action": 0,
+        "bgr_loss": 0.98340706835415,
+        "bgr_p": 0.3740345641,
+        "fixed_loss": 0.8472978603872037,
+        "fixed_p": 0.4285714286,
+        "observed": 1,
+        "source_task": "catalogue-names"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.15082415461264456,
+        "bgr_p": 0.1400010878,
+        "fixed_loss": 0.11778303565638351,
+        "fixed_p": 0.1111111111,
+        "observed": 0,
+        "source_task": "confection-merge"
+      },
+      {
+        "action": 0,
+        "bgr_loss": 0.8482310377865249,
+        "bgr_p": 0.5718283181,
+        "fixed_loss": 0.6931471805599453,
+        "fixed_p": 0.5,
+        "observed": 0,
+        "source_task": "confection-merge"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.133333174959018,
+        "bgr_p": 0.1248265424,
+        "fixed_loss": 0.11122563511022437,
+        "fixed_p": 0.1052631579,
+        "observed": 0,
+        "source_task": "confection-merge"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.10215900396715581,
+        "bgr_p": 0.0971140222,
+        "fixed_loss": 0.10536051565782628,
+        "fixed_p": 0.1,
+        "observed": 0,
+        "source_task": "confection-merge"
+      },
+      {
+        "action": 0,
+        "bgr_loss": 0.6582746592755501,
+        "bgr_p": 0.4822561511,
+        "fixed_loss": 0.587786664902119,
+        "fixed_p": 0.4444444444,
+        "observed": 0,
+        "source_task": "confection-merge"
+      },
+      {
+        "action": 1,
+        "bgr_loss": 0.1038135721994168,
+        "bgr_p": 0.0986066735,
+        "fixed_loss": 0.10008345855698253,
+        "fixed_p": 0.0952380952,
+        "observed": 0,
+        "source_task": "confection-merge"
+      }
+    ]
+  },
+  "predecessor_archive_sha256": "22c218597f5fa1cfc4003fc7694daac420ac42d0603feaeb8130ade6ef2619ea",
+  "prior_snapshot": {
+    "contested": [
+      "33153:and\u2192or"
+    ],
+    "events": [
+      {
+        "accepted": true,
+        "key": "33153:<=\u2192>=",
+        "task_id": "affine-almost",
+        "witness_sha256": "36ac875648905a546e0f4cfc47169a620260e28f072436689355aaa95455ebcd"
+      },
+      {
+        "accepted": true,
+        "key": "33153:and\u2192or",
+        "task_id": "catalogue-contains",
+        "witness_sha256": "c1e6041f605acc6cea23e1407070c53b595090c00e8d06f814f9a4c440b1bdde"
+      },
+      {
+        "accepted": false,
+        "key": "33153:and\u2192or",
+        "task_id": "catalogue-names",
+        "witness_sha256": "ba1de6248df1c9bb48dc6f766a03ea27ac9d6ea2711077ab462acb7182fd7d05"
+      }
+    ],
+    "min_support": 3,
+    "positive": {
+      "33153:<=\u2192>=": [
+        "affine-almost"
+      ],
+      "33153:and\u2192or": [
+        "catalogue-contains"
+      ]
+    },
+    "schema": "nomad.recursion.evidence-prior.v1",
+    "sha256": "5f1d324792b6d998ae0b27be5cf434457a8be529f507b55ea8c3ef4b6f75c329"
+  },
+  "research_states": {
+    "external_witnessed_transfer": "HOLD",
+    "native_bgr_import": "CONNECTED",
+    "native_bgr_real_task_advantage": "HOLD",
+    "production_readiness": "HOLD",
+    "self_revision_safety": "CANDIDATE_ONLY"
+  },
+  "schema": "nomad.recursion.v0.15.study.v1",
+  "self_revision_lab": [
+    {
+      "authority": "candidate proposal only; no automatic source replacement",
+      "candidate_sha256": "0ee427f4054bbbd7339e664a204bd18880abcb74437949e2634f1d46f084a302",
+      "case": "friendly_toy",
+      "dev": {
+        "candidate": {
+          "mean_attempts": 1.0,
+          "solved": 32,
+          "tasks": 32,
+          "total_attempts": 32
+        },
+        "incumbent": {
+          "mean_attempts": 5.0,
+          "solved": 32,
+          "tasks": 32,
+          "total_attempts": 160
+        }
+      },
+      "external_transfer_confirmed": false,
+      "heldout": {
+        "candidate": {
+          "mean_attempts": 1.0,
+          "solved": 32,
+          "tasks": 32,
+          "total_attempts": 32
+        },
+        "incumbent": {
+          "mean_attempts": 5.0,
+          "solved": 32,
+          "tasks": 32,
+          "total_attempts": 160
+        }
+      },
+      "improved_in_bounded_lab": true,
+      "incumbent_sha256": "4f39fcea921dfc77815bf22fed05d94aeaa4442270c4e7ee9b07992fd43fbd80",
+      "production_promotion": "HOLD",
+      "schema": "nomad.recursion.candidate.v1",
+      "self_modification_executed": false
+    },
+    {
+      "authority": "candidate proposal only; no automatic source replacement",
+      "candidate_sha256": "0ee427f4054bbbd7339e664a204bd18880abcb74437949e2634f1d46f084a302",
+      "case": "distribution_shift_toy",
+      "dev": {
+        "candidate": {
+          "mean_attempts": 1.0,
+          "solved": 32,
+          "tasks": 32,
+          "total_attempts": 32
+        },
+        "incumbent": {
+          "mean_attempts": 5.0,
+          "solved": 32,
+          "tasks": 32,
+          "total_attempts": 160
+        }
+      },
+      "external_transfer_confirmed": false,
+      "heldout": {
+        "candidate": {
+          "mean_attempts": 5.0,
+          "solved": 32,
+          "tasks": 32,
+          "total_attempts": 160
+        },
+        "incumbent": {
+          "mean_attempts": 1.0,
+          "solved": 32,
+          "tasks": 32,
+          "total_attempts": 32
+        }
+      },
+      "improved_in_bounded_lab": false,
+      "incumbent_sha256": "4f39fcea921dfc77815bf22fed05d94aeaa4442270c4e7ee9b07992fd43fbd80",
+      "production_promotion": "HOLD",
+      "schema": "nomad.recursion.candidate.v1",
+      "self_modification_executed": false
+    }
+  ],
+  "version": "0.15.0"
+}

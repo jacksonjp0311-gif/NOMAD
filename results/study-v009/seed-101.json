@@ -1,0 +1,2061 @@
+{
+  "seed": 101,
+  "training_repos": 16,
+  "evaluation_repos": 16,
+  "training_likelihoods": {
+    "schema": "nomad.v0.9.probe-likelihoods.v1",
+    "training_tasks": 16,
+    "rows": [
+      {
+        "hypothesis_role": "config",
+        "probe_role": "config",
+        "passed": 0,
+        "failed": 4,
+        "pass_probability": 0.16666666666666666
+      },
+      {
+        "hypothesis_role": "config",
+        "probe_role": "core",
+        "passed": 4,
+        "failed": 0,
+        "pass_probability": 0.8333333333333334
+      },
+      {
+        "hypothesis_role": "config",
+        "probe_role": "entry",
+        "passed": 0,
+        "failed": 4,
+        "pass_probability": 0.16666666666666666
+      },
+      {
+        "hypothesis_role": "config",
+        "probe_role": "middle",
+        "passed": 0,
+        "failed": 4,
+        "pass_probability": 0.16666666666666666
+      },
+      {
+        "hypothesis_role": "core",
+        "probe_role": "config",
+        "passed": 4,
+        "failed": 0,
+        "pass_probability": 0.8333333333333334
+      },
+      {
+        "hypothesis_role": "core",
+        "probe_role": "core",
+        "passed": 0,
+        "failed": 4,
+        "pass_probability": 0.16666666666666666
+      },
+      {
+        "hypothesis_role": "core",
+        "probe_role": "entry",
+        "passed": 0,
+        "failed": 4,
+        "pass_probability": 0.16666666666666666
+      },
+      {
+        "hypothesis_role": "core",
+        "probe_role": "middle",
+        "passed": 0,
+        "failed": 4,
+        "pass_probability": 0.16666666666666666
+      },
+      {
+        "hypothesis_role": "entry",
+        "probe_role": "config",
+        "passed": 4,
+        "failed": 0,
+        "pass_probability": 0.8333333333333334
+      },
+      {
+        "hypothesis_role": "entry",
+        "probe_role": "core",
+        "passed": 4,
+        "failed": 0,
+        "pass_probability": 0.8333333333333334
+      },
+      {
+        "hypothesis_role": "entry",
+        "probe_role": "entry",
+        "passed": 0,
+        "failed": 4,
+        "pass_probability": 0.16666666666666666
+      },
+      {
+        "hypothesis_role": "entry",
+        "probe_role": "middle",
+        "passed": 4,
+        "failed": 0,
+        "pass_probability": 0.8333333333333334
+      },
+      {
+        "hypothesis_role": "middle",
+        "probe_role": "config",
+        "passed": 4,
+        "failed": 0,
+        "pass_probability": 0.8333333333333334
+      },
+      {
+        "hypothesis_role": "middle",
+        "probe_role": "core",
+        "passed": 4,
+        "failed": 0,
+        "pass_probability": 0.8333333333333334
+      },
+      {
+        "hypothesis_role": "middle",
+        "probe_role": "entry",
+        "passed": 0,
+        "failed": 4,
+        "pass_probability": 0.16666666666666666
+      },
+      {
+        "hypothesis_role": "middle",
+        "probe_role": "middle",
+        "passed": 0,
+        "failed": 4,
+        "pass_probability": 0.16666666666666666
+      }
+    ]
+  },
+  "world_model_training_observations": 96,
+  "policies": {
+    "world": {
+      "tasks": 16,
+      "solved": 16,
+      "final_correct": 16,
+      "witness_supported": 16,
+      "mean_candidate_attempts": 4.75,
+      "mean_probe_count": 0,
+      "mean_probe_proxy_cost": 0,
+      "mean_total_proxy_cost": 4.75,
+      "correct_first_file": 12,
+      "first_file_accuracy": 0.75,
+      "probe_budget_violations": 0
+    },
+    "prior_only": {
+      "tasks": 16,
+      "solved": 16,
+      "final_correct": 16,
+      "witness_supported": 16,
+      "mean_candidate_attempts": 6.75,
+      "mean_probe_count": 0,
+      "mean_probe_proxy_cost": 0,
+      "mean_total_proxy_cost": 6.75,
+      "correct_first_file": 8,
+      "first_file_accuracy": 0.5,
+      "probe_budget_violations": 0
+    },
+    "active": {
+      "tasks": 16,
+      "solved": 16,
+      "final_correct": 16,
+      "witness_supported": 16,
+      "mean_candidate_attempts": 3.75,
+      "mean_probe_count": 1.5,
+      "mean_probe_proxy_cost": 0.365,
+      "mean_total_proxy_cost": 4.115,
+      "correct_first_file": 16,
+      "first_file_accuracy": 1.0,
+      "probe_budget_violations": 0
+    },
+    "random": {
+      "tasks": 16,
+      "solved": 16,
+      "final_correct": 16,
+      "witness_supported": 16,
+      "mean_candidate_attempts": 5.375,
+      "mean_probe_count": 1,
+      "mean_probe_proxy_cost": 0.32625,
+      "mean_total_proxy_cost": 5.70125,
+      "correct_first_file": 11,
+      "first_file_accuracy": 0.6875,
+      "probe_budget_violations": 0
+    },
+    "all": {
+      "tasks": 16,
+      "solved": 16,
+      "final_correct": 16,
+      "witness_supported": 16,
+      "mean_candidate_attempts": 3.75,
+      "mean_probe_count": 3,
+      "mean_probe_proxy_cost": 0.78,
+      "mean_total_proxy_cost": 4.529999999999999,
+      "correct_first_file": 16,
+      "first_file_accuracy": 1.0,
+      "probe_budget_violations": 0
+    },
+    "shuffled": {
+      "tasks": 16,
+      "solved": 16,
+      "final_correct": 16,
+      "witness_supported": 16,
+      "mean_candidate_attempts": 8.875,
+      "mean_probe_count": 1.6875,
+      "mean_probe_proxy_cost": 0.4175,
+      "mean_total_proxy_cost": 9.2925,
+      "correct_first_file": 8,
+      "first_file_accuracy": 0.5,
+      "probe_budget_violations": 0
+    }
+  },
+  "paired": {
+    "world": [
+      {
+        "task_id": "inq-1dc6ebfee7647916",
+        "attempts": 6,
+        "probe_cost": 0,
+        "total_proxy_cost": 6,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-f5d92dc0bc9a7ebc",
+        "attempts": 9,
+        "probe_cost": 0,
+        "total_proxy_cost": 9,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-68865ee7a671e8c3",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a185fb4f474feb72",
+        "attempts": 3,
+        "probe_cost": 0,
+        "total_proxy_cost": 3,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-1f79390b58365a2f",
+        "attempts": 6,
+        "probe_cost": 0,
+        "total_proxy_cost": 6,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-9c9690f384352d5f",
+        "attempts": 9,
+        "probe_cost": 0,
+        "total_proxy_cost": 9,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-10962b00cc4f32f9",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a499b400cb29285a",
+        "attempts": 3,
+        "probe_cost": 0,
+        "total_proxy_cost": 3,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-ed1138b29382efce",
+        "attempts": 6,
+        "probe_cost": 0,
+        "total_proxy_cost": 6,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-bef2a271ce88ad10",
+        "attempts": 9,
+        "probe_cost": 0,
+        "total_proxy_cost": 9,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-976cdcaeb14810ad",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a7d47112c1df001a",
+        "attempts": 3,
+        "probe_cost": 0,
+        "total_proxy_cost": 3,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-23332cb8a52fe216",
+        "attempts": 6,
+        "probe_cost": 0,
+        "total_proxy_cost": 6,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-68cb79f9da8d04a4",
+        "attempts": 9,
+        "probe_cost": 0,
+        "total_proxy_cost": 9,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a43e75b130d0fdd7",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-b236704b901a57d2",
+        "attempts": 3,
+        "probe_cost": 0,
+        "total_proxy_cost": 3,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      }
+    ],
+    "prior_only": [
+      {
+        "task_id": "inq-1dc6ebfee7647916",
+        "attempts": 6,
+        "probe_cost": 0,
+        "total_proxy_cost": 6,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-f5d92dc0bc9a7ebc",
+        "attempts": 17,
+        "probe_cost": 0,
+        "total_proxy_cost": 17,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-68865ee7a671e8c3",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a185fb4f474feb72",
+        "attempts": 3,
+        "probe_cost": 0,
+        "total_proxy_cost": 3,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-1f79390b58365a2f",
+        "attempts": 6,
+        "probe_cost": 0,
+        "total_proxy_cost": 6,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-9c9690f384352d5f",
+        "attempts": 17,
+        "probe_cost": 0,
+        "total_proxy_cost": 17,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-10962b00cc4f32f9",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a499b400cb29285a",
+        "attempts": 3,
+        "probe_cost": 0,
+        "total_proxy_cost": 3,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-ed1138b29382efce",
+        "attempts": 6,
+        "probe_cost": 0,
+        "total_proxy_cost": 6,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-bef2a271ce88ad10",
+        "attempts": 17,
+        "probe_cost": 0,
+        "total_proxy_cost": 17,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-976cdcaeb14810ad",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a7d47112c1df001a",
+        "attempts": 3,
+        "probe_cost": 0,
+        "total_proxy_cost": 3,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-23332cb8a52fe216",
+        "attempts": 6,
+        "probe_cost": 0,
+        "total_proxy_cost": 6,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-68cb79f9da8d04a4",
+        "attempts": 17,
+        "probe_cost": 0,
+        "total_proxy_cost": 17,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a43e75b130d0fdd7",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-b236704b901a57d2",
+        "attempts": 3,
+        "probe_cost": 0,
+        "total_proxy_cost": 3,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      }
+    ],
+    "active": [
+      {
+        "task_id": "inq-1dc6ebfee7647916",
+        "attempts": 2,
+        "probe_cost": 0.44,
+        "total_proxy_cost": 2.44,
+        "probes": 2,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_config",
+          "probe_core"
+        ],
+        "query_outcomes": [
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "74d35879368b6f01ea6a3db9a52094a316627c75c7fdd3f2b1f9dba8b668fb71",
+          "365eacf2ab8eae03f5b00b122a7acf49e50c9675040dc8dab44c6b73697ac61b"
+        ],
+        "query_information_gains_bits": [
+          0.3188355,
+          0.32013122
+        ]
+      },
+      {
+        "task_id": "inq-f5d92dc0bc9a7ebc",
+        "attempts": 9,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 9.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "e9368fcdee808b8115ff013ae340911fd78802b49b2e85599bf80e1533c6734d",
+          "f9a11b8efe12b9ee365d7581f2a21afe491986f2fdd282bc7c1c36b8bc54ee51",
+          "4ca7251b4d5261dfbc3ed333b135e6b836bba60f341dc4b127a4c1e68d8a7aca"
+        ],
+        "query_information_gains_bits": [
+          0.2525155,
+          0.20179627,
+          0.23088121
+        ]
+      },
+      {
+        "task_id": "inq-68865ee7a671e8c3",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a185fb4f474feb72",
+        "attempts": 3,
+        "probe_cost": 0.24,
+        "total_proxy_cost": 3.24,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core"
+        ],
+        "query_outcomes": [
+          true
+        ],
+        "receipt_digests": [
+          "6c798875817d254e5ccc208688667e66011f8fb33c94032c266805bf2636191b"
+        ],
+        "query_information_gains_bits": [
+          0.20019126
+        ]
+      },
+      {
+        "task_id": "inq-1f79390b58365a2f",
+        "attempts": 2,
+        "probe_cost": 0.44,
+        "total_proxy_cost": 2.44,
+        "probes": 2,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_config",
+          "probe_core"
+        ],
+        "query_outcomes": [
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "3c4bbdf363eb0d8b3c5957f00da6df3e521ce7e2abed7718fd068b4c4c1bdd59",
+          "0758582ead260ce74b2f1d40f014df2b9ed964cba700fdbc7d983663e1ebf8cc"
+        ],
+        "query_information_gains_bits": [
+          0.3188355,
+          0.32013122
+        ]
+      },
+      {
+        "task_id": "inq-9c9690f384352d5f",
+        "attempts": 9,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 9.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "4be3df03306e6338583cb515fbe99b5589250cd37d2bfa5f4336bc3be8bbfad6",
+          "4b8395584b5633f88e0d1ed822d9b7bf76d4574cf1292845e4abd9e65bb34758",
+          "dd1b4e92ad4c20c39faf6c9d58ccc64ebcfd7b54a99e60951906da1eaa1538e0"
+        ],
+        "query_information_gains_bits": [
+          0.2525155,
+          0.20179627,
+          0.23088121
+        ]
+      },
+      {
+        "task_id": "inq-10962b00cc4f32f9",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a499b400cb29285a",
+        "attempts": 3,
+        "probe_cost": 0.24,
+        "total_proxy_cost": 3.24,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core"
+        ],
+        "query_outcomes": [
+          true
+        ],
+        "receipt_digests": [
+          "e5548024703020c1939277a666729bc405f84c76e1b156c2036a718e2420c071"
+        ],
+        "query_information_gains_bits": [
+          0.20019126
+        ]
+      },
+      {
+        "task_id": "inq-ed1138b29382efce",
+        "attempts": 2,
+        "probe_cost": 0.44,
+        "total_proxy_cost": 2.44,
+        "probes": 2,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_config",
+          "probe_core"
+        ],
+        "query_outcomes": [
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "c3960e842804329800fddc058135a5a8ed53bad2a479d0a1f93e0136cb4c5533",
+          "cc7fb8a1bd0782c8f571f6f5fccc366e2a0e33ecec4f9bd10b4cce7c2ff2c7b0"
+        ],
+        "query_information_gains_bits": [
+          0.3188355,
+          0.32013122
+        ]
+      },
+      {
+        "task_id": "inq-bef2a271ce88ad10",
+        "attempts": 9,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 9.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "169b7c05401f045e707151eb11b5f7ac860098f6b2f8a7ae69ea56237f9352e0",
+          "6d289b3b04369285e45099bd95aeb965ce997eae7ff9edcfed2a544b0a4d3744",
+          "d5ee41abc8a89b275f6b1b307a543e3430f51091d9c4555487cba94cb5ba356a"
+        ],
+        "query_information_gains_bits": [
+          0.2525155,
+          0.20179627,
+          0.23088121
+        ]
+      },
+      {
+        "task_id": "inq-976cdcaeb14810ad",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a7d47112c1df001a",
+        "attempts": 3,
+        "probe_cost": 0.24,
+        "total_proxy_cost": 3.24,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core"
+        ],
+        "query_outcomes": [
+          true
+        ],
+        "receipt_digests": [
+          "2b1cca010df44cf86b0280175cc27acced60320959ac77d7862a37631a953744"
+        ],
+        "query_information_gains_bits": [
+          0.20019126
+        ]
+      },
+      {
+        "task_id": "inq-23332cb8a52fe216",
+        "attempts": 2,
+        "probe_cost": 0.44,
+        "total_proxy_cost": 2.44,
+        "probes": 2,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_config",
+          "probe_core"
+        ],
+        "query_outcomes": [
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "6a4528f7f6640de0827ff92241022099bd0a53bda2c27e79270b6db6fac77bf5",
+          "ce1c92c12c3c548c9655aa13b0a4eb974944136549ac0ebbd56e3e2214c0de26"
+        ],
+        "query_information_gains_bits": [
+          0.3188355,
+          0.32013122
+        ]
+      },
+      {
+        "task_id": "inq-68cb79f9da8d04a4",
+        "attempts": 9,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 9.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "b211cdac088b7f893abc07176e7c1e169c5371b8bda2067526d2d5c45b3253d1",
+          "120588cee4a7a9fe694cfeed3ec650520757ca015a0e55c9370b654e86970b03",
+          "372a50a8f553d0b28f5e43feaf2fd47c4fa87c80470367877538a62c00bdd606"
+        ],
+        "query_information_gains_bits": [
+          0.2525155,
+          0.20179627,
+          0.23088121
+        ]
+      },
+      {
+        "task_id": "inq-a43e75b130d0fdd7",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-b236704b901a57d2",
+        "attempts": 3,
+        "probe_cost": 0.24,
+        "total_proxy_cost": 3.24,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core"
+        ],
+        "query_outcomes": [
+          true
+        ],
+        "receipt_digests": [
+          "17263ede9ccdf107645bbae545a6392b4620ce39220c7a0cfb3358ae662c1c91"
+        ],
+        "query_information_gains_bits": [
+          0.20019126
+        ]
+      }
+    ],
+    "random": [
+      {
+        "task_id": "inq-1dc6ebfee7647916",
+        "attempts": 2,
+        "probe_cost": 0.24,
+        "total_proxy_cost": 2.24,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core"
+        ],
+        "query_outcomes": [
+          false
+        ],
+        "receipt_digests": [
+          "365eacf2ab8eae03f5b00b122a7acf49e50c9675040dc8dab44c6b73697ac61b"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-f5d92dc0bc9a7ebc",
+        "attempts": 13,
+        "probe_cost": 0.34,
+        "total_proxy_cost": 13.34,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          false
+        ],
+        "receipt_digests": [
+          "4ca7251b4d5261dfbc3ed333b135e6b836bba60f341dc4b127a4c1e68d8a7aca"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-68865ee7a671e8c3",
+        "attempts": 1,
+        "probe_cost": 0.5,
+        "total_proxy_cost": 1.5,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_entry"
+        ],
+        "query_outcomes": [
+          false
+        ],
+        "receipt_digests": [
+          "3321b4885aeaaa79ccf20cee4ec2920fce8404ac8d018ed19c33de9f1d41e1e0"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a185fb4f474feb72",
+        "attempts": 3,
+        "probe_cost": 0.2,
+        "total_proxy_cost": 3.2,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_config"
+        ],
+        "query_outcomes": [
+          false
+        ],
+        "receipt_digests": [
+          "01f111a46fe3b161bb2c9f7f77578f5190f389524b6ceb87b5e6eeb857f4cf75"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-1f79390b58365a2f",
+        "attempts": 6,
+        "probe_cost": 0.34,
+        "total_proxy_cost": 6.34,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          false
+        ],
+        "receipt_digests": [
+          "fec68b3ed99eaac94872156bebb3e21cceee5aa7c7ecc7df3f60e7dfba897064"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-9c9690f384352d5f",
+        "attempts": 13,
+        "probe_cost": 0.34,
+        "total_proxy_cost": 13.34,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          false
+        ],
+        "receipt_digests": [
+          "dd1b4e92ad4c20c39faf6c9d58ccc64ebcfd7b54a99e60951906da1eaa1538e0"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-10962b00cc4f32f9",
+        "attempts": 1,
+        "probe_cost": 0.5,
+        "total_proxy_cost": 1.5,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_entry"
+        ],
+        "query_outcomes": [
+          false
+        ],
+        "receipt_digests": [
+          "d4c0121e43b6d4f1000b585b904c765e93ee55753d1b5b3e081ca615483380b4"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a499b400cb29285a",
+        "attempts": 3,
+        "probe_cost": 0.34,
+        "total_proxy_cost": 3.34,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          false
+        ],
+        "receipt_digests": [
+          "11bf633dfdb48f9709f77cfec117229adcd8778006929217a47458c24b82eedc"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-ed1138b29382efce",
+        "attempts": 2,
+        "probe_cost": 0.2,
+        "total_proxy_cost": 2.2,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_config"
+        ],
+        "query_outcomes": [
+          true
+        ],
+        "receipt_digests": [
+          "c3960e842804329800fddc058135a5a8ed53bad2a479d0a1f93e0136cb4c5533"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-bef2a271ce88ad10",
+        "attempts": 16,
+        "probe_cost": 0.5,
+        "total_proxy_cost": 16.5,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [
+          "probe_entry"
+        ],
+        "query_outcomes": [
+          false
+        ],
+        "receipt_digests": [
+          "f4c122f7a64cb1acb0567f4d0dd1a02313daa082df5e742243417f35441f88dd"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-976cdcaeb14810ad",
+        "attempts": 1,
+        "probe_cost": 0.2,
+        "total_proxy_cost": 1.2,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_config"
+        ],
+        "query_outcomes": [
+          true
+        ],
+        "receipt_digests": [
+          "1632a2a1c07a0ee9f24ae191fba8ccd6ff33706f7fea3030a680377bcb0eb23a"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a7d47112c1df001a",
+        "attempts": 3,
+        "probe_cost": 0.5,
+        "total_proxy_cost": 3.5,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_entry"
+        ],
+        "query_outcomes": [
+          false
+        ],
+        "receipt_digests": [
+          "237b14fe4e54227f2275038587fc0f8b4c564a6565b1e8d08c3a2bf38dbd999c"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-23332cb8a52fe216",
+        "attempts": 2,
+        "probe_cost": 0.24,
+        "total_proxy_cost": 2.24,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core"
+        ],
+        "query_outcomes": [
+          false
+        ],
+        "receipt_digests": [
+          "ce1c92c12c3c548c9655aa13b0a4eb974944136549ac0ebbd56e3e2214c0de26"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-68cb79f9da8d04a4",
+        "attempts": 16,
+        "probe_cost": 0.2,
+        "total_proxy_cost": 16.2,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [
+          "probe_config"
+        ],
+        "query_outcomes": [
+          true
+        ],
+        "receipt_digests": [
+          "120588cee4a7a9fe694cfeed3ec650520757ca015a0e55c9370b654e86970b03"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a43e75b130d0fdd7",
+        "attempts": 1,
+        "probe_cost": 0.34,
+        "total_proxy_cost": 1.34,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true
+        ],
+        "receipt_digests": [
+          "bd00f4fecb68e3290d58ce10f809f6dff67233a60faa90eceebfcbbc808fb22a"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-b236704b901a57d2",
+        "attempts": 3,
+        "probe_cost": 0.24,
+        "total_proxy_cost": 3.24,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core"
+        ],
+        "query_outcomes": [
+          true
+        ],
+        "receipt_digests": [
+          "17263ede9ccdf107645bbae545a6392b4620ce39220c7a0cfb3358ae662c1c91"
+        ],
+        "query_information_gains_bits": []
+      }
+    ],
+    "all": [
+      {
+        "task_id": "inq-1dc6ebfee7647916",
+        "attempts": 2,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 2.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          false,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "365eacf2ab8eae03f5b00b122a7acf49e50c9675040dc8dab44c6b73697ac61b",
+          "74d35879368b6f01ea6a3db9a52094a316627c75c7fdd3f2b1f9dba8b668fb71",
+          "9f7c8e08e1a2ad98f587f461f3b1124036fd75069787c56557fc0f3f57db36d7"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-f5d92dc0bc9a7ebc",
+        "attempts": 9,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 9.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "e9368fcdee808b8115ff013ae340911fd78802b49b2e85599bf80e1533c6734d",
+          "f9a11b8efe12b9ee365d7581f2a21afe491986f2fdd282bc7c1c36b8bc54ee51",
+          "4ca7251b4d5261dfbc3ed333b135e6b836bba60f341dc4b127a4c1e68d8a7aca"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-68865ee7a671e8c3",
+        "attempts": 1,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 1.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          true
+        ],
+        "receipt_digests": [
+          "ca522595d5b3f943740491e8179de6b2a6e449f7f84cd6c5c94aacfa70d74012",
+          "4abc2c9a963dd0beff373c14a1aceb4c2e4ccc231979a5532ad30fbabf7922a8",
+          "dda063f152f6a2469db384904461f7eadb4bf16ed865cebfdac366054e43bb44"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a185fb4f474feb72",
+        "attempts": 3,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 3.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          false,
+          false
+        ],
+        "receipt_digests": [
+          "6c798875817d254e5ccc208688667e66011f8fb33c94032c266805bf2636191b",
+          "01f111a46fe3b161bb2c9f7f77578f5190f389524b6ceb87b5e6eeb857f4cf75",
+          "d4204a6df385e4d476ce68edd608e18db20486d032bb4accaa22c310d704d0f7"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-1f79390b58365a2f",
+        "attempts": 2,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 2.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          false,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "0758582ead260ce74b2f1d40f014df2b9ed964cba700fdbc7d983663e1ebf8cc",
+          "3c4bbdf363eb0d8b3c5957f00da6df3e521ce7e2abed7718fd068b4c4c1bdd59",
+          "fec68b3ed99eaac94872156bebb3e21cceee5aa7c7ecc7df3f60e7dfba897064"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-9c9690f384352d5f",
+        "attempts": 9,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 9.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "4be3df03306e6338583cb515fbe99b5589250cd37d2bfa5f4336bc3be8bbfad6",
+          "4b8395584b5633f88e0d1ed822d9b7bf76d4574cf1292845e4abd9e65bb34758",
+          "dd1b4e92ad4c20c39faf6c9d58ccc64ebcfd7b54a99e60951906da1eaa1538e0"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-10962b00cc4f32f9",
+        "attempts": 1,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 1.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          true
+        ],
+        "receipt_digests": [
+          "32bc24a264d22857a1135b04a951b91e789b7c8dfee778d87996d78ce8dd7400",
+          "c9899eb9aa3c6bc97a40b643e355027a10a302106c5d6b952ceae7b28f7c362d",
+          "305323cd2034844a15bdc8a7e2f6e2328b57ad3e2541b9d5227ec787afbdadfd"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a499b400cb29285a",
+        "attempts": 3,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 3.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          false,
+          false
+        ],
+        "receipt_digests": [
+          "e5548024703020c1939277a666729bc405f84c76e1b156c2036a718e2420c071",
+          "52ce1130232f7bea96533318780faa2d874cb752dac1782f575028020bfb7c86",
+          "11bf633dfdb48f9709f77cfec117229adcd8778006929217a47458c24b82eedc"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-ed1138b29382efce",
+        "attempts": 2,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 2.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          false,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "cc7fb8a1bd0782c8f571f6f5fccc366e2a0e33ecec4f9bd10b4cce7c2ff2c7b0",
+          "c3960e842804329800fddc058135a5a8ed53bad2a479d0a1f93e0136cb4c5533",
+          "7b65b0d904eab3177c4aca7ee973daf4be3cfac1871e3b984f3644070eaa312f"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-bef2a271ce88ad10",
+        "attempts": 9,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 9.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "169b7c05401f045e707151eb11b5f7ac860098f6b2f8a7ae69ea56237f9352e0",
+          "6d289b3b04369285e45099bd95aeb965ce997eae7ff9edcfed2a544b0a4d3744",
+          "d5ee41abc8a89b275f6b1b307a543e3430f51091d9c4555487cba94cb5ba356a"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-976cdcaeb14810ad",
+        "attempts": 1,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 1.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          true
+        ],
+        "receipt_digests": [
+          "96095108f4e4239d34fc57f8751742f8173adc2199baaca0fe6e398c5e358132",
+          "1632a2a1c07a0ee9f24ae191fba8ccd6ff33706f7fea3030a680377bcb0eb23a",
+          "33ed54d0e106cca807b20ece5fe29df435e45595da1bd34c651d33f9d8aa848e"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a7d47112c1df001a",
+        "attempts": 3,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 3.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          false,
+          false
+        ],
+        "receipt_digests": [
+          "2b1cca010df44cf86b0280175cc27acced60320959ac77d7862a37631a953744",
+          "1c982b2aeb148ac1ca7efbfd680d588e64d9033c22f96617a4e25cea01df0763",
+          "d5a882c41e512c4359f1ab608f7beed1393c5e55bed876b2d9003ec2e38974d6"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-23332cb8a52fe216",
+        "attempts": 2,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 2.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          false,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "ce1c92c12c3c548c9655aa13b0a4eb974944136549ac0ebbd56e3e2214c0de26",
+          "6a4528f7f6640de0827ff92241022099bd0a53bda2c27e79270b6db6fac77bf5",
+          "920b6d58b006bfc325e4fb4749fe0db124a5fbf5ed16f95792bfcfbee24adf12"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-68cb79f9da8d04a4",
+        "attempts": 9,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 9.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "b211cdac088b7f893abc07176e7c1e169c5371b8bda2067526d2d5c45b3253d1",
+          "120588cee4a7a9fe694cfeed3ec650520757ca015a0e55c9370b654e86970b03",
+          "372a50a8f553d0b28f5e43feaf2fd47c4fa87c80470367877538a62c00bdd606"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a43e75b130d0fdd7",
+        "attempts": 1,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 1.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          true
+        ],
+        "receipt_digests": [
+          "d6caa2a3287128dc5c49d55304beb6aa6872c86def5af87629e10910983f2e97",
+          "e79953d9c0b5889e274519cbbc7b092c8b3b24e8cf70bad6414b62c6326c6a24",
+          "bd00f4fecb68e3290d58ce10f809f6dff67233a60faa90eceebfcbbc808fb22a"
+        ],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-b236704b901a57d2",
+        "attempts": 3,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 3.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          false,
+          false
+        ],
+        "receipt_digests": [
+          "17263ede9ccdf107645bbae545a6392b4620ce39220c7a0cfb3358ae662c1c91",
+          "a07fa405ec31d5f2fc685a1d584a1462ff2d6aa68fb21b1e436615e8e59aa812",
+          "e1e12eacc1fc540ef637e5500b80a042f0d7859a5e8d66b1fdcfe5999506557f"
+        ],
+        "query_information_gains_bits": []
+      }
+    ],
+    "shuffled": [
+      {
+        "task_id": "inq-1dc6ebfee7647916",
+        "attempts": 14,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 14.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [
+          "probe_config",
+          "probe_core",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          false,
+          false
+        ],
+        "receipt_digests": [
+          "74d35879368b6f01ea6a3db9a52094a316627c75c7fdd3f2b1f9dba8b668fb71",
+          "365eacf2ab8eae03f5b00b122a7acf49e50c9675040dc8dab44c6b73697ac61b",
+          "9f7c8e08e1a2ad98f587f461f3b1124036fd75069787c56557fc0f3f57db36d7"
+        ],
+        "query_information_gains_bits": [
+          0.3188355,
+          0.32013122,
+          0.25874561
+        ]
+      },
+      {
+        "task_id": "inq-f5d92dc0bc9a7ebc",
+        "attempts": 32,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 32.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "e9368fcdee808b8115ff013ae340911fd78802b49b2e85599bf80e1533c6734d",
+          "f9a11b8efe12b9ee365d7581f2a21afe491986f2fdd282bc7c1c36b8bc54ee51",
+          "4ca7251b4d5261dfbc3ed333b135e6b836bba60f341dc4b127a4c1e68d8a7aca"
+        ],
+        "query_information_gains_bits": [
+          0.2525155,
+          0.11449162,
+          0.11548726
+        ]
+      },
+      {
+        "task_id": "inq-68865ee7a671e8c3",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a185fb4f474feb72",
+        "attempts": 3,
+        "probe_cost": 0.44,
+        "total_proxy_cost": 3.44,
+        "probes": 2,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core",
+          "probe_config"
+        ],
+        "query_outcomes": [
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "6c798875817d254e5ccc208688667e66011f8fb33c94032c266805bf2636191b",
+          "01f111a46fe3b161bb2c9f7f77578f5190f389524b6ceb87b5e6eeb857f4cf75"
+        ],
+        "query_information_gains_bits": [
+          0.20019126,
+          0.27237122
+        ]
+      },
+      {
+        "task_id": "inq-1f79390b58365a2f",
+        "attempts": 2,
+        "probe_cost": 0.44,
+        "total_proxy_cost": 2.44,
+        "probes": 2,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_config",
+          "probe_core"
+        ],
+        "query_outcomes": [
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "3c4bbdf363eb0d8b3c5957f00da6df3e521ce7e2abed7718fd068b4c4c1bdd59",
+          "0758582ead260ce74b2f1d40f014df2b9ed964cba700fdbc7d983663e1ebf8cc"
+        ],
+        "query_information_gains_bits": [
+          0.3188355,
+          0.32013122
+        ]
+      },
+      {
+        "task_id": "inq-9c9690f384352d5f",
+        "attempts": 18,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 18.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "4be3df03306e6338583cb515fbe99b5589250cd37d2bfa5f4336bc3be8bbfad6",
+          "4b8395584b5633f88e0d1ed822d9b7bf76d4574cf1292845e4abd9e65bb34758",
+          "dd1b4e92ad4c20c39faf6c9d58ccc64ebcfd7b54a99e60951906da1eaa1538e0"
+        ],
+        "query_information_gains_bits": [
+          0.2525155,
+          0.11449162,
+          0.11548726
+        ]
+      },
+      {
+        "task_id": "inq-10962b00cc4f32f9",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a499b400cb29285a",
+        "attempts": 3,
+        "probe_cost": 0.24,
+        "total_proxy_cost": 3.24,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core"
+        ],
+        "query_outcomes": [
+          true
+        ],
+        "receipt_digests": [
+          "e5548024703020c1939277a666729bc405f84c76e1b156c2036a718e2420c071"
+        ],
+        "query_information_gains_bits": [
+          0.20019126
+        ]
+      },
+      {
+        "task_id": "inq-ed1138b29382efce",
+        "attempts": 7,
+        "probe_cost": 0.2,
+        "total_proxy_cost": 7.2,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [
+          "probe_config"
+        ],
+        "query_outcomes": [
+          true
+        ],
+        "receipt_digests": [
+          "c3960e842804329800fddc058135a5a8ed53bad2a479d0a1f93e0136cb4c5533"
+        ],
+        "query_information_gains_bits": [
+          0.3188355
+        ]
+      },
+      {
+        "task_id": "inq-bef2a271ce88ad10",
+        "attempts": 14,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 14.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "169b7c05401f045e707151eb11b5f7ac860098f6b2f8a7ae69ea56237f9352e0",
+          "6d289b3b04369285e45099bd95aeb965ce997eae7ff9edcfed2a544b0a4d3744",
+          "d5ee41abc8a89b275f6b1b307a543e3430f51091d9c4555487cba94cb5ba356a"
+        ],
+        "query_information_gains_bits": [
+          0.2525155,
+          0.11449162,
+          0.1165775
+        ]
+      },
+      {
+        "task_id": "inq-976cdcaeb14810ad",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-a7d47112c1df001a",
+        "attempts": 3,
+        "probe_cost": 0.24,
+        "total_proxy_cost": 3.24,
+        "probes": 1,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [
+          "probe_core"
+        ],
+        "query_outcomes": [
+          true
+        ],
+        "receipt_digests": [
+          "2b1cca010df44cf86b0280175cc27acced60320959ac77d7862a37631a953744"
+        ],
+        "query_information_gains_bits": [
+          0.20019126
+        ]
+      },
+      {
+        "task_id": "inq-23332cb8a52fe216",
+        "attempts": 14,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 14.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [
+          "probe_config",
+          "probe_core",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          false,
+          false
+        ],
+        "receipt_digests": [
+          "6a4528f7f6640de0827ff92241022099bd0a53bda2c27e79270b6db6fac77bf5",
+          "ce1c92c12c3c548c9655aa13b0a4eb974944136549ac0ebbd56e3e2214c0de26",
+          "920b6d58b006bfc325e4fb4749fe0db124a5fbf5ed16f95792bfcfbee24adf12"
+        ],
+        "query_information_gains_bits": [
+          0.3188355,
+          0.32013122,
+          0.25874561
+        ]
+      },
+      {
+        "task_id": "inq-68cb79f9da8d04a4",
+        "attempts": 17,
+        "probe_cost": 0.78,
+        "total_proxy_cost": 17.78,
+        "probes": 3,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [
+          "probe_core",
+          "probe_config",
+          "probe_middle"
+        ],
+        "query_outcomes": [
+          true,
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "b211cdac088b7f893abc07176e7c1e169c5371b8bda2067526d2d5c45b3253d1",
+          "120588cee4a7a9fe694cfeed3ec650520757ca015a0e55c9370b654e86970b03",
+          "372a50a8f553d0b28f5e43feaf2fd47c4fa87c80470367877538a62c00bdd606"
+        ],
+        "query_information_gains_bits": [
+          0.2525155,
+          0.20179627,
+          0.14785907
+        ]
+      },
+      {
+        "task_id": "inq-a43e75b130d0fdd7",
+        "attempts": 1,
+        "probe_cost": 0,
+        "total_proxy_cost": 1,
+        "probes": 0,
+        "correct": true,
+        "first_file_correct": true,
+        "query_ids": [],
+        "query_outcomes": [],
+        "receipt_digests": [],
+        "query_information_gains_bits": []
+      },
+      {
+        "task_id": "inq-b236704b901a57d2",
+        "attempts": 11,
+        "probe_cost": 0.44,
+        "total_proxy_cost": 11.44,
+        "probes": 2,
+        "correct": true,
+        "first_file_correct": false,
+        "query_ids": [
+          "probe_core",
+          "probe_config"
+        ],
+        "query_outcomes": [
+          true,
+          false
+        ],
+        "receipt_digests": [
+          "17263ede9ccdf107645bbae545a6392b4620ce39220c7a0cfb3358ae662c1c91",
+          "a07fa405ec31d5f2fc685a1d584a1462ff2d6aa68fb21b1e436615e8e59aa812"
+        ],
+        "query_information_gains_bits": [
+          0.20019126,
+          0.27237122
+        ]
+      }
+    ]
+  },
+  "integration": {
+    "tasks": 4,
+    "final_correct": 4,
+    "witness_supported": 4,
+    "real_unittest_required": true,
+    "probe_budget_violations": 0
+  }
+}

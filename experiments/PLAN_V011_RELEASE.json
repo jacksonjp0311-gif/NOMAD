@@ -1,0 +1,23 @@
+{
+  "schema": "nomad.v011.post-audit-amendment-registered-plan.v1",
+  "reason_for_amendment": "Original independent audit had intermittent Python bytecode cache mismatches when a file was overwritten in the same timestamp tick. Corrected audit runs isolated child Python with -B. Original failure is preserved as a negative precheck, not rewritten as a pass.",
+  "original_precheck_seeds": [4321, 4357, 4397],
+  "development_seeds": [2601, 2633, 2671],
+  "training_seeds": [907,947],
+  "heldout_seeds": [5513,5563,5611],
+  "heldout_repositories": 24,
+  "holdout_contracts_per_repository": 9,
+  "integration_cases": 4,
+  "gates": {
+    "impact_f1_min": 0.95,
+    "learned_false_negative_count": 0,
+    "learned_false_positive_count_max": 0,
+    "uncertain_dynamic_calls_must_abstain": true,
+    "graph_file_visits_less_than_flat": true,
+    "both_integration_policies_final_correct": true,
+    "all_prior_tests_pass": true,
+    "independent_process_audit_pass": true,
+    "original_archive_unmodified": true
+  },
+  "claims": "Internal synthetic effect prediction with supplied AST features, narrow direct-call semantics, and small multi-file synthesis integration; not validated on external code or arbitrary runtime effects."
+}

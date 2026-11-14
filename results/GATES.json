@@ -1,0 +1,67 @@
+{
+  "schema": "nomad.v0.9.release-gates.v1",
+  "version": "0.9.0",
+  "codename": "INQUIRY",
+  "test_suite_passed": true,
+  "test_count": 65,
+  "gate_source_archive_integrity": true,
+  "gate_evaluation_seed_count": true,
+  "gate_final_correct": true,
+  "gate_witness": true,
+  "gate_query_budget": true,
+  "gate_cost_vs_world": true,
+  "gate_cost_vs_random": true,
+  "gate_cost_vs_all": true,
+  "gate_candidate_vs_world": true,
+  "gate_integration": true,
+  "gate_independent_probe_audit": true,
+  "gate_prior_research_present": true,
+  "summary": {
+    "active": {
+      "tasks": 64,
+      "final_correct": 64,
+      "witness_supported": 64,
+      "mean_candidate_attempts": 3.75,
+      "mean_probe_count": 1.5,
+      "mean_probe_proxy_cost": 0.365,
+      "mean_total_proxy_cost": 4.115,
+      "first_file_correct": 64,
+      "probe_budget_violations": 0,
+      "first_file_accuracy": 1.0
+    },
+    "world": {
+      "tasks": 64,
+      "final_correct": 64,
+      "witness_supported": 64,
+      "mean_candidate_attempts": 4.75,
+      "mean_probe_count": 0.0,
+      "mean_probe_proxy_cost": 0.0,
+      "mean_total_proxy_cost": 4.75,
+      "first_file_correct": 48,
+      "probe_budget_violations": 0,
+      "first_file_accuracy": 0.75
+    },
+    "comparisons": {
+      "proxy_cost_reduction_vs_world": 0.13368421052631574,
+      "proxy_cost_reduction_vs_prior_only": 0.3903703703703703,
+      "proxy_cost_reduction_vs_random": 0.2984549813532231,
+      "proxy_cost_reduction_vs_all": 0.0916114790286974,
+      "proxy_cost_reduction_vs_shuffled": 0.4662559280126464,
+      "candidate_reduction_vs_world": 0.21052631578947367
+    },
+    "integration": {
+      "tasks": 4,
+      "final_correct": 4,
+      "witness_supported": 4,
+      "real_unittest_required": true,
+      "budget_violations": 0
+    }
+  },
+  "simulation_sha256": "d927aab333943f418280444f525a060c64e17d1b039c6dc904d725565cff35ec",
+  "probe_audit_sha256": "6a48efcfe835d654d5555e2af2dabf21f49908ccc09abedfc84ab3dc667dfc7e",
+  "original_frozen_plan_sha256": "568acc4ddcd75bfdf782e97e9ad85f458f35b6d2372708d265362f8094d572e3",
+  "runner_amendment_sha256": "35818c5a92df3f43b0a508110aa7aeec53a256e2729b013e985792b43e1e4e34",
+  "predecessor_archive_sha256": "26ca3564f483bd37373d3f95ccc0f0884e1f5bd4bc5ed67f4d46439fe2b205e5",
+  "note": "Source for nomad.inquiry.py and nomad.repo_world.py matches the original experiment freeze; the study runner was amended only for subprocess isolation and pure aggregation.",
+  "status": "passed"
+}

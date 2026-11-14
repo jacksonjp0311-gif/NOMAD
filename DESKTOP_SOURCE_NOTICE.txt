@@ -1,0 +1,13 @@
+NOMAD v0.17.0 — DESKTOP SOURCE PACKAGE
+
+This is a compact development copy of the v0.17.0 source, scripts, tests, results, and documentation from the verified full research ZIP.
+
+Intentionally omitted: baseline/NOMAD-v0.16.0.zip (about 66 MiB uncompressed). This means full lineage/archive-manifest verification may fail, and the baseline for bit-exact historical release checks is not included.
+
+For CODEX: read CODEX_HANDOFF.md. Use this source for implementing NOMAD v0.18 PLATFORM, but do not claim the historical archive is present. The authoritative full package is NOMAD-v0.17.0.zip.
+
+Windows PowerShell:
+  Expand-Archive -LiteralPath .\NOMAD-v0.17.0-Desktop-Source.zip -DestinationPath . -Force
+  cd .\NOMAD-v0.17.0
+  py -3 -m nomad.protect_cli doctor
+  py -3 -m unittest discover -s tests -v

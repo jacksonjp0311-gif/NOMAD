@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nomad-bitwork"
+version = "0.17.0"
+description = "NOMAD SECURITY & RECOVERY: fail-closed sandbox gate, process supervision, and fenced side-effect receipts."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "Apache-2.0"}
+authors = [{name = "James Paul Jackson"}]
+dependencies = []
+
+[project.scripts]
+nomad = "nomad.cli:main"
+nomad-atlas = "nomad.atlas_cli:main"
+nomad-transcend = "nomad.transcend_cli:main"
+nomad-mission = "nomad.mission_cli:main"
+nomad-protect = "nomad.protect_cli:main"
+
+[tool.setuptools]
+packages = ["nomad"]

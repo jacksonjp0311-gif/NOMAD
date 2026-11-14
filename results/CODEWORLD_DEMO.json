@@ -1,0 +1,138 @@
+{
+  "task": "s9001-cmp-0",
+  "result": {
+    "task_id": "s9001-cmp-0",
+    "solved": true,
+    "final_correct": true,
+    "attempts": 1,
+    "family_attempts": 1,
+    "chosen_family": "comparison",
+    "predicted_family": "comparison",
+    "predicted_family_correct": true,
+    "witness_supported": true,
+    "abstained_reason": null
+  },
+  "causal_skills": [
+    {
+      "family": "binary_operator",
+      "preconditions": [
+        "ast_binop_rhs_name",
+        "runtime_ok"
+      ],
+      "positives": 4,
+      "negatives": 12,
+      "matched_positives": 4,
+      "matched_negatives": 0,
+      "precision": 1.0,
+      "coverage": 1.0,
+      "status": "promoted",
+      "positive_tasks": [
+        "s17-bin-0",
+        "s17-bin-1",
+        "s17-bin-2",
+        "s17-bin-3"
+      ],
+      "counterexample_tasks": []
+    },
+    {
+      "family": "comparison",
+      "preconditions": [
+        "target_boolean"
+      ],
+      "positives": 4,
+      "negatives": 0,
+      "matched_positives": 4,
+      "matched_negatives": 0,
+      "precision": 1.0,
+      "coverage": 1.0,
+      "status": "promoted",
+      "positive_tasks": [
+        "s17-cmp-0",
+        "s17-cmp-1",
+        "s17-cmp-2",
+        "s17-cmp-3"
+      ],
+      "counterexample_tasks": []
+    },
+    {
+      "family": "constant",
+      "preconditions": [
+        "target_numeric"
+      ],
+      "positives": 4,
+      "negatives": 0,
+      "matched_positives": 4,
+      "matched_negatives": 0,
+      "precision": 1.0,
+      "coverage": 1.0,
+      "status": "promoted",
+      "positive_tasks": [
+        "s17-const-0",
+        "s17-const-1",
+        "s17-const-2",
+        "s17-const-3"
+      ],
+      "counterexample_tasks": []
+    },
+    {
+      "family": "identifier",
+      "preconditions": [
+        "zero_case_target_nonzero_arg"
+      ],
+      "positives": 4,
+      "negatives": 0,
+      "matched_positives": 4,
+      "matched_negatives": 0,
+      "precision": 1.0,
+      "coverage": 1.0,
+      "status": "promoted",
+      "positive_tasks": [
+        "s17-id-0",
+        "s17-id-1",
+        "s17-id-2",
+        "s17-id-3"
+      ],
+      "counterexample_tasks": []
+    },
+    {
+      "family": "negate",
+      "preconditions": [
+        "target_identity_single_input"
+      ],
+      "positives": 4,
+      "negatives": 20,
+      "matched_positives": 4,
+      "matched_negatives": 0,
+      "precision": 1.0,
+      "coverage": 1.0,
+      "status": "promoted",
+      "positive_tasks": [
+        "s17-neg-0",
+        "s17-neg-1",
+        "s17-neg-2",
+        "s17-neg-3"
+      ],
+      "counterexample_tasks": []
+    },
+    {
+      "family": "zero_guard",
+      "preconditions": [
+        "zero_case_target_nonzero_arg"
+      ],
+      "positives": 4,
+      "negatives": 0,
+      "matched_positives": 4,
+      "matched_negatives": 0,
+      "precision": 1.0,
+      "coverage": 1.0,
+      "status": "promoted",
+      "positive_tasks": [
+        "s17-zero-0",
+        "s17-zero-1",
+        "s17-zero-2",
+        "s17-zero-3"
+      ],
+      "counterexample_tasks": []
+    }
+  ]
+}

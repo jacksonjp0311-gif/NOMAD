@@ -1,0 +1,11 @@
+{
+  "schema": "nomad.v011.audit-amendment.v1",
+  "original_audit": "scripts/audit_v11.py",
+  "original_precheck": "results/AUDIT_V011.json",
+  "corrected_audit": "scripts/audit_v11_corrected.py",
+  "corrected_precheck": "results/AUDIT_V011_CORRECTED_PRECHECK.json",
+  "observed_problem": "30 intermittent replay mismatches in a 216-receipt precheck. Candidate root cause: reused CPython .pyc with same-second mtime and same-size source rewrites.",
+  "correction": "Fresh subprocess interpreters use -I -B to disable bytecode write, removing an intermittent cache path. Source code of learner and synthetic fixture generator is unchanged.",
+  "heldout_policy": "The original holdout is demoted to diagnostic precheck; independent new seeds 5513, 5563, 5611 are reserved before execution.",
+  "caution": "This is a harness correction, not evidence of model improvement. External independent replication remains absent."
+}

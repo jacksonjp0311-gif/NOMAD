@@ -1,0 +1,840 @@
+{
+  "schema": "nomad.frontier.study.v1",
+  "scope": "evaluator-injected single-token defects in independently authored packaged source; NOT authentic upstream bug reports",
+  "task_ids": [
+    "affine-almost",
+    "affine-rectilinear",
+    "affine-vector",
+    "catalogue-contains",
+    "catalogue-names",
+    "confection-merge"
+  ],
+  "budget_per_task": 12,
+  "training": [
+    {
+      "id": "affine-almost",
+      "project": "affine",
+      "split": "train",
+      "policy": "cold",
+      "initial_public_failed": true,
+      "attempts": 4,
+      "budget": 12,
+      "selected": {
+        "path": "affine/__init__.py",
+        "line": 465,
+        "owner": "almost_equals",
+        "family": "<=\u2192>=",
+        "source_before_sha256": "f915e801efdce75194be2fe46626d9515d3444b9b13a0c7e9f765815be3eedde",
+        "candidate_sha256": "f9bfab6e0ddb3b6140294e65f736fd0f6f70ac1f765bebe7a81f518256fb338b"
+      },
+      "public_repaired": true,
+      "witness": {
+        "schema": "nomad.frontier.witness.v1",
+        "supported": true,
+        "upstream_suite_passed": true,
+        "additional_contract": {
+          "status": "not_available",
+          "supported": null
+        },
+        "source_sha256": "f9bfab6e0ddb3b6140294e65f736fd0f6f70ac1f765bebe7a81f518256fb338b",
+        "project": "affine",
+        "observed_test_exit_code": 0,
+        "test_output_sha256": "1be50b6aa3bc54f8dc66804a2d22ba949aeb602a9a6b98a67a0746b3873055e0",
+        "verified_at_scope": "full upstream distributed test suite",
+        "elapsed_s": 1.3419,
+        "receipt_sha256": "36ac875648905a546e0f4cfc47169a620260e28f072436689355aaa95455ebcd"
+      },
+      "witness_valid": true,
+      "evaluator_exact_original_restoration": true,
+      "bitwork_signature": 33153,
+      "trace": [
+        {
+          "index": 2,
+          "source_line": 465,
+          "owner": "almost_equals",
+          "edit_family": "-\u2192+",
+          "public_pass": false,
+          "result_hash": "a624d3f969f8e07ace0f024f1588877c5fe4ad50c31f0cb147ee092943c69c65"
+        },
+        {
+          "index": 3,
+          "source_line": 465,
+          "owner": "almost_equals",
+          "edit_family": "<=\u2192<",
+          "public_pass": false,
+          "result_hash": "a10a0b3a14ea2f947fc2f299b9b936e122f53b36ee996fc391426f6ade8c5fa6"
+        },
+        {
+          "index": 4,
+          "source_line": 465,
+          "owner": "almost_equals",
+          "edit_family": "<=\u2192>",
+          "public_pass": false,
+          "result_hash": "9b570298ed478ea39879e2a7f7fb707fc00607e71900c62fd5c327d8d198a047"
+        },
+        {
+          "index": 5,
+          "source_line": 465,
+          "owner": "almost_equals",
+          "edit_family": "<=\u2192>=",
+          "public_pass": true,
+          "result_hash": "b776a27431ee8dcdcb7be32a915d8e2741989ff6c27a3f189bdbe0d6f716c7ad"
+        }
+      ],
+      "failure_reason": null,
+      "context_key": "no language/repo name in prior key"
+    },
+    {
+      "id": "catalogue-contains",
+      "project": "catalogue",
+      "split": "train",
+      "policy": "cold",
+      "initial_public_failed": true,
+      "attempts": 4,
+      "budget": 12,
+      "selected": {
+        "path": "catalogue/__init__.py",
+        "line": 51,
+        "owner": "__contains__",
+        "family": "and\u2192or",
+        "source_before_sha256": "0c34ce2969b8d20754e91b051753844afc794102a399f4dbe0374cbce2e1f33e",
+        "candidate_sha256": "0eb8dd35905d1af2717e1f99a6cb5883862b86b6c2fb3d2de9f480fb90c9376c"
+      },
+      "public_repaired": true,
+      "witness": {
+        "schema": "nomad.frontier.witness.v1",
+        "supported": true,
+        "upstream_suite_passed": true,
+        "additional_contract": {
+          "status": "passed",
+          "supported": true,
+          "receipt_sha256": "5822f741bc3d19fba5ebf5c5c2a52cc0a7c1315d560dd5ad4eba2e32469376a9",
+          "contract_sha256": "c258385c46faa44fb5c68bb7f8abfc0548ab474ff248afad0d85d5bb4b339958"
+        },
+        "source_sha256": "0eb8dd35905d1af2717e1f99a6cb5883862b86b6c2fb3d2de9f480fb90c9376c",
+        "project": "catalogue",
+        "observed_test_exit_code": 0,
+        "test_output_sha256": "44e4d2a36c52f788955fa64a7cd38e0892fac89c66acf50fd9707d4d14918ef5",
+        "verified_at_scope": "full upstream distributed test suite",
+        "elapsed_s": 1.2022,
+        "receipt_sha256": "c1e6041f605acc6cea23e1407070c53b595090c00e8d06f814f9a4c440b1bdde"
+      },
+      "witness_valid": true,
+      "evaluator_exact_original_restoration": true,
+      "bitwork_signature": 33153,
+      "trace": [
+        {
+          "index": 2,
+          "source_line": 27,
+          "owner": "create",
+          "edit_family": "*\u2192+",
+          "public_pass": false,
+          "result_hash": "50fc343cbd430c64bf4b0bfee1a1d88cb410464dd49c59b032c9bd738e2eb505"
+        },
+        {
+          "index": 3,
+          "source_line": 49,
+          "owner": "__contains__",
+          "edit_family": "+\u2192-",
+          "public_pass": false,
+          "result_hash": "b3ceb5afd80f167ffb1bb9316edd631d0de72d2fc1390cbef4d02bb014426544"
+        },
+        {
+          "index": 4,
+          "source_line": 50,
+          "owner": "__contains__",
+          "edit_family": "and\u2192or",
+          "public_pass": false,
+          "result_hash": "946108f1a880766aacd84d67f121ca9b030eb8c164f806e14b5ef8961d18cfcb"
+        },
+        {
+          "index": 5,
+          "source_line": 51,
+          "owner": "__contains__",
+          "edit_family": "and\u2192or",
+          "public_pass": true,
+          "result_hash": "1b2dca2c79bb107eecca14a8a0cdbf398f6bc59740cbfdaf2640d451e870a637"
+        }
+      ],
+      "failure_reason": null,
+      "context_key": "no language/repo name in prior key"
+    }
+  ],
+  "frozen_prior": {
+    "schema": "nomad.frontier.prior.v1",
+    "counts": {
+      "33153:<=\u2192>=": 1,
+      "33153:and\u2192or": 1
+    }
+  },
+  "cold": [
+    {
+      "id": "affine-rectilinear",
+      "project": "affine",
+      "split": "release",
+      "policy": "cold",
+      "initial_public_failed": true,
+      "attempts": 2,
+      "budget": 12,
+      "selected": {
+        "path": "affine/__init__.py",
+        "line": 401,
+        "owner": "is_rectilinear",
+        "family": ">\u2192<",
+        "source_before_sha256": "f443965fd5b09b8627039f92bd68f58224500047331cf01806f447428efc746f",
+        "candidate_sha256": "f9bfab6e0ddb3b6140294e65f736fd0f6f70ac1f765bebe7a81f518256fb338b"
+      },
+      "public_repaired": true,
+      "witness": {
+        "schema": "nomad.frontier.witness.v1",
+        "supported": true,
+        "upstream_suite_passed": true,
+        "additional_contract": {
+          "status": "not_available",
+          "supported": null
+        },
+        "source_sha256": "f9bfab6e0ddb3b6140294e65f736fd0f6f70ac1f765bebe7a81f518256fb338b",
+        "project": "affine",
+        "observed_test_exit_code": 0,
+        "test_output_sha256": "7c63dc8f658cf2166c536c86c65177550edce344366f168a6dbb76188cf390be",
+        "verified_at_scope": "full upstream distributed test suite",
+        "elapsed_s": 1.647,
+        "receipt_sha256": "de0eadbfb6c3e80e0ecf11b21d1516f4704414aa30ec5fbdedca5c0e35a740ac"
+      },
+      "witness_valid": true,
+      "evaluator_exact_original_restoration": true,
+      "bitwork_signature": 33153,
+      "trace": [
+        {
+          "index": 1,
+          "source_line": 391,
+          "owner": "is_identity",
+          "edit_family": "or\u2192and",
+          "public_pass": false,
+          "result_hash": "8ee9e2c28cb9e9ca65c0fa9b8d7bbb7908a1a73bb2eff79c95e6b642b54e9599"
+        },
+        {
+          "index": 2,
+          "source_line": 401,
+          "owner": "is_rectilinear",
+          "edit_family": ">\u2192<",
+          "public_pass": true,
+          "result_hash": "c4729e9024384634090f2713baf533adee0ccc145680de46bdae7c3e480b9b7c"
+        }
+      ],
+      "failure_reason": null,
+      "context_key": "no language/repo name in prior key"
+    },
+    {
+      "id": "affine-vector",
+      "project": "affine",
+      "split": "release",
+      "policy": "cold",
+      "initial_public_failed": true,
+      "attempts": 11,
+      "budget": 12,
+      "selected": null,
+      "public_repaired": false,
+      "witness": {
+        "supported": false,
+        "reason": "no candidate"
+      },
+      "witness_valid": false,
+      "evaluator_exact_original_restoration": false,
+      "bitwork_signature": 35201,
+      "trace": [
+        {
+          "index": 2,
+          "source_line": 218,
+          "owner": "scale",
+          "edit_family": "==\u2192!=",
+          "public_pass": false,
+          "result_hash": "9e12cd412c6b5a0d709b70d4051078bba1e33668eb4a959914d921fddb8f0d31"
+        },
+        {
+          "index": 3,
+          "source_line": 255,
+          "owner": "rotation",
+          "edit_family": "-\u2192+",
+          "public_pass": false,
+          "result_hash": "f80e2fd59657dc7c3628e18c144a67ca4e2c3964902a3baad81246057aa4697e"
+        },
+        {
+          "index": 4,
+          "source_line": 262,
+          "owner": "rotation",
+          "edit_family": "-\u2192+",
+          "public_pass": false,
+          "result_hash": "448bd1a7427d3fd1cc6ea2484b5992b28f76b23a29317a7d90808b318861e83c"
+        },
+        {
+          "index": 5,
+          "source_line": 263,
+          "owner": "rotation",
+          "edit_family": "-\u2192+",
+          "public_pass": false,
+          "result_hash": "2b84eb1073933db6bc3f4f92bab0772582bbfea6e851871161b6b2047c1b2aa3"
+        },
+        {
+          "index": 6,
+          "source_line": 263,
+          "owner": "rotation",
+          "edit_family": "*\u2192+",
+          "public_pass": false,
+          "result_hash": "2b84eb1073933db6bc3f4f92bab0772582bbfea6e851871161b6b2047c1b2aa3"
+        },
+        {
+          "index": 7,
+          "source_line": 263,
+          "owner": "rotation",
+          "edit_family": "+\u2192-",
+          "public_pass": false,
+          "result_hash": "9e12cd412c6b5a0d709b70d4051078bba1e33668eb4a959914d921fddb8f0d31"
+        },
+        {
+          "index": 8,
+          "source_line": 263,
+          "owner": "rotation",
+          "edit_family": "*\u2192+",
+          "public_pass": false,
+          "result_hash": "448bd1a7427d3fd1cc6ea2484b5992b28f76b23a29317a7d90808b318861e83c"
+        },
+        {
+          "index": 9,
+          "source_line": 266,
+          "owner": "rotation",
+          "edit_family": "-\u2192+",
+          "public_pass": false,
+          "result_hash": "a3b6acff7f084024402f01ea219b6417cca7f172a168b1c5b56b94960f9fc7c5"
+        },
+        {
+          "index": 10,
+          "source_line": 266,
+          "owner": "rotation",
+          "edit_family": "*\u2192+",
+          "public_pass": false,
+          "result_hash": "2b84eb1073933db6bc3f4f92bab0772582bbfea6e851871161b6b2047c1b2aa3"
+        },
+        {
+          "index": 11,
+          "source_line": 266,
+          "owner": "rotation",
+          "edit_family": "-\u2192+",
+          "public_pass": false,
+          "result_hash": "2b84eb1073933db6bc3f4f92bab0772582bbfea6e851871161b6b2047c1b2aa3"
+        },
+        {
+          "index": 12,
+          "source_line": 266,
+          "owner": "rotation",
+          "edit_family": "*\u2192+",
+          "public_pass": false,
+          "result_hash": "9e12cd412c6b5a0d709b70d4051078bba1e33668eb4a959914d921fddb8f0d31"
+        }
+      ],
+      "failure_reason": "bounded search exhausted",
+      "context_key": "no language/repo name in prior key"
+    },
+    {
+      "id": "catalogue-names",
+      "project": "catalogue",
+      "split": "release",
+      "policy": "cold",
+      "initial_public_failed": true,
+      "attempts": 1,
+      "budget": 12,
+      "selected": {
+        "path": "catalogue/__init__.py",
+        "line": 112,
+        "owner": "get_all",
+        "family": "!=\u2192==",
+        "source_before_sha256": "5a7d2d504036ae3a0c9e9e199036b3acfe08cdec40d0d1928b497ac63bd20394",
+        "candidate_sha256": "0eb8dd35905d1af2717e1f99a6cb5883862b86b6c2fb3d2de9f480fb90c9376c"
+      },
+      "public_repaired": true,
+      "witness": {
+        "schema": "nomad.frontier.witness.v1",
+        "supported": true,
+        "upstream_suite_passed": true,
+        "additional_contract": {
+          "status": "passed",
+          "supported": true,
+          "receipt_sha256": "5822f741bc3d19fba5ebf5c5c2a52cc0a7c1315d560dd5ad4eba2e32469376a9",
+          "contract_sha256": "c258385c46faa44fb5c68bb7f8abfc0548ab474ff248afad0d85d5bb4b339958"
+        },
+        "source_sha256": "0eb8dd35905d1af2717e1f99a6cb5883862b86b6c2fb3d2de9f480fb90c9376c",
+        "project": "catalogue",
+        "observed_test_exit_code": 0,
+        "test_output_sha256": "8643ae69ea314f7247dc58b48461428d667ba65c0288808a3ec4318d58b8392b",
+        "verified_at_scope": "full upstream distributed test suite",
+        "elapsed_s": 1.4939,
+        "receipt_sha256": "f49ee99bae97c213ba6ceebd6452b4ba0360461c453fee987bd3e03e0c9077ca"
+      },
+      "witness_valid": true,
+      "evaluator_exact_original_restoration": true,
+      "bitwork_signature": 33153,
+      "trace": [
+        {
+          "index": 2,
+          "source_line": 112,
+          "owner": "get_all",
+          "edit_family": "!=\u2192==",
+          "public_pass": true,
+          "result_hash": "1b2dca2c79bb107eecca14a8a0cdbf398f6bc59740cbfdaf2640d451e870a637"
+        }
+      ],
+      "failure_reason": null,
+      "context_key": "no language/repo name in prior key"
+    },
+    {
+      "id": "confection-merge",
+      "project": "confection",
+      "split": "release",
+      "policy": "cold",
+      "initial_public_failed": true,
+      "attempts": 6,
+      "budget": 12,
+      "selected": null,
+      "public_repaired": false,
+      "witness": {
+        "supported": false,
+        "reason": "no candidate"
+      },
+      "witness_valid": false,
+      "evaluator_exact_original_restoration": false,
+      "bitwork_signature": 33153,
+      "trace": [
+        {
+          "index": 2,
+          "source_line": 420,
+          "owner": "from_str",
+          "edit_family": "and\u2192or",
+          "public_pass": false,
+          "result_hash": "2314a2297ad219fdef80b7d442d6f417f490ddbc5c1dd457b0354d12007c1fb6"
+        },
+        {
+          "index": 5,
+          "source_line": 548,
+          "owner": "deep_merge_configs",
+          "edit_family": "not in\u2192in",
+          "public_pass": false,
+          "result_hash": "cf5f0c1e83a309874e014c0c79d0d9dc67f4443b1957031fed65905966019990"
+        },
+        {
+          "index": 9,
+          "source_line": 563,
+          "owner": "deep_merge_configs",
+          "edit_family": "and\u2192or",
+          "public_pass": false,
+          "result_hash": "2314a2297ad219fdef80b7d442d6f417f490ddbc5c1dd457b0354d12007c1fb6"
+        },
+        {
+          "index": 10,
+          "source_line": 564,
+          "owner": "deep_merge_configs",
+          "edit_family": "and\u2192or",
+          "public_pass": false,
+          "result_hash": "7c099ffc009b8282cb75b4690f65f5196ed2920408dd17c02f571b8ea6b1f2e4"
+        },
+        {
+          "index": 11,
+          "source_line": 565,
+          "owner": "deep_merge_configs",
+          "edit_family": "in\u2192not in",
+          "public_pass": false,
+          "result_hash": "7c099ffc009b8282cb75b4690f65f5196ed2920408dd17c02f571b8ea6b1f2e4"
+        },
+        {
+          "index": 12,
+          "source_line": 566,
+          "owner": "deep_merge_configs",
+          "edit_family": "and\u2192or",
+          "public_pass": false,
+          "result_hash": "2314a2297ad219fdef80b7d442d6f417f490ddbc5c1dd457b0354d12007c1fb6"
+        }
+      ],
+      "failure_reason": "bounded search exhausted",
+      "context_key": "no language/repo name in prior key"
+    }
+  ],
+  "transferred": [
+    {
+      "id": "affine-rectilinear",
+      "project": "affine",
+      "split": "release",
+      "policy": "learned",
+      "initial_public_failed": true,
+      "attempts": 4,
+      "budget": 12,
+      "selected": {
+        "path": "affine/__init__.py",
+        "line": 401,
+        "owner": "is_rectilinear",
+        "family": ">\u2192<",
+        "source_before_sha256": "f443965fd5b09b8627039f92bd68f58224500047331cf01806f447428efc746f",
+        "candidate_sha256": "f9bfab6e0ddb3b6140294e65f736fd0f6f70ac1f765bebe7a81f518256fb338b"
+      },
+      "public_repaired": true,
+      "witness": {
+        "schema": "nomad.frontier.witness.v1",
+        "supported": true,
+        "upstream_suite_passed": true,
+        "additional_contract": {
+          "status": "not_available",
+          "supported": null
+        },
+        "source_sha256": "f9bfab6e0ddb3b6140294e65f736fd0f6f70ac1f765bebe7a81f518256fb338b",
+        "project": "affine",
+        "observed_test_exit_code": 0,
+        "test_output_sha256": "9d3e63a227f90a5da7d35620cbcdf04a526a50e95b824a5e4b7457cda4afbc15",
+        "verified_at_scope": "full upstream distributed test suite",
+        "elapsed_s": 1.6592,
+        "receipt_sha256": "534775a6e4ad93a7846c43c4964dd92d310272ca34e8f5e734457d4161a473a4"
+      },
+      "witness_valid": true,
+      "evaluator_exact_original_restoration": true,
+      "bitwork_signature": 33153,
+      "trace": [
+        {
+          "index": 1,
+          "source_line": 401,
+          "owner": "is_rectilinear",
+          "edit_family": "and\u2192or",
+          "public_pass": false,
+          "result_hash": "97275f0a99223ea673d56cc7181cc8128f7683d61f7c8dd9395f5e6ed34d8ca5"
+        },
+        {
+          "index": 2,
+          "source_line": 402,
+          "owner": "is_rectilinear",
+          "edit_family": "and\u2192or",
+          "public_pass": false,
+          "result_hash": "f9308a09b1776c592ebe89235b542384facd244501229d144bcccc7b91c6626c"
+        },
+        {
+          "index": 3,
+          "source_line": 391,
+          "owner": "is_identity",
+          "edit_family": "or\u2192and",
+          "public_pass": false,
+          "result_hash": "2e35d526a080073f3f531fa937cbad07dbf3e1a1ddd57bb5a460fc0321228cd1"
+        },
+        {
+          "index": 4,
+          "source_line": 401,
+          "owner": "is_rectilinear",
+          "edit_family": ">\u2192<",
+          "public_pass": true,
+          "result_hash": "8b49f76a4818597e7c26001cb68e412e612c6f9bb6f1eb1da8fb2f45c474a876"
+        }
+      ],
+      "failure_reason": null,
+      "context_key": "no language/repo name in prior key"
+    },
+    {
+      "id": "affine-vector",
+      "project": "affine",
+      "split": "release",
+      "policy": "learned",
+      "initial_public_failed": true,
+      "attempts": 11,
+      "budget": 12,
+      "selected": null,
+      "public_repaired": false,
+      "witness": {
+        "supported": false,
+        "reason": "no candidate"
+      },
+      "witness_valid": false,
+      "evaluator_exact_original_restoration": false,
+      "bitwork_signature": 35201,
+      "trace": [
+        {
+          "index": 2,
+          "source_line": 218,
+          "owner": "scale",
+          "edit_family": "==\u2192!=",
+          "public_pass": false,
+          "result_hash": "9e12cd412c6b5a0d709b70d4051078bba1e33668eb4a959914d921fddb8f0d31"
+        },
+        {
+          "index": 3,
+          "source_line": 255,
+          "owner": "rotation",
+          "edit_family": "-\u2192+",
+          "public_pass": false,
+          "result_hash": "11a09f7a12f94285d205ea76e5d03527a24a3f4048703bd84c4ff891cdea2a53"
+        },
+        {
+          "index": 4,
+          "source_line": 262,
+          "owner": "rotation",
+          "edit_family": "-\u2192+",
+          "public_pass": false,
+          "result_hash": "54752fa86623e5a5b3a9704b35d699748842eee8d6c990679a25118503c7d20a"
+        },
+        {
+          "index": 5,
+          "source_line": 263,
+          "owner": "rotation",
+          "edit_family": "-\u2192+",
+          "public_pass": false,
+          "result_hash": "17e1395d2e0a6093aac86485a64207863823e827d5044dbea10c1583e19b1988"
+        },
+        {
+          "index": 6,
+          "source_line": 263,
+          "owner": "rotation",
+          "edit_family": "*\u2192+",
+          "public_pass": false,
+          "result_hash": "acdd872084fa5e97ae248be0fc0950d6a5cf7b062a1bbad7306b42d31789b8ae"
+        },
+        {
+          "index": 7,
+          "source_line": 263,
+          "owner": "rotation",
+          "edit_family": "+\u2192-",
+          "public_pass": false,
+          "result_hash": "36957ee634ed07cf469ea3f2a9fe0d9eca8e7019cd0ec1a10d0e1776f17f55c7"
+        },
+        {
+          "index": 8,
+          "source_line": 263,
+          "owner": "rotation",
+          "edit_family": "*\u2192+",
+          "public_pass": false,
+          "result_hash": "2b84eb1073933db6bc3f4f92bab0772582bbfea6e851871161b6b2047c1b2aa3"
+        },
+        {
+          "index": 9,
+          "source_line": 266,
+          "owner": "rotation",
+          "edit_family": "-\u2192+",
+          "public_pass": false,
+          "result_hash": "2b84eb1073933db6bc3f4f92bab0772582bbfea6e851871161b6b2047c1b2aa3"
+        },
+        {
+          "index": 10,
+          "source_line": 266,
+          "owner": "rotation",
+          "edit_family": "*\u2192+",
+          "public_pass": false,
+          "result_hash": "54752fa86623e5a5b3a9704b35d699748842eee8d6c990679a25118503c7d20a"
+        },
+        {
+          "index": 11,
+          "source_line": 266,
+          "owner": "rotation",
+          "edit_family": "-\u2192+",
+          "public_pass": false,
+          "result_hash": "9e12cd412c6b5a0d709b70d4051078bba1e33668eb4a959914d921fddb8f0d31"
+        },
+        {
+          "index": 12,
+          "source_line": 266,
+          "owner": "rotation",
+          "edit_family": "*\u2192+",
+          "public_pass": false,
+          "result_hash": "acdd872084fa5e97ae248be0fc0950d6a5cf7b062a1bbad7306b42d31789b8ae"
+        }
+      ],
+      "failure_reason": "bounded search exhausted",
+      "context_key": "no language/repo name in prior key"
+    },
+    {
+      "id": "catalogue-names",
+      "project": "catalogue",
+      "split": "release",
+      "policy": "learned",
+      "initial_public_failed": true,
+      "attempts": 1,
+      "budget": 12,
+      "selected": {
+        "path": "catalogue/__init__.py",
+        "line": 112,
+        "owner": "get_all",
+        "family": "and\u2192or",
+        "source_before_sha256": "5a7d2d504036ae3a0c9e9e199036b3acfe08cdec40d0d1928b497ac63bd20394",
+        "candidate_sha256": "6542aa4b82aeeebbdec5721ca09f5b464ecb7b4da99a78c753160886c14f21bc"
+      },
+      "public_repaired": true,
+      "witness": {
+        "schema": "nomad.frontier.witness.v1",
+        "supported": false,
+        "upstream_suite_passed": true,
+        "additional_contract": {
+          "status": "failed",
+          "supported": false,
+          "receipt_sha256": "94f44f85b1c60cc9a2c99d2ed3e6634d32b9695813a9cf068d0c80e56c51f44c",
+          "contract_sha256": "c258385c46faa44fb5c68bb7f8abfc0548ab474ff248afad0d85d5bb4b339958"
+        },
+        "source_sha256": "6542aa4b82aeeebbdec5721ca09f5b464ecb7b4da99a78c753160886c14f21bc",
+        "project": "catalogue",
+        "observed_test_exit_code": 0,
+        "test_output_sha256": "44e4d2a36c52f788955fa64a7cd38e0892fac89c66acf50fd9707d4d14918ef5",
+        "verified_at_scope": "full upstream distributed test suite",
+        "elapsed_s": 1.3357,
+        "receipt_sha256": "ba1de6248df1c9bb48dc6f766a03ea27ac9d6ea2711077ab462acb7182fd7d05"
+      },
+      "witness_valid": true,
+      "evaluator_exact_original_restoration": false,
+      "bitwork_signature": 33153,
+      "trace": [
+        {
+          "index": 1,
+          "source_line": 112,
+          "owner": "get_all",
+          "edit_family": "and\u2192or",
+          "public_pass": true,
+          "result_hash": "1b2dca2c79bb107eecca14a8a0cdbf398f6bc59740cbfdaf2640d451e870a637"
+        }
+      ],
+      "failure_reason": null,
+      "context_key": "no language/repo name in prior key"
+    },
+    {
+      "id": "confection-merge",
+      "project": "confection",
+      "split": "release",
+      "policy": "learned",
+      "initial_public_failed": true,
+      "attempts": 6,
+      "budget": 12,
+      "selected": null,
+      "public_repaired": false,
+      "witness": {
+        "supported": false,
+        "reason": "no candidate"
+      },
+      "witness_valid": false,
+      "evaluator_exact_original_restoration": false,
+      "bitwork_signature": 33153,
+      "trace": [
+        {
+          "index": 1,
+          "source_line": 420,
+          "owner": "from_str",
+          "edit_family": "and\u2192or",
+          "public_pass": false,
+          "result_hash": "cf5f0c1e83a309874e014c0c79d0d9dc67f4443b1957031fed65905966019990"
+        },
+        {
+          "index": 2,
+          "source_line": 563,
+          "owner": "deep_merge_configs",
+          "edit_family": "and\u2192or",
+          "public_pass": false,
+          "result_hash": "7c099ffc009b8282cb75b4690f65f5196ed2920408dd17c02f571b8ea6b1f2e4"
+        },
+        {
+          "index": 3,
+          "source_line": 564,
+          "owner": "deep_merge_configs",
+          "edit_family": "and\u2192or",
+          "public_pass": false,
+          "result_hash": "7c099ffc009b8282cb75b4690f65f5196ed2920408dd17c02f571b8ea6b1f2e4"
+        },
+        {
+          "index": 4,
+          "source_line": 566,
+          "owner": "deep_merge_configs",
+          "edit_family": "and\u2192or",
+          "public_pass": false,
+          "result_hash": "f297e1a9b7aa32d9777675631df8a01216f47d7d253841f062155b555648f54b"
+        },
+        {
+          "index": 5,
+          "source_line": 570,
+          "owner": "deep_merge_configs",
+          "edit_family": "and\u2192or",
+          "public_pass": false,
+          "result_hash": "f297e1a9b7aa32d9777675631df8a01216f47d7d253841f062155b555648f54b"
+        },
+        {
+          "index": 9,
+          "source_line": 548,
+          "owner": "deep_merge_configs",
+          "edit_family": "not in\u2192in",
+          "public_pass": false,
+          "result_hash": "f297e1a9b7aa32d9777675631df8a01216f47d7d253841f062155b555648f54b"
+        }
+      ],
+      "failure_reason": "bounded search exhausted",
+      "context_key": "no language/repo name in prior key"
+    }
+  ],
+  "training_summary": {
+    "tasks": 2,
+    "public_repaired": 2,
+    "witnessed_repairs": 2,
+    "exact_restorations": 2,
+    "attempts_all": 8,
+    "mean_attempts": 4.0
+  },
+  "cold_summary": {
+    "tasks": 4,
+    "public_repaired": 2,
+    "witnessed_repairs": 2,
+    "exact_restorations": 2,
+    "attempts_all": 20,
+    "mean_attempts": 5.0
+  },
+  "transferred_summary": {
+    "tasks": 4,
+    "public_repaired": 2,
+    "witnessed_repairs": 1,
+    "exact_restorations": 1,
+    "attempts_all": 22,
+    "mean_attempts": 5.5
+  },
+  "rust": "NOT_TESTED: rustc absent",
+  "external_issue_gate": "HOLD: authentic unrelated issues and true unseen repositories not evaluated",
+  "source_snapshots": [
+    {
+      "name": "affine",
+      "version": "2.4.0",
+      "origin": "installed PyPI distribution (offline local filesystem)",
+      "repository": "https://github.com/rasterio/affine",
+      "files": {
+        "LICENSE.upstream": "fc3636b54ff4072cf4b013ed9893c171ed25f88dae2b32722050499c1878cd6e",
+        "affine/__init__.py": "f9bfab6e0ddb3b6140294e65f736fd0f6f70ac1f765bebe7a81f518256fb338b",
+        "affine/tests/__init__.py": "e843bc11735ec8b1ea101437754e37ae0e3f4899b0cfa748087b65feeb8f13b2",
+        "affine/tests/test_pickle.py": "9bcb1fdaceebbe8251280ed2ba394e6ac70ffbd30efbf15869dc7e6412b88b73",
+        "affine/tests/test_rotation.py": "91900ba9aaeb3024601a7ad15867ce75b50c065a4161d20bed5da229e80135eb",
+        "affine/tests/test_serialize.py": "46358e01543e66af0d9654dd351012d568e2b3c29bdac373752f660af53acba8",
+        "affine/tests/test_transform.py": "5c036a0afd123cf0b0ab87415db65564424901a7fac272a4222c6bb18f6a48a8"
+      }
+    },
+    {
+      "name": "catalogue",
+      "version": "2.0.10",
+      "origin": "installed PyPI distribution (offline local filesystem)",
+      "repository": "https://github.com/explosion/catalogue",
+      "files": {
+        "LICENSE.upstream": "f7f74ea82f9a10d7ce2ba05dd7e460c8c2bb42a6cc7d9ae71ab35661b5f71c9b",
+        "catalogue/__init__.py": "0eb8dd35905d1af2717e1f99a6cb5883862b86b6c2fb3d2de9f480fb90c9376c",
+        "catalogue/_importlib_metadata/__init__.py": "66b6bc8345ef10d38cc5a50c45df388e3e14073b914149c1eb25313480730091",
+        "catalogue/_importlib_metadata/_compat.py": "572ba660bc15356dfd157a955785ca536c91e5e4691f2712ec0ea90f11551316",
+        "catalogue/tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "catalogue/tests/test_catalogue.py": "dd1cf3a0884a4f2b364da1db416b4e09c86c48c9a227492cdf8543dd782ba16f"
+      }
+    },
+    {
+      "name": "confection",
+      "version": "0.1.5",
+      "origin": "installed PyPI distribution (offline local filesystem)",
+      "repository": "https://github.com/explosion/confection",
+      "files": {
+        "LICENSE.upstream": "f7f74ea82f9a10d7ce2ba05dd7e460c8c2bb42a6cc7d9ae71ab35661b5f71c9b",
+        "confection/__init__.py": "c2e86db314fa6859345c4a2ef4ff8c9b12272944b96bb784821088caf6d7607b",
+        "confection/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "confection/tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "confection/tests/conftest.py": "d3a4089816c6c44ee902fdf1f0931e84937dc6f183f18f67ef532161020c3766",
+        "confection/tests/test_config.py": "a649c648b8a1a2d33b88b8b42987827ce4f1d6e1d6c5a5dc2960b28f1ccb63f2",
+        "confection/tests/test_frozen_structures.py": "389caa93ec58e21bbcc83ac06d7f1c4a9bc0f4594ba65e3d1884a1d5c990d9c6",
+        "confection/tests/util.py": "092521f703a6e4e3007636c33f8bc34f418e747193f118180aaf02521c7548b9",
+        "confection/util.py": "d22a211d074380577c79ce7b9a18f8d7303bc2284abd33dc5ca2efec9a0a2dba"
+      }
+    }
+  ]
+}
