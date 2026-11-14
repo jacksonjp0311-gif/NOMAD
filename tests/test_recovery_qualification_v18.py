@@ -113,7 +113,7 @@ class RecoveryQualificationContractTests(unittest.TestCase):
         owner = Mock()
         owner.poll.return_value = None
         with tempfile.TemporaryDirectory() as directory, \
-             patch.object(isolation_qualifier.subprocess, 'Popen', return_value=owner), \
+             patch.object(isolation_qualifier.subprocess, 'Popen', return_value=owner) as launch, \
              patch.object(isolation_qualifier, '_docker_prefix', return_value=['docker']), \
              patch.object(isolation_qualifier, 'run_supervised', side_effect=OSError('controlled observation failure')), \
              patch.object(isolation_qualifier, 'cleanup_isolated', return_value=True) as cleanup:
@@ -123,6 +123,7 @@ class RecoveryQualificationContractTests(unittest.TestCase):
             owner.wait.assert_called_once_with(timeout=5)
             cleanup.assert_called_once()
             self.assertRegex(cleanup.call_args.args[0], r'^nomad-[a-f0-9]{24}$')
+            self.assertEqual(json.loads(launch.call_args.args[0][4]), asdict(SandboxPolicy(IMAGE)))
 
     def test_failed_emergency_cleanup_remains_explicitly_unconfirmed(self):
         with patch.object(qualifier, '_hard_death_once', side_effect=OSError('probe failed')), \

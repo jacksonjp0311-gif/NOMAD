@@ -1,0 +1,750 @@
+{
+  "cases": [
+    {
+      "observation": {
+        "after_commit": {
+          "extended_peak_job_bytes": 57393152,
+          "extended_peak_process_bytes": 48095232,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 57393152,
+            "peak_job_bytes": 57393152,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 48095232,
+            "private_commit_bytes": 48095232,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22925312
+          }
+        },
+        "after_commit_region": {
+          "protect": 4,
+          "region_bytes": 33554432,
+          "state": 4096
+        },
+        "after_release": {
+          "extended_peak_job_bytes": 57393152,
+          "extended_peak_process_bytes": 48095232,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23773184,
+            "peak_job_bytes": 57393152,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 48095232,
+            "private_commit_bytes": 14475264,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22933504
+          }
+        },
+        "after_reserve": {
+          "extended_peak_job_bytes": 23773184,
+          "extended_peak_process_bytes": 14475264,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23773184,
+            "peak_job_bytes": 23773184,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 14475264,
+            "private_commit_bytes": 14475264,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22925312
+          }
+        },
+        "before": {
+          "extended_peak_job_bytes": 23773184,
+          "extended_peak_process_bytes": 14475264,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23773184,
+            "peak_job_bytes": 23773184,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 14475264,
+            "private_commit_bytes": 14475264,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22921216
+          }
+        },
+        "commit_succeeded": true,
+        "commit_winerror": 0,
+        "requested_bytes": 33554432,
+        "reserved_region": {
+          "protect": 0,
+          "region_bytes": 33554432,
+          "state": 8192
+        }
+      },
+      "repetition": 0,
+      "request_mib": 32,
+      "scope": "commit result and queried region state only; counters are observations, not acceptance criteria",
+      "status": "PASS",
+      "transport": {
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 344,
+        "metrics": {
+          "active_processes_at_cleanup": 0,
+          "available": true,
+          "configured_active_process_limit": 6,
+          "configured_job_memory_bytes": 100663296,
+          "cpu_kernel_s": 0.09375,
+          "cpu_user_s": 0.171875,
+          "peak_counter_scope": "native high-water counter; not an atomic measurement of committed bytes",
+          "peak_job_commit_bytes": 57393152,
+          "peak_job_memory_counter_bytes": 57393152,
+          "scope": "Windows supervised process tree",
+          "total_processes": 3
+        },
+        "output": "{\"after_commit\": {\"extended_peak_job_bytes\": 57393152, \"extended_peak_process_bytes\": 48095232, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 57393152, \"peak_job_bytes\": 57393152, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 48095232, \"private_commit_bytes\": 48095232, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22925312}}, \"after_commit_region\": {\"protect\": 4, \"region_bytes\": 33554432, \"state\": 4096}, \"after_release\": {\"extended_peak_job_bytes\": 57393152, \"extended_peak_process_bytes\": 48095232, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23773184, \"peak_job_bytes\": 57393152, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 48095232, \"private_commit_bytes\": 14475264, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22933504}}, \"after_reserve\": {\"extended_peak_job_bytes\": 23773184, \"extended_peak_process_bytes\": 14475264, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23773184, \"peak_job_bytes\": 23773184, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 14475264, \"private_commit_bytes\": 14475264, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22925312}}, \"before\": {\"extended_peak_job_bytes\": 23773184, \"extended_peak_process_bytes\": 14475264, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23773184, \"peak_job_bytes\": 23773184, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 14475264, \"private_commit_bytes\": 14475264, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22921216}}, \"commit_succeeded\": true, \"commit_winerror\": 0, \"requested_bytes\": 33554432, \"reserved_region\": {\"protect\": 0, \"region_bytes\": 33554432, \"state\": 8192}}\r\n",
+        "output_sha256": "a3d8d64863408d24f6cd1ee61930f80804960ea914b0f9e2d3dc3c21df715591",
+        "returncode": 0,
+        "timed_out": false,
+        "total_output_bytes": 1959,
+        "truncated": false
+      }
+    },
+    {
+      "observation": {
+        "after_commit": {
+          "extended_peak_job_bytes": 157507584,
+          "extended_peak_process_bytes": 148574208,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23289856,
+            "peak_job_bytes": 157507584,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 148574208,
+            "private_commit_bytes": 14356480,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22867968
+          }
+        },
+        "after_commit_region": {
+          "protect": 0,
+          "region_bytes": 134217728,
+          "state": 8192
+        },
+        "after_release": {
+          "extended_peak_job_bytes": 157507584,
+          "extended_peak_process_bytes": 148574208,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23289856,
+            "peak_job_bytes": 157507584,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 148574208,
+            "private_commit_bytes": 14356480,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22876160
+          }
+        },
+        "after_reserve": {
+          "extended_peak_job_bytes": 23289856,
+          "extended_peak_process_bytes": 14356480,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23289856,
+            "peak_job_bytes": 23289856,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 14356480,
+            "private_commit_bytes": 14356480,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22867968
+          }
+        },
+        "before": {
+          "extended_peak_job_bytes": 23289856,
+          "extended_peak_process_bytes": 14356480,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23289856,
+            "peak_job_bytes": 23289856,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 14356480,
+            "private_commit_bytes": 14356480,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22863872
+          }
+        },
+        "commit_succeeded": false,
+        "commit_winerror": 1455,
+        "requested_bytes": 134217728,
+        "reserved_region": {
+          "protect": 0,
+          "region_bytes": 134217728,
+          "state": 8192
+        }
+      },
+      "repetition": 0,
+      "request_mib": 128,
+      "scope": "commit result and queried region state only; counters are observations, not acceptance criteria",
+      "status": "PASS",
+      "transport": {
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 327,
+        "metrics": {
+          "active_processes_at_cleanup": 0,
+          "available": true,
+          "configured_active_process_limit": 6,
+          "configured_job_memory_bytes": 100663296,
+          "cpu_kernel_s": 0.15625,
+          "cpu_user_s": 0.140625,
+          "peak_counter_scope": "native high-water counter; not an atomic measurement of committed bytes",
+          "peak_job_commit_bytes": 157507584,
+          "peak_job_memory_counter_bytes": 157507584,
+          "scope": "Windows supervised process tree",
+          "total_processes": 3
+        },
+        "output": "{\"after_commit\": {\"extended_peak_job_bytes\": 157507584, \"extended_peak_process_bytes\": 148574208, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23289856, \"peak_job_bytes\": 157507584, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 148574208, \"private_commit_bytes\": 14356480, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22867968}}, \"after_commit_region\": {\"protect\": 0, \"region_bytes\": 134217728, \"state\": 8192}, \"after_release\": {\"extended_peak_job_bytes\": 157507584, \"extended_peak_process_bytes\": 148574208, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23289856, \"peak_job_bytes\": 157507584, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 148574208, \"private_commit_bytes\": 14356480, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22876160}}, \"after_reserve\": {\"extended_peak_job_bytes\": 23289856, \"extended_peak_process_bytes\": 14356480, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23289856, \"peak_job_bytes\": 23289856, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 14356480, \"private_commit_bytes\": 14356480, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22867968}}, \"before\": {\"extended_peak_job_bytes\": 23289856, \"extended_peak_process_bytes\": 14356480, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23289856, \"peak_job_bytes\": 23289856, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 14356480, \"private_commit_bytes\": 14356480, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22863872}}, \"commit_succeeded\": false, \"commit_winerror\": 1455, \"requested_bytes\": 134217728, \"reserved_region\": {\"protect\": 0, \"region_bytes\": 134217728, \"state\": 8192}}\r\n",
+        "output_sha256": "6673b55b36d90094d0c774b3d7865eaafe59bdb554ea7dc1af23d13e2d41c10c",
+        "returncode": 0,
+        "timed_out": false,
+        "total_output_bytes": 1974,
+        "truncated": false
+      }
+    },
+    {
+      "observation": {
+        "after_commit": {
+          "extended_peak_job_bytes": 291876864,
+          "extended_peak_process_bytes": 282587136,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23441408,
+            "peak_job_bytes": 291876864,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 282587136,
+            "private_commit_bytes": 14151680,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22675456
+          }
+        },
+        "after_commit_region": {
+          "protect": 0,
+          "region_bytes": 268435456,
+          "state": 8192
+        },
+        "after_release": {
+          "extended_peak_job_bytes": 291876864,
+          "extended_peak_process_bytes": 282587136,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23441408,
+            "peak_job_bytes": 291876864,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 282587136,
+            "private_commit_bytes": 14151680,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22683648
+          }
+        },
+        "after_reserve": {
+          "extended_peak_job_bytes": 23683072,
+          "extended_peak_process_bytes": 14393344,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23441408,
+            "peak_job_bytes": 23683072,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 14393344,
+            "private_commit_bytes": 14151680,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22675456
+          }
+        },
+        "before": {
+          "extended_peak_job_bytes": 23683072,
+          "extended_peak_process_bytes": 14393344,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23441408,
+            "peak_job_bytes": 23683072,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 14393344,
+            "private_commit_bytes": 14151680,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22671360
+          }
+        },
+        "commit_succeeded": false,
+        "commit_winerror": 1455,
+        "requested_bytes": 268435456,
+        "reserved_region": {
+          "protect": 0,
+          "region_bytes": 268435456,
+          "state": 8192
+        }
+      },
+      "repetition": 0,
+      "request_mib": 256,
+      "scope": "commit result and queried region state only; counters are observations, not acceptance criteria",
+      "status": "PASS",
+      "transport": {
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 343,
+        "metrics": {
+          "active_processes_at_cleanup": 0,
+          "available": true,
+          "configured_active_process_limit": 6,
+          "configured_job_memory_bytes": 100663296,
+          "cpu_kernel_s": 0.09375,
+          "cpu_user_s": 0.171875,
+          "peak_counter_scope": "native high-water counter; not an atomic measurement of committed bytes",
+          "peak_job_commit_bytes": 291876864,
+          "peak_job_memory_counter_bytes": 291876864,
+          "scope": "Windows supervised process tree",
+          "total_processes": 3
+        },
+        "output": "{\"after_commit\": {\"extended_peak_job_bytes\": 291876864, \"extended_peak_process_bytes\": 282587136, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23441408, \"peak_job_bytes\": 291876864, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 282587136, \"private_commit_bytes\": 14151680, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22675456}}, \"after_commit_region\": {\"protect\": 0, \"region_bytes\": 268435456, \"state\": 8192}, \"after_release\": {\"extended_peak_job_bytes\": 291876864, \"extended_peak_process_bytes\": 282587136, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23441408, \"peak_job_bytes\": 291876864, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 282587136, \"private_commit_bytes\": 14151680, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22683648}}, \"after_reserve\": {\"extended_peak_job_bytes\": 23683072, \"extended_peak_process_bytes\": 14393344, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23441408, \"peak_job_bytes\": 23683072, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 14393344, \"private_commit_bytes\": 14151680, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22675456}}, \"before\": {\"extended_peak_job_bytes\": 23683072, \"extended_peak_process_bytes\": 14393344, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23441408, \"peak_job_bytes\": 23683072, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 14393344, \"private_commit_bytes\": 14151680, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22671360}}, \"commit_succeeded\": false, \"commit_winerror\": 1455, \"requested_bytes\": 268435456, \"reserved_region\": {\"protect\": 0, \"region_bytes\": 268435456, \"state\": 8192}}\r\n",
+        "output_sha256": "96745c4575162c68b2f91054027772169ec9349b07e2c0a529d9bae8f766cab1",
+        "returncode": 0,
+        "timed_out": false,
+        "total_output_bytes": 1974,
+        "truncated": false
+      }
+    },
+    {
+      "observation": {
+        "after_commit": {
+          "extended_peak_job_bytes": 57085952,
+          "extended_peak_process_bytes": 47783936,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 57085952,
+            "peak_job_bytes": 57085952,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 47783936,
+            "private_commit_bytes": 47783936,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22712320
+          }
+        },
+        "after_commit_region": {
+          "protect": 4,
+          "region_bytes": 33554432,
+          "state": 4096
+        },
+        "after_release": {
+          "extended_peak_job_bytes": 57085952,
+          "extended_peak_process_bytes": 47783936,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23465984,
+            "peak_job_bytes": 57085952,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 47783936,
+            "private_commit_bytes": 14163968,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22720512
+          }
+        },
+        "after_reserve": {
+          "extended_peak_job_bytes": 23465984,
+          "extended_peak_process_bytes": 14163968,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23465984,
+            "peak_job_bytes": 23465984,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 14163968,
+            "private_commit_bytes": 14163968,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22712320
+          }
+        },
+        "before": {
+          "extended_peak_job_bytes": 23465984,
+          "extended_peak_process_bytes": 14163968,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23465984,
+            "peak_job_bytes": 23465984,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 14163968,
+            "private_commit_bytes": 14163968,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22708224
+          }
+        },
+        "commit_succeeded": true,
+        "commit_winerror": 0,
+        "requested_bytes": 33554432,
+        "reserved_region": {
+          "protect": 0,
+          "region_bytes": 33554432,
+          "state": 8192
+        }
+      },
+      "repetition": 1,
+      "request_mib": 32,
+      "scope": "commit result and queried region state only; counters are observations, not acceptance criteria",
+      "status": "PASS",
+      "transport": {
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 328,
+        "metrics": {
+          "active_processes_at_cleanup": 0,
+          "available": true,
+          "configured_active_process_limit": 6,
+          "configured_job_memory_bytes": 100663296,
+          "cpu_kernel_s": 0.09375,
+          "cpu_user_s": 0.15625,
+          "peak_counter_scope": "native high-water counter; not an atomic measurement of committed bytes",
+          "peak_job_commit_bytes": 57085952,
+          "peak_job_memory_counter_bytes": 57085952,
+          "scope": "Windows supervised process tree",
+          "total_processes": 3
+        },
+        "output": "{\"after_commit\": {\"extended_peak_job_bytes\": 57085952, \"extended_peak_process_bytes\": 47783936, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 57085952, \"peak_job_bytes\": 57085952, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 47783936, \"private_commit_bytes\": 47783936, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22712320}}, \"after_commit_region\": {\"protect\": 4, \"region_bytes\": 33554432, \"state\": 4096}, \"after_release\": {\"extended_peak_job_bytes\": 57085952, \"extended_peak_process_bytes\": 47783936, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23465984, \"peak_job_bytes\": 57085952, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 47783936, \"private_commit_bytes\": 14163968, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22720512}}, \"after_reserve\": {\"extended_peak_job_bytes\": 23465984, \"extended_peak_process_bytes\": 14163968, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23465984, \"peak_job_bytes\": 23465984, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 14163968, \"private_commit_bytes\": 14163968, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22712320}}, \"before\": {\"extended_peak_job_bytes\": 23465984, \"extended_peak_process_bytes\": 14163968, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23465984, \"peak_job_bytes\": 23465984, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 14163968, \"private_commit_bytes\": 14163968, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22708224}}, \"commit_succeeded\": true, \"commit_winerror\": 0, \"requested_bytes\": 33554432, \"reserved_region\": {\"protect\": 0, \"region_bytes\": 33554432, \"state\": 8192}}\r\n",
+        "output_sha256": "5e2516e5f3e42456316e391df36a78bb6a24c2a47df36b96ecf10c1b09085d01",
+        "returncode": 0,
+        "timed_out": false,
+        "total_output_bytes": 1959,
+        "truncated": false
+      }
+    },
+    {
+      "observation": {
+        "after_commit": {
+          "extended_peak_job_bytes": 157855744,
+          "extended_peak_process_bytes": 148578304,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23638016,
+            "peak_job_bytes": 157855744,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 148578304,
+            "private_commit_bytes": 14360576,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22863872
+          }
+        },
+        "after_commit_region": {
+          "protect": 0,
+          "region_bytes": 134217728,
+          "state": 8192
+        },
+        "after_release": {
+          "extended_peak_job_bytes": 157855744,
+          "extended_peak_process_bytes": 148578304,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23638016,
+            "peak_job_bytes": 157855744,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 148578304,
+            "private_commit_bytes": 14360576,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22872064
+          }
+        },
+        "after_reserve": {
+          "extended_peak_job_bytes": 23638016,
+          "extended_peak_process_bytes": 14360576,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23638016,
+            "peak_job_bytes": 23638016,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 14360576,
+            "private_commit_bytes": 14360576,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22863872
+          }
+        },
+        "before": {
+          "extended_peak_job_bytes": 23638016,
+          "extended_peak_process_bytes": 14360576,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23638016,
+            "peak_job_bytes": 23638016,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 14360576,
+            "private_commit_bytes": 14360576,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22859776
+          }
+        },
+        "commit_succeeded": false,
+        "commit_winerror": 1455,
+        "requested_bytes": 134217728,
+        "reserved_region": {
+          "protect": 0,
+          "region_bytes": 134217728,
+          "state": 8192
+        }
+      },
+      "repetition": 1,
+      "request_mib": 128,
+      "scope": "commit result and queried region state only; counters are observations, not acceptance criteria",
+      "status": "PASS",
+      "transport": {
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 327,
+        "metrics": {
+          "active_processes_at_cleanup": 0,
+          "available": true,
+          "configured_active_process_limit": 6,
+          "configured_job_memory_bytes": 100663296,
+          "cpu_kernel_s": 0.078125,
+          "cpu_user_s": 0.140625,
+          "peak_counter_scope": "native high-water counter; not an atomic measurement of committed bytes",
+          "peak_job_commit_bytes": 157855744,
+          "peak_job_memory_counter_bytes": 157855744,
+          "scope": "Windows supervised process tree",
+          "total_processes": 3
+        },
+        "output": "{\"after_commit\": {\"extended_peak_job_bytes\": 157855744, \"extended_peak_process_bytes\": 148578304, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23638016, \"peak_job_bytes\": 157855744, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 148578304, \"private_commit_bytes\": 14360576, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22863872}}, \"after_commit_region\": {\"protect\": 0, \"region_bytes\": 134217728, \"state\": 8192}, \"after_release\": {\"extended_peak_job_bytes\": 157855744, \"extended_peak_process_bytes\": 148578304, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23638016, \"peak_job_bytes\": 157855744, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 148578304, \"private_commit_bytes\": 14360576, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22872064}}, \"after_reserve\": {\"extended_peak_job_bytes\": 23638016, \"extended_peak_process_bytes\": 14360576, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23638016, \"peak_job_bytes\": 23638016, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 14360576, \"private_commit_bytes\": 14360576, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22863872}}, \"before\": {\"extended_peak_job_bytes\": 23638016, \"extended_peak_process_bytes\": 14360576, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23638016, \"peak_job_bytes\": 23638016, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 14360576, \"private_commit_bytes\": 14360576, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22859776}}, \"commit_succeeded\": false, \"commit_winerror\": 1455, \"requested_bytes\": 134217728, \"reserved_region\": {\"protect\": 0, \"region_bytes\": 134217728, \"state\": 8192}}\r\n",
+        "output_sha256": "1cda0f7a300812d95e3dae97feb57da4d02a6e9e711a7d58bb6c0e35d22a0650",
+        "returncode": 0,
+        "timed_out": false,
+        "total_output_bytes": 1974,
+        "truncated": false
+      }
+    },
+    {
+      "observation": {
+        "after_commit": {
+          "extended_peak_job_bytes": 291729408,
+          "extended_peak_process_bytes": 282681344,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23293952,
+            "peak_job_bytes": 291729408,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 282681344,
+            "private_commit_bytes": 14245888,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22761472
+          }
+        },
+        "after_commit_region": {
+          "protect": 0,
+          "region_bytes": 268435456,
+          "state": 8192
+        },
+        "after_release": {
+          "extended_peak_job_bytes": 291729408,
+          "extended_peak_process_bytes": 282681344,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23293952,
+            "peak_job_bytes": 291729408,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 282681344,
+            "private_commit_bytes": 14245888,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22769664
+          }
+        },
+        "after_reserve": {
+          "extended_peak_job_bytes": 23293952,
+          "extended_peak_process_bytes": 14245888,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23293952,
+            "peak_job_bytes": 23293952,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 14245888,
+            "private_commit_bytes": 14245888,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22761472
+          }
+        },
+        "before": {
+          "extended_peak_job_bytes": 23293952,
+          "extended_peak_process_bytes": 14245888,
+          "job_limit_bytes": 100663296,
+          "memory_usage_class28": {
+            "available": true,
+            "current_job_bytes": 23293952,
+            "peak_job_bytes": 23293952,
+            "winerror": 0
+          },
+          "process_ex2": {
+            "available": true,
+            "peak_private_commit_bytes": 14245888,
+            "private_commit_bytes": 14245888,
+            "shared_commit_bytes": 4042752,
+            "winerror": 0,
+            "working_set_bytes": 22757376
+          }
+        },
+        "commit_succeeded": false,
+        "commit_winerror": 1455,
+        "requested_bytes": 268435456,
+        "reserved_region": {
+          "protect": 0,
+          "region_bytes": 268435456,
+          "state": 8192
+        }
+      },
+      "repetition": 1,
+      "request_mib": 256,
+      "scope": "commit result and queried region state only; counters are observations, not acceptance criteria",
+      "status": "PASS",
+      "transport": {
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 327,
+        "metrics": {
+          "active_processes_at_cleanup": 0,
+          "available": true,
+          "configured_active_process_limit": 6,
+          "configured_job_memory_bytes": 100663296,
+          "cpu_kernel_s": 0.140625,
+          "cpu_user_s": 0.09375,
+          "peak_counter_scope": "native high-water counter; not an atomic measurement of committed bytes",
+          "peak_job_commit_bytes": 291729408,
+          "peak_job_memory_counter_bytes": 291729408,
+          "scope": "Windows supervised process tree",
+          "total_processes": 3
+        },
+        "output": "{\"after_commit\": {\"extended_peak_job_bytes\": 291729408, \"extended_peak_process_bytes\": 282681344, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23293952, \"peak_job_bytes\": 291729408, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 282681344, \"private_commit_bytes\": 14245888, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22761472}}, \"after_commit_region\": {\"protect\": 0, \"region_bytes\": 268435456, \"state\": 8192}, \"after_release\": {\"extended_peak_job_bytes\": 291729408, \"extended_peak_process_bytes\": 282681344, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23293952, \"peak_job_bytes\": 291729408, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 282681344, \"private_commit_bytes\": 14245888, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22769664}}, \"after_reserve\": {\"extended_peak_job_bytes\": 23293952, \"extended_peak_process_bytes\": 14245888, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23293952, \"peak_job_bytes\": 23293952, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 14245888, \"private_commit_bytes\": 14245888, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22761472}}, \"before\": {\"extended_peak_job_bytes\": 23293952, \"extended_peak_process_bytes\": 14245888, \"job_limit_bytes\": 100663296, \"memory_usage_class28\": {\"available\": true, \"current_job_bytes\": 23293952, \"peak_job_bytes\": 23293952, \"winerror\": 0}, \"process_ex2\": {\"available\": true, \"peak_private_commit_bytes\": 14245888, \"private_commit_bytes\": 14245888, \"shared_commit_bytes\": 4042752, \"winerror\": 0, \"working_set_bytes\": 22757376}}, \"commit_succeeded\": false, \"commit_winerror\": 1455, \"requested_bytes\": 268435456, \"reserved_region\": {\"protect\": 0, \"region_bytes\": 268435456, \"state\": 8192}}\r\n",
+        "output_sha256": "131153dea3f081bea7165feaea9d7b124e6bed695d073edd33378d6823321579",
+        "returncode": 0,
+        "timed_out": false,
+        "total_output_bytes": 1974,
+        "truncated": false
+      }
+    }
+  ],
+  "cloud_model_calls": 0,
+  "created_utc": "2026-11-14T20:55:13.153757+00:00",
+  "host_identity": {
+    "hostname_sha256": "33f85b706309ad8ddf3ff6b099d0809269c3c71a1aa7f8ec8a5fda3283833549",
+    "machine": "AMD64",
+    "release": "11",
+    "system": "Windows",
+    "version": "10.0.26200"
+  },
+  "native_containment_gate": "HOLD",
+  "receipt_sha256": "014bde847978a76e55694562b24c27ba63e4be9f4290c47ab74a39b397106adc",
+  "schema": "nomad.memory-frontier-qualification.v18",
+  "scope": "trusted controlled reservation/commit experiments; no sampling-based strict maximum",
+  "source_sha256_after": {
+    "nomad/supervised.py": "b7e4ac3c52aed47408466fa0b681eb90f63f5e58c888d1b645a956c0404056b5",
+    "nomad/windows_job.py": "ece4d8405960cc70501a89225ab0717d0baecaaaa3cb62b53a941b0cae457260",
+    "scripts/qualify_memory_frontier_v18.py": "1d0a0c8a905ad2aad1b51066aaa8d807572042da7d0816229bb6ac2e4646fb63"
+  },
+  "source_sha256_before": {
+    "nomad/supervised.py": "b7e4ac3c52aed47408466fa0b681eb90f63f5e58c888d1b645a956c0404056b5",
+    "nomad/windows_job.py": "ece4d8405960cc70501a89225ab0717d0baecaaaa3cb62b53a941b0cae457260",
+    "scripts/qualify_memory_frontier_v18.py": "1d0a0c8a905ad2aad1b51066aaa8d807572042da7d0816229bb6ac2e4646fb63"
+  },
+  "source_stable": true,
+  "status": "PASS",
+  "strict_peak_counter_gate": "HOLD"
+}

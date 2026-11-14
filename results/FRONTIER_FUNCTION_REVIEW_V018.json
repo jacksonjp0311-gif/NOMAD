@@ -1,0 +1,61 @@
+{
+  "schema": "nomad.frontier-function-review.v18",
+  "scope": "Development review findings and controlled regression tests; not native containment qualification",
+  "native_function_execution": "NOT_RUN",
+  "findings": [
+    {
+      "id": "builtin-value-alias",
+      "observed": "Parse-only admission accepted a forbidden builtin obtained as a value and rebound to an allowed call spelling.",
+      "status": "FIXED",
+      "regression": "tests.test_function_security_frontier_v18.FunctionObserverAdmissionTests.test_nonapproved_builtin_values_cannot_be_hidden_behind_approved_calls"
+    },
+    {
+      "id": "module-alias-retyping",
+      "observed": "Parse-only admission trusted the spelling of an imported module alias after it was rebound to a generator/frame object.",
+      "status": "FIXED",
+      "regression": "tests.test_function_security_frontier_v18.FunctionObserverAdmissionTests.test_module_alias_cannot_be_retyped_into_generator_frame_access"
+    },
+    {
+      "id": "native-import-shadow",
+      "observed": "A native extension beside an admitted Python file could be selected by Python import precedence. No binary payload was executed.",
+      "status": "FIXED",
+      "regression": "tests.test_function_security_frontier_v18.FunctionObserverAdmissionTests.test_importable_binary_and_bytecode_shadows_are_refused_before_loading"
+    },
+    {
+      "id": "diagnosis-json-roundtrip",
+      "observed": "Four interruption subcases initially failed because native probability dictionary integer keys became strings in persisted JSON.",
+      "status": "FIXED",
+      "regression": "tests.test_frontier_function_mission_v18.FunctionMissionTests.test_function_resume_boundaries_do_not_repeat_observations"
+    },
+    {
+      "id": "memory-origin-binding",
+      "observed": "Duplicated learning source/task/action fields were not initially checked against the execution-bound immutable origin.",
+      "status": "FIXED",
+      "regression": "tests.test_function_evidence_frontier_v18.FunctionEvidenceBindingTests.test_memory_source_task_action_and_runtime_must_match_origin"
+    },
+    {
+      "id": "mnemonic-effect-binding",
+      "observed": "A rehashed effect could initially relabel its public before-vector without matching the WITNESS evidence digest.",
+      "status": "FIXED",
+      "regression": "tests.test_function_evidence_frontier_v18.FunctionEvidenceBindingTests.test_rehashed_mnemonic_effect_cannot_disagree_with_witness"
+    },
+    {
+      "id": "malformed-memory-refusal",
+      "observed": "An independent regression found raw ValueError on a forged output digest instead of the public MissionHold boundary.",
+      "status": "FIXED",
+      "regression": "tests.test_function_evidence_frontier_v18.FunctionEvidenceBindingTests.test_memory_public_execution_source_output_and_final_aggregate_are_bound"
+    },
+    {
+      "id": "duplicate-stage-evidence",
+      "observed": "Review found repeated WITNESS/final/diagnosis rows and post-commit patch intents needed explicit refusal.",
+      "status": "FIXED",
+      "regression": "tests.test_function_evidence_frontier_v18.FunctionEvidenceBindingTests.test_duplicate_witness_final_and_diagnosis_are_refused"
+    }
+  ],
+  "retained_iteration_observations": [
+    {"run": "initial 7 function tests after memory source dedup edit", "errors": 3, "cause": "NameError: eligible_sources declaration was inserted in the wrong function", "status": "FIXED"},
+    {"run": "16 function/security tests with expanded restart subcases", "errors": 4, "cause": "diagnosis JSON key roundtrip equality", "status": "FIXED"},
+    {"run": "14 independent admission/evidence regressions", "errors": 1, "cause": "malformed memory receipt raised ValueError instead of MissionHold", "status": "FIXED"}
+  ],
+  "iteration_evidence_note": "Counts and causes retain observed tool outcomes. This receipt does not pretend to be a separately captured raw unittest log or independent native qualification. Final source tests are recorded separately by release validation."
+}

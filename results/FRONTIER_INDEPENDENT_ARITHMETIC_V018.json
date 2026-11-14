@@ -1,0 +1,53 @@
+{
+  "auditor_sha256": "9ab4fbfa107cfa01e24d8c56b297e8c6dae345f8f52529a3094ad88a2f548941",
+  "coding_advantage": "NOT_ESTABLISHED",
+  "contrasts": [
+    {
+      "control": "native",
+      "family": "stationary",
+      "holm_threshold": 0.05,
+      "losses": 1,
+      "p_one_sided": 0.03515625,
+      "proposed": "frequency",
+      "significant": true,
+      "wins": 7
+    },
+    {
+      "control": "frequency",
+      "family": "boolean_history",
+      "holm_threshold": 0.0125,
+      "losses": 0,
+      "p_one_sided": 0.00390625,
+      "proposed": "native_no_lag",
+      "significant": true,
+      "wins": 8
+    },
+    {
+      "control": "native_no_lag",
+      "family": "lag3",
+      "holm_threshold": 0.016666666666666666,
+      "losses": 0,
+      "p_one_sided": 0.00390625,
+      "proposed": "native",
+      "significant": true,
+      "wins": 8
+    },
+    {
+      "control": "frequency",
+      "family": "switch",
+      "holm_threshold": 0.025,
+      "losses": 0,
+      "p_one_sided": 0.00390625,
+      "proposed": "temporal",
+      "significant": true,
+      "wins": 8
+    }
+  ],
+  "independent_streams": 32,
+  "plan_file_sha256": "9d7e180fc3a98ef6b4b9ecc0dbc6fcebe5c1fca3e50dd851e5a4a52e1ec7eda5",
+  "result_file_sha256": "83b4814d8a4079c72e190e21f40c7034af0fdeed51a91183d49e97c0fa6ef622",
+  "schema": "nomad.frontier-independent-arithmetic.v18",
+  "scope": "recomputed trace arithmetic, aggregation and multiplicity; not independent task outcomes or proof of execution order",
+  "scored_model_forecasts_checked": 21504,
+  "status": "PASS"
+}

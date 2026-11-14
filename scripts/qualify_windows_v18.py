@@ -53,9 +53,10 @@ $report.machine=Get-CimInstance Win32_ComputerSystem | Select-Object Manufacture
 $report.cpu=Get-CimInstance Win32_Processor | Select-Object Name,VirtualizationFirmwareEnabled,SecondLevelAddressTranslationExtensions,VMMonitorModeExtensions
 $principal=[Security.Principal.WindowsPrincipal]::new([Security.Principal.WindowsIdentity]::GetCurrent())
 $report.elevated_administrator=$principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-$report.optional_features=@(Get-CimInstance Win32_OptionalFeature | Where-Object {$_.Name -match 'VirtualMachinePlatform|Microsoft-Windows-Subsystem-Linux|Hyper-V|Containers-DisposableClientVM'} | Select-Object Name,InstallState)
+$report.optional_features=@(Get-CimInstance Win32_OptionalFeature | Where-Object {$_.Name -match 'VirtualMachinePlatform|Microsoft-Windows-Subsystem-Linux|Hyper-V|HypervisorPlatform|Containers-DisposableClientVM'} | Select-Object Name,InstallState)
 $report.services=@(Get-Service -Name '*docker*','*vmcompute*','*Lxss*','*Wsl*' -ErrorAction SilentlyContinue | Select-Object Name,@{N='Status';E={$_.Status.ToString()}},@{N='StartType';E={$_.StartType.ToString()}})
-$report.standard_install_files=@(@('C:\Program Files\Docker\Docker\resources\bin\docker.exe','C:\Program Files\Docker\Docker\Docker Desktop.exe','C:\Windows\System32\WindowsSandbox.exe') | ForEach-Object {[pscustomobject]@{Path=$_;Exists=(Test-Path -LiteralPath $_)}})
+$report.standard_install_files=@(@('C:\Program Files\Docker\Docker\resources\bin\docker.exe','C:\Program Files\Docker\Docker\Docker Desktop.exe','C:\Windows\System32\WindowsSandbox.exe',(Join-Path $env:LOCALAPPDATA 'Programs\DockerDesktop\Docker Desktop.exe'),(Join-Path $env:LOCALAPPDATA 'Programs\DockerDesktop\resources\bin\docker.exe')) | ForEach-Object {[pscustomobject]@{Path=$_;Exists=(Test-Path -LiteralPath $_)}})
+$report.registered_backends=@(Get-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*','HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*','HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*' -ErrorAction SilentlyContinue | Where-Object DisplayName -match 'Docker|Rancher|Podman|VirtualBox|VMware|Windows Subsystem for Linux' | Select-Object DisplayName,DisplayVersion,InstallLocation)
 $report | ConvertTo-Json -Depth 6 -Compress
 '''
     cim = execute(['powershell.exe', '-NoProfile', '-NonInteractive', '-Command', command])

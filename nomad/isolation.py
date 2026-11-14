@@ -335,8 +335,17 @@ def docker_preflight(policy: SandboxPolicy, *, engine: str = 'docker') -> dict:
 
 
 def run_isolated(source: Path, *, command: Sequence[str], policy: SandboxPolicy,
-                 engine: str = 'docker', container_name: str | None = None) -> dict:
+                 engine: str = 'docker', container_name: str | None = None,
+                 include_output: bool = False) -> dict:
+    """Execute only inside Docker; optional output remains untrusted evidence.
+
+    Captured stdout/stderr is returned only when complete, bounded, valid UTF-8
+    and bound to the supervisor digest. A trusted caller must independently
+    parse and compare observations; candidate text never grants authority.
+    """
     policy.validate()
+    if type(include_output) is not bool:
+        raise ValueError('include_output must be a boolean')
     if engine != 'docker':
         raise IsolationUnavailable('unsupported isolation backend; no host fallback')
     if not sandbox_available(engine):
@@ -361,7 +370,7 @@ def run_isolated(source: Path, *, command: Sequence[str], policy: SandboxPolicy,
             raise IsolationUnavailable('container cleanup unconfirmed; HOLD outcome')
         if result.returncode in (125, 126, 127) and not result.timed_out:
             raise IsolationUnavailable('container engine or requested interpreter did not start; HOLD outcome')
-        return {
+        receipt = {
             'schema': 'nomad.isolated-test.v1',
             'container_name': name,
             'preflight': preflight,
@@ -376,3 +385,13 @@ def run_isolated(source: Path, *, command: Sequence[str], policy: SandboxPolicy,
             'container_cleanup_confirmed': cleanup_confirmed,
             'authority': 'test execution only; independent WITNESS still required',
         }
+        if include_output:
+            if (result.truncated or len(result.output) > 8192
+                    or len(result.output) != result.total_output_bytes
+                    or sha256(result.output).hexdigest() != result.output_sha256):
+                raise IsolationUnavailable('complete bounded output observation unavailable; HOLD outcome')
+            try:
+                receipt['output_utf8'] = result.output.decode('utf-8', errors='strict')
+            except UnicodeDecodeError as error:
+                raise IsolationUnavailable('output observation is not UTF-8; HOLD outcome') from error
+        return receipt

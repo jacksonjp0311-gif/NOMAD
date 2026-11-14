@@ -1,0 +1,2138 @@
+{
+  "family": "lag3",
+  "input_sha256": "24e48938e801ff05a8812b40e85c3447f28c8c1cdfa5b04da44f2ed94207021e",
+  "metrics": {
+    "cold": {
+      "brier": 0.25,
+      "cpu_seconds": 0.0,
+      "forecasts": 128,
+      "mean_logloss": 0.6931471805599453,
+      "scored_forecasts": 96,
+      "wall_seconds": 0.0011795000755228102
+    },
+    "frequency": {
+      "brier": 0.26084243685955516,
+      "cpu_seconds": 0.0,
+      "forecasts": 128,
+      "mean_logloss": 0.7172529453794466,
+      "scored_forecasts": 96,
+      "wall_seconds": 0.0010550004080869257
+    },
+    "guarded_no_growth": {
+      "brier": 0.2549841582464748,
+      "cpu_seconds": 0.421875,
+      "forecasts": 128,
+      "mean_logloss": 0.7045051407501679,
+      "scored_forecasts": 96,
+      "wall_seconds": 0.38756359997205436
+    },
+    "native": {
+      "brier": 0.1251975000801377,
+      "cpu_seconds": 4.046875,
+      "forecasts": 128,
+      "mean_logloss": 0.40260582467668743,
+      "scored_forecasts": 96,
+      "wall_seconds": 4.125657400523778
+    },
+    "native_no_lag": {
+      "brier": 0.2546062380816061,
+      "cpu_seconds": 1.1875,
+      "forecasts": 128,
+      "mean_logloss": 0.7041530970263796,
+      "scored_forecasts": 96,
+      "wall_seconds": 1.223748099990189
+    },
+    "temporal": {
+      "brier": 0.2513847332820187,
+      "cpu_seconds": 0.0625,
+      "forecasts": 128,
+      "mean_logloss": 0.6967662602905775,
+      "scored_forecasts": 96,
+      "wall_seconds": 0.06754450034350157
+    },
+    "temporal_static": {
+      "brier": 0.261714175525842,
+      "cpu_seconds": 0.0,
+      "forecasts": 128,
+      "mean_logloss": 0.7193643217594884,
+      "scored_forecasts": 96,
+      "wall_seconds": 0.011179899680428207
+    }
+  },
+  "model_snapshots": {
+    "guarded_no_growth": {
+      "base_loss": 88.51416954109158,
+      "certifications": 0,
+      "compiled": "evidence-epoch exact term and score reuse; original numeric order",
+      "cumulative_log_loss": 89.56900225838461,
+      "induced_loss": 130.00888822842018,
+      "mixture_weights": [
+        0.9866391227506887,
+        0.013360877249311377
+      ],
+      "model_generation": {
+        "all_predictions_conditional": true,
+        "best_discovered_programs": [
+          {
+            "code": "0",
+            "depth": 0,
+            "operator": "constant",
+            "signature": 0,
+            "size": 1
+          },
+          {
+            "code": "y[t-1]",
+            "depth": 0,
+            "operator": "atom",
+            "signature": 3435973836,
+            "size": 1
+          },
+          {
+            "code": "y[t-2]",
+            "depth": 0,
+            "operator": "atom",
+            "signature": 4278255360,
+            "size": 1
+          },
+          {
+            "code": "a[t-2]",
+            "depth": 0,
+            "operator": "atom",
+            "signature": 4294901760,
+            "size": 1
+          },
+          {
+            "code": "action",
+            "depth": 0,
+            "operator": "atom",
+            "signature": 2863311530,
+            "size": 1
+          },
+          {
+            "code": "!a[t-1]",
+            "depth": 1,
+            "operator": "not",
+            "signature": 252645135,
+            "size": 2
+          }
+        ],
+        "candidate_programs": 12,
+        "compiled_cost": {
+          "compiled_candidate_evaluations": 1548,
+          "compositions_attempted": 0,
+          "forecast_exact_evaluations": 1536,
+          "lut_compilations": 129,
+          "near_tie_exact_evaluations": 45,
+          "ranking_events": 129
+        },
+        "execution_cost": {
+          "context_term_compilations": 128,
+          "evidence_epochs": 128,
+          "exact_score_cache_hits": 45,
+          "exact_score_computations": 1536,
+          "exact_score_requests": 1581,
+          "peak_exact_cache_entries": 12,
+          "ranking_score_reads": 1548
+        },
+        "expansions": [],
+        "observations": 128,
+        "public_certifications": 0,
+        "telemetry": {
+          "candidate_scoring_calls": 1581,
+          "candidate_signature_checks": 1536,
+          "compositions_attempted": 0,
+          "forecasts": 128,
+          "high_confidence_public_certificates": 0,
+          "observations": 128,
+          "structural_promotions": 0,
+          "unique_proposals": 0
+        }
+      },
+      "scope": "supplied finite compositional Boolean DSL; no AGI or external tools",
+      "steps": 128,
+      "version": "1.4.0"
+    },
+    "native": {
+      "conditional_model_only": true,
+      "cumulative_log_loss": 60.60978282162507,
+      "feature_set": [
+        "action",
+        "y1",
+        "a1",
+        "y2",
+        "a2",
+        "a3"
+      ],
+      "implementation": "exact score reuse and packed observed history",
+      "lag_promotions": [
+        {
+          "after_observations": 48,
+          "evidence_gain": 0.6851742610843949,
+          "feature": "a3",
+          "forward_gain": 1.046794009990048,
+          "witness": {
+            "features": [
+              "action",
+              "a3"
+            ],
+            "operators": [
+              "xor"
+            ],
+            "phase": 0
+          }
+        }
+      ],
+      "lag_search_active": true,
+      "monitor_events": [
+        {
+          "activated": true,
+          "activation_requested": true,
+          "at": 24,
+          "mean_recent_base_log_loss": 0.717080556776
+        }
+      ],
+      "policy": "v1.3 surprise-gated lag discovery",
+      "public_certifications": 0,
+      "steps": 128,
+      "telemetry": {
+        "fallback_due_budget": 0,
+        "lag_activation": 1,
+        "lag_live_steps": 104,
+        "lag_replay_steps": 24,
+        "lag_trigger_reason": "rolling predictive surprise on compiled v1.1 base",
+        "monitor_evaluations": 1,
+        "public_certifications": 0
+      },
+      "version": "1.4.0"
+    },
+    "native_no_lag": {
+      "conditional_model_only": true,
+      "cumulative_log_loss": 89.5583209671955,
+      "feature_set": [],
+      "implementation": "exact score reuse and packed observed history",
+      "lag_promotions": [],
+      "lag_search_active": false,
+      "monitor_events": [],
+      "policy": "v1.3 surprise-gated lag discovery",
+      "public_certifications": 0,
+      "steps": 128,
+      "telemetry": {
+        "fallback_due_budget": 0,
+        "lag_activation": 0,
+        "lag_live_steps": 0,
+        "lag_replay_steps": 0,
+        "lag_trigger_reason": "rolling predictive surprise on compiled v1.1 base",
+        "monitor_evaluations": 0,
+        "public_certifications": 0
+      },
+      "version": "1.4.0"
+    },
+    "temporal": {
+      "conditional_model_families": 8,
+      "cumulative_log_loss": 88.51416954109158,
+      "grammar_names": [
+        "order0.retention1.00",
+        "order0.retention0.82",
+        "order1.retention1.00",
+        "order1.retention0.82",
+        "order2.retention1.00",
+        "order2.retention0.82",
+        "order3.retention1.00",
+        "order3.retention0.82"
+      ],
+      "grammar_weights": [
+        0.168721791831,
+        0.054048733425,
+        0.08546433652,
+        0.032788778882,
+        0.039781920971,
+        0.017452904166,
+        0.579248695927,
+        0.022492838278
+      ],
+      "model_assumptions": "binary actions and outcomes, bounded conditional histories; no external scope attestation",
+      "public_certifications": 0,
+      "steps": 128,
+      "telemetry": {
+        "abstained_public_certificates": 128,
+        "backoff_context_reads": 2560,
+        "forecasts": 128,
+        "grammar_weight_updates": 1024,
+        "observations": 128
+      },
+      "version": "1.0.0"
+    },
+    "temporal_static": {
+      "conditional_model_families": 1,
+      "cumulative_log_loss": 90.44425742549885,
+      "grammar_names": [
+        "order0.retention1.00"
+      ],
+      "grammar_weights": [
+        1.0
+      ],
+      "model_assumptions": "binary actions and outcomes, bounded conditional histories; no external scope attestation",
+      "public_certifications": 0,
+      "steps": 128,
+      "telemetry": {
+        "abstained_public_certificates": 128,
+        "backoff_context_reads": 128,
+        "forecasts": 128,
+        "grammar_weight_updates": 128,
+        "observations": 128
+      },
+      "version": "1.0.0"
+    }
+  },
+  "native_snapshot": {
+    "conditional_model_only": true,
+    "cumulative_log_loss": 60.60978282162507,
+    "feature_set": [
+      "action",
+      "y1",
+      "a1",
+      "y2",
+      "a2",
+      "a3"
+    ],
+    "implementation": "exact score reuse and packed observed history",
+    "lag_promotions": [
+      {
+        "after_observations": 48,
+        "evidence_gain": 0.6851742610843949,
+        "feature": "a3",
+        "forward_gain": 1.046794009990048,
+        "witness": {
+          "features": [
+            "action",
+            "a3"
+          ],
+          "operators": [
+            "xor"
+          ],
+          "phase": 0
+        }
+      }
+    ],
+    "lag_search_active": true,
+    "monitor_events": [
+      {
+        "activated": true,
+        "activation_requested": true,
+        "at": 24,
+        "mean_recent_base_log_loss": 0.717080556776
+      }
+    ],
+    "policy": "v1.3 surprise-gated lag discovery",
+    "public_certifications": 0,
+    "steps": 128,
+    "telemetry": {
+      "fallback_due_budget": 0,
+      "lag_activation": 1,
+      "lag_live_steps": 104,
+      "lag_replay_steps": 24,
+      "lag_trigger_reason": "rolling predictive surprise on compiled v1.1 base",
+      "monitor_evaluations": 1,
+      "public_certifications": 0
+    },
+    "version": "1.4.0"
+  },
+  "peak_python_bytes": 2428684,
+  "scope": "development-only trusted generated stream; not evaluation or repository efficacy",
+  "seed": 18180101,
+  "trace": [
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5,
+        "guarded_no_growth": 0.47726341740642253,
+        "native": 0.47726341740642253,
+        "native_no_lag": 0.47726341740642253,
+        "temporal": 0.5,
+        "temporal_static": 0.5
+      },
+      "step": 0
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5,
+        "guarded_no_growth": 0.42837835908166055,
+        "native": 0.42837835908166055,
+        "native_no_lag": 0.42837835908166055,
+        "temporal": 0.5,
+        "temporal_static": 0.5
+      },
+      "step": 1
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3333333333333333,
+        "guarded_no_growth": 0.2949567187864012,
+        "native": 0.2949567187864012,
+        "native_no_lag": 0.2949567187864012,
+        "temporal": 0.31738221981162507,
+        "temporal_static": 0.25
+      },
+      "step": 2
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3333333333333333,
+        "guarded_no_growth": 0.4808677482424799,
+        "native": 0.4808677482424799,
+        "native_no_lag": 0.4808677482424799,
+        "temporal": 0.345036749069841,
+        "temporal_static": 0.25
+      },
+      "step": 3
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5,
+        "guarded_no_growth": 0.45643874738170287,
+        "native": 0.45643874738170287,
+        "native_no_lag": 0.45643874738170287,
+        "temporal": 0.4470835237543188,
+        "temporal_static": 0.5
+      },
+      "step": 4
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.25,
+        "guarded_no_growth": 0.305371169546849,
+        "native": 0.305371169546849,
+        "native_no_lag": 0.305371169546849,
+        "temporal": 0.28267077039195554,
+        "temporal_static": 0.16666666666666666
+      },
+      "step": 5
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.4,
+        "guarded_no_growth": 0.3561378582883638,
+        "native": 0.42361207867640754,
+        "native_no_lag": 0.42361207867640754,
+        "temporal": 0.4212550317545019,
+        "temporal_static": 0.375
+      },
+      "step": 6
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.4,
+        "guarded_no_growth": 0.4119074687196814,
+        "native": 0.36269068129918747,
+        "native_no_lag": 0.36269068129918747,
+        "temporal": 0.3912898959422346,
+        "temporal_static": 0.375
+      },
+      "step": 7
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5,
+        "guarded_no_growth": 0.4881199738517779,
+        "native": 0.5563321463273322,
+        "native_no_lag": 0.5563321463273322,
+        "temporal": 0.5260545128512704,
+        "temporal_static": 0.5
+      },
+      "step": 8
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5,
+        "guarded_no_growth": 0.36972763358164257,
+        "native": 0.3907001789557267,
+        "native_no_lag": 0.3907001789557267,
+        "temporal": 0.41743564341290296,
+        "temporal_static": 0.5
+      },
+      "step": 9
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.42857142857142855,
+        "guarded_no_growth": 0.6486470690946964,
+        "native": 0.6096749686014195,
+        "native_no_lag": 0.6096749686014195,
+        "temporal": 0.5673351649376549,
+        "temporal_static": 0.4166666666666667
+      },
+      "step": 10
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.375,
+        "guarded_no_growth": 0.3938611335980193,
+        "native": 0.40314207071570746,
+        "native_no_lag": 0.40314207071570746,
+        "temporal": 0.4169163078288801,
+        "temporal_static": 0.35714285714285715
+      },
+      "step": 11
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3333333333333333,
+        "guarded_no_growth": 0.30296728513122934,
+        "native": 0.3112067759622446,
+        "native_no_lag": 0.3112067759622446,
+        "temporal": 0.3300732906275784,
+        "temporal_static": 0.3125
+      },
+      "step": 12
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.42857142857142855,
+        "guarded_no_growth": 0.4903769720795866,
+        "native": 0.500826023512935,
+        "native_no_lag": 0.500826023512935,
+        "temporal": 0.4989678571449151,
+        "temporal_static": 0.4166666666666667
+      },
+      "step": 13
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.4,
+        "guarded_no_growth": 0.5027745876012112,
+        "native": 0.4973382258113679,
+        "native_no_lag": 0.4973382258113679,
+        "temporal": 0.494035092312378,
+        "temporal_static": 0.3888888888888889
+      },
+      "step": 14
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.36363636363636365,
+        "guarded_no_growth": 0.4197311752499971,
+        "native": 0.41416245490619696,
+        "native_no_lag": 0.41416245490619696,
+        "temporal": 0.4253100496375948,
+        "temporal_static": 0.35
+      },
+      "step": 15
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3333333333333333,
+        "guarded_no_growth": 0.4007214824578234,
+        "native": 0.38310736840007265,
+        "native_no_lag": 0.38310736840007265,
+        "temporal": 0.40263390177906233,
+        "temporal_static": 0.3181818181818182
+      },
+      "step": 16
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.38461538461538464,
+        "guarded_no_growth": 0.4035707580905459,
+        "native": 0.38861112966397776,
+        "native_no_lag": 0.38861112966397776,
+        "temporal": 0.388450644573756,
+        "temporal_static": 0.375
+      },
+      "step": 17
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.35714285714285715,
+        "guarded_no_growth": 0.43074048596117087,
+        "native": 0.42653718972008847,
+        "native_no_lag": 0.42653718972008847,
+        "temporal": 0.4347808928073664,
+        "temporal_static": 0.34615384615384615
+      },
+      "step": 18
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3333333333333333,
+        "guarded_no_growth": 0.451666343511391,
+        "native": 0.43943477640632794,
+        "native_no_lag": 0.43943477640632794,
+        "temporal": 0.45665287969621854,
+        "temporal_static": 0.32142857142857145
+      },
+      "step": 19
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3125,
+        "guarded_no_growth": 0.35509069324492176,
+        "native": 0.34393598882898535,
+        "native_no_lag": 0.34393598882898535,
+        "temporal": 0.36744265582085156,
+        "temporal_static": 0.3
+      },
+      "step": 20
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.29411764705882354,
+        "guarded_no_growth": 0.28790514961738284,
+        "native": 0.2768495833730749,
+        "native_no_lag": 0.2768495833730749,
+        "temporal": 0.30370668852408306,
+        "temporal_static": 0.28125
+      },
+      "step": 21
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5,
+        "guarded_no_growth": 0.4427581024792796,
+        "native": 0.39724238414951474,
+        "native_no_lag": 0.39724238414951474,
+        "temporal": 0.4407481716015074,
+        "temporal_static": 0.5
+      },
+      "step": 22
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.2777777777777778,
+        "guarded_no_growth": 0.29052951110768604,
+        "native": 0.29880867518832316,
+        "native_no_lag": 0.29880867518832316,
+        "temporal": 0.31190311596820325,
+        "temporal_static": 0.2647058823529412
+      },
+      "step": 23
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.2631578947368421,
+        "guarded_no_growth": 0.2389390868854881,
+        "native": 0.2476001427958118,
+        "native_no_lag": 0.2476001427958118,
+        "temporal": 0.2643747384280888,
+        "temporal_static": 0.25
+      },
+      "step": 24
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.25,
+        "guarded_no_growth": 0.22898814145513877,
+        "native": 0.2387162683780083,
+        "native_no_lag": 0.2387162683780083,
+        "temporal": 0.25960045437635,
+        "temporal_static": 0.23684210526315788
+      },
+      "step": 25
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5555555555555556,
+        "guarded_no_growth": 0.6504755692708655,
+        "native": 0.648095149499054,
+        "native_no_lag": 0.648095149499054,
+        "temporal": 0.6367551181799579,
+        "temporal_static": 0.5625
+      },
+      "step": 26
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.2857142857142857,
+        "guarded_no_growth": 0.3284607391271147,
+        "native": 0.3320515921820462,
+        "native_no_lag": 0.3320515921820462,
+        "temporal": 0.335621020068523,
+        "temporal_static": 0.275
+      },
+      "step": 27
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.2727272727272727,
+        "guarded_no_growth": 0.282547138946478,
+        "native": 0.28609994427965074,
+        "native_no_lag": 0.28609994427965074,
+        "temporal": 0.2926990568124459,
+        "temporal_static": 0.2619047619047619
+      },
+      "step": 28
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5,
+        "guarded_no_growth": 0.48681241143738696,
+        "native": 0.4828218329144078,
+        "native_no_lag": 0.4828218329144078,
+        "temporal": 0.48540070073611097,
+        "temporal_static": 0.5
+      },
+      "step": 29
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.2608695652173913,
+        "guarded_no_growth": 0.2714044005163673,
+        "native": 0.27371850300830025,
+        "native_no_lag": 0.27371850300830025,
+        "temporal": 0.28558420272173546,
+        "temporal_static": 0.25
+      },
+      "step": 30
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.25,
+        "guarded_no_growth": 0.23295459528167126,
+        "native": 0.23554091836771876,
+        "native_no_lag": 0.23554091836771876,
+        "temporal": 0.24895468749660055,
+        "temporal_static": 0.2391304347826087
+      },
+      "step": 31
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.24,
+        "guarded_no_growth": 0.23886942428577942,
+        "native": 0.24203571399044108,
+        "native_no_lag": 0.24203571399044108,
+        "temporal": 0.2601848022952982,
+        "temporal_static": 0.22916666666666666
+      },
+      "step": 32
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.2692307692307692,
+        "guarded_no_growth": 0.267748256676495,
+        "native": 0.2687806968838845,
+        "native_no_lag": 0.2687806968838845,
+        "temporal": 0.276217281878444,
+        "temporal_static": 0.26
+      },
+      "step": 33
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.45454545454545453,
+        "guarded_no_growth": 0.37325479398366396,
+        "native": 0.3704552655129335,
+        "native_no_lag": 0.3704552655129335,
+        "temporal": 0.3869412565521441,
+        "temporal_static": 0.45
+      },
+      "step": 34
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.25925925925925924,
+        "guarded_no_growth": 0.2759215721643199,
+        "native": 0.2787894601040088,
+        "native_no_lag": 0.2787894601040088,
+        "temporal": 0.2824992598099116,
+        "temporal_static": 0.25
+      },
+      "step": 35
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.25,
+        "guarded_no_growth": 0.2562644934584803,
+        "native": 0.2595169744421389,
+        "native_no_lag": 0.2595169744421389,
+        "temporal": 0.2651732180689863,
+        "temporal_static": 0.24074074074074073
+      },
+      "step": 36
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.2413793103448276,
+        "guarded_no_growth": 0.28920379816973424,
+        "native": 0.2938934284533579,
+        "native_no_lag": 0.2938934284533579,
+        "temporal": 0.303857749165031,
+        "temporal_static": 0.23214285714285715
+      },
+      "step": 37
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5,
+        "guarded_no_growth": 0.5211237310476026,
+        "native": 0.518776897025288,
+        "native_no_lag": 0.518776897025288,
+        "temporal": 0.5200652032253132,
+        "temporal_static": 0.5
+      },
+      "step": 38
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5384615384615384,
+        "guarded_no_growth": 0.5802122992510741,
+        "native": 0.5718100251740525,
+        "native_no_lag": 0.5718100251740525,
+        "temporal": 0.570303774212598,
+        "temporal_static": 0.5416666666666666
+      },
+      "step": 39
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5714285714285714,
+        "guarded_no_growth": 0.6646342298546437,
+        "native": 0.6546400394065507,
+        "native_no_lag": 0.6546400394065507,
+        "temporal": 0.6497726384678395,
+        "temporal_static": 0.5769230769230769
+      },
+      "step": 40
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.26666666666666666,
+        "guarded_no_growth": 0.28572307742930236,
+        "native": 0.2943058842259245,
+        "native_no_lag": 0.2943058842259245,
+        "temporal": 0.3043465275167852,
+        "temporal_static": 0.25862068965517243
+      },
+      "step": 41
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.2903225806451613,
+        "guarded_no_growth": 0.3106617416267337,
+        "native": 0.31258956985790576,
+        "native_no_lag": 0.31258956985790576,
+        "temporal": 0.31746901909421416,
+        "temporal_static": 0.2833333333333333
+      },
+      "step": 42
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.6,
+        "guarded_no_growth": 0.6687754605201469,
+        "native": 0.6666887597175262,
+        "native_no_lag": 0.6666887597175262,
+        "temporal": 0.6650965125196754,
+        "temporal_static": 0.6071428571428571
+      },
+      "step": 43
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3125,
+        "guarded_no_growth": 0.3673174488772409,
+        "native": 0.3673854020306828,
+        "native_no_lag": 0.3673854020306828,
+        "temporal": 0.37039653797825195,
+        "temporal_static": 0.3064516129032258
+      },
+      "step": 44
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5625,
+        "guarded_no_growth": 0.5412003015787317,
+        "native": 0.5249507590381618,
+        "native_no_lag": 0.5249507590381618,
+        "temporal": 0.5330338107947236,
+        "temporal_static": 0.5666666666666667
+      },
+      "step": 45
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5882352941176471,
+        "guarded_no_growth": 0.649884307197764,
+        "native": 0.6411714345557361,
+        "native_no_lag": 0.6411714345557361,
+        "temporal": 0.6373788512457722,
+        "temporal_static": 0.59375
+      },
+      "step": 46
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5555555555555556,
+        "guarded_no_growth": 0.568174716943112,
+        "native": 0.5653740946511078,
+        "native_no_lag": 0.5653740946511078,
+        "temporal": 0.5623673882685374,
+        "temporal_static": 0.5588235294117647
+      },
+      "step": 47
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.30303030303030304,
+        "guarded_no_growth": 0.36048368841308215,
+        "native": 0.3717011400081826,
+        "native_no_lag": 0.36227619088187313,
+        "temporal": 0.37024277438297953,
+        "temporal_static": 0.296875
+      },
+      "step": 48
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3235294117647059,
+        "guarded_no_growth": 0.43854810606874445,
+        "native": 0.4633303640890761,
+        "native_no_lag": 0.4416538543318301,
+        "temporal": 0.44324093770757234,
+        "temporal_static": 0.3181818181818182
+      },
+      "step": 49
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5789473684210527,
+        "guarded_no_growth": 0.501775856530434,
+        "native": 0.46661402848568706,
+        "native_no_lag": 0.5061705284464505,
+        "temporal": 0.5008611192733103,
+        "temporal_static": 0.5833333333333334
+      },
+      "step": 50
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.55,
+        "guarded_no_growth": 0.5673642318693024,
+        "native": 0.6246489345686256,
+        "native_no_lag": 0.5674742996633497,
+        "temporal": 0.5742725873122086,
+        "temporal_static": 0.5526315789473685
+      },
+      "step": 51
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.34285714285714286,
+        "guarded_no_growth": 0.45525398757701446,
+        "native": 0.41195214915790496,
+        "native_no_lag": 0.42428705540039663,
+        "temporal": 0.43686160763978116,
+        "temporal_static": 0.3382352941176471
+      },
+      "step": 52
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3333333333333333,
+        "guarded_no_growth": 0.3907185477716709,
+        "native": 0.39894591193990453,
+        "native_no_lag": 0.36629591869383765,
+        "temporal": 0.3858272782712352,
+        "temporal_static": 0.32857142857142857
+      },
+      "step": 53
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5238095238095238,
+        "guarded_no_growth": 0.46449055212394486,
+        "native": 0.4152442091341048,
+        "native_no_lag": 0.46916012814590097,
+        "temporal": 0.4771995869863809,
+        "temporal_static": 0.525
+      },
+      "step": 54
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5,
+        "guarded_no_growth": 0.4003115679506269,
+        "native": 0.5191873082795226,
+        "native_no_lag": 0.4073489758355321,
+        "temporal": 0.4216410134246859,
+        "temporal_static": 0.5
+      },
+      "step": 55
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.35135135135135137,
+        "guarded_no_growth": 0.5032813427114309,
+        "native": 0.3387433006223261,
+        "native_no_lag": 0.5012327101304102,
+        "temporal": 0.4955345400281327,
+        "temporal_static": 0.3472222222222222
+      },
+      "step": 56
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.34210526315789475,
+        "guarded_no_growth": 0.42544775427459003,
+        "native": 0.6850984006511783,
+        "native_no_lag": 0.41822850449300075,
+        "temporal": 0.4220031945819037,
+        "temporal_static": 0.33783783783783783
+      },
+      "step": 57
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5217391304347826,
+        "guarded_no_growth": 0.4245598122538112,
+        "native": 0.18122699988727498,
+        "native_no_lag": 0.43002557073886905,
+        "temporal": 0.43346964274796057,
+        "temporal_static": 0.5227272727272727
+      },
+      "step": 58
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5,
+        "guarded_no_growth": 0.5138087531169223,
+        "native": 0.8375169643197531,
+        "native_no_lag": 0.5275731176584648,
+        "temporal": 0.5343548293916695,
+        "temporal_static": 0.5
+      },
+      "step": 59
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.358974358974359,
+        "guarded_no_growth": 0.4042295675669069,
+        "native": 0.12392686846096515,
+        "native_no_lag": 0.39712423657948687,
+        "temporal": 0.3996907714323613,
+        "temporal_static": 0.35526315789473684
+      },
+      "step": 60
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.35,
+        "guarded_no_growth": 0.5321487619899217,
+        "native": 0.8771363355701037,
+        "native_no_lag": 0.520856838662794,
+        "temporal": 0.5266855191533898,
+        "temporal_static": 0.34615384615384615
+      },
+      "step": 61
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.36585365853658536,
+        "guarded_no_growth": 0.4528310985967966,
+        "native": 0.8851859174463852,
+        "native_no_lag": 0.4561602065750225,
+        "temporal": 0.46569416803606173,
+        "temporal_static": 0.3625
+      },
+      "step": 62
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.52,
+        "guarded_no_growth": 0.42304780936337794,
+        "native": 0.8950175241702288,
+        "native_no_lag": 0.41584349150595906,
+        "temporal": 0.4186419843842723,
+        "temporal_static": 0.5208333333333334
+      },
+      "step": 63
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5384615384615384,
+        "guarded_no_growth": 0.5590822292482291,
+        "native": 0.9090423449703453,
+        "native_no_lag": 0.5522682409795134,
+        "temporal": 0.5483603292383363,
+        "temporal_static": 0.54
+      },
+      "step": 64
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.38095238095238093,
+        "guarded_no_growth": 0.491265089052076,
+        "native": 0.09172627986351789,
+        "native_no_lag": 0.4781429567021711,
+        "temporal": 0.46665692263593894,
+        "temporal_static": 0.3780487804878049
+      },
+      "step": 65
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.37209302325581395,
+        "guarded_no_growth": 0.5462512965590344,
+        "native": 0.9100474142629973,
+        "native_no_lag": 0.5451217722450967,
+        "temporal": 0.5414922842450576,
+        "temporal_static": 0.36904761904761907
+      },
+      "step": 66
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5555555555555556,
+        "guarded_no_growth": 0.49327719551412474,
+        "native": 0.09166299578693235,
+        "native_no_lag": 0.5010966165248697,
+        "temporal": 0.5064871624860746,
+        "temporal_static": 0.5576923076923077
+      },
+      "step": 67
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5357142857142857,
+        "guarded_no_growth": 0.6135518768222936,
+        "native": 0.9132187640075221,
+        "native_no_lag": 0.607013103362519,
+        "temporal": 0.5929848425646924,
+        "temporal_static": 0.5370370370370371
+      },
+      "step": 68
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.38636363636363635,
+        "guarded_no_growth": 0.3511585933542068,
+        "native": 0.08645178404548423,
+        "native_no_lag": 0.36033806917987393,
+        "temporal": 0.38131950454985647,
+        "temporal_static": 0.38372093023255816
+      },
+      "step": 69
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.37777777777777777,
+        "guarded_no_growth": 0.6468735538477783,
+        "native": 0.9122917324652839,
+        "native_no_lag": 0.6331220155342208,
+        "temporal": 0.6003690309919121,
+        "temporal_static": 0.375
+      },
+      "step": 70
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.391304347826087,
+        "guarded_no_growth": 0.44869347355369116,
+        "native": 0.9080391098406136,
+        "native_no_lag": 0.5531468545313954,
+        "temporal": 0.5460096178799069,
+        "temporal_static": 0.3888888888888889
+      },
+      "step": 71
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5517241379310345,
+        "guarded_no_growth": 0.5431384992050324,
+        "native": 0.9048796863195063,
+        "native_no_lag": 0.45956947826456035,
+        "temporal": 0.5269081703674352,
+        "temporal_static": 0.5535714285714286
+      },
+      "step": 72
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.40425531914893614,
+        "guarded_no_growth": 0.4783347178703521,
+        "native": 0.0883660945375421,
+        "native_no_lag": 0.4312749334961369,
+        "temporal": 0.4421553316726724,
+        "temporal_static": 0.40217391304347827
+      },
+      "step": 73
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3958333333333333,
+        "guarded_no_growth": 0.5881316951031137,
+        "native": 0.09574800998219139,
+        "native_no_lag": 0.6078678089176022,
+        "temporal": 0.5819629114946125,
+        "temporal_static": 0.39361702127659576
+      },
+      "step": 74
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5666666666666667,
+        "guarded_no_growth": 0.5371963381823219,
+        "native": 0.0900123622899653,
+        "native_no_lag": 0.5362481295730791,
+        "temporal": 0.5417424158809586,
+        "temporal_static": 0.5689655172413793
+      },
+      "step": 75
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3877551020408163,
+        "guarded_no_growth": 0.38933519477366735,
+        "native": 0.08501136625256983,
+        "native_no_lag": 0.3853805066860858,
+        "temporal": 0.39818161735295604,
+        "temporal_static": 0.3854166666666667
+      },
+      "step": 76
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.38,
+        "guarded_no_growth": 0.3812363308773981,
+        "native": 0.08778830405356516,
+        "native_no_lag": 0.41846500509525814,
+        "temporal": 0.39653199319282484,
+        "temporal_static": 0.37755102040816324
+      },
+      "step": 77
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.37254901960784315,
+        "guarded_no_growth": 0.4888619639434003,
+        "native": 0.9088322170230535,
+        "native_no_lag": 0.5132020750615516,
+        "temporal": 0.5232085603056316,
+        "temporal_static": 0.37
+      },
+      "step": 78
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.38461538461538464,
+        "guarded_no_growth": 0.40385681878941027,
+        "native": 0.08794528482786526,
+        "native_no_lag": 0.418131732270256,
+        "temporal": 0.41017072171719804,
+        "temporal_static": 0.38235294117647056
+      },
+      "step": 79
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.37735849056603776,
+        "guarded_no_growth": 0.3902285583113374,
+        "native": 0.08694304554912292,
+        "native_no_lag": 0.3766878390620993,
+        "temporal": 0.3704960809845972,
+        "temporal_static": 0.375
+      },
+      "step": 80
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5483870967741935,
+        "guarded_no_growth": 0.43082138391241886,
+        "native": 0.8375870282713174,
+        "native_no_lag": 0.4501500123470961,
+        "temporal": 0.46579424023876115,
+        "temporal_static": 0.55
+      },
+      "step": 81
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5625,
+        "guarded_no_growth": 0.6669374932015155,
+        "native": 0.8956312942607809,
+        "native_no_lag": 0.6649977658732221,
+        "temporal": 0.6609868394512207,
+        "temporal_static": 0.5645161290322581
+      },
+      "step": 82
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5757575757575758,
+        "guarded_no_growth": 0.7052833690089735,
+        "native": 0.903186898950207,
+        "native_no_lag": 0.7028505008669683,
+        "temporal": 0.6966043322559908,
+        "temporal_static": 0.578125
+      },
+      "step": 83
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3888888888888889,
+        "guarded_no_growth": 0.5033407278944272,
+        "native": 0.8834348346089974,
+        "native_no_lag": 0.46765213250316523,
+        "temporal": 0.4789163970044351,
+        "temporal_static": 0.3867924528301887
+      },
+      "step": 84
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5882352941176471,
+        "guarded_no_growth": 0.5052051799511758,
+        "native": 0.2567524193571579,
+        "native_no_lag": 0.5049211273665015,
+        "temporal": 0.49808792902362625,
+        "temporal_static": 0.5909090909090909
+      },
+      "step": 85
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5714285714285714,
+        "guarded_no_growth": 0.6467276243463735,
+        "native": 0.24266129463432168,
+        "native_no_lag": 0.6492458826703925,
+        "temporal": 0.6513229668501379,
+        "temporal_static": 0.5735294117647058
+      },
+      "step": 86
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.38181818181818183,
+        "guarded_no_growth": 0.339744068814884,
+        "native": 0.11256694445084203,
+        "native_no_lag": 0.3279460448743381,
+        "temporal": 0.34783226018066227,
+        "temporal_static": 0.37962962962962965
+      },
+      "step": 87
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5555555555555556,
+        "guarded_no_growth": 0.4775037733820118,
+        "native": 0.12434134688498645,
+        "native_no_lag": 0.46590586019347985,
+        "temporal": 0.497055130243441,
+        "temporal_static": 0.5571428571428572
+      },
+      "step": 88
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.375,
+        "guarded_no_growth": 0.29893137104166323,
+        "native": 0.8661428908619909,
+        "native_no_lag": 0.2813872982537094,
+        "temporal": 0.320643635035784,
+        "temporal_static": 0.37272727272727274
+      },
+      "step": 89
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5405405405405406,
+        "guarded_no_growth": 0.5657151515529562,
+        "native": 0.9083759893016594,
+        "native_no_lag": 0.5565184173403529,
+        "temporal": 0.5803472617656721,
+        "temporal_static": 0.5416666666666666
+      },
+      "step": 90
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.38596491228070173,
+        "guarded_no_growth": 0.41419733396935077,
+        "native": 0.7921002535977504,
+        "native_no_lag": 0.3471733028354332,
+        "temporal": 0.3773040834209426,
+        "temporal_static": 0.38392857142857145
+      },
+      "step": 91
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5263157894736842,
+        "guarded_no_growth": 0.3757690073457337,
+        "native": 0.8668518787025027,
+        "native_no_lag": 0.4184449683306716,
+        "temporal": 0.43028697196254434,
+        "temporal_static": 0.527027027027027
+      },
+      "step": 92
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5384615384615384,
+        "guarded_no_growth": 0.6215731854303019,
+        "native": 0.11289773453270742,
+        "native_no_lag": 0.614058270157205,
+        "temporal": 0.6098462507457919,
+        "temporal_static": 0.5394736842105263
+      },
+      "step": 93
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.39655172413793105,
+        "guarded_no_growth": 0.48026642555875987,
+        "native": 0.09322729795219029,
+        "native_no_lag": 0.4714655570193302,
+        "temporal": 0.4736930223572578,
+        "temporal_static": 0.39473684210526316
+      },
+      "step": 94
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.525,
+        "guarded_no_growth": 0.43470053014410914,
+        "native": 0.09004164772219216,
+        "native_no_lag": 0.4309193533761199,
+        "temporal": 0.43813084245973805,
+        "temporal_static": 0.5256410256410257
+      },
+      "step": 95
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3898305084745763,
+        "guarded_no_growth": 0.45286576719109534,
+        "native": 0.9049181360520508,
+        "native_no_lag": 0.4457345328496217,
+        "temporal": 0.4609553511771292,
+        "temporal_static": 0.3879310344827586
+      },
+      "step": 96
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5121951219512195,
+        "guarded_no_growth": 0.36475681772807894,
+        "native": 0.7797354188965583,
+        "native_no_lag": 0.35616572026152893,
+        "temporal": 0.37790048496563416,
+        "temporal_static": 0.5125
+      },
+      "step": 97
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.38333333333333336,
+        "guarded_no_growth": 0.35707994292147377,
+        "native": 0.8507539842453293,
+        "native_no_lag": 0.3552592727177878,
+        "temporal": 0.36168981314457926,
+        "temporal_static": 0.3813559322033898
+      },
+      "step": 98
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.39344262295081966,
+        "guarded_no_growth": 0.46679059670067,
+        "native": 0.102186725112004,
+        "native_no_lag": 0.46714076839359175,
+        "temporal": 0.4623107123403532,
+        "temporal_static": 0.39166666666666666
+      },
+      "step": 99
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3870967741935484,
+        "guarded_no_growth": 0.4392288604280504,
+        "native": 0.897595301731288,
+        "native_no_lag": 0.4384485350937338,
+        "temporal": 0.43551553522060454,
+        "temporal_static": 0.38524590163934425
+      },
+      "step": 100
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3968253968253968,
+        "guarded_no_growth": 0.4238139076999525,
+        "native": 0.08982746690503643,
+        "native_no_lag": 0.42012568852401855,
+        "temporal": 0.4242294507409321,
+        "temporal_static": 0.3951612903225806
+      },
+      "step": 101
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.390625,
+        "guarded_no_growth": 0.5086262304622329,
+        "native": 0.09364171542988449,
+        "native_no_lag": 0.5103085199001071,
+        "temporal": 0.49518332748266025,
+        "temporal_static": 0.3888888888888889
+      },
+      "step": 102
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.38461538461538464,
+        "guarded_no_growth": 0.4201455136958413,
+        "native": 0.08831713385177434,
+        "native_no_lag": 0.4193390140398895,
+        "temporal": 0.4244487140209828,
+        "temporal_static": 0.3828125
+      },
+      "step": 103
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5238095238095238,
+        "guarded_no_growth": 0.4833542474072723,
+        "native": 0.907107767078513,
+        "native_no_lag": 0.47924947085830194,
+        "temporal": 0.4920152937622848,
+        "temporal_static": 0.524390243902439
+      },
+      "step": 104
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3787878787878788,
+        "guarded_no_growth": 0.34412982018226307,
+        "native": 0.13798116145614048,
+        "native_no_lag": 0.3412819834977814,
+        "temporal": 0.3583525321215822,
+        "temporal_static": 0.3769230769230769
+      },
+      "step": 105
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5116279069767442,
+        "guarded_no_growth": 0.4221069652379827,
+        "native": 0.8268842545610915,
+        "native_no_lag": 0.4169550300107505,
+        "temporal": 0.4498799195903247,
+        "temporal_static": 0.5119047619047619
+      },
+      "step": 106
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5227272727272727,
+        "guarded_no_growth": 0.49948269807232754,
+        "native": 0.1219791429446036,
+        "native_no_lag": 0.4965838324569492,
+        "temporal": 0.5063232792425014,
+        "temporal_static": 0.5232558139534884
+      },
+      "step": 107
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.373134328358209,
+        "guarded_no_growth": 0.36583911067286895,
+        "native": 0.09574383144690869,
+        "native_no_lag": 0.3388703526841069,
+        "temporal": 0.3486532020337864,
+        "temporal_static": 0.3712121212121212
+      },
+      "step": 108
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5111111111111111,
+        "guarded_no_growth": 0.46306107520706213,
+        "native": 0.10211019899599294,
+        "native_no_lag": 0.4498261907098905,
+        "temporal": 0.47114608654445167,
+        "temporal_static": 0.5113636363636364
+      },
+      "step": 109
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.5,
+        "guarded_no_growth": 0.4715337779491817,
+        "native": 0.09697581783816092,
+        "native_no_lag": 0.4447666167352587,
+        "temporal": 0.4897678170337444,
+        "temporal_static": 0.5
+      },
+      "step": 110
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.36764705882352944,
+        "guarded_no_growth": 0.29070742578493997,
+        "native": 0.08494129658532731,
+        "native_no_lag": 0.2668752105259029,
+        "temporal": 0.31012652966693316,
+        "temporal_static": 0.3656716417910448
+      },
+      "step": 111
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.48936170212765956,
+        "guarded_no_growth": 0.36314152946249434,
+        "native": 0.08921997707166085,
+        "native_no_lag": 0.3258824700005255,
+        "temporal": 0.3994007991330057,
+        "temporal_static": 0.4891304347826087
+      },
+      "step": 112
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.36231884057971014,
+        "guarded_no_growth": 0.27967752733536316,
+        "native": 0.8860551284819731,
+        "native_no_lag": 0.24310576043084126,
+        "temporal": 0.3201696128179168,
+        "temporal_static": 0.3602941176470588
+      },
+      "step": 113
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.4791666666666667,
+        "guarded_no_growth": 0.42427006726605276,
+        "native": 0.9087071154195282,
+        "native_no_lag": 0.4053994277936242,
+        "temporal": 0.4427493986319932,
+        "temporal_static": 0.4787234042553192
+      },
+      "step": 114
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.4897959183673469,
+        "guarded_no_growth": 0.4706576342326235,
+        "native": 0.08713263529935296,
+        "native_no_lag": 0.48337907526195556,
+        "temporal": 0.47299056955779717,
+        "temporal_static": 0.4895833333333333
+      },
+      "step": 115
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.37142857142857144,
+        "guarded_no_growth": 0.3203633950321683,
+        "native": 0.0830650805432399,
+        "native_no_lag": 0.32333093367016985,
+        "temporal": 0.32655715187039613,
+        "temporal_static": 0.3695652173913043
+      },
+      "step": 116
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.36619718309859156,
+        "guarded_no_growth": 0.3608537654341371,
+        "native": 0.9029312274161363,
+        "native_no_lag": 0.36612384869003073,
+        "temporal": 0.3736221335876967,
+        "temporal_static": 0.36428571428571427
+      },
+      "step": 117
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.48,
+        "guarded_no_growth": 0.42459123465771126,
+        "native": 0.08612383644804267,
+        "native_no_lag": 0.4260047604042735,
+        "temporal": 0.4301787232893836,
+        "temporal_static": 0.47959183673469385
+      },
+      "step": 118
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.375,
+        "guarded_no_growth": 0.33685363879063485,
+        "native": 0.08454045876686136,
+        "native_no_lag": 0.3436929745073809,
+        "temporal": 0.3455303100919647,
+        "temporal_static": 0.3732394366197183
+      },
+      "step": 119
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.3698630136986301,
+        "guarded_no_growth": 0.37140293848436573,
+        "native": 0.08737583343764324,
+        "native_no_lag": 0.37724513295036466,
+        "temporal": 0.38738258773682466,
+        "temporal_static": 0.3680555555555556
+      },
+      "step": 120
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.47058823529411764,
+        "guarded_no_growth": 0.3255079572068643,
+        "native": 0.08613971865474843,
+        "native_no_lag": 0.3317815911969372,
+        "temporal": 0.347467875035701,
+        "temporal_static": 0.47
+      },
+      "step": 121
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.46153846153846156,
+        "guarded_no_growth": 0.3911616515417807,
+        "native": 0.9003667250620311,
+        "native_no_lag": 0.4018531440629954,
+        "temporal": 0.4321398979620202,
+        "temporal_static": 0.46078431372549017
+      },
+      "step": 122
+    },
+    {
+      "action": 0,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.36486486486486486,
+        "guarded_no_growth": 0.29976489712873255,
+        "native": 0.08327536853337525,
+        "native_no_lag": 0.3011307084056697,
+        "temporal": 0.30641922340316907,
+        "temporal_static": 0.363013698630137
+      },
+      "step": 123
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.4716981132075472,
+        "guarded_no_growth": 0.3049607233057956,
+        "native": 0.08542335055096721,
+        "native_no_lag": 0.31549751871563836,
+        "temporal": 0.3156181529230813,
+        "temporal_static": 0.47115384615384615
+      },
+      "step": 124
+    },
+    {
+      "action": 1,
+      "outcome": 0,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.46296296296296297,
+        "guarded_no_growth": 0.416583255313557,
+        "native": 0.09188796841918248,
+        "native_no_lag": 0.4283856303302857,
+        "temporal": 0.4402539794107883,
+        "temporal_static": 0.46226415094339623
+      },
+      "step": 125
+    },
+    {
+      "action": 1,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.45454545454545453,
+        "guarded_no_growth": 0.44332283247373927,
+        "native": 0.9041675923182911,
+        "native_no_lag": 0.46693727135224844,
+        "temporal": 0.48753327361791304,
+        "temporal_static": 0.4537037037037037
+      },
+      "step": 126
+    },
+    {
+      "action": 0,
+      "outcome": 1,
+      "probabilities": {
+        "cold": 0.5,
+        "frequency": 0.36,
+        "guarded_no_growth": 0.3119587986551373,
+        "native": 0.9009919227159167,
+        "native_no_lag": 0.30967772339823574,
+        "temporal": 0.3180528010932027,
+        "temporal_static": 0.3581081081081081
+      },
+      "step": 127
+    }
+  ],
+  "whole_wall_seconds": 5.954591999994591
+}

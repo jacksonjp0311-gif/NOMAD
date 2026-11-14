@@ -1,0 +1,229 @@
+{
+  "coding_advantage": "NOT_ESTABLISHED",
+  "decomposition": [
+    {
+      "action": 0,
+      "additive_probability_contributions": {
+        "KT_prior_minus_Laplace": -0.025000000000000022,
+        "induced_grammar_mixture_lift": -0.004672571153435184,
+        "temporal_expert_bank_minus_static": 0.04951705662517386
+      },
+      "expert_bank": 0.42451705662517386,
+      "frequency": 0.4,
+      "grammar_mixture_weight": 0.07636942999956575,
+      "induced_grammar": 0.36333326680951394,
+      "reconstructed_native": 0.4198444854717387,
+      "static_KT": 0.375,
+      "temporal_experts": [
+        {
+          "expert": "order0.retention1.00",
+          "probability": 0.375,
+          "weight": 0.2036540197049747,
+          "weighted_lift_above_static": 0.0
+        },
+        {
+          "expert": "order0.retention0.82",
+          "probability": 0.4040637366715911,
+          "weight": 0.15080186067136514,
+          "weighted_lift_above_static": 0.00438286556813853
+        },
+        {
+          "expert": "order1.retention1.00",
+          "probability": 0.4166666666666667,
+          "weight": 0.1453418332859225,
+          "weighted_lift_above_static": 0.006055909720246774
+        },
+        {
+          "expert": "order1.retention0.82",
+          "probability": 0.4360424911143941,
+          "weight": 0.1050546788091527,
+          "weighted_lift_above_static": 0.006412799297733228
+        },
+        {
+          "expert": "order2.retention1.00",
+          "probability": 0.4444444444444445,
+          "weight": 0.12234679972852772,
+          "weighted_lift_above_static": 0.008496305536703318
+        },
+        {
+          "expert": "order2.retention0.82",
+          "probability": 0.4573616607429294,
+          "weight": 0.08927813722001121,
+          "weighted_lift_above_static": 0.0073530956494752605
+        },
+        {
+          "expert": "order3.retention1.00",
+          "probability": 0.46296296296296297,
+          "weight": 0.10538474648346595,
+          "weighted_lift_above_static": 0.009269954551786357
+        },
+        {
+          "expert": "order3.retention0.82",
+          "probability": 0.47157444049528624,
+          "weight": 0.07813792409658009,
+          "weighted_lift_above_static": 0.007546126301090366
+        }
+      ]
+    },
+    {
+      "action": 1,
+      "additive_probability_contributions": {
+        "KT_prior_minus_Laplace": -0.0357142857142857,
+        "induced_grammar_mixture_lift": 0.007262329748080972,
+        "temporal_expert_bank_minus_static": 0.0882762879640922
+      },
+      "expert_bank": 0.3382762879640922,
+      "frequency": 0.2857142857142857,
+      "grammar_mixture_weight": 0.07636942999956575,
+      "induced_grammar": 0.4333710103958593,
+      "reconstructed_native": 0.3455386177121732,
+      "static_KT": 0.25,
+      "temporal_experts": [
+        {
+          "expert": "order0.retention1.00",
+          "probability": 0.25,
+          "weight": 0.2036540197049747,
+          "weighted_lift_above_static": 0.0
+        },
+        {
+          "expert": "order0.retention0.82",
+          "probability": 0.27020366871733237,
+          "weight": 0.15080186067136514,
+          "weighted_lift_above_static": 0.0030467508349615743
+        },
+        {
+          "expert": "order1.retention1.00",
+          "probability": 0.3333333333333333,
+          "weight": 0.1453418332859225,
+          "weighted_lift_above_static": 0.01211181944049354
+        },
+        {
+          "expert": "order1.retention0.82",
+          "probability": 0.3468024458115549,
+          "weight": 0.1050546788091527,
+          "weighted_lift_above_static": 0.010169549852673309
+        },
+        {
+          "expert": "order2.retention1.00",
+          "probability": 0.38888888888888884,
+          "weight": 0.12234679972852772,
+          "weighted_lift_above_static": 0.016992611073406622
+        },
+        {
+          "expert": "order2.retention0.82",
+          "probability": 0.3978682972077032,
+          "weight": 0.08927813722001121,
+          "weighted_lift_above_static": 0.01320140612859873
+        },
+        {
+          "expert": "order3.retention1.00",
+          "probability": 0.4259259259259259,
+          "weight": 0.10538474648346595,
+          "weighted_lift_above_static": 0.018539909103572706
+        },
+        {
+          "expert": "order3.retention0.82",
+          "probability": 0.4319121981384688,
+          "weight": 0.07813792409658009,
+          "weighted_lift_above_static": 0.014214241530385714
+        }
+      ]
+    }
+  ],
+  "first_original_lag_checkpoint": 24,
+  "historical_results_modified": false,
+  "input_sha256": {
+    "results/BITWORK_V018.json": "85832fb3fd4270eb1303c7ac23fbeb1bbb49c29df80e5ee6cb6e74fedde91f1c",
+    "results/FRONTIER_STUDY_V014.json": "00846555f1d061dfc6136a8a5cd8f0f94d4ee2edfedd97a139140d64f7118dd6"
+  },
+  "interventions": {
+    "cold": {
+      "action_probabilities": [
+        0.5,
+        0.5
+      ],
+      "frozen_evaluation_logloss": 0.6931471805599453
+    },
+    "frequency": {
+      "action_probabilities": [
+        0.4,
+        0.2857142857142857
+      ],
+      "frozen_evaluation_logloss": 0.4206070942182238
+    },
+    "guarded_no_growth": {
+      "action_probabilities": [
+        0.4106867933061521,
+        0.32804855443150127
+      ],
+      "frozen_evaluation_logloss": 0.4664889590101616
+    },
+    "native": {
+      "action_probabilities": [
+        0.41984448547173864,
+        0.3455386177121732
+      ],
+      "frozen_evaluation_logloss": 0.48641297739326594
+    },
+    "native_no_lag": {
+      "action_probabilities": [
+        0.41984448547173864,
+        0.3455386177121732
+      ],
+      "frozen_evaluation_logloss": 0.48641297739326594
+    },
+    "temporal": {
+      "action_probabilities": [
+        0.42451705662517386,
+        0.3382762879640922
+      ],
+      "frozen_evaluation_logloss": 0.4782425354166344
+    },
+    "temporal_static": {
+      "action_probabilities": [
+        0.375,
+        0.25
+      ],
+      "frozen_evaluation_logloss": 0.38434502402686865
+    }
+  },
+  "lag_discovery_could_contribute": false,
+  "native_identity": {
+    "authority": "local_integrity_only",
+    "manifest_sha256": "5a2bd5238565949a7cbfa89ad560f64f3475268391aac0d56a861d6d08ee0e8e",
+    "runtime": "bgr140.GovernedBitworkV14",
+    "verified_files": 77
+  },
+  "native_snapshot": {
+    "conditional_model_only": true,
+    "cumulative_log_loss": 6.411478119804652,
+    "feature_set": [],
+    "implementation": "exact score reuse and packed observed history",
+    "lag_promotions": [],
+    "lag_search_active": false,
+    "monitor_events": [],
+    "policy": "v1.3 surprise-gated lag discovery",
+    "public_certifications": 0,
+    "steps": 8,
+    "telemetry": {
+      "fallback_due_budget": 0,
+      "lag_activation": 0,
+      "lag_live_steps": 0,
+      "lag_replay_steps": 0,
+      "lag_trigger_reason": "rolling predictive surprise on compiled v1.1 base",
+      "monitor_evaluations": 0,
+      "public_certifications": 0
+    },
+    "version": "1.4.0"
+  },
+  "posthoc": true,
+  "retuning_performed": false,
+  "schema": "nomad.frontier-bitwork-mechanisms.v18.historical-mechanism-diagnosis",
+  "scope": "exact computational attribution and module interventions for this observed prefix; no causal attribution to real repository repair",
+  "source_sha256": {
+    "nomad/native_bitwork.py": "2c26b9929157df201dc501c2ce8275737d4790cf8cc3705ca38bb3be2fcdff51",
+    "scripts/frontier_bitwork_v18.py": "21c56e8a267336ba58624ca112634cb6627c4dd8b614f5b6c5156e09898cade8",
+    "vendor/BGR-v1.4.0-runtime/MANIFEST.sha256": "5a2bd5238565949a7cbfa89ad560f64f3475268391aac0d56a861d6d08ee0e8e"
+  },
+  "training_events": 8
+}

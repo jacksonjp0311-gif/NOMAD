@@ -1,0 +1,63 @@
+{
+  "artifacts": [
+    {
+      "bytes": 3091822,
+      "name": "NOMAD-v0.18.0-frontier-source.zip",
+      "reproduced_identically": true,
+      "sha256": "6e8af7460c8978ba7bcba29f2cafc663412fd050553dc989359c04e4e311a181"
+    }
+  ],
+  "checks": [
+    {
+      "check": "reproduce-source",
+      "expected_returncode": 0,
+      "output_sha256": "87b285a8565aa758ff527abc8a39c4ff26139d2f4d2c2259d80e640c4e8fb5ae",
+      "returncode": 0,
+      "status": "PASS",
+      "wall_seconds": 0.9785479999845847
+    },
+    {
+      "check": "source-integrity-before",
+      "expected_returncode": 0,
+      "output_sha256": "217b2c2a5d129b86ececf7ff257aca89c369c104474822e588d61abef80fc721",
+      "returncode": 0,
+      "status": "PASS",
+      "wall_seconds": 1.160110099997837
+    },
+    {
+      "check": "source-release-hold",
+      "expected_returncode": 3,
+      "output_sha256": "82813926bbe5d50cabe176bc81914e542f96864693f4d83cd04001323b24abb2",
+      "returncode": 3,
+      "status": "PASS",
+      "wall_seconds": 1.1293612000299618
+    },
+    {
+      "check": "source-lineage-hold",
+      "expected_returncode": 3,
+      "output_sha256": "71689cb4ce92a2862cf860c5081b9675fb2129c16c23f752feccd1f18f95df57",
+      "returncode": 3,
+      "status": "PASS",
+      "wall_seconds": 0.6778691000072286
+    },
+    {
+      "check": "clean-source-study",
+      "expected_returncode": 0,
+      "output_sha256": "f2536f79b4bcacc1a4db71bbb139e91f367640b3fdd8cd4b7e0c6ef3e3d483a3",
+      "returncode": 1,
+      "status": "FAIL",
+      "wall_seconds": 109.31725269998424
+    }
+  ],
+  "gate_A": "HOLD",
+  "gate_B": "HOLD",
+  "gate_C": "HOLD",
+  "gate_D": "HOLD",
+  "production_ready": false,
+  "release_publication": "HOLD",
+  "schema": "nomad.frontier-delivery.v18",
+  "scope": "archive reproducibility, clean extraction, local tests and offline runtime workflow only",
+  "status": "FAIL",
+  "v019_ready": false,
+  "version": "0.18.0"
+}

@@ -167,12 +167,12 @@ print('controlled probe completed: '+case)
 def _crash_cleanup_probe(source: Path, policy: SandboxPolicy, base: Path) -> dict:
     name = 'nomad-' + uuid.uuid4().hex[:24]
     repo_root = Path(__file__).resolve().parents[1]
-    child_code = '''import pathlib,sys,tempfile
+    child_code = '''import json,pathlib,sys,tempfile
 from nomad.isolation import SandboxPolicy,run_isolated
 tempfile.tempdir=sys.argv[4]
-run_isolated(pathlib.Path(sys.argv[1]),command=['python','probe.py','timeout'],policy=SandboxPolicy(image=sys.argv[2],timeout_s=30,memory_mib=128,cpus=.5,pids_limit=16),container_name=sys.argv[3])
+run_isolated(pathlib.Path(sys.argv[1]),command=['python','probe.py','timeout'],policy=SandboxPolicy(**json.loads(sys.argv[2])),container_name=sys.argv[3])
 '''
-    child = subprocess.Popen([sys.executable, '-c', child_code, str(source), policy.image,
+    child = subprocess.Popen([sys.executable, '-c', child_code, str(source), json.dumps(asdict(policy)),
                               name, str(base)], cwd=repo_root,
                              env=minimal_env({'PYTHONPATH': str(repo_root)}),
                              stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,

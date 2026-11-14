@@ -6,15 +6,20 @@ import stat
 
 # Keep the first engineering seal as historical evidence. Qualification fixes
 # remain v0.18.0 and receive a distinct, immutable internal snapshot seal.
-MANIFEST = 'results/RELEASE_MANIFEST_QUALIFICATION_V018.json'
-GATES = 'results/GATES_QUALIFICATION_V018.json'
+MANIFEST = 'results/RELEASE_MANIFEST_FRONTIER_RECOVERY_V018.json'
+GATES = 'results/GATES_FRONTIER_RECOVERY_V018.json'
 EXCLUDED = {'.git', '.venv', 'venv', '__pycache__', '.pytest_cache', '.mypy_cache',
             'node_modules', 'runs', 'work', 'outputs', 'build', 'dist'}
 ROOT_FILES = {'README.md', 'LICENSE', 'pyproject.toml', 'NOMAD.ps1', 'NOMAD.cmd', 'platform.example.json',
               'RELEASE.md', 'CHANGELOG.md', 'DESKTOP_SOURCE_NOTICE.txt', 'CODEX_HANDOFF.md'}
 RUNTIME_SCRIPTS = {'release_files_v18.py', 'verify_package_v18.py', 'qualify_isolation_v18.py',
                    'windows_entry_v18.py', 'verify_lineage_v18.py',
-                   'experiment_qualification_v18.py', 'qualify_recovery_v18.py'}
+                   'experiment_qualification_v18.py', 'qualify_recovery_v18.py',
+                   'experiment_frontier_v18.py', 'frontier_bitwork_v18.py',
+                   'verify_frontier_bitwork_replay_v18.py',
+                   'qualify_function_recovery_frontier_v18.py',
+                   'audit_frontier_metrics_v18.py', 'qualify_memory_frontier_v18.py',
+                   'review_self_revision_frontier_v18.py'}
 
 
 def sha(path: Path) -> str:

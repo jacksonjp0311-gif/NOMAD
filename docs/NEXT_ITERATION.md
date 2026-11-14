@@ -1,5 +1,12 @@
 # NOMAD roadmap to v0.19 RELEASE CANDIDATE
 
+Current priorities and measured results are in the
+[FRONTIER qualification report](FRONTIER_REPORT_V018.md). The frozen native
+mechanism study has mixed outcomes and substantially greater compute cost than
+frequency; the next decisive intelligence test remains an authentic repository
+A/B/C/D comparison after isolation, function recovery, corpus and whole-mission
+resource prerequisites pass.
+
 The release path remains **v0.17 Security & Recovery → v0.18 Platform → v0.19 Release Candidate → v1.0 Production**. Continue internal v0.18 iterations until its critical platform gates are met. An implemented candidate with a native-security HOLD is not a qualified release or permission to advance its claims. The earlier roadmap and research record remain preserved in baseline Git history.
 
 ## Close the v0.18 platform holds
@@ -8,7 +15,7 @@ The release path remains **v0.17 Security & Recovery → v0.18 Platform → v0.1
 |---|---|---|
 | Native Windows containment | A reviewed, locally available digest-pinned Linux image; actual Docker/VM probes on this ROG; filesystem, credential, network, process, resource and cleanup results. | Docker is unavailable. Native container success has not been demonstrated. |
 | Interrupted isolated mission | Matched uninterrupted/interrupted tasks; matching accepted source and decisions; authoritative disposal of ambiguous workers; no duplicate admitted observations or remote effects. | Controller contracts and trusted-host recovery are distinct from real container mission recovery. |
-| Real external repair | Provenance-pinned repository and defect; frozen budget; public search tests separated from independent full validation and semantic contracts; repeatable container receipts. | The new adapter handles one operator-selected arithmetic target. Broad external repair is not established. |
+| Real external repair | Provenance-pinned repository and defect; frozen budget; public search tests separated from independent full validation and semantic contracts; repeatable container receipts. | Bounded JSON function APIs and two-module proposals are implemented; authentic isolated repair is not established. |
 | Complete lineage | Retrieve the authoritative historical release archive, verify expected bytes and preserve the intentionally omitted predecessor. | Desktop-package omission must not be relabeled source corruption or historical verification success. |
 | Qualified distribution | Repeatable source/runtime packaging, clean-extraction checks, documented installation/recovery and critical gates recorded without suppressing failures. | A local artifact can document HOLDs. It must not be published as a verified platform release while critical gates remain open. |
 

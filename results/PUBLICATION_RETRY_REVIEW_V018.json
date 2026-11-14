@@ -1,0 +1,66 @@
+{
+  "schema": "nomad.mission-publication-review.v18",
+  "status": "PASS_AT_BOUNDED_WINDOWS_PUBLICATION_SCOPE",
+  "native_container_qualification": "UNCHANGED_HOLD",
+  "observed_original_failure": {
+    "source": "results/FRONTIER_EXTRACTION_INITIAL_V018.log",
+    "errors": 2,
+    "operation": "same-parent staging directory rename during arithmetic mission initialization",
+    "windows_error": 5,
+    "fault_test_stages_reached": false,
+    "unchanged_targeted_replay": "results/FRONTIER_PUBLICATION_REPLAY_V018.json",
+    "inference": "The symptom was intermittent. The process or filesystem mechanism that caused the original denial was not identified. Antivirus, indexing, synchronization, permissions or another handle owner are not established causes."
+  },
+  "change": {
+    "helper": "nomad.platform_mission._publish_staged_mission",
+    "callers": ["initialize", "initialize_functions"],
+    "maximum_attempts": 6,
+    "retry_delays_seconds": [0.05, 0.1, 0.2, 0.4, 0.8],
+    "total_retry_sleep_seconds": 1.55,
+    "retry_scope": "Windows OSError.winerror 5 or 32 only",
+    "persistent_denial": "MissionHold",
+    "unknown_error": "original exception propagated without retry",
+    "guards": [
+      "same-parent actual staging directory; no reparse staging source",
+      "lstat destination absence before each attempt, including dangling entries",
+      "unchanged staging device/inode before each attempt",
+      "ambiguous exception after a possible move never accepted as success",
+      "successful rename requires source disappearance and matching destination identity",
+      "atomic rename only; no copy, replacement, delete or chmod fallback"
+    ]
+  },
+  "validation": {
+    "final_focused_log": "results/PUBLICATION_RETRY_TESTS_V018.log",
+    "publication_tests_run": 8,
+    "publication_tests_passed": 8,
+    "publication_tests_skipped": 0,
+    "combined_mission_regressions_run": 52,
+    "combined_mission_regressions_passed": 52,
+    "combined_mission_regressions_wall_seconds": 18.313,
+    "independent_agent_publication_tests_passed": 8,
+    "native_sharing_probe": {
+      "status": "PASS",
+      "mechanism": "CreateFileW directory handle with GENERIC_READ, FILE_SHARE_READ|FILE_SHARE_WRITE and no FILE_SHARE_DELETE",
+      "observed_initial_refusal": "PermissionError with WinError in {5,32}",
+      "scheduled_handle_release_seconds": 0.12,
+      "retry_publication_succeeded": true,
+      "payload_preserved": true,
+      "scope": "Controlled native directory-sharing denial; does not identify the original clean-extraction denial's cause"
+    }
+  },
+  "retained_development_observation": {
+    "initial_native_probe_setup": "A READ_ATTRIBUTES-only directory handle did not deny rename; the test assertion failed once while the other six tests passed.",
+    "correction": "Used GENERIC_READ to establish a real conflicting share mode; the corrected native test and all refusal tests passed.",
+    "interpretation": "This was a test setup correction, not evidence that the original publication failure's holder was identified."
+  },
+  "scope_limits": [
+    "Does not guarantee publication when access remains denied after the finite retry budget",
+    "Does not establish crash/power-loss durability or hostile-code containment",
+    "Does not claim atomic no-replace protection against an adversarial same-user destination race on POSIX",
+    "Earlier sealed archives, manifests, failures and historical results remain unchanged"
+  ],
+  "source_sha256": {
+    "nomad/platform_mission.py": "14c28e438430439f02d5656a6a29e20e2a517bd6830375a1745742faa4db5107",
+    "tests/test_mission_publication_v18.py": "a04bebfff5772be6c50006671229aada210353a53d58d4fa10c109dc75497610"
+  }
+}

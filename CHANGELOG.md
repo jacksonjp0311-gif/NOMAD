@@ -1,5 +1,22 @@
 # NOMAD — Change History
 
+## v0.18.0 FRONTIER qualification (no version change)
+
+- Extended the existing pipeline to bounded JSON Python functions, local imports,
+  public diagnostic experiments, conditional edits and two-module proposals.
+- Added a candidate self-revision audit with protected verifier/tests, separate
+  baseline/candidate regression receipts and no authoritative-source replacement.
+- Ran a frozen native Bitwork mechanism study and independent arithmetic audit;
+  retained stationary-data losses and unequal computational cost explicitly.
+- Diagnosed Windows peak counters on rejected commit attempts, refreshed native
+  supervision checks and searched original lineage without regenerating results.
+- Closed observer admission defects found in independent review; retained the
+  review findings and software regressions separately from native execution proof.
+- Fixed intermittent Windows mission-directory publication refusal with bounded
+  access/sharing retries, identity checks and no overwrite fallback. Preserved the
+  first failed clean-extraction receipt and sealed candidate archives.
+- Preserved all earlier seals/results and kept Gates A-D and v0.19 readiness HOLD.
+
 ## v0.18.0 qualification follow-up (no version change)
 
 - Connected bounded repository analysis, actual inquiry and deferred proposals

@@ -1,9 +1,11 @@
 """v0.18 bounded repository missions with Docker-only execution.
 
-Supported repair contract: one strict ``solve(x, y)`` arithmetic function in a
-source-only Python repository. GENESIS searches public examples; an independent
-bounded interpreter evaluates private examples without executing repository code.
-This is deliberately narrower than arbitrary Python behavioral verification.
+The original adapter repairs one strict ``solve(x, y)`` arithmetic function;
+its independent bounded interpreter never executes repository code. The typed
+JSON function adapter admits a wider restricted grammar, uses Docker-only
+observations, and compares private expectations in the trusted parent. GENESIS
+and proposal ranking see public evidence only. Neither adapter verifies
+arbitrary Python behavior or substitutes host execution for containment.
 Original repositories are never edited. A completed mission commits its own
 disposable snapshot, not Git or a remote effect. Checksums are not signatures.
 """
@@ -18,6 +20,7 @@ from pathlib import Path, PurePosixPath
 import shutil
 import stat
 import tempfile
+import time
 import uuid
 from typing import Any
 
@@ -30,7 +33,7 @@ from .mission_runtime import (InjectedInterruption, Journal, MissionHold, canoni
 from .python_operators import generate_python_candidates
 from .safe_eval import evaluate, parse_expr
 from .witness import Witness, WitnessReceipt
-from . import inquiry, repo_world
+from . import inquiry, repo_world, frontier
 from .causal_atlas import AtlasTask, ChangeReceipt, Contract, SymbolGraph, source_digest
 from .mnemonic import EvidenceMemory, action_digest, digest as memory_digest
 from .platform_bitwork import NativeDecisionRanker, PublicObservation
@@ -46,7 +49,55 @@ CHECKPOINTS = ('after_plan', 'after_patch_write', 'after_patch_record',
                'after_commit', 'after_learning', 'after_rollback_write',
                'after_rollback_record', 'after_probe_dispatch', 'after_probe',
                'after_proposal', 'before_memory', 'after_memory')
+FUNCTION_CHECKPOINTS = (*CHECKPOINTS, 'after_multifile_patch_write')
 MEMORY_ID = 'nomad-platform-memory-v018'
+
+
+def _publish_staged_mission(stage: Path, root: Path) -> None:
+    """Publish once, retrying only bounded Windows access/sharing refusals.
+
+    A directory handle can transiently deny a Windows rename. The error alone
+    does not identify the holder. Persistent denial, source replacement, a
+    destination conflict or an ambiguous result is never treated as success.
+    """
+    def metadata(path):
+        try:
+            return path.lstat()
+        except FileNotFoundError:
+            return None
+    initial = metadata(stage)
+    if (initial is None or not stat.S_ISDIR(initial.st_mode) or _reparse(initial)
+            or stat.S_ISLNK(initial.st_mode) or stage.parent != root.parent):
+        raise MissionHold('mission publication requires an owned same-parent staging directory')
+    identity = (initial.st_dev, initial.st_ino)
+    delays = (0.05, 0.1, 0.2, 0.4, 0.8)
+    for attempt in range(len(delays) + 1):
+        if metadata(root) is not None:
+            raise FileExistsError('mission destination exists; refusing publication overwrite')
+        current = metadata(stage)
+        if (current is None or _reparse(current) or not stat.S_ISDIR(current.st_mode)
+                or (current.st_dev, current.st_ino) != identity):
+            raise MissionHold('mission staging identity changed before publication')
+        try:
+            stage.rename(root)
+        except OSError as error:
+            # An exception does not prove that nothing moved. A newly visible
+            # destination is never adopted as ours, even if its bytes match.
+            remaining = metadata(stage)
+            if metadata(root) is not None or remaining is None:
+                raise MissionHold('mission publication outcome ambiguous; inspect destination before retry') from error
+            if os.name != 'nt' or getattr(error, 'winerror', None) not in (5, 32):
+                raise
+            if attempt == len(delays):
+                raise MissionHold('Windows mission publication remained denied after bounded retries') from error
+            time.sleep(delays[attempt])
+        else:
+            published = metadata(root)
+            if (metadata(stage) is not None or published is None or _reparse(published)
+                    or not stat.S_ISDIR(published.st_mode)
+                    or (published.st_dev, published.st_ino) != identity):
+                raise MissionHold('published mission identity is unconfirmed')
+            return
 
 
 def _runtime_identity() -> dict[str, str]:
@@ -55,7 +106,7 @@ def _runtime_identity() -> dict[str, str]:
             ('platform_mission.py', 'genesis.py', 'safe_eval.py', 'witness.py', 'isolation.py',
              'supervised.py', 'windows_job.py', 'mission_runtime.py', 'effects.py',
              'python_operators.py', 'platform_bitwork.py', 'resonance.py', 'repo_world.py',
-             'inquiry.py', 'mnemonic.py', 'causal_atlas.py')}
+             'inquiry.py', 'mnemonic.py', 'causal_atlas.py', 'frontier.py')}
 
 
 def _origin_goal(goal: dict) -> dict:
@@ -607,13 +658,15 @@ def initialize(root: Path, source: Path, *, goal_text: str, public: list[dict],
         (stage / 'events.jsonl').touch()
         Journal(stage / 'events.jsonl', goal['mission_id']).append('PLATFORM_CREATED',
                             {'goal_sha256': digest(canonical(goal))})
-        stage.rename(root)
+        _publish_staged_mission(stage, root)
     return goal
 
 
 def _load(root: Path) -> tuple[dict, Journal, list[dict]]:
     try:
         goal = json.loads((root / 'goal.json').read_bytes())
+        if goal.get('adapter') == frontier.FUNCTION_ADAPTER:
+            return _load_functions(root, goal)
         if goal.get('schema') != SCHEMA or goal.get('version') != '0.18.0':
             raise MissionHold('platform mission identity changed')
         identity = dict(goal)
@@ -721,6 +774,8 @@ def _validate_state(goal: dict, rows: list[dict]) -> None:
 
 
 def _summary(goal: dict, rows: list[dict]) -> dict:
+    if goal.get('adapter') == frontier.FUNCTION_ADAPTER:
+        return _function_summary(goal, rows)
     kind = rows[-1]['kind']
     status = {'LEARNED': 'completed', 'COMMITTED': 'committed', 'REVERTED': 'rejected',
               'EXHAUSTED': 'exhausted', 'EXECUTION_DISPATCHED': 'hold_uncertain_execution',
@@ -839,10 +894,12 @@ def _learn(root: Path, goal: dict, rows: list[dict], *, checkpoint=lambda _: Non
 
 def run(root: Path, *, interrupt_at: str | None = None) -> dict:
     root = Path(root).resolve(strict=True)
-    if interrupt_at is not None and interrupt_at not in CHECKPOINTS:
+    if interrupt_at is not None and interrupt_at not in FUNCTION_CHECKPOINTS:
         raise ValueError('unknown interruption checkpoint')
     with exclusive_owner(root):
         goal, journal, rows = _load(root)
+        if goal.get('adapter') == frontier.FUNCTION_ADAPTER:
+            return _run_functions(root, goal, journal, rows, interrupt_at=interrupt_at)
         candidate = goal['candidate']
         def checkpoint(name):
             if interrupt_at == name:
@@ -973,6 +1030,9 @@ def run(root: Path, *, interrupt_at: str | None = None) -> dict:
 
 
 def _check_terminal(root: Path, goal: dict, rows: list[dict]) -> None:
+    if goal.get('adapter') == frontier.FUNCTION_ADAPTER:
+        _load_functions(root, _origin_goal(goal))
+        return
     kind = rows[-1]['kind']
     expected = dict(goal['baseline'])
     if kind in ('LEARNED', 'COMMITTED'):
@@ -1016,6 +1076,13 @@ def recover(root: Path) -> dict:
     root = Path(root).resolve(strict=True)
     with exclusive_owner(root):
         goal, journal, rows = _load(root)
+        if goal.get('adapter') == frontier.FUNCTION_ADAPTER:
+            if rows[-1]['kind'] != 'F_DISPATCHED': return _function_summary(goal, rows)
+            if cleanup_isolated(rows[-1]['data']['container_name']) is not True:
+                raise MissionHold('function worker disposal unconfirmed')
+            journal.append('F_RECOVERED', {'operation': rows[-1]['data']['operation'],
+                'container_name': rows[-1]['data']['container_name'], 'disposal_confirmed': True})
+            return _function_summary(goal, journal.read())
         if rows[-1]['kind'] not in ('EXECUTION_DISPATCHED', 'PROBE_DISPATCHED'):
             return _summary(goal, rows)
         name = rows[-1]['data']['container_name']
@@ -1026,3 +1093,591 @@ def recover(root: Path) -> dict:
                        'container_name': name, 'disposal_confirmed': True,
                        'lost_execution_result': 'discarded; no authority'})
         return _summary(goal, journal.read())
+
+
+FUNCTION_MEMORY_ID = 'nomad-functions-memory-v018'
+FUNCTION_ACTION_SCHEMA = 'python-call-relational-vs-other'
+FUNCTION_WITNESS = 'nomad-v018-isolated-function-observer'
+
+
+def _function_memory(path: Path | None, *, mode='native', epoch=0) -> dict:
+    try:
+        return _rebuild_function_memory(path, mode=mode, epoch=epoch)
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, RecursionError) as error:
+        raise MissionHold('function memory artifact missing, malformed, or inconsistent') from error
+
+
+def _rebuild_function_memory(path: Path | None, *, mode='native', epoch=0) -> dict:
+    ranker = NativeDecisionRanker(mode, action_schema=FUNCTION_ACTION_SCHEMA)
+    world = repo_world.RepositoryWorldModel(include_failure=False)
+    memory = EvidenceMemory()
+    result = {'ranker': ranker, 'world': world, 'memory': memory, 'head': '0'*64,
+              'heads': [], 'records': [], 'eligible_tasks': 0}
+    if path is None or not path.exists(): return result
+    journal_path = path / 'events.jsonl'
+    if not journal_path.is_file(): raise MissionHold('function memory history missing')
+    if journal_path.stat().st_size > 64_000_000: raise MissionHold('function memory byte budget exceeded')
+    rows = Journal(journal_path, FUNCTION_MEMORY_ID).read()
+    if not rows or rows[0]['kind'] != 'MEMORY_CREATED' or len(rows) > 513 or journal_path.stat().st_size > 64_000_000:
+        raise MissionHold('function memory origin or budget invalid')
+    seen = set(); eligible_sources = set()
+    for row in rows[1:]:
+        record = row['data']
+        if row['kind'] != 'OBSERVATION_ADMITTED' or record.get('scope') != frontier.FUNCTION_ADAPTER:
+            raise MissionHold('cross-adapter function memory refused')
+        origin=record['origin']
+        origin_identity={k:v for k,v in origin.items() if k!='mission_id'}
+        if digest(canonical(origin_identity))[:32]!=origin['mission_id'] or origin['adapter']!=frontier.FUNCTION_ADAPTER:
+            raise MissionHold('stored function origin changed')
+        if (record['mission_id']!=origin['mission_id'] or record['baseline']!=origin['baseline']
+                or record['files']!=origin['analysis']['files'] or record['task_identity']!=origin['analysis']['task_identity']
+                or record['capture_epoch']!=origin['analysis']['capture_epoch'] or record['runtime']!=origin['runtime_sha256']
+                or record['signatures']!=origin['analysis']['signatures']
+                or record['candidate']!=_function_proposal(origin,record['candidate']['id'])
+                or record['candidate']['id']!=frontier.digest(json.dumps(record['candidate']['files'],sort_keys=True))):
+            raise MissionHold('function memory source/task/action scope changed')
+        recomputed_task=digest(canonical({'files':{k:ast.dump(ast.parse(v),include_attributes=False) for k,v in record['files'].items()},
+                                         'public':origin['public']}))
+        expected_execution_goal={k:origin[k] for k in ('public','policy','baseline','baseline_entries','public_command')}
+        expected_execution_goal['analysis']={'proposals':[record['candidate']]}
+        if recomputed_task!=record['task_identity'] or record['execution_goal']!=expected_execution_goal:
+            raise MissionHold('function memory execution origin differs')
+        acceptance=record['acceptance']; body={k:v for k,v in acceptance.items() if k!='sha256'}
+        if (acceptance.get('sha256')!=digest(canonical(body)) or acceptance.get('final_supported') is not True
+                or acceptance.get('candidate_sha256')!=record['candidate']['id']
+                or acceptance.get('sealed_sha256')!=origin['sealed_sha256']
+                or acceptance.get('witness_receipt_sha256')!=record['witness']['receipt_hash']
+                or any(not isinstance(acceptance.get(k),str) or len(acceptance[k])!=64
+                       for k in ('final_observation_sha256','commit_sha256'))):
+            raise MissionHold('function final acceptance provenance changed')
+        witness = WitnessReceipt(**record['witness'])
+        if (not witness.verify_checksum() or not witness.supported or witness.witness_id != FUNCTION_WITNESS
+                or witness.transmission_id != record['candidate']['id']
+                or witness.task_id != record['mission_id']
+                or record['observation_id'] != digest(canonical([record['task_identity'], record['candidate']['id']]))
+                or record['public_result']['supported'] is not True
+                or record['capture_epoch'] < 0):
+            raise MissionHold('function memory evidence binding invalid')
+        observed = _validate_function_execution(record['execution_goal'],
+            {'operation':'search:'+record['candidate']['id'],
+             'container_name':record['public_result']['execution']['container_name']},
+            record['public_result']['execution'], None)
+        if observed != {k:v for k,v in record['public_result'].items() if k!='execution'}:
+            raise MissionHold('stored function public evidence changed')
+        if record['observation_id'] in seen: raise MissionHold('duplicate function memory admission')
+        seen.add(record['observation_id'])
+        result['records'].append(record)
+        if record['runtime'] != _runtime_identity() or not 0 <= epoch-record['capture_epoch'] <= 4: continue
+        source_sha = digest(canonical(record['baseline']))
+        if source_sha in eligible_sources: continue
+        eligible_sources.add(source_sha)
+        ranker.observe(PublicObservation(record['task_identity'], source_sha, record['candidate']['id'],
+            digest(canonical(record['public_result']['execution'])), record['candidate']['family'], True,
+            record['capture_epoch']), independently_observed=True)
+        for name, signature in record['signatures'].items():
+            world.observe(signature, name in record['candidate']['files'])
+        result['eligible_tasks'] += 1
+        if record.get('mnemonic') is not None:
+            saved = record['mnemonic']
+            changed=list(record['candidate']['files']); public=origin['public']; first=public[0]
+            if (len(changed)!=1 or '/' in changed[0] or saved['changed_file']!=changed[0]
+                    or saved['module']!=first['module'] or saved['function']!=first['function']
+                    or saved['rows']!=[[i,0] for i in range(len(public))]
+                    or saved['receipt']['after']!=[1.0]*len(public)
+                    or digest(canonical({'current':saved['receipt']['before'],'target':[1.0]*len(public),
+                                         'candidate':[1.0]*len(public)}))!=witness.public_evidence_digest):
+                raise MissionHold('MNEMONIC effect differs from bound public WITNESS observation')
+            task = AtlasTask(record['task_identity'], record['files'], saved['changed_file'],
+                (Contract(saved['module'], saved['function'], tuple(tuple(x) for x in saved['rows'])),), (), (), ())
+            receipt = ChangeReceipt(**{**saved['receipt'], 'before': tuple(saved['receipt']['before']),
+                                       'after': tuple(saved['receipt']['after'])})
+            memory.record(task=task, contract=receipt.contract,
+                action_source=record['candidate']['files'][saved['changed_file']], receipt=receipt,
+                capture_epoch=record['capture_epoch'])
+    result.update(head=rows[-1]['sha256'], heads=[r['sha256'] for r in rows])
+    return result
+
+
+def read_function_memory_ranker(memory_root: Path, *, mode='native', now_epoch=0) -> NativeDecisionRanker:
+    path = Path(memory_root)
+    if not path.exists(): return _function_memory(None, mode=mode, epoch=now_epoch)['ranker']
+    with exclusive_owner(path): return _function_memory(path, mode=mode, epoch=now_epoch)['ranker']
+
+
+def initialize_functions(root: Path, source: Path, *, goal_text: str, public: list[dict],
+        challenge: list[dict], final: list[dict], policy: SandboxPolicy, ranker=None,
+        memory_root: Path | None = None, capture_epoch=0, adaptive_enabled=True,
+        max_candidates=64, max_executions=96, probe_budget=3, max_files_changed=2,
+        public_command: list[str] | None = None) -> dict:
+    """Initialize a bounded function mission without importing repository code.
+
+    Public cases, finite AST inventory and planning models are frozen. Private
+    values are sealed separately. No native qualification is inferred here.
+    """
+    policy.validate()
+    public, challenge, final = (frontier.validate_function_cases(r) for r in (public, challenge, final))
+    for partition in (public,challenge,final,public+challenge): frontier.function_command(partition)
+    inputs = [digest(canonical(frontier.function_inputs(rows))) for rows in (public, challenge, final)]
+    all_inputs = [digest(canonical(r)) for rows in (public, challenge, final) for r in frontier.function_inputs(rows)]
+    if len(set(all_inputs)) != len(all_inputs): raise ValueError('function evidence partitions overlap')
+    if (not isinstance(goal_text, str) or not 1 <= len(goal_text) <= 4096
+            or type(capture_epoch) is not int or capture_epoch < 0 or type(adaptive_enabled) is not bool
+            or type(max_executions) is not int or not 5 <= max_executions <= 256
+            or type(probe_budget) is not int or not 1 <= probe_budget <= 8):
+        raise ValueError('function mission goal or budget invalid')
+    if public_command not in (None, COMMAND): raise ValueError('only the registered full unittest command is supported')
+    source = Path(source)
+    metadata = source.lstat()
+    if stat.S_ISLNK(metadata.st_mode) or _reparse(metadata): raise UnsafeWorkspace('source root links refused')
+    source, root = source.resolve(strict=True), Path(root).resolve()
+    if root == source or root in source.parents or source in root.parents: raise ValueError('source and mission must be disjoint')
+    if root.exists(): raise FileExistsError('mission root exists')
+    memory_root = Path(memory_root).resolve() if memory_root else None
+    if memory_root and any(memory_root == p or memory_root in p.parents or p in memory_root.parents for p in (source, root)):
+        raise ValueError('function memory must be disjoint')
+    root.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='nomad-function-init-', dir=root.parent) as temporary:
+        stage = Path(temporary)
+        snapshot_source(source, stage/'baseline', policy)
+        analysis = frontier.inspect_function_repository(stage/'baseline', public,
+            max_candidates=max_candidates, max_files_changed=max_files_changed)
+        for row in challenge+final:
+            filename = analysis['modules'].get(row['module'])
+            if not filename or row['function'] not in analysis['symbols'][filename]:
+                raise ValueError('private callable outside admitted interface')
+        if public_command and not (stage/'baseline'/'tests').is_dir(): raise ValueError('registered suite requires tests directory')
+        manifest = _manifest(stage/'baseline')
+        entries = [[name,sha,(stage/'baseline'/name).stat().st_size] for name,sha in manifest.items()]
+        mode = getattr(ranker, 'mode', 'native')
+        if memory_root and memory_root.exists():
+            with exclusive_owner(memory_root): models = _function_memory(memory_root, mode=mode, epoch=capture_epoch)
+        else: models = _function_memory(memory_root, mode=mode, epoch=capture_epoch)
+        active = ranker or models['ranker']
+        if not isinstance(active, NativeDecisionRanker) or active.action_schema != FUNCTION_ACTION_SCHEMA:
+            raise ValueError('function mission requires the scoped native ranker')
+        if ranker is not None:
+            for observation in models['ranker'].events: active.observe(observation, independently_observed=True)
+        files = analysis['files']
+        graph_task = repo_world.RepoTask('function-structure',files,public[0]['module'],(),(),(),'','')
+        graph,_,_ = repo_world.build_graph(graph_task)
+        if {k:sorted(v) for k,v in graph.items()} != analysis['graph']:
+            raise ValueError('static import observers disagree')
+        # Existing WORLD MODEL structural tokens; no host failure harness.
+        reachable=set(); pending=[analysis['modules'][row['module']] for row in public]
+        while pending:
+            current=pending.pop()
+            if current in reachable: continue
+            reachable.add(current);pending.extend(graph[current])
+        signatures = {name: sorted(repo_world._ast_tokens(text) | {'reachable' if name in reachable else 'unreachable'})
+                      for name, text in files.items()}
+        scores = {name: models['world'].score(sig) if adaptive_enabled else 0.0 for name, sig in signatures.items()}
+        weights = {name: math.exp(max(-40, (score-max(scores.values()))/12)) for name, score in scores.items()}
+        prior = {name: w/sum(weights.values()) for name,w in weights.items()}
+        analysis.update(signatures=signatures, world_scores=scores, world_prior=prior,
+            task_identity=digest(canonical({'files': {k: ast.dump(ast.parse(v), include_attributes=False) for k,v in files.items()},
+                                            'public': public})), memory_head=models['head'],
+            eligible_memory_tasks=models['eligible_tasks'], capture_epoch=capture_epoch, adaptive_enabled=adaptive_enabled)
+        sealed = canonical({'challenge': challenge, 'final': final})
+        models['memory'].save(stage/'planning_memory.json')
+        save_atomic(stage/'planning_ranker.json', canonical(active.snapshot()))
+        goal = {'schema': SCHEMA, 'version': '0.18.0', 'adapter': frontier.FUNCTION_ADAPTER,
+            'goal': goal_text, 'public': public, 'policy': asdict(policy), 'baseline': manifest, 'baseline_entries':entries,
+            'runtime_sha256': _runtime_identity(), 'sealed_sha256': digest(sealed),
+            'analysis': analysis, 'candidate': None, 'memory_root': str(memory_root) if memory_root else None,
+            'planning':{'candidate_inventory_sha256':analysis['candidate_inventory_sha256'],
+                        'ast_candidates_evaluated':analysis['generated_candidates_checked'],
+                        'genesis':analysis['genesis']},
+            'max_executions': max_executions, 'probe_budget': probe_budget, 'public_command': public_command,
+            'planning_context': {n: digest((stage/n).read_bytes()) for n in ('planning_memory.json','planning_ranker.json')},
+            'scope': 'bounded JSON Python functions, local import graph, up to two edited files; no arbitrary Python authority'}
+        goal['mission_id'] = digest(canonical(goal))[:32]
+        shutil.copytree(stage/'baseline', stage/'workspace')
+        save_atomic(stage/'goal.json', canonical(goal)); save_atomic(stage/'sealed.json', sealed)
+        EffectLedger(stage/'effects')
+        (stage/'events.jsonl').touch()
+        Journal(stage/'events.jsonl', goal['mission_id']).append('PLATFORM_CREATED', {'goal_sha256': digest(canonical(goal))})
+        _publish_staged_mission(stage, root)
+    return goal
+
+
+def _function_proposal(goal, identity):
+    if identity is None: return None
+    found = [p for p in goal['analysis']['proposals'] if p['id'] == identity]
+    if len(found) != 1: raise MissionHold('unrecognized function proposal')
+    return found[0]
+
+
+def _function_manifest(goal, identity):
+    proposal = _function_proposal(goal, identity)
+    return {**goal['baseline'], **({k: digest(v.encode()) for k,v in proposal['files'].items()} if proposal else {})}
+
+
+def _function_spec(goal, sealed, operation):
+    stage, _, value = operation.partition(':')
+    proposal = None
+    if stage == 'probe':
+        index = int(value)
+        rows = [goal['public'][index]]
+    elif stage == 'search':
+        proposal = _function_proposal(goal, value); rows = goal['public']
+    elif stage in ('before', 'challenge', 'final', 'suite'):
+        proposal = _function_proposal(goal, value)
+        rows = (goal['public']+sealed['challenge']) if stage == 'before' else sealed['challenge'] if stage == 'challenge' else sealed['final'] if stage == 'final' else []
+    else: raise MissionHold('unrecognized function operation')
+    command = goal['public_command'] if stage == 'suite' else frontier.function_command(rows)
+    if not command: raise MissionHold('unregistered full-suite operation')
+    return rows, command, None if stage in ('probe','before') else proposal['id']
+
+
+def _validate_function_execution(goal, data, execution, root):
+    sealed = json.loads((root/'sealed.json').read_bytes()) if root is not None else {}
+    rows, command, identity = _function_spec(goal, sealed, data['operation'])
+    manifest = _function_manifest(goal, identity)
+    proposal = _function_proposal(goal, identity)
+    baseline_sizes = {row[0]:row[2] for row in goal['baseline_entries']}
+    entries = [[name, sha, len(proposal['files'][name].encode()) if proposal and name in proposal['files']
+                else baseline_sizes[name]] for name,sha in sorted(manifest.items())]
+    expected = {'schema': 'nomad.isolated-test.v1', 'container_name': data['container_name'],
+        'image_digest': goal['policy']['image'].split('@sha256:')[-1], 'command': command,
+        'snapshot_sha256': digest(canonical(entries)), 'source_files': len(entries),
+        'source_bytes': sum(row[2] for row in entries), 'container_cleanup_confirmed': True}
+    if any(execution.get(k) != v for k,v in expected.items()): raise MissionHold('foreign function execution receipt')
+    if (type(execution.get('returncode')) is not int or type(execution.get('timed_out')) is not bool
+            or execution.get('tests_passed') is not (execution['returncode'] == 0 and not execution['timed_out'])):
+        raise MissionHold('inconsistent function execution verdict')
+    return ({'supported': execution['tests_passed'], 'matches': [], 'observed_sha256': execution['output_sha256']}
+            if not rows else frontier.compare_function_output(execution, rows))
+
+
+def _load_functions(root, goal):
+    original = _origin_goal(goal)
+    identity = {k:v for k,v in original.items() if k != 'mission_id'}
+    if digest(canonical(identity))[:32] != original['mission_id'] or original['runtime_sha256'] != _runtime_identity():
+        raise MissionHold('function goal or runtime identity changed')
+    SandboxPolicy(**original['policy']).validate()
+    if _manifest(root/'baseline') != original['baseline'] or digest((root/'sealed.json').read_bytes()) != original['sealed_sha256']:
+        raise MissionHold('function source or private evidence changed')
+    for name, sha in original['planning_context'].items():
+        if name not in ('planning_memory.json','planning_ranker.json') or digest((root/name).read_bytes()) != sha:
+            raise MissionHold('function planning context changed')
+    if not EffectLedger(root/'effects', create=False).snapshot()['replay_safe']: raise MissionHold('unresolved function external effect')
+    journal = Journal(root/'events.jsonl', original['mission_id']); rows = journal.read()
+    if not rows or rows[0]['kind'] != 'PLATFORM_CREATED' or rows[0]['data'] != {'goal_sha256': digest(canonical(original))}:
+        raise MissionHold('function mission origin changed')
+    pending = None; expected = dict(original['baseline']); patch = None; selected = None
+    observations = {}; committed = False; finished = False; witness = None; final = None
+    patch_ids = set(); dispatches = 0; diagnosed = False
+    for row in rows[1:]:
+        kind, data = row['kind'], row['data']
+        if finished: raise MissionHold('events after function terminal state')
+        if committed and kind!='F_LEARNED': raise MissionHold('committed function candidate is immutable')
+        if pending and kind not in ('F_OBSERVED','F_RECOVERED'): raise MissionHold('unreconciled function dispatch')
+        if patch and kind != 'F_PATCHED': raise MissionHold('uncompleted function patch transaction')
+        if kind == 'F_PATCH':
+            if data['id'] in patch_ids or data['before'] != expected: raise MissionHold('duplicate or stale function patch')
+            patch_ids.add(data['id']); target = _function_manifest(original, data['candidate'])
+            if data['after'] != target: raise MissionHold('foreign function patch target')
+            patch = data
+        elif kind == 'F_PATCHED':
+            if patch is None or data != {'id': patch['id']}: raise MissionHold('function patch completion without intent')
+            expected = patch['after']; patch = None
+        elif kind == 'F_DISPATCHED':
+            dispatches += 1
+            if dispatches > original['max_executions']: raise MissionHold('function execution budget exceeded')
+            _, _, candidate_id = _function_spec(original, json.loads((root/'sealed.json').read_bytes()), data['operation'])
+            stage=data['operation'].split(':')[0]
+            if (stage in ('before','challenge','final','suite') and (selected is None or data['operation'].partition(':')[2]!=selected['id'])
+                    or stage in ('probe','search') and selected is not None
+                    or stage=='final' and (witness is None or not witness.supported)):
+                raise MissionHold('function observation stage violates evidence separation')
+            if expected != _function_manifest(original, candidate_id): raise MissionHold('function operation source mismatch')
+            if data['operation'] in observations: raise MissionHold('duplicate completed function operation')
+            pending = data
+        elif kind == 'F_RECOVERED':
+            if not pending or data != {'operation': pending['operation'], 'container_name': pending['container_name'], 'disposal_confirmed': True}:
+                raise MissionHold('foreign function cleanup receipt')
+            pending = None
+        elif kind == 'F_OBSERVED':
+            if not pending or data['operation'] != pending['operation']: raise MissionHold('unbound function observation')
+            observed = _validate_function_execution(original, pending, data['execution'], root)
+            if data['result'] != observed: raise MissionHold('function observation differs from trusted comparison')
+            observations[data['operation']] = data; pending = None
+        elif kind == 'F_DIAGNOSIS':
+            if selected is not None or diagnosed: raise MissionHold('duplicate or late function diagnosis')
+            if sorted(data['order'])!=sorted(p['id'] for p in original['analysis']['proposals']):
+                raise MissionHold('function diagnosis changed frozen candidate inventory')
+            diagnosed = True
+        elif kind == 'F_SELECTED':
+            if not diagnosed or selected is not None or not observations.get('search:'+data['candidate'], {}).get('result',{}).get('supported'):
+                raise MissionHold('function selection lacks public support')
+            selected = _function_proposal(original, data['candidate'])
+        elif kind == 'F_WITNESS':
+            if selected is None or witness is not None: raise MissionHold('duplicate witness or witness before function selection')
+            witness = WitnessReceipt(**data['receipt'])
+            expected_witness = _function_witness(original, selected, observations)
+            if asdict(witness) != asdict(expected_witness): raise MissionHold('function WITNESS observation changed')
+        elif kind == 'F_FINAL':
+            if final is not None or witness is None or not witness.supported or selected is None: raise MissionHold('duplicate final or final without supported WITNESS')
+            final = observations.get('final:'+selected['id'])
+            if final is None or data != {'supported': final['result']['supported'], 'observation_sha256': digest(canonical(final))}:
+                raise MissionHold('unbound final function observation')
+        elif kind == 'F_COMMITTED':
+            if committed or data != {'candidate':selected['id'] if selected else None}:
+                raise MissionHold('duplicate or foreign function commit')
+            if not final or not final['result']['supported'] or selected is None or expected != _function_manifest(original, selected['id']):
+                raise MissionHold('unverified function commit')
+            if original['public_command'] and not observations.get('suite:'+selected['id'],{}).get('result',{}).get('supported'):
+                raise MissionHold('full suite did not support commit')
+            committed = True
+        elif kind == 'F_LEARNED':
+            if not committed or digest((root/'learning.json').read_bytes()) != data['learning_sha256']:
+                raise MissionHold('unbound function learning')
+            memory_path = Path(original['memory_root']) if original['memory_root'] else root/'mnemonic'
+            model = _function_memory(memory_path, epoch=original['analysis']['capture_epoch'])
+            learning = json.loads((root/'learning.json').read_bytes())
+            if not any(r['observation_id'] == learning['observation_id'] for r in model['records']):
+                raise MissionHold('function learned observation lost')
+            finished = True
+        elif kind in ('F_REJECTED','F_EXHAUSTED'):
+            if expected != original['baseline']: raise MissionHold('terminal function rollback incomplete')
+            finished = True
+        else: raise MissionHold('unknown function transition')
+    actual = _manifest(root/'workspace')
+    if patch:
+        if set(actual) != set(expected) or any(actual[k] not in (patch['before'][k],patch['after'][k]) for k in actual):
+            raise MissionHold('unexpected partial function patch')
+    elif actual != expected: raise MissionHold('unexpected function workspace modification')
+    return {**original, '_origin': original, 'candidate': selected}, journal, rows
+
+
+def _function_summary(goal, rows):
+    status = {'F_LEARNED':'completed','F_REJECTED':'rejected','F_EXHAUSTED':'exhausted',
+              'F_DISPATCHED':'hold_uncertain_execution','F_COMMITTED':'committed'}.get(rows[-1]['kind'],'in_progress')
+    return {'schema': SCHEMA+'.summary', 'adapter': frontier.FUNCTION_ADAPTER, 'mission_id': goal['mission_id'],
+        'status':status, 'events':len(rows), 'journal_head':rows[-1]['sha256'],
+        'dispatches':sum(r['kind']=='F_DISPATCHED' for r in rows),
+        'public_executions_recorded':sum(r['kind']=='F_OBSERVED' and r['data']['operation'].startswith('search:') for r in rows),
+        'baseline_probes_recorded':sum(r['kind']=='F_OBSERVED' and r['data']['operation'].startswith('probe:') for r in rows),
+        'witness_observations':sum(r['kind']=='F_WITNESS' for r in rows),
+        'final_observations':sum(r['kind']=='F_FINAL' for r in rows),
+        'candidate_inventory_sha256':goal['analysis']['candidate_inventory_sha256'],
+        'candidate_inventory_count':len(goal['analysis']['proposals']), 'cloud_model_calls':0,
+        'scope':goal['scope'], 'authority':'finite isolated API observations; candidate review only, no deployment or skill promotion'}
+
+
+def _function_witness(goal, candidate, observations):
+    before = observations['before:'+candidate['id']]['result']['matches']
+    public = observations['search:'+candidate['id']]['result']['matches']
+    challenge = observations['challenge:'+candidate['id']]['result']['matches']
+    n = len(public)
+    return Witness(FUNCTION_WITNESS).attest(task_id=goal['mission_id'], transmission_id=candidate['id'], world_epoch=0,
+        current_public=tuple(map(float,before[:n])), target_public=(1.0,)*n, candidate_public=tuple(map(float,public)),
+        current_challenge=tuple(map(float,before[n:])), target_challenge=(1.0,)*len(challenge),
+        candidate_challenge=tuple(map(float,challenge)))
+
+
+def _function_learn(root, goal, rows, candidate):
+    path = Path(goal['memory_root']) if goal['memory_root'] else root/'mnemonic'
+    pinned = goal['analysis']['memory_head']; observation_id = digest(canonical([goal['analysis']['task_identity'],candidate['id']]))
+    if not path.exists() and pinned != '0'*64: raise MissionHold('pinned function memory history lost')
+    path.mkdir(parents=True, exist_ok=True)
+    with exclusive_owner(path):
+        ledger_path = path/'events.jsonl'
+        if not ledger_path.exists():
+            if pinned != '0'*64: raise MissionHold('pinned function memory journal lost')
+            ledger_path.touch(exist_ok=False)
+            Journal(ledger_path, FUNCTION_MEMORY_ID).append('MEMORY_CREATED', {'scope':frontier.FUNCTION_ADAPTER})
+        models = _function_memory(path, epoch=goal['analysis']['capture_epoch'])
+        if pinned != '0'*64 and pinned not in models['heads']: raise MissionHold('function memory no longer continues planning history')
+        if any(r['capture_epoch'] > goal['analysis']['capture_epoch'] for r in models['records']): raise MissionHold('function memory epoch moved backwards')
+        matching = [r for r in models['records'] if r['observation_id']==observation_id or
+                    (r['baseline']==goal['baseline'] and r['candidate']['id']==candidate['id'])]
+        if matching: observation_id=matching[0]['observation_id']
+        if not matching:
+            observed = {r['data']['operation']:r['data'] for r in rows if r['kind']=='F_OBSERVED'}
+            record = {'scope':frontier.FUNCTION_ADAPTER, 'observation_id':observation_id,
+                'mission_id':goal['mission_id'],
+                'origin':_origin_goal(goal),
+                'task_identity':goal['analysis']['task_identity'], 'baseline':goal['baseline'],
+                'capture_epoch':goal['analysis']['capture_epoch'], 'runtime':goal['runtime_sha256'],
+                'candidate':candidate, 'files':goal['analysis']['files'], 'signatures':goal['analysis']['signatures'],
+                'witness':next(r['data']['receipt'] for r in rows if r['kind']=='F_WITNESS'),
+                'public_result':{**observed['search:'+candidate['id']]['result'],
+                                 'execution':observed['search:'+candidate['id']]['execution']}, 'mnemonic':None}
+            record['execution_goal']={k:goal[k] for k in ('public','policy','baseline','baseline_entries','public_command')}
+            record['execution_goal']['analysis']={'proposals':[candidate]}
+            final=next(r['data'] for r in rows if r['kind']=='F_FINAL')
+            acceptance={'candidate_sha256':candidate['id'],'sealed_sha256':goal['sealed_sha256'],
+                'final_supported':final['supported'],'final_observation_sha256':final['observation_sha256'],
+                'commit_sha256':next(r['sha256'] for r in rows if r['kind']=='F_COMMITTED'),
+                'witness_receipt_sha256':record['witness']['receipt_hash']}
+            acceptance['sha256']=digest(canonical(acceptance));record['acceptance']=acceptance
+            # Existing MNEMONIC grammar can represent single-file root-module
+            # effects. Package/multi-edit effects abstain rather than fabricate
+            # per-file causal evidence from a jointly successful intervention.
+            changed = list(candidate['files'])
+            if len(changed)==1 and '/' not in changed[0]:
+                public = goal['public']; contract = Contract(public[0]['module'],public[0]['function'],tuple((i,0) for i in range(len(public))))
+                task = AtlasTask(record['task_identity'],record['files'],changed[0],(contract,),(),(),())
+                before = observed['before:'+candidate['id']]['result']['matches'][:len(public)]
+                body = {'task_id':task.task_id,'epoch':0,'before_digest':source_digest(task.files),
+                    'after_digest':source_digest({**task.files,**candidate['files']}), 'changed_file':changed[0],
+                    'contract':contract.key,'before':tuple(map(float,before)), 'after':(1.0,)*len(public)}
+                receipt = ChangeReceipt(**body,receipt_digest=memory_digest(body))
+                if models['memory'].record(task=task,contract=contract.key,action_source=candidate['files'][changed[0]],
+                                          receipt=receipt,capture_epoch=record['capture_epoch']):
+                    record['mnemonic']={'changed_file':changed[0],'module':contract.module,'function':contract.function,
+                        'rows':contract.rows,'receipt':asdict(receipt)}
+            if len(models['records']) >= 512 or ledger_path.stat().st_size+len(canonical(record))>64_000_000:
+                raise MissionHold('function memory storage budget exhausted')
+            Journal(ledger_path,FUNCTION_MEMORY_ID).append('OBSERVATION_ADMITTED',record)
+        learning = {'schema':'nomad.function-learning.v1','mission_id':goal['mission_id'],
+                    'observation_id':observation_id,'candidate_sha256':candidate['id']}
+        existing = root/'learning.json'
+        if existing.exists() and existing.read_bytes()!=canonical(learning): raise MissionHold('foreign pending function learning')
+        save_atomic(existing,canonical(learning))
+        return digest(canonical(learning))
+
+
+def _run_functions(root, goal, journal, rows, *, interrupt_at=None):
+    def checkpoint(name):
+        if interrupt_at==name: raise InjectedInterruption(name)
+    if rows[-1]['kind']=='F_DISPATCHED': raise MissionHold('function execution ambiguous; explicit cleanup recovery required')
+    if rows[-1]['kind'] in ('F_LEARNED','F_REJECTED','F_EXHAUSTED'): return _function_summary(goal,rows)
+    sealed = json.loads((root/'sealed.json').read_bytes())
+    def append(kind,data): journal.append(kind,data)
+    def patch(identity, tag):
+        found = [r for r in journal.read() if r['kind']=='F_PATCH' and r['data']['id']==tag]
+        done = [r for r in journal.read() if r['kind']=='F_PATCHED' and r['data']['id']==tag]
+        if done: return
+        if not found:
+            append('F_PATCH',{'id':tag,'candidate':identity,'before':_manifest(root/'workspace'),
+                              'after':_function_manifest(goal,identity)})
+            checkpoint('after_plan')
+        proposal = _function_proposal(goal,identity)
+        intended = _function_manifest(goal,identity)
+        for name,sha in intended.items():
+            destination=root/'workspace'/name
+            if digest(destination.read_bytes())!=sha:
+                data=proposal['files'][name].encode() if proposal and name in proposal['files'] else (root/'baseline'/name).read_bytes()
+                save_atomic(destination,data); checkpoint('after_patch_write')
+                if proposal and len(proposal['files'])==2: checkpoint('after_multifile_patch_write')
+        append('F_PATCHED',{'id':tag}); checkpoint('after_patch_record')
+    def observe(operation):
+        previous = [r['data'] for r in journal.read() if r['kind']=='F_OBSERVED' and r['data']['operation']==operation]
+        if previous: return previous[0]
+        if sum(r['kind']=='F_DISPATCHED' for r in journal.read())>=goal['max_executions']:
+            raise MissionHold('function execution budget exhausted')
+        requested,command,_ = _function_spec(goal,sealed,operation)
+        dispatch={'operation':operation,'container_name':'nomad-'+uuid.uuid4().hex[:24]}
+        append('F_DISPATCHED',dispatch); checkpoint('after_dispatch')
+        execution=run_isolated(root/'workspace',command=command,policy=SandboxPolicy(**goal['policy']),
+                               container_name=dispatch['container_name'],include_output=bool(requested))
+        result=_validate_function_execution(goal,dispatch,execution,root)
+        data={'operation':operation,'execution':execution,'result':result}
+        append('F_OBSERVED',data); checkpoint('after_public')
+        return data
+    # Complete a recorded partially applied multi-file transaction first.
+    if rows[-1]['kind']=='F_PATCH': patch(rows[-1]['data']['candidate'],rows[-1]['data']['id'])
+    chosen = next((r['data']['candidate'] for r in journal.read() if r['kind']=='F_SELECTED'),None)
+    if chosen is None:
+        prior=dict(goal['analysis']['world_prior']); roles={name:name for name in prior}
+        costs={name:max(1,sum(name in p['files'] for p in goal['analysis']['proposals'])) for name in prior}
+        model=inquiry.ProbeLikelihoods(); menu=[]
+        # Explicit structural likelihood assumption, not training evidence:
+        # a faulty reachable module is more likely to break this public API.
+        for i,row in enumerate(goal['public']):
+            filename=goal['analysis']['modules'][row['module']]
+            reachable=set(); pending=[filename]
+            while pending:
+                name=pending.pop()
+                if name in reachable: continue
+                reachable.add(name); pending.extend(goal['analysis']['graph'][name])
+            for hypothesis in prior:
+                for _ in range(4): model.observe(hypothesis,str(i),passed=hypothesis not in reachable)
+            menu.append(inquiry.ProbeMenu(str(i),str(i),0.05))
+        seen=set(); decisions=[]; resonances=[]
+        for step in range(min(goal['probe_budget'],len(menu))):
+            decision=(inquiry.choose_probe(prior,costs,roles,model,menu,frozenset(seen),1.0)
+                      if goal['analysis']['adaptive_enabled'] else None)
+            index=int(decision.probe_id) if decision else next(i for i in range(len(menu)) if str(i) not in seen)
+            evidence=observe('probe:'+str(index)); seen.add(str(index))
+            filename=goal['analysis']['modules'][goal['public'][index]['module']]
+            source=goal['analysis']['files'][filename]
+            model_task=PythonTask('api-equality-probe',source,(PythonExample({},1),))
+            observation=TestObservation(evidence['result']['supported'],1,None,None,None,0)
+            precomputed=PythonExecution(True,None,None,None,sum(1 for _ in ast.walk(ast.parse(source))),(observation,),0)
+            resonance=encode_resonance(model_task,execution=precomputed,numeric_inputs=False)
+            resonances.append({'index':index,**asdict(resonance),'fusion_signature':resonance.fusion_signature,
+                               'encoding':'bound isolated API equality; numeric input correlations disabled'})
+            prior=inquiry._update(prior,roles,model,str(index),evidence['result']['supported'])
+            decisions.append({'index':index,'decision':asdict(decision) if decision else None,'posterior':prior})
+        ranker=NativeDecisionRanker.load(json.loads((root/'planning_ranker.json').read_bytes()))
+        proposals=goal['analysis']['proposals']
+        @dataclass
+        class Ranked:
+            family:str
+            item:dict
+        ranked=ranker.rank([Ranked(p['family'],p) for p in proposals],now_epoch=goal['analysis']['capture_epoch'])
+        order=[p.item for p in ranked]
+        memory=EvidenceMemory.load(root/'planning_memory.json')
+        recall={}
+        first=goal['public'][0]
+        contract=Contract(first['module'],first['function'],tuple((i,0) for i in range(len(goal['public']))))
+        symbols=SymbolGraph(goal['analysis']['files'])
+        for p in order:
+            if len(p['files'])==1 and '/' not in next(iter(p['files'])):
+                filename=next(iter(p['files']))
+                recall[p['id']]=memory.recall(action_source=p['files'][filename],
+                    features=symbols.features(contract,filename),now_epoch=goal['analysis']['capture_epoch'],
+                    target_task_id=goal['analysis']['task_identity']).as_dict()
+        if goal['analysis']['adaptive_enabled']:
+            # Stable priority consumes measured posterior; native rank breaks
+            # ties. A failed direct leaf probe can outrank the public facade.
+            order.sort(key=lambda p:(-int(recall.get(p['id'],{}).get('outcome')=='impact'),
+                -sum(prior.get(n,0) for n in p['files'])/len(p['files'])))
+        diagnosis={'decisions':decisions,'posterior':prior,'order':[p['id'] for p in order],
+                   'resonance':resonances,'mnemonic_recall':recall,
+                   'ranking':ranker.summary(now_epoch=goal['analysis']['capture_epoch']),
+                   'likelihood_scope':'declared reachability heuristic; not calibrated learned probability'}
+        prior_diagnosis=[r['data'] for r in journal.read() if r['kind']=='F_DIAGNOSIS']
+        if prior_diagnosis and canonical(prior_diagnosis)!=canonical([diagnosis]): raise MissionHold('function diagnosis replay differs')
+        if not prior_diagnosis: append('F_DIAGNOSIS',diagnosis)
+        checkpoint('after_proposal')
+        for candidate in order:
+            patch(candidate['id'],'search-apply:'+candidate['id'])
+            result=observe('search:'+candidate['id'])
+            if result['result']['supported']:
+                chosen=candidate['id']; append('F_SELECTED',{'candidate':chosen}); break
+            patch(None,'search-revert:'+candidate['id'])
+        if chosen is None:
+            append('F_EXHAUSTED',{'reason':'bounded function inventory exhausted'})
+            return _function_summary(goal,journal.read())
+    candidate=_function_proposal(goal,chosen)
+    if goal['public_command'] and not observe('suite:'+chosen)['result']['supported']:
+        patch(None,'reject-suite'); append('F_REJECTED',{'reason':'full public suite rejected'}); return _function_summary(goal,journal.read())
+    patch(None,'witness-baseline')
+    observe('before:'+chosen)
+    patch(chosen,'witness-candidate')
+    challenge=observe('challenge:'+chosen)
+    observations={r['data']['operation']:r['data'] for r in journal.read() if r['kind']=='F_OBSERVED'}
+    receipt=_function_witness(goal,candidate,observations)
+    if not any(r['kind']=='F_WITNESS' for r in journal.read()): append('F_WITNESS',{'receipt':asdict(receipt)})
+    checkpoint('after_witness')
+    if not receipt.supported:
+        patch(None,'reject-witness'); append('F_REJECTED',{'reason':'independent challenge rejected'})
+        return _function_summary(goal,journal.read())
+    final=observe('final:'+chosen)
+    if not any(r['kind']=='F_FINAL' for r in journal.read()):
+        append('F_FINAL',{'supported':final['result']['supported'],'observation_sha256':digest(canonical(final))})
+    checkpoint('after_final')
+    if not final['result']['supported']:
+        patch(None,'reject-final'); append('F_REJECTED',{'reason':'independent final rejected; no search feedback'})
+        return _function_summary(goal,journal.read())
+    if not any(r['kind']=='F_COMMITTED' for r in journal.read()): append('F_COMMITTED',{'candidate':chosen})
+    checkpoint('after_commit'); checkpoint('before_memory')
+    learning=_function_learn(root,goal,journal.read(),candidate)
+    checkpoint('after_memory'); checkpoint('after_learning')
+    append('F_LEARNED',{'learning_sha256':learning})
+    validated,_,rows=_load(root)
+    return _function_summary(validated,rows)

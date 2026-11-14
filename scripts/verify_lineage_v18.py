@@ -15,6 +15,7 @@ V15_SHA = '088203e8af0b0c9886417c20a7eec2e75176b05b8313a527356def3b96a76544'
 V14_SHA = '22c218597f5fa1cfc4003fc7694daac420ac42d0603feaeb8130ade6ef2619ea'
 BGR_SHA = '93177c5cc628ac0c6426d8c612c0d769b86ed53cbd7b2a3f872d2706c601a8c2'
 ENGINEERING_SEAL_SHA = '577c0182ed917742ffa49b286638026657a165f2ee0a49e4f2130b124fdb8335'
+QUALIFICATION_SEAL_SHA = 'a51bf062d96db7a144450f37fb09f39377584e9642f36fbf3fd9606023afcfec'
 
 
 def hash_file(path: Path) -> str:
@@ -107,12 +108,24 @@ def verify(root: Path = ROOT, *, compact: Path | None = None, predecessor: Path 
                if not (root / name).is_file() or hash_file(root / name) != digest]
     if changed:
         raise ValueError('frozen v0.18 engineering evidence differs: ' + repr(changed))
+    qualification_seal = root / 'results/RELEASE_MANIFEST_QUALIFICATION_V018.json'
+    if hash_file(qualification_seal) != QUALIFICATION_SEAL_SHA:
+        raise ValueError('original ddb5c32 qualification seal differs')
+    qualification = json.loads(qualification_seal.read_bytes())['sha256_by_path']
+    protected = {name: checksum for name, checksum in qualification.items() if name.startswith(
+                  ('results/', 'experiments/', 'vendor/', 'external_sources/', 'baseline/'))}
+    changed = [name for name, checksum in protected.items()
+               if not (root / name).is_file() or hash_file(root / name) != checksum]
+    if changed:
+        raise ValueError('frozen ddb5c32 qualification evidence differs: ' + repr(changed))
     report = {'schema': 'nomad.lineage-qualification.v18', 'gate_D': 'HOLD',
               'compact_v17': {'status': 'PASS', 'sha256': COMPACT_SHA,
                               'original_manifest_members_verified': len(expected) - len(missing)},
               'historical_evidence': {'status': 'PASS', 'unchanged_files': len(preserved)},
               'engineering_5851566_evidence': {'status': 'PASS', 'unchanged_files': len(frozen),
                                               'original_seal_sha256': ENGINEERING_SEAL_SHA},
+              'qualification_ddb5c32_evidence': {'status': 'PASS', 'unchanged_files': len(protected),
+                                                'original_seal_sha256': QUALIFICATION_SEAL_SHA},
               'original_bgr_archive': {'status': 'PASS', 'sha256': BGR_SHA},
               'historical_results_regenerated': False,
               'missing': [{'path': missing[0], 'expected_sha256': V16_SHA,

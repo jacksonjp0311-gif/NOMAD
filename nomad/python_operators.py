@@ -78,6 +78,19 @@ def generate_python_candidates(source: str) -> dict[str, list[PythonCandidate]]:
             add("binary_operator", _unparse(t), f"replace {type(node.op).__name__} with {type(op).__name__}")
 
     # Integer constants.
+    # The same numeric alternatives apply to augmented assignments in loops.
+    # No issue identifier, reference patch or expected private output is used.
+    augmented = [n for n in ast.walk(tree) if isinstance(n, ast.AugAssign)]
+    for idx, node in enumerate(augmented):
+        for op in (ast.Add(), ast.Sub(), ast.Mult(), ast.Div(), ast.FloorDiv(), ast.Mod()):
+            if type(op) is type(node.op):
+                continue
+            t = copy.deepcopy(tree)
+            assignments = [n for n in ast.walk(t) if isinstance(n, ast.AugAssign)]
+            assignments[idx].op = op
+            add('binary_operator', _unparse(t), f'replace augmented {type(node.op).__name__} with {type(op).__name__}')
+
+    # Integer constants.
     constants = [n for n in ast.walk(tree) if isinstance(n, ast.Constant) and isinstance(n.value, int) and not isinstance(n.value, bool)]
     for idx, node in enumerate(constants):
         for delta in (-2, -1, 1, 2):

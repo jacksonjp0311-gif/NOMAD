@@ -1,5 +1,9 @@
 # NOMAD — Codex Desktop Handoff
 
+**Current:** version 0.18.0, branch `v0.18-platform`, Gates A-D HOLD. Start with
+[the FRONTIER report](docs/FRONTIER_REPORT_V018.md) and the current addendum at the
+end of this file. The earlier v0.17-to-platform instructions below are historical.
+
 ## Mission
 
 You are working on NOMAD, a local Bitwork-derived research system for evidence-governed autonomous coding. Treat `NOMAD-v0.17.0` as the authoritative engineering baseline. The next major milestone is **NOMAD v0.18.0 — PLATFORM**. Do not rewrite the architecture, rename NOMAD, substitute a generic LLM agent for Bitwork, or detour into small patch releases unless a serious correctness/security/data-integrity blocker requires one.
@@ -54,3 +58,26 @@ If GitHub `jacksonjp0311-gif/NOMAD` does not exist, prepare the repository with 
 ## Non-negotiable direction
 
 NOMAD learns through execution consequences. Bitwork is the reasoning/reuse substrate; external code execution is a bounded experiment; WITNESS owns evidence; learned memory guides but never certifies; failure narrows claims. We are heading v0.18 PLATFORM → v0.19 RC → v1.0 PRODUCTION within a documented supported operating envelope, not accumulating unrelated modules.
+# Current FRONTIER handoff, 2026-11-14
+
+Continue from the verified remote `v0.18-platform`, not from a release label.
+This iteration began at `ddb5c32ea56d5c94e67fc78bdea1ad64b7b9c399`; its delivered
+commit and artifact hashes are in the companion delivery receipt. Current version
+is **0.18.0**. All four gates remain HOLD. Read `docs/FRONTIER_REPORT_V018.md`,
+`docs/FRONTIER_FUNCTIONS_V018.md`, `docs/NATIVE_FRONTIER_V018.md`, the frozen
+mechanism plan and its raw results before changing code or opening new outcomes.
+
+The function adapter and self-revision review extend the original modules; they
+do not qualify arbitrary Python or prove coding improvement. Docker/WSL are absent.
+The new real-repository A/B/C/D protocol additionally requires a disjoint curated
+corpus, native function-adapter recovery and matched whole-mission resource
+accounting. Public development leads are exposed and excluded from unseen
+evaluation. Preserve both the old negative BGR result and the new mixed synthetic
+mechanism results. Do not retune a frozen experiment after viewing its outcomes.
+
+Original reports, archives and all earlier source seals remain unchanged. The
+new seal is `results/RELEASE_MANIFEST_FRONTIER_RECOVERY_V018.json`; verification must never
+regenerate it. The original full v0.17 and v0.16-v0.14 archives are still missing.
+No main merge, release publication, visibility change or version advance was
+authorized by this development snapshot. The instructions above are the retained
+earlier milestone handoff, superseded where this current addendum is more precise.

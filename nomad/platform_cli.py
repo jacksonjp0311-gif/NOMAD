@@ -25,11 +25,14 @@ def main(argv: list[str] | None = None) -> int:
     for name in ('status', 'recover', 'run'):
         child = commands.add_parser(name)
         child.add_argument('--root', type=Path, required=True)
-    init = commands.add_parser('init', help='initialize the supported Python arithmetic repository mission')
+    init = commands.add_parser('init', help='initialize an admitted arithmetic or typed function mission')
     init.add_argument('--root', type=Path, required=True)
     init.add_argument('--source', type=Path, required=True)
     init.add_argument('--contract', type=Path, required=True)
     init.add_argument('--ranker', choices=('cold', 'native', 'frequency', 'shuffled'), default='native')
+    init.add_argument('--candidate-budget', type=int, default=64, help='typed function proposal inventory limit')
+    init.add_argument('--probe-budget', type=int, default=3, help='typed function public diagnostic limit')
+    init.add_argument('--max-files-changed', type=int, choices=(1,2), default=2)
     demo = commands.add_parser('isolated-demo')
     demo.add_argument('--root', type=Path, required=True)
     demo.add_argument('--ranker', choices=('cold', 'native', 'frequency', 'shuffled'), default='native')
@@ -37,7 +40,7 @@ def main(argv: list[str] | None = None) -> int:
         mission_parser.add_argument('--memory-root', type=Path, help='shared trusted append-only learning store')
         mission_parser.add_argument('--epoch', type=int, default=0, help='monotonic evidence epoch for expiry')
         mission_parser.add_argument('--no-adaptive', action='store_true', help='disable world/memory preference; retain verification')
-        mission_parser.add_argument('--execution-budget', type=int, default=4, help='total baseline/candidate dispatch budget including recovery')
+        mission_parser.add_argument('--execution-budget', type=int, help='total dispatch budget including recovery; arithmetic4/functions96')
         mission_parser.add_argument('--max-eval', type=int, default=65000, help='GENESIS evaluation budget')
     args = parser.parse_args(argv)
     try:
@@ -71,18 +74,24 @@ def main(argv: list[str] | None = None) -> int:
                               'source_sha256': result.digest, 'executed_code': False,
                               'containment_qualified': False}
             elif args.action == 'init':
-                from .platform_mission import initialize
+                from .platform_mission import initialize, initialize_functions
                 from .platform_bitwork import NativeDecisionRanker
                 if args.contract.stat().st_size > 65536:
                     raise ValueError('contract exceeds size budget')
                 contract = json.loads(args.contract.read_text(encoding='utf-8'))
+                adapter=contract.pop('adapter',None) if isinstance(contract,dict) else None
                 required = {'goal_text', 'public', 'challenge', 'final'}
-                if not isinstance(contract, dict) or not required <= set(contract) or set(contract) - required - {'target', 'entry_module'}:
+                optional={'public_command'} if adapter=='python-functions-v1' else {'target','entry_module'}
+                if adapter not in (None,'python-functions-v1') or not isinstance(contract, dict) or not required <= set(contract) or set(contract) - required - optional:
                     raise ValueError('invalid mission contract')
-                ranker = NativeDecisionRanker(args.ranker, action_schema='genesis-vs-ast')
-                report = initialize(args.root, args.source, policy=policy, ranker=ranker,
+                functions=adapter=='python-functions-v1'
+                ranker = NativeDecisionRanker(args.ranker, action_schema='python-call-relational-vs-other' if functions else 'genesis-vs-ast')
+                options={'max_candidates':args.candidate_budget,'probe_budget':args.probe_budget,
+                         'max_files_changed':args.max_files_changed} if functions else {'max_eval':args.max_eval}
+                report = (initialize_functions if functions else initialize)(args.root, args.source, policy=policy, ranker=ranker,
                     memory_root=args.memory_root, capture_epoch=args.epoch, adaptive_enabled=not args.no_adaptive,
-                    max_executions=args.execution_budget, max_eval=args.max_eval, **contract)
+                    max_executions=args.execution_budget if args.execution_budget is not None else (96 if functions else 4),
+                    **options, **contract)
             else:
                 from .platform_mission import initialize, run
                 from .platform_bitwork import NativeDecisionRanker
@@ -103,7 +112,7 @@ def main(argv: list[str] | None = None) -> int:
                                final=rows([(11, -2), (-6, -9)]), policy=policy,
                                ranker=NativeDecisionRanker(args.ranker, action_schema='genesis-vs-ast'),
                                memory_root=args.memory_root, capture_epoch=args.epoch,
-                               adaptive_enabled=not args.no_adaptive, max_executions=args.execution_budget,
+                               adaptive_enabled=not args.no_adaptive, max_executions=args.execution_budget if args.execution_budget is not None else 4,
                                max_eval=args.max_eval)
                 report = run(args.root)
         print(json.dumps(report, indent=2, sort_keys=True))

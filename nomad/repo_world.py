@@ -170,12 +170,29 @@ def _local_imports(source: str, local_stems: set[str]) -> set[str]:
 
 
 def build_graph(task: RepoTask) -> tuple[dict[str, set[str]], dict[str, set[str]], dict[str, int]]:
-    by_stem = {Path(name).stem: name for name in task.files}
-    stems = set(by_stem)
+    def module_name(name):
+        parts = name.replace('\\', '/').removesuffix('.py').split('/')
+        if parts[-1] == '__init__': parts.pop()
+        return '.'.join(parts)
+    by_stem = {module_name(name): name for name in task.files}
     edges: dict[str, set[str]] = {name: set() for name in task.files}
     reverse: dict[str, set[str]] = {name: set() for name in task.files}
     for filename, source in task.files.items():
-        for dep_stem in _local_imports(source, stems):
+        dependencies = set()
+        current = module_name(filename)
+        try: tree = ast.parse(source)
+        except SyntaxError: tree = ast.Module(body=[], type_ignores=[])
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import): dependencies.update(a.name for a in node.names)
+            elif isinstance(node, ast.ImportFrom):
+                if node.level:
+                    package = current.split('.') if filename.endswith('/__init__.py') else current.split('.')[:-1]
+                    base = package[:max(0, len(package)-node.level+1)]
+                    dependency = '.'.join(base + ([node.module] if node.module else []))
+                else: dependency = node.module or ''
+                dependencies.add(dependency)
+                dependencies.update(dependency+'.'+a.name for a in node.names)
+        for dep_stem in dependencies & set(by_stem):
             dep = by_stem[dep_stem]
             edges[filename].add(dep)
             reverse[dep].add(filename)

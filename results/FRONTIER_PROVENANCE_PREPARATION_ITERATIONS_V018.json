@@ -1,0 +1,11 @@
+{
+  "schema": "nomad.frontier-provenance-preparation-iterations.v18",
+  "iteration": 1,
+  "command": "py -3 -B scripts/prepare_frontier_development_v18.py --root experiments/development/keon2733",
+  "result": "FAILED_BEFORE_PROJECTION_WRITE",
+  "error": "ValueError: projection changed the function AST",
+  "diagnosis": "Plain textwrap.dedent changed whitespace inside the nested function docstring. AST equality correctly rejected the altered literal.",
+  "correction": "Preserve multiline string-token interior lines while removing enclosing code indentation.",
+  "downloaded_source_executed": false,
+  "native_trials": 0
+}

@@ -215,3 +215,109 @@ def assess_candidate(*, base_source:str, candidate_source:str,
             'production_promotion':'HOLD' if not (improves and external_transfer_confirmed) else 'ELIGIBLE_FOR_EXTERNAL_REVIEW',
             'self_modification_executed':False,
             'authority':'candidate proposal only; no automatic source replacement'}
+
+
+# The self-revision gate reuses the platform mission's isolated candidate and
+# receipts. It has deliberately no operation that writes authoritative source.
+SELF_REGRESSION_COMMAND = ['python', '-B', '-m', 'unittest', 'discover', '-s', 'tests', '-q']
+_PROTECTED_SELF_FILES = {
+    'nomad/__init__.py', 'nomad/frontier.py', 'nomad/platform_cli.py',
+    'nomad/platform.py', 'nomad/protect_cli.py', 'nomad/mnemonic.py',
+    'nomad/recursion.py', 'nomad/witness.py', 'nomad/mission_witness.py',
+    'nomad/mission_runtime.py', 'nomad/platform_mission.py', 'nomad/effects.py',
+    'nomad/isolation.py', 'nomad/supervised.py', 'nomad/windows_job.py',
+    'nomad/archive_guard.py', 'nomad/safe_eval.py', 'nomad/ledger.py',
+}
+
+
+def _revision_identity(root: Path, manifest: dict) -> dict:
+    from .mission_runtime import canonical, digest
+    entries = [[name, checksum, (root/name).stat().st_size]
+               for name, checksum in sorted(manifest.items())]
+    return {'snapshot_sha256': digest(canonical(entries)), 'source_files': len(entries),
+            'source_bytes': sum(row[2] for row in entries)}
+
+
+def _check_regression_receipt(receipt: dict, identity: dict, image: str) -> None:
+    """Validate observed execution bindings, never a learner's PASS assertion."""
+    import re
+    if (not isinstance(receipt, dict) or receipt.get('schema') != 'nomad.isolated-test.v1'
+            or any(receipt.get(key) != value for key, value in identity.items())
+            or receipt.get('command') != SELF_REGRESSION_COMMAND
+            or receipt.get('image_digest') != image.split('@sha256:')[-1]
+            or receipt.get('returncode') != 0 or type(receipt.get('returncode')) is not int
+            or receipt.get('timed_out') is not False or receipt.get('tests_passed') is not True
+            or receipt.get('container_cleanup_confirmed') is not True
+            or receipt.get('output_truncated') is not False
+            or not isinstance(receipt.get('output_sha256'), str)
+            or len(receipt['output_sha256']) != 64
+            or any(c not in '0123456789abcdef' for c in receipt['output_sha256'])
+            or not isinstance(receipt.get('container_name'), str)
+            or re.fullmatch(r'nomad-[a-f0-9]{24}', receipt['container_name']) is None
+            or receipt.get('preflight', {}).get('ready') is not True):
+        raise ValueError('independent isolated regression receipt is missing, stale or not passing')
+
+
+def review_isolated_revision(mission_root: Path, authoritative_source: Path, *,
+                             allowed_paths: Iterable[str], baseline_regression: dict,
+                             candidate_regression: dict) -> dict:
+    """Assess a completed isolated revision without installing it.
+
+    authoritative_source is the exact source-only baseline supplied to the
+    mission. Full Git metadata/credentials are never copied into a worker.
+    Caller-owned native receipts need a trusted external storage anchor; their
+    checksums are not signatures. Public examples alone cannot pass this gate.
+    """
+    from . import platform_mission
+    from .mission_runtime import canonical, digest, exclusive_owner
+    from .isolation import SandboxPolicy
+    mission_root = Path(mission_root).resolve(strict=True)
+    authoritative_source = Path(authoritative_source).resolve(strict=True)
+    if (mission_root == authoritative_source or mission_root in authoritative_source.parents
+            or authoritative_source in mission_root.parents):
+        raise ValueError('self-revision evidence and authoritative source must be disjoint')
+    allowed = set(allowed_paths)
+    if not allowed or len(allowed) > 2 or any(
+            not isinstance(name, str) or '\\' in name or ':' in name
+            or not name.startswith('nomad/') or not name.endswith('.py')
+            or '..' in Path(name).parts or name.casefold() in _PROTECTED_SELF_FILES
+            for name in allowed):
+        raise ValueError('self-revision scope must name at most two non-verifier NOMAD modules')
+    with exclusive_owner(mission_root):
+        goal = platform_mission.resolved_goal(mission_root)
+        summary = platform_mission.inspect(mission_root)
+        if (summary.get('status') != 'completed' or summary.get('witness_observations', 0) < 1
+                or summary.get('final_observations', 0) < 1):
+            raise ValueError('independently completed mission required before self-revision review')
+        policy = SandboxPolicy(**goal['policy']); policy.validate()
+        original = platform_mission._manifest(authoritative_source)
+        baseline = platform_mission._manifest(mission_root/'baseline')
+        candidate = platform_mission._manifest(mission_root/'workspace')
+        if original != baseline or baseline != goal['baseline']:
+            raise ValueError('authoritative source differs from the pinned original; refuse replacement')
+        if set(candidate) != set(baseline):
+            raise ValueError('self-revision cannot add/remove source, tests or evidence files')
+        changed = sorted(name for name in baseline if baseline[name] != candidate[name])
+        if not changed or not set(changed) <= allowed:
+            raise ValueError('candidate changed protected or undeclared source')
+        base_id = _revision_identity(mission_root/'baseline', baseline)
+        candidate_id = _revision_identity(mission_root/'workspace', candidate)
+        _check_regression_receipt(baseline_regression, base_id, policy.image)
+        _check_regression_receipt(candidate_regression, candidate_id, policy.image)
+        if baseline_regression['container_name'] == candidate_regression['container_name']:
+            raise ValueError('baseline and candidate require separate observed executions')
+        report = {'schema': 'nomad.recursion.isolated-revision.v18',
+                  'mission_id': goal['mission_id'], 'journal_head': summary['journal_head'],
+                  'verifier_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                  'mission_runtime_sha256': goal.get('runtime_sha256', {}),
+                  'baseline': base_id, 'candidate': candidate_id, 'changed_paths': changed,
+                  'baseline_regression_sha256': digest(canonical(baseline_regression)),
+                  'candidate_regression_sha256': digest(canonical(candidate_regression)),
+                  'source_unchanged': platform_mission._manifest(authoritative_source) == original,
+                  'rollback': 'original baseline preserved; candidate is disposable; no authoritative write',
+                  'status': 'ELIGIBLE_FOR_INDEPENDENT_REVIEW', 'authoritative_source_replaced': False,
+                  'production_promotion': 'HOLD', 'self_improvement_advantage': 'NOT_ESTABLISHED',
+                  'authority': 'proposal audit only; no automatic integration or verifier modification'}
+        if report['source_unchanged'] is not True:
+            raise ValueError('source changed during independent self-revision review')
+        return {**report, 'receipt_sha256': digest(canonical(report))}

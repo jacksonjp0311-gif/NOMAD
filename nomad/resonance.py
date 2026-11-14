@@ -116,7 +116,8 @@ def _ast_bits(source: str) -> tuple[int, int]:
 
 
 def encode_resonance(task: PythonTask, source: str | None = None, *,
-                     execution: PythonExecution | None = None) -> ResonanceState:
+                     execution: PythonExecution | None = None,
+                     numeric_inputs: bool = True) -> ResonanceState:
     """Fuse observations; an adapter may supply a trusted, bound observation.
 
     The legacy default executes trusted generated fixtures. Isolated adapters
@@ -170,9 +171,9 @@ def encode_resonance(task: PythonTask, source: str | None = None, *,
         y = int(ex.inputs.get("y", 0))
         xs.append(x)
         ys.append(y)
-        if not obs.passed and y == 0:
+        if numeric_inputs and not obs.passed and y == 0:
             test_bits |= T_FAILS_Y_ZERO
-        if not obs.passed and x == y:
+        if numeric_inputs and not obs.passed and x == y:
             test_bits |= T_FAILS_EQUAL
         if obs.actual is not None:
             residuals.append(int(ex.expected) - obs.actual)
@@ -184,9 +185,9 @@ def encode_resonance(task: PythonTask, source: str | None = None, *,
         test_bits |= T_CONSTANT_RESIDUAL
     if any(r > 0 for r in nonzero) and any(r < 0 for r in nonzero):
         test_bits |= T_MIXED_RESIDUAL
-    if _constant_ratio(residuals, xs):
+    if numeric_inputs and _constant_ratio(residuals, xs):
         test_bits |= T_PROP_X
-    if _constant_ratio(residuals, ys):
+    if numeric_inputs and _constant_ratio(residuals, ys):
         test_bits |= T_PROP_Y
 
     ast_bits, ast_nodes = _ast_bits(source)

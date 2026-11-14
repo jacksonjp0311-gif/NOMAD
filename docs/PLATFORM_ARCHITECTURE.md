@@ -1,5 +1,8 @@
 # NOMAD v0.18.0 PLATFORM architecture
 
+The current [FRONTIER function pipeline](FRONTIER_FUNCTIONS_V018.md) extends this
+retained arithmetic design. See the addendum at the end for the current scope.
+
 The platform adds Windows operation, bounded execution, durable mission state and release verification around the existing intelligence system. It does not replace Bitwork with a cloud model. Native container qualification on this ROG remains **HOLD** because Docker is unavailable. A working controller or a passing mock test does not clear that gate.
 
 ## Preserved intelligence architecture
@@ -129,3 +132,24 @@ Private arithmetic checks use a separate observer implementation within the trus
 The inherited Catalogue false-positive remains a permanent regression: incomplete public test success must not authorize a namespace-breaking repair. Platform work does not revise the negative v0.14 transfer result or turn a bounded native Bitwork benchmark into proof of general coding improvement.
 
 The next work is in [NEXT_ITERATION.md]: native containment and interrupted isolated missions, independently validated external repairs, and useful WORLD MODEL/INQUIRY decisions beyond the current single-leaf interface. Cross-mission effect-memory integration is implemented and contract-tested; actual isolated qualification and automatic general skill admission remain HOLD.
+# FRONTIER qualification addendum, v0.18.0
+
+The current development snapshot adds a bounded JSON function adapter alongside
+the arithmetic path documented below. See [function pipeline](FRONTIER_FUNCTIONS_V018.md)
+for import-graph analysis, public diagnostic probes, posterior-guided search,
+multi-file proposals and the `F_*` durable transitions. The existing native BGR,
+GENESIS, RESONANCE, WORLD MODEL, INQUIRY, WITNESS and MNEMONIC modules are reused.
+No cloud model or alternative agent framework is introduced.
+
+The parent owns private expected values and compares complete, hash-bound JSON
+observations from a disposable Docker execution. Source admission is a restricted
+observation-language check, not an OS sandbox. Every unfamiliar program still
+requires the verified container boundary. Recovery validates source, runtime,
+sealed partitions, patch transactions, dispatches and learning provenance before
+continuing. An uncertain dispatch requires explicit observed cleanup.
+
+[Candidate self-revision](SELF_REVISION_FRONTIER_V018.md) is a read-only review
+of a separate candidate and original. It does not install a modification.
+[Native evidence](NATIVE_FRONTIER_V018.md) and the [current report](FRONTIER_REPORT_V018.md)
+keep all four gates HOLD. Synthetic Bitwork mechanism results do not substitute
+for independently accepted real-repository missions or cross-task transfer.

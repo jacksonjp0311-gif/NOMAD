@@ -4,7 +4,7 @@
 
 **Local coding intelligence with explicit evidence and execution boundaries.**
 
-This is a **v0.18.0 development qualification snapshot**. All four platform acceptance gates remain **HOLD**. Windows process supervision and the trusted research path run on the ASUS ROG. Docker and WSL are unavailable on this host, so native container containment and isolated external repository repair have not been demonstrated. There is no v0.19 readiness claim. See the [current qualification report](docs/QUALIFICATION_REPORT_V018.md).
+This is a **v0.18.0 FRONTIER development qualification snapshot**. All four platform acceptance gates remain **HOLD**. This iteration extends Python function repair and the evidence chain, investigates the native Bitwork mechanism with a frozen experiment, and diagnoses Windows memory accounting. Docker and WSL are unavailable on this host, so isolated external repair and transferable coding improvement have not been demonstrated. There is no v0.19 readiness claim. See the [current qualification report](docs/FRONTIER_REPORT_V018.md).
 
 ## Intelligence architecture
 
@@ -12,9 +12,9 @@ This is a **v0.18.0 development qualification snapshot**. All four platform acce
 
 The original intelligence modules, BGR runtime and research records remain present. The new platform surrounds them with source admission, durable ownership, process supervision and evidence checks. No cloud model is required.
 
-The isolated mission adapter has a deliberately bounded operating envelope: small top-level Python `solve(x, y)` arithmetic modules and transparent public import aliases, public examples and repository tests, separate private challenge/final examples, and a reviewed Docker image. Source parsing discovers the supported public target without importing unfamiliar code. The adapter connects actual RESONANCE, WORLD MODEL, INQUIRY, GENESIS, original BGR ranking, WITNESS and MNEMONIC through a durable mission journal. WITNESS and the final checker evaluate strict arithmetic syntax through a bounded interpreter. A negative private check ends that mission rather than feeding private answers into search.
+Two isolated adapters share one durable mission controller. The retained arithmetic path handles `solve(x, y)`; the new `python-functions-v1` path supports bounded JSON function contracts, local package imports, multiple functions, conditional/control-flow edits and proposals spanning at most two modules. Source inspection never imports unfamiliar code on the host. The function path connects RESONANCE, a repository import graph, INQUIRY, AST/GENESIS synthesis, native BGR ranking, Docker execution, WITNESS and MNEMONIC. Separate challenge and final expectations remain outside the worker and proposer. A negative private check ends the mission without feeding private answers back into search. See [supported syntax and exact commands](docs/FRONTIER_FUNCTIONS_V018.md).
 
-The public baseline probe must precede proposal selection. Retained learning is admitted only from independently checked consequences and remains bound to source, action, runtime and receipts. INQUIRY can abstain when its available public probe has no expected information gain. This bounded implementation and its mocked execution contracts do not demonstrate general repository understanding, informative inquiry or autonomous transfer. Actual isolated integration remains HOLD. See [research qualification and claim limits](docs/RESEARCH_QUALIFICATION_V018.md).
+Public observations precede proposals and update the diagnostic posterior used for localization and candidate ordering. Retained learning is admitted only from checked consequences bound to source, action, runtime and receipts. Native Bitwork influences proposal preference and has no acceptance authority. Software tests cover these contracts with explicitly mocked isolation; actual isolated integration and cross-repository transfer remain HOLD. General Python, arbitrary dependencies and general program correctness are outside the supported envelope.
 
 ## Start on Windows
 
@@ -55,9 +55,9 @@ The supported installation is source-linked. A standalone wheel containing the v
 | Hypervisor and firmware virtualization | Reported enabled; CIM reports WSL, VirtualMachinePlatform, Hyper-V and Windows Sandbox features disabled |
 | Malicious repository containment in Docker | HOLD: native probe cases not executed |
 | Isolated external repair and interrupted isolated mission | HOLD |
-| Native BGR learning advantage | HOLD: worse prediction loss than frequency-only control |
+| Native BGR coding advantage | NOT ESTABLISHED; mixed synthetic mechanism results below |
 
-Exact current test counts, source hashes, timing, skip reasons and runtime outputs are in [the qualification receipt](results/QUALIFICATION_FINAL_V018.json). [Native Windows checks](docs/NATIVE_QUALIFICATION_V018.md) include resource refusal, breakaway denial and owner-death recovery; strict interpretation of the Job peak-memory counter remains HOLD. Original and intermediate receipts remain immutable. CPU timing has a separate scope and is not an energy measurement.
+Exact current test counts, source hashes, timing, skip reasons and runtime outputs are in [the FRONTIER qualification receipt](results/FRONTIER_FINAL_RECHECK_V018.json). [Native Windows checks and memory diagnosis](docs/NATIVE_FRONTIER_V018.md) include resource refusal, breakaway denial and owner-death recovery. Rejected allocations increased peak counters without increasing observed current committed memory; strict peak accounting remains HOLD. A bounded Windows rename retry addresses intermittent mission-directory publication refusal, with destination/identity checks and no overwrite fallback. Original and intermediate receipts remain immutable. CPU timing is not an energy measurement.
 
 ## Isolated missions
 
@@ -103,13 +103,29 @@ The frozen historical replay compared four controls under the same candidate bud
 
 Native BGR loses to the frequency control. These are retrospective public-trace predictions from the preserved study, not fresh repository repairs, untouched holdout evidence or a demonstrated coding advantage. The original Catalogue false-positive remains rejected by its separate namespace contract. See [experiment and costs](docs/EXPERIMENT_V018.md) and [machine-readable results](results/BITWORK_V018.json).
 
-An [independent arithmetic audit](docs/RESEARCH_QUALIFICATION_V018.md) reproduces that negative loss result and shows identical candidate ordering under BGR and frequency learning. The [prospective four-arm protocol](docs/INTELLIGENCE_PROTOCOL_V018.md) fixes comparison rules and enforces isolation preflight before opening private contracts. No admissible held-out corpus has been frozen and no prospective trial has run. Known upstream repair candidates are explicitly unsupported by the current arithmetic adapter; synthetic fixtures are not counted as authentic repairs.
+An [independent arithmetic audit](docs/RESEARCH_QUALIFICATION_V018.md) reproduces that negative loss result and identical candidate ordering. The original study and protocol remain unchanged.
+
+The new frozen mechanism experiment ran 32 trusted synthetic streams, eight seeds for each of four distributions. All predictors received the same observed prefix and action, with 32 unscored observations followed by 96 scored forecasts. Mean natural-log loss, lower is better:
+
+| Distribution | Frequency | Native BGR | Conventional temporal |
+|---|---:|---:|---:|
+| Stationary | **0.478565** | 0.487530 | 0.489977 |
+| Boolean history | 0.702128 | **0.292385** | 0.358759 |
+| Three-step lag | 0.702936 | **0.412302** | 0.680390 |
+| Distribution switch | 0.769760 | 0.650146 | **0.644287** |
+
+These are designed mechanism tests, not repository repairs or equal-compute efficiency evidence. Native temporal mechanisms help on the selected history-dependent distributions but cost more computation; frequency wins on stationary data. The four preregistered contrasts and ablations are reported separately from this descriptive table. An [independent trace audit](results/FRONTIER_INDEPENDENT_ARITHMETIC_V018.json) recomputes 21,504 scored model forecasts and the multiplicity correction.
+
+The new repository protocol uses A cold, B frequency, C native Bitwork, D native plus verified memory/full pipeline. It refuses private evaluation without a disjoint curated corpus, qualified isolation/recovery and matched whole-mission resource accounting. No authentic prospective repair trial or genuine cross-task coding benefit has been established. Public development leads cannot become unseen evaluation tasks.
+
+The [candidate self-revision audit](docs/SELF_REVISION_FRONTIER_V018.md) checks protected files, baseline/candidate regressions and rollback identity. It cannot replace authoritative source; native self-improvement remains HOLD.
 
 ## Reproduce and inspect
 
 ```powershell
 py -3 -B -m unittest discover -s tests -v
 py -3 -B scripts\study_platform_v18.py --output runs\new-platform-study.json
+py -3 -B scripts\audit_frontier_metrics_v18.py --output runs\new-metric-audit.json
 py -3 -B scripts\verify_package_v18.py
 py -3 -B scripts\build_release_v18.py --output .\dist\NOMAD-v0.18.0-source.zip --mode source
 py -3 -B scripts\build_release_v18.py --output .\dist\NOMAD-v0.18.0-runtime.zip --mode runtime
@@ -121,9 +137,10 @@ Results and archive outputs must be new paths. The verifier never rebuilds expec
 
 The original desktop source is preserved in the `baseline-v0.17.0` Git branch and the original ZIP; development is on `v0.18-platform`. Historical experiment/results files and the original BGR archive were not rewritten. This compact source omits `baseline/NOMAD-v0.16.0.zip` by design. Its absence is a lineage HOLD, not corrupted current source. Do not present this source ZIP as the complete nested historical archive.
 
-The [GitHub repository](https://github.com/jacksonjp0311-gif/NOMAD) is private. Development uses [v0.18-platform](https://github.com/jacksonjp0311-gif/NOMAD/tree/v0.18-platform); `main` remains at the earlier engineering commit `5851566`. Initial reconciliation found that only `main` had been pushed. The artifact delivery receipt records the verified development synchronization. GitHub Actions was blocked before jobs started by the account billing/spending limit; local tests do not substitute for the unrun CI matrix. No release, main merge, force push or visibility change is part of qualification.
+The [GitHub repository](https://github.com/jacksonjp0311-gif/NOMAD) is private. Development uses [v0.18-platform](https://github.com/jacksonjp0311-gif/NOMAD/tree/v0.18-platform); `main` remains at the earlier engineering commit `5851566`. This iteration began from local and remote `ddb5c32ea56d5c94e67fc78bdea1ad64b7b9c399` with a clean tree and zero divergence. The companion delivery receipt records the new verified development synchronization. Prior GitHub Actions was blocked before jobs started by account billing/spending settings; delivery records the new run separately. No release, main merge, force push or visibility change is part of qualification.
 
-- [Current qualification report](docs/QUALIFICATION_REPORT_V018.md)
+- [Current FRONTIER qualification report](docs/FRONTIER_REPORT_V018.md)
+- [Previous qualification report](docs/QUALIFICATION_REPORT_V018.md)
 - [Native security qualification](docs/NATIVE_QUALIFICATION_V018.md)
 - [Original engineering report](docs/PLATFORM_QUALIFICATION_REPORT.md)
 - [Release notes](RELEASE.md)

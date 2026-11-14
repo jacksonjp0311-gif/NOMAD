@@ -74,7 +74,7 @@ class NativeDecisionRanker:
                 type(min_tasks) is not int or min_tasks < 2 or
                 type(max_events) is not int or max_events < 1):
             raise ValueError('invalid native decision configuration')
-        if action_schema not in ('relational-vs-other', 'genesis-vs-ast'):
+        if action_schema not in ('relational-vs-other', 'genesis-vs-ast', 'python-call-relational-vs-other'):
             raise ValueError('unsupported native action semantics')
         self.mode, self.ttl_epochs, self.min_tasks = mode, ttl_epochs, min_tasks
         self.max_events, self.seed = max_events, seed
@@ -90,6 +90,10 @@ class NativeDecisionRanker:
             return action_for_candidate(candidate)
         family = candidate if isinstance(candidate, str) else candidate.family
         from .python_operators import PY_FAMILIES
+        if self.action_schema == 'python-call-relational-vs-other':
+            if family not in PY_FAMILIES:
+                raise ValueError('evidence outside declared Python-call AST operator scope')
+            return 0 if family == 'comparison' else 1
         if family == 'GENESIS':
             return 0
         if family in PY_FAMILIES:

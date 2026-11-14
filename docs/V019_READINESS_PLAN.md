@@ -16,10 +16,12 @@ not an architecture freeze, release authorization or claim of qualification.
    namespaces, resource exhaustion, cleanup and forced termination. Resolve
    the strict Job peak-counter interpretation and unavailable native symlink
    case at their stated scopes. Retain failed receipts and demonstrate fixes.
-3. **Close Gates B and C on authentic work.** The current arithmetic adapter
-   does not support the independently authored upstream issues in the training
-   catalogue. Extend only the repository semantics required by selected real
-   repairs, with an independent verification contract. Run actual isolated
+3. **Close Gates B and C on authentic work.** The FRONTIER function adapter
+   broadens the original arithmetic envelope, but its public development
+   projection is not a qualified full-repository repair. Verify actual function
+   recovery and matched controller-plus-worker CPU, memory and wall budgets.
+   Curate repository-disjoint authentic tasks with independent private contracts;
+   exposed development sources cannot be unseen evaluation. Run actual isolated
    baseline, inquiry, synthesis, execution, WITNESS, final verification and
    durable learning. Demonstrate transfer to a distinct task and recovery
    from owner termination without duplicate uncertain effects. Component
