@@ -1,8 +1,70 @@
-# Adaptive computation: registered mechanism study
+# Adaptive computation: measured results and limits
 
 NOMAD now has a bounded computation selector in [`nomad/adaptive.py`](../nomad/adaptive.py). It chooses frequency, the original conventional temporal ensemble, or the preserved native Bitwork predictor. It can abstain when its available computation budget is exhausted. Selection changes actual computation: inactive temporal/native learners are neither forecast nor updated in the background. They catch up on previously observed public history only when selected, and that reconstruction is charged.
 
 The existing negative result remains authoritative: native log loss 0.4864129774 versus frequency 0.4206070942, with identical candidate ordering. The earlier 32-stream experiment also remains unchanged: native mechanisms helped designed temporal relationships, lost on stationary data and used substantially more computation. This new study asks whether selecting when to pay that cost helps. It does not assume that selection will succeed.
+
+The [new mechanism plan](../experiments/PLAN_ADAPTIVE_MECHANISMS_V018.json), payload SHA256 `f92d8687b27a6ec7a1f114283ae75ed6f7b21a7edfd52e6d79371bb24227be48`, and its implementation were committed at `e2cd77c03848ce13d9fe31bf32cca383835ae3b3` before held-out generation. The [source-bound development recheck](../results/ADAPTIVE_DEVELOPMENT_RECHECK_V018.json) supplied calibration. These are local source commitments, not authenticated proof against a hostile machine owner.
+
+The measured controller reduced CPU relative to always-on native Bitwork, but its predictive loss worsened beyond the registered tolerance. It improved prediction over frequency while using more CPU, and the conventional temporal learner was both more accurate and cheaper. **None of the three registered combined quality-and-cost criteria passed.** These negative results remain frozen; no parameters were retuned after evaluation.
+
+## Primary evaluation
+
+All 512 registered trials completed with unchanged source: eight modes, eight regimes and eight seeds. They contain 65,536 forecasts, of which 49,152 were scored. The [primary result](../results/ADAPTIVE_MECHANISMS_V018.json) recorded 311.7933146000141 seconds wall and 280.640625 seconds CPU including Job subtrees and harness; 0.71875 CPU seconds were unallocated orchestration/analysis overhead. Final receipt serialization is outside that timer.
+
+The [independent audit](../results/ADAPTIVE_INDEPENDENT_AUDIT_V018.json) recomputed raw forecast loss, Brier score, calibration error, input matching, output hashes, native/supervisor CPU arithmetic, paired seed blocks, bootstrap intervals and all nine Holm decisions. Its [negative audit tests](../results/ADAPTIVE_AUDITOR_REVIEW_V018.json) rejected ten altered receipts.
+
+An [unchanged-source replay](../results/ADAPTIVE_MECHANISMS_REPLAY_V018.json) completed another 512 trials on exactly the same registered streams. The [independent replay comparator](../results/ADAPTIVE_REPRODUCIBILITY_V018.json) matched all 65,536 forecasts, choices, input hashes, final state hashes, operation counts and predictive metrics exactly. This adds no independent seeds. Confirmatory cost conclusions use the primary run only; independent auditing and light analysis ran concurrently with parts of the replay, so replay timings are not a second controlled cost experiment.
+
+These means are over 64 streams per arm. CPU includes the worker Job plus supervisor; wall spans each complete supervised trial.
+
+| Mechanism arm | Log loss | Brier | ECE, ten bins | CPU seconds/trial | Wall seconds/trial |
+|---|---:|---:|---:|---:|---:|
+| A: Frequency | 0.623104 | 0.219114 | 0.101269 | 0.383301 | 0.442131 |
+| B: Always-on native | 0.488690 | 0.160760 | 0.089835 | 0.674072 | 0.736594 |
+| C: Conventional temporal | 0.532840 | 0.179003 | 0.093278 | 0.463623 | 0.526595 |
+| D: Adaptive | 0.548275 | 0.185936 | 0.106321 | 0.528320 | 0.586575 |
+
+Adaptive used 21.62% less CPU than always-on native, 37.83% more than frequency and 13.95% more than temporal. The in-worker algorithm/instrumentation interval averaged 0.150391 CPU seconds for adaptive, 0.300781 for native, 0.011230 for frequency and 0.096191 for temporal. That interval includes initialization, looping, snapshot/metric construction and process-memory observation. The complete process accounting makes clear that startup, verification and transport are material parts of this small-task benchmark.
+
+The following paired differences are adaptive minus comparator. Intervals are descriptive paired seed-block bootstrap intervals, not additional significance tests.
+
+| Comparator | Mean log-loss difference [95% interval] | Mean CPU-second difference [95% interval] | Combined registered criterion |
+|---|---|---|---|
+| Native | +0.059586 [0.045451, 0.072505] | −0.145752 [−0.187012, −0.116699] | Failed |
+| Frequency | −0.074829 [−0.085346, −0.065011] | +0.145020 [0.131104, 0.159424] | Failed |
+| Temporal | +0.015436 [0.008153, 0.022056] | +0.064697 [0.048096, 0.082520] | Failed |
+
+CPU reduction versus native, and objective improvement plus the shifted quality criterion versus frequency, each won all eight seed blocks with one-sided p=0.00390625 and passed Holm correction. Native quality failed the 0.02-nat criterion on all eight blocks. The other registered tests did not pass. In particular, the chosen cost penalty does not turn reduced CPU into an overall improvement when predictive quality degrades too much.
+
+Family results are descriptive:
+
+| Regime | Frequency loss | Native loss | Temporal loss | Adaptive loss |
+|---|---:|---:|---:|---:|
+| Stationary | 0.476975 | 0.490772 | 0.488776 | 0.476975 |
+| Previous-outcome dependency | 0.714604 | 0.287667 | 0.348956 | 0.349088 |
+| Delayed action relationship | 0.707270 | 0.394498 | 0.669728 | 0.660154 |
+| Distribution shift | 0.778083 | 0.626558 | 0.620134 | 0.755338 |
+| Sparse/noisy | 0.289732 | 0.295394 | 0.296625 | 0.289732 |
+| Misleading temporal relationship | 0.680755 | 0.506223 | 0.528671 | 0.538299 |
+| Held-out-only structure | 0.633035 | 0.595761 | 0.602854 | 0.612003 |
+| Irreducible fair coin | 0.704377 | 0.712645 | 0.706975 | 0.704614 |
+
+The ablations were also completed, with descriptive mean loss/CPU seconds: no-history 0.623104/0.387207; no-structure 0.531644/0.737793; no-selector-memory 0.586305/0.504395; fixed-native/no-selection 0.488690/0.695068. Removing the structural screen improved prediction but spent more CPU; retaining selector utility improved prediction over resetting it but also cost more. These comparisons do not establish persistent cross-repository memory value.
+
+## Why the adaptive policy failed its combined objective
+
+The [posthoc decomposition](../results/ADAPTIVE_DIAGNOSIS_V018.json) is computed from frozen traces without running new predictors. All 8192 adaptive forecasts exactly match the corresponding existing learner on the same observed prefix: 6016 frequency, 1408 temporal and 768 native forecasts. Lazy reconstruction introduced no forecast approximation. Among 6144 scored adaptive forecasts, frequency choices contributed +0.042667 nats to the mean loss gap versus native, temporal choices +0.016918, and native choices zero.
+
+The strongest failure was the delayed regime. The [delayed-trace review](../results/ADAPTIVE_DELAYED_TRACE_REVIEW_V018.json) shows the same pattern on seven of eight seeds: native exploration begins at zero-based step 32, then the controller returns to frequency at step 48. Its first 16-event native gain ranges from −0.034606 to +0.027070, below the frozen risk/cost threshold. That estimate remains unchanged while native is inactive, and the estimated cost of catching up grows. At step 96, least-observed exploration selects temporal instead. The separately measured native arm then shows substantial later advantage that the earlier controller could not know. This identifies a short credit-assignment horizon and stale utility estimate in the observed decisions; it is not evidence that changing those rules after seeing these streams would generalize.
+
+Distribution-shift handling also under-allocated temporal computation: 688 of 768 scored forecasts in that regime used frequency. The structural screen's local contingency evidence did not reliably justify timely exploration. In stationary and sparse/noisy streams, frequency was selected for every forecast and matched the simpler baseline exactly.
+
+Direct adaptive timing totals across 64 streams were 0.126005 seconds for decisions, 0.031648 for observation bookkeeping, 4.678543 for lazy model construction, 2.911799 for catch-up and 1.418279 for selected prediction/update work. Catch-up processed 4336 historical observations; 33 native and 30 temporal objects were built. Timed decision arithmetic was small, but initialization and replay were substantial. The complete measured algorithm and process costs also include uninstrumented checks, shared input generation, trace recording and serialization. The controller cannot claim efficiency by reporting decision arithmetic alone.
+
+Mean native Job high-water counters were 27,249,216 bytes for adaptive, 27,456,768 for native, 26,835,840 for frequency and 26,860,928 for temporal. Adaptive's largest Job counter was 28,491,776 bytes; the parent's separate lifetime peak working set was 57,688,064 bytes. These are measured counter values, not a proved reduction in strict simultaneous committed peak memory.
+
+A future prospective mechanism study should test longer evaluation credit windows or renewed exploration of previously unpromising mechanisms, using new untouched seeds and preregistered costs. The present data must not be reused as unseen validation. Authentic coding benefit still requires the separately qualified repository experiment.
 
 ## Controller and objective
 
@@ -69,6 +131,10 @@ To reproduce after checking the frozen source and registered environment, use ne
 py -3 -B scripts\experiment_adaptive_v18.py develop --output runs\adaptive-development.json
 py -3 -B scripts\experiment_adaptive_v18.py freeze --calibration runs\adaptive-development.json --output runs\adaptive-plan.json
 py -3 -B scripts\experiment_adaptive_v18.py run --plan runs\adaptive-plan.json --confirm-preregistered-evaluation --output runs\adaptive-result.json
+
+# Exact frozen-study reproduction; retain a distinct output and audit it.
+py -3 -B scripts\experiment_adaptive_v18.py run --plan experiments\PLAN_ADAPTIVE_MECHANISMS_V018.json --confirm-preregistered-evaluation --output runs\adaptive-replay.json
+py -3 -B scripts\verify_adaptive_replay_v18.py --plan experiments\PLAN_ADAPTIVE_MECHANISMS_V018.json --original results\ADAPTIVE_MECHANISMS_V018.json --replay runs\adaptive-replay.json --output runs\adaptive-replay-audit.json
 ```
 
 Evaluation is a prospective one-time source-bound experiment. Altering its code, generator, calibration rule or acceptance after examining held-out outcomes requires a new study; the exposed outcomes cannot become unseen again.

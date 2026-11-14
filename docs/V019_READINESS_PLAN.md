@@ -37,12 +37,25 @@ not an architecture freeze, release authorization or claim of qualification.
    outcomes are opened. Use the four fixed arms, match information and budgets,
    and retain negative outcomes. The current protocol design is not a completed
    corpus preregistration. Report failure to outperform controls explicitly.
+   Preserve original arms A-D and register optional adaptive arm E separately.
+   Its effort mappings need measured native coding costs, complete worker and
+   recovery accounting, and an executable matched-budget plan. Synthetic stream
+   performance cannot substitute for this test. Include memory reset and
+   shuffled-evidence controls in a separately frozen transfer comparison.
 6. **Require stability and distribution evidence.** Run sustained native
    missions with interruption, partial/corrupt journals, stale/contested memory
    and external-effect uncertainty. Obtain Windows and Linux CI results once
    the GitHub account billing/spending block is resolved. Rebuild identical
    source/runtime archives, verify a fresh Git checkout and clean Windows
    installation, and independently review source/image/dependency provenance.
+
+The adaptive controller and its frozen synthetic study do not close any of
+these platform gates. Before another mechanism experiment, investigate measured
+failure modes on development data, register the changed hypothesis, and reserve
+new evaluation data. Do not tune on the completed study and reuse its outcomes
+as a new held-out advantage. Candidate self-revision additionally needs a real
+independent held-out corpus and native baseline/candidate regression evidence;
+the current development-only ranking nomination is not an accepted improvement.
 
 Only after acceptance evidence supports all four platform gates may the
 architecture be frozen for a v0.19 candidate. Scientific claims must remain

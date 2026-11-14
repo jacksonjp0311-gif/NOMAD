@@ -1,0 +1,255 @@
+{
+  "auditor_sha256": "9c538ebae7c35c56f0a16a1a592a4930855da33cae3ae9530b04bc0b766d438e",
+  "coding_advantage": "NOT_ESTABLISHED",
+  "complete_trials": 512,
+  "cross_repository_transfer": "NOT_ESTABLISHED",
+  "decision_records_checked": 2560,
+  "forecasts_checked": 65536,
+  "plan_file_sha256": "2f0d114930509b7378e9497ee5967f8c922ae4a08c027053c355d5cfb389ac3d",
+  "registered_comparisons": {
+    "frequency": {
+      "descriptive_cpu_mean_interval95": [
+        0.131103515625,
+        0.159423828125
+      ],
+      "descriptive_logloss_mean_interval95": [
+        -0.08534562015478823,
+        -0.06501123305760921
+      ],
+      "descriptive_objective_mean_interval95": [
+        -0.08306443118994448,
+        -0.06284242042162866
+      ],
+      "mean_cpu_difference": 0.14501953125,
+      "mean_logloss_difference": -0.07482850721656831,
+      "mean_objective_difference": -0.07256257704078706,
+      "paired_seed_cpu_differences": [
+        0.1796875,
+        0.142578125,
+        0.1328125,
+        0.169921875,
+        0.154296875,
+        0.11328125,
+        0.1328125,
+        0.134765625
+      ],
+      "paired_seed_logloss_differences": [
+        -0.08773017129357874,
+        -0.08192682647134086,
+        -0.10312718882606997,
+        -0.07514835995395097,
+        -0.05325791101286903,
+        -0.06273831468872859,
+        -0.06700499680373173,
+        -0.06769428868227656
+      ],
+      "paired_seed_objective_differences": [
+        -0.08492255410607874,
+        -0.07969904326821586,
+        -0.10105199351356997,
+        -0.07249333065707597,
+        -0.05084702234099403,
+        -0.06096829515747859,
+        -0.06492980149123173,
+        -0.06558857579165156
+      ],
+      "registered_quality_cost_criterion_passed": false
+    },
+    "native": {
+      "descriptive_cpu_mean_interval95": [
+        -0.18701171875,
+        -0.11669921875
+      ],
+      "descriptive_logloss_mean_interval95": [
+        0.045451338999889505,
+        0.07250459930954004
+      ],
+      "descriptive_objective_mean_interval95": [
+        0.04283368482605483,
+        0.07052680563841346
+      ],
+      "mean_cpu_difference": -0.145751953125,
+      "mean_logloss_difference": 0.05958572611329833,
+      "mean_objective_difference": 0.0573083518457202,
+      "paired_seed_cpu_differences": [
+        -0.099609375,
+        -0.111328125,
+        -0.130859375,
+        -0.1171875,
+        -0.181640625,
+        -0.26953125,
+        -0.13671875,
+        -0.119140625
+      ],
+      "paired_seed_logloss_differences": [
+        0.08132779345731544,
+        0.06204456609531822,
+        0.084808659813429,
+        0.04851631031657044,
+        0.02303808364233295,
+        0.04322825041459144,
+        0.06905454447652848,
+        0.06466760069030064
+      ],
+      "paired_seed_objective_differences": [
+        0.07977139697294044,
+        0.06030506414219322,
+        0.082763982079054,
+        0.04668525562907044,
+        0.02019994887670795,
+        0.03901682463334144,
+        0.06691831400777848,
+        0.06280602842467564
+      ],
+      "registered_quality_cost_criterion_passed": false
+    },
+    "temporal": {
+      "descriptive_cpu_mean_interval95": [
+        0.048095703125,
+        0.08251953125
+      ],
+      "descriptive_logloss_mean_interval95": [
+        0.008152546558579318,
+        0.0220563465393133
+      ],
+      "descriptive_objective_mean_interval95": [
+        0.009071972044195645,
+        0.02311054996370933
+      ],
+      "mean_cpu_difference": 0.064697265625,
+      "mean_logloss_difference": 0.01543553816963187,
+      "mean_objective_difference": 0.016446432945022495,
+      "paired_seed_cpu_differences": [
+        0.115234375,
+        0.0546875,
+        0.052734375,
+        0.08984375,
+        0.056640625,
+        0.03515625,
+        0.037109375,
+        0.076171875
+      ],
+      "paired_seed_logloss_differences": [
+        0.02446286196473013,
+        0.01049810128245865,
+        0.029341926599054158,
+        0.01973713965502122,
+        0.010954646741651253,
+        -0.004780715041801775,
+        0.021747520141230048,
+        0.011522824014711275
+      ],
+      "paired_seed_objective_differences": [
+        0.02626339907410513,
+        0.01135259346995865,
+        0.030165901208429158,
+        0.02114094824877122,
+        0.011839656507276253,
+        -0.004231398635551775,
+        0.022327354125605048,
+        0.012713009561586275
+      ],
+      "registered_quality_cost_criterion_passed": false
+    }
+  },
+  "registered_tests": [
+    {
+      "control": "native",
+      "holm_threshold": 0.0125,
+      "losses": 8,
+      "metric": "objective",
+      "p_one_sided": 1.0,
+      "significant": false,
+      "ties": 0,
+      "wins": 0
+    },
+    {
+      "control": "native",
+      "holm_threshold": 0.016666666666666666,
+      "losses": 8,
+      "metric": "margin_shifted_quality",
+      "p_one_sided": 1.0,
+      "significant": false,
+      "ties": 0,
+      "wins": 0
+    },
+    {
+      "control": "native",
+      "holm_threshold": 0.005555555555555556,
+      "losses": 0,
+      "metric": "whole_cpu",
+      "p_one_sided": 0.00390625,
+      "significant": true,
+      "ties": 0,
+      "wins": 8
+    },
+    {
+      "control": "frequency",
+      "holm_threshold": 0.00625,
+      "losses": 0,
+      "metric": "objective",
+      "p_one_sided": 0.00390625,
+      "significant": true,
+      "ties": 0,
+      "wins": 8
+    },
+    {
+      "control": "frequency",
+      "holm_threshold": 0.0071428571428571435,
+      "losses": 0,
+      "metric": "margin_shifted_quality",
+      "p_one_sided": 0.00390625,
+      "significant": true,
+      "ties": 0,
+      "wins": 8
+    },
+    {
+      "control": "frequency",
+      "holm_threshold": 0.025,
+      "losses": 8,
+      "metric": "whole_cpu",
+      "p_one_sided": 1.0,
+      "significant": false,
+      "ties": 0,
+      "wins": 0
+    },
+    {
+      "control": "temporal",
+      "holm_threshold": 0.01,
+      "losses": 7,
+      "metric": "objective",
+      "p_one_sided": 0.99609375,
+      "significant": false,
+      "ties": 0,
+      "wins": 1
+    },
+    {
+      "control": "temporal",
+      "holm_threshold": 0.008333333333333333,
+      "losses": 3,
+      "metric": "margin_shifted_quality",
+      "p_one_sided": 0.36328125,
+      "significant": false,
+      "ties": 0,
+      "wins": 5
+    },
+    {
+      "control": "temporal",
+      "holm_threshold": 0.05,
+      "losses": 8,
+      "metric": "whole_cpu",
+      "p_one_sided": 1.0,
+      "significant": false,
+      "ties": 0,
+      "wins": 0
+    }
+  ],
+  "result_file_sha256": "faee2732e68662b8913c626eb242418c0378bae9ac6b4865920409a385bbaa3e",
+  "schema": "nomad.adaptive-independent-arithmetic.v18",
+  "scope": "independent trace, calibration metric, cost arithmetic, matched inputs, aggregation and paired inference; not independent outcome authorship or proof of forecast execution order",
+  "scored_forecasts_checked": 49152,
+  "seed_blocks": 8,
+  "status": "PASS",
+  "strict_peak_qualification": "HOLD",
+  "total_cpu_arithmetic_seconds": 280.640625
+}

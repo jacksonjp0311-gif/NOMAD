@@ -1,48 +1,32 @@
-# NOMAD v0.18.0 FRONTIER development qualification
+# NOMAD v0.18.0 adaptive development qualification
 
-November 14, 2026. **All four gates HOLD; v0.19 and production not ready.**
-Version remains 0.18.0. This is a development snapshot, not a GitHub release.
+November 14, 2026. All four gates HOLD; no version advance or GitHub release.
 
-The existing intelligence pipeline now supports bounded JSON Python function
-contracts, local import graphs, diagnostic probes, conditional edits, two-module
-proposals and typed GENESIS synthesis. Native BGR, WITNESS and verified memory
-remain separate computational and acceptance mechanisms. Recovery and observer
-admission were strengthened through independent review. Candidate self-revision
-has a protected audit and no authoritative-source replacement operation.
+Implemented bounded adaptive computation using the existing frequency, temporal
+and original native BGR mechanisms; optional mission effort allocation and
+public-evidence memory; durable abstention; independent study auditing; authentic
+development provenance and candidate-only self-revision preparation.
 
-Final frozen-source regression: **346 run, 342 passed, zero failures/errors,
-four skipped**, with source unchanged during execution. The skips cover two
-POSIX-specific checks, missing historical predecessor bytes and unavailable
-Windows symlink privilege. Native Windows supervision passed 14 focused checks;
-six controlled memory cases diagnosed attempted-charge peak accounting. Strict
-peak-memory qualification remains HOLD.
+The frozen 512-trial synthetic study failed its combined quality/cost criterion
+against every control. Adaptive used 21.62% less CPU than always-on native but
+lost too much predictive quality. It improved frequency loss at higher CPU cost
+and was worse than conventional temporal on both aggregate loss and CPU.
+No coding, cross-repository transfer or verified self-improvement gain occurred.
 
-The first clean archive exposed two intermittent Windows mission-publication
-errors. A bounded, identity-checked rename retry now handles known sharing/access
-refusals without overwriting destinations; eight focused tests include a real
-Windows sharing lock. The original failed archives and receipts remain unchanged.
+Regression: 394 run, 390 passed, 0 failures,
+0 errors, 4 skipped, source unchanged. Independent audit
+checked 65,536 forecasts and replay matched the complete deterministic study.
+Native containment remains 0/13 and native function recovery 0/21. Historical
+full predecessor archives remain missing. Earlier failed and negative evidence
+and all original seals remain unchanged.
 
-The frozen native Bitwork mechanism study ran 32 synthetic streams. Its replay
-matched 28,672 forecasts; independent arithmetic verified 21,504 scored forecasts.
-Native helped on the selected history-dependent distributions, lost to frequency
-on stationary data and cost substantially more computation. The old negative
-log-loss result and identical candidate ordering remain unchanged. No coding
-advantage or genuine cross-task learning has been established.
+Current seal: `results/RELEASE_MANIFEST_ADAPTIVE_V018.json`. The companion delivery
+receipt records deterministic archive hashes, clean Windows extraction/setup,
+fresh remote checkout and current CI status. Development stays on
+`v0.18-platform`; `main` remains 5851566. No force push, merge, release, visibility
+or billing change is part of this work.
 
-Docker/WSL are absent. Zero of 13 containment probes and zero of 21 function
-recovery cases ran. No authentic isolated repair or self-improvement trial ran.
-The new A/B/C/D design also awaits a curated disjoint corpus and qualified matched
-whole-mission CPU, memory and wall budgets. Original full v0.17-v0.14 lineage is
-still incomplete; all available original evidence and earlier seals are retained.
-
-The new source seal is `results/RELEASE_MANIFEST_FRONTIER_RECOVERY_V018.json`. Deterministic
-source/runtime ZIPs and the companion delivery receipt record clean extraction,
-offline Windows runtime checks, fresh remote checkout and exact hashes.
-Development is on `v0.18-platform`; `main` remains at 5851566. CI outcome is
-checked after the development push and recorded separately from local tests.
-No main merge, force push, release publication or visibility change is authorized.
-
-Read the [complete qualification report](docs/FRONTIER_REPORT_V018.md),
-[mechanism mathematics and results](docs/FRONTIER_BITWORK_V018.md),
-[native setup instructions](docs/NATIVE_FRONTIER_V018.md), and
-[conditional v0.19 plan](docs/V019_READINESS_PLAN.md).
+Read the [full report](docs/ADAPTIVE_REPORT_V018.md),
+[controller mathematics](docs/ADAPTIVE_INTELLIGENCE_V018.md),
+[mission boundaries](docs/ADAPTIVE_MISSION_V018.md) and
+[native instructions](docs/NATIVE_FRONTIER_V018.md).

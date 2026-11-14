@@ -503,12 +503,9 @@ def admit_function_sources(files: dict[str, str]) -> dict:
     return {'modules': modules, 'symbols': symbols, 'graph': {k: sorted(v) for k, v in graph.items()}}
 
 
-def inspect_function_repository(root: Path, public: list[dict], *, max_candidates=64, max_files_changed=2) -> dict:
-    from .python_operators import generate_python_candidates
-    from .genesis import IOExample, SynthesisTask, synthesize
+def inspect_function_structure(root: Path, public: list[dict]) -> dict:
+    """Admit source and contracts without generating or executing candidates."""
     from .isolation import _input_paths, SandboxPolicy
-    if type(max_candidates) is not int or not 1 <= max_candidates <= 128 or max_files_changed not in (1, 2):
-        raise ValueError('function proposal budgets invalid')
     public = validate_function_cases(public)
     files = {}
     admitted_paths=_input_paths(Path(root),policy=SandboxPolicy('inspection@sha256:'+'0'*64))
@@ -524,6 +521,26 @@ def inspect_function_repository(root: Path, public: list[dict], *, max_candidate
     for row in public:
         name = structure['modules'].get(row['module'])
         if not name or row['function'] not in structure['symbols'][name]: raise ValueError('contract callable is not an admitted definition')
+    return {**structure, 'files': files}
+
+
+def inspect_function_repository(root: Path, public: list[dict], *, max_candidates=64,
+        max_files_changed=2, genesis_max_eval=4096, generation_files=None, ast_check_budget=None) -> dict:
+    from .python_operators import generate_python_candidates
+    from .genesis import IOExample, SynthesisTask, synthesize
+    if (type(max_candidates) is not int or not 0 <= max_candidates <= 128
+            or max_files_changed not in (1, 2) or type(genesis_max_eval) is not int
+            or not 0 <= genesis_max_eval <= 4096):
+        raise ValueError('function proposal budgets invalid')
+    if ast_check_budget is not None and (type(ast_check_budget) is not int or not 0<=ast_check_budget<=4096):
+        raise ValueError('AST candidate check budget invalid')
+    public = validate_function_cases(public)
+    inspected = inspect_function_structure(root, public)
+    files = inspected['files']
+    structure = {k:v for k,v in inspected.items() if k!='files'}
+    selected_files = list(files) if generation_files is None else list(generation_files)
+    if (len(set(selected_files)) != len(selected_files) or any(name not in files for name in selected_files)):
+        raise ValueError('generation localization must reference admitted source files')
     single = []
     synthesis_runs = []
     # Reuse GENESIS's typed finite expression language for eligible public
@@ -531,13 +548,14 @@ def inspect_function_repository(root: Path, public: list[dict], *, max_candidate
     for module, function in sorted({(r['module'],r['function']) for r in public}):
         cases=[r for r in public if (r['module'],r['function'])==(module,function)]
         name=structure['modules'][module]
+        if not max_candidates or not genesis_max_eval or name not in selected_files: continue
         tree=ast.parse(files[name]); fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name==function)
         if (len(fn.args.args)!=2 or fn.args.posonlyargs or fn.args.kwonlyargs or fn.args.defaults
                 or any(r['kwargs'] or len(r['args'])!=2 or any(type(v) is not int or abs(v)>10000 for v in r['args'])
                        or type(r.get('expected')) is not int or abs(r['expected'])>1000000 for r in cases)):
             continue
         run=synthesize(SynthesisTask('function-public', 'def solve(x, y):\n    return 0\n',
-            tuple(IOExample(r['args'][0],r['args'][1],r['expected']) for r in cases),(),()),max_eval=4096,max_nodes=7)
+            tuple(IOExample(r['args'][0],r['args'][1],r['expected']) for r in cases),(),()),max_eval=genesis_max_eval,max_nodes=7)
         synthesis_runs.append({'module':module,'function':function,**asdict(run)})
         if run.candidate is None: continue
         class Rename(ast.NodeTransformer):
@@ -551,13 +569,15 @@ def inspect_function_repository(root: Path, public: list[dict], *, max_candidate
         single.append({'id':digest(json.dumps(patch,sort_keys=True)),'files':patch,'family':'binary_operator',
                        'origin':'GENESIS','description':'public-only typed expression synthesis with parameter binding'})
     generated = 0
-    for name, source in files.items():
+    for name in selected_files if max_candidates else ():
+        source = files[name]
         groups = generate_python_candidates(source)
         # Round-robin families prevents identifier combinatorics crowding out
         # comparison/control-flow edits. All filters are source/public only.
         flattened = [rows[i] for i in range(max([len(v) for v in groups.values()] or [0])) for rows in groups.values() if i < len(rows)]
         accepted = 0
         for candidate in flattened:
+            if ast_check_budget is not None and generated>=ast_check_budget: break
             generated += 1
             try:
                 updated = admit_function_sources({**files, name: candidate.source})
@@ -568,6 +588,7 @@ def inspect_function_repository(root: Path, public: list[dict], *, max_candidate
                            'family': candidate.operator_family, 'description': candidate.description})
             accepted += 1
             if accepted >= min(32, max(8, max_candidates // max(1,len(files)*2))): break
+        if ast_check_budget is not None and generated>=ast_check_budget: break
     single = list({item['id']: item for item in reversed(single)}.values())[::-1]
     proposals = list(single)
     if max_files_changed == 2:

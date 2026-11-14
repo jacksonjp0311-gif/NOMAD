@@ -1,0 +1,50 @@
+{
+  "schema": "nomad.adaptive-containment-review.v18",
+  "status": "SOFTWARE_CONTRACTS_PASS_NATIVE_HOLD",
+  "baseline_commit": "993395f500565a392f9f117485626cad11122b0b",
+  "command": "python -B -m unittest tests.test_adaptive_provenance_v18 tests.test_repository_adaptive_v18 tests.test_adaptive_mission_review_v18 tests.test_experiment_frontier_v18 -v",
+  "tests_run": 21,
+  "tests_passed": 21,
+  "tests_failed": 0,
+  "tests_errors": 0,
+  "tests_skipped": 0,
+  "reported_duration_seconds": 2.781,
+  "test_scope": "Parse-only public provenance, original protocol preservation, explicit cost refusal, authored-fixture journal negatives and prior experiment software contracts.",
+  "native_container_cases_executed": 0,
+  "native_function_recovery_cases_executed": 0,
+  "downloaded_repository_code_executed": false,
+  "private_contracts_created_or_opened": false,
+  "whole_mission_cpu_qualified": false,
+  "strict_peak_memory_qualified": false,
+  "reporting_defect": {
+    "file": "scripts/experiment_frontier_v18.py",
+    "problem": "Serialized WitnessReceipt has verdict/public_match/challenge_match, not supported; challenge contradiction was omitted from private_rejected.",
+    "correction": "Read actual receipt fields and independent final rejection.",
+    "affected_previously_executed_native_trials": 0,
+    "arm_definitions_budgets_acceptance_statistics_changed": false,
+    "prior_frozen_protocols_and_results_overwritten": false
+  },
+  "mechanism_review": {
+    "blocking_findings_corrected": [
+      "Calibration must match current source and exact complete development inventory, retained raw output/input/metrics and recomputed cost values.",
+      "Raised worker failures must preserve attempt identity and known cost while retaining unknown worker CPU as null."
+    ],
+    "remaining_scope": "Trusted generated streams, independently registered held-out assessment required, native high-water counters are not strict actual-commit peak."
+  },
+  "mission_review": {
+    "blocking_authority_bypass_found": false,
+    "independent_negative_tests": [
+      "private observation in rehashed public computation trace refused",
+      "duplicate computation decision in rehashed public computation trace refused",
+      "adaptive accepted record missing computation evidence refused"
+    ],
+    "limitation": "Measured controller stages do not cover complete Docker worker/replay/peak costs; checksums do not authenticate against an attacker replacing every trusted anchor."
+  },
+  "corpus": {
+    "upstream_issue_source_license_bundles": 3,
+    "exact_function_projections_parse_only_supported": 2,
+    "complete_upstream_repositories_qualified": 0,
+    "unseen_evaluation_tasks": 0,
+    "repair_successes": 0
+  }
+}

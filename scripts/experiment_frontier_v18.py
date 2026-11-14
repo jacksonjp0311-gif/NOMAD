@@ -203,6 +203,16 @@ def preflight(document, root, qualification, recovery):
         return {'status': 'HOLD', 'execution': 'NOT_RUN', 'private_contracts_opened': False, 'reasons': [str(error)]}
 
 
+def independent_rejection(events):
+    """Read the serialized WITNESS verdict, which has no `supported` field."""
+    return any((row['kind']=='F_FINAL' and row['data'].get('supported') is False) or
+        (row['kind']=='F_WITNESS' and
+         (row['data'].get('receipt',{}).get('verdict')=='contradicted' or
+          row['data'].get('receipt',{}).get('public_match') is False or
+          row['data'].get('receipt',{}).get('challenge_match') is False))
+        for row in events)
+
+
 def trial(task, root, destination, memory, settings, image):
     from nomad import platform_mission
     started, cpu = time.perf_counter(), time.process_time()
@@ -221,8 +231,7 @@ def trial(task, root, destination, memory, settings, image):
     events = [json.loads(line) for line in (destination/'events.jsonl').read_text().splitlines()]
     public_passed = any(row['kind'] == 'F_OBSERVED' and row['data']['operation'].startswith('search:')
                         and row['data']['result'].get('supported') is True for row in events)
-    private_rejected = any(row['kind'] in ('F_WITNESS', 'F_FINAL') and
-        (row['data'].get('supported') is False or row['data'].get('receipt', {}).get('supported') is False) for row in events)
+    private_rejected = independent_rejection(events)
     return {'task_id': task['id'], 'repository': shared._repository(task['repository']),
         'source_sha256': task['source_sha256'], 'public_spec_sha256': task['public_spec_sha256'],
         'status': result['status'], 'accepted': result['status'] == 'completed',

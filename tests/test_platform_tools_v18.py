@@ -14,6 +14,12 @@ from scripts.verify_package_v18 import verify, verify_qualification_evidence
 
 
 class PlatformToolsTests(unittest.TestCase):
+    def test_runtime_contains_the_included_windows_qualifiers_dependencies(self):
+        from scripts import qualify_windows_v18 as qualifier
+        selected = {name for name, _ in files(qualifier.ROOT, 'runtime')}
+        self.assertTrue(set(qualifier.source_identity()) <= selected)
+        self.assertIn('tests/__init__.py', selected)
+
     def test_missing_image_cannot_run_repository(self):
         with patch('nomad.isolation.run_isolated') as execute, contextlib.redirect_stderr(io.StringIO()):
             self.assertEqual(main(['isolated-demo', '--root', 'uncreated-demo']), 3)

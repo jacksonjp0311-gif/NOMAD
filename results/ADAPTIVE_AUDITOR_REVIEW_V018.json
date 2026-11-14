@@ -1,0 +1,65 @@
+{
+  "auditor_sha256": "9c538ebae7c35c56f0a16a1a592a4930855da33cae3ae9530b04bc0b766d438e",
+  "checks": [
+    {
+      "case": "altered_forecast",
+      "refusal": "worker output differs from retained transport hash",
+      "status": "PASS"
+    },
+    {
+      "case": "wrong_policy",
+      "refusal": "arithmetic mismatch: registered controller config.risk_weight",
+      "status": "PASS"
+    },
+    {
+      "case": "duplicated_trial",
+      "refusal": "missing, duplicate, failed or unregistered trial",
+      "status": "PASS"
+    },
+    {
+      "case": "invented_cpu",
+      "refusal": "arithmetic mismatch: total CPU",
+      "status": "PASS"
+    },
+    {
+      "case": "negative_harness",
+      "refusal": "invalid measured cost: whole harness",
+      "status": "PASS"
+    },
+    {
+      "case": "failed_worker",
+      "refusal": "missing, duplicate, failed or unregistered trial",
+      "status": "PASS"
+    },
+    {
+      "case": "future_decision",
+      "refusal": "decision prefix or selected mechanism differs from trace",
+      "status": "PASS"
+    },
+    {
+      "case": "missing_arm",
+      "refusal": "registered trial inventory incomplete",
+      "status": "PASS"
+    },
+    {
+      "case": "changed_source",
+      "refusal": "source changed between registration and results",
+      "status": "PASS"
+    },
+    {
+      "case": "changed_conclusion",
+      "refusal": "value mismatch: comparisons and intervals.native.registered_quality_cost_criterion_passed",
+      "status": "PASS"
+    }
+  ],
+  "original_bytes_modified": false,
+  "original_result_sha256": "faee2732e68662b8913c626eb242418c0378bae9ac6b4865920409a385bbaa3e",
+  "review_corrections": [
+    "bound worker JSON to transport hash and frozen configuration",
+    "validated exact schemas and complete nonnegative CPU coverage",
+    "bound block decision indices and prefixes to trace mechanisms"
+  ],
+  "schema": "nomad.adaptive-independent-auditor-review.v18",
+  "scope": "consistency and arithmetic mutation checks; not an authenticated hostile-host or isolation test",
+  "status": "PASS"
+}

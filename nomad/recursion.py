@@ -217,6 +217,75 @@ def assess_candidate(*, base_source:str, candidate_source:str,
             'authority':'candidate proposal only; no automatic source replacement'}
 
 
+def prepare_ranking_experiment(output: Path, development: Iterable[SyntheticTask], *,
+                               heldout_sha256: str | None = None, seed: int = 18018) -> dict:
+    """Freeze a dev-nominated revision of the existing bounded ranking policy.
+
+    Only the four enumerated, already trusted pure productions above execute
+    during nomination. The result is a source projection of this research
+    mechanism, not an admitted full-engine mission. Heldout bytes are neither
+    accepted as input nor opened. Native independent acceptance remains HOLD.
+    """
+    import tempfile
+    from .mission_runtime import canonical, digest, save_atomic
+    from .platform_mission import _publish_staged_mission
+    if (type(seed) is not int or not 0<=seed<=2**32-1 or heldout_sha256 is not None and (
+            not isinstance(heldout_sha256,str) or len(heldout_sha256)!=64
+            or any(c not in '0123456789abcdef' for c in heldout_sha256))):
+        raise ValueError('bounded seed and independently frozen heldout digest required')
+    tasks=list(development)
+    if not 2<=len(tasks)<=128 or len({t.id for t in tasks})!=len(tasks):
+        raise ValueError('development requires distinct bounded task identities')
+    for task in tasks:
+        if (not isinstance(task.id,str) or not 1<=len(task.id)<=128 or not 2<=len(task.candidates)<=64
+                or sum(c.is_correct for c in task.candidates)!=1
+                or any(type(c.is_correct) is not bool or any(type(getattr(c,k)) is not int
+                       or abs(getattr(c,k))>10000 for k in ('semantic','prior','line')) for c in task.candidates)):
+            raise ValueError('malformed bounded public development task')
+    sources={name:synthesize_ranking_source(name) for name in _ALLOWED_ORDERS}
+    # Reuse the existing exact-source whitelist evaluator; no imported or
+    # unfamiliar repository program runs on the host during this preparation.
+    scores={name:evaluate_ranking(tasks,compile_ranking_source(source)) for name,source in sources.items()}
+    selected=min(sources,key=lambda name:(scores[name]['total_attempts'],list(sources).index(name)))
+    improved=scores[selected]['total_attempts']<scores['cold']['total_attempts']
+    public=canonical([asdict(task) for task in tasks])
+    files={'baseline/search_policy.py':sources['cold'].encode(),
+           'candidate/search_policy.py':sources[selected].encode(),'development.json':public}
+    report={'schema':'nomad.recursion.ranking-experiment.v18',
+        'status':'PREPARED_NOT_RUN' if heldout_sha256 else 'DEVELOPMENT_NOMINATION_ONLY',
+        'scope':'four existing pure ranking productions; source projection, not full NOMAD self-repair',
+        'seed':seed,'development_sha256':digest(public),'heldout_sha256':heldout_sha256,
+        'development_task_ids':[t.id for t in tasks],'mechanism_source_sha256':digest(Path(__file__).read_bytes()),
+        'hypothesis':'Using independently supported prior after semantic evidence reduces candidate attempts without reducing solved tasks.',
+        'nomination':selected,'development_scores':scores,'development_improved':improved,
+        'candidate_eligible_for_independent_test':improved and heldout_sha256 is not None,
+        'matched_budgets':{'arms':['cold','nominated'],'max_tasks_per_arm':128,'max_candidates_per_task':64,
+                          'repository_worker_dispatches_per_arm':2,'same_heldout_bytes':True},
+        'independent_acceptance':{'status':'HOLD',
+            'independent_corpus_status':'DIGEST_SUPPLIED_NOT_EVALUATED' if heldout_sha256 else 'MISSING_INDEPENDENT_HELDOUT_CORPUS',
+            'required':['native containment qualification',
+            'heldout digest and development task disjointness checked by independent observer',
+            'same heldout tasks and candidate budgets for both arms',
+            'separate Docker baseline/candidate observations and full regressions',
+            'no fewer solved tasks and strictly fewer heldout candidate attempts',
+            'source, protected WITNESS and evidence integrity unchanged']},
+        'files_sha256':{name:digest(data) for name,data in files.items()},
+        'rollback':'discard candidate projection; authoritative runtime was never changed',
+        'heldout_read':False,'native_executions':0,'authoritative_source_replaced':False,
+        'self_improvement_advantage':'NOT_ESTABLISHED','production_promotion':'HOLD'}
+    report['receipt_sha256']=digest(canonical(report))
+    destination=Path(output).resolve()
+    if destination.exists(): raise FileExistsError('self-revision experiment already exists')
+    destination.parent.mkdir(parents=True,exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='nomad-self-experiment-',dir=destination.parent) as temporary:
+        stage=Path(temporary)
+        for name,data in files.items():
+            (stage/name).parent.mkdir(parents=True,exist_ok=True); save_atomic(stage/name,data)
+        save_atomic(stage/'protocol.json',canonical(report))
+        _publish_staged_mission(stage,destination)
+    return report
+
+
 # The self-revision gate reuses the platform mission's isolated candidate and
 # receipts. It has deliberately no operation that writes authoritative source.
 SELF_REGRESSION_COMMAND = ['python', '-B', '-m', 'unittest', 'discover', '-s', 'tests', '-q']

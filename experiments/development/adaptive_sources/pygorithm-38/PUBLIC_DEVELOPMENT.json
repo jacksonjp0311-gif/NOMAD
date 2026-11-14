@@ -1,0 +1,45 @@
+{
+  "goal_text": "Traverse the finite declared cyclic graph using the documented default path parameter.",
+  "public": [
+    {
+      "args": [
+        {
+          "A": [
+            "B"
+          ],
+          "B": [
+            "A"
+          ]
+        },
+        "A"
+      ],
+      "expected": [
+        "A",
+        "B"
+      ],
+      "function": "search",
+      "module": "subject"
+    },
+    {
+      "args": [
+        {
+          "A": [
+            "B"
+          ],
+          "B": [
+            "A"
+          ]
+        },
+        "A",
+        []
+      ],
+      "expected": [
+        "A",
+        "B"
+      ],
+      "function": "search",
+      "module": "subject"
+    }
+  ],
+  "scope": "Openly authored development examples; not independent held-out verification."
+}

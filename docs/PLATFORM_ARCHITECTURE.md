@@ -1,7 +1,39 @@
 # NOMAD v0.18.0 PLATFORM architecture
 
-The current [FRONTIER function pipeline](FRONTIER_FUNCTIONS_V018.md) extends this
-retained arithmetic design. See the addendum at the end for the current scope.
+The [FRONTIER function pipeline](FRONTIER_FUNCTIONS_V018.md) extends this retained
+arithmetic design. The latest [adaptive mission specification](ADAPTIVE_MISSION_V018.md)
+and [information-flow audit](ADAPTIVE_PIPELINE_AUDIT_V018.md) add optional effort
+selection around the existing modules. All native qualification gates remain HOLD.
+
+## Optional adaptive computation
+
+The controller first chooses a bounded effort profile from validated public
+experience, before GENESIS and AST candidate admission. Existing INQUIRY then
+uses allocated public probes. A second durable choice selects the ranking
+mechanism and optional MNEMONIC recall. WITNESS and the independent final
+observer retain acceptance authority. Accepted public traces may inform a later
+task; private values never become numerical learning targets.
+
+```mermaid
+flowchart LR
+  S[Admitted source and public goal] --> R[Repository structure]
+  M[Verified public memory] --> C[Computation selection]
+  R --> C
+  C --> G[Bounded GENESIS and AST proposals]
+  G --> I[INQUIRY and isolated public probes]
+  I --> D[Durable ranking choice]
+  D --> E[Isolated candidate execution]
+  E --> W[Independent WITNESS and final check]
+  W --> M
+  C --> A[Abstain when no work is admissible]
+```
+
+Selection can use frequency, the existing temporal count ensemble or the
+unchanged native BGR runtime. Expensive inference is lazy and replay work is
+charged. The controller's predictor-cost approximation does not price a full
+coding mission. The registered native repository experiment must establish
+usefulness under complete controller-plus-worker accounting. A generated-stream
+result and execution-double tests cannot establish that result.
 
 The platform adds Windows operation, bounded execution, durable mission state and release verification around the existing intelligence system. It does not replace Bitwork with a cloud model. Native container qualification on this ROG remains **HOLD** because Docker is unavailable. A working controller or a passing mock test does not clear that gate.
 

@@ -33,6 +33,8 @@ def main(argv: list[str] | None = None) -> int:
     init.add_argument('--candidate-budget', type=int, default=64, help='typed function proposal inventory limit')
     init.add_argument('--probe-budget', type=int, default=3, help='typed function public diagnostic limit')
     init.add_argument('--max-files-changed', type=int, choices=(1,2), default=2)
+    init.add_argument('--computation-controller', type=Path,
+        help='optional bounded AdaptiveConfig JSON for the separately registered function path')
     demo = commands.add_parser('isolated-demo')
     demo.add_argument('--root', type=Path, required=True)
     demo.add_argument('--ranker', choices=('cold', 'native', 'frequency', 'shuffled'), default='native')
@@ -85,9 +87,16 @@ def main(argv: list[str] | None = None) -> int:
                 if adapter not in (None,'python-functions-v1') or not isinstance(contract, dict) or not required <= set(contract) or set(contract) - required - optional:
                     raise ValueError('invalid mission contract')
                 functions=adapter=='python-functions-v1'
-                ranker = NativeDecisionRanker(args.ranker, action_schema='python-call-relational-vs-other' if functions else 'genesis-vs-ast')
+                computation=None
+                if args.computation_controller:
+                    if not functions: raise ValueError('adaptive computation is supported only by the typed function adapter')
+                    if args.computation_controller.stat().st_size>8192: raise ValueError('computation configuration exceeds size budget')
+                    computation=json.loads(args.computation_controller.read_text(encoding='utf-8'))
+                    if not isinstance(computation,dict): raise ValueError('computation configuration must be a JSON object')
+                ranker = None if computation is not None else NativeDecisionRanker(args.ranker, action_schema='python-call-relational-vs-other' if functions else 'genesis-vs-ast')
                 options={'max_candidates':args.candidate_budget,'probe_budget':args.probe_budget,
                          'max_files_changed':args.max_files_changed} if functions else {'max_eval':args.max_eval}
+                if computation is not None: options['computation_controller']=computation
                 report = (initialize_functions if functions else initialize)(args.root, args.source, policy=policy, ranker=ranker,
                     memory_root=args.memory_root, capture_epoch=args.epoch, adaptive_enabled=not args.no_adaptive,
                     max_executions=args.execution_budget if args.execution_budget is not None else (96 if functions else 4),

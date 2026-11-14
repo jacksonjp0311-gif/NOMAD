@@ -1,0 +1,26 @@
+{
+  "checked_runtime_dependency_paths": [
+    "nomad/archive_guard.py",
+    "nomad/isolation.py",
+    "nomad/supervised.py",
+    "nomad/windows_job.py",
+    "scripts/qualify_isolation_v18.py",
+    "scripts/qualify_windows_v18.py",
+    "tests/__init__.py",
+    "tests/test_native_qualification_v18.py",
+    "tests/test_platform_isolation_v18.py"
+  ],
+  "correction": "runtime boundary now includes both trusted check modules and tests package initializer",
+  "final_study_sha256": "ba9ee1bfccc6e0dd951d22f4f81be01e23a4468097f01b16e4a3a33b09975426",
+  "finding": "runtime Windows qualifier omitted its two test-module dependencies",
+  "native_extracted_runtime_result": "recorded in companion delivery receipt after sealing",
+  "previous_study_preserved": "results/ADAPTIVE_FINAL_V018.json",
+  "regression": "test_runtime_contains_the_included_windows_qualifiers_dependencies",
+  "schema": "nomad.adaptive-packaging-review.v18",
+  "source_sha256": {
+    "scripts/release_files_v18.py": "5333378e750a6e94d59bb4497ff7318c06720efe19d3505956ce33135d187d94",
+    "tests/__init__.py": "aeedc1385f129bc9872dadd50c30b16bfbc7f868acfba9cc581b58970a976e4b",
+    "tests/test_platform_tools_v18.py": "3cee5cc186ff98d13c021b3f2d2c2e5d67719dd7254a0560a03db3b891c57932"
+  },
+  "status": "PASS"
+}

@@ -16,6 +16,7 @@ V14_SHA = '22c218597f5fa1cfc4003fc7694daac420ac42d0603feaeb8130ade6ef2619ea'
 BGR_SHA = '93177c5cc628ac0c6426d8c612c0d769b86ed53cbd7b2a3f872d2706c601a8c2'
 ENGINEERING_SEAL_SHA = '577c0182ed917742ffa49b286638026657a165f2ee0a49e4f2130b124fdb8335'
 QUALIFICATION_SEAL_SHA = 'a51bf062d96db7a144450f37fb09f39377584e9642f36fbf3fd9606023afcfec'
+FRONTIER_SEAL_SHA = 'e2c2fd63a811b7ccc2aaa3470cbb07e490fc2b6782d153db4e26d6d147f664e1'
 
 
 def hash_file(path: Path) -> str:
@@ -118,6 +119,21 @@ def verify(root: Path = ROOT, *, compact: Path | None = None, predecessor: Path 
                if not (root / name).is_file() or hash_file(root / name) != checksum]
     if changed:
         raise ValueError('frozen ddb5c32 qualification evidence differs: ' + repr(changed))
+    frontier_seal = root / 'results/RELEASE_MANIFEST_FRONTIER_RECOVERY_V018.json'
+    if hash_file(frontier_seal) != FRONTIER_SEAL_SHA:
+        raise ValueError('original 993395f FRONTIER seal differs')
+    frontier = json.loads(frontier_seal.read_bytes())['sha256_by_path']
+    frozen_study_code = {'scripts/frontier_bitwork_v18.py',
+                         'scripts/verify_frontier_bitwork_replay_v18.py',
+                         'scripts/audit_frontier_metrics_v18.py'}
+    frontier_protected = {name: checksum for name, checksum in frontier.items()
+                          if name.startswith(('results/', 'experiments/', 'vendor/',
+                                              'external_sources/', 'baseline/'))
+                          or name in frozen_study_code}
+    changed = [name for name, checksum in frontier_protected.items()
+               if not (root / name).is_file() or hash_file(root / name) != checksum]
+    if changed:
+        raise ValueError('frozen 993395f FRONTIER evidence differs: ' + repr(changed))
     report = {'schema': 'nomad.lineage-qualification.v18', 'gate_D': 'HOLD',
               'compact_v17': {'status': 'PASS', 'sha256': COMPACT_SHA,
                               'original_manifest_members_verified': len(expected) - len(missing)},
@@ -126,6 +142,9 @@ def verify(root: Path = ROOT, *, compact: Path | None = None, predecessor: Path 
                                               'original_seal_sha256': ENGINEERING_SEAL_SHA},
               'qualification_ddb5c32_evidence': {'status': 'PASS', 'unchanged_files': len(protected),
                                                 'original_seal_sha256': QUALIFICATION_SEAL_SHA},
+              'frontier_993395f_evidence': {'status': 'PASS', 'unchanged_files': len(frontier_protected),
+                                           'original_seal_sha256': FRONTIER_SEAL_SHA,
+                                           'includes_original_mechanism_code': True},
               'original_bgr_archive': {'status': 'PASS', 'sha256': BGR_SHA},
               'historical_results_regenerated': False,
               'missing': [{'path': missing[0], 'expected_sha256': V16_SHA,

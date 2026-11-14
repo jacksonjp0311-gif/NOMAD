@@ -4,7 +4,7 @@
 
 **Local coding intelligence with explicit evidence and execution boundaries.**
 
-This is a **v0.18.0 FRONTIER development qualification snapshot**. All four platform acceptance gates remain **HOLD**. This iteration extends Python function repair and the evidence chain, investigates the native Bitwork mechanism with a frozen experiment, and diagnoses Windows memory accounting. Docker and WSL are unavailable on this host, so isolated external repair and transferable coding improvement have not been demonstrated. There is no v0.19 readiness claim. See the [current qualification report](docs/FRONTIER_REPORT_V018.md).
+This is a **v0.18.0 adaptive intelligence development snapshot**. All four platform acceptance gates remain **HOLD**. An optional controller now chooses among frequency, conventional temporal and original native Bitwork computation, changes coding effort allocation, and preserves verified public experience. A separately preregistered experiment measures its predictive quality and actual computational cost. Docker and WSL remain unavailable on this host, so isolated external repair and transferable coding improvement have not been demonstrated. There is no v0.19 readiness claim. See the [current qualification report](docs/ADAPTIVE_REPORT_V018.md).
 
 ## Intelligence architecture
 
@@ -15,6 +15,8 @@ The original intelligence modules, BGR runtime and research records remain prese
 Two isolated adapters share one durable mission controller. The retained arithmetic path handles `solve(x, y)`; the new `python-functions-v1` path supports bounded JSON function contracts, local package imports, multiple functions, conditional/control-flow edits and proposals spanning at most two modules. Source inspection never imports unfamiliar code on the host. The function path connects RESONANCE, a repository import graph, INQUIRY, AST/GENESIS synthesis, native BGR ranking, Docker execution, WITNESS and MNEMONIC. Separate challenge and final expectations remain outside the worker and proposer. A negative private check ends the mission without feeding private answers back into search. See [supported syntax and exact commands](docs/FRONTIER_FUNCTIONS_V018.md).
 
 Public observations precede proposals and update the diagnostic posterior used for localization and candidate ordering. Retained learning is admitted only from checked consequences bound to source, action, runtime and receipts. Native Bitwork influences proposal preference and has no acceptance authority. Software tests cover these contracts with explicitly mocked isolation; actual isolated integration and cross-repository transfer remain HOLD. General Python, arbitrary dependencies and general program correctness are outside the supported envelope.
+
+The [adaptive computation controller](docs/ADAPTIVE_INTELLIGENCE_V018.md) uses public predictive gain, frozen development cost estimates, an uncertainty penalty and bounded exploration. Expensive predictors are built only when selected; startup and historical replay are charged. Its [optional mission path](docs/ADAPTIVE_MISSION_V018.md) changes GENESIS work, candidate/probe ceilings, localization, ranking and memory recall, and can durably abstain. Existing A/B/C/D configurations retain their definitions; adaptive repository arm E has a separate prospective design. These effort mappings are explicit hypotheses, not proven optimal computation policies.
 
 ## Start on Windows
 
@@ -57,7 +59,7 @@ The supported installation is source-linked. A standalone wheel containing the v
 | Isolated external repair and interrupted isolated mission | HOLD |
 | Native BGR coding advantage | NOT ESTABLISHED; mixed synthetic mechanism results below |
 
-Exact current test counts, source hashes, timing, skip reasons and runtime outputs are in [the FRONTIER qualification receipt](results/FRONTIER_FINAL_RECHECK_V018.json). [Native Windows checks and memory diagnosis](docs/NATIVE_FRONTIER_V018.md) include resource refusal, breakaway denial and owner-death recovery. Rejected allocations increased peak counters without increasing observed current committed memory; strict peak accounting remains HOLD. A bounded Windows rename retry addresses intermittent mission-directory publication refusal, with destination/identity checks and no overwrite fallback. Original and intermediate receipts remain immutable. CPU timing is not an energy measurement.
+Exact current test counts, source hashes, timing, skip reasons and runtime outputs are in [the adaptive qualification receipt](results/ADAPTIVE_FINAL_RECHECK_V018.json). [Native Windows checks and memory diagnosis](docs/NATIVE_FRONTIER_V018.md) include resource refusal, breakaway denial and owner-death recovery. Rejected allocations increased peak counters without increasing observed current committed memory; strict peak accounting remains HOLD. A bounded Windows rename retry addresses intermittent mission-directory publication refusal, with destination/identity checks and no overwrite fallback. Original and intermediate receipts remain immutable. CPU timing is not an energy measurement.
 
 ## Isolated missions
 
@@ -116,9 +118,9 @@ The new frozen mechanism experiment ran 32 trusted synthetic streams, eight seed
 
 These are designed mechanism tests, not repository repairs or equal-compute efficiency evidence. Native temporal mechanisms help on the selected history-dependent distributions but cost more computation; frequency wins on stationary data. The four preregistered contrasts and ablations are reported separately from this descriptive table. An [independent trace audit](results/FRONTIER_INDEPENDENT_ARITHMETIC_V018.json) recomputes 21,504 scored model forecasts and the multiplicity correction.
 
-The new repository protocol uses A cold, B frequency, C native Bitwork, D native plus verified memory/full pipeline. It refuses private evaluation without a disjoint curated corpus, qualified isolation/recovery and matched whole-mission resource accounting. No authentic prospective repair trial or genuine cross-task coding benefit has been established. Public development leads cannot become unseen evaluation tasks.
+The repository protocol uses A cold, B frequency, C native Bitwork, D native plus verified memory/full pipeline. It refuses private evaluation without a disjoint curated corpus, qualified isolation/recovery and matched whole-mission resource accounting. The [separate adaptive extension](experiments/PROTOCOL_REPOSITORY_ADAPTIVE_V018.json) leaves those four definitions intact. Three additional authentic issue/source/license bundles have documented provenance; all are exposed development material and remain excluded from unseen evaluation. No authentic prospective repair trial or genuine cross-task coding benefit has been established.
 
-The [candidate self-revision audit](docs/SELF_REVISION_FRONTIER_V018.md) checks protected files, baseline/candidate regressions and rollback identity. It cannot replace authoritative source; native self-improvement remains HOLD.
+The [candidate self-revision audit](docs/SELF_REVISION_FRONTIER_V018.md) checks protected files, baseline/candidate regressions and rollback identity. The new bounded development nomination prepares an existing ranking-function candidate and rollback baseline; independent held-out and native acceptance remain absent. It cannot replace authoritative source; verified self-improvement remains HOLD.
 
 ## Reproduce and inspect
 
@@ -126,6 +128,7 @@ The [candidate self-revision audit](docs/SELF_REVISION_FRONTIER_V018.md) checks 
 py -3 -B -m unittest discover -s tests -v
 py -3 -B scripts\study_platform_v18.py --output runs\new-platform-study.json
 py -3 -B scripts\audit_frontier_metrics_v18.py --output runs\new-metric-audit.json
+py -3 -B scripts\audit_adaptive_metrics_v18.py --plan experiments\PLAN_ADAPTIVE_MECHANISMS_V018.json --result results\ADAPTIVE_MECHANISMS_V018.json --output runs\adaptive-audit.json
 py -3 -B scripts\verify_package_v18.py
 py -3 -B scripts\build_release_v18.py --output .\dist\NOMAD-v0.18.0-source.zip --mode source
 py -3 -B scripts\build_release_v18.py --output .\dist\NOMAD-v0.18.0-runtime.zip --mode runtime
@@ -137,9 +140,13 @@ Results and archive outputs must be new paths. The verifier never rebuilds expec
 
 The original desktop source is preserved in the `baseline-v0.17.0` Git branch and the original ZIP; development is on `v0.18-platform`. Historical experiment/results files and the original BGR archive were not rewritten. This compact source omits `baseline/NOMAD-v0.16.0.zip` by design. Its absence is a lineage HOLD, not corrupted current source. Do not present this source ZIP as the complete nested historical archive.
 
-The [GitHub repository](https://github.com/jacksonjp0311-gif/NOMAD) is private. Development uses [v0.18-platform](https://github.com/jacksonjp0311-gif/NOMAD/tree/v0.18-platform); `main` remains at the earlier engineering commit `5851566`. This iteration began from local and remote `ddb5c32ea56d5c94e67fc78bdea1ad64b7b9c399` with a clean tree and zero divergence. The companion delivery receipt records the new verified development synchronization. Prior GitHub Actions was blocked before jobs started by account billing/spending settings; delivery records the new run separately. No release, main merge, force push or visibility change is part of qualification.
+The [GitHub repository](https://github.com/jacksonjp0311-gif/NOMAD) is private. Development uses [v0.18-platform](https://github.com/jacksonjp0311-gif/NOMAD/tree/v0.18-platform); `main` remains at the earlier engineering commit `5851566`. This iteration began from local and remote `993395f500565a392f9f117485626cad11122b0b` with a clean tree and zero divergence. The controller study was preregistered in commit `e2cd77c03848ce13d9fe31bf32cca383835ae3b3` before evaluation. The companion delivery receipt records the new verified development synchronization. Prior GitHub Actions was blocked before jobs started by account billing/spending settings; delivery records the new run separately. No release, main merge, force push or visibility change is part of qualification.
 
-- [Current FRONTIER qualification report](docs/FRONTIER_REPORT_V018.md)
+- [Current adaptive qualification report](docs/ADAPTIVE_REPORT_V018.md)
+- [Controller mathematics and frozen protocol](docs/ADAPTIVE_INTELLIGENCE_V018.md)
+- [Adaptive mission, memory and recovery boundaries](docs/ADAPTIVE_MISSION_V018.md)
+- [Native blockers and authentic development corpus](docs/ADAPTIVE_NATIVE_AND_CORPUS_V018.md)
+- [Preserved FRONTIER qualification report](docs/FRONTIER_REPORT_V018.md)
 - [Previous qualification report](docs/QUALIFICATION_REPORT_V018.md)
 - [Native security qualification](docs/NATIVE_QUALIFICATION_V018.md)
 - [Original engineering report](docs/PLATFORM_QUALIFICATION_REPORT.md)

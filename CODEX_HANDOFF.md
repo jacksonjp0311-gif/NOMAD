@@ -58,7 +58,7 @@ If GitHub `jacksonjp0311-gif/NOMAD` does not exist, prepare the repository with 
 ## Non-negotiable direction
 
 NOMAD learns through execution consequences. Bitwork is the reasoning/reuse substrate; external code execution is a bounded experiment; WITNESS owns evidence; learned memory guides but never certifies; failure narrows claims. We are heading v0.18 PLATFORM → v0.19 RC → v1.0 PRODUCTION within a documented supported operating envelope, not accumulating unrelated modules.
-# Current FRONTIER handoff, 2026-11-14
+# Preserved FRONTIER handoff, 2026-11-14
 
 Continue from the verified remote `v0.18-platform`, not from a release label.
 This iteration began at `ddb5c32ea56d5c94e67fc78bdea1ad64b7b9c399`; its delivered
@@ -81,3 +81,33 @@ regenerate it. The original full v0.17 and v0.16-v0.14 archives are still missin
 No main merge, release publication, visibility change or version advance was
 authorized by this development snapshot. The instructions above are the retained
 earlier milestone handoff, superseded where this current addendum is more precise.
+
+# Current adaptive intelligence handoff, 2026-11-14
+
+Start with `docs/ADAPTIVE_REPORT_V018.md`, `docs/ADAPTIVE_INTELLIGENCE_V018.md`,
+`docs/ADAPTIVE_MISSION_V018.md` and `docs/ADAPTIVE_NATIVE_AND_CORPUS_V018.md`.
+This iteration began at verified local/remote `993395f500565a392f9f117485626cad11122b0b`.
+The mechanism study was preregistered in Git commit
+`e2cd77c03848ce13d9fe31bf32cca383835ae3b3` before opening evaluation outcomes.
+The companion delivery receipt records the final pushed SHA, clean checkout,
+archive checksums and CI status. Stay on `v0.18-platform`, version **0.18.0**.
+
+All four gates remain HOLD. The optional controller changes actual planning
+allocation and ranking; this does not establish independently verified coding
+performance or cross-repository transfer. Preserve the complete synthetic study,
+replay and negative findings. Do not retune on its held-out outcomes and reuse
+them as fresh evaluation. A new scientific hypothesis requires a new freeze and
+new evaluation data. The original A/B/C/D repository definitions remain intact;
+adaptive arm E is a separate non-executable design pending native prerequisites.
+
+Docker/WSL and complete mission resource accounting remain unavailable. Zero
+native containment or function recovery cases qualify this new snapshot. The
+self-revision artifact is development nomination only, with no independent
+held-out corpus and no accepted gain. Original full v0.17-v0.14 archives remain
+missing. The current create-only seal is `results/RELEASE_MANIFEST_ADAPTIVE_V018.json`;
+the verifier must never regenerate it. Earlier seals and original study code
+remain protected. Further edits require a new internal seal, not a new version.
+
+No release, main merge, force push, visibility or billing change is authorized.
+Development commits and a checked push to the existing private branch are
+authorized. Do not execute unfamiliar repository code directly on the host.

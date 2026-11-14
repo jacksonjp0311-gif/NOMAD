@@ -1,0 +1,330 @@
+{
+  "adaptive_cpu_percent_less_than_native": 21.62260050706266,
+  "adaptive_forecast_mechanisms_by_family": {
+    "delayed": {
+      "frequency": 704,
+      "native": 176,
+      "temporal": 144
+    },
+    "irreducible": {
+      "frequency": 992,
+      "native": 32
+    },
+    "misleading": {
+      "frequency": 336,
+      "native": 96,
+      "temporal": 592
+    },
+    "shift": {
+      "frequency": 944,
+      "native": 48,
+      "temporal": 32
+    },
+    "sparse_noisy": {
+      "frequency": 1024
+    },
+    "stationary": {
+      "frequency": 1024
+    },
+    "temporal": {
+      "frequency": 288,
+      "native": 192,
+      "temporal": 544
+    },
+    "unseen_structure": {
+      "frequency": 704,
+      "native": 224,
+      "temporal": 96
+    }
+  },
+  "all_registered_joint_comparisons_passed": false,
+  "coding_transfer": "NOT_ESTABLISHED",
+  "family_logloss": {
+    "delayed": {
+      "adaptive": 0.6601535851402404,
+      "frequency": 0.70727019509867,
+      "native": 0.3944982017772975,
+      "temporal": 0.6697278021053824
+    },
+    "irreducible": {
+      "adaptive": 0.7046142826056537,
+      "frequency": 0.7043767508449175,
+      "native": 0.7126445280832657,
+      "temporal": 0.7069745558237016
+    },
+    "misleading": {
+      "adaptive": 0.5382993362822817,
+      "frequency": 0.6807552568310595,
+      "native": 0.5062229019962674,
+      "temporal": 0.5286712118424209
+    },
+    "shift": {
+      "adaptive": 0.7553375439898505,
+      "frequency": 0.7780831994716731,
+      "native": 0.6265575028746436,
+      "temporal": 0.6201338153050927
+    },
+    "sparse_noisy": {
+      "adaptive": 0.2897319414038093,
+      "frequency": 0.2897319414038093,
+      "native": 0.29539360068294807,
+      "temporal": 0.2966251491082993
+    },
+    "stationary": {
+      "adaptive": 0.4769747155694968,
+      "frequency": 0.4769747155694968,
+      "native": 0.49077197775533554,
+      "temporal": 0.4887761551754808
+    },
+    "temporal": {
+      "adaptive": 0.34908777143737335,
+      "frequency": 0.7146037678963595,
+      "native": 0.28766659420209795,
+      "temporal": 0.34895584900274546
+    },
+    "unseen_structure": {
+      "adaptive": 0.6120033214105556,
+      "frequency": 0.6330347284558222,
+      "native": 0.595761381561019,
+      "temporal": 0.6028536541190831
+    }
+  },
+  "memory_scope": "reported worker Job/working-set and parent peaks separately; not additive or strict simultaneous peak",
+  "modes": {
+    "adaptive": {
+      "brier": 0.1859360410152453,
+      "ece10": 0.10632096328368737,
+      "max_reported_job_peak_bytes": 28491776,
+      "max_worker_peak_working_set_bytes": 26963968,
+      "mean_logloss": 0.5482753122299077,
+      "mean_telemetry": {
+        "bookkeeping_cpu_seconds": 0.0009765625,
+        "bookkeeping_wall_seconds": 0.0004945047148794401,
+        "build_cpu_seconds": 0.070556640625,
+        "build_wall_seconds": 0.07310223750300793,
+        "catchup_cpu_seconds": 0.043701171875,
+        "catchup_observations": 67.75,
+        "catchup_wall_seconds": 0.04549686094196659,
+        "decision_cpu_seconds": 0.00146484375,
+        "decision_wall_seconds": 0.0019688234406203264,
+        "native_builds": 0.515625,
+        "native_forecasts": 12,
+        "predictor_cpu_seconds": 0.022216796875,
+        "predictor_wall_seconds": 0.022160614072163298,
+        "temporal_builds": 0.46875,
+        "temporal_forecasts": 22
+      },
+      "mean_worker_algorithm_cpu_seconds": 0.150390625,
+      "selected_forecasts": {
+        "frequency": 6016,
+        "native": 768,
+        "temporal": 1408
+      },
+      "supervisor_cpu_seconds": 0.011962890625,
+      "total_cpu_seconds": 0.5283203125,
+      "trials": 64,
+      "whole_job_cpu_seconds": 0.516357421875,
+      "whole_wall_seconds": 0.5865753046819009
+    },
+    "frequency": {
+      "brier": 0.2191138406529432,
+      "ece10": 0.10126883213643918,
+      "max_reported_job_peak_bytes": 27254784,
+      "max_worker_peak_working_set_bytes": 25812992,
+      "mean_logloss": 0.623103819446476,
+      "mean_telemetry": {},
+      "mean_worker_algorithm_cpu_seconds": 0.01123046875,
+      "selected_forecasts": {
+        "frequency": 8192
+      },
+      "supervisor_cpu_seconds": 0.010986328125,
+      "total_cpu_seconds": 0.38330078125,
+      "trials": 64,
+      "whole_job_cpu_seconds": 0.372314453125,
+      "whole_wall_seconds": 0.44213131875130784
+    },
+    "native": {
+      "brier": 0.16075950390427637,
+      "ece10": 0.08983537234683656,
+      "max_reported_job_peak_bytes": 28377088,
+      "max_worker_peak_working_set_bytes": 26816512,
+      "mean_logloss": 0.48868958611660934,
+      "mean_telemetry": {},
+      "mean_worker_algorithm_cpu_seconds": 0.30078125,
+      "selected_forecasts": {
+        "native": 8192
+      },
+      "supervisor_cpu_seconds": 0.01220703125,
+      "total_cpu_seconds": 0.674072265625,
+      "trials": 64,
+      "whole_job_cpu_seconds": 0.661865234375,
+      "whole_wall_seconds": 0.7365942593760337
+    },
+    "no_history": {
+      "brier": 0.2191138406529432,
+      "ece10": 0.10126883213643918,
+      "max_reported_job_peak_bytes": 27271168,
+      "max_worker_peak_working_set_bytes": 25841664,
+      "mean_logloss": 0.623103819446476,
+      "mean_telemetry": {
+        "bookkeeping_cpu_seconds": 0.000732421875,
+        "bookkeeping_wall_seconds": 0.00044138124667369993,
+        "build_cpu_seconds": 0.0,
+        "build_wall_seconds": 0.0,
+        "catchup_cpu_seconds": 0.0,
+        "catchup_observations": 0,
+        "catchup_wall_seconds": 0.0,
+        "decision_cpu_seconds": 0.000732421875,
+        "decision_wall_seconds": 0.00045778750700264936,
+        "native_builds": 0,
+        "native_forecasts": 0,
+        "predictor_cpu_seconds": 0.0,
+        "predictor_wall_seconds": 0.0,
+        "temporal_builds": 0,
+        "temporal_forecasts": 0
+      },
+      "mean_worker_algorithm_cpu_seconds": 0.011474609375,
+      "selected_forecasts": {
+        "frequency": 8192
+      },
+      "supervisor_cpu_seconds": 0.01220703125,
+      "total_cpu_seconds": 0.38720703125,
+      "trials": 64,
+      "whole_job_cpu_seconds": 0.375,
+      "whole_wall_seconds": 0.44625639375135506
+    },
+    "no_memory": {
+      "brier": 0.20306676529169687,
+      "ece10": 0.10932047248175415,
+      "max_reported_job_peak_bytes": 28069888,
+      "max_worker_peak_working_set_bytes": 26779648,
+      "mean_logloss": 0.5863051456257572,
+      "mean_telemetry": {
+        "bookkeeping_cpu_seconds": 0.0,
+        "bookkeeping_wall_seconds": 0.00021786719935334986,
+        "build_cpu_seconds": 0.04443359375,
+        "build_wall_seconds": 0.04496670937805902,
+        "catchup_cpu_seconds": 0.04833984375,
+        "catchup_observations": 45.25,
+        "catchup_wall_seconds": 0.05048110157258634,
+        "decision_cpu_seconds": 0.00244140625,
+        "decision_wall_seconds": 0.001949712496752909,
+        "native_builds": 0.3125,
+        "native_forecasts": 8.25,
+        "predictor_cpu_seconds": 0.018310546875,
+        "predictor_wall_seconds": 0.02017156250985863,
+        "temporal_builds": 0.265625,
+        "temporal_forecasts": 7.5
+      },
+      "mean_worker_algorithm_cpu_seconds": 0.125,
+      "selected_forecasts": {
+        "frequency": 7184,
+        "native": 528,
+        "temporal": 480
+      },
+      "supervisor_cpu_seconds": 0.01123046875,
+      "total_cpu_seconds": 0.50439453125,
+      "trials": 64,
+      "whole_job_cpu_seconds": 0.4931640625,
+      "whole_wall_seconds": 0.5629057250052938
+    },
+    "no_selection": {
+      "brier": 0.16075950390427637,
+      "ece10": 0.08983537234683656,
+      "max_reported_job_peak_bytes": 28418048,
+      "max_worker_peak_working_set_bytes": 26894336,
+      "mean_logloss": 0.48868958611660934,
+      "mean_telemetry": {
+        "bookkeeping_cpu_seconds": 0.00146484375,
+        "bookkeeping_wall_seconds": 0.0009276452738049557,
+        "build_cpu_seconds": 0.077392578125,
+        "build_wall_seconds": 0.07945772812490759,
+        "catchup_cpu_seconds": 0.000244140625,
+        "catchup_observations": 0,
+        "catchup_wall_seconds": 0.00021945311527815647,
+        "decision_cpu_seconds": 0.0029296875,
+        "decision_wall_seconds": 0.002339015622965235,
+        "native_builds": 1,
+        "native_forecasts": 128,
+        "predictor_cpu_seconds": 0.217529296875,
+        "predictor_wall_seconds": 0.22459540633280994,
+        "temporal_builds": 0,
+        "temporal_forecasts": 0
+      },
+      "mean_worker_algorithm_cpu_seconds": 0.3125,
+      "selected_forecasts": {
+        "native": 8192
+      },
+      "supervisor_cpu_seconds": 0.011474609375,
+      "total_cpu_seconds": 0.695068359375,
+      "trials": 64,
+      "whole_job_cpu_seconds": 0.68359375,
+      "whole_wall_seconds": 0.7568751687513213
+    },
+    "no_structure": {
+      "brier": 0.178544431660194,
+      "ece10": 0.10534896452366913,
+      "max_reported_job_peak_bytes": 28340224,
+      "max_worker_peak_working_set_bytes": 26996736,
+      "mean_logloss": 0.5316439325621447,
+      "mean_telemetry": {
+        "bookkeeping_cpu_seconds": 0.00048828125,
+        "bookkeeping_wall_seconds": 0.0004917297228530515,
+        "build_cpu_seconds": 0.145751953125,
+        "build_wall_seconds": 0.14765835000252991,
+        "catchup_cpu_seconds": 0.15625,
+        "catchup_observations": 130.5,
+        "catchup_wall_seconds": 0.16134797032100323,
+        "decision_cpu_seconds": 0.000244140625,
+        "decision_wall_seconds": 0.0007699234383835574,
+        "native_builds": 1,
+        "native_forecasts": 22.5,
+        "predictor_cpu_seconds": 0.04638671875,
+        "predictor_wall_seconds": 0.04826417187359766,
+        "temporal_builds": 1,
+        "temporal_forecasts": 31.25
+      },
+      "mean_worker_algorithm_cpu_seconds": 0.362548828125,
+      "selected_forecasts": {
+        "frequency": 4752,
+        "native": 1440,
+        "temporal": 2000
+      },
+      "supervisor_cpu_seconds": 0.010498046875,
+      "total_cpu_seconds": 0.73779296875,
+      "trials": 64,
+      "whole_job_cpu_seconds": 0.727294921875,
+      "whole_wall_seconds": 0.8029360734444708
+    },
+    "temporal": {
+      "brier": 0.17900266273499155,
+      "ece10": 0.09327814285045732,
+      "max_reported_job_peak_bytes": 27394048,
+      "max_worker_peak_working_set_bytes": 26267648,
+      "mean_logloss": 0.5328397740602758,
+      "mean_telemetry": {},
+      "mean_worker_algorithm_cpu_seconds": 0.09619140625,
+      "selected_forecasts": {
+        "temporal": 8192
+      },
+      "supervisor_cpu_seconds": 0.0107421875,
+      "total_cpu_seconds": 0.463623046875,
+      "trials": 64,
+      "whole_job_cpu_seconds": 0.452880859375,
+      "whole_wall_seconds": 0.5265945031205774
+    }
+  },
+  "parent_memory_after": {
+    "available": true,
+    "peak_working_set_bytes": 57688064,
+    "reported_peak_commit_bytes": 47951872,
+    "scope": "this process lifetime; excludes other processes; peaks are not contemporaneous or additive",
+    "strict_commit_peak_qualification": "HOLD",
+    "winerror": 0
+  },
+  "primary_total_cpu_seconds": 280.640625,
+  "primary_wall_seconds": 311.7933146000141,
+  "result_sha256": "faee2732e68662b8913c626eb242418c0378bae9ac6b4865920409a385bbaa3e",
+  "schema": "nomad.adaptive-descriptive-summary.v18",
+  "scope": "posthoc descriptive summaries; no policy change or new confirmatory test"
+}

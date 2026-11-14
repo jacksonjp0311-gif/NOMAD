@@ -40,6 +40,7 @@ from .platform_bitwork import NativeDecisionRanker, PublicObservation
 from .python_model import PythonExample, PythonTask
 from .python_runtime import PythonExecution, TestObservation
 from .resonance import encode_resonance
+from .adaptive import AdaptiveConfig, AdaptiveController
 
 SCHEMA = 'nomad.platform-mission.v1'
 WITNESS_ID = 'nomad-v018-bounded-arithmetic-observer'
@@ -49,7 +50,7 @@ CHECKPOINTS = ('after_plan', 'after_patch_write', 'after_patch_record',
                'after_commit', 'after_learning', 'after_rollback_write',
                'after_rollback_record', 'after_probe_dispatch', 'after_probe',
                'after_proposal', 'before_memory', 'after_memory')
-FUNCTION_CHECKPOINTS = (*CHECKPOINTS, 'after_multifile_patch_write')
+FUNCTION_CHECKPOINTS = (*CHECKPOINTS, 'after_multifile_patch_write', 'after_control')
 MEMORY_ID = 'nomad-platform-memory-v018'
 
 
@@ -106,7 +107,7 @@ def _runtime_identity() -> dict[str, str]:
             ('platform_mission.py', 'genesis.py', 'safe_eval.py', 'witness.py', 'isolation.py',
              'supervised.py', 'windows_job.py', 'mission_runtime.py', 'effects.py',
              'python_operators.py', 'platform_bitwork.py', 'resonance.py', 'repo_world.py',
-             'inquiry.py', 'mnemonic.py', 'causal_atlas.py', 'frontier.py')}
+             'inquiry.py', 'mnemonic.py', 'causal_atlas.py', 'frontier.py', 'adaptive.py')}
 
 
 def _origin_goal(goal: dict) -> dict:
@@ -1100,6 +1101,262 @@ FUNCTION_ACTION_SCHEMA = 'python-call-relational-vs-other'
 FUNCTION_WITNESS = 'nomad-v018-isolated-function-observer'
 
 
+def _computation_cost(start):
+    return {'wall_seconds': time.perf_counter()-start[0], 'cpu_seconds': time.process_time()-start[1],
+            'scope': 'trusted controller process only; excludes isolated worker CPU and peak memory'}
+
+
+def _validate_computation_cost(value):
+    if (not isinstance(value,dict) or set(value)!={'wall_seconds','cpu_seconds','scope'}
+            or value['scope']!='trusted controller process only; excludes isolated worker CPU and peak memory'
+            or any(type(value[k]) not in (int,float) or not math.isfinite(value[k]) or not 0<=value[k]<=3600
+                   for k in ('wall_seconds','cpu_seconds'))):
+        raise MissionHold('malformed measured computation cost')
+
+
+def _controller_state(analysis, *, observations=0, failures=0):
+    return {'candidate_count':len(analysis.get('proposals',[])),
+            'symbol_count':sum(len(s) for s in analysis['symbols'].values()),
+            'edge_count':sum(len(e) for e in analysis['graph'].values()),
+            'memory_records':analysis.get('eligible_memory_tasks',0),
+            'public_observations':observations,'public_failures':failures}
+
+
+def _controller_from_memory(config, models):
+    """Import only validated, current, independently accepted PUBLIC evidence.
+
+    An operator supplies configuration, never a trained snapshot. Whole-source
+    duplicates and expired observations have already been excluded by the
+    memory reader. Accepted-only sampling is explicitly not a causal estimate.
+    """
+    controller=AdaptiveController(config)
+    if not config.use_memory: return controller
+    records=models.get('eligible_records',[])
+    # Retain whole missions, bounded from newest to oldest; never partial labels.
+    chosen=[]; count=0
+    for record in reversed(records):
+        evidence=record.get('computation_evidence')
+        history=(evidence['public_search'] if evidence else
+                 [{'operation':'search:'+record['candidate']['id'],'result':record['public_result']}])
+        if count+len(history)>config.max_history: break
+        chosen.append((record,evidence,history)); count+=len(history)
+    for record,evidence,history in reversed(chosen):
+        for observation in history:
+            proposal=_function_proposal(record['origin'],observation['operation'].partition(':')[2])
+            controller.ingest_public(int(proposal['family']!='comparison'),int(observation['result']['supported']))
+        if evidence:
+            mechanism=evidence['control']['decision']['mechanism']
+            controller.record_verified(mechanism,evidence['public_log_gain'],evidence['cost']['wall_seconds'],
+                record['observation_id'],independently_verified=True)
+    return controller
+
+
+def _allocation(controller, analysis, *, max_candidates, probe_budget, max_executions, public_command):
+    # Explicit registered effort heuristics. The selector's frozen per-forecast
+    # costs are not estimates of GENESIS or Docker work; both are measured apart.
+    reserve=3+int(bool(public_command))
+    steps=max(0,min(max_candidates,max_executions-reserve-1))
+    before=controller.snapshot()
+    decision=controller.decide(_controller_state(analysis),remaining_budget={'steps':steps,'max_cost_seconds':120.0})
+    mechanism=decision['mechanism']
+    cap={'frequency':16,'temporal':32,'native':max_candidates,'abstain':0}[mechanism]
+    probes=min(probe_budget,{'frequency':1,'temporal':2,'native':probe_budget,'abstain':0}[mechanism])
+    cap=min(cap,max_candidates,max(0,max_executions-reserve-probes))
+    return {'schema':'nomad.function-computation-allocation.v18','decision':decision,
+            'controller_before':before,'controller_after':controller.snapshot(),
+            'max_candidates':cap,'probe_budget':probes,'private_dispatch_reserve':reserve,
+            'genesis_max_eval':{'frequency':0,'temporal':1024,'native':4096,'abstain':0}[mechanism],
+            'ast_check_budget':{'frequency':64,'temporal':256,'native':1024,'abstain':0}[mechanism],
+            'use_localization':mechanism in ('temporal','native') and controller.config.use_structure,
+            'use_retrieval':mechanism in ('temporal','native') and controller.config.use_memory
+                            and analysis['eligible_memory_tasks']>=3,
+            'scope':'registered bounded effort heuristic; no demonstrated repository utility'}
+
+
+def _validate_control(data, expected_before=None):
+    """Replay choice from settled public state; never replay measured timings."""
+    if expected_before is not None and data['controller_before']!=expected_before:
+        raise MissionHold('computation history differs from bound public prefix')
+    controller=AdaptiveController.load(data['controller_before'])
+    decision=data['decision']
+    actions=data.get('available_actions',('frequency','temporal','native'))
+    observed=controller.decide(decision['public_state'],available_actions=tuple(actions),
+                               remaining_budget=decision['remaining_budget'])
+    if canonical(observed)!=canonical(decision) or controller.snapshot()!=data['controller_after']:
+        raise MissionHold('computation choice does not replay from its public evidence')
+    return controller
+
+
+def _validate_function_control(goal,data,probes):
+    controller=_validate_control(data,goal['computation']['controller_after'])
+    if (len(probes)!=min(goal['probe_budget'],len(goal['public']))
+            or len({p['operation'] for p in probes})!=len(probes)):
+        raise MissionHold('computation choice lacks the allocated distinct public probes')
+    failures=sum(not p['result']['supported'] for p in probes)
+    steps=0 if len(probes)==len(goal['public']) and failures==0 else len(goal['analysis']['proposals'])
+    if (data['public_prefix_sha256']!=digest(canonical(probes))
+            or data['available_actions']!=['frequency','temporal','native']
+            or data['decision']['remaining_budget']!={'steps':steps,'max_cost_seconds':120.0}
+            or data['decision']['public_state']!=_controller_state(goal['analysis'],observations=len(probes),failures=failures)):
+        raise MissionHold('computation choice public prefix or registered budget changed')
+    return controller
+
+
+def _validate_public_forecast(control,ranking):
+    # The cheap comparator is independently recomputable without loading BGR.
+    # Native/temporal forecasts retain trusted controller+source+journal origin;
+    # a hostile writer able to replace every anchor is outside checksum trust.
+    controller=AdaptiveController.load(control['controller_after'])
+    baseline=[controller.frequency.predict(action) for action in (0,1)]
+    if (ranking['frequency_probabilities']!=baseline or ranking['mechanism']!=control['decision']['mechanism']
+            or ranking['action_schema']!=FUNCTION_ACTION_SCHEMA
+            or ranking['mechanism']=='frequency' and ranking['probabilities']!=baseline):
+        raise MissionHold('forecast comparator or frequency prediction differs from its public history')
+
+
+def _adaptive_function_diagnosis(root,goal,journal,observe,checkpoint):
+    previous=[r['data'] for r in journal.read() if r['kind']=='F_DIAGNOSIS']
+    if previous: return previous[0]
+    computation=goal['computation']; config=AdaptiveConfig(**computation['controller_after']['payload']['config'])
+    prior=dict(goal['analysis']['world_prior']); roles={name:name for name in prior}
+    costs={name:max(1,sum(name in p['files'] for p in goal['analysis']['proposals'])) for name in prior}
+    model=inquiry.ProbeLikelihoods(); menu=[]
+    for i,row in enumerate(goal['public']):
+        reached=set(); pending=[goal['analysis']['modules'][row['module']]]
+        while pending:
+            name=pending.pop()
+            if name in reached: continue
+            reached.add(name); pending.extend(goal['analysis']['graph'][name])
+        for hypothesis in prior:
+            for _ in range(4): model.observe(hypothesis,str(i),passed=hypothesis not in reached)
+        menu.append(inquiry.ProbeMenu(str(i),str(i),0.05))
+    seen=set(); decisions=[]; resonances=[]
+    for _ in range(min(goal['probe_budget'],len(menu))):
+        decision=(inquiry.choose_probe(prior,costs,roles,model,menu,frozenset(seen),1.0)
+                  if config.use_structure and goal['analysis']['adaptive_enabled'] else None)
+        index=int(decision.probe_id) if decision else next(i for i in range(len(menu)) if str(i) not in seen)
+        evidence=observe('probe:'+str(index)); seen.add(str(index))
+        source=goal['analysis']['files'][goal['analysis']['modules'][goal['public'][index]['module']]]
+        observation=TestObservation(evidence['result']['supported'],1,None,None,None,0)
+        precomputed=PythonExecution(True,None,None,None,len(list(ast.walk(ast.parse(source)))),(observation,),0)
+        resonance=encode_resonance(PythonTask('api-equality-probe',source,(PythonExample({},1),)),
+                                   execution=precomputed,numeric_inputs=False)
+        resonances.append({'index':index,**asdict(resonance),'fusion_signature':resonance.fusion_signature,
+                           'encoding':'bound isolated API equality; numeric input correlations disabled'})
+        prior=inquiry._update(prior,roles,model,str(index),evidence['result']['supported'])
+        decisions.append({'index':index,'decision':asdict(decision) if decision else None,'posterior':prior})
+    probes=[r['data'] for r in journal.read() if r['kind']=='F_OBSERVED' and r['data']['operation'].startswith('probe:')]
+    started=(time.perf_counter(),time.process_time())
+    failures=sum(not r['result']['supported'] for r in probes)
+    controller=AdaptiveController.load(computation['controller_after'])
+    previous_control=[r['data'] for r in journal.read() if r['kind']=='F_CONTROL']
+    if previous_control:
+        control=previous_control[0]; controller=_validate_control(control,computation['controller_after'])
+    else:
+        # A complete passing PUBLIC contract supplies no repair target. No
+        # private observations are consulted to manufacture a search incentive.
+        steps=0 if len(probes)==len(goal['public']) and failures==0 else len(goal['analysis']['proposals'])
+        control={'controller_before':controller.snapshot(),'public_prefix_sha256':digest(canonical(probes)),
+                 'available_actions':['frequency','temporal','native']}
+        control['decision']=controller.decide(_controller_state(goal['analysis'],observations=len(probes),failures=failures),
+            remaining_budget={'steps':steps,'max_cost_seconds':120.0})
+        control['controller_after']=controller.snapshot()
+        journal.append('F_CONTROL',control); checkpoint('after_control')
+    mechanism=control['decision']['mechanism']
+    probabilities=controller.peek_probabilities(mechanism)
+    baseline=controller.peek_probabilities('frequency')
+    order=list(goal['analysis']['proposals'])
+    order.sort(key=lambda p:-probabilities[int(p['family']!='comparison')])
+    use_retrieval=(mechanism in ('temporal','native') and config.use_memory
+                   and goal['analysis']['eligible_memory_tasks']>=3)
+    recall={}
+    if use_retrieval:
+        memory=EvidenceMemory.load(root/'planning_memory.json'); first=goal['public'][0]
+        contract=Contract(first['module'],first['function'],tuple((i,0) for i in range(len(goal['public']))))
+        symbols=SymbolGraph(goal['analysis']['files'])
+        for p in order:
+            if len(p['files'])==1 and '/' not in next(iter(p['files'])):
+                filename=next(iter(p['files']))
+                recall[p['id']]=memory.recall(action_source=p['files'][filename],features=symbols.features(contract,filename),
+                    now_epoch=goal['analysis']['capture_epoch'],target_task_id=goal['analysis']['task_identity']).as_dict()
+    # Probe observations affect actual localization priority. The cheap profile
+    # still uses already-paid public diagnostics, but does not retrieve memory.
+    if config.use_structure and goal['analysis']['adaptive_enabled']:
+        order.sort(key=lambda p:(-int(recall.get(p['id'],{}).get('outcome')=='impact'),
+            -sum(prior.get(n,0) for n in p['files'])/len(p['files'])))
+    diagnosis={'decisions':decisions,'posterior':prior,'order':[p['id'] for p in order],
+        'resonance':resonances,'mnemonic_recall':recall,'control_sha256':digest(canonical(control)),
+        'ranking':{'mechanism':mechanism,'probabilities':list(probabilities),'frequency_probabilities':list(baseline),
+                   'authority':'ranking_only','action_schema':FUNCTION_ACTION_SCHEMA},
+        'computation_cost':_computation_cost(started),'telemetry':dict(controller.telemetry),
+        'retrieval_invoked':use_retrieval,
+        'likelihood_scope':'declared reachability heuristic; not calibrated learned probability'}
+    journal.append('F_DIAGNOSIS',diagnosis)
+    return diagnosis
+
+
+def _validate_computation_evidence(goal,evidence,selected):
+    """Bind public forecasts before outcomes; private labels never enter it."""
+    trace=evidence['public_trace']
+    if not isinstance(trace,list) or not 4<=len(trace)<=2048: raise MissionHold('public computation trace budget invalid')
+    previous='0'*64; control=None; diagnosis=None; pending=None; public=[]; probes=[]
+    for number,row in enumerate(trace,1):
+        payload={k:v for k,v in row.items() if k!='sha256'}
+        if (row['prev']!=previous or row['seq']!=number or row['mission_id']!=goal['mission_id']
+                or row['sha256']!=digest(canonical(payload))): raise MissionHold('public computation trace changed')
+        previous=row['sha256']; kind=row['kind']; data=row['data']
+        if number==1 and (kind!='PLATFORM_CREATED' or data!={'goal_sha256':digest(canonical(goal))}):
+            raise MissionHold('public computation origin changed')
+        if kind=='F_CONTROL':
+            if control is not None or public: raise MissionHold('duplicate or retrospective computation choice')
+            control=data; _validate_function_control(goal,control,probes)
+        elif kind=='F_DIAGNOSIS':
+            if diagnosis is not None or public or control is None: raise MissionHold('retrospective or duplicate forecast')
+            diagnosis=data
+            if data.get('control_sha256')!=digest(canonical(control)): raise MissionHold('unbound computation forecast')
+            _validate_public_forecast(control,data['ranking'])
+            _validate_computation_cost(data['computation_cost'])
+            for field in ('probabilities','frequency_probabilities'):
+                values=data['ranking'][field]
+                if (not isinstance(values,list) or len(values)!=2 or any(type(p) not in (int,float)
+                        or not math.isfinite(p) or not 0<p<1 for p in values)):
+                    raise MissionHold('malformed pre-observation probabilities')
+            if (data['ranking']['mechanism']!=control['decision']['mechanism']
+                    or data['ranking']['action_schema']!=FUNCTION_ACTION_SCHEMA
+                    or sorted(data['order'])!=sorted(p['id'] for p in goal['analysis']['proposals'])):
+                raise MissionHold('forecast mechanism or candidate inventory changed')
+        elif kind=='F_DISPATCHED':
+            if pending or not data['operation'].startswith(('probe:','search:')): raise MissionHold('private or duplicate dispatch in public training')
+            if data['operation'].startswith('search:') and diagnosis is None: raise MissionHold('forecast recorded after its outcome')
+            pending=data
+        elif kind=='F_RECOVERED':
+            if not pending or data['container_name']!=pending['container_name'] or data.get('disposal_confirmed') is not True:
+                raise MissionHold('public training cleanup changed')
+            pending=None
+        elif kind=='F_OBSERVED':
+            if not pending or data['operation']!=pending['operation']: raise MissionHold('unbound public training outcome')
+            result=_validate_function_execution(goal,pending,data['execution'],None)
+            if result!=data['result']: raise MissionHold('public training result differs from bound receipt')
+            (probes if data['operation'].startswith('probe:') else public).append(data); pending=None
+        elif kind not in ('PLATFORM_CREATED','F_PATCH','F_PATCHED','F_SELECTED'):
+            raise MissionHold('nonpublic evidence in computation training')
+    if (pending or not public or diagnosis is None or trace[-1]['kind']!='F_SELECTED'
+            or trace[-1]['data']!={'candidate':selected} or not public[-1]['result']['supported']
+            or public[-1]['operation']!='search:'+selected or any(r['result']['supported'] for r in public[:-1])
+            or [r['operation'].partition(':')[2] for r in public]!=diagnosis['order'][:len(public)]):
+        raise MissionHold('public computation outcomes are not the accepted search prefix')
+    gain=0.0
+    for row in public:
+        proposal=_function_proposal(goal,row['operation'].partition(':')[2]); action=int(proposal['family']!='comparison')
+        p=diagnosis['ranking']['probabilities'][action]; base=diagnosis['ranking']['frequency_probabilities'][action]
+        outcome=row['result']['supported']
+        gain+=math.log((p if outcome else 1-p)/(base if outcome else 1-base))
+    gain=max(-8.0,min(8.0,gain/len(public)))
+    expected={'control':control,'public_search':public,'public_log_gain':gain,'cost':diagnosis['computation_cost']}
+    if {k:evidence[k] for k in expected}!=expected: raise MissionHold('relabelled public computation benefit or cost')
+    return expected
+
+
 def _function_memory(path: Path | None, *, mode='native', epoch=0) -> dict:
     try:
         return _rebuild_function_memory(path, mode=mode, epoch=epoch)
@@ -1112,7 +1369,7 @@ def _rebuild_function_memory(path: Path | None, *, mode='native', epoch=0) -> di
     world = repo_world.RepositoryWorldModel(include_failure=False)
     memory = EvidenceMemory()
     result = {'ranker': ranker, 'world': world, 'memory': memory, 'head': '0'*64,
-              'heads': [], 'records': [], 'eligible_tasks': 0}
+              'heads': [], 'records': [], 'eligible_tasks': 0, 'eligible_records': []}
     if path is None or not path.exists(): return result
     journal_path = path / 'events.jsonl'
     if not journal_path.is_file(): raise MissionHold('function memory history missing')
@@ -1120,7 +1377,7 @@ def _rebuild_function_memory(path: Path | None, *, mode='native', epoch=0) -> di
     rows = Journal(journal_path, FUNCTION_MEMORY_ID).read()
     if not rows or rows[0]['kind'] != 'MEMORY_CREATED' or len(rows) > 513 or journal_path.stat().st_size > 64_000_000:
         raise MissionHold('function memory origin or budget invalid')
-    seen = set(); eligible_sources = set()
+    seen = set(); eligible_sources = set(); current_runtime=_runtime_identity()
     for row in rows[1:]:
         record = row['data']
         if row['kind'] != 'OBSERVATION_ADMITTED' or record.get('scope') != frontier.FUNCTION_ADAPTER:
@@ -1164,13 +1421,18 @@ def _rebuild_function_memory(path: Path | None, *, mode='native', epoch=0) -> di
             record['public_result']['execution'], None)
         if observed != {k:v for k,v in record['public_result'].items() if k!='execution'}:
             raise MissionHold('stored function public evidence changed')
+        if 'computation_evidence' in record:
+            _validate_computation_evidence(record['origin'],record['computation_evidence'],record['candidate']['id'])
+        elif record['origin'].get('computation') is not None:
+            raise MissionHold('accepted adaptive observation lost its public computation evidence')
         if record['observation_id'] in seen: raise MissionHold('duplicate function memory admission')
         seen.add(record['observation_id'])
         result['records'].append(record)
-        if record['runtime'] != _runtime_identity() or not 0 <= epoch-record['capture_epoch'] <= 4: continue
+        if record['runtime'] != current_runtime or not 0 <= epoch-record['capture_epoch'] <= 4: continue
         source_sha = digest(canonical(record['baseline']))
         if source_sha in eligible_sources: continue
         eligible_sources.add(source_sha)
+        result['eligible_records'].append(record)
         ranker.observe(PublicObservation(record['task_identity'], source_sha, record['candidate']['id'],
             digest(canonical(record['public_result']['execution'])), record['candidate']['family'], True,
             record['capture_epoch']), independently_observed=True)
@@ -1204,17 +1466,39 @@ def read_function_memory_ranker(memory_root: Path, *, mode='native', now_epoch=0
     with exclusive_owner(path): return _function_memory(path, mode=mode, epoch=now_epoch)['ranker']
 
 
+def read_function_computation_controller(memory_root: Path, *, config=None, now_epoch=0):
+    """Read-only rebuilt public predictor, never an admission or verifier."""
+    configuration=config or AdaptiveConfig()
+    if type(configuration) is dict: configuration=AdaptiveConfig(**configuration)
+    if type(configuration) is not AdaptiveConfig: raise ValueError('configuration required')
+    path=Path(memory_root)
+    if path.exists():
+        with exclusive_owner(path): models=_function_memory(path,mode='frequency',epoch=now_epoch)
+    else: models=_function_memory(None,mode='frequency',epoch=now_epoch)
+    return _controller_from_memory(configuration,models)
+
+
 def initialize_functions(root: Path, source: Path, *, goal_text: str, public: list[dict],
         challenge: list[dict], final: list[dict], policy: SandboxPolicy, ranker=None,
         memory_root: Path | None = None, capture_epoch=0, adaptive_enabled=True,
         max_candidates=64, max_executions=96, probe_budget=3, max_files_changed=2,
-        public_command: list[str] | None = None) -> dict:
+        public_command: list[str] | None = None, computation_controller=None) -> dict:
     """Initialize a bounded function mission without importing repository code.
 
     Public cases, finite AST inventory and planning models are frozen. Private
     values are sealed separately. No native qualification is inferred here.
     """
     policy.validate()
+    config=None
+    if computation_controller is not None:
+        if type(computation_controller) is dict:
+            if len(canonical(computation_controller))>8192: raise ValueError('computation configuration byte budget exceeded')
+            config=AdaptiveConfig(**computation_controller)
+        elif type(computation_controller) is AdaptiveConfig:
+            config=AdaptiveConfig(**asdict(computation_controller))
+        else: raise ValueError('computation controller accepts configuration only, never unverified learned state')
+        config.validate()
+        if ranker is not None: raise ValueError('adaptive computation owns ranking; explicit static ranker conflicts')
     public, challenge, final = (frontier.validate_function_cases(r) for r in (public, challenge, final))
     for partition in (public,challenge,final,public+challenge): frontier.function_command(partition)
     inputs = [digest(canonical(frontier.function_inputs(rows))) for rows in (public, challenge, final)]
@@ -1223,7 +1507,8 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
     if (not isinstance(goal_text, str) or not 1 <= len(goal_text) <= 4096
             or type(capture_epoch) is not int or capture_epoch < 0 or type(adaptive_enabled) is not bool
             or type(max_executions) is not int or not 5 <= max_executions <= 256
-            or type(probe_budget) is not int or not 1 <= probe_budget <= 8):
+            or type(probe_budget) is not int or not 1 <= probe_budget <= 8
+            or type(max_candidates) is not int or not 1<=max_candidates<=128 or max_files_changed not in (1,2)):
         raise ValueError('function mission goal or budget invalid')
     if public_command not in (None, COMMAND): raise ValueError('only the registered full unittest command is supported')
     source = Path(source)
@@ -1239,8 +1524,10 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
     with tempfile.TemporaryDirectory(prefix='nomad-function-init-', dir=root.parent) as temporary:
         stage = Path(temporary)
         snapshot_source(source, stage/'baseline', policy)
-        analysis = frontier.inspect_function_repository(stage/'baseline', public,
-            max_candidates=max_candidates, max_files_changed=max_files_changed)
+        started=(time.perf_counter(),time.process_time())
+        analysis = (frontier.inspect_function_structure(stage/'baseline',public) if config else
+            frontier.inspect_function_repository(stage/'baseline', public,
+                max_candidates=max_candidates, max_files_changed=max_files_changed))
         for row in challenge+final:
             filename = analysis['modules'].get(row['module'])
             if not filename or row['function'] not in analysis['symbols'][filename]:
@@ -1248,10 +1535,37 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
         if public_command and not (stage/'baseline'/'tests').is_dir(): raise ValueError('registered suite requires tests directory')
         manifest = _manifest(stage/'baseline')
         entries = [[name,sha,(stage/'baseline'/name).stat().st_size] for name,sha in manifest.items()]
-        mode = getattr(ranker, 'mode', 'native')
+        mode = 'frequency' if config else getattr(ranker, 'mode', 'native')
         if memory_root and memory_root.exists():
             with exclusive_owner(memory_root): models = _function_memory(memory_root, mode=mode, epoch=capture_epoch)
         else: models = _function_memory(memory_root, mode=mode, epoch=capture_epoch)
+        computation=None
+        if config:
+            analysis['eligible_memory_tasks']=models['eligible_tasks']
+            controller=_controller_from_memory(config,models)
+            allocation=_allocation(controller,analysis,max_candidates=max_candidates,probe_budget=probe_budget,
+                                   max_executions=max_executions,public_command=public_command)
+            inspection_cost=_computation_cost(started)
+            started=(time.perf_counter(),time.process_time())
+            # Only source-reachable modules enter the optional inventory. This
+            # is static graph localization, not evidence of fault correctness.
+            reachable=set(); pending=[analysis['modules'][r['module']] for r in public]
+            while pending:
+                name=pending.pop()
+                if name in reachable: continue
+                reachable.add(name); pending.extend(analysis['graph'][name])
+            generation_files=sorted(reachable)
+            if allocation['use_localization']:
+                generation_files.sort(key=lambda n:-models['world'].score(sorted(repo_world._ast_tokens(analysis['files'][n])|{'reachable'})))
+            analysis=frontier.inspect_function_repository(stage/'baseline',public,
+                max_candidates=allocation['max_candidates'],max_files_changed=max_files_changed,
+                genesis_max_eval=allocation['genesis_max_eval'],generation_files=generation_files,
+                ast_check_budget=allocation['ast_check_budget'])
+            computation={**allocation,'generation_files':generation_files,
+                'requested_limits':{'max_candidates':max_candidates,'probe_budget':probe_budget},
+                'inspection_and_memory_validation_cost':inspection_cost,'generation_cost':_computation_cost(started),
+                'objective':'public log-loss gain versus frequency; accepted-only sampling, no causal utility claim'}
+            probe_budget=allocation['probe_budget']
         active = ranker or models['ranker']
         if not isinstance(active, NativeDecisionRanker) or active.action_schema != FUNCTION_ACTION_SCHEMA:
             raise ValueError('function mission requires the scoped native ranker')
@@ -1270,7 +1584,8 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
             reachable.add(current);pending.extend(graph[current])
         signatures = {name: sorted(repo_world._ast_tokens(text) | {'reachable' if name in reachable else 'unreachable'})
                       for name, text in files.items()}
-        scores = {name: models['world'].score(sig) if adaptive_enabled else 0.0 for name, sig in signatures.items()}
+        localize=adaptive_enabled and (computation is None or computation['use_localization'])
+        scores = {name: models['world'].score(sig) if localize else 0.0 for name, sig in signatures.items()}
         weights = {name: math.exp(max(-40, (score-max(scores.values()))/12)) for name, score in scores.items()}
         prior = {name: w/sum(weights.values()) for name,w in weights.items()}
         analysis.update(signatures=signatures, world_scores=scores, world_prior=prior,
@@ -1290,6 +1605,7 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
             'max_executions': max_executions, 'probe_budget': probe_budget, 'public_command': public_command,
             'planning_context': {n: digest((stage/n).read_bytes()) for n in ('planning_memory.json','planning_ranker.json')},
             'scope': 'bounded JSON Python functions, local import graph, up to two edited files; no arbitrary Python authority'}
+        if computation is not None: goal['computation']=computation
         goal['mission_id'] = digest(canonical(goal))[:32]
         shutil.copytree(stage/'baseline', stage/'workspace')
         save_atomic(stage/'goal.json', canonical(goal)); save_atomic(stage/'sealed.json', sealed)
@@ -1317,6 +1633,7 @@ def _function_spec(goal, sealed, operation):
     proposal = None
     if stage == 'probe':
         index = int(value)
+        if not 0<=index<len(goal['public']) or value!=str(index): raise MissionHold('invalid canonical public probe index')
         rows = [goal['public'][index]]
     elif stage == 'search':
         proposal = _function_proposal(goal, value); rows = goal['public']
@@ -1355,6 +1672,22 @@ def _load_functions(root, goal):
     if digest(canonical(identity))[:32] != original['mission_id'] or original['runtime_sha256'] != _runtime_identity():
         raise MissionHold('function goal or runtime identity changed')
     SandboxPolicy(**original['policy']).validate()
+    computation=original.get('computation')
+    if computation is not None:
+        _validate_control(computation)
+        before=AdaptiveController.load(computation['controller_before'])
+        limits=computation['requested_limits']
+        inspected={**original['analysis'],'proposals':[]}
+        allocation=_allocation(before,inspected,max_candidates=limits['max_candidates'],probe_budget=limits['probe_budget'],
+            max_executions=original['max_executions'],public_command=original['public_command'])
+        if any(computation.get(key)!=value for key,value in allocation.items()):
+            raise MissionHold('registered computation allocation changed')
+        for field in ('inspection_and_memory_validation_cost','generation_cost'):
+            _validate_computation_cost(computation[field])
+        if (original['probe_budget']!=computation['probe_budget']
+                or len(original['analysis']['proposals'])>computation['max_candidates']
+                or original['analysis']['generated_candidates_checked']>computation['ast_check_budget']):
+            raise MissionHold('computation allocation or proposal budget changed')
     if _manifest(root/'baseline') != original['baseline'] or digest((root/'sealed.json').read_bytes()) != original['sealed_sha256']:
         raise MissionHold('function source or private evidence changed')
     for name, sha in original['planning_context'].items():
@@ -1366,7 +1699,7 @@ def _load_functions(root, goal):
         raise MissionHold('function mission origin changed')
     pending = None; expected = dict(original['baseline']); patch = None; selected = None
     observations = {}; committed = False; finished = False; witness = None; final = None
-    patch_ids = set(); dispatches = 0; diagnosed = False
+    patch_ids = set(); dispatches = 0; diagnosed = False; control = None; diagnosis = None
     for row in rows[1:]:
         kind, data = row['kind'], row['data']
         if finished: raise MissionHold('events after function terminal state')
@@ -1386,6 +1719,8 @@ def _load_functions(root, goal):
             if dispatches > original['max_executions']: raise MissionHold('function execution budget exceeded')
             _, _, candidate_id = _function_spec(original, json.loads((root/'sealed.json').read_bytes()), data['operation'])
             stage=data['operation'].split(':')[0]
+            if computation is not None and stage=='search' and (not diagnosed or control['decision']['mechanism']=='abstain'):
+                raise MissionHold('search without an eligible recorded computation choice')
             if (stage in ('before','challenge','final','suite') and (selected is None or data['operation'].partition(':')[2]!=selected['id'])
                     or stage in ('probe','search') and selected is not None
                     or stage=='final' and (witness is None or not witness.supported)):
@@ -1406,7 +1741,27 @@ def _load_functions(root, goal):
             if selected is not None or diagnosed: raise MissionHold('duplicate or late function diagnosis')
             if sorted(data['order'])!=sorted(p['id'] for p in original['analysis']['proposals']):
                 raise MissionHold('function diagnosis changed frozen candidate inventory')
+            if computation is not None:
+                if control is None or data.get('control_sha256')!=digest(canonical(control)):
+                    raise MissionHold('adaptive forecast lacks a prior computation decision')
+                _validate_computation_cost(data['computation_cost'])
+                _validate_public_forecast(control,data['ranking'])
+                if data['ranking']['mechanism']!=control['decision']['mechanism']:
+                    raise MissionHold('ranking mechanism differs from registered choice')
+                for key in ('probabilities','frequency_probabilities'):
+                    values=data['ranking'][key]
+                    if len(values)!=2 or any(type(v) not in (int,float) or not math.isfinite(v) or not 0<v<1 for v in values):
+                        raise MissionHold('invalid public forecast probability')
+            diagnosis=data
             diagnosed = True
+        elif kind == 'F_CONTROL':
+            if computation is None or control is not None or diagnosed or selected is not None:
+                raise MissionHold('duplicate or late adaptive computation decision')
+            probes=[value for key,value in observations.items() if key.startswith('probe:')]
+            if any(not key.startswith('probe:') for key in observations):
+                raise MissionHold('adaptive choice recorded after candidate outcomes')
+            _validate_function_control(original,data,probes)
+            control=data
         elif kind == 'F_SELECTED':
             if not diagnosed or selected is not None or not observations.get('search:'+data['candidate'], {}).get('result',{}).get('supported'):
                 raise MissionHold('function selection lacks public support')
@@ -1438,6 +1793,13 @@ def _load_functions(root, goal):
             if not any(r['observation_id'] == learning['observation_id'] for r in model['records']):
                 raise MissionHold('function learned observation lost')
             finished = True
+        elif kind == 'F_ABSTAINED':
+            if (computation is None or expected!=original['baseline'] or selected is not None
+                    or any(k.startswith('search:') for k in observations)
+                    or (computation['decision']['mechanism']!='abstain' and original['analysis']['proposals']
+                        and (control is None or control['decision']['mechanism']!='abstain'))):
+                raise MissionHold('abstention does not match public-only computation state')
+            finished=True
         elif kind in ('F_REJECTED','F_EXHAUSTED'):
             if expected != original['baseline']: raise MissionHold('terminal function rollback incomplete')
             finished = True
@@ -1452,8 +1814,8 @@ def _load_functions(root, goal):
 
 def _function_summary(goal, rows):
     status = {'F_LEARNED':'completed','F_REJECTED':'rejected','F_EXHAUSTED':'exhausted',
-              'F_DISPATCHED':'hold_uncertain_execution','F_COMMITTED':'committed'}.get(rows[-1]['kind'],'in_progress')
-    return {'schema': SCHEMA+'.summary', 'adapter': frontier.FUNCTION_ADAPTER, 'mission_id': goal['mission_id'],
+              'F_ABSTAINED':'abstained','F_DISPATCHED':'hold_uncertain_execution','F_COMMITTED':'committed'}.get(rows[-1]['kind'],'in_progress')
+    result={'schema': SCHEMA+'.summary', 'adapter': frontier.FUNCTION_ADAPTER, 'mission_id': goal['mission_id'],
         'status':status, 'events':len(rows), 'journal_head':rows[-1]['sha256'],
         'dispatches':sum(r['kind']=='F_DISPATCHED' for r in rows),
         'public_executions_recorded':sum(r['kind']=='F_OBSERVED' and r['data']['operation'].startswith('search:') for r in rows),
@@ -1463,6 +1825,16 @@ def _function_summary(goal, rows):
         'candidate_inventory_sha256':goal['analysis']['candidate_inventory_sha256'],
         'candidate_inventory_count':len(goal['analysis']['proposals']), 'cloud_model_calls':0,
         'scope':goal['scope'], 'authority':'finite isolated API observations; candidate review only, no deployment or skill promotion'}
+    if goal.get('computation') is not None:
+        costs=[goal['computation'][name] for name in ('inspection_and_memory_validation_cost','generation_cost')]
+        costs += [r['data']['computation_cost'] for r in rows if r['kind']=='F_DIAGNOSIS']
+        result['computation']={'allocation':goal['computation']['decision']['mechanism'],
+            'ranking':next((r['data']['decision']['mechanism'] for r in rows if r['kind']=='F_CONTROL'),None),
+            'recorded_controller_wall_seconds':sum(c['wall_seconds'] for c in costs),
+            'recorded_controller_cpu_seconds':sum(c['cpu_seconds'] for c in costs),
+            'controller_cost_scope':'completed inspection/memory audit, generation and ranking stages; excludes worker CPU, recovery/replay overhead and peak memory',
+            'abstention_is_verification':False}
+    return result
 
 
 def _function_witness(goal, candidate, observations):
@@ -1512,6 +1884,22 @@ def _function_learn(root, goal, rows, candidate):
                 'commit_sha256':next(r['sha256'] for r in rows if r['kind']=='F_COMMITTED'),
                 'witness_receipt_sha256':record['witness']['receipt_hash']}
             acceptance['sha256']=digest(canonical(acceptance));record['acceptance']=acceptance
+            if goal.get('computation') is not None:
+                stop=next(i for i,r in enumerate(rows) if r['kind']=='F_SELECTED')
+                trace=rows[:stop+1]
+                control=next(r['data'] for r in trace if r['kind']=='F_CONTROL')
+                diagnosis=next(r['data'] for r in trace if r['kind']=='F_DIAGNOSIS')
+                public_search=[r['data'] for r in trace if r['kind']=='F_OBSERVED' and r['data']['operation'].startswith('search:')]
+                gain=0.0
+                for result in public_search:
+                    proposal=_function_proposal(goal,result['operation'].partition(':')[2]); action=int(proposal['family']!='comparison')
+                    probability=diagnosis['ranking']['probabilities'][action]
+                    baseline_probability=diagnosis['ranking']['frequency_probabilities'][action]
+                    supported=result['result']['supported']
+                    gain+=math.log((probability if supported else 1-probability)/(baseline_probability if supported else 1-baseline_probability))
+                record['computation_evidence']={'public_trace':trace,'control':control,'public_search':public_search,
+                    'public_log_gain':max(-8.0,min(8.0,gain/len(public_search))),'cost':diagnosis['computation_cost']}
+                _validate_computation_evidence(_origin_goal(goal),record['computation_evidence'],candidate['id'])
             # Existing MNEMONIC grammar can represent single-file root-module
             # effects. Package/multi-edit effects abstain rather than fabricate
             # per-file causal evidence from a jointly successful intervention.
@@ -1543,7 +1931,7 @@ def _run_functions(root, goal, journal, rows, *, interrupt_at=None):
     def checkpoint(name):
         if interrupt_at==name: raise InjectedInterruption(name)
     if rows[-1]['kind']=='F_DISPATCHED': raise MissionHold('function execution ambiguous; explicit cleanup recovery required')
-    if rows[-1]['kind'] in ('F_LEARNED','F_REJECTED','F_EXHAUSTED'): return _function_summary(goal,rows)
+    if rows[-1]['kind'] in ('F_LEARNED','F_REJECTED','F_EXHAUSTED','F_ABSTAINED'): return _function_summary(goal,rows)
     sealed = json.loads((root/'sealed.json').read_bytes())
     def append(kind,data): journal.append(kind,data)
     def patch(identity, tag):
@@ -1581,68 +1969,78 @@ def _run_functions(root, goal, journal, rows, *, interrupt_at=None):
     if rows[-1]['kind']=='F_PATCH': patch(rows[-1]['data']['candidate'],rows[-1]['data']['id'])
     chosen = next((r['data']['candidate'] for r in journal.read() if r['kind']=='F_SELECTED'),None)
     if chosen is None:
-        prior=dict(goal['analysis']['world_prior']); roles={name:name for name in prior}
-        costs={name:max(1,sum(name in p['files'] for p in goal['analysis']['proposals'])) for name in prior}
-        model=inquiry.ProbeLikelihoods(); menu=[]
-        # Explicit structural likelihood assumption, not training evidence:
-        # a faulty reachable module is more likely to break this public API.
-        for i,row in enumerate(goal['public']):
-            filename=goal['analysis']['modules'][row['module']]
-            reachable=set(); pending=[filename]
-            while pending:
-                name=pending.pop()
-                if name in reachable: continue
-                reachable.add(name); pending.extend(goal['analysis']['graph'][name])
-            for hypothesis in prior:
-                for _ in range(4): model.observe(hypothesis,str(i),passed=hypothesis not in reachable)
-            menu.append(inquiry.ProbeMenu(str(i),str(i),0.05))
-        seen=set(); decisions=[]; resonances=[]
-        for step in range(min(goal['probe_budget'],len(menu))):
-            decision=(inquiry.choose_probe(prior,costs,roles,model,menu,frozenset(seen),1.0)
-                      if goal['analysis']['adaptive_enabled'] else None)
-            index=int(decision.probe_id) if decision else next(i for i in range(len(menu)) if str(i) not in seen)
-            evidence=observe('probe:'+str(index)); seen.add(str(index))
-            filename=goal['analysis']['modules'][goal['public'][index]['module']]
-            source=goal['analysis']['files'][filename]
-            model_task=PythonTask('api-equality-probe',source,(PythonExample({},1),))
-            observation=TestObservation(evidence['result']['supported'],1,None,None,None,0)
-            precomputed=PythonExecution(True,None,None,None,sum(1 for _ in ast.walk(ast.parse(source))),(observation,),0)
-            resonance=encode_resonance(model_task,execution=precomputed,numeric_inputs=False)
-            resonances.append({'index':index,**asdict(resonance),'fusion_signature':resonance.fusion_signature,
-                               'encoding':'bound isolated API equality; numeric input correlations disabled'})
-            prior=inquiry._update(prior,roles,model,str(index),evidence['result']['supported'])
-            decisions.append({'index':index,'decision':asdict(decision) if decision else None,'posterior':prior})
-        ranker=NativeDecisionRanker.load(json.loads((root/'planning_ranker.json').read_bytes()))
-        proposals=goal['analysis']['proposals']
-        @dataclass
-        class Ranked:
-            family:str
-            item:dict
-        ranked=ranker.rank([Ranked(p['family'],p) for p in proposals],now_epoch=goal['analysis']['capture_epoch'])
-        order=[p.item for p in ranked]
-        memory=EvidenceMemory.load(root/'planning_memory.json')
-        recall={}
-        first=goal['public'][0]
-        contract=Contract(first['module'],first['function'],tuple((i,0) for i in range(len(goal['public']))))
-        symbols=SymbolGraph(goal['analysis']['files'])
-        for p in order:
-            if len(p['files'])==1 and '/' not in next(iter(p['files'])):
-                filename=next(iter(p['files']))
-                recall[p['id']]=memory.recall(action_source=p['files'][filename],
-                    features=symbols.features(contract,filename),now_epoch=goal['analysis']['capture_epoch'],
-                    target_task_id=goal['analysis']['task_identity']).as_dict()
-        if goal['analysis']['adaptive_enabled']:
-            # Stable priority consumes measured posterior; native rank breaks
-            # ties. A failed direct leaf probe can outrank the public facade.
-            order.sort(key=lambda p:(-int(recall.get(p['id'],{}).get('outcome')=='impact'),
-                -sum(prior.get(n,0) for n in p['files'])/len(p['files'])))
-        diagnosis={'decisions':decisions,'posterior':prior,'order':[p['id'] for p in order],
-                   'resonance':resonances,'mnemonic_recall':recall,
-                   'ranking':ranker.summary(now_epoch=goal['analysis']['capture_epoch']),
-                   'likelihood_scope':'declared reachability heuristic; not calibrated learned probability'}
-        prior_diagnosis=[r['data'] for r in journal.read() if r['kind']=='F_DIAGNOSIS']
-        if prior_diagnosis and canonical(prior_diagnosis)!=canonical([diagnosis]): raise MissionHold('function diagnosis replay differs')
-        if not prior_diagnosis: append('F_DIAGNOSIS',diagnosis)
+        if goal.get('computation') is not None:
+            if goal['computation']['decision']['mechanism']=='abstain' or not goal['analysis']['proposals']:
+                append('F_ABSTAINED',{'reason':'registered computation allocation declined work'})
+                return _function_summary(goal,journal.read())
+            diagnosis=_adaptive_function_diagnosis(root,goal,journal,observe,checkpoint)
+            if diagnosis['ranking']['mechanism']=='abstain':
+                append('F_ABSTAINED',{'reason':'public-only computation choice declined search'})
+                return _function_summary(goal,journal.read())
+            order=[_function_proposal(goal,identity) for identity in diagnosis['order']]
+        else:
+            prior=dict(goal['analysis']['world_prior']); roles={name:name for name in prior}
+            costs={name:max(1,sum(name in p['files'] for p in goal['analysis']['proposals'])) for name in prior}
+            model=inquiry.ProbeLikelihoods(); menu=[]
+            # Explicit structural likelihood assumption, not training evidence:
+            # a faulty reachable module is more likely to break this public API.
+            for i,row in enumerate(goal['public']):
+                filename=goal['analysis']['modules'][row['module']]
+                reachable=set(); pending=[filename]
+                while pending:
+                    name=pending.pop()
+                    if name in reachable: continue
+                    reachable.add(name); pending.extend(goal['analysis']['graph'][name])
+                for hypothesis in prior:
+                    for _ in range(4): model.observe(hypothesis,str(i),passed=hypothesis not in reachable)
+                menu.append(inquiry.ProbeMenu(str(i),str(i),0.05))
+            seen=set(); decisions=[]; resonances=[]
+            for step in range(min(goal['probe_budget'],len(menu))):
+                decision=(inquiry.choose_probe(prior,costs,roles,model,menu,frozenset(seen),1.0)
+                          if goal['analysis']['adaptive_enabled'] else None)
+                index=int(decision.probe_id) if decision else next(i for i in range(len(menu)) if str(i) not in seen)
+                evidence=observe('probe:'+str(index)); seen.add(str(index))
+                filename=goal['analysis']['modules'][goal['public'][index]['module']]
+                source=goal['analysis']['files'][filename]
+                model_task=PythonTask('api-equality-probe',source,(PythonExample({},1),))
+                observation=TestObservation(evidence['result']['supported'],1,None,None,None,0)
+                precomputed=PythonExecution(True,None,None,None,sum(1 for _ in ast.walk(ast.parse(source))),(observation,),0)
+                resonance=encode_resonance(model_task,execution=precomputed,numeric_inputs=False)
+                resonances.append({'index':index,**asdict(resonance),'fusion_signature':resonance.fusion_signature,
+                                   'encoding':'bound isolated API equality; numeric input correlations disabled'})
+                prior=inquiry._update(prior,roles,model,str(index),evidence['result']['supported'])
+                decisions.append({'index':index,'decision':asdict(decision) if decision else None,'posterior':prior})
+            ranker=NativeDecisionRanker.load(json.loads((root/'planning_ranker.json').read_bytes()))
+            proposals=goal['analysis']['proposals']
+            @dataclass
+            class Ranked:
+                family:str
+                item:dict
+            ranked=ranker.rank([Ranked(p['family'],p) for p in proposals],now_epoch=goal['analysis']['capture_epoch'])
+            order=[p.item for p in ranked]
+            memory=EvidenceMemory.load(root/'planning_memory.json')
+            recall={}
+            first=goal['public'][0]
+            contract=Contract(first['module'],first['function'],tuple((i,0) for i in range(len(goal['public']))))
+            symbols=SymbolGraph(goal['analysis']['files'])
+            for p in order:
+                if len(p['files'])==1 and '/' not in next(iter(p['files'])):
+                    filename=next(iter(p['files']))
+                    recall[p['id']]=memory.recall(action_source=p['files'][filename],
+                        features=symbols.features(contract,filename),now_epoch=goal['analysis']['capture_epoch'],
+                        target_task_id=goal['analysis']['task_identity']).as_dict()
+            if goal['analysis']['adaptive_enabled']:
+                # Stable priority consumes measured posterior; native rank breaks
+                # ties. A failed direct leaf probe can outrank the public facade.
+                order.sort(key=lambda p:(-int(recall.get(p['id'],{}).get('outcome')=='impact'),
+                    -sum(prior.get(n,0) for n in p['files'])/len(p['files'])))
+            diagnosis={'decisions':decisions,'posterior':prior,'order':[p['id'] for p in order],
+                       'resonance':resonances,'mnemonic_recall':recall,
+                       'ranking':ranker.summary(now_epoch=goal['analysis']['capture_epoch']),
+                       'likelihood_scope':'declared reachability heuristic; not calibrated learned probability'}
+            prior_diagnosis=[r['data'] for r in journal.read() if r['kind']=='F_DIAGNOSIS']
+            if prior_diagnosis and canonical(prior_diagnosis)!=canonical([diagnosis]): raise MissionHold('function diagnosis replay differs')
+            if not prior_diagnosis: append('F_DIAGNOSIS',diagnosis)
         checkpoint('after_proposal')
         for candidate in order:
             patch(candidate['id'],'search-apply:'+candidate['id'])

@@ -9,6 +9,7 @@ import random
 import statistics
 
 ROOT = Path(__file__).resolve().parents[1]
+SCHEMA = 'nomad.adaptive-mechanism-study.v18'
 
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 def digest(value):
@@ -51,6 +52,9 @@ def signs(values):
 def audit(plan_path, result_path):
     plan, result = read(plan_path), read(result_path)
     payload = plan['payload']; design = payload['design']
+    if (payload.get('schema') != SCHEMA+'.plan' or result.get('schema') != SCHEMA+'.result'
+            or design.get('schema') != SCHEMA+'.design'):
+        raise ValueError('incorrect study schema')
     if plan['sha256'] != digest(payload) or result['plan_sha256'] != plan['sha256']:
         raise ValueError('plan/result commitment differs')
     if (result.get('status') != 'COMPLETED' or result.get('split') != 'evaluation'
@@ -70,9 +74,11 @@ def audit(plan_path, result_path):
             raise ValueError('current study source differs: '+name)
     started_path = result_path.with_name(result_path.stem+'.STARTED.json')
     started = read(started_path)
-    if (sha(started_path) != result['started_receipt_sha256'] or started['source_sha256'] != source
+    if (started.get('schema') != SCHEMA+'.started' or started.get('split') != 'evaluation'
+            or sha(started_path) != result['started_receipt_sha256'] or started['source_sha256'] != source
             or started['plan_sha256'] != plan['sha256'] or started['evaluation_outcomes_generated'] is not False):
         raise ValueError('missing or inconsistent pre-run commitment')
+    equal(result['config'], design['controller_config'], 'registered controller config')
     families, seeds, modes = design['families'], design['evaluation_seeds'], design['modes']
     if len(seeds) != 8 or len(set(seeds)) != 8 or design['metrics']['bootstrap']['samples'] != 4000:
         raise ValueError('unsupported registered inference inventory')
@@ -107,6 +113,11 @@ def audit(plan_path, result_path):
                    'scored_forecasts':len(scored)}
         equal(row['metrics'], metrics, 'metrics.'+str(key))
         process = row['process_receipt']; native = process['native_job_metrics']
+        raw_worker = {name:value for name,value in row.items() if name not in ('process_receipt','cost')}
+        newline = '\r\n' if payload['platform'] == 'win32' else '\n'
+        worker_bytes = (json.dumps(raw_worker,sort_keys=True,allow_nan=False)+newline).encode('utf-8')
+        if hashlib.sha256(worker_bytes).hexdigest() != process['output_sha256']:
+            raise ValueError('worker output differs from retained transport hash')
         if (process['returncode'] != 0 or process['timed_out'] or process['truncated']
                 or process['cleanup'] != 'windows-job-empty-confirmed' or native.get('available') is not True):
             raise ValueError('unqualified trusted worker completion')
@@ -118,12 +129,24 @@ def audit(plan_path, result_path):
         equal(cost['native_peak_counter_bytes'], native['peak_job_memory_counter_bytes'], 'Job reported peak')
         if cost['strict_peak_qualification'] != 'HOLD': raise ValueError('strict peak accounting overstated')
         for value in row['worker_cost'].values(): finite_nonnegative(value, 'worker stage')
-        for decision in row['decisions']:
-            if not 0 <= decision['observed_prefix'] <= steps: raise ValueError('decision sees future prefix')
+        if row['mode'] in ('frequency','native','temporal'):
+            if row['decisions'] or any(event['mechanism'] != row['mode'] for event in trace):
+                raise ValueError('fixed mechanism or decision inventory changed')
+        else:
+            size = design['controller_config']['block_size']
+            if len(row['decisions']) != math.ceil(steps/size): raise ValueError('controller decision inventory changed')
+            for i, decision in enumerate(row['decisions']):
+                if (decision['decision_index'] != i or decision['observed_prefix'] != i*size
+                        or any(e['mechanism'] != decision['mechanism'] for e in trace[i*size:(i+1)*size])):
+                    raise ValueError('decision prefix or selected mechanism differs from trace')
         decisions += len(row['decisions']); cost_sum += supervisor; job_sum += job
         measured[key] = {'metrics':metrics, 'cpu':job+supervisor}
     if set(measured) != inventory: raise ValueError('registered trial inventory incomplete')
+    outer_cpu = finite_nonnegative(result['harness_cpu_seconds'], 'whole harness')
+    finite_nonnegative(result['harness_wall_seconds'], 'whole harness wall')
+    if outer_cpu+1e-10 < cost_sum: raise ValueError('allocated supervisor CPU exceeds whole harness CPU')
     equal(result['whole_study_cpu_seconds'], result['harness_cpu_seconds']+job_sum, 'study total CPU')
+    equal(result['measured_study_cpu_lower_bound_seconds'], result['whole_study_cpu_seconds'], 'complete CPU lower bound')
     equal(result['unallocated_harness_cpu_seconds'], max(0.,result['harness_cpu_seconds']-cost_sum), 'unallocated CPU')
     means = {f:{m:{metric:statistics.fmean(measured[f,s,m]['metrics'][metric] for s in seeds)
                   for metric in ('mean_logloss','brier','ece10')} for m in modes} for f in families}

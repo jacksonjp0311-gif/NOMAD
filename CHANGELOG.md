@@ -1,5 +1,22 @@
 # NOMAD — Change History
 
+## v0.18.0 adaptive intelligence qualification (no version change)
+
+- Added a bounded controller that chooses existing frequency, temporal or native
+  Bitwork computation using public gain, frozen cost estimates and bounded exploration.
+- Registered implementation, seeds, costs, ablations and inference before held-out
+  evaluation; preserved development failures and earlier negative findings.
+- Connected optional allocation to actual GENESIS, candidate/probe budgets,
+  localization, ranking, memory recall and durable abstention.
+- Bound retained computation evidence to public forecasts, execution receipts,
+  independent acceptance and expiry; kept private outcomes out of numerical rewards.
+- Corrected WITNESS rejection reporting in the repository experiment without
+  changing original A/B/C/D definitions or historical frozen protocols.
+- Added authentic development provenance, a separate prospective adaptive arm,
+  bounded self-revision nomination and stronger historical evidence checks.
+- Kept all four platform gates and version promotion on HOLD. Exact scientific
+  results, costs, regression counts and limitations are in the adaptive report.
+
 ## v0.18.0 FRONTIER qualification (no version change)
 
 - Extended the existing pipeline to bounded JSON Python functions, local imports,

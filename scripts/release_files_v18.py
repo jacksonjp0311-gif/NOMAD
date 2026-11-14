@@ -6,8 +6,8 @@ import stat
 
 # Keep the first engineering seal as historical evidence. Qualification fixes
 # remain v0.18.0 and receive a distinct, immutable internal snapshot seal.
-MANIFEST = 'results/RELEASE_MANIFEST_FRONTIER_RECOVERY_V018.json'
-GATES = 'results/GATES_FRONTIER_RECOVERY_V018.json'
+MANIFEST = 'results/RELEASE_MANIFEST_ADAPTIVE_V018.json'
+GATES = 'results/GATES_ADAPTIVE_V018.json'
 EXCLUDED = {'.git', '.venv', 'venv', '__pycache__', '.pytest_cache', '.mypy_cache',
             'node_modules', 'runs', 'work', 'outputs', 'build', 'dist'}
 ROOT_FILES = {'README.md', 'LICENSE', 'pyproject.toml', 'NOMAD.ps1', 'NOMAD.cmd', 'platform.example.json',
@@ -19,7 +19,16 @@ RUNTIME_SCRIPTS = {'release_files_v18.py', 'verify_package_v18.py', 'qualify_iso
                    'verify_frontier_bitwork_replay_v18.py',
                    'qualify_function_recovery_frontier_v18.py',
                    'audit_frontier_metrics_v18.py', 'qualify_memory_frontier_v18.py',
-                   'review_self_revision_frontier_v18.py'}
+                   'review_self_revision_frontier_v18.py',
+                   'experiment_adaptive_v18.py', 'audit_adaptive_metrics_v18.py',
+                   'verify_adaptive_replay_v18.py', 'summarize_adaptive_v18.py',
+                   'diagnose_adaptive_v18.py',
+                   'experiment_repository_adaptive_v18.py',
+                   'prepare_adaptive_provenance_v18.py', 'refresh_adaptive_prerequisites_v18.py',
+                   'prepare_adaptive_self_revision_v18.py', 'qualify_windows_v18.py',
+                   'search_lineage_frontier_v18.py'}
+RUNTIME_TESTS = {'tests/__init__.py', 'tests/test_native_qualification_v18.py',
+                 'tests/test_platform_isolation_v18.py'}
 
 
 def sha(path: Path) -> str:
@@ -66,6 +75,7 @@ def files(root: Path, mode: str = 'source') -> list[tuple[str, Path]]:
         if mode == 'runtime' and not (
             relative.parts[0] in {'nomad', 'vendor', 'docs', 'assets', 'baseline',
                                  'results', 'experiments', 'external_sources'} or name in ROOT_FILES or
+            name in RUNTIME_TESTS or
             name.startswith('scripts/') and path.name in RUNTIME_SCRIPTS
         ):
             continue

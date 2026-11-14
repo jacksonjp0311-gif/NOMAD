@@ -1,0 +1,260 @@
+{
+  "payload": {
+    "private_contracts_opened": false,
+    "protocol": {
+      "additional_arm": {
+        "allocation": "frequency <=16 candidates/1 probe/0 GENESIS evaluations; temporal <=32/2/1024; native <=64/3/4096; abstain0",
+        "ceilings": {
+          "max_candidates": 64,
+          "max_executions": 96,
+          "max_files_changed": 2,
+          "probe_budget": 3
+        },
+        "controller_api": "initialize_functions(computation_controller=AdaptiveConfig or exact config dict)",
+        "controller_config": {
+          "adaptive_selection": true,
+          "block_size": 16,
+          "cost_seconds": {
+            "frequency": 1e-05,
+            "native": 0.02,
+            "temporal": 0.0006
+          },
+          "cost_weight": 2.0,
+          "exploration_interval": 4,
+          "max_history": 512,
+          "maximum_lag": 8,
+          "minimum_observations": 32,
+          "risk_weight": 0.15,
+          "setup_seconds": {
+            "frequency": 0.0,
+            "native": 0.02,
+            "temporal": 0.02
+          },
+          "structural_window": 64,
+          "use_history": true,
+          "use_memory": true,
+          "use_structure": true
+        },
+        "controller_input": "past verified public observations and public structural counts only",
+        "cost_calibration_scope": "development prior; native coding-cost calibration not established",
+        "inherits": "D verified full pipeline",
+        "label": "E",
+        "quality_authority": "unchanged WITNESS plus independent final verification"
+      },
+      "evaluation_updates": false,
+      "matching": "Original A-D arm definitions/statistics remain exact. E may allocate less work and thus a different bounded inventory; compare source/public/training evidence and qualified hard total budgets, report inventory differences.",
+      "newly_exposed_evaluation_exclusions": [
+        "akshaynagpal/w2n",
+        "mahmoud/boltons",
+        "omkarpathak/pygorithm",
+        "python-attrs/attrs",
+        "python-humanize/humanize",
+        "unidata/metpy"
+      ],
+      "original_A_to_D_protocol": {
+        "acceptance": {
+          "contrasts": [
+            "D>A",
+            "D>B",
+            "C>B",
+            "D>C"
+          ],
+          "joint_claim_requires": "matched whole-mission hard compute budgets qualified, all four contrasts significant, no integrity/containment failure",
+          "metric": "independent final accepted repair rate grouped by upstream repository",
+          "test": "one-sided paired exact sign test, ties omitted; Holm four contrasts alpha0.05"
+        },
+        "action_schema": "python-call-relational-vs-other",
+        "adapter": "python-functions-v1",
+        "arms": {
+          "A": {
+            "adaptive_enabled": false,
+            "ranker_mode": "cold"
+          },
+          "B": {
+            "adaptive_enabled": false,
+            "ranker_mode": "frequency"
+          },
+          "C": {
+            "adaptive_enabled": false,
+            "ranker_mode": "native"
+          },
+          "D": {
+            "adaptive_enabled": true,
+            "ranker_mode": "native"
+          }
+        },
+        "bounds": {
+          "max_candidates": 64,
+          "max_executions": 96,
+          "max_files_changed": 2,
+          "probe_budget": 3
+        },
+        "evaluation_updates": false,
+        "limits": [
+          "finite independent examples, not general semantic correctness",
+          "two coarse action classes do not distinguish candidates within a class",
+          "controller CPU/RSS hard cap absent; isolated and controller costs reported separately",
+          "native recovery must explicitly exercise this function adapter",
+          "no repository efficacy inferred from trusted synthetic stream mechanism study"
+        ],
+        "matching": "same source, available public contract, candidate inventory, training evidence and declared budgets; arm policy may choose different public probes",
+        "minimum_evaluation_repositories": 8,
+        "minimum_evaluation_tasks": 24,
+        "minimum_training_repositories": 2,
+        "native_binary_meaning": {
+          "0": "comparison AST family",
+          "1": "other registered AST families"
+        },
+        "sandbox": {
+          "cpus": 0.5,
+          "max_files": 3000,
+          "max_total_bytes": 30000000,
+          "memory_mib": 128,
+          "pids_limit": 16,
+          "timeout_s": 10.0
+        },
+        "schema": "nomad.frontier-repository-experiment.v18.protocol",
+        "seeds": [
+          1818201,
+          1818207,
+          1818211
+        ],
+        "training": "common independently accepted cold training observations; fresh frozen clone before every evaluation trial",
+        "whole_mission_compute_budget": {
+          "blocker": "worker limits exist; aggregate controller-plus-worker CPU/memory/wall supervision is not qualified",
+          "qualified": false,
+          "required": "matched hard limits over controller plus all workers for CPU, peak memory and elapsed wall time"
+        }
+      },
+      "original_frozen_document_sha256": "3f3e3aa36e96de10f2aaf08f6124b46895ddad0b36b4b96c00a703da09c6eb2b",
+      "private_contracts_opened": false,
+      "prospective_additional_contrasts": {
+        "acceptance": "No efficiency claim unless lower one-sided95percent repository-level quality-difference bound >= -0.02 and Holm-corrected paired cost comparison favors E; estimator must be registered in a subsequent executable plan before private access.",
+        "primary": "E versus D independently accepted repair rate and total measured mission CPU",
+        "quality_noninferiority_margin": 0.02,
+        "status": "DESIGN_ONLY_NOT_A_REGISTERED_EXECUTABLE_TEST",
+        "unit": "upstream repository; seed repeats are not independent units"
+      },
+      "schema": "nomad.adaptive-repository-extension.v18.protocol",
+      "unimplemented_execution_gate": "New E schedule/cost estimator and aggregate resource receipt must be registered and qualified before dispatch.",
+      "whole_mission_cost": {
+        "accounting": "Sum disjoint controller/host-supervisor/Linux-cgroup CPU scopes, excluding duplicate nested counters; wall is one encompassing interval.",
+        "current_measurements": [
+          "controller process CPU",
+          "end-to-end trial wall time",
+          "Windows supervisor Job CPU and native high-water counters"
+        ],
+        "memory": "Record each enforced memory domain and native counter semantics separately. Never sum independent peaks and label it a simultaneous measured peak.",
+        "missing": [
+          "Linux daemon-owned worker CPU retained after container exit",
+          "all-container and controller aggregate hard CPU/wall enforcement",
+          "strict successful-memory-commit peak semantics",
+          "attributable backend/VM overhead"
+        ],
+        "numeric_aggregate_budget_registration": "HOLD pending measured native accounting and enforceable scope; per-worker and search ceilings inherit original protocol.",
+        "qualified": false,
+        "required_coverage": [
+          "controller",
+          "predictor initialization and catch-up",
+          "candidate generation",
+          "diagnostic probes",
+          "every Docker worker including test subprocesses",
+          "memory retrieval and cloning",
+          "verification",
+          "interrupted/discarded attempts",
+          "recovery and cleanup"
+        ],
+        "strict_peak_available": false,
+        "total_cpu_available": false
+      }
+    },
+    "schema": "nomad.adaptive-repository-extension.v18.design-only",
+    "source_sha256": {
+      "experiments/FRONTIER_PUBLIC_DEVELOPMENT_LEADS_V018.json": "36de3c8ee9bfe31d544e726c3d39fefbe167457975842f4e2d5f46171504ebcc",
+      "experiments/PUBLIC_TRAINING_CANDIDATES_V018.json": "1811c1a8b1c1fa202be2486d53a50959a19026b1cb10d5259ab2f03f39ed8c01",
+      "experiments/development/adaptive_sources/CORPUS.json": "2730238c034f6c4d39abe633838932da2467f50997398bfdce0f275ba6da3f37",
+      "nomad/__init__.py": "35f25ad02c929c6690a44029a3bf01c3113faecf356e1364a80dee3fcc61fb09",
+      "nomad/adaptive.py": "bae26d0abbc1d276761d9082bf736b0eb6877b9ddbc227488211037c65d366ba",
+      "nomad/archive_guard.py": "7d91ae740708cf1d3d8c2650e6dedab2a84d7081f5d453fbe15634fc0f2b7f76",
+      "nomad/atlas_cli.py": "299bdb0c30ea51e3a31591ffd3d06a1d2e65426286cbedc23339181d38bdd276",
+      "nomad/benchmarks.py": "80ec235f5dd798bb76d9edf67125d0ebcff4a2d212fb392fc790fdf100bf8658",
+      "nomad/bitstate.py": "4ac2ee6d41ea024ad10adc7220bb4bd9cb9793584f5d746d73614e2f23641d27",
+      "nomad/causal_atlas.py": "eb29cd989c8c1d813cb2bb59ce47df7530658a570c16218518e034fd08efef09",
+      "nomad/causal_skills.py": "4ca538373fc0cbfa6f7cfa2ddc97ae27108310ebd51a5289b27cd710bd78299d",
+      "nomad/cli.py": "4c5685cdbd29ea7208ba0cb94f4351f143f06f7e9f995bca7a16e53a3a49f086",
+      "nomad/codeworld.py": "7fd2b4db64ddf5814df986afed8ee85c918f1a632ffb710b15f818c40c356731",
+      "nomad/echo_engine.py": "e7fd9484779bec87b47c0bb8b30c62390e26ca20c49dc52523bfdeec2fff8877",
+      "nomad/echo_map.py": "bce62c13ee7dc65e913e17c63e0fd345d7b58397ee42229b92030645039ee504",
+      "nomad/effects.py": "4154775a35f6511214efbb630c8c69e7904280e58a3c427cc280070657b24c28",
+      "nomad/engine.py": "aed5e16c4db1ad966940d22b487207fda2a00c0e2745178f8a4e32dd96d740e5",
+      "nomad/frontier.py": "22eeff99287c35fc5ae0f7e7be562b9638a97f00097192f6ca01d18365ad5a56",
+      "nomad/genesis.py": "8d5eefdb4fa2cd6f2d15eef6a54e1479927b4482ba00c207b9977f2a9ada063e",
+      "nomad/genesis_store.py": "914c185c85098d3c24470bd629db71b58de981b5e50eb178888b11d2bcd9263f",
+      "nomad/inquiry.py": "afd5375e0f7960d2f846175d6f4215f01b13a7127f63990883137fdd61ef162e",
+      "nomad/isolation.py": "934c6624f6b929b20798cb15d5b7344afcd0c3b750229f12c86ba7cc86a9b4e0",
+      "nomad/learner.py": "34867eb8717e02d6d2ce3c6a391c93c626523587cf9ed8724c5b4edcd48c8587",
+      "nomad/ledger.py": "a707e341cf51bb70dfec9e940631ee3f818a8f2742b2538902bc827caea23db0",
+      "nomad/mission_cli.py": "e9c0ae4e1334f33664fe76bce02ddaf44f0fccdaf38894aaa628561ff5464bc4",
+      "nomad/mission_runtime.py": "baadb67a588cfb2074248eda3805622b3272913ba5181ee16ecfb4abb0c6c12b",
+      "nomad/mission_witness.py": "d956b8cf95669ef1c57eff0030772e8331ff5ec43c81da6abed4245b164e606d",
+      "nomad/mnemonic.py": "1ca03e2dd7feff7ca404cfd280d1cdffe477b5be793a6b8c75157a7f4f7dc991",
+      "nomad/mnemonic_cli.py": "6225d7aab9138a81171a14599f7329b93724074394043e3eb9e6c9941959ca56",
+      "nomad/model.py": "64f7da3ed191ca2680f686879fc7dcc26679a7315e58bcd34b52b4b851542785",
+      "nomad/morphic.py": "03bc58ddaf5248e6f25de5d0bb8d0c620317e790c45959d7597943e6ef8ff098",
+      "nomad/morphic_adapters.py": "743d459575f20680ae84b0229b7df493805cc14cd0074146b1077bd8b4d92397",
+      "nomad/morphic_benchmarks.py": "7d482c103146c2bfd881c0598fcc6630b379aef0fbab02ed60b36c159e7202bb",
+      "nomad/morphic_engine.py": "632c8a681aa82994f39157b9946975abf2d6ee0166fc90f81b3c3868972501cd",
+      "nomad/multi_benchmarks.py": "6e3028883f39f675a89edd9fd84e6255ca58e369d90517e5a2a75f267ec9a2e6",
+      "nomad/native_bitwork.py": "2c26b9929157df201dc501c2ce8275737d4790cf8cc3705ca38bb3be2fcdff51",
+      "nomad/operators.py": "95ae5fa889c53558a8fbf850ff502ebd62f808034e9b0be6dfad23dbcf24b60f",
+      "nomad/platform.py": "66e9452cee03e399b82d72b772467d1b292dc71db9a8f32dc2c75825b14e49ae",
+      "nomad/platform_bitwork.py": "3d2e303c49a31e4750379ed1a56fc4fdfe713c4d025fd33ddfff8365e334db09",
+      "nomad/platform_cli.py": "dd0012b3fefdcea7e8efba9d0a556234181a781c76f90f4e5b2c4d52a705bba8",
+      "nomad/platform_mission.py": "b08de7884c3fcbf59d9089b731a75058c754de0d07d5eae711f7d1e63e1c5f2e",
+      "nomad/protect_cli.py": "86f553cbe755f9e8e141713a70298796f45ecf2c8f24b2c7b4c559750215c407",
+      "nomad/python_benchmarks.py": "f994166474b6703c9309445cb882197e5bc3565a21623b56ed9b586a4a45e52f",
+      "nomad/python_model.py": "8c5b26e3f8d96d7d98c0a17121cd4fc6ee567ff441d7c79e230de34269c662d2",
+      "nomad/python_operators.py": "585e2c744e539a3ce4c2dbd38f6dd1cbaadaf42d3b0603a9f5f9c2f69619e9e1",
+      "nomad/python_runtime.py": "f914b351b4c8f2b2aa0572591873944025d2aa92a2c5bfdee8468418645efbb2",
+      "nomad/python_search.py": "aa2a07bb7112357f1013384671d38e64eda19b39e51099757fb461fb3aa8decb",
+      "nomad/recursion.py": "c8bba64e313319756433f494b565a3f1342db604004ed252c4f2bb37b2cc6437",
+      "nomad/repo_world.py": "654cc13f775ec4db993713f1308fc87a5907768d97c21af150a85a8785ddf5f1",
+      "nomad/resonance.py": "76a1942b5bcce3bb7cce5bb6a39783314fd23960260bd90bbccf85adbca17f2f",
+      "nomad/resonance_learner.py": "2c9916541f606093a79d9d6f99a1760ea99fb39800e69c4464ed4e3a74a3a844",
+      "nomad/safe_eval.py": "04ec81ccf7a6ca1fc14080db6a1e913c19110e9c4bf6d6aedd735de2f67718e9",
+      "nomad/search.py": "e67038d83f91a9f50379f0dcbf46a6bcbe30a265601b244390b7832301cb6eea",
+      "nomad/sensory_learner.py": "3f4efbea9743047c526964a6633551748963a5ca5118a2a22ba0034c165c91d1",
+      "nomad/simulation.py": "4fb38c821dea467f6d1b34696bcec9b3db90c7e4054bfbac81ac28ed9bd46f83",
+      "nomad/simulation_v10.py": "790bfe2e79e55a981c87c2b7dc5febf9d1f67e5ab63dc7ae8775426e5182a925",
+      "nomad/simulation_v11.py": "e615ef4edb644795a3e312229e04a742f10288a20087c0d49e2ea134bb592c66",
+      "nomad/simulation_v12.py": "0d459e8a45f00f7686a148baaef90a5c4a4ada9dac387083bc3aa3c10edd5653",
+      "nomad/simulation_v13.py": "f89fe62fca19cdb2cb8ec1b5667d656822e92b609997c38480c47b1463b80cbc",
+      "nomad/simulation_v2.py": "d199fb76e85028ee630b71c067299b4c3994e85e5b1b9fe7c1934f676a54fbc1",
+      "nomad/simulation_v3.py": "ba551ef41bc17ec1266346ab16f03f795fdaaf9db5e58594d902196a74b55304",
+      "nomad/simulation_v4.py": "f0c89e5fbd7bd729f5522f2619f1dd3da98212df3c156372d2e462d86ce0fba5",
+      "nomad/simulation_v5.py": "1bc976ac8da2fbfde2a0063ffe42e7fa49b5fbbe622896e4ef6c8bb9f71a7714",
+      "nomad/simulation_v6.py": "9d0879b1fef44d897101dead76aca7f61a6cfa4b3585ae62032412c6ad22ef7e",
+      "nomad/simulation_v7.py": "45ef6147dd0dfb77acfda434096455c3d980717040d3b57755a6508e6fb43407",
+      "nomad/simulation_v8.py": "eb97db38e9151ef8bffe8c561f4767c4130d4e8104ce049d134e8ebc9b58b1ec",
+      "nomad/simulation_v9.py": "9087b7b362f82bfdf4c769c3b086e8f0a093f32f33c2ddcf42640e9382f605fa",
+      "nomad/skills.py": "0aa46caddf76942a8e37495cba3aa0639543f5bf214160f6fba9ad3da58b0a13",
+      "nomad/store.py": "8e406341d055d9b9ba5bee8adc8ea9f7524f90b1d6da4f49637b70ffd17f022b",
+      "nomad/supervised.py": "b7e4ac3c52aed47408466fa0b681eb90f63f5e58c888d1b645a956c0404056b5",
+      "nomad/transcend.py": "bf825baa143275bf23042b9c808165d2dd3f9966cc35d4b2504133268fdb2d13",
+      "nomad/transcend_cli.py": "c27cab10a26a41e2bd12add81ef5c3ca9c55e83c97f26b583856e517b1b94ced",
+      "nomad/windows_job.py": "ece4d8405960cc70501a89225ab0717d0baecaaaa3cb62b53a941b0cae457260",
+      "nomad/witness.py": "3c32518d930b71a06a9df909ce7b97f1e56200d070bbf0262c65a8a196152eef",
+      "nomad/witness_skills.py": "3c473dcd27e3f9f9cadcdc90a4509dcd1f415ed32dd4484f3f34719f1a1047e8",
+      "scripts/experiment_frontier_v18.py": "fb96dc6b3bd6757f7bffdde3f0d23b8ce3084a4711388af1816c8088c4599f2e",
+      "scripts/experiment_qualification_v18.py": "bcbd4cabe0c19e838c60a5c5fc655d384f804971709c8fd0287c4b41a21b021f",
+      "scripts/experiment_repository_adaptive_v18.py": "97bb58a266dd14d919001863f35baf81a7160fc0e0a399c1929d0bb8ea90d94d",
+      "scripts/qualify_function_recovery_frontier_v18.py": "95569bba465c32c2246ef050191c0d871246e0c63bc54bf27ad18c4e555b2790",
+      "scripts/qualify_isolation_v18.py": "3f52a0a67c3ddffb6fe159a63095fc2ae953433d2ca89d284bc7f2ba931924bd",
+      "scripts/qualify_recovery_v18.py": "b677eb770f123cf8d30d765f8f5911608f189afde927842133a5ba43a5a41673",
+      "vendor/BGR-v1.4.0-runtime/MANIFEST.sha256": "5a2bd5238565949a7cbfa89ad560f64f3475268391aac0d56a861d6d08ee0e8e"
+    },
+    "status": "AWAITING_NATIVE_COST_QUALIFICATION_AND_INDEPENDENT_CURATED_CORPUS",
+    "tasks_registered": 0
+  },
+  "sha256": "9d1a6682afbf7886ed63278079c2f18f00a225850d10df0d3d5e9e37f9966c33"
+}
