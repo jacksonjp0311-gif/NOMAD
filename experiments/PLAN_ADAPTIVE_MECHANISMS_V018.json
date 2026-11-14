@@ -1,0 +1,169 @@
+{
+  "payload": {
+    "calibration_path": "results\\ADAPTIVE_DEVELOPMENT_RECHECK_V018.json",
+    "calibration_sha256": "0bf447f5ea64bcdc21854fe020a4f2bc5415ebd2466fc4f5d60fdeb36cbc0f30",
+    "design": {
+      "ablations": {
+        "no_history": "frequency only; chronological history unavailable to screening or expensive models",
+        "no_memory": "selector utility history reset at decisions; native predictive history retained, not MNEMONIC ablation",
+        "no_selection": "fixed native choice with controller bookkeeping; no adaptive strategy selection",
+        "no_structure": "screen disabled; bounded exploration continues without structural ordering"
+      },
+      "budgets": {
+        "hard_cpu_limit_note": "CPU measured; equal wall and Job memory/process ceilings, no independent CPU-time kill limit",
+        "hard_cpu_seconds": null,
+        "maximum_decisions": 256,
+        "maximum_retained_history": 512,
+        "observations": 128,
+        "per_trial_wall_seconds": 30,
+        "windows_job_max_processes": 4,
+        "windows_job_memory_mib": 512
+      },
+      "controller_config": {
+        "adaptive_selection": true,
+        "block_size": 16,
+        "cost_seconds": {
+          "frequency": 1.7370535455743915e-06,
+          "native": 0.001477956919643475,
+          "temporal": 9.00303571792652e-05
+        },
+        "cost_weight": 2.0,
+        "exploration_interval": 4,
+        "max_history": 512,
+        "maximum_lag": 8,
+        "minimum_observations": 32,
+        "risk_weight": 0.15,
+        "setup_seconds": {
+          "frequency": 1.1128564697823354e-05,
+          "native": 0.07840468570689804,
+          "temporal": 0.08108499998758946
+        },
+        "structural_window": 64,
+        "use_history": true,
+        "use_memory": true,
+        "use_structure": true
+      },
+      "cost_calibration": "fixed development initialization wall and full-loop wall per observation; realized whole-process CPU is evaluated separately",
+      "development_excludes": [
+        "unseen_structure"
+      ],
+      "development_seeds": [
+        18185001
+      ],
+      "evaluation_seeds": [
+        18185101,
+        18185102,
+        18185103,
+        18185104,
+        18185105,
+        18185106,
+        18185107,
+        18185108
+      ],
+      "failure_rule": "retain every attempted trial and cost; any missing/failed arm prevents complete paired efficacy assessment",
+      "families": [
+        "stationary",
+        "temporal",
+        "delayed",
+        "shift",
+        "sparse_noisy",
+        "misleading",
+        "unseen_structure",
+        "irreducible"
+      ],
+      "generator": {
+        "actions": "one RNG.random per step; probability1 .08 for sparse_noisy, .5 otherwise",
+        "delayed": "a XOR action at lag3, flip .075",
+        "irreducible": 0.5,
+        "misleading": "temporal rule before64; stationary [.1,.3] thereafter",
+        "missing_history_bit": 0,
+        "outcome_draw": "one RNG.random drawn only AFTER this arm forecasts",
+        "shift": "[.1,.3] before64, [.8,.6] thereafter",
+        "sparse_noisy": [
+          0.07,
+          0.35
+        ],
+        "stationary": [
+          0.1,
+          0.3
+        ],
+        "temporal": "a XOR previous y, flip .075",
+        "unseen_structure": "a XOR (outcome at lag2 AND action at lag5), flip .075"
+      },
+      "information": "predictor receives current binary action and previously observed binary outcomes only; never family/seed/future",
+      "limits": [
+        "trusted generated binary streams only; no coding/transfer/energy/GPU claim",
+        "unseen structure excludes development outcomes, but its generator is designed and known",
+        "reported native Job peak is a high-water counter, potentially including attempted charges; strict committed peak remains HOLD",
+        "cost estimates and uncertainty proxies do not establish optimal allocation or causal benefit"
+      ],
+      "metrics": {
+        "bootstrap": {
+          "paired_seed": 18185999,
+          "percentiles": [
+            2.5,
+            97.5
+          ],
+          "purpose": "descriptive paired seed-block mean interval, not extra independent evidence",
+          "samples": 4000
+        },
+        "brier": "mean (p-y)^2 after prefix",
+        "ece": "10 fixed equal-width bins, left-closed/right-open except final includes1; weighted absolute calibration error",
+        "meaning": "directional seed-block evidence; shifted-margin sign criterion is not mean-equivalence proof",
+        "multiplicity": "Holm correction across nine one-sided paired exact sign tests, alpha .05; ties <=1e-12 omitted",
+        "objective": "mean_logloss + cost_weight * (whole_job_cpu_seconds + supervisor_cpu_seconds) / 128",
+        "objective_cost_weight": 2.0,
+        "primary_controls": [
+          "native",
+          "frequency",
+          "temporal"
+        ],
+        "primary_quality": "mean natural-log loss after prefix",
+        "primary_tests": [
+          "objective difference <0",
+          "logloss difference minus .02 <0",
+          "whole CPU difference <0"
+        ],
+        "quality_margin_nats": 0.02,
+        "unit": "eight independent seed blocks; average eight family streams within each seed"
+      },
+      "modes": [
+        "frequency",
+        "native",
+        "temporal",
+        "adaptive",
+        "no_history",
+        "no_structure",
+        "no_memory",
+        "no_selection"
+      ],
+      "schedule": {
+        "order": "seed-family groups, shuffled with independent registered schedule seed; modes shuffled within every group",
+        "schedule_seed": 18185931
+      },
+      "schema": "nomad.adaptive-mechanism-study.v18.design",
+      "steps": 128,
+      "unscored_prefix": 32
+    },
+    "evaluation_outcomes_generated": false,
+    "native_identity": {
+      "authority": "local_integrity_only",
+      "manifest_sha256": "5a2bd5238565949a7cbfa89ad560f64f3475268391aac0d56a861d6d08ee0e8e",
+      "runtime": "bgr140.GovernedBitworkV14",
+      "verified_files": 77
+    },
+    "observed_at_utc": "2026-11-14T22:24:42.540783+00:00",
+    "platform": "win32",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "schema": "nomad.adaptive-mechanism-study.v18.plan",
+    "source_sha256": {
+      "nomad/adaptive.py": "bae26d0abbc1d276761d9082bf736b0eb6877b9ddbc227488211037c65d366ba",
+      "nomad/native_bitwork.py": "2c26b9929157df201dc501c2ce8275737d4790cf8cc3705ca38bb3be2fcdff51",
+      "nomad/supervised.py": "b7e4ac3c52aed47408466fa0b681eb90f63f5e58c888d1b645a956c0404056b5",
+      "nomad/windows_job.py": "ece4d8405960cc70501a89225ab0717d0baecaaaa3cb62b53a941b0cae457260",
+      "scripts/experiment_adaptive_v18.py": "194737913667c52e44d32c8838a29df7a1c44736cd94972d22ad86ca5e0152f2",
+      "vendor/BGR-v1.4.0-runtime/MANIFEST.sha256": "5a2bd5238565949a7cbfa89ad560f64f3475268391aac0d56a861d6d08ee0e8e"
+    }
+  },
+  "sha256": "f92d8687b27a6ec7a1f114283ae75ed6f7b21a7edfd52e6d79371bb24227be48"
+}
