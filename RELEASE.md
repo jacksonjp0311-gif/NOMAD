@@ -1,26 +1,15 @@
-# NOMAD v0.17.0 — SECURITY & RECOVERY
+# NOMAD v0.18.0 — PLATFORM
 
-**Engineering result:** PROTECTION LAYER IMPLEMENTED. Local admission, process supervision, effect-recovery and clean-package checks to be reported from the final verification record.
+Local engineering snapshot, November 14, 2026. **Publication and production HOLD.**
 
-**Adversarial execution authorization:** **HOLD** until the Docker/VM boundary is natively exercised on the deployment host. The source launcher is intentionally fail-closed when Docker is not available.
+This milestone adds native Windows process supervision and offline setup, source admission hardening, a durable Docker-only arithmetic mission adapter, native Bitwork ranking with evidence controls, reproducible packaging and explicit qualification receipts. The original intelligence architecture, historical negative results and Catalogue regression are preserved.
 
-## What shipped
+Final local validation: **219 tests, 215 passed, 4 explicit skips, no failures/errors**. Python, JavaScript and Rust generated programs ran on the ROG. Native Windows process and ownership tests passed. Docker and WSL were unavailable, so actual container containment and isolated real-repository repair remain HOLD. Native BGR lost to frequency-only prediction on the retrospective replay; no learning advantage is claimed.
 
-- `isolation.py`: digest-pinned, pre-pulled Docker-only execution, unprivileged user, no network, readonly snapshot, limited processes/memory/CPU, no Docker socket or private WITNESS bind, and cleanup confirmation.
-- `supervised.py`: trusted subprocess output/time limits, minimal environment, POSIX process-group cleanup, best-effort Windows termination (not a guarantee).
-- `archive_guard.py`: ZIP entry validation, traversals/symlink/duplicate/size checks.
-- `effects.py`: fsynced pre-dispatch journal, process ownership epochs, unconfirmed-effect hold, mandatory independent readback and never-reused effect IDs.
-- Mission start now checks the external-effect journal. Prior mission states remain readable; the v0.16 event schema is deliberately retained for restart compatibility.
-- Security-specific adversarial tests and verified-vs-untested research records.
+Use `NOMAD.cmd setup`, `NOMAD.cmd trusted-demo`, `NOMAD.cmd doctor` and `NOMAD.cmd verify`. See `README.md` for exact supported repository contracts and configuration. Setup changes no host security policy and downloads no dependencies. PowerShell-only startup is blocked by this host's policy, so the command/Python entry is the tested path.
 
-## Scientific and production boundaries
+The source and runtime ZIPs are engineering artifacts, not an approved public release. Both are sealed with read-only integrity manifests and verified from fresh extraction; the independent delivery receipt records the observed package checks. The original compact v0.17 source is backed up separately. Complete nested historical lineage remains unavailable because the predecessor archive was intentionally omitted.
 
-- No measured external coding gain over cold search; no native BGR coding advantage claimed.
-- No live Docker kernel isolation test or Windows Job Object support in this release; Windows native behavior not verified here.
-- No encrypted/authed WITNESS remote attestation or irreversible remote operation integration.
-- A Docker test passing does **not** complete a coding mission or certify a patch. Verification remains independent.
-- The previous v0.16 full archive is preserved unchanged. Production qualification remains held.
+No GitHub publication occurred. `PUBLISH.ps1` and `PUBLISH.sh` enforce the release HOLD and do not select public visibility or push. The next milestone is v0.19 RELEASE CANDIDATE after the current native/security/integration gates close; no extra minor or patch release was introduced.
 
-## Next release
-
-**v0.18 — PLATFORM:** native Windows/ROG containment acceptance, process trees, Docker/VM contract verification, external-effect idempotency/readback, authenticated WITNESS, and measured real coding tasks. No superficial patch-version ladder.
+See `docs/PLATFORM_QUALIFICATION_REPORT.md`, `docs/PLATFORM_ARCHITECTURE.md`, `docs/WINDOWS_SECURITY_REPORT.md`, `docs/EXPERIMENT_V018.md`, and `docs/NEXT_ITERATION.md`.

@@ -1,0 +1,25 @@
+{
+  "authority": "historical_public_trace_replay_only",
+  "budget_per_task": 12,
+  "evaluation_split": "cold",
+  "evaluation_updates": false,
+  "modes": [
+    "cold",
+    "frequency",
+    "native",
+    "shuffled"
+  ],
+  "native_identity": {
+    "authority": "local_integrity_only",
+    "manifest_sha256": "5a2bd5238565949a7cbfa89ad560f64f3475268391aac0d56a861d6d08ee0e8e",
+    "runtime": "bgr140.GovernedBitworkV14",
+    "verified_files": 77
+  },
+  "repeats": 3,
+  "schema": "nomad.platform.bitwork-plan.v1",
+  "seed": 18018,
+  "shuffled_control": "permute training outcome labels with fixed seed; retain action sequence",
+  "source_path": "results/FRONTIER_STUDY_V014.json",
+  "source_sha256": "00846555f1d061dfc6136a8a5cd8f0f94d4ee2edfedd97a139140d64f7118dd6",
+  "training_split": "training"
+}

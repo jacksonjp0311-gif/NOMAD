@@ -1,0 +1,25 @@
+{
+  "schema": "nomad.platform-isolation-development-evidence.v18",
+  "native_docker_gate": "HOLD",
+  "records": [
+    {
+      "finding": "Windows DirEntry.stat returned zero link count for ordinary source files",
+      "observed_result": "Four snapshot-dependent inherited tests errored during the first implementation run",
+      "resolution": "Use Path.lstat to obtain native file identity and link counts; keep multiply linked file rejection",
+      "regression": "Inherited snapshot and mocked orchestration tests passed after correction"
+    },
+    {
+      "finding": "Windows Job ActiveProcesses became zero before descendant process handles signaled termination",
+      "observed_result": "Two of eleven new platform tests failed in the first native run; immediate descendant liveness checks remained true",
+      "resolution": "Retain process synchronization handles before termination and require both zero active members and signaled handles before confirmed cleanup",
+      "regression": "All eleven new tests passed after correction, including parent exit, timeout, and supervisor hard death"
+    },
+    {
+      "finding": "Native symbolic link creation lacks Windows privilege",
+      "observed_result": "Inherited symlink fixture raised WinError 1314 before exercising admission",
+      "resolution": "Skip only this precise unavailable-privilege condition and retain explicit HOLD for native symlink qualification",
+      "separate_evidence": "Actual Windows junction-to-protected-host fixture is rejected; junction target sentinel remains unchanged"
+    }
+  ],
+  "scope": "Software defect and controlled native process/filesystem evidence; not Docker containment or general intelligence evidence"
+}

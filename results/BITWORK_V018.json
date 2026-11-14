@@ -1,0 +1,441 @@
+{
+  "cost": {
+    "api_cost_usd": 0,
+    "cloud_calls": 0,
+    "electricity_cost_usd": null,
+    "energy_joules": null,
+    "gpu_used": false,
+    "memory_scope": "tracemalloc per arm; Windows working set sampled after arm, not isolated peak RSS"
+  },
+  "environment": {
+    "machine": "AMD64",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+  },
+  "evaluation_tasks": 4,
+  "external_repair_advantage": "NOT_ESTABLISHED",
+  "learning_gate": "HOLD",
+  "limitations": [
+    "Historical outcomes were already available before this new adapter was designed.",
+    "Frozen historical replay is not a prospective heldout experiment.",
+    "Candidate pools stop at prior policy outcomes and omit unexecuted repairs.",
+    "Public pass ranking does not imply WITNESS or final correctness.",
+    "The Catalogue false-positive remains a permanent independent-contract regression.",
+    "No statistical significance, GPU, energy, or fresh repository repair claim is made."
+  ],
+  "metrics": {
+    "cold": {
+      "action_probabilities": [
+        0.5,
+        0.5
+      ],
+      "max_python_peak_allocated_bytes": 3704,
+      "mean_brier": 0.25,
+      "mean_cpu_seconds": 0.0,
+      "mean_logloss": 0.6931471805599453,
+      "mean_observed_public_success_rank": 1.5,
+      "mean_wall_seconds": 0.0004656333476305008,
+      "public_events": 20,
+      "public_success_tasks": 2,
+      "tasks": [
+        {
+          "archived_witness_supported": true,
+          "first_public_pass_rank": 2,
+          "fresh_repository_execution": false,
+          "observed_candidates": 2,
+          "ordered_original_indices": [
+            0,
+            1
+          ],
+          "public_pass_within_budget": true,
+          "task_id": "affine-rectilinear"
+        },
+        {
+          "archived_witness_supported": false,
+          "first_public_pass_rank": null,
+          "fresh_repository_execution": false,
+          "observed_candidates": 11,
+          "ordered_original_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "public_pass_within_budget": false,
+          "task_id": "affine-vector"
+        },
+        {
+          "archived_witness_supported": true,
+          "first_public_pass_rank": 1,
+          "fresh_repository_execution": false,
+          "observed_candidates": 1,
+          "ordered_original_indices": [
+            0
+          ],
+          "public_pass_within_budget": true,
+          "task_id": "catalogue-names"
+        },
+        {
+          "archived_witness_supported": false,
+          "first_public_pass_rank": null,
+          "fresh_repository_execution": false,
+          "observed_candidates": 6,
+          "ordered_original_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "public_pass_within_budget": false,
+          "task_id": "confection-merge"
+        }
+      ],
+      "timing_repeats": [
+        {
+          "cpu_seconds": 0.0,
+          "process_working_set_bytes_after": 25714688,
+          "python_peak_allocated_bytes": 3704,
+          "wall_seconds": 0.0005108000477775931
+        },
+        {
+          "cpu_seconds": 0.0,
+          "process_working_set_bytes_after": 25747456,
+          "python_peak_allocated_bytes": 3192,
+          "wall_seconds": 0.0004878999898210168
+        },
+        {
+          "cpu_seconds": 0.0,
+          "process_working_set_bytes_after": 25755648,
+          "python_peak_allocated_bytes": 3312,
+          "wall_seconds": 0.00039820000529289246
+        }
+      ]
+    },
+    "frequency": {
+      "action_probabilities": [
+        0.4,
+        0.2857142857142857
+      ],
+      "max_python_peak_allocated_bytes": 3472,
+      "mean_brier": 0.12122448979591835,
+      "mean_cpu_seconds": 0.0,
+      "mean_logloss": 0.42060709421822373,
+      "mean_observed_public_success_rank": 1.0,
+      "mean_wall_seconds": 0.0003725000036259492,
+      "public_events": 20,
+      "public_success_tasks": 2,
+      "tasks": [
+        {
+          "archived_witness_supported": true,
+          "first_public_pass_rank": 1,
+          "fresh_repository_execution": false,
+          "observed_candidates": 2,
+          "ordered_original_indices": [
+            1,
+            0
+          ],
+          "public_pass_within_budget": true,
+          "task_id": "affine-rectilinear"
+        },
+        {
+          "archived_witness_supported": false,
+          "first_public_pass_rank": null,
+          "fresh_repository_execution": false,
+          "observed_candidates": 11,
+          "ordered_original_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "public_pass_within_budget": false,
+          "task_id": "affine-vector"
+        },
+        {
+          "archived_witness_supported": true,
+          "first_public_pass_rank": 1,
+          "fresh_repository_execution": false,
+          "observed_candidates": 1,
+          "ordered_original_indices": [
+            0
+          ],
+          "public_pass_within_budget": true,
+          "task_id": "catalogue-names"
+        },
+        {
+          "archived_witness_supported": false,
+          "first_public_pass_rank": null,
+          "fresh_repository_execution": false,
+          "observed_candidates": 6,
+          "ordered_original_indices": [
+            1,
+            4,
+            0,
+            2,
+            3,
+            5
+          ],
+          "public_pass_within_budget": false,
+          "task_id": "confection-merge"
+        }
+      ],
+      "timing_repeats": [
+        {
+          "cpu_seconds": 0.0,
+          "process_working_set_bytes_after": 25763840,
+          "python_peak_allocated_bytes": 3472,
+          "wall_seconds": 0.00037560000782832503
+        },
+        {
+          "cpu_seconds": 0.0,
+          "process_working_set_bytes_after": 25763840,
+          "python_peak_allocated_bytes": 3416,
+          "wall_seconds": 0.0003706999705173075
+        },
+        {
+          "cpu_seconds": 0.0,
+          "process_working_set_bytes_after": 25780224,
+          "python_peak_allocated_bytes": 3416,
+          "wall_seconds": 0.0003712000325322151
+        }
+      ]
+    },
+    "native": {
+      "action_probabilities": [
+        0.41984448547173864,
+        0.3455386177121732
+      ],
+      "max_python_peak_allocated_bytes": 215252,
+      "mean_brier": 0.14964615314873903,
+      "mean_cpu_seconds": 0.07291666666666667,
+      "mean_logloss": 0.48641297739326594,
+      "mean_observed_public_success_rank": 1.0,
+      "mean_wall_seconds": 0.08256299999387313,
+      "public_events": 20,
+      "public_success_tasks": 2,
+      "tasks": [
+        {
+          "archived_witness_supported": true,
+          "first_public_pass_rank": 1,
+          "fresh_repository_execution": false,
+          "observed_candidates": 2,
+          "ordered_original_indices": [
+            1,
+            0
+          ],
+          "public_pass_within_budget": true,
+          "task_id": "affine-rectilinear"
+        },
+        {
+          "archived_witness_supported": false,
+          "first_public_pass_rank": null,
+          "fresh_repository_execution": false,
+          "observed_candidates": 11,
+          "ordered_original_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "public_pass_within_budget": false,
+          "task_id": "affine-vector"
+        },
+        {
+          "archived_witness_supported": true,
+          "first_public_pass_rank": 1,
+          "fresh_repository_execution": false,
+          "observed_candidates": 1,
+          "ordered_original_indices": [
+            0
+          ],
+          "public_pass_within_budget": true,
+          "task_id": "catalogue-names"
+        },
+        {
+          "archived_witness_supported": false,
+          "first_public_pass_rank": null,
+          "fresh_repository_execution": false,
+          "observed_candidates": 6,
+          "ordered_original_indices": [
+            1,
+            4,
+            0,
+            2,
+            3,
+            5
+          ],
+          "public_pass_within_budget": false,
+          "task_id": "confection-merge"
+        }
+      ],
+      "timing_repeats": [
+        {
+          "cpu_seconds": 0.078125,
+          "process_working_set_bytes_after": 26746880,
+          "python_peak_allocated_bytes": 215252,
+          "wall_seconds": 0.0812957999878563
+        },
+        {
+          "cpu_seconds": 0.078125,
+          "process_working_set_bytes_after": 26767360,
+          "python_peak_allocated_bytes": 177252,
+          "wall_seconds": 0.07430029998067766
+        },
+        {
+          "cpu_seconds": 0.0625,
+          "process_working_set_bytes_after": 27795456,
+          "python_peak_allocated_bytes": 177076,
+          "wall_seconds": 0.09209290001308545
+        }
+      ]
+    },
+    "shuffled": {
+      "action_probabilities": [
+        0.6096210308365457,
+        0.5839121379488013
+      ],
+      "max_python_peak_allocated_bytes": 181692,
+      "mean_brier": 0.3267002827751989,
+      "mean_cpu_seconds": 0.08333333333333333,
+      "mean_logloss": 0.8482314975858793,
+      "mean_observed_public_success_rank": 1.0,
+      "mean_wall_seconds": 0.10171533333292852,
+      "public_events": 20,
+      "public_success_tasks": 2,
+      "tasks": [
+        {
+          "archived_witness_supported": true,
+          "first_public_pass_rank": 1,
+          "fresh_repository_execution": false,
+          "observed_candidates": 2,
+          "ordered_original_indices": [
+            1,
+            0
+          ],
+          "public_pass_within_budget": true,
+          "task_id": "affine-rectilinear"
+        },
+        {
+          "archived_witness_supported": false,
+          "first_public_pass_rank": null,
+          "fresh_repository_execution": false,
+          "observed_candidates": 11,
+          "ordered_original_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "public_pass_within_budget": false,
+          "task_id": "affine-vector"
+        },
+        {
+          "archived_witness_supported": true,
+          "first_public_pass_rank": 1,
+          "fresh_repository_execution": false,
+          "observed_candidates": 1,
+          "ordered_original_indices": [
+            0
+          ],
+          "public_pass_within_budget": true,
+          "task_id": "catalogue-names"
+        },
+        {
+          "archived_witness_supported": false,
+          "first_public_pass_rank": null,
+          "fresh_repository_execution": false,
+          "observed_candidates": 6,
+          "ordered_original_indices": [
+            1,
+            4,
+            0,
+            2,
+            3,
+            5
+          ],
+          "public_pass_within_budget": false,
+          "task_id": "confection-merge"
+        }
+      ],
+      "timing_repeats": [
+        {
+          "cpu_seconds": 0.0625,
+          "process_working_set_bytes_after": 27701248,
+          "python_peak_allocated_bytes": 181692,
+          "wall_seconds": 0.08693839999614283
+        },
+        {
+          "cpu_seconds": 0.09375,
+          "process_working_set_bytes_after": 27856896,
+          "python_peak_allocated_bytes": 179436,
+          "wall_seconds": 0.1214701000135392
+        },
+        {
+          "cpu_seconds": 0.09375,
+          "process_working_set_bytes_after": 27664384,
+          "python_peak_allocated_bytes": 179388,
+          "wall_seconds": 0.09673749998910353
+        }
+      ]
+    }
+  },
+  "native_beats_frequency_logloss": false,
+  "plan": {
+    "authority": "historical_public_trace_replay_only",
+    "budget_per_task": 12,
+    "evaluation_split": "cold",
+    "evaluation_updates": false,
+    "modes": [
+      "cold",
+      "frequency",
+      "native",
+      "shuffled"
+    ],
+    "native_identity": {
+      "authority": "local_integrity_only",
+      "manifest_sha256": "5a2bd5238565949a7cbfa89ad560f64f3475268391aac0d56a861d6d08ee0e8e",
+      "runtime": "bgr140.GovernedBitworkV14",
+      "verified_files": 77
+    },
+    "repeats": 3,
+    "schema": "nomad.platform.bitwork-plan.v1",
+    "seed": 18018,
+    "shuffled_control": "permute training outcome labels with fixed seed; retain action sequence",
+    "source_path": "results/FRONTIER_STUDY_V014.json",
+    "source_sha256": "00846555f1d061dfc6136a8a5cd8f0f94d4ee2edfedd97a139140d64f7118dd6",
+    "training_split": "training"
+  },
+  "schema": "nomad.platform.bitwork-benchmark.v1",
+  "training_public_events": 8,
+  "training_tasks": 2
+}

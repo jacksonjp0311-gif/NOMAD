@@ -110,8 +110,10 @@ def _public_test_text(task: CodeWorldTask) -> str:
 def materialize(task: CodeWorldTask, root: Path) -> None:
     root.mkdir(parents=True, exist_ok=True)
     (root / "tests").mkdir(exist_ok=True)
-    (root / "solution.py").write_text(task.source, encoding="utf-8")
-    (root / "tests" / "test_public.py").write_text(_public_test_text(task), encoding="utf-8")
+    # Mission identities bind exact UTF-8 bytes. Native Windows text-mode
+    # newline conversion must not silently change the planned source digest.
+    (root / "solution.py").write_bytes(task.source.encode("utf-8"))
+    (root / "tests" / "test_public.py").write_bytes(_public_test_text(task).encode("utf-8"))
     (root / "README.md").write_text(
         f"# CODEWORLD fixture {task.task_id}\n\nRepair `solution.py` until the public tests pass.\n",
         encoding="utf-8",

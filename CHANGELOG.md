@@ -1,5 +1,18 @@
 # NOMAD — Change History
 
+## v0.18.0 — PLATFORM (2026-11-14, engineering snapshot)
+
+- Added offline source installation, Windows command launcher, configuration, doctor, native runtime smoke checks, and explicit recovery commands.
+- Replaced best-effort Windows tree cleanup with gated Job Object supervision; native timeout, descendant, owner-death, and lock tests ran on the ROG.
+- Fixed Windows newline hashing and byte-range lock contention defects found in the inherited mission suite.
+- Hardened source/ZIP intake for reparse points, Windows aliases, case collisions, hardlinks and credential paths; Docker uses a private client configuration, local endpoint, explicit entrypoint and pinned-image preflight.
+- Added a durable Docker-only mission adapter for a strict Python arithmetic target, actual GENESIS proposals, independent WITNESS/final observations, bound receipts, unique dispatch identities and scoped learning.
+- Connected original BGR through optional scoped candidate ranking; prevented duplicate evidence and relabelled observations from increasing support or renewing MNEMONIC expiry.
+- Added frozen native/cold/frequency/shuffled replay, native containment probe harness, read-only manifests and deterministic source/runtime ZIP builders.
+- Kept the Catalogue false-positive and all historical result files. The compact package's missing predecessor archive remains a lineage HOLD.
+
+**Outcome:** Windows engineering controls pass their reported native tests. Docker/WSL are absent, so native containment, isolated real-repository repair and release publication remain HOLD. Native BGR loses to frequency-only log loss in the retrospective replay. No intelligence advantage or production readiness is claimed.
+
 ## v0.17.0 — SECURITY & RECOVERY (2026-11-13)
 
 **Major capability:** a fail-closed execution boundary and durable indeterminate-effect handling around the v0.16 mission runtime.

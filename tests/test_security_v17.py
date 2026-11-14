@@ -61,7 +61,12 @@ class IsolationContractTests(unittest.TestCase):
             source=repo(Path(td))
             secret=Path(td)/'private.txt'
             secret.write_text('NOT_FOR_SANDBOX')
-            (source/'leak.py').symlink_to(secret)
+            try:
+                (source/'leak.py').symlink_to(secret)
+            except OSError as error:
+                if os.name == 'nt' and getattr(error, 'winerror', None) == 1314:
+                    self.skipTest('Windows symlink privilege absent; native symlink gate remains HOLD')
+                raise
             with self.assertRaises(UnsafeWorkspace):
                 snapshot_source(source,Path(td)/'copy',SandboxPolicy(image=IMAGE))
             self.assertFalse((Path(td)/'copy').exists())
@@ -122,6 +127,7 @@ class IsolationContractTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             source=repo(Path(td))
             with patch('nomad.isolation.sandbox_available',return_value=True), \
+                 patch('nomad.isolation.docker_preflight',return_value={'ready':True}), \
                  patch('nomad.isolation.run_supervised',side_effect=[
                      result(0),result(1,b'Error: No such object: container')]) as call:
                 receipt=run_isolated(source,command=['python','-B','-m','unittest'],
@@ -140,6 +146,7 @@ class IsolationContractTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             source=repo(Path(td))
             with patch('nomad.isolation.sandbox_available',return_value=True), \
+                 patch('nomad.isolation.docker_preflight',return_value={'ready':True}), \
                  patch('nomad.isolation.run_supervised',side_effect=[
                       result(0),result(1,b'Cannot connect to Docker daemon')]):
                 with self.assertRaises(IsolationUnavailable):

@@ -1,6 +1,6 @@
 """NOMAD: evidence-bounded transformation intelligence."""
 
-__version__ = "0.17.0"
+__version__ = "0.18.0"
 
 from .engine import NomadEngine, SolveResult
 from .learner import ContextualOperatorLearner

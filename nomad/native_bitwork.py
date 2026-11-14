@@ -27,12 +27,42 @@ def load_native():
     """Load the preserved, immutable runtime—not a reimplementation of BGR."""
     if not (RUNTIME / 'bgr140' / 'engine.py').is_file():
         raise FileNotFoundError('BGR v1.4 source not vendored')
+    # Check bytes before importing executable vendored code. The manifest is a
+    # local integrity anchor, not an authenticated signature against a host
+    # administrator who can replace both the sources and the manifest.
+    verified_runtime_identity()
+    runtime_root = RUNTIME.resolve()
+    namespaces = {p.name for p in RUNTIME.iterdir() if p.is_dir() and p.name.startswith('bgr')}
+    for name, module in tuple(sys.modules.items()):
+        if name.split('.')[0] in namespaces and module is not None:
+            origin = getattr(module, '__file__', None)
+            if origin is None or not Path(origin).resolve().is_relative_to(runtime_root):
+                raise RuntimeError('preloaded BGR module is outside preserved runtime: ' + name)
     if str(RUNTIME) not in sys.path:
         sys.path.insert(0, str(RUNTIME))
     m = importlib.import_module('bgr140')
     if not hasattr(m, 'GovernedBitworkV14'):
         raise RuntimeError('wrong BGR release')
+    if not Path(m.__file__).resolve().is_relative_to(runtime_root):
+        raise RuntimeError('BGR import is outside preserved runtime')
     return m.GovernedBitworkV14
+
+
+def verified_runtime_identity() -> dict:
+    """Read-only verification of every entry in the original runtime manifest."""
+    manifest = RUNTIME / 'MANIFEST.sha256'
+    checked = 0
+    for line in manifest.read_text(encoding='utf-8').splitlines():
+        expected, relative = line.split('  ', 1)
+        path = RUNTIME / relative
+        if (not path.resolve().is_relative_to(RUNTIME.resolve()) or path.is_symlink()
+                or not path.is_file() or checksum(path) != expected):
+            raise ValueError('preserved BGR runtime integrity failure: ' + relative)
+        checked += 1
+    if not checked:
+        raise ValueError('empty BGR runtime manifest')
+    return {'runtime': 'bgr140.GovernedBitworkV14', 'manifest_sha256': checksum(manifest),
+            'verified_files': checked, 'authority': 'local_integrity_only'}
 
 
 def action_for_family(family: str) -> int:

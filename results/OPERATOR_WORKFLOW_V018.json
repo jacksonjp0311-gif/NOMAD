@@ -1,0 +1,44 @@
+{
+  "cloud_model_calls": 0,
+  "docker_installed_by_this_task": false,
+  "host_security_policy_changed": false,
+  "missing_image_demo": {
+    "exit_code": 3,
+    "source_executed": false,
+    "status": "HOLD"
+  },
+  "offline_source_install": {
+    "command": "NOMAD.cmd setup",
+    "exit_code": 0,
+    "status": "PASS"
+  },
+  "powershell_script_entry": {
+    "command": "powershell -File NOMAD.ps1 -Action setup",
+    "reason": "host execution policy blocks script files",
+    "status": "HOLD"
+  },
+  "resolution": "NOMAD.cmd and Python entry run without changing PowerShell policy",
+  "schema": "nomad.v018.operator-workflow.v1",
+  "trusted_demo": {
+    "command": "NOMAD.cmd trusted-demo",
+    "exit_code": 0,
+    "receipt": {
+      "attempts": 1,
+      "committed_sha256": "1a712a552285cedb0cdebcb8f1d28ba0f83f44b912400c0ad7065ae0c76a06ec",
+      "execution_scope": "generated trusted fixture on host; not containment",
+      "final_observations": 1,
+      "journal_head": "43e5b857f46a2e3098a6ea27b34ca6862b60b669309b6a371dcc1bb744d914e6",
+      "mission_id": "e5ab63a4b5fe03954f8bc7497a75644a",
+      "model_calls": 0,
+      "note": null,
+      "public_executions_recorded": 1,
+      "schema": "nomad.mission.summary.v1",
+      "scope": "trusted synthetic single-file repair only",
+      "status": "completed",
+      "task_id": "s9117-bin-0",
+      "witness_observations": 1
+    },
+    "status": "completed"
+  },
+  "wsl_installed_by_this_task": false
+}

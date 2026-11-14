@@ -6,7 +6,7 @@ import os
 import stat
 import zipfile
 
-from .isolation import UnsafeWorkspace
+from .isolation import UnsafeWorkspace, validate_source_name
 
 
 def extract_checked(archive: Path, destination: Path, *, max_files: int = 3000,
@@ -19,6 +19,7 @@ def extract_checked(archive: Path, destination: Path, *, max_files: int = 3000,
     entries=[]
     total=0
     paths=set()
+    spellings={}
     with zipfile.ZipFile(archive) as z:
         for item in z.infolist():
             name=item.filename
@@ -27,9 +28,18 @@ def extract_checked(archive: Path, destination: Path, *, max_files: int = 3000,
                 or '..' in path.parts or any(x in ('', '.') for x in path.parts)
                 or ':' in name or len(path.parts)>32):
                 raise UnsafeWorkspace('unsafe ZIP member path')
-            if name.rstrip('/') in paths:
+            for part in path.parts:
+                validate_source_name(part)
+            for depth in range(1, len(path.parts)+1):
+                prefix='/'.join(path.parts[:depth])
+                key=prefix.casefold()
+                if key in spellings and spellings[key]!=prefix:
+                    raise UnsafeWorkspace('case-colliding ZIP parent/member')
+                spellings[key]=prefix
+            normalized = name.rstrip('/').casefold()
+            if normalized in paths:
                 raise UnsafeWorkspace('duplicate ZIP member')
-            paths.add(name.rstrip('/'))
+            paths.add(normalized)
             unix_type=stat.S_IFMT(item.external_attr>>16)
             if unix_type not in (0, stat.S_IFREG, stat.S_IFDIR):
                 raise UnsafeWorkspace('nonregular ZIP member (including symlink) refused')
@@ -59,7 +69,8 @@ def extract_checked(archive: Path, destination: Path, *, max_files: int = 3000,
                         out.write(chunk)
                 if used!=item.file_size:
                     raise UnsafeWorkspace('mismatched ZIP member size')
-                os.chmod(target,0o444)
+                if os.name != 'nt':
+                    os.chmod(target,0o444)
         except Exception:
             import shutil
             shutil.rmtree(destination)

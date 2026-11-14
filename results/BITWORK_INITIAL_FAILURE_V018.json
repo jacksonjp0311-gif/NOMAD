@@ -1,0 +1,15 @@
+{
+  "schema": "nomad.platform.initial-integration-failure.v1",
+  "command": "py -3 -B -m unittest tests.test_platform_bitwork_v18 tests.test_mnemonic -v",
+  "tests_run": 20,
+  "errors": 3,
+  "error": "RuntimeError: observation pending",
+  "affected_tests": [
+    "test_native_manifest_and_real_predict_observe",
+    "test_native_reorders_actual_candidate_list_without_authority",
+    "test_saved_memory_tampering_and_duplicate_observation_rejected"
+  ],
+  "cause": "BGR predict reserves a pending observation; counterfactual scores incorrectly used two predicts on one model without an intervening observation.",
+  "correction": "Score each counterfactual action on a separate deep copy of the trained native predictor; do not invent observed outcomes or change the preserved BGR runtime.",
+  "historical_research_changed": false
+}

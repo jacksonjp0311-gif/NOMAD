@@ -72,12 +72,16 @@ def exclusive_owner(root: Path) -> Iterator[None]:
     with lock.open('a+b') as handle:
         if os.name == 'nt':
             import msvcrt
-            handle.seek(0)
-            if not handle.read(1):
-                handle.write(b'0')
-                handle.flush()
-            handle.seek(0)
             try:
+                # Reading byte zero can itself raise PermissionError while a
+                # different owner holds the Windows byte-range lock. Inspect
+                # file length without reading the locked range and normalize
+                # all lock-admission failures to the mission HOLD contract.
+                handle.seek(0, os.SEEK_END)
+                if handle.tell() == 0:
+                    handle.write(b'0')
+                    handle.flush()
+                handle.seek(0)
                 msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
             except OSError as ex:
                 raise MissionHold('mission already owned by another process') from ex

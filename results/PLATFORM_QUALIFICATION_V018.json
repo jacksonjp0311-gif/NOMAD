@@ -1,0 +1,193 @@
+{
+  "api_calls": 0,
+  "api_cost_usd": 0,
+  "cost_note": "No cloud model used. Hardware power and local electricity cost were not measured.",
+  "cpu_scope": "controller process only; excludes child process CPU",
+  "doctor": {
+    "local_image": null,
+    "native_containment": "HOLD",
+    "observed_at_utc": "2026-11-14T12:51:45.136378+00:00",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "policy": null,
+    "ready_for_untrusted_code": false,
+    "reason": "Run the native qualification suite with a reviewed local image; diagnostics grant no execution authority.",
+    "schema": "nomad.platform.doctor.v1",
+    "tools": {
+      "cargo": {
+        "available": true,
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 235,
+        "output": "cargo 1.98.1 (797e8a9bc 2026-08-05)",
+        "returncode": 0,
+        "status": "PASS",
+        "timed_out": false
+      },
+      "docker": {
+        "available": false,
+        "reason": "binary absent",
+        "status": "HOLD"
+      },
+      "git": {
+        "available": true,
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 186,
+        "output": "git version 2.55.0.windows.3",
+        "returncode": 0,
+        "status": "PASS",
+        "timed_out": false
+      },
+      "node": {
+        "available": true,
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 186,
+        "output": "v24.19.0",
+        "returncode": 0,
+        "status": "PASS",
+        "timed_out": false
+      },
+      "python": {
+        "available": true,
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 172,
+        "output": "Python 3.12.10",
+        "returncode": 0,
+        "status": "PASS",
+        "timed_out": false
+      },
+      "rustc": {
+        "available": true,
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 219,
+        "output": "rustc 1.98.1 (48a229cea 2026-09-01)",
+        "returncode": 0,
+        "status": "PASS",
+        "timed_out": false
+      }
+    },
+    "untrusted_host_fallback": false,
+    "version": "0.18.0",
+    "windows": {
+      "features": {
+        "available": true,
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 782,
+        "output": "The requested operation requires elevation.",
+        "returncode": 3,
+        "status": "HOLD",
+        "timed_out": false
+      },
+      "hardware": {
+        "available": true,
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 2280,
+        "output": "{\"manufacturer\":\"ASUSTeK COMPUTER INC.\",\"model\":\"ROG Flow Z13 GZ302EA_GZ302EA\",\"memory_bytes\":132766306304,\"hypervisor_present\":true,\"cpu\":\"AMD RYZEN AI MAX+ 395 w/ Radeon 8060S          \",\"virtualization_firmware\":true,\"os\":\"Microsoft Windows 11 Pro\",\"build\":\"26200\"}",
+        "returncode": 0,
+        "status": "PASS",
+        "timed_out": false
+      },
+      "wsl": {
+        "available": true,
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 156,
+        "output": "The Windows Subsystem for Linux is not installed. You can install by running 'wsl.exe --install'.\r\r\nFor more information please visit https://aka.ms/wslinstall",
+        "returncode": 50,
+        "status": "HOLD",
+        "timed_out": false
+      }
+    }
+  },
+  "electricity_cost_usd": null,
+  "energy_joules": null,
+  "native_containment": "HOLD",
+  "native_runtimes": {
+    "languages": {
+      "javascript": {
+        "elapsed_s": 0.1206314000301063,
+        "expected": [
+          7,
+          23,
+          -1
+        ],
+        "language": "javascript",
+        "native_status": "passed",
+        "reason": "",
+        "source_sha256": "215c7746de64ae9a97595c75e17637daf72ef481aadbde52ad3a9541486cb570",
+        "status": "PASS",
+        "values": [
+          7,
+          23,
+          -1
+        ]
+      },
+      "python": {
+        "elapsed_s": 0.060438500018790364,
+        "expected": [
+          7,
+          23,
+          -1
+        ],
+        "language": "python",
+        "native_status": "passed",
+        "reason": "",
+        "source_sha256": "bb2029ee7913f6b35faea747fcf4e8e82817e6988db066cd36d4c7471df43a48",
+        "status": "PASS",
+        "values": [
+          7,
+          23,
+          -1
+        ]
+      },
+      "rust": {
+        "elapsed_s": 1.1451025999849662,
+        "expected": [
+          7,
+          23,
+          -1
+        ],
+        "language": "rust",
+        "native_status": "passed",
+        "reason": "",
+        "source_sha256": "de4f1e345c7ac97aebfdc775397790fc0fd953c7dcef2bd07bded7c2b87990c4",
+        "status": "PASS",
+        "values": [
+          7,
+          23,
+          -1
+        ]
+      }
+    },
+    "schema": "nomad.platform.runtime-smoke.v1",
+    "scope": "generated trusted arithmetic programs; not hostile-code containment"
+  },
+  "observed_at_utc": "2026-11-14T12:51:40.887572+00:00",
+  "schema": "nomad.platform.study.v1",
+  "tests": {
+    "controller_cpu_s": 39.03125,
+    "errors": 0,
+    "failures": 0,
+    "passed": 208,
+    "run": 212,
+    "skip_reasons": [
+      {
+        "reason": "POSIX exclusive owner test; Windows native acceptance is separate",
+        "test": "test_second_process_cannot_take_live_mission_ownership (test_mission_v16.MissionRuntimeV16Tests.test_second_process_cannot_take_live_mission_ownership)"
+      },
+      {
+        "reason": "HOLD: compact desktop package intentionally omits the full predecessor archive",
+        "test": "test_native_runtime_baseline_zip_preserved (test_recursion_v15.RecursionV15Tests.test_native_runtime_baseline_zip_preserved)"
+      },
+      {
+        "reason": "POSIX process-group test",
+        "test": "test_orphaned_descendant_is_cleaned (test_security_v17.IsolationContractTests.test_orphaned_descendant_is_cleaned)"
+      },
+      {
+        "reason": "Windows symlink privilege absent; native symlink gate remains HOLD",
+        "test": "test_symlink_escape_is_refused (test_security_v17.IsolationContractTests.test_symlink_escape_is_refused)"
+      }
+    ],
+    "skipped": 4,
+    "status": "PASS",
+    "wall_s": 9212.338824900042
+  },
+  "version": "0.18.0"
+}

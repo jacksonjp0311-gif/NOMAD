@@ -121,9 +121,21 @@ class EvidenceMemory:
         if bits is None:
             return False  # no fabricated positive or negative evidence
         act = action_digest(action_source)
-        event_id = digest([act, task.task_id, contract, originals, capture_epoch])
+        # Receipt identity allows a genuine contradiction in the same capture
+        # epoch to remain visible; duplicate receipt admission is still refused.
+        event_id = digest([act, task.task_id, contract, originals, capture_epoch,
+                           receipt.receipt_digest])
         if event_id in self._event_ids:
             raise ValueError('duplicate effect observation')
+        # A later capture epoch cannot turn one receipt into a fresh observation
+        # or refresh its TTL. A relabelled task is not independent evidence.
+        if any(e['evidence']['receipt_digest'] == receipt.receipt_digest or
+               (e['evidence']['action'] == act
+                and e['evidence']['contract'] == contract
+                and e['evidence']['source_digest'] == originals
+                and e['evidence']['changed'] == bool(receipt.changed))
+               for e in self.events):
+            raise ValueError('replayed effect observation')
         if len(self.events) >= self.max_events:
             raise ValueError('memory admission budget exceeded')
         evidence = {
@@ -160,12 +172,16 @@ class EvidenceMemory:
         by_task: dict[str, set[bool]] = {}
         for e in valid:
             by_task.setdefault(e['task_id'], set()).add(e['changed'])
+        support = min(len(by_task), len({e['source_digest'] for e in valid}),
+                      len({e['receipt_digest'] for e in valid}))
         if any(len(y) > 1 for y in by_task.values()):
-            return Prediction('abstain', len(by_task), 'contested', scope)
+            return Prediction('abstain', support, 'contested', scope)
         values = {next(iter(y)) for y in by_task.values()}
         if len(values) > 1:
-            return Prediction('abstain', len(by_task), 'contested', scope)
-        support = len(by_task)
+            return Prediction('abstain', support, 'contested', scope)
+        # Distinct labels alone do not establish independent source worlds.
+        # Keep the historical schema readable, but do not count a copied source
+        # repeatedly even when its task/receipt labels have been changed.
         if not values or support < self.min_tasks:
             return Prediction('abstain', support, 'insufficient', scope)
         return Prediction('impact' if True in values else 'no_impact', support, 'promoted', scope)
