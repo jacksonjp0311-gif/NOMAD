@@ -9,8 +9,8 @@ from unittest.mock import patch
 from nomad.platform import load_policy
 from nomad.platform_cli import main
 from scripts.build_release_v18 import build
-from scripts.release_files_v18 import files, sha
-from scripts.verify_package_v18 import verify
+from scripts.release_files_v18 import GATES, files, sha
+from scripts.verify_package_v18 import verify, verify_qualification_evidence
 
 
 class PlatformToolsTests(unittest.TestCase):
@@ -50,7 +50,7 @@ class PlatformToolsTests(unittest.TestCase):
             root.mkdir()
             for name, content in [('nomad/code.py', 'x=1\n'),
                                   ('vendor/BGR-v1.4.0-runtime.zip', 'fixture'),
-                                  ('results/GATES_V018.json', '{"publication":"HOLD"}')]:
+                                  (GATES, '{"publication":"HOLD"}')]:
                 path = root / name
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text(content)
@@ -70,6 +70,16 @@ class PlatformToolsTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'changed release bytes'):
                     verify(extracted)
 
+    def test_windows_case_aliases_do_not_export_local_state(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in ('.GIT/config', 'Work/scratch', 'Runs/private',
+                         'PLATFORM.LOCAL.JSON', 'nomad/__PYCACHE__/cache.PYC', 'nomad/code.py'):
+                path = root / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text('fixture')
+            self.assertEqual([name for name, _ in files(root)], ['nomad/code.py'])
+
     def test_packaging_refuses_secret_paths_and_included_output(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -79,6 +89,49 @@ class PlatformToolsTests(unittest.TestCase):
             with patch('scripts.build_release_v18.ROOT', root):
                 with self.assertRaisesRegex(ValueError, 'archive output'):
                     build(root / 'recursive.zip', 'source')
+
+    def test_release_cannot_advance_with_any_platform_gate_unresolved(self):
+        from scripts.release_files_v18 import MANIFEST
+        from scripts.build_release_v18 import canonical, manifest
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'vendor').mkdir()
+            (root / 'results').mkdir()
+            archive = root / 'vendor/BGR-v1.4.0-runtime.zip'
+            archive.write_bytes(b'fixture')
+            for unresolved in ('gate_A', 'gate_B', 'gate_C', 'gate_D'):
+                gates = {key: 'PASS' for key in ('publication', 'native_containment',
+                         'isolated_mission_recovery', 'gate_A', 'gate_B', 'gate_C', 'gate_D')}
+                gates[unresolved] = 'HOLD'
+                (root / GATES).write_text(json.dumps(gates))
+                with patch('scripts.build_release_v18.ROOT', root):
+                    (root / MANIFEST).write_bytes(canonical(manifest('source')))
+                with patch('scripts.verify_package_v18.BGR_SHA', sha(archive)), \
+                     patch('scripts.verify_package_v18.verify_lineage', return_value={'gate_D': 'PASS'}):
+                    with self.subTest(gate=unresolved), self.assertRaisesRegex(ValueError, 'publication gate HOLD'):
+                        verify(root, require_release=True)
+
+    def test_summary_pass_cannot_override_native_hold_receipt(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / 'results/native.json'
+            path.parent.mkdir()
+            path.write_text(json.dumps({'schema': 'nomad.native-isolation-qualification.v18',
+                                        'native_containment_gate': 'HOLD', 'status': 'HOLD'}))
+            name, checksum = 'results/native.json', sha(path)
+            gates = {'gate_A': 'PASS', 'publication': 'PASS',
+                     'qualification_evidence': {'gate_A': {'path': name, 'sha256': checksum}}}
+            with self.assertRaisesRegex(ValueError, 'unresolved receipt for gate_A'):
+                verify_qualification_evidence(root, gates, {name: checksum})
+            path.write_text(json.dumps({'schema': 'nomad.native-isolation-qualification.v18',
+                                        'native_containment_gate': 'PASS', 'status': 'PASS', 'cases': []}))
+            checksum = sha(path)
+            gates['qualification_evidence']['gate_A']['sha256'] = checksum
+            with self.assertRaisesRegex(ValueError, 'native receipt is incomplete or stale'):
+                verify_qualification_evidence(root, gates, {name: checksum})
+            path.write_text('{}')
+            with self.assertRaises(ValueError):
+                verify_qualification_evidence(root, gates, {name: sha(path)})
 
 
 if __name__ == '__main__':

@@ -1,0 +1,121 @@
+{
+  "baseline_validation": {
+    "controller_cpu_s": 34.3125,
+    "errors": 0,
+    "failures": 0,
+    "passed": 215,
+    "run": 219,
+    "skip_reasons": [
+      {
+        "reason": "POSIX exclusive owner test; Windows native acceptance is separate",
+        "test": "test_second_process_cannot_take_live_mission_ownership (test_mission_v16.MissionRuntimeV16Tests.test_second_process_cannot_take_live_mission_ownership)"
+      },
+      {
+        "reason": "HOLD: compact desktop package intentionally omits the full predecessor archive",
+        "test": "test_native_runtime_baseline_zip_preserved (test_recursion_v15.RecursionV15Tests.test_native_runtime_baseline_zip_preserved)"
+      },
+      {
+        "reason": "POSIX process-group test",
+        "test": "test_orphaned_descendant_is_cleaned (test_security_v17.IsolationContractTests.test_orphaned_descendant_is_cleaned)"
+      },
+      {
+        "reason": "Windows symlink privilege absent; native symlink gate remains HOLD",
+        "test": "test_symlink_escape_is_refused (test_security_v17.IsolationContractTests.test_symlink_escape_is_refused)"
+      }
+    ],
+    "skipped": 4,
+    "slowest_tests": [
+      {
+        "test": "test_release_study_gate (test_world_model.WorldModelTests.test_release_study_gate)",
+        "wall_s": 8.43696879997151
+      },
+      {
+        "test": "test_development_study_smoke (test_inquiry.InquiryTests.test_development_study_smoke)",
+        "wall_s": 8.070730999985244
+      },
+      {
+        "test": "test_restart_seven_interruption_boundaries (test_mission_v16.MissionRuntimeV16Tests.test_restart_seven_interruption_boundaries)",
+        "wall_s": 7.813521199976094
+      },
+      {
+        "test": "test_rollback_reconciliation (test_mission_v16.MissionRuntimeV16Tests.test_rollback_reconciliation)",
+        "wall_s": 6.7951719999546185
+      },
+      {
+        "test": "test_world_model_localizes_unseen_filenames (test_world_model.WorldModelTests.test_world_model_localizes_unseen_filenames)",
+        "wall_s": 2.640764700016007
+      },
+      {
+        "test": "test_terminal_replay_does_no_extra_work (test_mission_v16.MissionRuntimeV16Tests.test_terminal_replay_does_no_extra_work)",
+        "wall_s": 2.253767600050196
+      },
+      {
+        "test": "test_final_holdout_can_reject_witness_positive (test_mission_v16.MissionRuntimeV16Tests.test_final_holdout_can_reject_witness_positive)",
+        "wall_s": 1.7909721999894828
+      },
+      {
+        "test": "test_generated_heldout_study (test_mnemonic.MnemonicTests.test_generated_heldout_study)",
+        "wall_s": 1.7735428999876603
+      },
+      {
+        "test": "test_no_native_rust_claim_without_compiler (test_transcend_v13.TranscendTests.test_no_native_rust_claim_without_compiler)",
+        "wall_s": 1.6046709999791346
+      },
+      {
+        "test": "test_physical_multifile_unittest_integration (test_world_model.WorldModelTests.test_physical_multifile_unittest_integration)",
+        "wall_s": 1.554851500026416
+      }
+    ],
+    "status": "PASS",
+    "wall_s": 76.57430530001875
+  },
+  "default_branch": "main",
+  "development_branch_present_before_push": false,
+  "github_actions": {
+    "check_conclusions": {
+      "verify (ubuntu-latest, 3.11)": "cancelled",
+      "verify (ubuntu-latest, 3.12)": "failure",
+      "verify (windows-latest, 3.11)": "failure",
+      "verify (windows-latest, 3.12)": "failure"
+    },
+    "reason": "GitHub reports recent account payments failed or spending limit needs increasing.",
+    "run_id": 43599441154,
+    "software_test_result": "NOT_RUN",
+    "status": "BLOCKED_BEFORE_JOBS_STARTED"
+  },
+  "initial_worktree": "clean before baseline rerun; recorded source unchanged during baseline tests",
+  "local_branch": "v0.18-platform",
+  "local_branches_before_qualification_commit": [
+    "baseline-v0.17.0 d1514f5 Preserve original NOMAD v0.17.0 desktop source",
+    "* v0.18-platform   5851566 Preserve sealed research bytes across Windows Git checkouts"
+  ],
+  "local_history_before_qualification_commit": [
+    "5851566 (HEAD -> v0.18-platform, origin/main, origin/HEAD) Preserve sealed research bytes across Windows Git checkouts",
+    "ccd4afc Implement NOMAD v0.18 platform engineering snapshot with explicit HOLD gates",
+    "d1514f5 (baseline-v0.17.0) Preserve original NOMAD v0.17.0 desktop source"
+  ],
+  "local_tags": [],
+  "local_vs_initial_remote_main_divergence": "0\t0",
+  "main_merge_authorized": false,
+  "observed_at_utc": "2026-11-14T14:10:45.644122+00:00",
+  "permissions": {
+    "admin": true,
+    "maintain": true,
+    "pull": true,
+    "push": true,
+    "triage": true
+  },
+  "planned_sync": "tested v0.18-platform only; no force push, no visibility change",
+  "private": true,
+  "release_publication_authorized": false,
+  "remote_branches_before_qualification_push": {
+    "main": "58515665dcccfdaa1c046907b51189a19e48c5aa"
+  },
+  "remote_releases": [],
+  "remote_tags": [],
+  "remote_url": "https://github.com/jacksonjp0311-gif/NOMAD.git",
+  "reported_commit_exists": true,
+  "reported_engineering_commit": "58515665dcccfdaa1c046907b51189a19e48c5aa",
+  "repository": "jacksonjp0311-gif/NOMAD",
+  "schema": "nomad.repository-reconciliation.v18"
+}

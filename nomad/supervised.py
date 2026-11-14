@@ -65,11 +65,16 @@ def _terminate_tree(process: subprocess.Popen) -> str:
 
 def run_supervised(argv: Sequence[str], *, cwd: Path, timeout_s: float,
                    env: Mapping[str, str] | None = None, max_output_bytes: int = 1_048_576,
-                   discard_output: bool = False) -> ProcessResult:
-    if not argv or not all(isinstance(v, str) and v and '\x00' not in v for v in argv):
+                   discard_output: bool = False, windows_memory_mib: int = 1024,
+                   windows_max_processes: int = 64) -> ProcessResult:
+    if isinstance(argv, (str, bytes)) or not argv or not all(isinstance(v, str) and v and '\x00' not in v for v in argv):
         raise ValueError('command must be a nonempty argument vector')
-    if not math.isfinite(timeout_s) or timeout_s <= 0 or timeout_s > 120 or not (0 <= max_output_bytes <= 4_194_304):
+    if (type(timeout_s) not in (int, float) or not math.isfinite(timeout_s)
+            or not 0 < timeout_s <= 120 or type(max_output_bytes) is not int
+            or not 0 <= max_output_bytes <= 4_194_304):
         raise ValueError('execution limits outside bounded range')
+    if os.name != 'nt' and (windows_memory_mib != 1024 or windows_max_processes != 64):
+        raise ValueError('Windows Job budgets cannot be enforced on this platform')
     if not cwd.is_dir():
         raise ValueError('execution cwd must exist')
     started = time.monotonic()
@@ -77,7 +82,8 @@ def run_supervised(argv: Sequence[str], *, cwd: Path, timeout_s: float,
     child_env = minimal_env() if env is None else dict(env)
     if os.name == 'nt':
         from .windows_job import launch_in_job
-        process, job = launch_in_job(argv, cwd=cwd, env=child_env)
+        process, job = launch_in_job(argv, cwd=cwd, env=child_env,
+                                     memory_mib=windows_memory_mib, max_processes=windows_max_processes)
     else:
         process = subprocess.Popen(list(argv), cwd=str(cwd), env=child_env,
                                    stdin=subprocess.DEVNULL, stdout=subprocess.PIPE,

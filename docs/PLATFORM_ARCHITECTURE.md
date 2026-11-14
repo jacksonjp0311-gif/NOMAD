@@ -17,20 +17,20 @@ These components and their earlier research results remain in the repository. Th
 | Component | v0.18 isolated mission integration | Boundary |
 |---|---|---|
 | Original native BGR/Bitwork | `NativeDecisionRanker` can rank public-correct proposals through the preserved runtime. | Ranking only. No eligible evidence means stable cold ordering. |
-| RESONANCE | Preserved implementation and inherited tests. GENESIS retains its existing Bitwork failure encoding. | Full RESONANCE observation fusion is not wired into the isolated adapter. |
-| WORLD MODEL | Preserved repository graph and localization research. | The operator supplies the target file; isolated multi-module localization remains HOLD. |
-| INQUIRY | Preserved public-probe selection and evidence contracts. | The new adapter uses a fixed public test command; isolated adaptive probes remain HOLD. |
+| RESONANCE | The existing encoder fuses bound observations produced by the bounded arithmetic interpreter. | These are model observations, not a host execution or native containment result. |
+| WORLD MODEL | Existing AST/graph sensors and `RepositoryWorldModel.score` inspect supported modules; verified prior missions supply learned signatures. | The current public API resolves one arithmetic leaf. Competing multi-file fault localization remains HOLD. |
+| INQUIRY | Existing `choose_probe` decides whether the public-suite query has positive expected utility; `_update` records the posterior after a bound baseline observation. | An empty likelihood model correctly declines discretionary probes. The current singleton menu still needs mandatory baseline validation; useful adaptive probe selection is not demonstrated. |
 | GENESIS | The existing bounded synthesizer constructs expressions from public examples. Existing AST transformations provide additional proposals. | No challenge/final input enters synthesis or ranking. |
 | Execution | `isolation.run_isolated` executes repository tests through Docker only. | Missing backend, preflight or cleanup proof means refusal/HOLD, never host fallback. |
 | WITNESS | The original `Witness` consumes independently recomputed public and private observations. | A bounded arithmetic interpreter supplies observations without executing repository code. |
-| MNEMONIC | Existing scoped memory, expiry, contradiction handling and skill-admission boundaries are retained. | The new mission does not automatically promote its observation into MNEMONIC skills. |
-| Learning | A completed mission persists one content-bound observation in `learning.json`. | Replay reuses that observation. It is not multiple independent tasks or a general skill. |
+| MNEMONIC | Verified missions admit an existing `ChangeReceipt` into `EvidenceMemory`; later missions use scoped recall to rank public-correct proposals. | Memory predicts effects only. Stale, replayed or contradictory cells cannot authorize acceptance or test skipping. |
+| Learning | One append-only admission can rebuild existing world, public-probe and native Bitwork models for later distinct tasks. | Replay does not refresh expiry or increase support. No automatic general skill promotion is enabled. |
 
-The older WORLD MODEL and INQUIRY execution helpers run explicitly trusted fixtures on the host. Routing an unfamiliar repository through those helpers would bypass the new isolation boundary. Integration requires a new isolated adapter and qualification, rather than a call added merely to complete the diagram.
+The older WORLD MODEL and INQUIRY execution helpers run explicitly trusted fixtures on the host. The platform reuses their pure graph, scoring and query algorithms and never calls their host repository executors. Its new RESONANCE observation input also avoids the legacy fixture executor. The recorded world/probe posterior is diagnostic in this bounded public-interface scope; it does not yet choose between competing multi-file repairs. Component calls alone are not evidence of a localization or probe-efficiency advantage.
 
 ## Supported repository contract
 
-`nomad.platform_mission` currently repairs one operator-selected Python file containing exactly one `solve(x, y)` function with a single bounded integer-arithmetic return expression. It rejects imports, decorators, default arguments, annotations, arbitrary calls and unsupported syntax in that target. The rest of the admitted repository may contain public tests, but NOMAD does not import or execute those files while planning.
+`nomad.platform_mission` discovers supported top-level arithmetic modules by parsing the source and public test imports. It can resolve a public module that transparently re-exports `solve` from an arithmetic leaf. Ambiguous public APIs require an explicit `entry_module`; an optional target must agree with that public interface. The repaired leaf contains exactly one `solve(x, y)` function with a single bounded integer-arithmetic return expression. Imports, decorators, default arguments, annotations, arbitrary calls and unsupported syntax are rejected in that leaf. Other admitted modules and tests are parsed or copied without being imported or executed on the host.
 
 The source directory must be separate from the mission directory and pass source admission. Git metadata, credential-like files, links, Windows reparse points, hardlinks, unsafe names and quota violations are refused. Use a reviewed source-only export rather than a working checkout containing `.git` or environment files. The original source directory is never edited.
 
@@ -48,55 +48,69 @@ The accepted claim is limited to this arithmetic contract and the observed publi
 | `runtime-smoke` | Runs controlled native language smoke programs, separately from untrusted isolation. |
 | `trusted-demo` | Runs the preserved generated CodeWorld fixture with explicit trusted host execution. |
 | `dry-run --source PATH` | Admits and hashes a source snapshot without executing it. |
-| `init --source PATH --root PATH --contract FILE` | Freezes source, contract, policy, runtime identity and the public proposal. |
+| `init --source PATH --root PATH --contract FILE` | Freezes source, contract, policy, runtime identity and public planning models. No proposal has yet been synthesized. |
 | `run --root PATH` | Continues the mission through isolation and independent contract checks. |
 | `status --root PATH` | Checks persisted identities and reports state. |
 | `recover --root PATH` | Confirms disposal of a recorded ambiguous container; does not accept a missing result. |
 | `isolated-demo --root PATH` | Creates a controlled fixture and attempts the same Docker-only mission path. |
 
-Use global `--config FILE` or `--image REVIEWED_REFERENCE` before the subcommand. An image must be reviewed, present locally and pinned by its real registry digest. The platform does not fetch images or install Docker. `init` and `isolated-demo` offer `--ranker cold|native|frequency|shuffled`; these modes do not relax verification.
+Use global `--config FILE` or `--image REVIEWED_REFERENCE` before the subcommand. An image must be reviewed, present locally and pinned by its real registry digest. The platform does not fetch images or install Docker. `init` and `isolated-demo` offer `--ranker cold|native|frequency|shuffled`, `--memory-root PATH`, `--epoch N`, `--no-adaptive`, `--execution-budget N` and `--max-eval N`. These modes do not relax verification. Epochs are explicit, monotonic evidence time, not the count of receipt replays.
 
 The Python API is:
 
 ```python
 initialize(root, source, *, goal_text, public, challenge, final,
-           policy, target="solution.py", max_eval=65000, ranker=None)
+           policy, target=None, max_eval=65000, ranker=None,
+           entry_module=None, memory_root=None, capture_epoch=0,
+           adaptive_enabled=True, max_executions=4)
 run(root, *, interrupt_at=None)
 inspect(root)
 recover(root)
+resolved_goal(root)
+read_memory_ranker(memory_root, *, mode="native", now_epoch=0)
 ```
 
-`policy` is a validated `SandboxPolicy`. An optional ranker for this adapter uses the explicit `genesis-vs-ast` action schema. Historical relational-edit observations are not interchangeable with evidence about this schema. The CLI creates an empty scoped ranker; it does not silently import an unverified prior. Without eligible observations, selecting `native` does not imply a learned ordering or an advantage.
+`policy` is a validated `SandboxPolicy`. The serializable ranker uses the explicit `genesis-vs-ast` action schema. Historical relational-edit observations are not interchangeable with evidence about this schema. A supplied shared memory store is checked before its accepted observations rebuild a scoped ranker. Without eligible observations, effective ranking remains cold even when the native runtime runs diagnostic predictions. `resolved_goal` reads the immutable origin plus the proposal sealed in the journal; raw `goal.json` deliberately retains `candidate: null`.
 
 ## Mission storage and transitions
 
 ```text
 mission/
-  goal.json       pinned goal, policy, proposal and runtime/source identities
+  goal.json       immutable goal, policy and runtime/source identities
   sealed.json     challenge/final examples; never in the worker mount
+  planning_memory.json  frozen existing EvidenceMemory snapshot
+  planning_ranker.json  frozen existing native-ranker snapshot
   baseline/       admitted original repository bytes
   workspace/      disposable candidate repository; committed snapshot stays here
   events.jsonl    fsynced, hash-chained transitions
   mission.lock   operating-system ownership lock
   effects/        separate fenced external-effect ledger
   learning.json  one verified observation, written only after local commit
+  mnemonic/      local admission journal when no shared memory root is supplied
 ```
 
 Normal progression is:
 
 ```text
-PLATFORM_CREATED → PATCH_PLANNED → PATCH_APPLIED
+PLATFORM_CREATED → PROBE_DISPATCHED → PROBE_RESULT
+  → PROPOSAL_SELECTED → PATCH_PLANNED → PATCH_APPLIED
   → EXECUTION_DISPATCHED → PUBLIC_RESULT → WITNESS_RESULT
   → FINAL_RESULT → COMMITTED → LEARNED
 ```
 
-A negative public, WITNESS or final observation restores the original target and records `REVERTED`. No public-correct proposal leads to `EXHAUSTED`. Here, `COMMITTED` means accepting the mission's local candidate snapshot. It does not create a Git commit, merge, push, publish or deploy.
+A bound baseline probe precedes actual GENESIS synthesis and proposal selection. A negative candidate-public, WITNESS or final observation restores the original target and records `REVERTED`. No public-correct proposal leads to `EXHAUSTED`. Here, `COMMITTED` means accepting the mission's local candidate snapshot. It does not create a Git commit, merge, push, publish or deploy.
 
 The controller uses the existing OS ownership lock and validates every journal transition. Original-source, candidate, source-manifest, private-evidence and runtime-source identities prevent stale artifacts from silently continuing after changes. Windows fixture materialization writes exact UTF-8 bytes so newline conversion cannot invalidate the planned hash. Windows byte-range lock contention becomes a mission HOLD.
 
 Each dispatch gets a fresh container name persisted before launch. Identical semantic missions in separate directories do not share cleanup ownership. An execution receipt must match that name, image digest, command, source snapshot hash, file count and byte count. Exit status, timeout, cleanup and pass fields must agree. WITNESS receipts and final observations are checked again during recovery.
 
 If the controller dies after dispatch but before recording an outcome, the next `run` refuses to guess. `recover` asks Docker to confirm disposal of only that recorded container. If confirmed, the lost result is discarded and the next run performs a new experiment. If disposal is uncertain or Docker is unavailable, recovery remains HOLD. Recorded final results and learning observations are reused rather than counted again.
+
+This rule applies to baseline and candidate dispatches. The persisted execution budget includes both and any recovery retries. A normal successful mission uses two container experiments. Repeated recovery cannot silently create an unlimited execution budget.
+
+Persistent learning uses the existing journal, `ChangeReceipt`, `EvidenceMemory`, world model, probe-likelihood model and native ranker. It adds no parallel intelligence framework. Admissions require a supported WITNESS receipt, a bound final observation and exact public-execution identity. Source/task/action replay does not renew its capture epoch. Planning pins the observed memory head and freezes its models; later appends are allowed, but missing or replaced history cannot be silently recreated. Cross-mission models count distinct stored tasks/sources rather than each candidate action as a new independent task. Experimental independence still requires a properly designed corpus.
+
+Private example rows are not copied into shared learning. The store retains public contracts, source identities and integrity-bound WITNESS/final receipts. MNEMONIC effect promotion is a prediction status within its existing scope; it is not a coding skill permission or authority to skip independent final checks.
 
 The external-effect ledger must exist and be replay-safe before a mission advances. Unknown remote effects require independent authoritative reconciliation. This adapter adds no irreversible external-action integration and makes no distributed exactly-once claim.
 
@@ -110,8 +124,8 @@ Private arithmetic checks use a separate observer implementation within the trus
 
 ## Verification and remaining integration
 
-`tests/test_platform_mission_v18.py` covers interruption points, ambiguous dispatch recovery, receipt substitution, stale runtime/evidence, private contradictions, duplicate observations, source preservation, Windows ownership, links and portable snapshot ordering. Docker mocks test controller contracts only. Native process tests and native containment experiments are reported separately.
+`tests/test_platform_mission_v18.py` covers interruption points, ambiguous dispatch recovery, receipt substitution, stale runtime/evidence, private contradictions, duplicate observations, source preservation, Windows ownership, links and portable snapshot ordering. `tests/test_pipeline_qualification_v18.py` adds real parser/learner integration with the host repository executors explicitly forbidden, deferred proposal ordering, distinct-task memory, replay/expiry, lost-history faults and bounded recovery. Docker receipt doubles test controller contracts only. Native process tests and native containment experiments are reported separately.
 
 The inherited Catalogue false-positive remains a permanent regression: incomplete public test success must not authorize a namespace-breaking repair. Platform work does not revise the negative v0.14 transfer result or turn a bounded native Bitwork benchmark into proof of general coding improvement.
 
-The next work is in [NEXT_ITERATION.md](NEXT_ITERATION.md): native containment and interrupted isolated missions, independently validated external repairs, and isolated WORLD MODEL/INQUIRY integration. Automatic cross-mission MNEMONIC skill admission remains HOLD until its evidence and independence gates are demonstrated.
+The next work is in [NEXT_ITERATION.md]: native containment and interrupted isolated missions, independently validated external repairs, and useful WORLD MODEL/INQUIRY decisions beyond the current single-leaf interface. Cross-mission effect-memory integration is implemented and contract-tested; actual isolated qualification and automatic general skill admission remain HOLD.

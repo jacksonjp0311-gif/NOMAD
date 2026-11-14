@@ -58,6 +58,9 @@ class _ProcessIds(ctypes.Structure):
 
 class WindowsJob:
     def __init__(self, *, memory_mib: int = 1024, max_processes: int = 64):
+        if (type(memory_mib) is not int or not 64 <= memory_mib <= 4096
+                or type(max_processes) is not int or not 2 <= max_processes <= 256):
+            raise ValueError('Windows Job budget requires 64..4096 MiB and 2..256 processes')
         if os.name != 'nt':
             raise JobUnavailable('Windows Job Objects require Windows')
         self.api = ctypes.WinDLL('kernel32', use_last_error=True)
@@ -145,8 +148,12 @@ class WindowsJob:
                 'cpu_user_s': accounting.TotalUserTime / 10_000_000,
                 'cpu_kernel_s': accounting.TotalKernelTime / 10_000_000,
                 'peak_job_commit_bytes': limits.PeakJobMemoryUsed,
+                'peak_job_memory_counter_bytes': limits.PeakJobMemoryUsed,
+                'peak_counter_scope': 'native high-water counter; not an atomic measurement of committed bytes',
                 'total_processes': accounting.TotalProcesses,
-                'active_processes_at_cleanup': accounting.ActiveProcesses}
+                'active_processes_at_cleanup': accounting.ActiveProcesses,
+                'configured_job_memory_bytes': limits.JobMemoryLimit,
+                'configured_active_process_limit': limits.BasicLimitInformation.ActiveProcessLimit}
 
 
 _LAUNCHER = '''import json,subprocess,sys
@@ -162,8 +169,9 @@ raise SystemExit(result.returncode)
 '''
 
 
-def launch_in_job(argv: Sequence[str], *, cwd: Path, env: Mapping[str, str]) -> tuple[subprocess.Popen, WindowsJob]:
-    job = WindowsJob()
+def launch_in_job(argv: Sequence[str], *, cwd: Path, env: Mapping[str, str],
+                  memory_mib: int = 1024, max_processes: int = 64) -> tuple[subprocess.Popen, WindowsJob]:
+    job = WindowsJob(memory_mib=memory_mib, max_processes=max_processes)
     process = None
     try:
         # -I excludes the source directory/user site and -S disables site startup.

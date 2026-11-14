@@ -1,0 +1,13 @@
+{
+  "schema": "nomad.intelligence-qualification.v18.initial-integration-failure",
+  "command": "py -3 -B -m unittest tests.test_experiment_qualification_v18 -v",
+  "tests_run": 11,
+  "failures": 1,
+  "errors": 0,
+  "test": "test_changed_source_or_protocol_invalidates_frozen_plan",
+  "cause": "The protocol dictionary shared mutable nested references with its expected arm and budget constants; a caller could change both the proposed plan and the validation baseline in memory.",
+  "correction": "Return a detached canonical copy of all preregistration constants before constructing or comparing a plan.",
+  "repository_trials_executed": 0,
+  "private_holdout_contracts_opened": false,
+  "historical_results_modified": false
+}

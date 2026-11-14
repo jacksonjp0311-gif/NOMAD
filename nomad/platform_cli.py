@@ -33,6 +33,12 @@ def main(argv: list[str] | None = None) -> int:
     demo = commands.add_parser('isolated-demo')
     demo.add_argument('--root', type=Path, required=True)
     demo.add_argument('--ranker', choices=('cold', 'native', 'frequency', 'shuffled'), default='native')
+    for mission_parser in (init, demo):
+        mission_parser.add_argument('--memory-root', type=Path, help='shared trusted append-only learning store')
+        mission_parser.add_argument('--epoch', type=int, default=0, help='monotonic evidence epoch for expiry')
+        mission_parser.add_argument('--no-adaptive', action='store_true', help='disable world/memory preference; retain verification')
+        mission_parser.add_argument('--execution-budget', type=int, default=4, help='total baseline/candidate dispatch budget including recovery')
+        mission_parser.add_argument('--max-eval', type=int, default=65000, help='GENESIS evaluation budget')
     args = parser.parse_args(argv)
     try:
         policy = load_policy(args.config, args.image)
@@ -71,10 +77,12 @@ def main(argv: list[str] | None = None) -> int:
                     raise ValueError('contract exceeds size budget')
                 contract = json.loads(args.contract.read_text(encoding='utf-8'))
                 required = {'goal_text', 'public', 'challenge', 'final'}
-                if not isinstance(contract, dict) or not required <= set(contract) or set(contract) - required - {'target'}:
+                if not isinstance(contract, dict) or not required <= set(contract) or set(contract) - required - {'target', 'entry_module'}:
                     raise ValueError('invalid mission contract')
                 ranker = NativeDecisionRanker(args.ranker, action_schema='genesis-vs-ast')
-                report = initialize(args.root, args.source, policy=policy, ranker=ranker, **contract)
+                report = initialize(args.root, args.source, policy=policy, ranker=ranker,
+                    memory_root=args.memory_root, capture_epoch=args.epoch, adaptive_enabled=not args.no_adaptive,
+                    max_executions=args.execution_budget, max_eval=args.max_eval, **contract)
             else:
                 from .platform_mission import initialize, run
                 from .platform_bitwork import NativeDecisionRanker
@@ -93,7 +101,10 @@ def main(argv: list[str] | None = None) -> int:
                     initialize(args.root, source, goal_text='Make solve return the sum of its arguments',
                                public=rows([(1, 2), (3, 4)]), challenge=rows([(-5, 7), (0, 3)]),
                                final=rows([(11, -2), (-6, -9)]), policy=policy,
-                               ranker=NativeDecisionRanker(args.ranker, action_schema='genesis-vs-ast'))
+                               ranker=NativeDecisionRanker(args.ranker, action_schema='genesis-vs-ast'),
+                               memory_root=args.memory_root, capture_epoch=args.epoch,
+                               adaptive_enabled=not args.no_adaptive, max_executions=args.execution_budget,
+                               max_eval=args.max_eval)
                 report = run(args.root)
         print(json.dumps(report, indent=2, sort_keys=True))
         if args.action == 'runtime-smoke' and any(row['status'] != 'PASS' for row in report['languages'].values()):

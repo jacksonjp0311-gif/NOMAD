@@ -1,0 +1,50 @@
+{
+  "schema": "nomad.intelligence-qualification.v18.public-training-candidates",
+  "status": "DEVELOPMENT_PROVENANCE_ONLY_NOT_AN_EVALUATION_CORPUS",
+  "retrieved_from": "GitHub connected API, primary upstream issue and commit metadata",
+  "sources_executed": false,
+  "heldout_expected_results_opened": false,
+  "candidates": [
+    {
+      "repository": "https://github.com/rasterio/affine",
+      "issue_url": "https://github.com/rasterio/affine/issues/40",
+      "issue_title": "Incorrect computation in `itransform`",
+      "issue_created_at": "2018-12-20T01:23:23Z",
+      "issue_state_observed": "closed",
+      "upstream_bug_label_observed": true,
+      "reported_source_revision": "b125a6397c2a0ff4d7587a43b8678ee5f54765ed",
+      "fix_commit": "3d1a493ae070ec88c92bfc919e580fe25e65ac6f",
+      "fix_commit_url": "https://github.com/rasterio/affine/commit/3d1a493ae070ec88c92bfc919e580fe25e65ac6f",
+      "provenance": "An upstream user reported incorrect in-place transformation when off-diagonal terms are present; the upstream fix commit names issue 40.",
+      "known_exposure": "Repository and issue are public development information inspected in this session; never an unseen evaluation source.",
+      "adapter_status": "UNSUPPORTED: actual class method and mutable point sequence exceed the strict solve(x,y) arithmetic adapter.",
+      "source_snapshot_sha256": null,
+      "private_contract_sha256": null,
+      "qualification": "NOT_RUN"
+    },
+    {
+      "repository": "https://github.com/more-itertools/more-itertools",
+      "issue_url": "https://github.com/more-itertools/more-itertools/issues/832",
+      "issue_title": "distinct_permutations with incomparable items",
+      "issue_created_at": "2024-04-27T08:05:45Z",
+      "issue_state_observed": "closed",
+      "upstream_bug_label_observed": false,
+      "reported_source_revision": null,
+      "fix_commit": "87b3f1768ed3a893f9b396bb3d0fad1bf5824638",
+      "fix_commit_url": "https://github.com/more-itertools/more-itertools/commit/87b3f1768ed3a893f9b396bb3d0fad1bf5824638",
+      "provenance": "An upstream user reported that distinct permutations reject mixed incomparable elements; the associated implementation commit links issue 832.",
+      "known_exposure": "Issue and fix metadata are public development information inspected in this session; never an unseen evaluation source.",
+      "adapter_status": "UNSUPPORTED: generator and sequence semantics exceed the strict solve(x,y) arithmetic adapter.",
+      "source_snapshot_sha256": null,
+      "private_contract_sha256": null,
+      "qualification": "NOT_RUN"
+    }
+  ],
+  "limitations": [
+    "Issue existence and associated fix metadata establish public provenance leads, not a reproduced NOMAD repair.",
+    "No downloaded repository code was executed; no test suite or private expected result was evaluated.",
+    "An independent curator must supply exact buggy source snapshots, licenses, public contracts and private contract commitments.",
+    "Do not wrap or simplify these tasks and then claim the original upstream bug was solved.",
+    "No candidate in this inspected catalogue may be assigned to the decisive evaluation split."
+  ]
+}

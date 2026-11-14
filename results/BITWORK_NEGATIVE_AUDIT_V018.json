@@ -1,0 +1,63 @@
+{
+  "diagnosis": [
+    "Native probabilities are higher for both actions; this hurts calibration on failure-heavy recorded evaluation events.",
+    "Both controls produce the same candidate order and observed public success rank; this corpus demonstrates no native search-order gain.",
+    "Eight training events and a two-action encoding do not establish general repository reasoning.",
+    "The adaptive model dynamics and encoding remain causal hypotheses; this audit does not isolate their contributions."
+  ],
+  "fresh_repository_executions": 0,
+  "groups": [
+    {
+      "action": 0,
+      "evaluation_events": 5,
+      "evaluation_public_successes": 2,
+      "mean_logloss": {
+        "frequency": 0.6730116670092564,
+        "native": 0.6738238133143815
+      },
+      "observed_public_success_rate": 0.4,
+      "predicted_probabilities": {
+        "frequency": 0.4,
+        "native": 0.41984448547173864
+      },
+      "training_events": 3,
+      "training_public_successes": 1,
+      "weighted_excess_native_logloss": 0.00020303657628126248
+    },
+    {
+      "action": 1,
+      "evaluation_events": 15,
+      "evaluation_public_successes": 0,
+      "mean_logloss": {
+        "frequency": 0.3364722366212129,
+        "native": 0.4239426987528941
+      },
+      "observed_public_success_rate": 0.0,
+      "predicted_probabilities": {
+        "frequency": 0.2857142857142857,
+        "native": 0.3455386177121732
+      },
+      "training_events": 5,
+      "training_public_successes": 1,
+      "weighted_excess_native_logloss": 0.0656028465987609
+    }
+  ],
+  "heldout_protocol_changed": false,
+  "identical_frequency_native_candidate_ordering": true,
+  "independent_arithmetic_check": "PASS",
+  "input_sha256_by_path": {
+    "experiments/PLAN_BITWORK_V018.json": "bd6e4413ca52c1aa7e890527b8cb17d59c988decdc5f3edf84d3e0fb61f70617",
+    "results/BITWORK_V018.json": "85832fb3fd4270eb1303c7ac23fbeb1bbb49c29df80e5ee6cb6e74fedde91f1c",
+    "results/FRONTIER_STUDY_V014.json": "00846555f1d061dfc6136a8a5cd8f0f94d4ee2edfedd97a139140d64f7118dd6"
+  },
+  "intelligence_advantage": "NOT_ESTABLISHED",
+  "native_excess_mean_logloss": 0.06580588317504221,
+  "native_runtime_rerun": false,
+  "original_results_modified": false,
+  "recomputed_mean_logloss": {
+    "frequency": 0.42060709421822373,
+    "native": 0.48641297739326594
+  },
+  "schema": "nomad.frozen-bitwork-posthoc-audit.v18",
+  "scope": "post hoc decomposition of original frozen public-trace predictions"
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "nomad.native-qualification-retained-failure.v18",
+  "status": "ERROR",
+  "test": "tests.test_native_qualification_v18.NativeResourceQualification.test_repeated_abrupt_owner_death_leaves_no_targets",
+  "iteration": 1,
+  "tests_run": 9,
+  "errors": 1,
+  "elapsed_s": 2.341,
+  "observation": "Target liveness assertion passed, but immediate TemporaryDirectory cleanup raised WinError 32, followed by WinError 5 during cleanup retry.",
+  "limitation_found": "The crash test tracked only the target PID and did not wait for every Job member, including the trusted launcher, before cleaning its directory.",
+  "next_check": "Record all live Job member PIDs immediately before controlled supervisor death; wait for every observed member to exit before directory cleanup. Do not suppress cleanup errors."
+}

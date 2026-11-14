@@ -44,8 +44,11 @@ def passing_execution(source, *, command, policy, container_name):
     assert not (source / 'effects').exists()
     assert container_name.startswith('nomad-')
     from nomad.platform_mission import _execution_identity
-    goal = json.loads((source.parent / 'goal.json').read_bytes())
-    return {**_execution_identity(goal, container_name),
+    from nomad.platform_mission import resolved_goal
+    goal = resolved_goal(source.parent)
+    from nomad.mission_runtime import digest
+    baseline = digest((source / goal['target']).read_bytes()) == goal['baseline'][goal['target']]
+    return {**_execution_identity(goal, container_name, baseline=baseline),
             'schema': 'nomad.isolated-test.v1', 'tests_passed': True,
             'container_cleanup_confirmed': True, 'returncode': 0, 'timed_out': False,
             'output_sha256': '0' * 64}
@@ -56,16 +59,19 @@ class PlatformMissionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             root, repo = fixture(td)
             goal = json.loads((root / 'goal.json').read_bytes())
-            self.assertGreater(goal['planning']['genesis']['candidates_evaluated'], 0)
+            self.assertIsNone(goal['candidate'])
+            self.assertEqual(goal['planning']['status'], 'awaiting_bound_public_probe')
             self.assertNotIn('challenge', goal)
             self.assertNotIn('final', goal)
             with patch('nomad.platform_mission.run_isolated', side_effect=passing_execution) as call:
                 result = run(root)
+                from nomad.platform_mission import resolved_goal
+                self.assertGreater(resolved_goal(root)['planning']['genesis']['candidates_evaluated'], 0)
                 self.assertEqual(result['status'], 'completed')
-                self.assertEqual(call.call_count, 1)
+                self.assertEqual(call.call_count, 2)
                 before = (root / 'events.jsonl').read_bytes()
                 self.assertEqual(run(root)['status'], 'completed')
-                self.assertEqual(call.call_count, 1)
+                self.assertEqual(call.call_count, 2)
                 self.assertEqual(before, (root / 'events.jsonl').read_bytes())
             self.assertEqual((repo / 'solution.py').read_bytes(), SOURCE.encode())
             learning = json.loads((root / 'learning.json').read_bytes())
@@ -86,13 +92,14 @@ class PlatformMissionTests(unittest.TestCase):
                     self.assertEqual(result['public_executions_recorded'], 1)
                     self.assertEqual(result['witness_observations'], 1)
                     self.assertEqual(result['final_observations'], 1)
-                    self.assertEqual(call.call_count, 1)
+                    self.assertEqual(call.call_count, 2)
 
     def test_unknown_dispatch_holds_until_cleanup_then_fresh_execution(self):
         with tempfile.TemporaryDirectory() as td:
             root, _ = fixture(td)
-            with self.assertRaises(InjectedInterruption):
-                run(root, interrupt_at='after_dispatch')
+            with patch('nomad.platform_mission.run_isolated', side_effect=passing_execution):
+                with self.assertRaises(InjectedInterruption):
+                    run(root, interrupt_at='after_dispatch')
             with patch('nomad.platform_mission.run_isolated') as execute:
                 with self.assertRaises(MissionHold):
                     run(root)
@@ -105,7 +112,7 @@ class PlatformMissionTests(unittest.TestCase):
             with patch('nomad.platform_mission.run_isolated', side_effect=passing_execution):
                 result = run(root)
                 self.assertEqual(result['status'], 'completed')
-                self.assertEqual(result['dispatches'], 2)
+                self.assertEqual(result['dispatches'], 3)
                 self.assertEqual(result['public_executions_recorded'], 1)
 
     def test_identical_missions_never_share_container_cleanup_identity(self):
@@ -117,8 +124,9 @@ class PlatformMissionTests(unittest.TestCase):
                 base.mkdir()
                 root, _ = fixture(base)
                 identities.append(json.loads((root / 'goal.json').read_bytes())['mission_id'])
-                with self.assertRaises(InjectedInterruption):
-                    run(root, interrupt_at='after_dispatch')
+                with patch('nomad.platform_mission.run_isolated', side_effect=passing_execution):
+                    with self.assertRaises(InjectedInterruption):
+                        run(root, interrupt_at='after_dispatch')
                 last = json.loads((root / 'events.jsonl').read_bytes().splitlines()[-1])
                 names.append(last['data']['container_name'])
             self.assertEqual(identities[0], identities[1])
@@ -153,7 +161,7 @@ class PlatformMissionTests(unittest.TestCase):
                     with self.assertRaises(InjectedInterruption):
                         run(root, interrupt_at=stop)
                     self.assertEqual(run(root)['status'], 'rejected')
-                    self.assertEqual(call.call_count, 1)
+                    self.assertEqual(call.call_count, 2)
 
     def test_tampered_private_evidence_journal_or_source_holds(self):
         for relative in ('sealed.json', 'events.jsonl', 'workspace/solution.py', 'baseline/solution.py'):
@@ -191,10 +199,12 @@ class PlatformMissionTests(unittest.TestCase):
             (repo / 'Zebra.txt').write_bytes(b'z')
             (repo / 'apple.txt').write_bytes(b'a')
             second = Path(td) / 'mission-second'
-            goal = initialize(second, repo, goal_text='Subtract', public=PUBLIC,
+            initialize(second, repo, goal_text='Subtract', public=PUBLIC,
                               challenge=CHALLENGE, final=FINAL, policy=SandboxPolicy(IMAGE))
             with patch('nomad.platform_mission.run_isolated', side_effect=passing_execution):
                 run(second)
+            from nomad.platform_mission import resolved_goal
+            goal = resolved_goal(second)
             snapshot = snapshot_source(second / 'workspace', Path(td) / 'snapshot', SandboxPolicy(IMAGE))
             self.assertEqual(snapshot.digest, _execution_identity(goal, 'nomad-' + '0' * 24)['snapshot_sha256'])
 
@@ -233,18 +243,17 @@ class PlatformMissionTests(unittest.TestCase):
                 self.assertFalse((Path(td) / 'mission').exists())
 
     def test_ranker_only_sees_candidates_and_public_planning(self):
-        class Ranker:
-            called = False
-            def rank(self, candidates, *, now_epoch):
-                self.called = True
-                return list(candidates)
-            def summary(self, *, now_epoch):
-                return {'mode': 'test', 'authority': 'ranking_only'}
-        ranker = Ranker()
+        from nomad.platform_bitwork import NativeDecisionRanker
+        from nomad.platform_mission import resolved_goal
+        ranker = NativeDecisionRanker('native', action_schema='genesis-vs-ast')
         with tempfile.TemporaryDirectory() as td:
             root, _ = fixture(td, ranker=ranker)
-            self.assertTrue(ranker.called)
-            self.assertEqual(json.loads((root / 'goal.json').read_bytes())['planning']['ranking']['authority'], 'ranking_only')
+            with patch('nomad.platform_mission.run_isolated', side_effect=passing_execution):
+                run(root)
+            plan = resolved_goal(root)['planning']
+            self.assertEqual(plan['ranking']['authority'], 'ranking_only')
+            self.assertNotIn('challenge', plan)
+            self.assertNotIn('final', plan)
 
     def test_stale_verifier_identity_holds_before_execution(self):
         with tempfile.TemporaryDirectory() as td:

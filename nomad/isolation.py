@@ -53,6 +53,10 @@ class SandboxPolicy:
     def validate(self) -> None:
         if not isinstance(self.image, str) or not IMAGE_RE.fullmatch(self.image):
             raise ValueError('sandbox image must be a trusted, digest-pinned reference')
+        if (type(self.timeout_s) not in (int, float) or type(self.cpus) not in (int, float)
+                or any(type(value) is not int for value in
+                       (self.memory_mib, self.pids_limit, self.max_files, self.max_total_bytes))):
+            raise ValueError('sandbox budgets require real numeric times/CPU and integer resource counts')
         if not (math.isfinite(self.timeout_s) and math.isfinite(self.cpus)
                 and 1 <= self.timeout_s <= 120 and 64 <= self.memory_mib <= 4096
                 and 0.1 <= self.cpus <= 4 and 8 <= self.pids_limit <= 256

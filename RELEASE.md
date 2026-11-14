@@ -1,15 +1,29 @@
-# NOMAD v0.18.0 — PLATFORM
+# NOMAD v0.18.0 — PLATFORM qualification
 
-Local engineering snapshot, November 14, 2026. **Publication and production HOLD.**
+Qualification follow-up, November 14, 2026. **All four platform gates HOLD;
+v0.19 and production not ready.** Version remains 0.18.0.
 
-This milestone adds native Windows process supervision and offline setup, source admission hardening, a durable Docker-only arithmetic mission adapter, native Bitwork ranking with evidence controls, reproducible packaging and explicit qualification receipts. The original intelligence architecture, historical negative results and Catalogue regression are preserved.
+The bounded mission now connects repository inspection, inquiry, deferred
+GENESIS/native BGR proposals, isolated execution, independent verification and
+durable learning under one mission identity. Windows limits/recovery checks,
+archive admission, evidence bindings and release gating were tightened.
 
-Final local validation: **219 tests, 215 passed, 4 explicit skips, no failures/errors**. Python, JavaScript and Rust generated programs ran on the ROG. Native Windows process and ownership tests passed. Docker and WSL were unavailable, so actual container containment and isolated real-repository repair remain HOLD. Native BGR lost to frequency-only prediction on the retrospective replay; no learning advantage is claimed.
+Current local validation: **277 run, 273 passed,
+0 failed, 0 errors, 4 skipped**.
+The original 215-pass/four-skip baseline reproduced. Native Windows supervision
+passed 14 focused checks. Actual Docker containment, isolated repairs and
+isolated recovery remain unexecuted because the backend is absent. Full original
+historical archives are still missing. BGR's earlier loss to frequency remains
+negative; the prospective four-arm experiment has not run.
 
-Use `NOMAD.cmd setup`, `NOMAD.cmd trusted-demo`, `NOMAD.cmd doctor` and `NOMAD.cmd verify`. See `README.md` for exact supported repository contracts and configuration. Setup changes no host security policy and downloads no dependencies. PowerShell-only startup is blocked by this host's policy, so the command/Python entry is the tested path.
+The repository is private; development is on `v0.18-platform`. Main remains
+at 5851566. The companion synchronization receipt records the actual pushed
+commit. No release, main merge, force push or visibility change was performed.
+GitHub Actions is blocked before execution by account billing/spending settings.
 
-The source and runtime ZIPs are engineering artifacts, not an approved public release. Both are sealed with read-only integrity manifests and verified from fresh extraction; the independent delivery receipt records the observed package checks. The original compact v0.17 source is backed up separately. Complete nested historical lineage remains unavailable because the predecessor archive was intentionally omitted.
-
-No GitHub publication occurred. `PUBLISH.ps1` and `PUBLISH.sh` enforce the release HOLD and do not select public visibility or push. The next milestone is v0.19 RELEASE CANDIDATE after the current native/security/integration gates close; no extra minor or patch release was introduced.
-
-See `docs/PLATFORM_QUALIFICATION_REPORT.md`, `docs/PLATFORM_ARCHITECTURE.md`, `docs/WINDOWS_SECURITY_REPORT.md`, `docs/EXPERIMENT_V018.md`, and `docs/NEXT_ITERATION.md`.
+Source/runtime archives and new immutable qualification manifests preserve the
+first engineering artifacts. Use `NOMAD.cmd setup`, `doctor`, `trusted-demo`,
+`runtime-smoke` and `verify` for the supported offline workflow. Read the
+[current qualification report](docs/QUALIFICATION_REPORT_V018.md),
+[research supplement](docs/RESEARCH_QUALIFICATION_V018.md), and
+[conditional readiness plan](docs/V019_READINESS_PLAN.md).

@@ -82,6 +82,8 @@ class NativeDecisionRanker:
         self.events: list[PublicObservation] = []
         self.contested: set[tuple[str, str]] = set()
         self._cache = None
+        self._raw_cache = None
+        self.native_predictions_evaluated = 0
 
     def _action(self, candidate) -> int:
         if self.action_schema == 'relational-vs-other':
@@ -142,13 +144,23 @@ class NativeDecisionRanker:
 
     def probabilities(self, *, now_epoch: int = 0) -> tuple[float, float]:
         native, counts, support, _ = self._model(now_epoch)
+        raw = None
+        if native is not None:
+            if self._raw_cache is None or self._raw_cache[0] is not native:
+                # Actual cold predictions are diagnostic only until independent
+                # support is eligible; initialization alone is not inference.
+                raw = tuple(float(copy.deepcopy(native).predict(action)) for action in (0, 1))
+                self._raw_cache = (native, raw)
+                self.native_predictions_evaluated += 2
+            else:
+                raw = self._raw_cache[1]
         if self.mode == 'cold' or support < self.min_tasks:
             return (0.5, 0.5)
         if native is not None:
             # BGR predict reserves a pending observation. Counterfactual action
             # scores therefore use separate copies; do not fabricate labels to
             # clear the pending state or mutate the chronological predictor.
-            return tuple(float(copy.deepcopy(native).predict(action)) for action in (0, 1))
+            return raw
         return tuple(c[1] / sum(c) for c in counts)
 
     def rank(self, candidates, *, now_epoch: int = 0) -> list:
@@ -160,12 +172,16 @@ class NativeDecisionRanker:
                 (-probabilities[self._action(row[1])], row[0]))]
 
     def summary(self, *, now_epoch: int = 0) -> dict:
-        _, _, support, eligible = self._model(now_epoch)
+        native, _, support, eligible = self._model(now_epoch)
+        probabilities = self.probabilities(now_epoch=now_epoch)
         return {'mode': self.mode, 'authority': 'ranking_only', 'independent_tasks': support,
                 'action_schema': self.action_schema,
                 'eligible_observations': eligible, 'contested_observations': len(self.contested),
                 'status': 'active' if support >= self.min_tasks and self.mode != 'cold' else 'cold',
-                'action_probabilities': self.probabilities(now_epoch=now_epoch),
+                'action_probabilities': probabilities,
+                'native_runtime_loaded': native is not None,
+                'native_predictions_evaluated': self.native_predictions_evaluated,
+                'native_raw_probabilities': self._raw_cache[1] if native is not None else None,
                 'external_repair_advantage': 'NOT_ESTABLISHED'}
 
     def snapshot(self) -> dict:

@@ -1,5 +1,18 @@
 # NOMAD — Change History
 
+## v0.18.0 qualification follow-up (no version change)
+
+- Connected bounded repository analysis, actual inquiry and deferred proposals
+  to the durable mission/evidence chain; added verified persistent learning.
+- Hardened missing-memory recovery, redispatch budgets, native resource limits,
+  archive metadata validation and case-insensitive local-state exclusions.
+- Added executable native recovery and four-arm experiment qualification tools,
+  immutable provenance/receipt bindings and explicit blocked-execution evidence.
+- Preserved original archives/results and independently audited the negative
+  BGR likelihood result without retuning the frozen benchmark.
+- Kept all four acceptance gates HOLD. See the current qualification report
+  for exact tests, remaining blockers and conditional v0.19 plan.
+
 ## v0.18.0 — PLATFORM (2026-11-14, engineering snapshot)
 
 - Added offline source installation, Windows command launcher, configuration, doctor, native runtime smoke checks, and explicit recovery commands.

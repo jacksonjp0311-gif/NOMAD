@@ -1,0 +1,346 @@
+{
+  "cases": [
+    {
+      "elapsed_s": 0.03200000000651926,
+      "status": "PASS",
+      "test": "tests.test_platform_isolation_v18.NativeWindowsSupervisionTests.test_assignment_failure_does_not_start_target"
+    },
+    {
+      "elapsed_s": 0.0470000000204891,
+      "status": "PASS",
+      "test": "tests.test_platform_isolation_v18.NativeWindowsSupervisionTests.test_native_junction_to_host_is_rejected"
+    },
+    {
+      "elapsed_s": 0.21799999999348074,
+      "status": "PASS",
+      "test": "tests.test_platform_isolation_v18.NativeWindowsSupervisionTests.test_parent_exit_cleans_live_descendant"
+    },
+    {
+      "elapsed_s": 0.35999999998603016,
+      "status": "PASS",
+      "test": "tests.test_platform_isolation_v18.NativeWindowsSupervisionTests.test_supervisor_hard_death_closes_job_and_kills_target"
+    },
+    {
+      "elapsed_s": 1.047000000020489,
+      "status": "PASS",
+      "test": "tests.test_platform_isolation_v18.NativeWindowsSupervisionTests.test_timeout_cleans_target_and_descendant"
+    },
+    {
+      "elapsed_s": 0.0,
+      "status": "PASS",
+      "test": "tests.test_native_qualification_v18.BudgetValidationQualification.test_invalid_job_budgets_are_denied_before_native_api"
+    },
+    {
+      "elapsed_s": 0.0,
+      "status": "PASS",
+      "test": "tests.test_native_qualification_v18.BudgetValidationQualification.test_invalid_sandbox_count_types_are_denied"
+    },
+    {
+      "elapsed_s": 0.0,
+      "status": "PASS",
+      "test": "tests.test_native_qualification_v18.BudgetValidationQualification.test_invalid_supervision_limits_are_denied"
+    },
+    {
+      "elapsed_s": 0.2029999999795109,
+      "status": "PASS",
+      "test": "tests.test_native_qualification_v18.NativeResourceQualification.test_explicit_process_breakaway_is_denied"
+    },
+    {
+      "elapsed_s": 0.20300000003771856,
+      "status": "PASS",
+      "test": "tests.test_native_qualification_v18.NativeResourceQualification.test_job_memory_allocation_is_refused_at_declared_budget"
+    },
+    {
+      "elapsed_s": 0.2649999999557622,
+      "status": "PASS",
+      "test": "tests.test_native_qualification_v18.NativeResourceQualification.test_job_process_creation_is_refused_at_declared_budget"
+    },
+    {
+      "elapsed_s": 0.3130000000237487,
+      "status": "PASS",
+      "test": "tests.test_native_qualification_v18.NativeResourceQualification.test_owner_death_before_assignment_cannot_release_target"
+    },
+    {
+      "elapsed_s": 1.0939999999827705,
+      "status": "PASS",
+      "test": "tests.test_native_qualification_v18.NativeResourceQualification.test_repeated_abrupt_owner_death_leaves_no_targets"
+    }
+  ],
+  "cloud_model_calls": 0,
+  "created_utc": "2026-11-14T14:01:23.718339+00:00",
+  "elapsed_s": 3.7820000000065193,
+  "environment": {
+    "docker_named_pipes": [
+      {
+        "available": false,
+        "name": "dockerDesktopLinuxEngine",
+        "winerror": 2
+      },
+      {
+        "available": false,
+        "name": "docker_engine",
+        "winerror": 2
+      }
+    ],
+    "native_cim": {
+      "cpu": {
+        "Name": "AMD RYZEN AI MAX+ 395 w/ Radeon 8060S          ",
+        "SecondLevelAddressTranslationExtensions": false,
+        "VMMonitorModeExtensions": false,
+        "VirtualizationFirmwareEnabled": true
+      },
+      "elevated_administrator": false,
+      "machine": {
+        "HypervisorPresent": true,
+        "Manufacturer": "ASUSTeK COMPUTER INC.",
+        "Model": "ROG Flow Z13 GZ302EA_GZ302EA",
+        "TotalPhysicalMemory": 132766306304
+      },
+      "optional_features": [
+        {
+          "InstallState": 2,
+          "Name": "VirtualMachinePlatform"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Windows-Subsystem-Linux"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Hyper-V-All"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Hyper-V"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Hyper-V-Tools-All"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Hyper-V-Management-PowerShell"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Hyper-V-Hypervisor"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Hyper-V-Services"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Hyper-V-Management-Clients"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Containers-DisposableClientVM"
+        }
+      ],
+      "os": {
+        "BuildNumber": "26200",
+        "Caption": "Microsoft Windows 11 Pro",
+        "OSArchitecture": "64-bit",
+        "Version": "10.0.26200"
+      },
+      "services": [],
+      "standard_install_files": [
+        {
+          "Exists": false,
+          "Path": "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe"
+        },
+        {
+          "Exists": false,
+          "Path": "C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe"
+        },
+        {
+          "Exists": false,
+          "Path": "C:\\Windows\\System32\\WindowsSandbox.exe"
+        }
+      ]
+    },
+    "platform": "win32",
+    "privileges": {
+      "command": [
+        "whoami",
+        "/priv"
+      ],
+      "elapsed_s": 0.07800000003771856,
+      "output": "\r\nPRIVILEGES INFORMATION\r\n----------------------\r\n\r\nPrivilege Name                Description                          State   \r\n============================= ==================================== ========\r\nSeShutdownPrivilege           Shut down the system                 Disabled\r\nSeChangeNotifyPrivilege       Bypass traverse checking             Enabled \r\nSeUndockPrivilege             Remove computer from docking station Disabled\r\nSeIncreaseWorkingSetPrivilege Increase a process working set       Disabled\r\nSeTimeZonePrivilege           Change the time zone                 Disabled\r\n",
+      "returncode": 0
+    },
+    "tools": {
+      "VBoxManage": false,
+      "WindowsSandbox": false,
+      "containerd": false,
+      "docker": false,
+      "nerdctl": false,
+      "podman": false,
+      "qemu-system-x86_64": false,
+      "vmrun": false,
+      "wsl": true
+    },
+    "wsl_distributions": {
+      "command": [
+        "wsl",
+        "--list",
+        "--verbose"
+      ],
+      "elapsed_s": 0.061999999976251274,
+      "output": "The Windows Subsystem for Linux is not installed. You can install by running 'wsl.exe --install'.\r\r\nFor more information please visit https://aka.ms/wslinstall\r\r\n",
+      "returncode": 1
+    },
+    "wsl_status": {
+      "command": [
+        "wsl",
+        "--status"
+      ],
+      "elapsed_s": 0.06300000002374873,
+      "output": "The Windows Subsystem for Linux is not installed. You can install by running 'wsl.exe --install'.\r\r\nFor more information please visit https://aka.ms/wslinstall\r\r\n",
+      "returncode": 50
+    }
+  },
+  "errors": 0,
+  "failures": 0,
+  "limitations": [
+    "Windows Job supervision is not a hostile-code filesystem/network boundary.",
+    "No Docker/VM case ran in this Windows-only script.",
+    "Native peak counters exceeded the configured limit in retained initial experiments; counter semantics remain HOLD.",
+    "Direct allocation refusal and before/after private-commit measurements do not establish an atomic historical job-wide peak.",
+    "Process-death tests do not establish hard-power-loss durability."
+  ],
+  "native_containment_gate": "HOLD",
+  "observations": [
+    {
+      "case": "native_breakaway_denied",
+      "escaped_marker_created": false,
+      "observation": {
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 202,
+        "metrics": {
+          "active_processes_at_cleanup": 0,
+          "available": true,
+          "configured_active_process_limit": 64,
+          "configured_job_memory_bytes": 1073741824,
+          "cpu_kernel_s": 0.0625,
+          "cpu_user_s": 0.078125,
+          "peak_counter_scope": "native high-water counter; not an atomic measurement of committed bytes",
+          "peak_job_commit_bytes": 16969728,
+          "peak_job_memory_counter_bytes": 16969728,
+          "scope": "Windows supervised process tree",
+          "total_processes": 3
+        },
+        "output": "{\"breakaway_denied\": true, \"winerror\": 5}\r\n",
+        "output_sha256": "58d8e1f127ccbaf655a30fe32abc34c7eb37dd7f30dd381bf003d3b5c1955a80",
+        "returncode": 0,
+        "timed_out": false,
+        "total_output_bytes": 43,
+        "truncated": false
+      }
+    },
+    {
+      "case": "native_memory_limit",
+      "declared_memory_mib": 96,
+      "observation": {
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 203,
+        "metrics": {
+          "active_processes_at_cleanup": 0,
+          "available": true,
+          "configured_active_process_limit": 6,
+          "configured_job_memory_bytes": 100663296,
+          "cpu_kernel_s": 0.0625,
+          "cpu_user_s": 0.09375,
+          "peak_counter_scope": "native high-water counter; not an atomic measurement of committed bytes",
+          "peak_job_commit_bytes": 108462080,
+          "peak_job_memory_counter_bytes": 108462080,
+          "scope": "Windows supervised process tree",
+          "total_processes": 3
+        },
+        "output": "{\"allocation_denied\": true, \"allocated_mib\": 80, \"winerror\": 1455, \"private_usage_before_failed_commit\": 91066368, \"private_usage_after_failed_commit\": 91066368}\r\n",
+        "output_sha256": "b6e654e1a10a1ff875837e335ca1626aee5182cce620dade66f0d502161f9ac6",
+        "returncode": 0,
+        "timed_out": false,
+        "total_output_bytes": 163,
+        "truncated": false
+      }
+    },
+    {
+      "case": "native_process_limit",
+      "declared_process_limit": 6,
+      "observation": {
+        "cleanup": "windows-job-empty-confirmed",
+        "elapsed_ms": 264,
+        "metrics": {
+          "active_processes_at_cleanup": 0,
+          "available": true,
+          "configured_active_process_limit": 6,
+          "configured_job_memory_bytes": 268435456,
+          "cpu_kernel_s": 0.15625,
+          "cpu_user_s": 0.03125,
+          "peak_counter_scope": "native high-water counter; not an atomic measurement of committed bytes",
+          "peak_job_commit_bytes": 31248384,
+          "peak_job_memory_counter_bytes": 31248384,
+          "scope": "Windows supervised process tree",
+          "total_processes": 7
+        },
+        "output": "{\"creation_denied\": true, \"children_started\": 4, \"winerror\": 1816}\r\n",
+        "output_sha256": "09d3daac8dfb1dd238e890ca1e188362ebbf898db1db5ee98cc9debf40aa7c83",
+        "returncode": 0,
+        "timed_out": false,
+        "total_output_bytes": 68,
+        "truncated": false
+      }
+    },
+    {
+      "case": "owner_death_before_assignment",
+      "launcher_exited": true,
+      "returncode": 73,
+      "target_started": false
+    },
+    {
+      "case": "repeated_owner_death",
+      "iteration": 0,
+      "returncode": 74,
+      "target_exited": true
+    },
+    {
+      "case": "repeated_owner_death",
+      "iteration": 1,
+      "returncode": 74,
+      "target_exited": true
+    },
+    {
+      "case": "repeated_owner_death",
+      "iteration": 2,
+      "returncode": 74,
+      "target_exited": true
+    }
+  ],
+  "schema": "nomad.windows-native-qualification.v18",
+  "scope": "controlled trusted Windows supervision; no Docker or VM qualification",
+  "skipped": 0,
+  "source_sha256_after": {
+    "nomad/archive_guard.py": "7d91ae740708cf1d3d8c2650e6dedab2a84d7081f5d453fbe15634fc0f2b7f76",
+    "nomad/isolation.py": "b84c1a4be662786e9aed50122734dc4b4e6f54b2a3920de6d6f97962edf4712f",
+    "nomad/supervised.py": "b7e4ac3c52aed47408466fa0b681eb90f63f5e58c888d1b645a956c0404056b5",
+    "nomad/windows_job.py": "ece4d8405960cc70501a89225ab0717d0baecaaaa3cb62b53a941b0cae457260",
+    "scripts/qualify_windows_v18.py": "20038e486471d90941568d2c319d68e1799f29a54249bbf1fe23377cb188955d",
+    "tests/test_native_qualification_v18.py": "ae6001e34b7c7418e2e0fcbc89723948b264c14cfd778ecbcf6e0859c4a91a89",
+    "tests/test_platform_isolation_v18.py": "0c7d1a0f3432399cba5311348da79967ae1f0a237e9575549dd2b8f5b1bfc375"
+  },
+  "source_sha256_before": {
+    "nomad/archive_guard.py": "7d91ae740708cf1d3d8c2650e6dedab2a84d7081f5d453fbe15634fc0f2b7f76",
+    "nomad/isolation.py": "b84c1a4be662786e9aed50122734dc4b4e6f54b2a3920de6d6f97962edf4712f",
+    "nomad/supervised.py": "b7e4ac3c52aed47408466fa0b681eb90f63f5e58c888d1b645a956c0404056b5",
+    "nomad/windows_job.py": "ece4d8405960cc70501a89225ab0717d0baecaaaa3cb62b53a941b0cae457260",
+    "scripts/qualify_windows_v18.py": "20038e486471d90941568d2c319d68e1799f29a54249bbf1fe23377cb188955d",
+    "tests/test_native_qualification_v18.py": "ae6001e34b7c7418e2e0fcbc89723948b264c14cfd778ecbcf6e0859c4a91a89",
+    "tests/test_platform_isolation_v18.py": "0c7d1a0f3432399cba5311348da79967ae1f0a237e9575549dd2b8f5b1bfc375"
+  },
+  "source_stable": true,
+  "strict_peak_counter_gate": "HOLD",
+  "tests_run": 13,
+  "trusted_windows_supervision_gate": "PASS"
+}

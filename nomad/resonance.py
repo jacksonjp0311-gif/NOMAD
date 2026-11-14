@@ -115,9 +115,23 @@ def _ast_bits(source: str) -> tuple[int, int]:
     return bits, len(nodes)
 
 
-def encode_resonance(task: PythonTask, source: str | None = None) -> ResonanceState:
+def encode_resonance(task: PythonTask, source: str | None = None, *,
+                     execution: PythonExecution | None = None) -> ResonanceState:
+    """Fuse observations; an adapter may supply a trusted, bound observation.
+
+    The legacy default executes trusted generated fixtures. Isolated adapters
+    must supply observations from their permitted evaluator instead of calling
+    that host executor. Supplied observations do not confer verification power.
+    """
     source = task.source if source is None else source
-    run = execute_python(source, task.examples, function_name=task.function_name)
+    if execution is not None:
+        if (not isinstance(execution, PythonExecution)
+                or len(execution.observations) != len(task.examples)
+                or any(o.expected != int(e.expected) for o, e in zip(execution.observations, task.examples))):
+            raise ValueError('precomputed RESONANCE observations do not match public contract')
+        run = execution
+    else:
+        run = execute_python(source, task.examples, function_name=task.function_name)
 
     parser_bits = 0
     if not run.parse_ok:

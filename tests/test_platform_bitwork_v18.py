@@ -59,6 +59,15 @@ class PlatformBitworkTests(unittest.TestCase):
         self.assertEqual(ranker.summary()['authority'], 'ranking_only')
         self.assertEqual(ranker.summary()['external_repair_advantage'], 'NOT_ESTABLISHED')
 
+    def test_cold_native_diagnostic_executes_without_granting_ordering_authority(self):
+        ranker = NativeDecisionRanker(action_schema='genesis-vs-ast')
+        report = ranker.summary()
+        self.assertTrue(report['native_runtime_loaded'])
+        self.assertEqual(report['native_predictions_evaluated'], 2)
+        self.assertEqual(report['action_probabilities'], (0.5, 0.5))
+        self.assertEqual(report['status'], 'cold')
+        self.assertEqual(ranker.summary()['native_predictions_evaluated'], 2)
+
     def test_arithmetic_route_scope_is_distinct_from_relational_history(self):
         ranker = NativeDecisionRanker(action_schema='genesis-vs-ast')
         with self.assertRaises(ValueError):

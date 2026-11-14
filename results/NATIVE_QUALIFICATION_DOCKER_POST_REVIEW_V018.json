@@ -1,0 +1,56 @@
+{
+  "backend": "docker",
+  "cases": [],
+  "cloud_model_calls": 0,
+  "created_utc": "2026-11-14T14:30:18.976424+00:00",
+  "docker_binary_present": false,
+  "host_identity": {
+    "hostname_sha256": "33f85b706309ad8ddf3ff6b099d0809269c3c71a1aa7f8ec8a5fda3283833549",
+    "machine": "AMD64",
+    "release": "11",
+    "system": "Windows",
+    "version": "10.0.26200"
+  },
+  "host_identity_sha256": "b483e9ae25860abd6174d4ae1465d180febb1478c33640b845873365f12e24aa",
+  "image": null,
+  "native_containment_gate": "HOLD",
+  "planned_cases": [
+    "nonroot",
+    "protected_host",
+    "environment",
+    "readonly",
+    "network",
+    "namespaces",
+    "resource_config",
+    "pid_exhaustion",
+    "cpu_budget",
+    "memory_exhaustion",
+    "output_budget",
+    "timeout",
+    "supervisor_hard_death_cleanup"
+  ],
+  "policy_sha256": null,
+  "reason": "DOCKER_BINARY_UNAVAILABLE; REVIEWED_IMAGE_UNCONFIGURED; no source execution",
+  "reason_codes": [
+    "DOCKER_BINARY_UNAVAILABLE",
+    "REVIEWED_IMAGE_UNCONFIGURED"
+  ],
+  "receipt_authority": "operator-owned observation; checksum is not a signature",
+  "receipt_sha256": "5aec1feb8515fcab09a340407184467bca13f464a8e62cdde199acef65e579b1",
+  "schema": "nomad.native-isolation-qualification.v18",
+  "scope": "controlled Linux Docker probes on this host; not a general escape-proof claim",
+  "source_sha256_after": {
+    "nomad/isolation.py": "b84c1a4be662786e9aed50122734dc4b4e6f54b2a3920de6d6f97962edf4712f",
+    "nomad/supervised.py": "b7e4ac3c52aed47408466fa0b681eb90f63f5e58c888d1b645a956c0404056b5",
+    "nomad/windows_job.py": "ece4d8405960cc70501a89225ab0717d0baecaaaa3cb62b53a941b0cae457260",
+    "scripts/qualify_isolation_v18.py": "e67ed60255794366a6ffb839364cf14b00b9a323470684f7889448f07531f50c"
+  },
+  "source_sha256_before": {
+    "nomad/isolation.py": "b84c1a4be662786e9aed50122734dc4b4e6f54b2a3920de6d6f97962edf4712f",
+    "nomad/supervised.py": "b7e4ac3c52aed47408466fa0b681eb90f63f5e58c888d1b645a956c0404056b5",
+    "nomad/windows_job.py": "ece4d8405960cc70501a89225ab0717d0baecaaaa3cb62b53a941b0cae457260",
+    "scripts/qualify_isolation_v18.py": "e67ed60255794366a6ffb839364cf14b00b9a323470684f7889448f07531f50c"
+  },
+  "source_stable": true,
+  "status": "HOLD"
+}

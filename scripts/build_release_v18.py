@@ -28,7 +28,7 @@ def build(output: Path, mode: str, *, seal_source: bool = False) -> dict:
         raise FileExistsError('refusing to overwrite an existing archive')
     if output.is_relative_to(ROOT.resolve()):
         relative = output.relative_to(ROOT.resolve())
-        if relative.parts[0] not in EXCLUDED:
+        if relative.parts[0].casefold() not in EXCLUDED:
             raise ValueError('archive output must be outside included source paths')
     if seal_source and mode != 'source':
         raise ValueError('only source can seal the repository')

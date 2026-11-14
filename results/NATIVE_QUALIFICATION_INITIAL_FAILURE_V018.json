@@ -1,0 +1,30 @@
+{
+  "schema": "nomad.native-qualification-retained-failure.v18",
+  "status": "FAIL",
+  "baseline_commit": "58515665dcccfdaa1c046907b51189a19e48c5aa",
+  "test": "tests.test_native_qualification_v18.NativeResourceQualification.test_job_memory_allocation_is_refused_at_declared_budget",
+  "first_run": {
+    "tests_run": 8,
+    "failures": 1,
+    "elapsed_s": 2.105,
+    "assertion": "peak_job_commit_bytes <= configured_job_memory_bytes",
+    "configured_job_memory_bytes": 100663296,
+    "observed_peak_job_commit_bytes": 100675584
+  },
+  "focused_repeat": {
+    "tests_run": 1,
+    "failures": 1,
+    "elapsed_s": 0.228,
+    "configured_job_memory_bytes": 100663296,
+    "observed_peak_job_commit_bytes": 100864000,
+    "allocation_denied": true,
+    "allocated_mib_before_refusal": 80,
+    "returncode": 0,
+    "cleanup": "windows-job-empty-confirmed",
+    "cpu_user_s": 0.046875,
+    "cpu_kernel_s": 0.09375
+  },
+  "interpretation": "Allocation refusal was observed, but the native peak counter exceeded the configured limit. The cause is not established. A peak-counter bound is not accepted as proof of successfully committed memory.",
+  "next_check": "Use direct VirtualAlloc return/error and process PrivateUsage before and after a rejected commit, preserving the native peak counter and this failure.",
+  "strict_peak_counter_gate": "HOLD"
+}

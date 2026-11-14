@@ -7,11 +7,13 @@ No image is fetched, Docker installed, or host security setting changed.
 from __future__ import annotations
 
 import argparse
+import hashlib
 from dataclasses import asdict
 from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
+import platform
 import subprocess
 import sys
 import tempfile
@@ -23,6 +25,39 @@ from nomad.isolation import (IsolationUnavailable, SandboxPolicy, _docker_prefix
                              cleanup_isolated, docker_preflight, run_isolated,
                              sandbox_available)
 from nomad.supervised import minimal_env, run_supervised
+
+CONTROLLED_CASES = ('nonroot', 'protected_host', 'environment', 'readonly', 'network',
+                   'namespaces', 'resource_config', 'pid_exhaustion', 'cpu_budget',
+                   'memory_exhaustion', 'output_budget', 'timeout')
+
+
+def canonical_digest(value: dict) -> str:
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':'),
+                                     ensure_ascii=True).encode('utf-8')).hexdigest()
+
+
+def qualification_source_identity() -> dict[str, str]:
+    root = Path(__file__).resolve().parents[1]
+    names = ('nomad/isolation.py', 'nomad/supervised.py', 'nomad/windows_job.py',
+             'scripts/qualify_isolation_v18.py')
+    return {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in names}
+
+
+def qualification_host_identity() -> dict[str, str]:
+    return {'system': platform.system(), 'release': platform.release(),
+            'version': platform.version(), 'machine': platform.machine(),
+            'hostname_sha256': hashlib.sha256(platform.node().encode('utf-8')).hexdigest()}
+
+
+def _seal_report(report: dict) -> dict:
+    report['source_sha256_after'] = qualification_source_identity()
+    report['source_stable'] = report['source_sha256_before'] == report['source_sha256_after']
+    report['policy_sha256'] = canonical_digest(report['policy']) if 'policy' in report else None
+    if not report['source_stable'] and report['status'] == 'PASS':
+        report['status'] = report['native_containment_gate'] = 'HOLD'
+        report['reason'] = 'Qualification source changed during execution'
+    report['receipt_sha256'] = canonical_digest(report)
+    return report
 
 
 PROBE = r'''import json,os,pathlib,socket,subprocess,sys,time
@@ -144,20 +179,25 @@ run_isolated(pathlib.Path(sys.argv[1]),command=['python','probe.py','timeout'],p
                              stderr=subprocess.DEVNULL)
     observed_running = False
     try:
-        deadline = time.monotonic() + 15
-        while time.monotonic() < deadline and child.poll() is None:
-            check = run_supervised([*_docker_prefix('docker', base), 'container', 'inspect',
-                                    '--format', '{{.State.Running}}', name],
-                                   cwd=base, timeout_s=3, max_output_bytes=4096)
-            if check.returncode == 0 and check.output.strip() == b'true':
-                observed_running = True
-                break
-            time.sleep(0.1)
+        try:
+            deadline = time.monotonic() + 15
+            while time.monotonic() < deadline and child.poll() is None:
+                check = run_supervised([*_docker_prefix('docker', base), 'container', 'inspect',
+                                        '--format', '{{.State.Running}}', name],
+                                       cwd=base, timeout_s=3, max_output_bytes=4096)
+                if check.returncode == 0 and check.output.strip() == b'true':
+                    observed_running = True
+                    break
+                time.sleep(0.1)
+        finally:
+            if child.poll() is None:
+                child.kill()
+            child.wait(timeout=5)
     finally:
-        if child.poll() is None:
-            child.kill()
-        child.wait(timeout=5)
-    cleanup = cleanup_isolated(name)
+        # A metadata/owner-wait exception must not strand the daemon-owned
+        # container after its supervisor dies. This cleans only our UUID name
+        # and requires the isolation layer's ownership-label validation.
+        cleanup = cleanup_isolated(name)
     return {'case': 'supervisor_hard_death_cleanup',
             'status': 'PASS' if observed_running and cleanup else 'HOLD',
             'observed_live_container_before_owner_death': observed_running,
@@ -167,21 +207,30 @@ run_isolated(pathlib.Path(sys.argv[1]),command=['python','probe.py','timeout'],p
 
 def qualify(image: str | None) -> dict:
     report = {'schema': 'nomad.native-isolation-qualification.v18',
+              'backend': 'docker',
               'created_utc': datetime.now(timezone.utc).isoformat(),
               'status': 'HOLD', 'native_containment_gate': 'HOLD',
               'scope': 'controlled Linux Docker probes on this host; not a general escape-proof claim',
               'docker_binary_present': sandbox_available(), 'image': image,
-              'cases': [], 'reason': None, 'cloud_model_calls': 0}
+              'cases': [], 'planned_cases': list(CONTROLLED_CASES) + ['supervisor_hard_death_cleanup'],
+              'reason': None, 'cloud_model_calls': 0,
+              'source_sha256_before': qualification_source_identity(),
+              'host_identity': qualification_host_identity(),
+              'receipt_authority': 'operator-owned observation; checksum is not a signature'}
+    report['host_identity_sha256'] = canonical_digest(report['host_identity'])
     if image is None:
-        report['reason'] = 'Reviewed digest-pinned image not configured; no source execution'
-        return report
+        report['reason_codes'] = ['REVIEWED_IMAGE_UNCONFIGURED']
+        if not report['docker_binary_present']:
+            report['reason_codes'].insert(0, 'DOCKER_BINARY_UNAVAILABLE')
+        report['reason'] = '; '.join(report['reason_codes']) + '; no source execution'
+        return _seal_report(report)
     policy = SandboxPolicy(image=image, timeout_s=10, memory_mib=128, cpus=0.5, pids_limit=16)
     policy.validate()
     report['policy'] = asdict(policy)
     report['preflight'] = docker_preflight(policy)
     if not report['preflight']['ready']:
         report['reason'] = '; '.join(report['preflight']['reasons'])
-        return report
+        return _seal_report(report)
     with tempfile.TemporaryDirectory(prefix='nomad-native-qualification-') as td:
         base = Path(td)
         source = base / 'controlled-source'
@@ -198,9 +247,7 @@ def qualify(image: str | None) -> dict:
         original_env = os.environ.get('NOMAD_QUALIFICATION_SENTINEL')
         os.environ['NOMAD_QUALIFICATION_SENTINEL'] = 'synthetic-not-a-real-secret'
         try:
-            for case in ('nonroot', 'protected_host', 'environment', 'readonly', 'network',
-                         'namespaces', 'resource_config', 'pid_exhaustion', 'cpu_budget', 'memory_exhaustion',
-                         'output_budget', 'timeout'):
+            for case in CONTROLLED_CASES:
                 started = time.monotonic()
                 command = ['python', 'probe.py', case]
                 if case == 'protected_host':
@@ -226,12 +273,17 @@ def qualify(image: str | None) -> dict:
                 os.environ.pop('NOMAD_QUALIFICATION_SENTINEL', None)
             else:
                 os.environ['NOMAD_QUALIFICATION_SENTINEL'] = original_env
-        report['protected_host_sentinel_unchanged'] = sentinel.read_text() == 'NOMAD synthetic host-only sentinel'
+        try:
+            report['protected_host_sentinel_unchanged'] = sentinel.read_text() == 'NOMAD synthetic host-only sentinel'
+        except OSError:
+            # Loss of the protected sentinel is an observed boundary failure,
+            # not a reason to omit the qualification receipt.
+            report['protected_host_sentinel_unchanged'] = False
     statuses = [case['status'] for case in report['cases']]
     report['status'] = ('FAIL' if 'FAIL' in statuses or not report['protected_host_sentinel_unchanged'] else 'PASS'
                         if len(statuses) == 13 and all(x == 'PASS' for x in statuses) else 'HOLD')
     report['native_containment_gate'] = report['status']
-    return report
+    return _seal_report(report)
 
 
 def main(argv=None):

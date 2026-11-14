@@ -1,0 +1,31 @@
+{
+  "cases": [],
+  "cloud_model_calls": 0,
+  "created_utc": "2026-11-14T14:02:13.317635+00:00",
+  "docker_binary_present": false,
+  "image": null,
+  "native_containment_gate": "HOLD",
+  "planned_cases": [
+    "nonroot",
+    "protected_host",
+    "environment",
+    "readonly",
+    "network",
+    "namespaces",
+    "resource_config",
+    "pid_exhaustion",
+    "cpu_budget",
+    "memory_exhaustion",
+    "output_budget",
+    "timeout",
+    "supervisor_hard_death_cleanup"
+  ],
+  "reason": "DOCKER_BINARY_UNAVAILABLE; REVIEWED_IMAGE_UNCONFIGURED; no source execution",
+  "reason_codes": [
+    "DOCKER_BINARY_UNAVAILABLE",
+    "REVIEWED_IMAGE_UNCONFIGURED"
+  ],
+  "schema": "nomad.native-isolation-qualification.v18",
+  "scope": "controlled Linux Docker probes on this host; not a general escape-proof claim",
+  "status": "HOLD"
+}

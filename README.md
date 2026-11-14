@@ -4,7 +4,7 @@
 
 **Local coding intelligence with explicit evidence and execution boundaries.**
 
-This is a verified local **engineering snapshot**, with production and publication gates on **HOLD**. Windows process supervision and the trusted research path run on the ASUS ROG. Docker and WSL are absent on this host, so native container containment and isolated external repository repair have not been demonstrated.
+This is a **v0.18.0 development qualification snapshot**. All four platform acceptance gates remain **HOLD**. Windows process supervision and the trusted research path run on the ASUS ROG. Docker and WSL are unavailable on this host, so native container containment and isolated external repository repair have not been demonstrated. There is no v0.19 readiness claim. See the [current qualification report](docs/QUALIFICATION_REPORT_V018.md).
 
 ## Intelligence architecture
 
@@ -12,9 +12,9 @@ This is a verified local **engineering snapshot**, with production and publicati
 
 The original intelligence modules, BGR runtime and research records remain present. The new platform surrounds them with source admission, durable ownership, process supervision and evidence checks. No cloud model is required.
 
-The v0.18 isolated mission adapter has a deliberately bounded operating envelope: an operator-selected Python `solve(x, y)` arithmetic function, public examples and repository tests, separate private challenge/final examples, and a reviewed Docker image. It calls real GENESIS and can use the original BGR predictor to rank synthesis versus registered AST edits. WITNESS and the final checker evaluate the strict arithmetic syntax through a separate interpreter; unfamiliar Python is never imported on the host. A negative private check ends that mission rather than feeding private answers into search.
+The isolated mission adapter has a deliberately bounded operating envelope: small top-level Python `solve(x, y)` arithmetic modules and transparent public import aliases, public examples and repository tests, separate private challenge/final examples, and a reviewed Docker image. Source parsing discovers the supported public target without importing unfamiliar code. The adapter connects actual RESONANCE, WORLD MODEL, INQUIRY, GENESIS, original BGR ranking, WITNESS and MNEMONIC through a durable mission journal. WITNESS and the final checker evaluate strict arithmetic syntax through a bounded interpreter. A negative private check ends that mission rather than feeding private answers into search.
 
-WORLD MODEL and INQUIRY remain executable in the inherited trusted research path. Their integration into general isolated repository missions is unfinished. MNEMONIC is preserved and hardened; a completed platform mission retains one scoped observation without automatically promoting a reusable skill. See [platform architecture](docs/PLATFORM_ARCHITECTURE.md).
+The public baseline probe must precede proposal selection. Retained learning is admitted only from independently checked consequences and remains bound to source, action, runtime and receipts. INQUIRY can abstain when its available public probe has no expected information gain. This bounded implementation and its mocked execution contracts do not demonstrate general repository understanding, informative inquiry or autonomous transfer. Actual isolated integration remains HOLD. See [research qualification and claim limits](docs/RESEARCH_QUALIFICATION_V018.md).
 
 ## Start on Windows
 
@@ -52,12 +52,12 @@ The supported installation is source-linked. A standalone wheel containing the v
 | Junction, hardlink and Windows path admission | Native tests passed |
 | Native symlink behavior | HOLD: creating a symlink requires a privilege unavailable here |
 | Docker Desktop / WSL | Docker absent; WSL reports not installed |
-| Hypervisor and firmware virtualization | Reported enabled; optional-feature inventory requires elevation |
+| Hypervisor and firmware virtualization | Reported enabled; CIM reports WSL, VirtualMachinePlatform, Hyper-V and Windows Sandbox features disabled |
 | Malicious repository containment in Docker | HOLD: native probe cases not executed |
 | Isolated external repair and interrupted isolated mission | HOLD |
 | Native BGR learning advantage | HOLD: worse prediction loss than frequency-only control |
 
-Exact test counts, source hashes, timing, skip reasons and runtime outputs are in [the final qualification receipt](results/PLATFORM_FINAL_V018.json). Initial failures and intermediate results are retained. An unusually long intermediate wall-time observation is retained as recorded; CPU timing has a separate scope and is not an energy measurement.
+Exact current test counts, source hashes, timing, skip reasons and runtime outputs are in [the qualification receipt](results/QUALIFICATION_FINAL_V018.json). [Native Windows checks](docs/NATIVE_QUALIFICATION_V018.md) include resource refusal, breakaway denial and owner-death recovery; strict interpretation of the Job peak-memory counter remains HOLD. Original and intermediate receipts remain immutable. CPU timing has a separate scope and is not an energy measurement.
 
 ## Isolated missions
 
@@ -77,7 +77,7 @@ py -3 -B scripts\qualify_isolation_v18.py --image $image --output runs\native-qu
 
 The qualification harness contains controlled host-file, environment, network, namespace, read-only filesystem, resource-exhaustion and owner-death probes. A probe PASS qualifies only that stated check on that image/host. It does not prove arbitrary kernel escapes impossible. The current native receipt is HOLD with no executed container cases.
 
-For a supported repository, prepare a separate JSON contract with `goal_text`, `target` (default `solution.py`) and `public`, `challenge`, `final` arrays of `{ "x": 1, "y": 2, "expected": 3 }`. All three input partitions must be disjoint. The source copy must contain a `tests` directory; `.git`, credentials, links and unsupported Windows path names are refused.
+For a supported repository, prepare a separate JSON contract with `goal_text`, optional `target` and `entry_module`, and `public`, `challenge`, `final` arrays of `{ "x": 1, "y": 2, "expected": 3 }`. All three input partitions must be disjoint. The source copy must contain a `tests` directory; `.git`, credentials, links and unsupported Windows path names are refused. Ambiguous or unsupported public interfaces produce HOLD.
 
 ```powershell
 .\NOMAD.cmd --config platform.local.json init --source .\source-only --root runs\mission --contract .\contract.json
@@ -103,6 +103,8 @@ The frozen historical replay compared four controls under the same candidate bud
 
 Native BGR loses to the frequency control. These are retrospective public-trace predictions from the preserved study, not fresh repository repairs, untouched holdout evidence or a demonstrated coding advantage. The original Catalogue false-positive remains rejected by its separate namespace contract. See [experiment and costs](docs/EXPERIMENT_V018.md) and [machine-readable results](results/BITWORK_V018.json).
 
+An [independent arithmetic audit](docs/RESEARCH_QUALIFICATION_V018.md) reproduces that negative loss result and shows identical candidate ordering under BGR and frequency learning. The [prospective four-arm protocol](docs/INTELLIGENCE_PROTOCOL_V018.md) fixes comparison rules and enforces isolation preflight before opening private contracts. No admissible held-out corpus has been frozen and no prospective trial has run. Known upstream repair candidates are explicitly unsupported by the current arithmetic adapter; synthetic fixtures are not counted as authentic repairs.
+
 ## Reproduce and inspect
 
 ```powershell
@@ -113,18 +115,18 @@ py -3 -B scripts\build_release_v18.py --output .\dist\NOMAD-v0.18.0-source.zip -
 py -3 -B scripts\build_release_v18.py --output .\dist\NOMAD-v0.18.0-runtime.zip --mode runtime
 ```
 
-Results and archive outputs must be new paths. The verifier never rebuilds expected hashes. Builds use deterministic ordering, timestamps and file modes; bytes reproduce with the same Python/zlib toolchain. The shared boundary excludes Git internals, virtual environments, working runs and local credentials while preserving `.github`. The runtime ZIP carries the executable platform and BGR; the source ZIP additionally carries tests and retained research records. Both are local engineering artifacts with publication HOLD.
+Results and archive outputs must be new paths. The verifier never rebuilds expected hashes. Builds use deterministic ordering, timestamps and file modes; bytes reproduce with the same Python/zlib toolchain. The shared boundary excludes Git internals, virtual environments, working runs and local credentials while preserving `.github`. Both ZIPs carry the platform, original BGR and retained research records; the source ZIP additionally carries the tests and development tooling. Both are engineering artifacts with release publication HOLD. The new qualification seal preserves the first v0.18 engineering manifest unchanged.
 
 ## History and release gates
 
 The original desktop source is preserved in the `baseline-v0.17.0` Git branch and the original ZIP; development is on `v0.18-platform`. Historical experiment/results files and the original BGR archive were not rewritten. This compact source omits `baseline/NOMAD-v0.16.0.zip` by design. Its absence is a lineage HOLD, not corrupted current source. Do not present this source ZIP as the complete nested historical archive.
 
-GitHub `jacksonjp0311-gif/NOMAD` returned not found to both the connected API and Git remote lookup. That cannot exclude an inaccessible private repository. No remote was created, no visibility was selected, and nothing was pushed. Publishing scripts now enforce HOLD and require a separate review of exact commit, visibility and artifacts.
+The [GitHub repository](https://github.com/jacksonjp0311-gif/NOMAD) is private. Development uses [v0.18-platform](https://github.com/jacksonjp0311-gif/NOMAD/tree/v0.18-platform); `main` remains at the earlier engineering commit `5851566`. Initial reconciliation found that only `main` had been pushed. The artifact delivery receipt records the verified development synchronization. GitHub Actions was blocked before jobs started by the account billing/spending limit; local tests do not substitute for the unrun CI matrix. No release, main merge, force push or visibility change is part of qualification.
 
-- [Engineering report](docs/PLATFORM_QUALIFICATION_REPORT.md)
-- [Current security report](docs/WINDOWS_SECURITY_REPORT.md)
-- [Platform architecture](docs/PLATFORM_ARCHITECTURE.md)
+- [Current qualification report](docs/QUALIFICATION_REPORT_V018.md)
+- [Native security qualification](docs/NATIVE_QUALIFICATION_V018.md)
+- [Original engineering report](docs/PLATFORM_QUALIFICATION_REPORT.md)
 - [Release notes](RELEASE.md)
-- [v0.19 RC roadmap](docs/NEXT_ITERATION.md)
+- [Conditional v0.19 readiness plan](docs/V019_READINESS_PLAN.md)
 
 **Protect the system. Preserve the intelligence. Advance verified capability.**
