@@ -1,3 +1,7 @@
+> Current snapshot: Temporal Ascension, November 15, 2026. Start with
+> `docs/TEMPORAL_REPORT_V018.md` and the current temporal handoff below.
+> Earlier instructions and handoffs are retained as historical context.
+
 # NOMAD — Codex Desktop Handoff
 
 **Current:** version 0.18.0, branch `v0.18-platform`, Gates A-D HOLD. Start with
@@ -82,7 +86,7 @@ No main merge, release publication, visibility change or version advance was
 authorized by this development snapshot. The instructions above are the retained
 earlier milestone handoff, superseded where this current addendum is more precise.
 
-# Current adaptive intelligence handoff, 2026-11-14
+# Preserved adaptive intelligence handoff, 2026-11-14
 
 Start with `docs/ADAPTIVE_REPORT_V018.md`, `docs/ADAPTIVE_INTELLIGENCE_V018.md`,
 `docs/ADAPTIVE_MISSION_V018.md` and `docs/ADAPTIVE_NATIVE_AND_CORPUS_V018.md`.
@@ -111,3 +115,40 @@ remain protected. Further edits require a new internal seal, not a new version.
 No release, main merge, force push, visibility or billing change is authorized.
 Development commits and a checked push to the existing private branch are
 authorized. Do not execute unfamiliar repository code directly on the host.
+
+
+# Current temporal computation handoff, 2026-11-15
+
+Read docs/TEMPORAL_REPORT_V018.md, docs/PERSISTENT_TEMPORAL_V018.md,
+docs/TEMPORAL_MISSION_V018.md and docs/TEMPORAL_DIAGNOSIS_V018.md first.
+Starting local/remote SHA was 3ffd46741ddb99693cd05f35153daec778a2105a.
+Preregistration commit was 952684387c2414b14ce76bf1cf3029254ce10e67, before
+reserved generation. The companion Git synchronization receipt supplies the
+final pushed SHA. Remain v0.18.0 on v0.18-platform.
+
+The persistent controller failed its registered combined objective. Its warm
+state removes replay relative to cold, but E has worse quality and higher CPU
+than always-on native. Detector alarms interrupt native credit maturation.
+Do not retune the completed study or count its replay as fresh evidence. A new
+predictor-specific residual detector hypothesis needs new source/protocol/seeds.
+All eleven pinned mechanism paths and earlier research artifacts stay frozen.
+
+The mission path is opt-in research. Its fixtures test actual decision plumbing,
+public updates and interruption behavior with labeled isolation doubles. No
+native coding benefit or cross-repository transfer was established. Private
+results cannot become numerical selection rewards. Preserve original repository
+A-D, earlier adaptive E, and the separate persistent F design. No self-revision
+candidate has passed a direct independent comparison against its persistent
+baseline; DEVELOPMENT_NOMINATION_ONLY is not promotion.
+
+All gates A-D remain HOLD. Docker/WSL and strict memory accounting are unresolved;
+container probes are 0/13 and native function-recovery cases 0/21. The authentic
+disjoint corpus and original full v0.17/v0.16/v0.15/v0.14 archives remain unavailable.
+Exact provisioning instructions are documented; no privileged install, feature
+change or reboot occurred. Never substitute unfamiliar host subprocess execution.
+
+Current seal is results/RELEASE_MANIFEST_TEMPORAL_V018.json. Preserve every
+earlier seal and failed attempt. Follow docs/TEMPORAL_REPRODUCTION_V018.md and
+inspect actual branch divergence before further work. Subsequent edits require
+a distinct internal seal, not an unnecessary version increment. No release,
+main merge, force push, visibility change or billing change is authorized.

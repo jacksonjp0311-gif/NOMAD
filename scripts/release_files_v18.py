@@ -6,8 +6,8 @@ import stat
 
 # Keep the first engineering seal as historical evidence. Qualification fixes
 # remain v0.18.0 and receive a distinct, immutable internal snapshot seal.
-MANIFEST = 'results/RELEASE_MANIFEST_ADAPTIVE_V018.json'
-GATES = 'results/GATES_ADAPTIVE_V018.json'
+MANIFEST = 'results/RELEASE_MANIFEST_TEMPORAL_V018.json'
+GATES = 'results/GATES_TEMPORAL_V018.json'
 EXCLUDED = {'.git', '.venv', 'venv', '__pycache__', '.pytest_cache', '.mypy_cache',
             'node_modules', 'runs', 'work', 'outputs', 'build', 'dist'}
 ROOT_FILES = {'README.md', 'LICENSE', 'pyproject.toml', 'NOMAD.ps1', 'NOMAD.cmd', 'platform.example.json',
@@ -26,7 +26,12 @@ RUNTIME_SCRIPTS = {'release_files_v18.py', 'verify_package_v18.py', 'qualify_iso
                    'experiment_repository_adaptive_v18.py',
                    'prepare_adaptive_provenance_v18.py', 'refresh_adaptive_prerequisites_v18.py',
                    'prepare_adaptive_self_revision_v18.py', 'qualify_windows_v18.py',
-                   'search_lineage_frontier_v18.py'}
+                   'search_lineage_frontier_v18.py',
+                   'experiment_temporal_v18.py', 'audit_temporal_metrics_v18.py',
+                   'verify_temporal_replay_v18.py', 'summarize_temporal_v18.py',
+                   'diagnose_temporal_v18.py', 'account_temporal_cost_v18.py',
+                   'study_retention_temporal_v18.py', 'prepare_temporal_self_revision_v18.py',
+                   'refresh_temporal_prerequisites_v18.py', 'experiment_repository_temporal_v18.py'}
 RUNTIME_TESTS = {'tests/__init__.py', 'tests/test_native_qualification_v18.py',
                  'tests/test_platform_isolation_v18.py'}
 

@@ -1,0 +1,30 @@
+{
+  "corrected_source_sha256": "1e918b861517f786cdae3a9448fe06220d89608d41e095d0819079ec969c9fd5",
+  "correction": "aggregate only numeric telemetry; retain string labels separately",
+  "failed_attempt": {
+    "cause": "original adaptive telemetry includes a string scope label; descriptive aggregator attempted its numeric mean",
+    "command": "scripts/summarize_temporal_v18.py --result results/TEMPORAL_MECHANISMS_V018.json --output results/TEMPORAL_SUMMARY_V018.json",
+    "exception": "TypeError: must be real number, not str",
+    "exit_code": 1,
+    "output_file_created": false,
+    "source_bytes_preserved_at_commit": "952684387c2414b14ce76bf1cf3029254ce10e67",
+    "source_sha256": "47c6fe3ef63c14021f04bea2da25981d27f38ee3040ba3003ed9e22ce31ac9f2",
+    "standalone_console_log_retained": false
+  },
+  "focused_contract": {
+    "failed": 0,
+    "passed": 1,
+    "path": "tests/test_temporal_summary_v18.py",
+    "sha256": "d0b95664eba6e6b458cbaba73d4e9dacf46eb82cc9a6090de3c1cd6efa4a6d4c",
+    "skipped": 0,
+    "tests": 1
+  },
+  "recheck": {
+    "exit_code": 0,
+    "sha256": "8f52726ea37df5503b9f59d2f6427e4b88b798312a5f6ae8fae6b4ac1a5cb5ff",
+    "status": "DESCRIPTIVE_COMPLETE"
+  },
+  "schema": "nomad.temporal-postprocessing-correction.v18",
+  "scope": "unfrozen descriptive exporter only; no forecast, cost, heldout result, plan, frozen auditor or acceptance threshold changed",
+  "status": "CORRECTED_RECHECK_PASS"
+}

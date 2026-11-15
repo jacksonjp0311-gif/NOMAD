@@ -1,0 +1,102 @@
+{
+  "correction": "Propagate MissionHold unchanged before normalizing other runtime/data exceptions. No admission, predictor or threshold change.",
+  "failed_counts": {
+    "controller_cpu_s": 250.125,
+    "errors": 0,
+    "failures": 1,
+    "passed": 468,
+    "run": 473,
+    "skip_reasons": [
+      {
+        "reason": "POSIX exclusive owner test; Windows native acceptance is separate",
+        "test": "test_second_process_cannot_take_live_mission_ownership (test_mission_v16.MissionRuntimeV16Tests.test_second_process_cannot_take_live_mission_ownership)"
+      },
+      {
+        "reason": "HOLD: compact desktop package intentionally omits the full predecessor archive",
+        "test": "test_native_runtime_baseline_zip_preserved (test_recursion_v15.RecursionV15Tests.test_native_runtime_baseline_zip_preserved)"
+      },
+      {
+        "reason": "POSIX process-group test",
+        "test": "test_orphaned_descendant_is_cleaned (test_security_v17.IsolationContractTests.test_orphaned_descendant_is_cleaned)"
+      },
+      {
+        "reason": "Windows symlink privilege absent; native symlink gate remains HOLD",
+        "test": "test_symlink_escape_is_refused (test_security_v17.IsolationContractTests.test_symlink_escape_is_refused)"
+      }
+    ],
+    "skipped": 4,
+    "slowest_tests": [
+      {
+        "test": "test_later_success_interrupted_before_update_selects_its_own_candidate (test_persistent_mission_v18.PersistentMissionTests.test_later_success_interrupted_before_update_selects_its_own_candidate)",
+        "wall_s": 38.73308959999122
+      },
+      {
+        "test": "test_rehashed_public_update_cache_poisoning_is_refused (test_persistent_mission_audit_v18.NumericalCacheAudit.test_rehashed_public_update_cache_poisoning_is_refused)",
+        "wall_s": 35.00952639995376
+      },
+      {
+        "test": "test_settled_state_restart_at_public_boundaries (test_persistent_mission_v18.PersistentMissionTests.test_settled_state_restart_at_public_boundaries)",
+        "wall_s": 32.10021970001981
+      },
+      {
+        "test": "test_distinct_accepted_prefix_restores_native_state_and_expires (test_persistent_mission_v18.PersistentMissionTests.test_distinct_accepted_prefix_restores_native_state_and_expires)",
+        "wall_s": 28.97248270001728
+      },
+      {
+        "test": "test_development_study_smoke (test_inquiry.InquiryTests.test_development_study_smoke)",
+        "wall_s": 9.015625999949407
+      },
+      {
+        "test": "test_rehashed_diagnosis_recall_forecast_and_private_training_refused (test_persistent_mission_v18.PersistentMissionTests.test_rehashed_diagnosis_recall_forecast_and_private_training_refused)",
+        "wall_s": 8.95996860001469
+      },
+      {
+        "test": "test_release_study_gate (test_world_model.WorldModelTests.test_release_study_gate)",
+        "wall_s": 8.23033689998556
+      },
+      {
+        "test": "test_restart_seven_interruption_boundaries (test_mission_v16.MissionRuntimeV16Tests.test_restart_seven_interruption_boundaries)",
+        "wall_s": 8.062882800004445
+      },
+      {
+        "test": "test_rollback_reconciliation (test_mission_v16.MissionRuntimeV16Tests.test_rollback_reconciliation)",
+        "wall_s": 7.059580500004813
+      },
+      {
+        "test": "test_ambiguous_search_requires_confirmed_cleanup_before_once_only_update (test_persistent_mission_v18.PersistentMissionTests.test_ambiguous_search_requires_confirmed_cleanup_before_once_only_update)",
+        "wall_s": 6.811662600026466
+      }
+    ],
+    "status": "FAIL",
+    "wall_s": 303.4145067000063
+  },
+  "failed_study": "results/TEMPORAL_FINAL_V018.json",
+  "failed_study_sha256": "b77c26a6155d9941ff0e46467b7d3d0cdc41a747d66e054fdc50d8f41b3d904c",
+  "failure": "Existing immutable-commit refusal was wrapped by new generic RuntimeError handler because MissionHold inherits RuntimeError.",
+  "final_recheck": "results/TEMPORAL_FINAL_RECHECK_V018.json",
+  "focused_check": {
+    "failures": 0,
+    "passed": 1,
+    "run": 1,
+    "test": "tests.test_function_evidence_frontier_v18.FunctionEvidenceBindingTests.test_completed_candidate_cannot_be_patched_after_commit",
+    "wall_seconds": 0.271
+  },
+  "old_test_sha256": "26c6a0f48d12290ef61346f704cb545554f7d51a674dab73c8657414f3eeebd1",
+  "schema": "nomad.temporal-regression-correction.v18",
+  "source_after_sha256": "1e7292b4a5b3c31516802aeff92ca4fbc83526630ef8feab4004bcbb32bc8f8a",
+  "source_archive": {
+    "files": 235,
+    "method": "unchanged files copied; two changed files recovered by exact inverse edits and verified against original recorded hashes; no results regenerated",
+    "name": "PRE_REGRESSION_FIX_SOURCE_RECHECK.zip",
+    "scope": "all Python source/test/script bytes bound by the failed study; unchanged native vendor bytes remain in original source/runtime packages",
+    "sha256": "4a06b251d3abf134908516c1d280ea52d9b3aeb00de1e7642a8e9f8a9ffd4c34"
+  },
+  "source_before_sha256": "d7bebabcf9f4395810d6591cb5fd8d5f65850443377cb73732600affd7d2f050",
+  "source_capture_attempt": {
+    "initial_incomplete_archive_name": "PRE_REGRESSION_FIX_SOURCE.zip",
+    "initial_incomplete_archive_sha256": "9d6ac42e22e3cf304a1664f7295984906c3a0aba3ca8e6f25575e88339124c32",
+    "reason": "initial archive attempt looked for the agent-recovered test in task workspace, but agent saved it in repository work; hash check stopped capture",
+    "status": "INITIAL_INCOMPLETE_RECHECK_PASS"
+  },
+  "status": "CORRECTED_FOCUSED_CHECK_PASS_FULL_RECHECK_PENDING"
+}

@@ -1,0 +1,160 @@
+{
+  "coding_advantage": "NOT_ESTABLISHED",
+  "contracts_receipt": "results/TEMPORAL_MISSION_CONTRACTS_V018.json",
+  "contracts_sha256": "49dbc16afae68053d19542dafa4558a575afbd8e44d8e693303caf537850d71d",
+  "cross_repository_transfer": "NOT_ESTABLISHED",
+  "fixture_controller_config": {
+    "commitment": 1,
+    "cost_seconds": {
+      "frequency": 2e-06,
+      "native": 0.0015,
+      "temporal": 0.0001
+    },
+    "cost_weight": 2.0,
+    "credit_horizon": 2,
+    "delayed_credit": true,
+    "detector_cooldown": 4,
+    "detector_enabled": true,
+    "detector_threshold": 4.0,
+    "detector_window": 2,
+    "epoch": 0,
+    "gamma": 0.98,
+    "max_history": 2048,
+    "max_state_bytes": 16777216,
+    "risk_weight": 0.1,
+    "setup_seconds": {
+      "frequency": 0.0,
+      "native": 0.08,
+      "temporal": 0.08
+    },
+    "state_policy": "selectivewarm",
+    "switch_penalty": 0.01,
+    "ttl_epochs": 32
+  },
+  "fixture_policy_scope": "Accelerated C1/H2 boundary testing, not the frozen C32/H64 mechanism efficacy study.",
+  "iterations": [
+    {
+      "errors": 3,
+      "reason": "Three new persistent checkpoint names had not been registered; corrected.",
+      "stage": "first focused run",
+      "status": "FAILED",
+      "tests_run": 5
+    },
+    {
+      "failures": 2,
+      "reason": "Original comparison fixture succeeded on its first candidate; full inventory steps also held the cheap commitment too long to reach intended test boundaries. Added later-success fixture and explicit configured commitment budget for coding decisions.",
+      "stage": "native/later-success fixture run",
+      "status": "FAILED",
+      "tests_run": 3
+    },
+    {
+      "archive": "C:\\Users\\jacks\\Documents\\Codex\\2026-11-14\\files-pasted-by-the-user-nomad\\work\\temporal-20261115\\persistent-contract-interrupted.zip",
+      "archive_sha256": "c4f595288ff65ae01128661bb9f4e9e1389afd1765f44b65ab10ebaefc3db509",
+      "reason": "Independent review found numerical native caches must remain checked; stopped only owned Python contract process. Two generated fixture missions had completed; the test had not returned.",
+      "stage": "interrupted review run",
+      "status": "STOPPED_NO_TEST_PASS_CLAIM"
+    },
+    {
+      "stage": "native-cache/later-success rerun",
+      "status": "PASS",
+      "tests_run": 2,
+      "wall_seconds": 73.961
+    },
+    {
+      "source_stable": true,
+      "stage": "persistent and unchanged adaptive focused suite",
+      "status": "PASS",
+      "tests_run": 22
+    }
+  ],
+  "native_docker_executions": 0,
+  "native_persistent_recovery": "HOLD: earlier default function 21-case protocol does not qualify persistent decision/forecast/update/accepted-cache stages",
+  "observed_decision_effects": [
+    {
+      "actual_probes": 1,
+      "ast_checks": 8,
+      "genesis_cap": 0,
+      "genesis_evaluations": 0,
+      "initial_mechanism": "frequency",
+      "memory_cache": "COLD",
+      "probe_cap": 1,
+      "proposal_cap": 16,
+      "public_updates": 1,
+      "runtime_mechanisms": [
+        "frequency"
+      ],
+      "status": "completed",
+      "task": 0
+    },
+    {
+      "actual_probes": 2,
+      "ast_checks": 11,
+      "genesis_cap": 1024,
+      "genesis_evaluations": 1024,
+      "initial_mechanism": "temporal",
+      "memory_cache": "RESTORED",
+      "probe_cap": 2,
+      "proposal_cap": 32,
+      "public_updates": 1,
+      "runtime_mechanisms": [
+        "temporal"
+      ],
+      "status": "completed",
+      "task": 1
+    },
+    {
+      "actual_probes": 2,
+      "ast_checks": 11,
+      "genesis_cap": 4096,
+      "genesis_evaluations": 4096,
+      "initial_mechanism": "native",
+      "memory_cache": "RESTORED",
+      "probe_cap": 3,
+      "proposal_cap": 64,
+      "public_updates": 1,
+      "runtime_mechanisms": [
+        "native"
+      ],
+      "status": "completed",
+      "task": 2
+    }
+  ],
+  "production_promotion": "HOLD",
+  "review_fixes": [
+    {
+      "finding": "Repeated unconsumed recorded control after restart",
+      "regression": "test_settled_state_restart_at_public_boundaries",
+      "status": "FIXED"
+    },
+    {
+      "finding": "Later successful observation could select previously updated candidate before settlement",
+      "regression": "test_later_success_interrupted_before_update_selects_its_own_candidate",
+      "status": "FIXED"
+    },
+    {
+      "finding": "Recorded diagnosis and recall were trusted without pure recomputation",
+      "regression": "test_rehashed_diagnosis_recall_forecast_and_private_training_refused",
+      "status": "FIXED"
+    },
+    {
+      "finding": "Native numerical scoring/ranking caches were omitted by broad learned-state normalization",
+      "rule": "Keep all numerical caches; omit only concrete diagnostic telemetry/cost counters.",
+      "status": "FIXED_IN_SOURCE; independent negative review recorded separately"
+    },
+    {
+      "finding": "Validation memo needed full current native bridge/vendor/Python identity and defensive copies",
+      "rule": "Canonical goal/full trace/complete/selected plus fresh platform, persistent source and verified runtime bindings; four entries and 8MB maximum.",
+      "status": "FIXED"
+    }
+  ],
+  "schema": "nomad.persistent-mission-implementation-review.v18",
+  "source_sha256": {
+    "docs/TEMPORAL_MISSION_V018.md": "d2bc61017a0c28a54f3eb730aa76ce12f13237cb16e384e156b152b4c07e805c",
+    "nomad/platform_cli.py": "dc4908a08a638c2a9e20114740aff22ed689cd4626b63f54931ea5909f975fa9",
+    "nomad/platform_mission.py": "d7bebabcf9f4395810d6591cb5fd8d5f65850443377cb73732600affd7d2f050",
+    "scripts/experiment_repository_temporal_v18.py": "19191dc1b3a7eab6f767cb6585c0bbad5dd203f199db53cec67450bbda0bca4d",
+    "tests/test_persistent_mission_v18.py": "3707dc82f7c2edfb2f06088ca181c62519d71a407765f4dfef671afa82f957c3"
+  },
+  "status": "SOFTWARE_CONTRACTS_PASS",
+  "whole_mission_cost": "HOLD: stage subsets omit preload, some forecasts, trace replay, recovery and Docker worker costs/strict peak"
+}

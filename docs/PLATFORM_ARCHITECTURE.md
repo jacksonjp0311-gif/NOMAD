@@ -1,8 +1,16 @@
 # NOMAD v0.18.0 PLATFORM architecture
 
+The [persistent computation specification](PERSISTENT_TEMPORAL_V018.md) and
+[persistent mission path](TEMPORAL_MISSION_V018.md) are the latest optional
+extensions. They retain independently bound frequency, temporal and native states,
+update only from public observations, and separate cached computation from
+WITNESS-accepted knowledge. The frozen temporal experiment failed its joint
+quality/cost objective; this path is an opt-in research capability. No platform
+gate or release qualification follows from it.
+
 The [FRONTIER function pipeline](FRONTIER_FUNCTIONS_V018.md) extends this retained
 arithmetic design. The latest [adaptive mission specification](ADAPTIVE_MISSION_V018.md)
-and [information-flow audit](ADAPTIVE_PIPELINE_AUDIT_V018.md) add optional effort
+and [information-flow audit](ADAPTIVE_PIPELINE_AUDIT_V018.md) document the earlier optional effort
 selection around the existing modules. All native qualification gates remain HOLD.
 
 ## Optional adaptive computation

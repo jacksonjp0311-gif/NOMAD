@@ -28,8 +28,9 @@ def summarize(path):
             'mean_checkpoint_wall_seconds':statistics.fmean(sum(c['wall_seconds'] for c in r['checkpoints']) for r in rows),
             'mean_final_state_cpu_seconds':statistics.fmean(r['worker_cost']['final_state_cpu_seconds'] for r in rows),
             'mean_final_state_wall_seconds':statistics.fmean(r['worker_cost']['final_state_wall_seconds'] for r in rows),
-            'mean_telemetry':{k:statistics.fmean(r['telemetry'].get(k,0) for r in rows)
-                              for k in sorted({k for r in rows for k in r['telemetry']})},
+            'mean_telemetry':numeric_telemetry(rows),
+            'telemetry_labels':{k:sorted({r['telemetry'][k] for r in rows if k in r['telemetry']})
+                                for k in sorted({k for r in rows for k,v in r['telemetry'].items() if isinstance(v,str)})},
             'detector':{f:{'alarms':sum(len(r['detector_metrics']['alarm_prefixes']) for r in rows if r['family']==f),
                 'false_alarms':sum(r['detector_metrics']['false_alarms'] for r in rows if r['family']==f),
                 'known_changes':sum(len(r['detector_metrics']['known_change_boundaries']) for r in rows if r['family']==f),
@@ -41,6 +42,11 @@ def summarize(path):
         'whole_study_cpu_seconds':data['whole_study_cpu_seconds'],'whole_study_wall_seconds':data['harness_wall_seconds'],
         'parent_memory':data['parent_memory_after'],
         'limits':'stage timers overlap inclusive totals; original adaptive telemetry resets on restore, see retained telemetry_segments; no summed peak memory, causal ablation, energy, coding or transfer claim'}
+
+
+def numeric_telemetry(rows):
+    keys=sorted({k for r in rows for k,v in r['telemetry'].items() if type(v) in (int,float)})
+    return {k:statistics.fmean(r['telemetry'].get(k,0) for r in rows) for k in keys}
 
 
 if __name__=='__main__':

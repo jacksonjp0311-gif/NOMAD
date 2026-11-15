@@ -1,0 +1,179 @@
+{
+  "author_contract_evidence": {
+    "errors": 0,
+    "failures": 0,
+    "independently_rerun_by_this_reviewer": false,
+    "observed_decision_effects": [
+      {
+        "actual_probes": 1,
+        "ast_checks": 8,
+        "genesis_cap": 0,
+        "genesis_evaluations": 0,
+        "initial_mechanism": "frequency",
+        "memory_cache": "COLD",
+        "probe_cap": 1,
+        "proposal_cap": 16,
+        "public_updates": 1,
+        "runtime_mechanisms": [
+          "frequency"
+        ],
+        "status": "completed",
+        "task": 0
+      },
+      {
+        "actual_probes": 2,
+        "ast_checks": 11,
+        "genesis_cap": 1024,
+        "genesis_evaluations": 1024,
+        "initial_mechanism": "temporal",
+        "memory_cache": "RESTORED",
+        "probe_cap": 2,
+        "proposal_cap": 32,
+        "public_updates": 1,
+        "runtime_mechanisms": [
+          "temporal"
+        ],
+        "status": "completed",
+        "task": 1
+      },
+      {
+        "actual_probes": 2,
+        "ast_checks": 11,
+        "genesis_cap": 4096,
+        "genesis_evaluations": 4096,
+        "initial_mechanism": "native",
+        "memory_cache": "RESTORED",
+        "probe_cap": 3,
+        "proposal_cap": 64,
+        "public_updates": 1,
+        "runtime_mechanisms": [
+          "native"
+        ],
+        "status": "completed",
+        "task": 2
+      }
+    ],
+    "raw_log_hash_checked": true,
+    "raw_log_sha256": "ea04b692cfc725df63f498756237fc7617f73e2c2369cca7fa11d9dc2ae888a5",
+    "receipt": "results/TEMPORAL_MISSION_CONTRACTS_V018.json",
+    "receipt_sha256": "49dbc16afae68053d19542dafa4558a575afbd8e44d8e693303caf537850d71d",
+    "skips": 0,
+    "source_stable": true,
+    "tests_run": 22
+  },
+  "evidence_boundaries": {
+    "authority": "Ranking and bounded effort only. Worker observations, WITNESS and final comparison retain separate acceptance authority.",
+    "crossmission_state": "Initial prefix is reconstructed from the pinned accepted-memory head, current runtime, source-distinct eligible records and four-epoch admission window. Exact prefix/policy/epoch required for direct cache reuse; otherwise eligible public reconstruction or cold result.",
+    "duplicates_and_recovery": "Bound forecast/observation hashes, candidate identity and public update uniqueness; durable unconsumed controls are reused. Ambiguous worker disposal remains explicit.",
+    "predictor_numeric_training": "Candidate public-contract supported bit only, scoped comparison-versus-other action encoding.",
+    "private_results": "Challenge/final values are excluded from the prefix and stored public training trace. Independent acceptance authorizes admission but does not supply a numeric predictor target."
+  },
+  "findings_and_resolutions": [
+    {
+      "correction": "Reuse an unconsumed durable control when its saved postchoice state is the current state.",
+      "id": "unconsumed-control-replay",
+      "initial_evidence": "Read-only source inspection: after a durable control and before forecast, resume took the new-decision branch. No pre-fix execution was performed by this reviewer.",
+      "verification": "Author restart contract compares exact control/forecast/selection decisions across six interruption boundaries; current source readback confirms reuse."
+    },
+    {
+      "correction": "Require no pending forecast and exact last public operation/update candidate equality before selecting success.",
+      "id": "later-public-success-binding",
+      "initial_evidence": "Read-only source inspection: latest public success could be paired with the previous completed update when a later forecast remained pending.",
+      "verification": "Dedicated authored fixture has two real public failures before a correct comparison; author test interrupts after later public success and recovers the same candidate. Independent cache attack test also executes this real late-success fixture."
+    },
+    {
+      "correction": "Recompute INQUIRY, RESONANCE and posterior from ordered validated public probe receipts before using them.",
+      "id": "diagnosis-replay-integrity",
+      "initial_evidence": "Public diagnosis posterior was accepted by assignment while later order validation trusted it.",
+      "verification": "Author altered/rechained diagnosis test passes; reviewer read deterministic replay helper and its use before controls."
+    },
+    {
+      "correction": "Require a non-boolean nonnegative capture epoch, boolean effect, list features, matching encoded feature bits, bounded events, unique IDs, exact metadata and valid chain. Recompute recall rather than trust recorded recall values.",
+      "id": "recall-snapshot-shape",
+      "initial_evidence": "Inline recall snapshot decoder omitted checks present in EvidenceMemory.load.",
+      "verification": "Source readback and author rechained recall refusal contract."
+    },
+    {
+      "correction": "Keep every numerical cache in mission replay comparisons. Omit only specifically enumerated diagnostic timing/cost counters. Frozen codec and vendor code are unchanged.",
+      "id": "prediction-affecting-numerical-caches",
+      "independent_probe": {
+        "changed_fields": [
+          "_rank_cache",
+          "_exact_scores"
+        ],
+        "clean_native_probability": 0.47726341740642253,
+        "fixture": "empty public prefix, identical source/runtime/policy",
+        "rehashed_cache_probability": 0.60625,
+        "runtime_source_or_history_changed": false
+      },
+      "initial_evidence": "Mission semantic normalization omitted exact/approximate scoring, ranking and lookup caches even though native predict consumes them.",
+      "verification": "Independent test changes valid-shaped native caches, reseals nested and outer checkpoint hashes and rechains the mission journal. Public inspect refuses with inner cause persistent post-observation learned state changed, including after a valid memo entry was populated."
+    },
+    {
+      "correction": "Key full canonical goal and trace plus complete/selected flags, platform sources, persistent source map, and freshly verified vendor/Python runtime. Store immutable serialized bytes and return independent decoded objects.",
+      "id": "validated-trace-memo",
+      "initial_evidence": "Optimization review required preserving checks performed by uncached state load. Platform runtime map alone omitted native bridge and vendor checks.",
+      "verification": "Independent tests verify changed raw content despite unchanged recorded hashes, both authority flags, goal content, bridge identity, fresh vendor failure before a hit, copy isolation on misses/hits, at most four entries/eight million stored bytes, two-million-byte entry cap and input count/byte refusal."
+    },
+    {
+      "correction": "Mission batch scheduling now caps explicit steps at the configured commitment and verification-safe execution/history budget. This may truncate the stream controller exploratory credit horizon and is documented.",
+      "id": "actual-decision-influence",
+      "initial_evidence": "Requested an actual native/effort contract; the author reported a test exposing an overly long cheap commitment when the full candidate inventory was supplied as the scheduling horizon.",
+      "verification": "Author three-task accepted-memory fixture observes cold frequency, restored temporal, then restored native allocations and actual synthesis/probe work. Counts copied below; no coding benefit inferred."
+    },
+    {
+      "correction": "Documentation explicitly lists excluded preload/forecast/validation/recovery work, Docker CPU and strict peak memory; costs are named stage subsets only.",
+      "id": "partial-cost-accounting",
+      "initial_evidence": "Loads, whole-trace replay and some predictions occur outside named stage timers.",
+      "verification": "Readback confirms no complete mission CPU or efficiency claim. Complete resource accounting remains unqualified."
+    }
+  ],
+  "frozen_controller_unchanged": true,
+  "independent_execution": {
+    "errors": 0,
+    "failures": 0,
+    "native_docker_executions": 0,
+    "outer_wall_seconds": 38.84757689997787,
+    "raw_log": "results/TEMPORAL_MISSION_AUDIT_TEST_RECHECK_V018.log",
+    "raw_log_sha256": "198d6288ed7a4bedf403547a2729ed0993d1a2d4f7eec6ca5d44e81a10c78f54",
+    "receipt": "results/TEMPORAL_MISSION_AUDIT_TEST_RECHECK_V018.json",
+    "receipt_sha256": "6dfba783cd1138a7ae70017c09081b786bbede8ac1f389242b45ed53aef6a609",
+    "skips": 0,
+    "source_stable": true,
+    "test_runner_seconds": 38.36,
+    "tests_run": 6
+  },
+  "limitations": [
+    "Trusted authored fixture worker doubles are not native Docker containment/recovery qualification or authentic repository outcomes.",
+    "Checksums are local integrity anchors, not authenticated state against a host attacker replacing all sources and evidence anchors.",
+    "The frozen codec alone cannot authenticate rehashed numerical cache values; mission public replay now compares them.",
+    "Accepted-only crossmission sampling is biased and does not establish causal computation benefit or transfer.",
+    "Mission decision batch caps differ from the unlimited-stream schedule; the heldout mechanism result does not establish coding performance.",
+    "Whole-mission CPU and strict aggregate peak memory remain unqualified; named stage costs omit work outside their timers.",
+    "The temporal mechanism experiment failed its combined primary gate. Optional wiring is not a promotion or a self-improvement claim."
+  ],
+  "observed_at_utc": "2026-11-15T14:15:18.295348+00:00",
+  "preserved_initial_review_test_failure": {
+    "errors": 0,
+    "failures": 1,
+    "raw_log": "results/TEMPORAL_MISSION_AUDIT_TEST_V018.log",
+    "reason": "Runtime correctly refused the cache alteration. Reviewer assertion expected the inner error text at the public exception surface, but inspect wraps it. Only the review test was corrected to verify the cause chain; runtime source stayed identical.",
+    "receipt": "results/TEMPORAL_MISSION_AUDIT_TEST_V018.json",
+    "test_runner_seconds": 41.996,
+    "tests_run": 6
+  },
+  "review_scope": "Read-only review of optional persistent mission integration, followed by separate independently authored negative tests. No runtime/frozen experiment edits by reviewer.",
+  "schema": "nomad.temporal-mission-independent-review.v18",
+  "source_sha256": {
+    "docs/TEMPORAL_MISSION_V018.md": "d2bc61017a0c28a54f3eb730aa76ce12f13237cb16e384e156b152b4c07e805c",
+    "nomad/adaptive.py": "bae26d0abbc1d276761d9082bf736b0eb6877b9ddbc227488211037c65d366ba",
+    "nomad/native_bitwork.py": "2c26b9929157df201dc501c2ce8275737d4790cf8cc3705ca38bb3be2fcdff51",
+    "nomad/persistent.py": "96eb551f8203df6e2da8a952c436d87d1c4b3e23b9e294143cf51d245ff6036c",
+    "nomad/platform_cli.py": "dc4908a08a638c2a9e20114740aff22ed689cd4626b63f54931ea5909f975fa9",
+    "nomad/platform_mission.py": "d7bebabcf9f4395810d6591cb5fd8d5f65850443377cb73732600affd7d2f050",
+    "tests/test_persistent_mission_audit_v18.py": "26c6a0f48d12290ef61346f704cb545554f7d51a674dab73c8657414f3eeebd1",
+    "tests/test_persistent_mission_v18.py": "3707dc82f7c2edfb2f06088ca181c62519d71a407765f4dfef671afa82f957c3"
+  },
+  "status": "PASS_SCOPED_SOFTWARE_REVIEW",
+  "unresolved_blocking_findings": []
+}

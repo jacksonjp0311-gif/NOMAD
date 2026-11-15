@@ -35,6 +35,8 @@ def main(argv: list[str] | None = None) -> int:
     init.add_argument('--max-files-changed', type=int, choices=(1,2), default=2)
     init.add_argument('--computation-controller', type=Path,
         help='optional bounded AdaptiveConfig JSON for the separately registered function path')
+    init.add_argument('--persistent-controller', type=Path,
+        help='opt-in research PersistentConfig JSON; never accepts a learned state or grants verification authority')
     demo = commands.add_parser('isolated-demo')
     demo.add_argument('--root', type=Path, required=True)
     demo.add_argument('--ranker', choices=('cold', 'native', 'frequency', 'shuffled'), default='native')
@@ -87,16 +89,29 @@ def main(argv: list[str] | None = None) -> int:
                 if adapter not in (None,'python-functions-v1') or not isinstance(contract, dict) or not required <= set(contract) or set(contract) - required - optional:
                     raise ValueError('invalid mission contract')
                 functions=adapter=='python-functions-v1'
-                computation=None
+                computation=None;persistent=None
+                if args.persistent_controller:
+                    if not functions or args.computation_controller:raise ValueError('persistent controller needs typed functions and cannot be combined with adaptive E')
+                    if args.persistent_controller.stat().st_size>8192:raise ValueError('persistent configuration exceeds size budget')
+                    def unique(pairs):
+                        value={}
+                        for key,item in pairs:
+                            if key in value:raise ValueError('duplicate persistent configuration key')
+                            value[key]=item
+                        return value
+                    persistent=json.loads(args.persistent_controller.read_bytes(),object_pairs_hook=unique,
+                        parse_constant=lambda value: (_ for _ in ()).throw(ValueError('nonfinite persistent configuration')))
+                    if type(persistent) is not dict:raise ValueError('persistent configuration must be an object')
                 if args.computation_controller:
                     if not functions: raise ValueError('adaptive computation is supported only by the typed function adapter')
                     if args.computation_controller.stat().st_size>8192: raise ValueError('computation configuration exceeds size budget')
                     computation=json.loads(args.computation_controller.read_text(encoding='utf-8'))
                     if not isinstance(computation,dict): raise ValueError('computation configuration must be a JSON object')
-                ranker = None if computation is not None else NativeDecisionRanker(args.ranker, action_schema='python-call-relational-vs-other' if functions else 'genesis-vs-ast')
+                ranker = None if computation is not None or persistent is not None else NativeDecisionRanker(args.ranker, action_schema='python-call-relational-vs-other' if functions else 'genesis-vs-ast')
                 options={'max_candidates':args.candidate_budget,'probe_budget':args.probe_budget,
                          'max_files_changed':args.max_files_changed} if functions else {'max_eval':args.max_eval}
                 if computation is not None: options['computation_controller']=computation
+                if persistent is not None:options['persistent_controller']=persistent
                 report = (initialize_functions if functions else initialize)(args.root, args.source, policy=policy, ranker=ranker,
                     memory_root=args.memory_root, capture_epoch=args.epoch, adaptive_enabled=not args.no_adaptive,
                     max_executions=args.execution_budget if args.execution_budget is not None else (96 if functions else 4),

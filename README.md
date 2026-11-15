@@ -4,7 +4,33 @@
 
 **Local coding intelligence with explicit evidence and execution boundaries.**
 
-This is a **v0.18.0 adaptive intelligence development snapshot**. All four platform acceptance gates remain **HOLD**. An optional controller now chooses among frequency, conventional temporal and original native Bitwork computation, changes coding effort allocation, and preserves verified public experience. A separately preregistered experiment measures its predictive quality and actual computational cost. Docker and WSL remain unavailable on this host, so isolated external repair and transferable coding improvement have not been demonstrated. There is no v0.19 readiness claim. See the [current qualification report](docs/ADAPTIVE_REPORT_V018.md).
+This is a **v0.18.0 persistent computation development snapshot**. All four platform acceptance gates remain **HOLD**. The new controller retains bounded frequency, conventional temporal and original native Bitwork state, assigns delayed credit, and changes coding effort allocation. Its preregistered synthetic experiment **failed the combined quality-and-cost objective**. Warm retention reduced reconstruction cost, but the selected policy was less accurate and more expensive than always-on native BGR. Docker and WSL remain unavailable, so authentic isolated repairs and cross-repository learning remain unproved. See the [current qualification report](docs/TEMPORAL_REPORT_V018.md).
+
+## Temporal Ascension: measured result
+
+The source-frozen study completed 576 trials across eight new seed blocks and
+eight regimes. Each arm saw the same 512 observations and checkpointed after 256.
+CPU includes the worker Job and supervisor, including inactive work and recovery.
+
+| Mechanism | Mean log loss | CPU seconds/trial |
+|---|---:|---:|
+| Frequency | 0.616591 | 0.617676 |
+| Conventional temporal | 0.510751 | 1.054932 |
+| Always-on original native BGR | 0.474825 | 3.229248 |
+| Original adaptive controller | 0.501269 | 1.905029 |
+| Persistent selective controller | 0.502447 | 3.603516 |
+
+Only one of five registered primary conditions passed. Persistent selective
+retention saved 29.38% CPU against identical cold-reconstruction forecasts, but
+used 11.59% more CPU than native BGR. Change alarms repeatedly interrupted native
+learning; detector-off and delayed-credit-off ablations had lower average loss.
+These are trusted synthetic forecasts, not authentic coding or transfer results.
+
+Read the [preregistered protocol](docs/TEMPORAL_PROTOCOL_V018.md),
+[independent audit](results/TEMPORAL_INDEPENDENT_AUDIT_V018.json),
+[negative-result diagnosis](docs/TEMPORAL_DIAGNOSIS_V018.md),
+[state and mathematical design](docs/PERSISTENT_TEMPORAL_V018.md), and
+[exact reproduction commands](docs/TEMPORAL_REPRODUCTION_V018.md).
 
 ## Intelligence architecture
 
@@ -19,6 +45,15 @@ Public observations precede proposals and update the diagnostic posterior used f
 The [adaptive computation controller](docs/ADAPTIVE_INTELLIGENCE_V018.md) uses public predictive gain, frozen development cost estimates, an uncertainty penalty and bounded exploration. Expensive predictors are built only when selected; startup and historical replay are charged. Its [optional mission path](docs/ADAPTIVE_MISSION_V018.md) changes GENESIS work, candidate/probe ceilings, localization, ranking and memory recall, and can durably abstain. Existing A/B/C/D configurations retain their definitions; adaptive repository arm E has a separate prospective design. These effort mappings are explicit hypotheses, not proven optimal computation policies.
 
 ## Start on Windows
+
+The optional [persistent mission path](docs/TEMPORAL_MISSION_V018.md) adds direct
+state restoration and public-observation updates to the architecture above.
+Full warm, selective warm and cold policies are explicit; cached state never
+becomes verified knowledge merely by serialization. Source, runtime, policy,
+epoch and eligible public-prefix bindings control reuse. Hidden verification
+results do not train candidate selection. The earlier repository arms retain
+their definitions; the persistent repository extension remains NOT_RUN pending
+independent qualification.
 
 From the extracted source root, run these commands in PowerShell or Command Prompt:
 
@@ -59,7 +94,7 @@ The supported installation is source-linked. A standalone wheel containing the v
 | Isolated external repair and interrupted isolated mission | HOLD |
 | Native BGR coding advantage | NOT ESTABLISHED; mixed synthetic mechanism results below |
 
-Exact current test counts, source hashes, timing, skip reasons and runtime outputs are in [the adaptive qualification receipt](results/ADAPTIVE_FINAL_RECHECK_V018.json). [Native Windows checks and memory diagnosis](docs/NATIVE_FRONTIER_V018.md) include resource refusal, breakaway denial and owner-death recovery. Rejected allocations increased peak counters without increasing observed current committed memory; strict peak accounting remains HOLD. A bounded Windows rename retry addresses intermittent mission-directory publication refusal, with destination/identity checks and no overwrite fallback. Original and intermediate receipts remain immutable. CPU timing is not an energy measurement.
+Exact current test counts, source hashes, timing, skip reasons and runtime outputs are in [the temporal qualification receipt](results/TEMPORAL_FINAL_RECHECK_V018.json). [Native Windows checks and memory diagnosis](docs/NATIVE_FRONTIER_V018.md) include resource refusal, breakaway denial and owner-death recovery. Rejected allocations increased peak counters without increasing observed current committed memory; strict peak accounting remains HOLD. A bounded Windows rename retry addresses intermittent mission-directory publication refusal, with destination/identity checks and no overwrite fallback. Original and intermediate receipts remain immutable. CPU timing is not an energy measurement.
 
 ## Isolated missions
 
@@ -107,7 +142,7 @@ Native BGR loses to the frequency control. These are retrospective public-trace 
 
 An [independent arithmetic audit](docs/RESEARCH_QUALIFICATION_V018.md) reproduces that negative loss result and identical candidate ordering. The original study and protocol remain unchanged.
 
-The new frozen mechanism experiment ran 32 trusted synthetic streams, eight seeds for each of four distributions. All predictors received the same observed prefix and action, with 32 unscored observations followed by 96 scored forecasts. Mean natural-log loss, lower is better:
+The earlier FRONTIER mechanism experiment ran 32 trusted synthetic streams, eight seeds for each of four distributions. All predictors received the same observed prefix and action, with 32 unscored observations followed by 96 scored forecasts. Mean natural-log loss, lower is better:
 
 | Distribution | Frequency | Native BGR | Conventional temporal |
 |---|---:|---:|---:|
@@ -140,9 +175,13 @@ Results and archive outputs must be new paths. The verifier never rebuilds expec
 
 The original desktop source is preserved in the `baseline-v0.17.0` Git branch and the original ZIP; development is on `v0.18-platform`. Historical experiment/results files and the original BGR archive were not rewritten. This compact source omits `baseline/NOMAD-v0.16.0.zip` by design. Its absence is a lineage HOLD, not corrupted current source. Do not present this source ZIP as the complete nested historical archive.
 
-The [GitHub repository](https://github.com/jacksonjp0311-gif/NOMAD) is private. Development uses [v0.18-platform](https://github.com/jacksonjp0311-gif/NOMAD/tree/v0.18-platform); `main` remains at the earlier engineering commit `5851566`. This iteration began from local and remote `993395f500565a392f9f117485626cad11122b0b` with a clean tree and zero divergence. The controller study was preregistered in commit `e2cd77c03848ce13d9fe31bf32cca383835ae3b3` before evaluation. The companion delivery receipt records the new verified development synchronization. Prior GitHub Actions was blocked before jobs started by account billing/spending settings; delivery records the new run separately. No release, main merge, force push or visibility change is part of qualification.
+The [GitHub repository](https://github.com/jacksonjp0311-gif/NOMAD) is private. Development uses [v0.18-platform](https://github.com/jacksonjp0311-gif/NOMAD/tree/v0.18-platform); `main` remains at the earlier engineering commit `5851566`. This iteration began from local and remote `3ffd46741ddb99693cd05f35153daec778a2105a` with a clean tree and zero divergence. The controller study was preregistered in commit `952684387c2414b14ce76bf1cf3029254ce10e67` before evaluation. The companion delivery receipt records the new verified development synchronization. Prior GitHub Actions was blocked before jobs started by account billing/spending settings; delivery records the new run separately. No release, main merge, force push or visibility change is part of qualification.
 
-- [Current adaptive qualification report](docs/ADAPTIVE_REPORT_V018.md)
+- [Current temporal qualification report](docs/TEMPORAL_REPORT_V018.md)
+- [Persistent state and mathematics](docs/PERSISTENT_TEMPORAL_V018.md)
+- [Persistent mission and recovery](docs/TEMPORAL_MISSION_V018.md)
+- [Negative result and diagnosis](docs/TEMPORAL_DIAGNOSIS_V018.md)
+- [Preserved adaptive qualification report](docs/ADAPTIVE_REPORT_V018.md)
 - [Controller mathematics and frozen protocol](docs/ADAPTIVE_INTELLIGENCE_V018.md)
 - [Adaptive mission, memory and recovery boundaries](docs/ADAPTIVE_MISSION_V018.md)
 - [Native blockers and authentic development corpus](docs/ADAPTIVE_NATIVE_AND_CORPUS_V018.md)

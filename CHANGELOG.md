@@ -1,5 +1,19 @@
 # NOMAD — Change History
 
+## v0.18.0 temporal qualification (no version change)
+
+- Added bounded typed predictor state, selective/full/cold retention, direct
+  native restoration, delayed credit, public-loss detection and recovery contracts.
+- Froze a new nine-arm, eight-seed-block experiment before reserved generation;
+  completed 576 primary trials and independent arithmetic auditing.
+- Preserved the failed registered objective: warm state reduces replay, but the
+  persistent controller is less accurate and more costly than always-on native.
+- Added explicit persistent mission decisions, public-state replay and optional
+  admitted-memory reuse while preserving WITNESS and earlier repository arms.
+- Preserved prior negative results, failed development/postprocessing attempts,
+  original seals, available archives and unresolved historical gaps.
+- All four gates remain HOLD; no v0.19 promotion or release publication.
+
 ## v0.18.0 adaptive intelligence qualification (no version change)
 
 - Added a bounded controller that chooses existing frequency, temporal or native

@@ -12,7 +12,8 @@ disposable snapshot, not Git or a remote effect. Checksums are not signatures.
 from __future__ import annotations
 
 import ast
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
+import copy
 import json
 import math
 import os
@@ -35,12 +36,15 @@ from .safe_eval import evaluate, parse_expr
 from .witness import Witness, WitnessReceipt
 from . import inquiry, repo_world, frontier
 from .causal_atlas import AtlasTask, ChangeReceipt, Contract, SymbolGraph, source_digest
-from .mnemonic import EvidenceMemory, action_digest, digest as memory_digest
+from .mnemonic import EvidenceMemory, action_digest, digest as memory_digest, encode_features
 from .platform_bitwork import NativeDecisionRanker, PublicObservation
 from .python_model import PythonExample, PythonTask
 from .python_runtime import PythonExecution, TestObservation
 from .resonance import encode_resonance
 from .adaptive import AdaptiveConfig, AdaptiveController
+from .persistent import (PersistentConfig, PersistentController, prefix_digest,
+                         _runtime_identity as _persistent_runtime_identity,
+                         source_identity as _persistent_source_identity)
 
 SCHEMA = 'nomad.platform-mission.v1'
 WITNESS_ID = 'nomad-v018-bounded-arithmetic-observer'
@@ -51,6 +55,8 @@ CHECKPOINTS = ('after_plan', 'after_patch_write', 'after_patch_record',
                'after_rollback_record', 'after_probe_dispatch', 'after_probe',
                'after_proposal', 'before_memory', 'after_memory')
 FUNCTION_CHECKPOINTS = (*CHECKPOINTS, 'after_multifile_patch_write', 'after_control')
+PERSISTENT_CHECKPOINTS = ('after_persistent_control','after_persistent_forecast','after_persistent_update',
+                         'after_persistent_search_observation')
 MEMORY_ID = 'nomad-platform-memory-v018'
 
 
@@ -101,13 +107,14 @@ def _publish_staged_mission(stage: Path, root: Path) -> None:
             return
 
 
-def _runtime_identity() -> dict[str, str]:
+def _runtime_identity(*, persistent=False) -> dict[str, str]:
     package = Path(__file__).parent
-    return {name: digest((package / name).read_bytes()) for name in
+    names = (
             ('platform_mission.py', 'genesis.py', 'safe_eval.py', 'witness.py', 'isolation.py',
              'supervised.py', 'windows_job.py', 'mission_runtime.py', 'effects.py',
              'python_operators.py', 'platform_bitwork.py', 'resonance.py', 'repo_world.py',
-             'inquiry.py', 'mnemonic.py', 'causal_atlas.py', 'frontier.py', 'adaptive.py')}
+             'inquiry.py', 'mnemonic.py', 'causal_atlas.py', 'frontier.py', 'adaptive.py'))
+    return {name: digest((package / name).read_bytes()) for name in names + (('persistent.py',) if persistent else ())}
 
 
 def _origin_goal(goal: dict) -> dict:
@@ -665,6 +672,7 @@ def initialize(root: Path, source: Path, *, goal_text: str, public: list[dict],
 
 def _load(root: Path) -> tuple[dict, Journal, list[dict]]:
     try:
+        if (root/'goal.json').stat().st_size>64_000_000:raise MissionHold('mission goal byte budget exceeded')
         goal = json.loads((root / 'goal.json').read_bytes())
         if goal.get('adapter') == frontier.FUNCTION_ADAPTER:
             return _load_functions(root, goal)
@@ -704,7 +712,9 @@ def _load(root: Path) -> tuple[dict, Journal, list[dict]]:
         elif actual != expected:
             raise MissionHold('unexpected workspace modification')
         return goal, journal, rows
-    except (OSError, ValueError, TypeError, KeyError) as exc:
+    except MissionHold:
+        raise
+    except (OSError, ValueError, TypeError, KeyError, AttributeError, RuntimeError, OverflowError) as exc:
         raise MissionHold('mission artifact missing, malformed, or stale') from exc
 
 
@@ -895,7 +905,7 @@ def _learn(root: Path, goal: dict, rows: list[dict], *, checkpoint=lambda _: Non
 
 def run(root: Path, *, interrupt_at: str | None = None) -> dict:
     root = Path(root).resolve(strict=True)
-    if interrupt_at is not None and interrupt_at not in FUNCTION_CHECKPOINTS:
+    if interrupt_at is not None and interrupt_at not in FUNCTION_CHECKPOINTS+PERSISTENT_CHECKPOINTS:
         raise ValueError('unknown interruption checkpoint')
     with exclusive_owner(root):
         goal, journal, rows = _load(root)
@@ -1120,6 +1130,410 @@ def _controller_state(analysis, *, observations=0, failures=0):
             'edge_count':sum(len(e) for e in analysis['graph'].values()),
             'memory_records':analysis.get('eligible_memory_tasks',0),
             'public_observations':observations,'public_failures':failures}
+
+
+PERSISTENT_MISSION_SCHEMA = 'nomad.function-persistent-computation.v18'
+PERSISTENT_JOURNAL_BYTES = 64_000_000
+_PERSISTENT_VALIDATED = {}
+
+
+def _persistent_semantics(document):
+    """Compare learned state while retaining all policy/evidence/decision fields.
+
+    Restore/serialization counters differ after restart. Only these concrete
+    diagnostic codec paths are omitted, never arbitrary
+    fields with a similar name. This is not an authenticity check.
+    """
+    payload=copy.deepcopy(document['payload']); payload.pop('telemetry')
+    diagnostic={
+        'GrammarEnsemble':{'telemetry'}, 'ExactCompiledGuardedLearner':{'telemetry'},
+        'GovernedBitworkV14':{'telemetry'},
+        'ExactCompiledGrammarSynthesizer':{'telemetry','cost','execution_cost'},
+        'PackedLagFeatureLearner':{'telemetry','packed_cost'}}
+    def normalize(value):
+        if isinstance(value,list): return [normalize(v) for v in value]
+        if not isinstance(value,dict): return value
+        if value.get('t') in diagnostic and set(value)=={'t','version','fields'}:
+            return {**value,'fields':{k:normalize(v) for k,v in value['fields'].items()
+                                     if k not in diagnostic[value['t']]}}
+        return {k:normalize(v) for k,v in value.items()}
+    payload['states']={name:{**doc['payload'],'state':normalize(doc['payload']['state'])}
+                       for name,doc in payload['states'].items()}
+    return payload
+
+
+def _persistent_load(document, config, history, epoch):
+    return PersistentController.load(document,expected_config=config,expected_epoch=epoch,
+        expected_prefix_sha256=prefix_digest(history))
+
+
+def _public_record_search(record):
+    evidence=record.get('persistent_evidence') or record.get('computation_evidence')
+    return evidence['public_search'] if evidence else [
+        {'operation':'search:'+record['candidate']['id'],'result':record['public_result']}]
+
+
+def _persistent_prefix(config,records):
+    chosen=[]; count=0
+    limit=config.max_history-min(128,config.max_history//2)
+    for record in reversed(records):
+        search=_public_record_search(record)
+        if count+len(search)>limit: break
+        chosen.append((record,search)); count+=len(search)
+    history=[]; bindings=[]
+    for record,search in reversed(chosen):
+        bindings.append({'observation_id':record['observation_id'],
+            'source_sha256':digest(canonical(record['baseline'])),
+            'public_search_sha256':digest(canonical(search))})
+        for observation in search:
+            proposal=_function_proposal(record['origin'],observation['operation'].partition(':')[2])
+            history.append((int(proposal['family']!='comparison'),int(observation['result']['supported'])))
+    return history,bindings,chosen
+
+
+def _persistent_from_memory(config, models, epoch):
+    """Exact-prefix cache reuse; otherwise measured rebuilding of admitted data."""
+    history,bindings,chosen=_persistent_prefix(config,models.get('eligible_records',[]))
+    reason='no accepted exact-prefix checkpoint'
+    for record,_ in chosen:
+        evidence=record.get('persistent_evidence')
+        if not evidence: continue
+        document=evidence['terminal_state']; saved=PersistentConfig(**document['payload']['config'])
+        if asdict(replace(saved,epoch=config.epoch))!=asdict(config):
+            reason='accepted checkpoint policy differs'; continue
+        if document['payload']['history']!=[list(row) for row in history]:
+            reason='eligible public prefix changed or expired'; continue
+        try:
+            controller=_persistent_load(document,saved,history,epoch)
+            return controller,{'status':'RESTORED','reason':None,'bindings':bindings,
+                'public_prefix_sha256':prefix_digest(history),'observations':len(history),
+                'checkpoint_sha256':digest(canonical(document))}
+        except (ValueError,RuntimeError) as error:
+            reason=str(error)
+    controller=PersistentController(replace(config,epoch=epoch))
+    for action,outcome in history: controller.ingest_public(action,outcome)
+    return controller,{'status':'REBUILT' if history else 'COLD','reason':reason,'bindings':bindings,
+        'public_prefix_sha256':prefix_digest(history),'observations':len(history),'checkpoint_sha256':None}
+
+
+def _persistent_allocation(controller,analysis,*,max_candidates,probe_budget,max_executions,public_command):
+    reserve=3+int(bool(public_command)); before=controller.snapshot()
+    steps=max(0,min(max_candidates,max_executions-reserve-1,controller.config.max_history-len(controller.history),
+                    controller.config.commitment))
+    state=_controller_state(analysis); budget={'steps':steps,'max_cost_seconds':120.0}
+    decision=controller.decide(state,remaining_budget=budget); mechanism=decision['mechanism']
+    probes=min(probe_budget,{'frequency':1,'temporal':2,'native':probe_budget,'abstain':0}[mechanism])
+    cap=min({'frequency':16,'temporal':32,'native':max_candidates,'abstain':0}[mechanism],
+            max_candidates,max(0,max_executions-reserve-probes),controller.config.max_history-len(controller.history))
+    return {'schema':PERSISTENT_MISSION_SCHEMA,'config':asdict(controller.config),
+        'controller_before':before,'controller_after':controller.snapshot(),'decision':decision,
+        'public_state':state,'remaining_budget':budget,'max_candidates':cap,'probe_budget':probes,
+        'private_dispatch_reserve':reserve,'genesis_max_eval':{'frequency':0,'temporal':1024,'native':4096,'abstain':0}[mechanism],
+        'ast_check_budget':{'frequency':64,'temporal':256,'native':1024,'abstain':0}[mechanism],
+        'use_localization':mechanism in ('temporal','native'),
+        'use_retrieval':mechanism in ('temporal','native') and analysis['eligible_memory_tasks']>=3,
+        'scope':'registered bounded effort heuristic; no established coding advantage'}
+
+
+def _persistent_order(goal,remaining,probabilities,posterior,recall):
+    order=[_function_proposal(goal,identity) for identity in remaining]
+    order.sort(key=lambda p:-probabilities[int(p['family']!='comparison')])
+    if goal['analysis']['adaptive_enabled']:
+        order.sort(key=lambda p:(-int(recall.get(p['id'],{}).get('outcome')=='impact'),
+            -sum(posterior.get(name,0) for name in p['files'])/len(p['files'])))
+    return [p['id'] for p in order]
+
+
+def _persistent_recall(goal,remaining,mechanism):
+    invoked=(mechanism in ('native','temporal') and goal['analysis']['adaptive_enabled']
+             and goal['analysis']['eligible_memory_tasks']>=3)
+    if not invoked:return False,{}
+    body=goal['persistent']['mnemonic_snapshot'];memory=EvidenceMemory();template=memory.snapshot()
+    if set(body)!=set(template) or any(body[k]!=template[k] for k in template if k not in ('events','head')):
+        raise MissionHold('persistent planning memory metadata changed')
+    previous=memory.head;seen=set()
+    if len(body['events'])>memory.max_events:raise MissionHold('persistent planning memory bound exceeded')
+    for row in body['events']:
+        evidence=row['evidence']
+        if (row['previous']!=previous or row['sha256']!=memory_digest({'evidence':evidence,'previous':previous})
+                or evidence['event_id'] in seen):raise MissionHold('persistent planning memory chain changed')
+        if (type(evidence['capture_epoch']) is not int or evidence['capture_epoch']<0
+                or type(evidence['changed']) is not bool or type(evidence['features']) is not list
+                or encode_features(tuple(evidence['features']))!=evidence.get('state_bits')):
+            raise MissionHold('persistent planning memory effect shape changed')
+        seen.add(evidence['event_id']);previous=row['sha256']
+    if previous!=body['head']:raise MissionHold('persistent planning memory head changed')
+    memory.events=body['events'];memory.head=previous;memory._event_ids=seen
+    first=goal['public'][0];contract=Contract(first['module'],first['function'],tuple((i,0) for i in range(len(goal['public']))))
+    symbols=SymbolGraph(goal['analysis']['files']);recall={}
+    for identity in remaining:
+        proposal=_function_proposal(goal,identity)
+        if len(proposal['files'])==1 and '/' not in next(iter(proposal['files'])):
+            name=next(iter(proposal['files']))
+            recall[identity]=memory.recall(action_source=proposal['files'][name],features=symbols.features(contract,name),
+                now_epoch=goal['analysis']['capture_epoch'],target_task_id=goal['analysis']['task_identity']).as_dict()
+    return True,recall
+
+
+def _persistent_public_state(goal,observations):
+    return _controller_state(goal['analysis'],observations=len(observations),
+                             failures=sum(not row['result']['supported'] for row in observations))
+
+
+def _validate_persistent_trace(goal,rows,*,complete=False,selected=None):
+    # Memoize only complete pure validation of immutable content. Rehashed or
+    # altered fields, another policy/runtime, and different terminal authority
+    # all produce a different key. This is not a cache of mutable controller objects.
+    if len(rows)>2048:raise MissionHold('persistent event count budget exceeded')
+    raw=canonical([goal,rows,complete,selected,_runtime_identity(persistent=True),
+                   _persistent_source_identity(),_persistent_runtime_identity()])
+    if len(raw)>PERSISTENT_JOURNAL_BYTES:raise MissionHold('persistent validation byte budget exceeded')
+    key=digest(raw)
+    if key in _PERSISTENT_VALIDATED:return json.loads(_PERSISTENT_VALIDATED[key])
+    result=_replay_persistent_trace(goal,rows,complete=complete,selected=selected)
+    encoded=canonical(result)
+    if len(encoded)<=2_000_000:
+        while _PERSISTENT_VALIDATED and (len(_PERSISTENT_VALIDATED)>=4 or
+                sum(map(len,_PERSISTENT_VALIDATED.values()))+len(encoded)>8_000_000):
+            del _PERSISTENT_VALIDATED[next(iter(_PERSISTENT_VALIDATED))]
+        _PERSISTENT_VALIDATED[key]=encoded
+    return result
+
+
+def _replay_persistent_trace(goal,rows,*,complete=False,selected=None):
+    """Replay only public controller effects; private observations never train."""
+    allocation=goal['persistent']; config=PersistentConfig(**allocation['config'])
+    epoch=goal['analysis']['capture_epoch']; initial=allocation['controller_before']
+    history=[tuple(row) for row in initial['payload']['history']]
+    model=_persistent_load(initial,config,history,epoch)
+    expected=_persistent_allocation(model,{**goal['analysis'],'proposals':[]},
+        max_candidates=allocation['requested_limits']['max_candidates'],
+        probe_budget=allocation['requested_limits']['probe_budget'],max_executions=goal['max_executions'],
+        public_command=goal['public_command'])
+    for key,value in expected.items():
+        if key.startswith('controller_'):
+            if _persistent_semantics(value)!=_persistent_semantics(allocation[key]):
+                raise MissionHold('persistent initial learned state changed')
+        elif allocation.get(key)!=value: raise MissionHold('persistent allocation changed')
+    for field in ('inspection_and_memory_validation_cost','generation_cost'): _validate_computation_cost(allocation[field])
+    if (goal['probe_budget']!=allocation['probe_budget'] or len(goal['analysis']['proposals'])>allocation['max_candidates']
+            or goal['analysis']['generated_candidates_checked']>allocation['ast_check_budget']):
+        raise MissionHold('persistent allocation exceeds registered bounds')
+    state=allocation['controller_after']; public=[]; probes=[]; pending=None; forecast=None; control=None
+    diagnosis=None; updated=[]; dispatches=0; seen=set();operations=set();previous='0'*64
+    for index,row in enumerate(rows,1):
+        body={k:v for k,v in row.items() if k!='sha256'}
+        if row['seq']!=index or row['prev']!=previous or row['mission_id']!=goal['mission_id'] or row['sha256']!=digest(canonical(body)):
+            raise MissionHold('persistent public trace chain changed')
+        previous=row['sha256']; kind=row['kind']; data=row['data']
+        if index==1 and (kind!='PLATFORM_CREATED' or data!={'goal_sha256':digest(canonical(goal))}):
+            raise MissionHold('persistent public origin changed')
+        if kind=='F_DIAGNOSIS':
+            if diagnosis is not None:raise MissionHold('duplicate persistent diagnosis')
+            iterator=iter(probes)
+            def observed_probe(operation):
+                value=next(iterator,None)
+                if value is None or value['operation']!=operation:raise MissionHold('persistent probe choice/order changed')
+                return value
+            expected_diagnosis=_persistent_diagnosis_data(goal,observed_probe)
+            if next(iterator,None) is not None or data!=expected_diagnosis:
+                raise MissionHold('persistent public diagnosis differs from its bound probes')
+            diagnosis=data
+        elif kind=='F_P_CONTROL':
+            if diagnosis is None or forecast is not None: raise MissionHold('persistent choice before diagnosis or unsettled outcome')
+            if public and public[-1]['result']['supported']:raise MissionHold('persistent search continued after public success')
+            if data['state_before_sha256']!=digest(canonical(state)): raise MissionHold('persistent control prefix changed')
+            remaining=[p['id'] for p in goal['analysis']['proposals'] if p['id'] not in seen]
+            steps=max(0,min(len(remaining),goal['max_executions']-dispatches-allocation['private_dispatch_reserve'],
+                            config.max_history-len(history),config.commitment))
+            if len(probes)==len(goal['public']) and not public and all(p['result']['supported'] for p in probes): steps=0
+            public_state=_persistent_public_state(goal,probes+public); budget={'steps':steps,'max_cost_seconds':120.0}
+            if data['public_state']!=public_state or data['remaining_budget']!=budget:
+                raise MissionHold('persistent continuation budget or public evidence changed')
+            model=_persistent_load(state,config,history,epoch)
+            decision=model.decide(public_state,remaining_budget=budget)
+            probabilities=list(model.peek_probabilities(decision['mechanism']))
+            baseline=list(model.peek_probabilities('frequency'))
+            if data['decision']!=decision or data['probabilities']!=probabilities or data['frequency_probabilities']!=baseline:
+                raise MissionHold('persistent choice or forecast does not replay')
+            invoked,recall=_persistent_recall(goal,remaining,decision['mechanism'])
+            if data['retrieval_invoked']!=invoked or data['mnemonic_recall']!=recall:
+                raise MissionHold('persistent recall differs from bound planning memory')
+            if data['order']!=_persistent_order(goal,remaining,probabilities,diagnosis['posterior'],data['mnemonic_recall']):
+                raise MissionHold('persistent candidate preference changed')
+            _persistent_load(data['state'],config,history,epoch)
+            if _persistent_semantics(model.snapshot())!=_persistent_semantics(data['state']):
+                raise MissionHold('persistent ranked state changed')
+            _validate_computation_cost(data['cost']);state=data['state'];control=data
+        elif kind=='F_P_FORECAST':
+            if forecast is not None or control is None or control['decision']['mechanism']=='abstain':
+                raise MissionHold('duplicate or unauthorized persistent forecast')
+            remaining=[identity for identity in control['order'] if identity not in seen]
+            if not remaining or data['candidate']!=remaining[0] or data['state_before_sha256']!=digest(canonical(state)):
+                raise MissionHold('persistent forecast source/order changed')
+            proposal=_function_proposal(goal,data['candidate']);action=int(proposal['family']!='comparison')
+            model=_persistent_load(state,config,history,epoch);prediction=model.predict(action)
+            if data['action']!=action or data['p']!=prediction or data['mechanism']!=model.selected:
+                raise MissionHold('persistent pre-observation prediction changed')
+            forecast=row
+        elif kind=='F_DISPATCHED':
+            dispatches+=1
+            if pending: raise MissionHold('duplicate persistent dispatch')
+            if data['operation'].startswith('search:') and (forecast is None or data['operation']!='search:'+forecast['data']['candidate']):
+                raise MissionHold('public outcome requested without persistent forecast')
+            pending=data
+        elif kind=='F_RECOVERED':
+            if not pending or data!={'operation':pending['operation'],'container_name':pending['container_name'],'disposal_confirmed':True}:
+                raise MissionHold('persistent recovery does not bind pending dispatch')
+            pending=None
+        elif kind=='F_OBSERVED':
+            if not pending or pending['operation']!=data['operation']: raise MissionHold('unbound persistent observation')
+            if data['operation'] in operations:raise MissionHold('duplicate persistent public observation')
+            operations.add(data['operation'])
+            if data['operation'].startswith(('probe:','search:')):
+                result=_validate_function_execution(goal,pending,data['execution'],None)
+                if data['result']!=result: raise MissionHold('persistent public result differs')
+                (probes if data['operation'].startswith('probe:') else public).append(data)
+            elif complete: raise MissionHold('private observation in persistent learning trace')
+            pending=None
+        elif kind=='F_P_UPDATED':
+            if forecast is None or not public or data['candidate']!=forecast['data']['candidate']:
+                raise MissionHold('persistent update without unique pending forecast')
+            observation=public[-1];action=forecast['data']['action'];outcome=int(observation['result']['supported'])
+            if (observation['operation']!='search:'+data['candidate'] or data['forecast_sha256']!=forecast['sha256']
+                    or data['observation_sha256']!=digest(canonical(observation)) or data['candidate'] in seen):
+                raise MissionHold('persistent update receipt binding changed')
+            model=_persistent_load(state,config,history,epoch)
+            if model.predict(action)!=forecast['data']['p']: raise MissionHold('persistent resumed prediction differs')
+            model.observe(action,outcome);history.append((action,outcome))
+            _persistent_load(data['state'],config,history,epoch)
+            if _persistent_semantics(model.snapshot())!=_persistent_semantics(data['state']):
+                raise MissionHold('persistent post-observation learned state changed')
+            _validate_computation_cost(data['cost']);state=data['state'];seen.add(data['candidate']);updated.append(data);forecast=None
+        elif kind=='F_SELECTED':
+            if (forecast is not None or not updated or data['candidate']!=updated[-1]['candidate']
+                    or public[-1]['operation']!='search:'+data['candidate'] or not public[-1]['result']['supported']):
+                raise MissionHold('persistent selection before public update')
+        elif complete and kind not in ('PLATFORM_CREATED','F_PATCH','F_PATCHED'):
+            raise MissionHold('nonpublic event in persistent training trace')
+    if complete and (pending or forecast or not public or rows[-1]['kind']!='F_SELECTED'
+                     or rows[-1]['data']!={'candidate':selected}):
+        raise MissionHold('incomplete persistent accepted public prefix')
+    return {'state':state,'history':history,'public_search':public,'probes':probes,'control':control,
+            'forecast':forecast,'updated':updated,'dispatches':dispatches,'diagnosis':diagnosis}
+
+
+def read_function_persistent_controller(memory_root: Path, *, config=None, now_epoch=0):
+    """Read-only admitted reconstruction/cache reuse; never accept external state."""
+    config=config or PersistentConfig(state_policy='selectivewarm')
+    if type(config) is dict: config=PersistentConfig(**config)
+    if type(config) is not PersistentConfig: raise ValueError('persistent configuration only')
+    config.validate();path=Path(memory_root)
+    if path.exists():
+        with exclusive_owner(path):models=_function_memory(path,mode='frequency',epoch=now_epoch)
+    else:models=_function_memory(None,mode='frequency',epoch=now_epoch)
+    return _persistent_from_memory(config,models,now_epoch)
+
+
+def _persistent_diagnosis(goal,journal,observe,append):
+    previous=[r['data'] for r in journal.read() if r['kind']=='F_DIAGNOSIS']
+    if previous: return previous[0]
+    result=_persistent_diagnosis_data(goal,observe);append('F_DIAGNOSIS',result);return result
+
+
+def _persistent_diagnosis_data(goal,observe):
+    prior=dict(goal['analysis']['world_prior']); roles={name:name for name in prior}
+    costs={name:max(1,sum(name in p['files'] for p in goal['analysis']['proposals'])) for name in prior}
+    model=inquiry.ProbeLikelihoods();menu=[];seen=set();decisions=[];resonances=[]
+    for index,row in enumerate(goal['public']):
+        reached=set();pending=[goal['analysis']['modules'][row['module']]]
+        while pending:
+            name=pending.pop()
+            if name in reached: continue
+            reached.add(name);pending.extend(goal['analysis']['graph'][name])
+        for hypothesis in prior:
+            for _ in range(4):model.observe(hypothesis,str(index),passed=hypothesis not in reached)
+        menu.append(inquiry.ProbeMenu(str(index),str(index),.05))
+    for _ in range(min(goal['probe_budget'],len(menu))):
+        decision=(inquiry.choose_probe(prior,costs,roles,model,menu,frozenset(seen),1.)
+                  if goal['persistent']['use_localization'] and goal['analysis']['adaptive_enabled'] else None)
+        index=int(decision.probe_id) if decision else next(i for i in range(len(menu)) if str(i) not in seen)
+        evidence=observe('probe:'+str(index));seen.add(str(index))
+        source=goal['analysis']['files'][goal['analysis']['modules'][goal['public'][index]['module']]]
+        precomputed=PythonExecution(True,None,None,None,len(list(ast.walk(ast.parse(source)))),
+            (TestObservation(evidence['result']['supported'],1,None,None,None,0),),0)
+        resonance=encode_resonance(PythonTask('api-equality-probe',source,(PythonExample({},1),)),
+                                   execution=precomputed,numeric_inputs=False)
+        resonances.append({'index':index,**asdict(resonance),'fusion_signature':resonance.fusion_signature,
+            'encoding':'bound isolated API equality; numeric input correlations disabled'})
+        prior=inquiry._update(prior,roles,model,str(index),evidence['result']['supported'])
+        decisions.append({'index':index,'decision':asdict(decision) if decision else None,'posterior':prior})
+    result={'decisions':decisions,'posterior':prior,'order':[p['id'] for p in goal['analysis']['proposals']],
+        'resonance':resonances,'mnemonic_recall':{},'ranking':{'authority':'ranking_only','mechanism':'persistent_pending'},
+        'likelihood_scope':'declared reachability heuristic; not calibrated learned probability'}
+    return result
+
+
+def _persistent_search(root,goal,journal,observe,patch,append,checkpoint):
+    allocation=goal['persistent'];config=PersistentConfig(**allocation['config']);epoch=goal['analysis']['capture_epoch']
+    if allocation['decision']['mechanism']=='abstain' or not goal['analysis']['proposals']:
+        append('F_ABSTAINED',{'reason':'persistent initial allocation declined work'});return None
+    diagnosis=_persistent_diagnosis(goal,journal,observe,append);checkpoint('after_proposal')
+    context=_validate_persistent_trace(_origin_goal(goal),journal.read())
+    controller=_persistent_load(context['state'],config,context['history'],epoch)
+    while True:
+        completed=context['public_search']; updated=context['updated'];forecast=context['forecast']
+        if (forecast is None and updated and completed[-1]['operation']=='search:'+updated[-1]['candidate']
+                and completed[-1]['result']['supported']):
+            chosen=updated[-1]['candidate'];append('F_SELECTED',{'candidate':chosen});return chosen
+        if updated:patch(None,'search-revert:'+updated[-1]['candidate'])
+        remaining=[p['id'] for p in goal['analysis']['proposals'] if p['id'] not in {r['candidate'] for r in updated}]
+        if not remaining:
+            append('F_EXHAUSTED',{'reason':'persistent bounded inventory exhausted'});return None
+        state=context['state'];history=context['history']
+        if forecast is None:
+            cached_control=context['control']
+            if cached_control is not None and cached_control['state']==state:
+                control=cached_control;decision=control['decision']
+            else:
+                started=(time.perf_counter(),time.process_time())
+                steps=max(0,min(len(remaining),goal['max_executions']-context['dispatches']-allocation['private_dispatch_reserve'],
+                                config.max_history-len(history),config.commitment))
+                if len(context['probes'])==len(goal['public']) and not completed and all(p['result']['supported'] for p in context['probes']):steps=0
+                public_state=_persistent_public_state(goal,context['probes']+completed);budget={'steps':steps,'max_cost_seconds':120.}
+                decision=controller.decide(public_state,remaining_budget=budget)
+                probabilities=list(controller.peek_probabilities(decision['mechanism']));baseline=list(controller.peek_probabilities('frequency'))
+                retrieval,recall=_persistent_recall(goal,remaining,decision['mechanism'])
+                control={'state_before_sha256':digest(canonical(state)),'public_state':public_state,'remaining_budget':budget,
+                    'decision':decision,'probabilities':probabilities,'frequency_probabilities':baseline,
+                    'mnemonic_recall':recall,'retrieval_invoked':retrieval,
+                    'order':_persistent_order(goal,remaining,probabilities,diagnosis['posterior'],recall),
+                    'state':controller.snapshot(),'cost':_computation_cost(started)}
+                append('F_P_CONTROL',control);checkpoint('after_persistent_control')
+            if decision['mechanism']=='abstain':
+                patch(None,'persistent-abstain');append('F_ABSTAINED',{'reason':'persistent continuation declined remaining search'});return None
+            identity=control['order'][0];proposal=_function_proposal(goal,identity)
+            action=int(proposal['family']!='comparison');state=control['state']
+            prediction=controller.predict(action)
+            append('F_P_FORECAST',{'candidate':identity,'action':action,'p':prediction,'mechanism':controller.selected,
+                'state_before_sha256':digest(canonical(state))});checkpoint('after_persistent_forecast')
+            forecast=journal.read()[-1]
+        else:
+            identity=forecast['data']['candidate'];action=forecast['data']['action']
+            if controller.predict(action)!=forecast['data']['p']:raise MissionHold('resumed persistent forecast differs')
+        patch(identity,'search-apply:'+identity)
+        result=observe('search:'+identity)
+        checkpoint('after_persistent_search_observation')
+        started=(time.perf_counter(),time.process_time());controller.observe(action,int(result['result']['supported']))
+        update={'candidate':identity,'forecast_sha256':forecast['sha256'],'observation_sha256':digest(canonical(result)),
+                'state':controller.snapshot(),'cost':_computation_cost(started)}
+        append('F_P_UPDATED',update);checkpoint('after_persistent_update')
+        public=context['public_search']
+        if not public or public[-1]['operation']!=result['operation']:public=public+[result]
+        context={**context,'state':update['state'],'history':history+[(action,int(result['result']['supported']))],
+            'public_search':public,'forecast':None,'updated':updated+[update],
+            'control':control if 'control' in locals() else context['control'],
+            'dispatches':sum(r['kind']=='F_DISPATCHED' for r in journal.read())}
 
 
 def _controller_from_memory(config, models):
@@ -1360,7 +1774,7 @@ def _validate_computation_evidence(goal,evidence,selected):
 def _function_memory(path: Path | None, *, mode='native', epoch=0) -> dict:
     try:
         return _rebuild_function_memory(path, mode=mode, epoch=epoch)
-    except (OSError, ValueError, KeyError, TypeError, AttributeError, RecursionError) as error:
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, RuntimeError, OverflowError) as error:
         raise MissionHold('function memory artifact missing, malformed, or inconsistent') from error
 
 
@@ -1377,7 +1791,7 @@ def _rebuild_function_memory(path: Path | None, *, mode='native', epoch=0) -> di
     rows = Journal(journal_path, FUNCTION_MEMORY_ID).read()
     if not rows or rows[0]['kind'] != 'MEMORY_CREATED' or len(rows) > 513 or journal_path.stat().st_size > 64_000_000:
         raise MissionHold('function memory origin or budget invalid')
-    seen = set(); eligible_sources = set(); current_runtime=_runtime_identity()
+    seen = set(); eligible_sources = set()
     for row in rows[1:]:
         record = row['data']
         if row['kind'] != 'OBSERVATION_ADMITTED' or record.get('scope') != frontier.FUNCTION_ADAPTER:
@@ -1425,10 +1839,33 @@ def _rebuild_function_memory(path: Path | None, *, mode='native', epoch=0) -> di
             _validate_computation_evidence(record['origin'],record['computation_evidence'],record['candidate']['id'])
         elif record['origin'].get('computation') is not None:
             raise MissionHold('accepted adaptive observation lost its public computation evidence')
+        if origin.get('persistent') is not None:
+            pinned=origin['analysis']['memory_head'];prior_records=[];prior_sources=set()
+            if pinned!='0'*64:
+                indices=[i for i,r in enumerate(rows) if r['sha256']==pinned]
+                if len(indices)!=1 or rows.index(row)<=indices[0]:raise MissionHold('persistent origin memory prefix missing or future')
+                for prior_row in rows[1:indices[0]+1]:
+                    prior_record=prior_row['data'];source=digest(canonical(prior_record['baseline']))
+                    if (prior_record['runtime']!=_runtime_identity(persistent=prior_record['origin'].get('persistent') is not None)
+                            or not 0<=origin['analysis']['capture_epoch']-prior_record['capture_epoch']<=4
+                            or source in prior_sources):continue
+                    prior_sources.add(source);prior_records.append(prior_record)
+            prefix,bindings,_=_persistent_prefix(PersistentConfig(**origin['persistent']['config']),prior_records)
+            cache=origin['persistent']['memory_cache']
+            if (origin['persistent']['controller_before']['payload']['history']!=[list(pair) for pair in prefix]
+                    or cache['bindings']!=bindings or cache['public_prefix_sha256']!=prefix_digest(prefix)
+                    or cache['observations']!=len(prefix)):
+                raise MissionHold('persistent initial state does not bind the admitted memory prefix')
+            evidence=record['persistent_evidence']
+            checked=_validate_persistent_trace(origin,evidence['public_trace'],complete=True,selected=record['candidate']['id'])
+            if evidence['public_search']!=checked['public_search'] or evidence['terminal_state']!=checked['state']:
+                raise MissionHold('persistent accepted state differs from its public receipts')
+        elif 'persistent_evidence' in record:
+            raise MissionHold('persistent state lacks a persistent mission origin')
         if record['observation_id'] in seen: raise MissionHold('duplicate function memory admission')
         seen.add(record['observation_id'])
         result['records'].append(record)
-        if record['runtime'] != current_runtime or not 0 <= epoch-record['capture_epoch'] <= 4: continue
+        if record['runtime'] != _runtime_identity(persistent=origin.get('persistent') is not None) or not 0 <= epoch-record['capture_epoch'] <= 4: continue
         source_sha = digest(canonical(record['baseline']))
         if source_sha in eligible_sources: continue
         eligible_sources.add(source_sha)
@@ -1482,7 +1919,7 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
         challenge: list[dict], final: list[dict], policy: SandboxPolicy, ranker=None,
         memory_root: Path | None = None, capture_epoch=0, adaptive_enabled=True,
         max_candidates=64, max_executions=96, probe_budget=3, max_files_changed=2,
-        public_command: list[str] | None = None, computation_controller=None) -> dict:
+        public_command: list[str] | None = None, computation_controller=None, persistent_controller=None) -> dict:
     """Initialize a bounded function mission without importing repository code.
 
     Public cases, finite AST inventory and planning models are frozen. Private
@@ -1490,6 +1927,15 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
     """
     policy.validate()
     config=None
+    persistent_config=None
+    if persistent_controller is not None:
+        if computation_controller is not None or ranker is not None:raise ValueError('persistent and adaptive/static controllers are mutually exclusive')
+        if type(persistent_controller) is dict:
+            if len(canonical(persistent_controller))>8192:raise ValueError('persistent configuration byte budget exceeded')
+            persistent_config=PersistentConfig(**persistent_controller)
+        elif type(persistent_controller) is PersistentConfig:persistent_config=PersistentConfig(**asdict(persistent_controller))
+        else:raise ValueError('persistent controller accepts configuration only, never unverified learned state')
+        persistent_config.validate()
     if computation_controller is not None:
         if type(computation_controller) is dict:
             if len(canonical(computation_controller))>8192: raise ValueError('computation configuration byte budget exceeded')
@@ -1525,7 +1971,7 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
         stage = Path(temporary)
         snapshot_source(source, stage/'baseline', policy)
         started=(time.perf_counter(),time.process_time())
-        analysis = (frontier.inspect_function_structure(stage/'baseline',public) if config else
+        analysis = (frontier.inspect_function_structure(stage/'baseline',public) if config or persistent_config else
             frontier.inspect_function_repository(stage/'baseline', public,
                 max_candidates=max_candidates, max_files_changed=max_files_changed))
         for row in challenge+final:
@@ -1535,15 +1981,17 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
         if public_command and not (stage/'baseline'/'tests').is_dir(): raise ValueError('registered suite requires tests directory')
         manifest = _manifest(stage/'baseline')
         entries = [[name,sha,(stage/'baseline'/name).stat().st_size] for name,sha in manifest.items()]
-        mode = 'frequency' if config else getattr(ranker, 'mode', 'native')
+        mode = 'frequency' if config or persistent_config else getattr(ranker, 'mode', 'native')
         if memory_root and memory_root.exists():
             with exclusive_owner(memory_root): models = _function_memory(memory_root, mode=mode, epoch=capture_epoch)
         else: models = _function_memory(memory_root, mode=mode, epoch=capture_epoch)
-        computation=None
-        if config:
+        computation=None;persistent=None
+        if config or persistent_config:
             analysis['eligible_memory_tasks']=models['eligible_tasks']
-            controller=_controller_from_memory(config,models)
-            allocation=_allocation(controller,analysis,max_candidates=max_candidates,probe_budget=probe_budget,
+            if persistent_config:
+                controller,cache=_persistent_from_memory(persistent_config,models,capture_epoch)
+            else:controller=_controller_from_memory(config,models)
+            allocation=(_persistent_allocation if persistent_config else _allocation)(controller,analysis,max_candidates=max_candidates,probe_budget=probe_budget,
                                    max_executions=max_executions,public_command=public_command)
             inspection_cost=_computation_cost(started)
             started=(time.perf_counter(),time.process_time())
@@ -1565,6 +2013,8 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
                 'requested_limits':{'max_candidates':max_candidates,'probe_budget':probe_budget},
                 'inspection_and_memory_validation_cost':inspection_cost,'generation_cost':_computation_cost(started),
                 'objective':'public log-loss gain versus frequency; accepted-only sampling, no causal utility claim'}
+            if persistent_config:
+                persistent={**computation,'memory_cache':cache,'mnemonic_snapshot':models['memory'].snapshot()};computation=None
             probe_budget=allocation['probe_budget']
         active = ranker or models['ranker']
         if not isinstance(active, NativeDecisionRanker) or active.action_schema != FUNCTION_ACTION_SCHEMA:
@@ -1584,7 +2034,8 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
             reachable.add(current);pending.extend(graph[current])
         signatures = {name: sorted(repo_world._ast_tokens(text) | {'reachable' if name in reachable else 'unreachable'})
                       for name, text in files.items()}
-        localize=adaptive_enabled and (computation is None or computation['use_localization'])
+        effort=persistent or computation
+        localize=adaptive_enabled and (effort is None or effort['use_localization'])
         scores = {name: models['world'].score(sig) if localize else 0.0 for name, sig in signatures.items()}
         weights = {name: math.exp(max(-40, (score-max(scores.values()))/12)) for name, score in scores.items()}
         prior = {name: w/sum(weights.values()) for name,w in weights.items()}
@@ -1597,7 +2048,7 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
         save_atomic(stage/'planning_ranker.json', canonical(active.snapshot()))
         goal = {'schema': SCHEMA, 'version': '0.18.0', 'adapter': frontier.FUNCTION_ADAPTER,
             'goal': goal_text, 'public': public, 'policy': asdict(policy), 'baseline': manifest, 'baseline_entries':entries,
-            'runtime_sha256': _runtime_identity(), 'sealed_sha256': digest(sealed),
+            'runtime_sha256': _runtime_identity(persistent=persistent is not None), 'sealed_sha256': digest(sealed),
             'analysis': analysis, 'candidate': None, 'memory_root': str(memory_root) if memory_root else None,
             'planning':{'candidate_inventory_sha256':analysis['candidate_inventory_sha256'],
                         'ast_candidates_evaluated':analysis['generated_candidates_checked'],
@@ -1606,6 +2057,7 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
             'planning_context': {n: digest((stage/n).read_bytes()) for n in ('planning_memory.json','planning_ranker.json')},
             'scope': 'bounded JSON Python functions, local import graph, up to two edited files; no arbitrary Python authority'}
         if computation is not None: goal['computation']=computation
+        if persistent is not None:goal['persistent']=persistent
         goal['mission_id'] = digest(canonical(goal))[:32]
         shutil.copytree(stage/'baseline', stage/'workspace')
         save_atomic(stage/'goal.json', canonical(goal)); save_atomic(stage/'sealed.json', sealed)
@@ -1669,7 +2121,7 @@ def _validate_function_execution(goal, data, execution, root):
 def _load_functions(root, goal):
     original = _origin_goal(goal)
     identity = {k:v for k,v in original.items() if k != 'mission_id'}
-    if digest(canonical(identity))[:32] != original['mission_id'] or original['runtime_sha256'] != _runtime_identity():
+    if digest(canonical(identity))[:32] != original['mission_id'] or original['runtime_sha256'] != _runtime_identity(persistent=original.get('persistent') is not None):
         raise MissionHold('function goal or runtime identity changed')
     SandboxPolicy(**original['policy']).validate()
     computation=original.get('computation')
@@ -1693,10 +2145,16 @@ def _load_functions(root, goal):
     for name, sha in original['planning_context'].items():
         if name not in ('planning_memory.json','planning_ranker.json') or digest((root/name).read_bytes()) != sha:
             raise MissionHold('function planning context changed')
+    if original.get('persistent') is not None and original['persistent']['mnemonic_snapshot']!=json.loads((root/'planning_memory.json').read_bytes())['payload']:
+        raise MissionHold('persistent planning memory differs from sealed snapshot')
     if not EffectLedger(root/'effects', create=False).snapshot()['replay_safe']: raise MissionHold('unresolved function external effect')
-    journal = Journal(root/'events.jsonl', original['mission_id']); rows = journal.read()
+    journal = Journal(root/'events.jsonl', original['mission_id'])
+    if original.get('persistent') is not None and (root/'events.jsonl').stat().st_size>PERSISTENT_JOURNAL_BYTES:
+        raise MissionHold('persistent journal byte budget exceeded')
+    rows = journal.read()
     if not rows or rows[0]['kind'] != 'PLATFORM_CREATED' or rows[0]['data'] != {'goal_sha256': digest(canonical(original))}:
         raise MissionHold('function mission origin changed')
+    persistent_context=_validate_persistent_trace(original,rows) if original.get('persistent') is not None else None
     pending = None; expected = dict(original['baseline']); patch = None; selected = None
     observations = {}; committed = False; finished = False; witness = None; final = None
     patch_ids = set(); dispatches = 0; diagnosed = False; control = None; diagnosis = None
@@ -1762,6 +2220,8 @@ def _load_functions(root, goal):
                 raise MissionHold('adaptive choice recorded after candidate outcomes')
             _validate_function_control(original,data,probes)
             control=data
+        elif kind in ('F_P_CONTROL','F_P_FORECAST','F_P_UPDATED'):
+            if persistent_context is None or selected is not None:raise MissionHold('foreign or late persistent controller event')
         elif kind == 'F_SELECTED':
             if not diagnosed or selected is not None or not observations.get('search:'+data['candidate'], {}).get('result',{}).get('supported'):
                 raise MissionHold('function selection lacks public support')
@@ -1794,7 +2254,12 @@ def _load_functions(root, goal):
                 raise MissionHold('function learned observation lost')
             finished = True
         elif kind == 'F_ABSTAINED':
-            if (computation is None or expected!=original['baseline'] or selected is not None
+            if persistent_context is not None:
+                declined=(original['persistent']['decision']['mechanism']=='abstain' or not original['analysis']['proposals']
+                    or persistent_context['control'] is not None and persistent_context['control']['decision']['mechanism']=='abstain')
+                if expected!=original['baseline'] or selected is not None or not declined or persistent_context['forecast'] is not None:
+                    raise MissionHold('persistent abstention does not match settled public state')
+            elif (computation is None or expected!=original['baseline'] or selected is not None
                     or any(k.startswith('search:') for k in observations)
                     or (computation['decision']['mechanism']!='abstain' and original['analysis']['proposals']
                         and (control is None or control['decision']['mechanism']!='abstain'))):
@@ -1825,6 +2290,18 @@ def _function_summary(goal, rows):
         'candidate_inventory_sha256':goal['analysis']['candidate_inventory_sha256'],
         'candidate_inventory_count':len(goal['analysis']['proposals']), 'cloud_model_calls':0,
         'scope':goal['scope'], 'authority':'finite isolated API observations; candidate review only, no deployment or skill promotion'}
+    if goal.get('persistent') is not None:
+        controls=[r['data'] for r in rows if r['kind']=='F_P_CONTROL']
+        updates=[r['data'] for r in rows if r['kind']=='F_P_UPDATED']
+        costs=[goal['persistent'][name] for name in ('inspection_and_memory_validation_cost','generation_cost')]
+        costs += [row['cost'] for row in controls+updates]
+        result['persistent']={'allocation':goal['persistent']['decision']['mechanism'],
+            'mechanisms':[row['decision']['mechanism'] for row in controls],
+            'public_updates':len(updates),'memory_cache':goal['persistent']['memory_cache'],
+            'recorded_controller_cpu_seconds':sum(c['cpu_seconds'] for c in costs),
+            'recorded_controller_wall_seconds':sum(c['wall_seconds'] for c in costs),
+            'cost_scope':'recorded controller stages; excludes Docker worker CPU, validation/replay and strict peak memory',
+            'authority':'ranking and bounded effort only; coding advantage NOT_ESTABLISHED'}
     if goal.get('computation') is not None:
         costs=[goal['computation'][name] for name in ('inspection_and_memory_validation_cost','generation_cost')]
         costs += [r['data']['computation_cost'] for r in rows if r['kind']=='F_DIAGNOSIS']
@@ -1900,6 +2377,11 @@ def _function_learn(root, goal, rows, candidate):
                 record['computation_evidence']={'public_trace':trace,'control':control,'public_search':public_search,
                     'public_log_gain':max(-8.0,min(8.0,gain/len(public_search))),'cost':diagnosis['computation_cost']}
                 _validate_computation_evidence(_origin_goal(goal),record['computation_evidence'],candidate['id'])
+            if goal.get('persistent') is not None:
+                stop=next(i for i,r in enumerate(rows) if r['kind']=='F_SELECTED');trace=rows[:stop+1]
+                checked=_validate_persistent_trace(_origin_goal(goal),trace,complete=True,selected=candidate['id'])
+                record['persistent_evidence']={'public_trace':trace,'public_search':checked['public_search'],
+                    'terminal_state':checked['state'],'authority':'accepted public prefix only; private values excluded'}
             # Existing MNEMONIC grammar can represent single-file root-module
             # effects. Package/multi-edit effects abstain rather than fabricate
             # per-file causal evidence from a jointly successful intervention.
@@ -1933,7 +2415,10 @@ def _run_functions(root, goal, journal, rows, *, interrupt_at=None):
     if rows[-1]['kind']=='F_DISPATCHED': raise MissionHold('function execution ambiguous; explicit cleanup recovery required')
     if rows[-1]['kind'] in ('F_LEARNED','F_REJECTED','F_EXHAUSTED','F_ABSTAINED'): return _function_summary(goal,rows)
     sealed = json.loads((root/'sealed.json').read_bytes())
-    def append(kind,data): journal.append(kind,data)
+    def append(kind,data):
+        if goal.get('persistent') is not None and (root/'events.jsonl').stat().st_size+len(canonical(data))+1024>PERSISTENT_JOURNAL_BYTES:
+            raise MissionHold('persistent journal byte budget exhausted')
+        journal.append(kind,data)
     def patch(identity, tag):
         found = [r for r in journal.read() if r['kind']=='F_PATCH' and r['data']['id']==tag]
         done = [r for r in journal.read() if r['kind']=='F_PATCHED' and r['data']['id']==tag]
@@ -1968,6 +2453,9 @@ def _run_functions(root, goal, journal, rows, *, interrupt_at=None):
     # Complete a recorded partially applied multi-file transaction first.
     if rows[-1]['kind']=='F_PATCH': patch(rows[-1]['data']['candidate'],rows[-1]['data']['id'])
     chosen = next((r['data']['candidate'] for r in journal.read() if r['kind']=='F_SELECTED'),None)
+    if chosen is None and goal.get('persistent') is not None:
+        chosen=_persistent_search(root,goal,journal,observe,patch,append,checkpoint)
+        if chosen is None:return _function_summary(goal,journal.read())
     if chosen is None:
         if goal.get('computation') is not None:
             if goal['computation']['decision']['mechanism']=='abstain' or not goal['analysis']['proposals']:

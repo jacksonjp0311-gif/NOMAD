@@ -3,6 +3,16 @@
 Status: **NOT READY**. NOMAD remains 0.18.0. This is an ordered blocker list,
 not an architecture freeze, release authorization or claim of qualification.
 
+The latest [temporal study](TEMPORAL_REPORT_V018.md) failed its registered joint
+objective. Keep the original and persistent controllers optional. Warm retention
+has a measured advantage over cold reconstruction, but the complete persistent
+policy is not a qualified improvement over conventional temporal or always-on
+native computation. The next mechanism experiment should isolate predictor-specific
+residual monitoring from selected-loss/switching effects, with fixed retention and
+exploration, complete checkpoint/replay costs and genuinely new reserved seeds.
+The current short-profile self-revision nomination lacks a direct held-out
+comparison with its standard persistent baseline and cannot be promoted.
+
 1. **Provision the real execution boundary.** On the ROG, WSL and required
    optional features are disabled, Docker Desktop is absent, and there is no
    reviewed local image. An administrator must complete the required host setup
