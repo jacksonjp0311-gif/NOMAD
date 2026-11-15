@@ -1,0 +1,138 @@
+{
+  "schema": "nomad.temporal-state-review.v18",
+  "observed_at": "2026-11-15 13:03:14 UTC",
+  "status": "CONTRACTS_PASS_REVIEWED_BEFORE_DEVELOPMENT",
+  "scope": "Software state and scheduling contracts, not heldout predictive efficacy or hostile native containment.",
+  "source_candidate": {
+    "nomad/persistent.py": "96eb551f8203df6e2da8a952c436d87d1c4b3e23b9e294143cf51d245ff6036c",
+    "tests/test_persistent_v18.py": "a525ef7655385bd3f94cabde3524e6e6085b1388baf736c12a78c7f6ff539b19"
+  },
+  "evidence_retention": {
+    "original_tool_outputs": "Present in the active task tool transcript.",
+    "standalone_raw_stdout_log_retained": false,
+    "note": "No standalone raw stdout file was saved for these development contract runs. The fields below transcribe observed counts and messages; they are not reconstructed execution receipts."
+  },
+  "initial_probe_failures": [
+    {
+      "stage": "First concrete codec roundtrip probe",
+      "failure": "StateRefused: KT table bound",
+      "cause": "Short startup contexts coexist with full-length contexts; the first table bound counted full-length contexts only.",
+      "correction": "Bound each table by the sum of binary context capacities through its order."
+    },
+    {
+      "stage": "Second concrete codec roundtrip probe",
+      "failure": "StateRefused: nonfinite native state",
+      "cause": "The original lag proposal diagnostic uses negative infinity when no finite candidate passes its training gate.",
+      "correction": "Encode only that diagnostic value as NO_FINITE_CANDIDATE; arbitrary nonfinite JSON remains refused."
+    }
+  ],
+  "independent_findings": [
+    {
+      "finding": "Standalone model public-prefix metadata could be relabeled without checking actual native/temporal history.",
+      "correction": "Snapshot and restore compare the embedded ordered native/temporal history digest to the external prefix binding. Frequency-only order remains an explicitly documented external binding; controller restoration recomputes frequency counts from explicit history."
+    },
+    {
+      "finding": "Windows symbolic-link-only checks miss junction/reparse ancestors.",
+      "correction": "Inspect unresolved target and existing ancestors with lstat; refuse symlink, reparse tag/attribute, and multiply linked checkpoint files. Native controlled junction test passed."
+    },
+    {
+      "finding": "Boolean True could alias integer state version one.",
+      "correction": "Require exact integer type for predictor and concrete class version fields."
+    },
+    {
+      "finding": "Internally impossible controller chronology could survive a rehashed checkpoint.",
+      "correction": "Check monotonic decision prefixes, selected mechanism against final decision, ordered alarms and cooldown, alarm arithmetic, and last-alarm/credit cursors."
+    },
+    {
+      "finding": "Generic nested counter/cache maps could survive restoration and fail on the next forecast.",
+      "correction": "Check exact per-class counter keys and bounded concrete cache shapes before adoption."
+    },
+    {
+      "finding": "Full-warm abstention initially retained the all-learner execution path.",
+      "correction": "Budget abstention performs only frequency bookkeeping; expensive native/temporal states are not built or updated."
+    },
+    {
+      "finding": "Memory-pressure eviction could be reversed by the next full-warm prediction.",
+      "correction": "Persist residency_limit and enforce it during future build, selection, prediction, and restoration."
+    },
+    {
+      "finding": "Cold-switch eviction could exceed the accepted 512-event limit, and exhausted decisions could mutate state before refusal.",
+      "correction": "Check decision and applicable eviction capacity before policy/model/exploration mutation."
+    },
+    {
+      "finding": "Only same-process restoration had initially been checked.",
+      "correction": "Add a fresh Python process contract: restore a 256-observation native state with an actually promoted a3 lag and compare the next 32 forecasts exactly."
+    }
+  ],
+  "preregistration_design_corrections": [
+    {
+      "change": "E uses selectivewarm; I uses fullwarm.",
+      "timing": "Parent-directed architectural choice before any new development or heldout outcomes.",
+      "reason": "Fullwarm pays for all inactive native computation and receives additional actual public forecasts; it is a distinct ablation rather than a plausible primary cost-saving policy."
+    },
+    {
+      "change": "Delayed exploratory commitment extends to ceil((n+C)/H)*H, capped by history and explicit remaining-step budget.",
+      "timing": "Parent-approved before development.",
+      "reason": "A normal C deadline could abandon a new learner before its initial H credit release.",
+      "accounting": "Estimated cost charges the extended prospective horizon; no-delayed uses the base C deadline and current last16 credit."
+    }
+  ],
+  "observed_test_sequence": [
+    {
+      "tests_run": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wall_seconds": 10.229
+    },
+    {
+      "tests_run": 19,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wall_seconds": 11.304
+    },
+    {
+      "tests_run": 19,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wall_seconds": 10.453
+    },
+    {
+      "tests_run": 21,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wall_seconds": 13.643
+    },
+    {
+      "tests_run": 23,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wall_seconds": 14.586,
+      "failure_test": "test_abstention_does_not_run_expensive_warm_learners",
+      "failure": "Native and temporal models were present after zero-step abstention.",
+      "cause": "The new prospective-deadline logic set a zero-budget abstention deadline to the current prefix, causing predict to immediately re-decide with default budget.",
+      "correction": "Retain abstention through the registered interval; do not immediately auto-decide with defaults."
+    },
+    {
+      "tests_run": 23,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wall_seconds": 14.614,
+      "command": "python -B -m unittest tests.test_persistent_v18 -q"
+    }
+  ],
+  "limits": [
+    "Test timings are contract-suite observations, not independent experiment performance samples.",
+    "No software contract establishes general forecasting, coding, or intelligence advantage.",
+    "Checkpoint checksum/source bindings are local integrity, not authentication against replacement of state and trust anchors.",
+    "Logical expiry requires an external current epoch; model eligibility requires an external accepted public-prefix binding.",
+    "Storage and resident learner bounds are not a strict RSS guarantee.",
+    "Fullwarm/selective/cold comparisons differ in paid inactive forecasts and feedback as well as persistence.",
+    "The packed lag epoch cache is rebuilt after restoration; its process-local row identities are never imported."
+  ]
+}

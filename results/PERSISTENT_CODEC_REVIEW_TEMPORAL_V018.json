@@ -1,0 +1,41 @@
+{
+  "schema": "nomad.temporal-persistent-codec-review.v18",
+  "status": "READ_ONLY_REVIEW_PASS_WITH_SCOPED_LIMITS",
+  "reviewed_module": "nomad/persistent.py",
+  "reviewed_module_sha256": "96eb551f8203df6e2da8a952c436d87d1c4b3e23b9e294143cf51d245ff6036c",
+  "review_scope": "Independent source readback of concrete object restoration, schema/resource/history/epoch bindings, checkpoint paths and fail-closed counters before prospective development.",
+  "candidate_or_downloaded_code_executed_by_review": false,
+  "evaluation_outcomes_read_by_review": false,
+  "findings_closed": [
+    "Unresolved Windows checkpoint ancestors are checked for links/reparse points; controlled junction refusal contract present.",
+    "Standalone temporal/native restore verifies actual decoded history against the supplied prefix digest.",
+    "Boolean version tags are refused and native counter/cache collection shapes are validated.",
+    "Cold-switch eviction capacity and decision budget are checked before logical state mutation."
+  ],
+  "reviewed_properties": [
+    "Finite concrete class registry; serialized tags never become import targets or pickle operations.",
+    "Original vendor Expression.code is data/tie ordering, never evaluated as Python.",
+    "Unknown object fields, pending state, nonfinite JSON, duplicate keys and incompatible source/runtime/policy are refused.",
+    "Bounded bytes, history, collection sizes, decoding depth/node counts and resident learners.",
+    "Controller frequency counts and nested native/temporal histories agree with the eligible public prefix.",
+    "Delayed credit and extended initial exploration use only observed history; planned extended work is charged and bounded.",
+    "No WITNESS, final-verifier or acceptance authority is granted to restored forecasts."
+  ],
+  "implementation_agent_reported_validation": {
+    "tests": "tests.test_persistent_v18",
+    "run": 23,
+    "passed": 23,
+    "reported_seconds": 14.614,
+    "fresh_process_contract": "Promoted native lag state after256 observations restored in fresh Python process; next32 forecasts match exactly.",
+    "reviewer_reran_suite": false
+  },
+  "remaining_limits": [
+    "Local checksums establish integrity, not authentication against replacement of every anchor.",
+    "Expiry is an externally supplied logical epoch, not autonomous wall-clock expiry.",
+    "Standalone frequency state carries an external prefix binding; controller load additionally reconstructs frequency counts.",
+    "Study checkpoint reconstruction is in-process; separate fresh-process contract has finite trusted fixture scope.",
+    "Object and JSON storage limits are not strict measured RSS or successful-memory-commit peak limits.",
+    "Atomic replacement and process-death tests do not establish hard-power-loss durability.",
+    "Native hostile-code containment and authentic repository repair remain unqualified."
+  ]
+}

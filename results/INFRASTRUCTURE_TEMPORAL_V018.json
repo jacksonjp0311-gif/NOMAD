@@ -1,0 +1,163 @@
+{
+  "configuration_changed": false,
+  "created_utc": "2026-11-15T05:55:08.916527+00:00",
+  "environment": {
+    "docker_named_pipes": [
+      {
+        "available": false,
+        "name": "dockerDesktopLinuxEngine",
+        "winerror": 2
+      },
+      {
+        "available": false,
+        "name": "docker_engine",
+        "winerror": 2
+      }
+    ],
+    "native_cim": {
+      "cpu": {
+        "Name": "AMD RYZEN AI MAX+ 395 w/ Radeon 8060S          ",
+        "SecondLevelAddressTranslationExtensions": false,
+        "VMMonitorModeExtensions": false,
+        "VirtualizationFirmwareEnabled": true
+      },
+      "elevated_administrator": false,
+      "machine": {
+        "HypervisorPresent": true,
+        "Manufacturer": "ASUSTeK COMPUTER INC.",
+        "Model": "ROG Flow Z13 GZ302EA_GZ302EA",
+        "TotalPhysicalMemory": 132766306304
+      },
+      "optional_features": [
+        {
+          "InstallState": 2,
+          "Name": "VirtualMachinePlatform"
+        },
+        {
+          "InstallState": 2,
+          "Name": "HypervisorPlatform"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Windows-Subsystem-Linux"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Hyper-V-All"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Hyper-V"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Hyper-V-Tools-All"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Hyper-V-Management-PowerShell"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Hyper-V-Hypervisor"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Hyper-V-Services"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Microsoft-Hyper-V-Management-Clients"
+        },
+        {
+          "InstallState": 2,
+          "Name": "Containers-DisposableClientVM"
+        }
+      ],
+      "os": {
+        "BuildNumber": "26200",
+        "Caption": "Microsoft Windows 11 Pro",
+        "OSArchitecture": "64-bit",
+        "Version": "10.0.26200"
+      },
+      "registered_backends": [],
+      "services": [],
+      "standard_install_files": [
+        {
+          "Exists": false,
+          "Path": "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe"
+        },
+        {
+          "Exists": false,
+          "Path": "C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe"
+        },
+        {
+          "Exists": false,
+          "Path": "C:\\Windows\\System32\\WindowsSandbox.exe"
+        },
+        {
+          "Exists": false,
+          "Path": "C:\\Users\\jacks\\AppData\\Local\\Programs\\DockerDesktop\\Docker Desktop.exe"
+        },
+        {
+          "Exists": false,
+          "Path": "C:\\Users\\jacks\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe"
+        }
+      ]
+    },
+    "platform": "win32",
+    "privileges": {
+      "command": [
+        "whoami",
+        "/priv"
+      ],
+      "elapsed_s": 0.09399999998277053,
+      "output": "\r\nPRIVILEGES INFORMATION\r\n----------------------\r\n\r\nPrivilege Name                Description                          State   \r\n============================= ==================================== ========\r\nSeShutdownPrivilege           Shut down the system                 Disabled\r\nSeChangeNotifyPrivilege       Bypass traverse checking             Enabled \r\nSeUndockPrivilege             Remove computer from docking station Disabled\r\nSeIncreaseWorkingSetPrivilege Increase a process working set       Disabled\r\nSeTimeZonePrivilege           Change the time zone                 Disabled\r\n",
+      "returncode": 0
+    },
+    "tools": {
+      "VBoxManage": false,
+      "WindowsSandbox": false,
+      "containerd": false,
+      "docker": false,
+      "nerdctl": false,
+      "podman": false,
+      "qemu-system-x86_64": false,
+      "vmrun": false,
+      "wsl": true
+    },
+    "wsl_distributions": {
+      "command": [
+        "wsl",
+        "--list",
+        "--verbose"
+      ],
+      "elapsed_s": 0.07800000003771856,
+      "output": "The Windows Subsystem for Linux is not installed. You can install by running 'wsl.exe --install'.\r\r\nFor more information please visit https://aka.ms/wslinstall\r\r\n",
+      "returncode": 1
+    },
+    "wsl_status": {
+      "command": [
+        "wsl",
+        "--status"
+      ],
+      "elapsed_s": 0.06299999996554106,
+      "output": "The Windows Subsystem for Linux is not installed. You can install by running 'wsl.exe --install'.\r\r\nFor more information please visit https://aka.ms/wslinstall\r\r\n",
+      "returncode": 50
+    }
+  },
+  "function_recovery_cases_executed": 0,
+  "native_containment_gate": "HOLD",
+  "native_probe_cases_executed": 0,
+  "reason": "Actual native13 containment PASS and same-source/image/policy native21 function recovery remain required.",
+  "receipt_sha256": "0bd9677fe2043cd785f15d45f0e96ce643ac5812721e51b75f0796cdac726db2",
+  "repository_code_executed": false,
+  "schema": "nomad.temporal-infrastructure-refresh.v18",
+  "scope": "read-only availability inventory, not a containment qualification",
+  "software_installed": false,
+  "source_sha256": {
+    "scripts/qualify_windows_v18.py": "18813716489c27d7c4f2e111598cce0efa0d270082027498cf2dae85c70866cc",
+    "scripts/refresh_temporal_prerequisites_v18.py": "12ab16cf1ac274edb5e4db4bfcae7beeec90e4824a90a134cdbdbf5b6eb450f7"
+  },
+  "strict_peak_counter_gate": "HOLD"
+}

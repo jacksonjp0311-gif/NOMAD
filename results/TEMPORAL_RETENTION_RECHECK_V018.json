@@ -1,0 +1,5278 @@
+{
+  "forced_schedule": true,
+  "identical_forecasts_and_selection": true,
+  "information_sha256": "1e9e765464b70a8987e827adae5ab69489bc622fcd4c1bae8e2c84ba8c6d9f46",
+  "limits": "development diagnostic only; same forced selection, no adaptive utility or held-out efficacy inference",
+  "observed_at_utc": "2026-11-15T13:02:33.765156+00:00",
+  "schema": "nomad.temporal-retention-development.v18",
+  "seed": 18186003,
+  "source_sha256_after": {
+    "nomad/adaptive.py": "bae26d0abbc1d276761d9082bf736b0eb6877b9ddbc227488211037c65d366ba",
+    "nomad/native_bitwork.py": "2c26b9929157df201dc501c2ce8275737d4790cf8cc3705ca38bb3be2fcdff51",
+    "nomad/persistent.py": "96eb551f8203df6e2da8a952c436d87d1c4b3e23b9e294143cf51d245ff6036c"
+  },
+  "source_sha256_before": {
+    "nomad/adaptive.py": "bae26d0abbc1d276761d9082bf736b0eb6877b9ddbc227488211037c65d366ba",
+    "nomad/native_bitwork.py": "2c26b9929157df201dc501c2ce8275737d4790cf8cc3705ca38bb3be2fcdff51",
+    "nomad/persistent.py": "96eb551f8203df6e2da8a952c436d87d1c4b3e23b9e294143cf51d245ff6036c"
+  },
+  "source_stable": true,
+  "status": "PASS",
+  "steps": 512,
+  "trials": [
+    {
+      "config": {
+        "commitment": 64,
+        "cost_seconds": {
+          "frequency": 2e-06,
+          "native": 0.0015,
+          "temporal": 0.0001
+        },
+        "cost_weight": 2.0,
+        "credit_horizon": 64,
+        "delayed_credit": false,
+        "detector_cooldown": 64,
+        "detector_enabled": false,
+        "detector_threshold": 0.35,
+        "detector_window": 32,
+        "epoch": 0,
+        "gamma": 0.98,
+        "max_history": 2048,
+        "max_state_bytes": 16777216,
+        "risk_weight": 0.1,
+        "setup_seconds": {
+          "frequency": 0.0,
+          "native": 0.08,
+          "temporal": 0.08
+        },
+        "state_policy": "selectivewarm",
+        "switch_penalty": 0.01,
+        "ttl_epochs": 32
+      },
+      "controller_cpu_seconds": 3.4375,
+      "policy": "selectivewarm",
+      "scope": "trusted in-process sequential demonstration, no worker/startup cost or inferential speedup claim",
+      "telemetry": {
+        "active_cpu_seconds": 1.53125,
+        "active_forecasts": 512,
+        "active_updates": 512,
+        "active_wall_seconds": 1.5071653999621049,
+        "bookkeeping_cpu_seconds": 0.0,
+        "bookkeeping_wall_seconds": 0.004728599218651652,
+        "build_cpu_seconds": 0.140625,
+        "build_wall_seconds": 0.16272640001261607,
+        "cache_rebuilds_on_restore": 0,
+        "catchup_cpu_seconds": 1.765625,
+        "catchup_observations": 512,
+        "catchup_wall_seconds": 1.8298199002747424,
+        "cold_evictions": 0,
+        "cold_fallbacks": 0,
+        "decision_cpu_seconds": 0.0,
+        "decision_wall_seconds": 0.001173200027551502,
+        "detector_cpu_seconds": 0.0,
+        "detector_wall_seconds": 0.0016792997485026717,
+        "expired_states": 0,
+        "inactive_cpu_seconds": 0.0,
+        "inactive_forecasts": 320,
+        "inactive_updates": 320,
+        "inactive_wall_seconds": 0.0017806007526814938,
+        "restoration_cpu_seconds": 0.0,
+        "restoration_wall_seconds": 0.0,
+        "restores": 0,
+        "serialization_cpu_seconds": 0.0,
+        "serialization_wall_seconds": 0.0,
+        "switches": 7
+      },
+      "trace": [
+        {
+          "mechanism": "frequency",
+          "p": 0.5,
+          "step": 0
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.3333333333333333,
+          "step": 1
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.25,
+          "step": 2
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5,
+          "step": 3
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.2,
+          "step": 4
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.16666666666666666,
+          "step": 5
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.14285714285714285,
+          "step": 6
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.25,
+          "step": 7
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6666666666666666,
+          "step": 8
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.75,
+          "step": 9
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.8,
+          "step": 10
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.3333333333333333,
+          "step": 11
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4,
+          "step": 12
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.8333333333333334,
+          "step": 13
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.45454545454545453,
+          "step": 14
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.7142857142857143,
+          "step": 15
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4166666666666667,
+          "step": 16
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.75,
+          "step": 17
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.7777777777777778,
+          "step": 18
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.7,
+          "step": 19
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.7272727272727273,
+          "step": 20
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6666666666666666,
+          "step": 21
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.46153846153846156,
+          "step": 22
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6153846153846154,
+          "step": 23
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5,
+          "step": 24
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5333333333333333,
+          "step": 25
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5625,
+          "step": 26
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5714285714285714,
+          "step": 27
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5882352941176471,
+          "step": 28
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6,
+          "step": 29
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5555555555555556,
+          "step": 30
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.625,
+          "step": 31
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6470588235294118,
+          "step": 32
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5789473684210527,
+          "step": 33
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.55,
+          "step": 34
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5714285714285714,
+          "step": 35
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5909090909090909,
+          "step": 36
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6111111111111112,
+          "step": 37
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.631578947368421,
+          "step": 38
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5652173913043478,
+          "step": 39
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5416666666666666,
+          "step": 40
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.56,
+          "step": 41
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5769230769230769,
+          "step": 42
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.65,
+          "step": 43
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6666666666666666,
+          "step": 44
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5555555555555556,
+          "step": 45
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5714285714285714,
+          "step": 46
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5862068965517241,
+          "step": 47
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6818181818181818,
+          "step": 48
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6,
+          "step": 49
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5806451612903226,
+          "step": 50
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6956521739130435,
+          "step": 51
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6666666666666666,
+          "step": 52
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5625,
+          "step": 53
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5454545454545454,
+          "step": 54
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.68,
+          "step": 55
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6538461538461539,
+          "step": 56
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6666666666666666,
+          "step": 57
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5588235294117647,
+          "step": 58
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6785714285714286,
+          "step": 59
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6551724137931034,
+          "step": 60
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6333333333333333,
+          "step": 61
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6451612903225806,
+          "step": 62
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5714285714285714,
+          "step": 63
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.515241534729559,
+          "step": 64
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6256683375741756,
+          "step": 65
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4324827004584025,
+          "step": 66
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5811929869272933,
+          "step": 67
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.542500444721101,
+          "step": 68
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5495046389562651,
+          "step": 69
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5717074919123575,
+          "step": 70
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6069364580299511,
+          "step": 71
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5903685439544825,
+          "step": 72
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5511855176534286,
+          "step": 73
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6680681161970942,
+          "step": 74
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5774612947049279,
+          "step": 75
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6592610575621954,
+          "step": 76
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6269387020391635,
+          "step": 77
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6600437707072967,
+          "step": 78
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5817375518920745,
+          "step": 79
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5278493496247865,
+          "step": 80
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5649099414821959,
+          "step": 81
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6612628777983744,
+          "step": 82
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.42035457708132795,
+          "step": 83
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6115751193112752,
+          "step": 84
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7531269253599353,
+          "step": 85
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3499861375343085,
+          "step": 86
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5248958684238607,
+          "step": 87
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5016854762127928,
+          "step": 88
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6042437297928508,
+          "step": 89
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.39656406683673134,
+          "step": 90
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3511005274641653,
+          "step": 91
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.536198375905385,
+          "step": 92
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7602356085873335,
+          "step": 93
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6925970459495631,
+          "step": 94
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3660105596872103,
+          "step": 95
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3029344528477063,
+          "step": 96
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4287994245998896,
+          "step": 97
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.530931769769949,
+          "step": 98
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5254394907540376,
+          "step": 99
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.503724218794363,
+          "step": 100
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.712448785253385,
+          "step": 101
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.2627913553402354,
+          "step": 102
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6085424439376437,
+          "step": 103
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5663052663914947,
+          "step": 104
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5129119299712833,
+          "step": 105
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.32868898621572484,
+          "step": 106
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.46703489348268046,
+          "step": 107
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3057866417912114,
+          "step": 108
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.248639301578432,
+          "step": 109
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6263279073957128,
+          "step": 110
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5915836799673487,
+          "step": 111
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7631484221220196,
+          "step": 112
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.2649155070052478,
+          "step": 113
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.20220048487277273,
+          "step": 114
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.711644087782823,
+          "step": 115
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.44879532520237053,
+          "step": 116
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.44340372517713167,
+          "step": 117
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5404385179721969,
+          "step": 118
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6705790567827697,
+          "step": 119
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7004455848627402,
+          "step": 120
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6115617741951751,
+          "step": 121
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.42822053881020156,
+          "step": 122
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4764043382327006,
+          "step": 123
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5685025061562663,
+          "step": 124
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7009345485769941,
+          "step": 125
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3901075593274806,
+          "step": 126
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4691881330617945,
+          "step": 127
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09913368396558442,
+          "step": 128
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9140659234518689,
+          "step": 129
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08495107479597445,
+          "step": 130
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09158328694311069,
+          "step": 131
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09579385678309235,
+          "step": 132
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9106588926869147,
+          "step": 133
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9161773407350776,
+          "step": 134
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9137169622116359,
+          "step": 135
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8366638402481775,
+          "step": 136
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11160292340616997,
+          "step": 137
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1892968012432863,
+          "step": 138
+        },
+        {
+          "mechanism": "native",
+          "p": 0.19218104087278026,
+          "step": 139
+        },
+        {
+          "mechanism": "native",
+          "p": 0.844830913703318,
+          "step": 140
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8717483938749712,
+          "step": 141
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8907130313782212,
+          "step": 142
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11680993839581696,
+          "step": 143
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8834410694517917,
+          "step": 144
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11280830392099164,
+          "step": 145
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9112001194378346,
+          "step": 146
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09119044619924999,
+          "step": 147
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1004244946871461,
+          "step": 148
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9148338626361844,
+          "step": 149
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9064318087187777,
+          "step": 150
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10050706353943152,
+          "step": 151
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0928896768612135,
+          "step": 152
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08512014992083501,
+          "step": 153
+        },
+        {
+          "mechanism": "native",
+          "p": 0.915524877119019,
+          "step": 154
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09331869954154666,
+          "step": 155
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9103909154010591,
+          "step": 156
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08442883562636348,
+          "step": 157
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1481838319470674,
+          "step": 158
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8811201929942016,
+          "step": 159
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09620878646423767,
+          "step": 160
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09656705053929385,
+          "step": 161
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9138179166741579,
+          "step": 162
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08841148114748323,
+          "step": 163
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8540145696615521,
+          "step": 164
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8889689701135441,
+          "step": 165
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11173883138187829,
+          "step": 166
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1135465599581973,
+          "step": 167
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9107373450361511,
+          "step": 168
+        },
+        {
+          "mechanism": "native",
+          "p": 0.888079306271072,
+          "step": 169
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9035690691311886,
+          "step": 170
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8957215303771406,
+          "step": 171
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9096670787628599,
+          "step": 172
+        },
+        {
+          "mechanism": "native",
+          "p": 0.14658329023187883,
+          "step": 173
+        },
+        {
+          "mechanism": "native",
+          "p": 0.13903718852669417,
+          "step": 174
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8893692520601262,
+          "step": 175
+        },
+        {
+          "mechanism": "native",
+          "p": 0.7619238410396421,
+          "step": 176
+        },
+        {
+          "mechanism": "native",
+          "p": 0.20513785825240943,
+          "step": 177
+        },
+        {
+          "mechanism": "native",
+          "p": 0.13538816071884752,
+          "step": 178
+        },
+        {
+          "mechanism": "native",
+          "p": 0.13098963337061487,
+          "step": 179
+        },
+        {
+          "mechanism": "native",
+          "p": 0.12245183848170207,
+          "step": 180
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9010938738260862,
+          "step": 181
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08946276911257235,
+          "step": 182
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1774447480021687,
+          "step": 183
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8404641433842334,
+          "step": 184
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10944162109646458,
+          "step": 185
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9112684733614023,
+          "step": 186
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0919826098237441,
+          "step": 187
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08519515994598048,
+          "step": 188
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9098918959013742,
+          "step": 189
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09296502322599262,
+          "step": 190
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9184752363835141,
+          "step": 191
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.48598130841121495,
+          "step": 192
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.550561797752809,
+          "step": 193
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5555555555555556,
+          "step": 194
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.48148148148148145,
+          "step": 195
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47706422018348627,
+          "step": 196
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4818181818181818,
+          "step": 197
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4864864864864865,
+          "step": 198
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5494505494505495,
+          "step": 199
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5543478260869565,
+          "step": 200
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.48214285714285715,
+          "step": 201
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5591397849462365,
+          "step": 202
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4778761061946903,
+          "step": 203
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47368421052631576,
+          "step": 204
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5531914893617021,
+          "step": 205
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5473684210526316,
+          "step": 206
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5520833333333334,
+          "step": 207
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.46956521739130436,
+          "step": 208
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.46551724137931033,
+          "step": 209
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5567010309278351,
+          "step": 210
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4700854700854701,
+          "step": 211
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5510204081632653,
+          "step": 212
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4745762711864407,
+          "step": 213
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5555555555555556,
+          "step": 214
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4789915966386555,
+          "step": 215
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.56,
+          "step": 216
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5643564356435643,
+          "step": 217
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.48333333333333334,
+          "step": 218
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4793388429752066,
+          "step": 219
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5588235294117647,
+          "step": 220
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.48360655737704916,
+          "step": 221
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5533980582524272,
+          "step": 222
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4796747967479675,
+          "step": 223
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4838709677419355,
+          "step": 224
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5576923076923077,
+          "step": 225
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.48,
+          "step": 226
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47619047619047616,
+          "step": 227
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47244094488188976,
+          "step": 228
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4765625,
+          "step": 229
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5523809523809524,
+          "step": 230
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4728682170542636,
+          "step": 231
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5566037735849056,
+          "step": 232
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.46923076923076923,
+          "step": 233
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5607476635514018,
+          "step": 234
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5648148148148148,
+          "step": 235
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4732824427480916,
+          "step": 236
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5596330275229358,
+          "step": 237
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5545454545454546,
+          "step": 238
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4696969696969697,
+          "step": 239
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47368421052631576,
+          "step": 240
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47761194029850745,
+          "step": 241
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.48148148148148145,
+          "step": 242
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47794117647058826,
+          "step": 243
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4744525547445255,
+          "step": 244
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47101449275362317,
+          "step": 245
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5495495495495496,
+          "step": 246
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4676258992805755,
+          "step": 247
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5535714285714286,
+          "step": 248
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4642857142857143,
+          "step": 249
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.46808510638297873,
+          "step": 250
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4647887323943662,
+          "step": 251
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.46853146853146854,
+          "step": 252
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5575221238938053,
+          "step": 253
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4652777777777778,
+          "step": 254
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5614035087719298,
+          "step": 255
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4264899390069346,
+          "step": 256
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.660207768513059,
+          "step": 257
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6158006832861749,
+          "step": 258
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6994890596400851,
+          "step": 259
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4634714641360284,
+          "step": 260
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.65199128454952,
+          "step": 261
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4373787107825954,
+          "step": 262
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6242444437277167,
+          "step": 263
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.24905316197204455,
+          "step": 264
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6309446780789127,
+          "step": 265
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4358991134109677,
+          "step": 266
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.36987645062580526,
+          "step": 267
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4023611006919622,
+          "step": 268
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6067611286346126,
+          "step": 269
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.33916976997728726,
+          "step": 270
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.212558546437226,
+          "step": 271
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7414573446651948,
+          "step": 272
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5204724261306041,
+          "step": 273
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5521452341698545,
+          "step": 274
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.35081118949388423,
+          "step": 275
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7641431767090194,
+          "step": 276
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.29325638612452204,
+          "step": 277
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.2824262743747823,
+          "step": 278
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.2963995582784428,
+          "step": 279
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3289051914173063,
+          "step": 280
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7779936011822864,
+          "step": 281
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.27245107231011334,
+          "step": 282
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.803892750621276,
+          "step": 283
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.33802291841469806,
+          "step": 284
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.31789157370005217,
+          "step": 285
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5227522117066435,
+          "step": 286
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.35941089815968835,
+          "step": 287
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4271826280663005,
+          "step": 288
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.411728644534099,
+          "step": 289
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.22702869297806952,
+          "step": 290
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3993376624288258,
+          "step": 291
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.44736369704882467,
+          "step": 292
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6368940103904793,
+          "step": 293
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4682219900788746,
+          "step": 294
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.345437127036037,
+          "step": 295
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.39383676709759013,
+          "step": 296
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5062663809100195,
+          "step": 297
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3676049713800217,
+          "step": 298
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7107052959852099,
+          "step": 299
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.412538256351421,
+          "step": 300
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6902137069892509,
+          "step": 301
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6975122898444158,
+          "step": 302
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.18777807231074167,
+          "step": 303
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.8410803745927142,
+          "step": 304
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.14896330345889425,
+          "step": 305
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.1440634933811095,
+          "step": 306
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.28775115991687183,
+          "step": 307
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.31159582407365627,
+          "step": 308
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.25844636745177585,
+          "step": 309
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.2759786184917581,
+          "step": 310
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.8063868100513003,
+          "step": 311
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3466857018127208,
+          "step": 312
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.45404412074602585,
+          "step": 313
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4524193842849317,
+          "step": 314
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7119156392500187,
+          "step": 315
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6408137222181052,
+          "step": 316
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.2855262171360134,
+          "step": 317
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3203727069856776,
+          "step": 318
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.35930921803643134,
+          "step": 319
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1243298732711792,
+          "step": 320
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11615346343158714,
+          "step": 321
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9048427342768898,
+          "step": 322
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11407508670601553,
+          "step": 323
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09656619762216295,
+          "step": 324
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9043437456316127,
+          "step": 325
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08986248783524116,
+          "step": 326
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9046827365940276,
+          "step": 327
+        },
+        {
+          "mechanism": "native",
+          "p": 0.904018845562183,
+          "step": 328
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9111850505085621,
+          "step": 329
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1019079163623435,
+          "step": 330
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9104774173822164,
+          "step": 331
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08385387890868731,
+          "step": 332
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8490834181730721,
+          "step": 333
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10543984096320604,
+          "step": 334
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09351130511064515,
+          "step": 335
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9131123309956822,
+          "step": 336
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09156352584352274,
+          "step": 337
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9196311351134839,
+          "step": 338
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08087731342115292,
+          "step": 339
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08031062049279261,
+          "step": 340
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0922172065110271,
+          "step": 341
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09215217362746067,
+          "step": 342
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08871597546186387,
+          "step": 343
+        },
+        {
+          "mechanism": "native",
+          "p": 0.897187716703248,
+          "step": 344
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8974804505008921,
+          "step": 345
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09900956860029483,
+          "step": 346
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9054447894538648,
+          "step": 347
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08628729062249081,
+          "step": 348
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08512174768016807,
+          "step": 349
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09096095096769861,
+          "step": 350
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8956473506923194,
+          "step": 351
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0940608738264565,
+          "step": 352
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10463348308270257,
+          "step": 353
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9116173516942724,
+          "step": 354
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9134687112765607,
+          "step": 355
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8451586377374904,
+          "step": 356
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10215966885064096,
+          "step": 357
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10187954367290566,
+          "step": 358
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0992096317770883,
+          "step": 359
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10846775796551619,
+          "step": 360
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9062770077189768,
+          "step": 361
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08836962979200225,
+          "step": 362
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9060586915164873,
+          "step": 363
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08768170197147121,
+          "step": 364
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09031768827518082,
+          "step": 365
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11049505012983471,
+          "step": 366
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8546519584417513,
+          "step": 367
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0843674514081432,
+          "step": 368
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8324528929874135,
+          "step": 369
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8652744177705766,
+          "step": 370
+        },
+        {
+          "mechanism": "native",
+          "p": 0.7503818014047701,
+          "step": 371
+        },
+        {
+          "mechanism": "native",
+          "p": 0.7691881920063218,
+          "step": 372
+        },
+        {
+          "mechanism": "native",
+          "p": 0.858191813385861,
+          "step": 373
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1357512568073989,
+          "step": 374
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8490613158849101,
+          "step": 375
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1645357613853999,
+          "step": 376
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11488012906646877,
+          "step": 377
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1324733765240838,
+          "step": 378
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8961426572897988,
+          "step": 379
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08842818629346713,
+          "step": 380
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9085616052271585,
+          "step": 381
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11266878278337948,
+          "step": 382
+        },
+        {
+          "mechanism": "native",
+          "p": 0.913305850690842,
+          "step": 383
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4398148148148148,
+          "step": 384
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4377880184331797,
+          "step": 385
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5116279069767442,
+          "step": 386
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5144508670520231,
+          "step": 387
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44036697247706424,
+          "step": 388
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4383561643835616,
+          "step": 389
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4409090909090909,
+          "step": 390
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5172413793103449,
+          "step": 391
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.52,
+          "step": 392
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5227272727272727,
+          "step": 393
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5254237288135594,
+          "step": 394
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4434389140271493,
+          "step": 395
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5224719101123596,
+          "step": 396
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5195530726256983,
+          "step": 397
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44594594594594594,
+          "step": 398
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5166666666666667,
+          "step": 399
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5138121546961326,
+          "step": 400
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.510989010989011,
+          "step": 401
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4439461883408072,
+          "step": 402
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44642857142857145,
+          "step": 403
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5136612021857924,
+          "step": 404
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5108695652173914,
+          "step": 405
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4444444444444444,
+          "step": 406
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4424778761061947,
+          "step": 407
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44493392070484583,
+          "step": 408
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5135135135135135,
+          "step": 409
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4473684210526316,
+          "step": 410
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5161290322580645,
+          "step": 411
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44541484716157204,
+          "step": 412
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5187165775401069,
+          "step": 413
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44782608695652176,
+          "step": 414
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5159574468085106,
+          "step": 415
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.45021645021645024,
+          "step": 416
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4525862068965517,
+          "step": 417
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5185185185185185,
+          "step": 418
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.45064377682403434,
+          "step": 419
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44871794871794873,
+          "step": 420
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5157894736842106,
+          "step": 421
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44680851063829785,
+          "step": 422
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5130890052356021,
+          "step": 423
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4449152542372881,
+          "step": 424
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.515625,
+          "step": 425
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5181347150259067,
+          "step": 426
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4430379746835443,
+          "step": 427
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5154639175257731,
+          "step": 428
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4411764705882353,
+          "step": 429
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4435146443514644,
+          "step": 430
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5128205128205128,
+          "step": 431
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44166666666666665,
+          "step": 432
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5102040816326531,
+          "step": 433
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44398340248962653,
+          "step": 434
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4462809917355372,
+          "step": 435
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5126903553299492,
+          "step": 436
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.51010101010101,
+          "step": 437
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5125628140703518,
+          "step": 438
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4444444444444444,
+          "step": 439
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44672131147540983,
+          "step": 440
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4489795918367347,
+          "step": 441
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.515,
+          "step": 442
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.45121951219512196,
+          "step": 443
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4493927125506073,
+          "step": 444
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5174129353233831,
+          "step": 445
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4475806451612903,
+          "step": 446
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5148514851485149,
+          "step": 447
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9053638160433949,
+          "step": 448
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9133593211499609,
+          "step": 449
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0823202898010214,
+          "step": 450
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08410538422897414,
+          "step": 451
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9051724595084892,
+          "step": 452
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0922689366889501,
+          "step": 453
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8997978126520485,
+          "step": 454
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08989138194085838,
+          "step": 455
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0908344135023702,
+          "step": 456
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8967032090370787,
+          "step": 457
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08125781850454904,
+          "step": 458
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09071732008002864,
+          "step": 459
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9139356576070347,
+          "step": 460
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08666169034006731,
+          "step": 461
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08735062506045231,
+          "step": 462
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9014571814939529,
+          "step": 463
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8584823740320916,
+          "step": 464
+        },
+        {
+          "mechanism": "native",
+          "p": 0.13738893697210064,
+          "step": 465
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09899456158787238,
+          "step": 466
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8832628390066521,
+          "step": 467
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8862604232651528,
+          "step": 468
+        },
+        {
+          "mechanism": "native",
+          "p": 0.25549832768838476,
+          "step": 469
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1412392686375854,
+          "step": 470
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1360730130128272,
+          "step": 471
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8668179133520626,
+          "step": 472
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11618036862229078,
+          "step": 473
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8999630153065574,
+          "step": 474
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8876599391243157,
+          "step": 475
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09821787637898531,
+          "step": 476
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8909820935238818,
+          "step": 477
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8747004389742057,
+          "step": 478
+        },
+        {
+          "mechanism": "native",
+          "p": 0.891612329388985,
+          "step": 479
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8374045700053587,
+          "step": 480
+        },
+        {
+          "mechanism": "native",
+          "p": 0.18747256972876492,
+          "step": 481
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8357517661491719,
+          "step": 482
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10671687936733258,
+          "step": 483
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10445842593549304,
+          "step": 484
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9088561721656452,
+          "step": 485
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11731114344693933,
+          "step": 486
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0993245037430372,
+          "step": 487
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9012990877844156,
+          "step": 488
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8902219950577348,
+          "step": 489
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10715218387604361,
+          "step": 490
+        },
+        {
+          "mechanism": "native",
+          "p": 0.907271550472964,
+          "step": 491
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08983243068456367,
+          "step": 492
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0871348818073646,
+          "step": 493
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09991961829367207,
+          "step": 494
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8402146872031134,
+          "step": 495
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10832350256697229,
+          "step": 496
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8962946277048041,
+          "step": 497
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8678847537053161,
+          "step": 498
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9059709486416461,
+          "step": 499
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0907019854450129,
+          "step": 500
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9175568357088143,
+          "step": 501
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8886915693923491,
+          "step": 502
+        },
+        {
+          "mechanism": "native",
+          "p": 0.306283680423477,
+          "step": 503
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8238741586179394,
+          "step": 504
+        },
+        {
+          "mechanism": "native",
+          "p": 0.12167396914617779,
+          "step": 505
+        },
+        {
+          "mechanism": "native",
+          "p": 0.864326519913998,
+          "step": 506
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10059771288799124,
+          "step": 507
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10453464916790291,
+          "step": 508
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09575711429011158,
+          "step": 509
+        },
+        {
+          "mechanism": "native",
+          "p": 0.914090238616285,
+          "step": 510
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09224840319181517,
+          "step": 511
+        }
+      ],
+      "wall_seconds": 3.52017989999149
+    },
+    {
+      "config": {
+        "commitment": 64,
+        "cost_seconds": {
+          "frequency": 2e-06,
+          "native": 0.0015,
+          "temporal": 0.0001
+        },
+        "cost_weight": 2.0,
+        "credit_horizon": 64,
+        "delayed_credit": false,
+        "detector_cooldown": 64,
+        "detector_enabled": false,
+        "detector_threshold": 0.35,
+        "detector_window": 32,
+        "epoch": 0,
+        "gamma": 0.98,
+        "max_history": 2048,
+        "max_state_bytes": 16777216,
+        "risk_weight": 0.1,
+        "setup_seconds": {
+          "frequency": 0.0,
+          "native": 0.08,
+          "temporal": 0.08
+        },
+        "state_policy": "cold",
+        "switch_penalty": 0.01,
+        "ttl_epochs": 32
+      },
+      "controller_cpu_seconds": 6.296875,
+      "policy": "cold",
+      "scope": "trusted in-process sequential demonstration, no worker/startup cost or inferential speedup claim",
+      "telemetry": {
+        "active_cpu_seconds": 1.5625,
+        "active_forecasts": 512,
+        "active_updates": 512,
+        "active_wall_seconds": 1.562448300071992,
+        "bookkeeping_cpu_seconds": 0.015625,
+        "bookkeeping_wall_seconds": 0.005199599836487323,
+        "build_cpu_seconds": 0.40625,
+        "build_wall_seconds": 0.4107361999922432,
+        "cache_rebuilds_on_restore": 0,
+        "catchup_cpu_seconds": 4.3125,
+        "catchup_observations": 1216,
+        "catchup_wall_seconds": 4.355117099767085,
+        "cold_evictions": 4,
+        "cold_fallbacks": 0,
+        "decision_cpu_seconds": 0.0,
+        "decision_wall_seconds": 0.0025584999821148813,
+        "detector_cpu_seconds": 0.0,
+        "detector_wall_seconds": 0.001867099606897682,
+        "expired_states": 0,
+        "inactive_cpu_seconds": 0.0,
+        "inactive_forecasts": 320,
+        "inactive_updates": 320,
+        "inactive_wall_seconds": 0.001959799905307591,
+        "restoration_cpu_seconds": 0.0,
+        "restoration_wall_seconds": 0.0,
+        "restores": 0,
+        "serialization_cpu_seconds": 0.0,
+        "serialization_wall_seconds": 0.0,
+        "switches": 7
+      },
+      "trace": [
+        {
+          "mechanism": "frequency",
+          "p": 0.5,
+          "step": 0
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.3333333333333333,
+          "step": 1
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.25,
+          "step": 2
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5,
+          "step": 3
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.2,
+          "step": 4
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.16666666666666666,
+          "step": 5
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.14285714285714285,
+          "step": 6
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.25,
+          "step": 7
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6666666666666666,
+          "step": 8
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.75,
+          "step": 9
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.8,
+          "step": 10
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.3333333333333333,
+          "step": 11
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4,
+          "step": 12
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.8333333333333334,
+          "step": 13
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.45454545454545453,
+          "step": 14
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.7142857142857143,
+          "step": 15
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4166666666666667,
+          "step": 16
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.75,
+          "step": 17
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.7777777777777778,
+          "step": 18
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.7,
+          "step": 19
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.7272727272727273,
+          "step": 20
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6666666666666666,
+          "step": 21
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.46153846153846156,
+          "step": 22
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6153846153846154,
+          "step": 23
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5,
+          "step": 24
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5333333333333333,
+          "step": 25
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5625,
+          "step": 26
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5714285714285714,
+          "step": 27
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5882352941176471,
+          "step": 28
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6,
+          "step": 29
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5555555555555556,
+          "step": 30
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.625,
+          "step": 31
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6470588235294118,
+          "step": 32
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5789473684210527,
+          "step": 33
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.55,
+          "step": 34
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5714285714285714,
+          "step": 35
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5909090909090909,
+          "step": 36
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6111111111111112,
+          "step": 37
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.631578947368421,
+          "step": 38
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5652173913043478,
+          "step": 39
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5416666666666666,
+          "step": 40
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.56,
+          "step": 41
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5769230769230769,
+          "step": 42
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.65,
+          "step": 43
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6666666666666666,
+          "step": 44
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5555555555555556,
+          "step": 45
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5714285714285714,
+          "step": 46
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5862068965517241,
+          "step": 47
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6818181818181818,
+          "step": 48
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6,
+          "step": 49
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5806451612903226,
+          "step": 50
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6956521739130435,
+          "step": 51
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6666666666666666,
+          "step": 52
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5625,
+          "step": 53
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5454545454545454,
+          "step": 54
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.68,
+          "step": 55
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6538461538461539,
+          "step": 56
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6666666666666666,
+          "step": 57
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5588235294117647,
+          "step": 58
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6785714285714286,
+          "step": 59
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6551724137931034,
+          "step": 60
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6333333333333333,
+          "step": 61
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.6451612903225806,
+          "step": 62
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5714285714285714,
+          "step": 63
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.515241534729559,
+          "step": 64
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6256683375741756,
+          "step": 65
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4324827004584025,
+          "step": 66
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5811929869272933,
+          "step": 67
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.542500444721101,
+          "step": 68
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5495046389562651,
+          "step": 69
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5717074919123575,
+          "step": 70
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6069364580299511,
+          "step": 71
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5903685439544825,
+          "step": 72
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5511855176534286,
+          "step": 73
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6680681161970942,
+          "step": 74
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5774612947049279,
+          "step": 75
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6592610575621954,
+          "step": 76
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6269387020391635,
+          "step": 77
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6600437707072967,
+          "step": 78
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5817375518920745,
+          "step": 79
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5278493496247865,
+          "step": 80
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5649099414821959,
+          "step": 81
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6612628777983744,
+          "step": 82
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.42035457708132795,
+          "step": 83
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6115751193112752,
+          "step": 84
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7531269253599353,
+          "step": 85
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3499861375343085,
+          "step": 86
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5248958684238607,
+          "step": 87
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5016854762127928,
+          "step": 88
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6042437297928508,
+          "step": 89
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.39656406683673134,
+          "step": 90
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3511005274641653,
+          "step": 91
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.536198375905385,
+          "step": 92
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7602356085873335,
+          "step": 93
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6925970459495631,
+          "step": 94
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3660105596872103,
+          "step": 95
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3029344528477063,
+          "step": 96
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4287994245998896,
+          "step": 97
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.530931769769949,
+          "step": 98
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5254394907540376,
+          "step": 99
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.503724218794363,
+          "step": 100
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.712448785253385,
+          "step": 101
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.2627913553402354,
+          "step": 102
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6085424439376437,
+          "step": 103
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5663052663914947,
+          "step": 104
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5129119299712833,
+          "step": 105
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.32868898621572484,
+          "step": 106
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.46703489348268046,
+          "step": 107
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3057866417912114,
+          "step": 108
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.248639301578432,
+          "step": 109
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6263279073957128,
+          "step": 110
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5915836799673487,
+          "step": 111
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7631484221220196,
+          "step": 112
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.2649155070052478,
+          "step": 113
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.20220048487277273,
+          "step": 114
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.711644087782823,
+          "step": 115
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.44879532520237053,
+          "step": 116
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.44340372517713167,
+          "step": 117
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5404385179721969,
+          "step": 118
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6705790567827697,
+          "step": 119
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7004455848627402,
+          "step": 120
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6115617741951751,
+          "step": 121
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.42822053881020156,
+          "step": 122
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4764043382327006,
+          "step": 123
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5685025061562663,
+          "step": 124
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7009345485769941,
+          "step": 125
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3901075593274806,
+          "step": 126
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4691881330617945,
+          "step": 127
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09913368396558442,
+          "step": 128
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9140659234518689,
+          "step": 129
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08495107479597445,
+          "step": 130
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09158328694311069,
+          "step": 131
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09579385678309235,
+          "step": 132
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9106588926869147,
+          "step": 133
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9161773407350776,
+          "step": 134
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9137169622116359,
+          "step": 135
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8366638402481775,
+          "step": 136
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11160292340616997,
+          "step": 137
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1892968012432863,
+          "step": 138
+        },
+        {
+          "mechanism": "native",
+          "p": 0.19218104087278026,
+          "step": 139
+        },
+        {
+          "mechanism": "native",
+          "p": 0.844830913703318,
+          "step": 140
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8717483938749712,
+          "step": 141
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8907130313782212,
+          "step": 142
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11680993839581696,
+          "step": 143
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8834410694517917,
+          "step": 144
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11280830392099164,
+          "step": 145
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9112001194378346,
+          "step": 146
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09119044619924999,
+          "step": 147
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1004244946871461,
+          "step": 148
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9148338626361844,
+          "step": 149
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9064318087187777,
+          "step": 150
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10050706353943152,
+          "step": 151
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0928896768612135,
+          "step": 152
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08512014992083501,
+          "step": 153
+        },
+        {
+          "mechanism": "native",
+          "p": 0.915524877119019,
+          "step": 154
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09331869954154666,
+          "step": 155
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9103909154010591,
+          "step": 156
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08442883562636348,
+          "step": 157
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1481838319470674,
+          "step": 158
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8811201929942016,
+          "step": 159
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09620878646423767,
+          "step": 160
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09656705053929385,
+          "step": 161
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9138179166741579,
+          "step": 162
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08841148114748323,
+          "step": 163
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8540145696615521,
+          "step": 164
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8889689701135441,
+          "step": 165
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11173883138187829,
+          "step": 166
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1135465599581973,
+          "step": 167
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9107373450361511,
+          "step": 168
+        },
+        {
+          "mechanism": "native",
+          "p": 0.888079306271072,
+          "step": 169
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9035690691311886,
+          "step": 170
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8957215303771406,
+          "step": 171
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9096670787628599,
+          "step": 172
+        },
+        {
+          "mechanism": "native",
+          "p": 0.14658329023187883,
+          "step": 173
+        },
+        {
+          "mechanism": "native",
+          "p": 0.13903718852669417,
+          "step": 174
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8893692520601262,
+          "step": 175
+        },
+        {
+          "mechanism": "native",
+          "p": 0.7619238410396421,
+          "step": 176
+        },
+        {
+          "mechanism": "native",
+          "p": 0.20513785825240943,
+          "step": 177
+        },
+        {
+          "mechanism": "native",
+          "p": 0.13538816071884752,
+          "step": 178
+        },
+        {
+          "mechanism": "native",
+          "p": 0.13098963337061487,
+          "step": 179
+        },
+        {
+          "mechanism": "native",
+          "p": 0.12245183848170207,
+          "step": 180
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9010938738260862,
+          "step": 181
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08946276911257235,
+          "step": 182
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1774447480021687,
+          "step": 183
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8404641433842334,
+          "step": 184
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10944162109646458,
+          "step": 185
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9112684733614023,
+          "step": 186
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0919826098237441,
+          "step": 187
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08519515994598048,
+          "step": 188
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9098918959013742,
+          "step": 189
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09296502322599262,
+          "step": 190
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9184752363835141,
+          "step": 191
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.48598130841121495,
+          "step": 192
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.550561797752809,
+          "step": 193
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5555555555555556,
+          "step": 194
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.48148148148148145,
+          "step": 195
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47706422018348627,
+          "step": 196
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4818181818181818,
+          "step": 197
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4864864864864865,
+          "step": 198
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5494505494505495,
+          "step": 199
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5543478260869565,
+          "step": 200
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.48214285714285715,
+          "step": 201
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5591397849462365,
+          "step": 202
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4778761061946903,
+          "step": 203
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47368421052631576,
+          "step": 204
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5531914893617021,
+          "step": 205
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5473684210526316,
+          "step": 206
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5520833333333334,
+          "step": 207
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.46956521739130436,
+          "step": 208
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.46551724137931033,
+          "step": 209
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5567010309278351,
+          "step": 210
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4700854700854701,
+          "step": 211
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5510204081632653,
+          "step": 212
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4745762711864407,
+          "step": 213
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5555555555555556,
+          "step": 214
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4789915966386555,
+          "step": 215
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.56,
+          "step": 216
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5643564356435643,
+          "step": 217
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.48333333333333334,
+          "step": 218
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4793388429752066,
+          "step": 219
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5588235294117647,
+          "step": 220
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.48360655737704916,
+          "step": 221
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5533980582524272,
+          "step": 222
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4796747967479675,
+          "step": 223
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4838709677419355,
+          "step": 224
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5576923076923077,
+          "step": 225
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.48,
+          "step": 226
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47619047619047616,
+          "step": 227
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47244094488188976,
+          "step": 228
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4765625,
+          "step": 229
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5523809523809524,
+          "step": 230
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4728682170542636,
+          "step": 231
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5566037735849056,
+          "step": 232
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.46923076923076923,
+          "step": 233
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5607476635514018,
+          "step": 234
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5648148148148148,
+          "step": 235
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4732824427480916,
+          "step": 236
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5596330275229358,
+          "step": 237
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5545454545454546,
+          "step": 238
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4696969696969697,
+          "step": 239
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47368421052631576,
+          "step": 240
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47761194029850745,
+          "step": 241
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.48148148148148145,
+          "step": 242
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47794117647058826,
+          "step": 243
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4744525547445255,
+          "step": 244
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.47101449275362317,
+          "step": 245
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5495495495495496,
+          "step": 246
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4676258992805755,
+          "step": 247
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5535714285714286,
+          "step": 248
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4642857142857143,
+          "step": 249
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.46808510638297873,
+          "step": 250
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4647887323943662,
+          "step": 251
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.46853146853146854,
+          "step": 252
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5575221238938053,
+          "step": 253
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4652777777777778,
+          "step": 254
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5614035087719298,
+          "step": 255
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4264899390069346,
+          "step": 256
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.660207768513059,
+          "step": 257
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6158006832861749,
+          "step": 258
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6994890596400851,
+          "step": 259
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4634714641360284,
+          "step": 260
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.65199128454952,
+          "step": 261
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4373787107825954,
+          "step": 262
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6242444437277167,
+          "step": 263
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.24905316197204455,
+          "step": 264
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6309446780789127,
+          "step": 265
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4358991134109677,
+          "step": 266
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.36987645062580526,
+          "step": 267
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4023611006919622,
+          "step": 268
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6067611286346126,
+          "step": 269
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.33916976997728726,
+          "step": 270
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.212558546437226,
+          "step": 271
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7414573446651948,
+          "step": 272
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5204724261306041,
+          "step": 273
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5521452341698545,
+          "step": 274
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.35081118949388423,
+          "step": 275
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7641431767090194,
+          "step": 276
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.29325638612452204,
+          "step": 277
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.2824262743747823,
+          "step": 278
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.2963995582784428,
+          "step": 279
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3289051914173063,
+          "step": 280
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7779936011822864,
+          "step": 281
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.27245107231011334,
+          "step": 282
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.803892750621276,
+          "step": 283
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.33802291841469806,
+          "step": 284
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.31789157370005217,
+          "step": 285
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5227522117066435,
+          "step": 286
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.35941089815968835,
+          "step": 287
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4271826280663005,
+          "step": 288
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.411728644534099,
+          "step": 289
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.22702869297806952,
+          "step": 290
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3993376624288258,
+          "step": 291
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.44736369704882467,
+          "step": 292
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6368940103904793,
+          "step": 293
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4682219900788746,
+          "step": 294
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.345437127036037,
+          "step": 295
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.39383676709759013,
+          "step": 296
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.5062663809100195,
+          "step": 297
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3676049713800217,
+          "step": 298
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7107052959852099,
+          "step": 299
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.412538256351421,
+          "step": 300
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6902137069892509,
+          "step": 301
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6975122898444158,
+          "step": 302
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.18777807231074167,
+          "step": 303
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.8410803745927142,
+          "step": 304
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.14896330345889425,
+          "step": 305
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.1440634933811095,
+          "step": 306
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.28775115991687183,
+          "step": 307
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.31159582407365627,
+          "step": 308
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.25844636745177585,
+          "step": 309
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.2759786184917581,
+          "step": 310
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.8063868100513003,
+          "step": 311
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3466857018127208,
+          "step": 312
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.45404412074602585,
+          "step": 313
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.4524193842849317,
+          "step": 314
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.7119156392500187,
+          "step": 315
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.6408137222181052,
+          "step": 316
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.2855262171360134,
+          "step": 317
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.3203727069856776,
+          "step": 318
+        },
+        {
+          "mechanism": "temporal",
+          "p": 0.35930921803643134,
+          "step": 319
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1243298732711792,
+          "step": 320
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11615346343158714,
+          "step": 321
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9048427342768898,
+          "step": 322
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11407508670601553,
+          "step": 323
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09656619762216295,
+          "step": 324
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9043437456316127,
+          "step": 325
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08986248783524116,
+          "step": 326
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9046827365940276,
+          "step": 327
+        },
+        {
+          "mechanism": "native",
+          "p": 0.904018845562183,
+          "step": 328
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9111850505085621,
+          "step": 329
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1019079163623435,
+          "step": 330
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9104774173822164,
+          "step": 331
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08385387890868731,
+          "step": 332
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8490834181730721,
+          "step": 333
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10543984096320604,
+          "step": 334
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09351130511064515,
+          "step": 335
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9131123309956822,
+          "step": 336
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09156352584352274,
+          "step": 337
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9196311351134839,
+          "step": 338
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08087731342115292,
+          "step": 339
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08031062049279261,
+          "step": 340
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0922172065110271,
+          "step": 341
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09215217362746067,
+          "step": 342
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08871597546186387,
+          "step": 343
+        },
+        {
+          "mechanism": "native",
+          "p": 0.897187716703248,
+          "step": 344
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8974804505008921,
+          "step": 345
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09900956860029483,
+          "step": 346
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9054447894538648,
+          "step": 347
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08628729062249081,
+          "step": 348
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08512174768016807,
+          "step": 349
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09096095096769861,
+          "step": 350
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8956473506923194,
+          "step": 351
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0940608738264565,
+          "step": 352
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10463348308270257,
+          "step": 353
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9116173516942724,
+          "step": 354
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9134687112765607,
+          "step": 355
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8451586377374904,
+          "step": 356
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10215966885064096,
+          "step": 357
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10187954367290566,
+          "step": 358
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0992096317770883,
+          "step": 359
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10846775796551619,
+          "step": 360
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9062770077189768,
+          "step": 361
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08836962979200225,
+          "step": 362
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9060586915164873,
+          "step": 363
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08768170197147121,
+          "step": 364
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09031768827518082,
+          "step": 365
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11049505012983471,
+          "step": 366
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8546519584417513,
+          "step": 367
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0843674514081432,
+          "step": 368
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8324528929874135,
+          "step": 369
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8652744177705766,
+          "step": 370
+        },
+        {
+          "mechanism": "native",
+          "p": 0.7503818014047701,
+          "step": 371
+        },
+        {
+          "mechanism": "native",
+          "p": 0.7691881920063218,
+          "step": 372
+        },
+        {
+          "mechanism": "native",
+          "p": 0.858191813385861,
+          "step": 373
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1357512568073989,
+          "step": 374
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8490613158849101,
+          "step": 375
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1645357613853999,
+          "step": 376
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11488012906646877,
+          "step": 377
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1324733765240838,
+          "step": 378
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8961426572897988,
+          "step": 379
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08842818629346713,
+          "step": 380
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9085616052271585,
+          "step": 381
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11266878278337948,
+          "step": 382
+        },
+        {
+          "mechanism": "native",
+          "p": 0.913305850690842,
+          "step": 383
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4398148148148148,
+          "step": 384
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4377880184331797,
+          "step": 385
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5116279069767442,
+          "step": 386
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5144508670520231,
+          "step": 387
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44036697247706424,
+          "step": 388
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4383561643835616,
+          "step": 389
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4409090909090909,
+          "step": 390
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5172413793103449,
+          "step": 391
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.52,
+          "step": 392
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5227272727272727,
+          "step": 393
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5254237288135594,
+          "step": 394
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4434389140271493,
+          "step": 395
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5224719101123596,
+          "step": 396
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5195530726256983,
+          "step": 397
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44594594594594594,
+          "step": 398
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5166666666666667,
+          "step": 399
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5138121546961326,
+          "step": 400
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.510989010989011,
+          "step": 401
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4439461883408072,
+          "step": 402
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44642857142857145,
+          "step": 403
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5136612021857924,
+          "step": 404
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5108695652173914,
+          "step": 405
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4444444444444444,
+          "step": 406
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4424778761061947,
+          "step": 407
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44493392070484583,
+          "step": 408
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5135135135135135,
+          "step": 409
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4473684210526316,
+          "step": 410
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5161290322580645,
+          "step": 411
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44541484716157204,
+          "step": 412
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5187165775401069,
+          "step": 413
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44782608695652176,
+          "step": 414
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5159574468085106,
+          "step": 415
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.45021645021645024,
+          "step": 416
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4525862068965517,
+          "step": 417
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5185185185185185,
+          "step": 418
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.45064377682403434,
+          "step": 419
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44871794871794873,
+          "step": 420
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5157894736842106,
+          "step": 421
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44680851063829785,
+          "step": 422
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5130890052356021,
+          "step": 423
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4449152542372881,
+          "step": 424
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.515625,
+          "step": 425
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5181347150259067,
+          "step": 426
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4430379746835443,
+          "step": 427
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5154639175257731,
+          "step": 428
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4411764705882353,
+          "step": 429
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4435146443514644,
+          "step": 430
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5128205128205128,
+          "step": 431
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44166666666666665,
+          "step": 432
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5102040816326531,
+          "step": 433
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44398340248962653,
+          "step": 434
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4462809917355372,
+          "step": 435
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5126903553299492,
+          "step": 436
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.51010101010101,
+          "step": 437
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5125628140703518,
+          "step": 438
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4444444444444444,
+          "step": 439
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.44672131147540983,
+          "step": 440
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4489795918367347,
+          "step": 441
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.515,
+          "step": 442
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.45121951219512196,
+          "step": 443
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4493927125506073,
+          "step": 444
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5174129353233831,
+          "step": 445
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.4475806451612903,
+          "step": 446
+        },
+        {
+          "mechanism": "frequency",
+          "p": 0.5148514851485149,
+          "step": 447
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9053638160433949,
+          "step": 448
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9133593211499609,
+          "step": 449
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0823202898010214,
+          "step": 450
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08410538422897414,
+          "step": 451
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9051724595084892,
+          "step": 452
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0922689366889501,
+          "step": 453
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8997978126520485,
+          "step": 454
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08989138194085838,
+          "step": 455
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0908344135023702,
+          "step": 456
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8967032090370787,
+          "step": 457
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08125781850454904,
+          "step": 458
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09071732008002864,
+          "step": 459
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9139356576070347,
+          "step": 460
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08666169034006731,
+          "step": 461
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08735062506045231,
+          "step": 462
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9014571814939529,
+          "step": 463
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8584823740320916,
+          "step": 464
+        },
+        {
+          "mechanism": "native",
+          "p": 0.13738893697210064,
+          "step": 465
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09899456158787238,
+          "step": 466
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8832628390066521,
+          "step": 467
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8862604232651528,
+          "step": 468
+        },
+        {
+          "mechanism": "native",
+          "p": 0.25549832768838476,
+          "step": 469
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1412392686375854,
+          "step": 470
+        },
+        {
+          "mechanism": "native",
+          "p": 0.1360730130128272,
+          "step": 471
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8668179133520626,
+          "step": 472
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11618036862229078,
+          "step": 473
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8999630153065574,
+          "step": 474
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8876599391243157,
+          "step": 475
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09821787637898531,
+          "step": 476
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8909820935238818,
+          "step": 477
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8747004389742057,
+          "step": 478
+        },
+        {
+          "mechanism": "native",
+          "p": 0.891612329388985,
+          "step": 479
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8374045700053587,
+          "step": 480
+        },
+        {
+          "mechanism": "native",
+          "p": 0.18747256972876492,
+          "step": 481
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8357517661491719,
+          "step": 482
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10671687936733258,
+          "step": 483
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10445842593549304,
+          "step": 484
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9088561721656452,
+          "step": 485
+        },
+        {
+          "mechanism": "native",
+          "p": 0.11731114344693933,
+          "step": 486
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0993245037430372,
+          "step": 487
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9012990877844156,
+          "step": 488
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8902219950577348,
+          "step": 489
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10715218387604361,
+          "step": 490
+        },
+        {
+          "mechanism": "native",
+          "p": 0.907271550472964,
+          "step": 491
+        },
+        {
+          "mechanism": "native",
+          "p": 0.08983243068456367,
+          "step": 492
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0871348818073646,
+          "step": 493
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09991961829367207,
+          "step": 494
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8402146872031134,
+          "step": 495
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10832350256697229,
+          "step": 496
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8962946277048041,
+          "step": 497
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8678847537053161,
+          "step": 498
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9059709486416461,
+          "step": 499
+        },
+        {
+          "mechanism": "native",
+          "p": 0.0907019854450129,
+          "step": 500
+        },
+        {
+          "mechanism": "native",
+          "p": 0.9175568357088143,
+          "step": 501
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8886915693923491,
+          "step": 502
+        },
+        {
+          "mechanism": "native",
+          "p": 0.306283680423477,
+          "step": 503
+        },
+        {
+          "mechanism": "native",
+          "p": 0.8238741586179394,
+          "step": 504
+        },
+        {
+          "mechanism": "native",
+          "p": 0.12167396914617779,
+          "step": 505
+        },
+        {
+          "mechanism": "native",
+          "p": 0.864326519913998,
+          "step": 506
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10059771288799124,
+          "step": 507
+        },
+        {
+          "mechanism": "native",
+          "p": 0.10453464916790291,
+          "step": 508
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09575711429011158,
+          "step": 509
+        },
+        {
+          "mechanism": "native",
+          "p": 0.914090238616285,
+          "step": 510
+        },
+        {
+          "mechanism": "native",
+          "p": 0.09224840319181517,
+          "step": 511
+        }
+      ],
+      "wall_seconds": 6.351720899983775
+    }
+  ]
+}

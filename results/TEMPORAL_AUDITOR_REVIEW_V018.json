@@ -1,0 +1,37 @@
+{
+  "complete_fixture_forecasts": 294912,
+  "complete_fixture_scored_forecasts": 258048,
+  "complete_fixture_trials": 576,
+  "efficacy": "NOT_ESTABLISHED",
+  "elapsed_seconds": 3.755,
+  "errors": 0,
+  "failures": 0,
+  "inference_unit": "eight independent seed blocks",
+  "native_qualification": "NOT_ESTABLISHED",
+  "negative_cases": [
+    "duplicate/nonfinite JSON",
+    "bad Bernoulli value or incomplete trace",
+    "trace mutation versus retained output hash",
+    "CPU double-count or unbound alteration",
+    "mode config mismatch",
+    "future decision prefix",
+    "changed restart boundary",
+    "invented detector alarm",
+    "checkpoint subset overclaim",
+    "missing/reordered trial",
+    "unmatched arm input",
+    "negative harness CPU"
+  ],
+  "primary_policy": "selectivewarm",
+  "primary_tests": 5,
+  "retention_control": "fullwarm",
+  "schema": "nomad.temporal-auditor-review.v18",
+  "scope": "Independent pure-Python arithmetic and synthetic receipt contracts; no predictor/harness imports and no evaluation outcomes generated.",
+  "skips": 0,
+  "source_sha256": {
+    "scripts/audit_temporal_metrics_v18.py": "56f0e44411ce421b570e0047e7d191df07066c4735b6732478a0ebda176aa5b3",
+    "tests/test_temporal_audit_v18.py": "288ac7280bd35061777ff5f9cc1d7db91333ba4a87ce0cfa260985e9a2ca5b8b"
+  },
+  "status": "CONTRACTS_PASS",
+  "tests_run": 10
+}

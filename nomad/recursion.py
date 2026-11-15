@@ -286,6 +286,109 @@ def prepare_ranking_experiment(output: Path, development: Iterable[SyntheticTask
     return report
 
 
+def prepare_computation_experiment(output: Path, development: Path, *,
+                                  future_plan_sha256: str | None = None) -> dict:
+    """Nominate one predeclared computation configuration as JSON data only.
+
+    The trusted temporal harness validates every retained development trial.
+    No learner or candidate is executed here; an optional future plan digest
+    is an external commitment, never permission to read evaluation contracts.
+    """
+    import math
+    import stat
+    import statistics
+    import tempfile
+    from .mission_runtime import canonical, digest, save_atomic
+    from .platform_mission import _publish_staged_mission
+    from scripts import experiment_temporal_v18 as temporal
+    if future_plan_sha256 is not None and (type(future_plan_sha256) is not str
+            or len(future_plan_sha256)!=64 or any(c not in '0123456789abcdef' for c in future_plan_sha256)):
+        raise ValueError('future plan must be a lowercase SHA-256 commitment')
+    path=Path(development)
+    if not path.is_file() or not 0<path.stat().st_size<=64_000_000:
+        raise ValueError('bounded complete development report required')
+    raw=path.read_bytes()
+    def unique(pairs):
+        result={}
+        for key,value in pairs:
+            if key in result: raise ValueError('duplicate development JSON key')
+            result[key]=value
+        return result
+    parsed=json.loads(raw,object_pairs_hook=unique,
+        parse_constant=lambda value: (_ for _ in ()).throw(ValueError('nonfinite development JSON')))
+    if type(parsed) is not dict: raise ValueError('development report must be an object')
+    before=temporal.source_identity()
+    data,choice=temporal.validate_development(path)
+    if data!=parsed or path.read_bytes()!=raw: raise ValueError('development report changed during validation')
+    profiles={name:asdict(config) for name,config in temporal.profile_configs().items()}
+    if list(profiles)!=['standard','long','short'] or choice.get('profiles')!=profiles:
+        raise ValueError('candidate profile definitions differ from registered vocabulary')
+    selected=choice['selected_profile']
+    if selected not in profiles: raise ValueError('unregistered nominated profile')
+    objectives=choice['profile_mean_objectives']
+    if set(objectives)!=set(profiles) or any(type(v) not in (int,float) or not math.isfinite(v) for v in objectives.values()):
+        raise ValueError('finite complete profile objectives required')
+    if selected!=min(profiles,key=lambda name:(objectives[name],list(profiles).index(name))):
+        raise ValueError('nomination differs from fixed development selection rule')
+    profile_metrics={}
+    for name in profiles:
+        rows=[row for row in data['trials'] if row['mode']=='candidate_'+name]
+        profile_metrics[name]={'trials':len(rows),
+            'mean_logloss':statistics.fmean(row['metrics']['mean_logloss'] for row in rows),
+            'mean_total_cpu_seconds':statistics.fmean(row['cost']['total_cpu_seconds'] for row in rows),
+            'mean_registered_objective':objectives[name]}
+    improved=selected!='standard' and objectives[selected]<objectives['standard']
+    implementation={**before,'nomad/recursion.py':digest(Path(__file__).read_bytes()),
+        'scripts/prepare_temporal_self_revision_v18.py':digest((Path(__file__).resolve().parents[1]/'scripts/prepare_temporal_self_revision_v18.py').read_bytes())}
+    files={'baseline/config.json':canonical(profiles['standard']),
+           'candidate/config.json':canonical(profiles[selected]),
+           'rollback/config.json':canonical(profiles['standard']),
+           'development-selection.json':canonical({'selection':choice,'metrics':profile_metrics})}
+    report={'schema':'nomad.recursion.computation-config-experiment.v18',
+        'status':'BASELINE_RETAINED' if not improved else 'PREPARED_NOT_RUN' if future_plan_sha256 else 'DEVELOPMENT_NOMINATION_ONLY',
+        'scope':'three fixed computation configuration profiles; data-only proposal, not an engine modification',
+        'baseline_profile':'standard','nominated_profile':selected,
+        'baseline_config':profiles['standard'],'candidate_config':profiles[selected],
+        'profiles_sha256':digest(canonical(profiles)),
+        'changed_config_fields':sorted(k for k in profiles['standard'] if profiles['standard'][k]!=profiles[selected][k]),
+        'development_report_sha256':digest(raw),'development_schema':data['schema'],
+        'development_source_sha256':before,'development_trial_count':len(data['trials']),
+        'development_profile_metrics':profile_metrics,'selection_rule':choice['selection_rule'],
+        'implementation_sha256':implementation,'future_independent_plan_sha256':future_plan_sha256,
+        'hypothesis':'A predeclared commitment, credit-horizon or detector configuration improves held-out quality versus total measured CPU under identical prospective budgets.',
+        'development_objective_improved':improved,
+        'candidate_eligible_for_independent_test':improved and future_plan_sha256 is not None,
+        'independent_acceptance':{'status':'HOLD','required':[
+            'independently registered unseen evaluation with matched observations and complete measured costs',
+            'registered paired quality/cost criterion and unchanged source/evidence bindings',
+            'actual native containment, recovery and independent full regressions for any engine self-revision claim'],
+            'future_plan_status':'DIGEST_SUPPLIED_NOT_EVALUATED' if future_plan_sha256 else 'MISSING_INDEPENDENT_FUTURE_PLAN'},
+        'files_sha256':{name:digest(value) for name,value in files.items()},
+        'rollback':{'profile':'standard','path':'rollback/config.json','sha256':digest(files['rollback/config.json']),
+                    'action':'discard data-only candidate; running configuration and authoritative source were never changed'},
+        'heldout_read':False,'candidate_code_executed':False,'native_executions':0,
+        'authoritative_source_replaced':False,'production_promotion':'HOLD',
+        'self_improvement_advantage':'NOT_ESTABLISHED','authority':'configuration nomination only; no automatic installation or verifier modification'}
+    if temporal.source_identity()!=before or digest(Path(__file__).read_bytes())!=implementation['nomad/recursion.py']:
+        raise ValueError('implementation changed during data-only nomination')
+    report['receipt_sha256']=digest(canonical(report))
+    destination=Path(output).absolute()
+    for parent in (destination,*destination.parents):
+        try: metadata=parent.lstat()
+        except FileNotFoundError: continue
+        if stat.S_ISLNK(metadata.st_mode) or getattr(metadata,'st_reparse_tag',0):
+            raise ValueError('self-revision output link/reparse path refused')
+    if destination.exists(): raise FileExistsError('computation experiment already exists')
+    destination.parent.mkdir(parents=True,exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='nomad-computation-proposal-',dir=destination.parent) as temporary:
+        stage=Path(temporary)
+        for name,value in files.items():
+            (stage/name).parent.mkdir(parents=True,exist_ok=True);save_atomic(stage/name,value)
+        save_atomic(stage/'protocol.json',canonical(report))
+        _publish_staged_mission(stage,destination)
+    return report
+
+
 # The self-revision gate reuses the platform mission's isolated candidate and
 # receipts. It has deliberately no operation that writes authoritative source.
 SELF_REGRESSION_COMMAND = ['python', '-B', '-m', 'unittest', 'discover', '-s', 'tests', '-q']

@@ -17,6 +17,11 @@ BGR_SHA = '93177c5cc628ac0c6426d8c612c0d769b86ed53cbd7b2a3f872d2706c601a8c2'
 ENGINEERING_SEAL_SHA = '577c0182ed917742ffa49b286638026657a165f2ee0a49e4f2130b124fdb8335'
 QUALIFICATION_SEAL_SHA = 'a51bf062d96db7a144450f37fb09f39377584e9642f36fbf3fd9606023afcfec'
 FRONTIER_SEAL_SHA = 'e2c2fd63a811b7ccc2aaa3470cbb07e490fc2b6782d153db4e26d6d147f664e1'
+ADAPTIVE_SEAL_SHA = 'ce2740ce18c6e3ad1b8474e43dbf4a0e7d776bf11a42e9156eb47b2660afae31'
+ADAPTIVE_STUDY_CODE = frozenset({
+    'nomad/adaptive.py', 'scripts/experiment_adaptive_v18.py',
+    'scripts/audit_adaptive_metrics_v18.py', 'scripts/verify_adaptive_replay_v18.py',
+    'scripts/summarize_adaptive_v18.py', 'scripts/diagnose_adaptive_v18.py'})
 
 
 def hash_file(path: Path) -> str:
@@ -134,6 +139,18 @@ def verify(root: Path = ROOT, *, compact: Path | None = None, predecessor: Path 
                if not (root / name).is_file() or hash_file(root / name) != checksum]
     if changed:
         raise ValueError('frozen 993395f FRONTIER evidence differs: ' + repr(changed))
+    adaptive_seal = root / 'results/RELEASE_MANIFEST_ADAPTIVE_V018.json'
+    if hash_file(adaptive_seal) != ADAPTIVE_SEAL_SHA:
+        raise ValueError('original 3ffd467 ADAPTIVE seal differs')
+    adaptive = json.loads(adaptive_seal.read_bytes())['sha256_by_path']
+    adaptive_protected = {name: checksum for name, checksum in adaptive.items()
+                          if name.startswith(('results/', 'experiments/', 'vendor/',
+                                              'external_sources/', 'baseline/', 'docs/ADAPTIVE'))
+                          or name in ADAPTIVE_STUDY_CODE}
+    changed = [name for name, checksum in adaptive_protected.items()
+               if not (root / name).is_file() or hash_file(root / name) != checksum]
+    if changed:
+        raise ValueError('frozen 3ffd467 ADAPTIVE evidence differs: ' + repr(changed))
     report = {'schema': 'nomad.lineage-qualification.v18', 'gate_D': 'HOLD',
               'compact_v17': {'status': 'PASS', 'sha256': COMPACT_SHA,
                               'original_manifest_members_verified': len(expected) - len(missing)},
@@ -145,6 +162,9 @@ def verify(root: Path = ROOT, *, compact: Path | None = None, predecessor: Path 
               'frontier_993395f_evidence': {'status': 'PASS', 'unchanged_files': len(frontier_protected),
                                            'original_seal_sha256': FRONTIER_SEAL_SHA,
                                            'includes_original_mechanism_code': True},
+              'adaptive_3ffd467_evidence': {'status': 'PASS', 'unchanged_files': len(adaptive_protected),
+                                           'original_seal_sha256': ADAPTIVE_SEAL_SHA,
+                                           'includes_original_controller_study_audits_and_reports': True},
               'original_bgr_archive': {'status': 'PASS', 'sha256': BGR_SHA},
               'historical_results_regenerated': False,
               'missing': [{'path': missing[0], 'expected_sha256': V16_SHA,

@@ -1,0 +1,41 @@
+{
+  "change": "Added auditor and deterministic replay verifier to explicit source allowlist and matching synthetic fixture inventory.",
+  "efficacy": "NOT_ESTABLISHED",
+  "evaluation_outcomes_used_for_correction": false,
+  "native_qualification": "NOT_ESTABLISHED",
+  "prior_source_recovery": {
+    "directory": "C:\\Users\\jacks\\Documents\\Codex\\2026-11-14\\files-pasted-by-the-user-nomad\\work\\temporal-20261115\\pre_allowlist_fix",
+    "experimental_results_regenerated": false,
+    "method": "Exact inverse removal of each added allowlist line, then hash equality before exclusive-write archive.",
+    "source_sha256": {
+      "scripts/audit_temporal_metrics_v18.py": "56f0e44411ce421b570e0047e7d191df07066c4735b6732478a0ebda176aa5b3",
+      "tests/test_temporal_audit_v18.py": "288ac7280bd35061777ff5f9cc1d7db91333ba4a87ce0cfa260985e9a2ca5b8b"
+    },
+    "verified_against": "results/TEMPORAL_AUDITOR_REVIEW_V018.json"
+  },
+  "schema": "nomad.temporal-auditor-review.v18",
+  "scope": "Eleven-file source commitment alignment only; scoring, tests of efficacy, controller policies and frozen historical studies unchanged.",
+  "source_sha256": {
+    "scripts/audit_temporal_metrics_v18.py": "180e2258b8777ed0a4eb4f1cd69490890bcd078b83947784a6830af3b19ac880",
+    "tests/test_temporal_audit_v18.py": "e8055aaf67f2534980126db517f6971df9fb7a243d05cf1ca0d65208f9e79c1e"
+  },
+  "status": "CONTRACTS_PASS",
+  "timing_failure_preserved": {
+    "artifact": "results/TEMPORAL_DEVELOPMENT_V018.json",
+    "authority": "HOLD",
+    "explanation": "Allowlist correction overlapped the first development run; all 98 attempts were retained and the complete attempt refused as source-unstable.",
+    "source_stable": false
+  },
+  "validation": {
+    "elapsed_seconds": 3.761,
+    "errors": 0,
+    "failures": 0,
+    "independent_repeat_during_measurement": false,
+    "modules": [
+      "tests.test_temporal_audit_v18",
+      "tests.test_experiment_temporal_v18"
+    ],
+    "reported_by": "root agent, actual local execution",
+    "tests_run": 18
+  }
+}
