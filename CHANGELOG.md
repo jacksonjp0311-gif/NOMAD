@@ -91,3 +91,7 @@
 ## Previous versions
 
 The complete previous histories, including v0.16 MISSION RUNTIME, v0.15 RECURSION and earlier Bitwork/NOMAD research, remain in the exact `baseline/NOMAD-v0.16.0.zip` archive. That preserved predecessor is the reference for original studies and prior changelogs.
+
+## v0.18.0 internal operations snapshot
+
+Stabilized the existing operating path: detector-off temporal default, explicit native/frequency choices, bounded state reuse, fixed-policy replay and CLI inspection/repair/review/export. Preserved scientific results. WSL/Docker installed with no reboot; native qualification and authentic repairs remain HOLD. See docs/OPERATIONS_REPORT_V018.md.

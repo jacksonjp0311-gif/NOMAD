@@ -1,0 +1,69 @@
+{
+  "attempted_command": "powershell.exe -NoProfile -NonInteractive -File install-wsl-no-reboot.ps1",
+  "authorization": {
+    "docker_desktop_per_user_wsl2_setup": true,
+    "image_pull_or_run": false,
+    "reboot": false,
+    "wsl_setup": true
+  },
+  "created_utc": "2026-11-16T05:42:20.365282+00:00",
+  "docker_installed": false,
+  "docker_installer_downloaded": false,
+  "elevation_attempt_count": 1,
+  "elevation_launch": {
+    "pid": 48948,
+    "reboot_initiated": false,
+    "script_sha256": "DC7DB5642FAA9E0B0171AA3A28D7EB38B72E92FDE13579DF0E688435F031839F",
+    "started_utc": "2026-11-16T05:39:28.5632544Z",
+    "status": "LAUNCHED"
+  },
+  "evidence_sha256": {
+    "install-wsl-no-reboot.ps1": "dc7db5642faa9e0b0171aa3a28d7eb38b72e92fde13579df0e688435f031839f",
+    "post-denial-readonly.json": "41eb7f434d530f00650b7939698b80b805a38817ccb3da816e88e30e7c078f4f",
+    "wsl-elevation-launch.json": "f1b4f3e5baa38a0e9e2c4fd2b066a5252cc9a29f7be8bb29a77250eadf414a1e",
+    "wsl-script-policy-denial.json": "5c42874d89ac68ebca2beb23b6cde5a7cffc97f515572abd6d432c10afc514da"
+  },
+  "execution_policy_changed": false,
+  "global_security_changed": false,
+  "image_pulled_or_run": false,
+  "intended_native_command": "C:\\Windows\\System32\\wsl.exe --install --no-distribution",
+  "native_containment_gate": "HOLD",
+  "native_install_commands_started": 0,
+  "native_recovery_gate": "HOLD",
+  "official_references_checked": [
+    "https://learn.microsoft.com/en-us/windows/wsl/install",
+    "https://learn.microsoft.com/en-us/windows/wsl/basic-commands",
+    "https://docs.docker.com/desktop/setup/install/windows-install/"
+  ],
+  "read_only_after": {
+    "created_utc": "2026-11-16T05:41:44.6402643Z",
+    "docker_all_user_exists": false,
+    "docker_per_user_exists": false,
+    "optional_features": [
+      {
+        "InstallState": 2,
+        "Name": "VirtualMachinePlatform"
+      },
+      {
+        "InstallState": 2,
+        "Name": "Microsoft-Windows-Subsystem-Linux"
+      }
+    ]
+  },
+  "reason": "Elevated Windows PowerShell5.1 refused the locally generated setup script because script execution is disabled in that host.",
+  "reboot_initiated": false,
+  "receipt_sha256": "0c98cd53e3b7a92a7a831a63da9c3d33a26639264cd7d0c126f02de251c40e63",
+  "schema": "nomad.operations-authorized-native-setup-attempt.v18",
+  "scope": "One elevated script launch. No policy bypass or repeat elevation route was attempted.",
+  "setup_result_created": false,
+  "status": "BLOCKED_BEFORE_INSTALLER_EXECUTION",
+  "windows_event": {
+    "error": "UnauthorizedAccess",
+    "event_id": 4100,
+    "log": "Microsoft-Windows-PowerShell/Operational",
+    "message": "running scripts is disabled on this system"
+  },
+  "windows_features_changed": false,
+  "work_directory": "C:\\Users\\jacks\\Documents\\Codex\\2026-11-14\\files-pasted-by-the-user-nomad\\work\\operations-native-20261116",
+  "wsl_installed": false
+}

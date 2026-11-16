@@ -1,0 +1,220 @@
+{
+  "actual_final_contract_prepared": false,
+  "blockers": [
+    "No qualified native container backend or reviewed image.",
+    "Selected full pinned module imports inspect and is outside the admitted function contract; full upstream snapshot is not retained.",
+    "Missing general None-path initialization proposal; no speculative answer-specific mutation was added.",
+    "Next existing w2n lead full module exceeds the source AST budget."
+  ],
+  "candidate_generation_executed": false,
+  "checked_existing_leads": [
+    {
+      "actual_repair_execution": "NOT_RUN",
+      "complete_upstream_repository_retained": false,
+      "full_original_module_admission": {
+        "code_executed": false,
+        "reason": "external import outside function contract",
+        "status": "UNSUPPORTED"
+      },
+      "id": "pygorithm-38",
+      "issue_url": "https://github.com/OmkarPathak/pygorithm/issues/38",
+      "native_defect_reproduction": "NOT_RUN",
+      "original_source_sha256": "59190465120e76cec93e05235c9e0bdf2a2e92d763c9018ea473626a5761f60e",
+      "projection_admission": {
+        "code_executed": false,
+        "status": "PARSE_ONLY_SUPPORTED",
+        "symbols": {
+          "subject.py": [
+            "search"
+          ]
+        }
+      },
+      "projection_function_AST_unchanged": true,
+      "projection_parse_fixture": "experiments/development/adaptive_sources/pygorithm-38/projection/subject.py",
+      "projection_scope": "Standalone exact function parse fixture only. Not a substitute for full repository/module repair.",
+      "projection_sha256": "8ecf97909f648b20222a517187f89e29d88dd1fa07eab62561e69c89e32e62c3",
+      "provenance_source_license_issue_hashes_verified": true,
+      "repository": "https://github.com/OmkarPathak/pygorithm",
+      "retained_license": "experiments/development/adaptive_sources/pygorithm-38/original/LICENSE",
+      "retained_original_module": "experiments/development/adaptive_sources/pygorithm-38/original/subject.py",
+      "revision": "07b46856dcdf99794396332707be89cb62a40ca6",
+      "search_grammar_limitation": "Current generic proposals do not insert a None-to-empty-list initialization guard. No answer-specific mutation or reference patch was added.",
+      "source_url": "https://github.com/OmkarPathak/pygorithm/blob/07b46856dcdf99794396332707be89cb62a40ca6/pygorithm/searching/depth_first_search.py",
+      "upstream_source_path": "pygorithm/searching/depth_first_search.py"
+    },
+    {
+      "actual_repair_execution": "NOT_RUN",
+      "complete_upstream_repository_retained": false,
+      "full_original_module_admission": {
+        "code_executed": false,
+        "reason": "module AST exceeds budget",
+        "status": "UNSUPPORTED"
+      },
+      "id": "w2n-74",
+      "issue_url": "https://github.com/akshaynagpal/w2n/issues/74",
+      "native_defect_reproduction": "NOT_RUN",
+      "original_source_sha256": "09779857ec955ce570c62390b9813f9c3eafd5d8ccc03e305b41e741e9719057",
+      "provenance_source_license_issue_hashes_verified": true,
+      "repository": "https://github.com/akshaynagpal/w2n",
+      "retained_license": "experiments/development/adaptive_sources/w2n-74/original/LICENSE",
+      "retained_original_module": "experiments/development/adaptive_sources/w2n-74/original/subject.py",
+      "revision": "33aac8a1d71ef1dffd4435fe6e9f998154bcb051",
+      "source_url": "https://github.com/akshaynagpal/w2n/blob/33aac8a1d71ef1dffd4435fe6e9f998154bcb051/word2number/w2n.py",
+      "upstream_source_path": "word2number/w2n.py"
+    }
+  ],
+  "created_utc": "2026-11-15T22:52:46.124280+00:00",
+  "existing_private_evaluation_contracts_opened": false,
+  "full_repository_snapshot_prepared": false,
+  "independence_scope": "Expected values were authored upstream independently of NOMAD; all are public and now exposed. This is not an independently curated private final contract.",
+  "preparation_note": "An initial verification attempt compared formatted issue JSON bytes to its canonical-content hash and stopped before writing output. The original preparation defines issue_sha256 over canonical JSON; that documented convention was then verified successfully. No historical file changed.",
+  "private_contract_created": false,
+  "private_contracts_or_grammar_tuned": false,
+  "public_development_cases": [
+    {
+      "args": [
+        {
+          "A": [
+            "B"
+          ],
+          "B": [
+            "A"
+          ]
+        },
+        "A"
+      ],
+      "expected": [
+        "A",
+        "B"
+      ],
+      "function": "search",
+      "module": "subject"
+    },
+    {
+      "args": [
+        {
+          "A": [
+            "B"
+          ],
+          "B": [
+            "A"
+          ]
+        },
+        "A",
+        []
+      ],
+      "expected": [
+        "A",
+        "B"
+      ],
+      "function": "search",
+      "module": "subject"
+    }
+  ],
+  "public_upstream_regression_cases": [
+    {
+      "args": [
+        {
+          "A": [
+            "B",
+            "C",
+            "E"
+          ],
+          "B": [
+            "A",
+            "D",
+            "F"
+          ],
+          "C": [
+            "A",
+            "G"
+          ],
+          "D": [
+            "B"
+          ],
+          "E": [
+            "A"
+          ],
+          "F": [
+            "B"
+          ],
+          "G": [
+            "C"
+          ]
+        },
+        "A"
+      ],
+      "expected": [
+        "A",
+        "B",
+        "D",
+        "F",
+        "C",
+        "G",
+        "E"
+      ],
+      "function": "search",
+      "kwargs": {},
+      "module": "subject"
+    },
+    {
+      "args": [
+        {
+          "A": [
+            "B",
+            "C",
+            "E"
+          ],
+          "B": [
+            "A",
+            "D",
+            "F"
+          ],
+          "C": [
+            "A",
+            "G"
+          ],
+          "D": [
+            "B"
+          ],
+          "E": [
+            "A"
+          ],
+          "F": [
+            "B"
+          ],
+          "G": [
+            "C"
+          ]
+        },
+        "G"
+      ],
+      "expected": [
+        "G",
+        "C",
+        "A",
+        "B",
+        "D",
+        "F",
+        "E"
+      ],
+      "function": "search",
+      "kwargs": {},
+      "module": "subject"
+    }
+  ],
+  "receipt_sha256": "c1847af51c3e4da3fdc22be4882586f40fd333f492e56aaa6202d38408e31868",
+  "regression_case_provenance": "Data-only AST extraction of graph and expected traversal literals from same-commit TestDFSSearch.test_dfs; no upstream import or execution.",
+  "repairs_executed": 0,
+  "schema": "nomad.operations-authentic-task-admission.v18",
+  "selected_lead": "pygorithm-38",
+  "selection_scope": "Smallest retained exact function parse fixture; not an easier replacement for the requested full authentic repository repair.",
+  "status": "NO_FULL_REPOSITORY_TASK_READY",
+  "stop_rule": "Checked these two existing leads only; no wider issue search or execution. Full task remains NOT_RUN.",
+  "task_execution_eligible": false,
+  "upstream_code_executed_on_host": false,
+  "upstream_test_content_receipt": "results/UPSTREAM_DFS_TEST_OPERATIONS_V018.json",
+  "upstream_test_content_receipt_sha256": "968bb0a0f59cf9a5cb534f026bdf468a52956ff2010ab012fb6bac2c5cbcca38",
+  "upstream_test_text_sha256": "d69b7ef741ff7028e06605949e24880ea73be595af4b2e02ee844b1462b63e89",
+  "upstream_test_url": "https://github.com/OmkarPathak/pygorithm/blob/07b46856dcdf99794396332707be89cb62a40ca6/tests/test_searching.py"
+}

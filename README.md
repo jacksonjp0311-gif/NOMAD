@@ -4,9 +4,21 @@
 
 **Local coding intelligence with explicit evidence and execution boundaries.**
 
-This is a **v0.18.0 persistent computation development snapshot**. All four platform acceptance gates remain **HOLD**. The new controller retains bounded frequency, conventional temporal and original native Bitwork state, assigns delayed credit, and changes coding effort allocation. Its preregistered synthetic experiment **failed the combined quality-and-cost objective**. Warm retention reduced reconstruction cost, but the selected policy was less accurate and more expensive than always-on native BGR. Docker and WSL remain unavailable, so authentic isolated repairs and cross-repository learning remain unproved. See the [current qualification report](docs/TEMPORAL_REPORT_V018.md).
+This is a **v0.18.0 engineering recovery snapshot**. The supported function-mission CLI defaults to conventional temporal learning, detector off, with bounded warm state. Native Bitwork remains selectable and unchanged. No cloud model is required. All four platform gates remain **HOLD**; fixture software passes are separate from native containment and authentic repairs. Read the [current operational report](docs/OPERATIONS_REPORT_V018.md), [execution ledger](docs/OPERATIONS_LEDGER_V018.md), and [ROG usage instructions](docs/OPERATIONS_USAGE_V018.md).
 
-## Temporal Ascension: measured result
+## Use the existing coding pipeline
+
+```powershell
+py -3 -B -m nomad.platform_cli inspect-source --source C:\work\subject
+py -3 -B -m nomad.platform_cli repair --isolation-receipt runs\native\isolation.json --root runs\repair-001 --source C:\work\subject --contract C:\work\contracts\repair.json --memory-root runs\verified-memory
+py -3 -B -m nomad.platform_cli review --root runs\repair-001
+```
+
+The repair command requires an actual thirteen-probe containment PASS for this host, image, source and policy, plus a running approved Docker engine. It produces a bounded candidate patch and independent WITNESS/final receipts only on success. `accept` or `reject` exports an explicit operator review decision; `recover` and `run` resume interrupted work. The original repository is preserved. See the usage guide for exact contract syntax, review/export commands and unsupported-interface limits. Setup authorization does not itself qualify isolation; the [native setup report](docs/OPERATIONS_NATIVE_V018.md) records the actual outcome.
+
+No frozen scientific experiment was rerun or retuned for this engineering work. The earlier negative findings below remain preserved.
+
+## Preserved Temporal Ascension result
 
 The source-frozen study completed 576 trials across eight new seed blocks and
 eight regimes. Each arm saw the same 512 observations and checkpointed after 256.
@@ -88,19 +100,19 @@ The supported installation is source-linked. A standalone wheel containing the v
 | NTFS mission ownership and restart | Native tests passed |
 | Junction, hardlink and Windows path admission | Native tests passed |
 | Native symlink behavior | HOLD: creating a symlink requires a privilege unavailable here |
-| Docker Desktop / WSL | Docker absent; WSL reports not installed |
-| Hypervisor and firmware virtualization | Reported enabled; CIM reports WSL, VirtualMachinePlatform, Hyper-V and Windows Sandbox features disabled |
+| Docker Desktop / WSL | Desktop 4.99.0 and WSL 3.0.5 installed; Windows restart pending; engine stopped |
+| Hypervisor and firmware virtualization | Enabled; Virtual Machine Platform now enabled; legacy WSL 1, Hyper-V and Sandbox remain disabled |
 | Malicious repository containment in Docker | HOLD: native probe cases not executed |
 | Isolated external repair and interrupted isolated mission | HOLD |
 | Native BGR coding advantage | NOT ESTABLISHED; mixed synthetic mechanism results below |
 
-Exact current test counts, source hashes, timing, skip reasons and runtime outputs are in [the temporal qualification receipt](results/TEMPORAL_FINAL_RECHECK_V018.json). [Native Windows checks and memory diagnosis](docs/NATIVE_FRONTIER_V018.md) include resource refusal, breakaway denial and owner-death recovery. Rejected allocations increased peak counters without increasing observed current committed memory; strict peak accounting remains HOLD. A bounded Windows rename retry addresses intermittent mission-directory publication refusal, with destination/identity checks and no overwrite fallback. Original and intermediate receipts remain immutable. CPU timing is not an energy measurement.
+Exact current test counts, source hashes, timing, skip reasons and runtime outputs are in [the operations qualification receipt](results/FULL_OPERATIONS_RECHECK_V018.json). [Native Windows checks and memory diagnosis](docs/NATIVE_FRONTIER_V018.md) include resource refusal, breakaway denial and owner-death recovery. Rejected allocations increased peak counters without increasing observed current committed memory; strict peak accounting remains HOLD. A bounded Windows rename retry addresses intermittent mission-directory publication refusal, with destination/identity checks and no overwrite fallback. Original and intermediate receipts remain immutable. CPU timing is not an energy measurement.
 
 ## Isolated missions
 
 There is no host fallback for unfamiliar code. Docker must be available at the local Linux endpoint, with seccomp reported and the exact reviewed digest already present. The runner does not pull images or inherit a user's Docker credentials/context. Only a disposable source copy is mounted, read-only; journals, credentials and private examples remain outside the mount. CPU, memory, PID, time and output budgets are bounded. The container must be confirmed removed before its result can be used.
 
-First provision the host using the official [WSL installation](https://learn.microsoft.com/en-us/windows/wsl/install) and [Docker Desktop Windows setup](https://docs.docker.com/desktop/setup/install/windows-install/) instructions. Feature changes may need an administrator and restart. This task did not install those system components. Review an image and its dependencies, then pre-pull it through an operator-controlled workflow.
+WSL and Docker Desktop were installed under explicit authorization. Windows requires an operator-controlled restart before engine readiness can be checked. Follow the [actual setup and next operator steps](docs/OPERATIONS_NATIVE_V018.md); do not repeat completed installation. Review a digest-pinned image and its dependencies before authorizing its acquisition.
 
 Copy `platform.example.json` to ignored `platform.local.json` and replace `null` with that real digest reference. Do not invent a digest or use `latest`.
 
@@ -177,7 +189,8 @@ The original desktop source is preserved in the `baseline-v0.17.0` Git branch an
 
 The [GitHub repository](https://github.com/jacksonjp0311-gif/NOMAD) is private. Development uses [v0.18-platform](https://github.com/jacksonjp0311-gif/NOMAD/tree/v0.18-platform); `main` remains at the earlier engineering commit `5851566`. This iteration began from local and remote `3ffd46741ddb99693cd05f35153daec778a2105a` with a clean tree and zero divergence. The controller study was preregistered in commit `952684387c2414b14ce76bf1cf3029254ce10e67` before evaluation. The companion delivery receipt records the new verified development synchronization. Prior GitHub Actions was blocked before jobs started by account billing/spending settings; delivery records the new run separately. No release, main merge, force push or visibility change is part of qualification.
 
-- [Current temporal qualification report](docs/TEMPORAL_REPORT_V018.md)
+- [Current operational qualification report](docs/OPERATIONS_REPORT_V018.md)
+- [Preserved temporal qualification report](docs/TEMPORAL_REPORT_V018.md)
 - [Persistent state and mathematics](docs/PERSISTENT_TEMPORAL_V018.md)
 - [Persistent mission and recovery](docs/TEMPORAL_MISSION_V018.md)
 - [Negative result and diagnosis](docs/TEMPORAL_DIAGNOSIS_V018.md)

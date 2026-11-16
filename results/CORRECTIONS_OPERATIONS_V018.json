@@ -1,0 +1,38 @@
+{
+  "attempts": [
+    {
+      "error_records": 4,
+      "failures": 0,
+      "note": "Three subtest KeyErrors assumed every AST proposal has GENESIS origin; the follow-on empty signature list caused IndexError. Runtime mission/restart assertions preceding that test assertion passed. Do not interpret four error records as four distinct failed test methods.",
+      "receipt": "results/FOCUSED_OPERATIONS_ATTEMPT1_V018.json",
+      "run": 33,
+      "source_archive": "ATTEMPT1_SOURCE.zip",
+      "source_sha256": "d42ae262f4d8aadc07595a96345637c900954d520227222779b5294750c4fe86"
+    },
+    {
+      "errors": 0,
+      "failures": 1,
+      "note": "Packaging test named previous active seal; updated to require operations seal and inclusion of both temporal and adaptive historical seals. No functional implementation changed after this run.",
+      "passed": 480,
+      "receipt": "results/FULL_OPERATIONS_V018.json",
+      "run": 485,
+      "skipped": 4,
+      "source_archive": "FULL_ATTEMPT_SOURCE.zip",
+      "source_sha256": "11d14d3e89e5f257166885e8012301e43b4f769beaeb0c4f819a080d375eed03"
+    }
+  ],
+  "focused_recheck": "results/FOCUSED_OPERATIONS_RECHECK_V018.json",
+  "frozen_experiments_or_forecast_replay_rerun": false,
+  "frozen_research_retuned": false,
+  "packaging_recheck": "results/PACKAGING_OPERATIONS_V018.json",
+  "read_only_review_fixes": [
+    "Require an unexpired fixed-mechanism control and verifier reserve before forecasts, including rehashed trace replay.",
+    "Bind cache reuse and cold history reconstruction to the explicit operating mechanism.",
+    "Recheck arithmetic terminal source/learning evidence before patch export.",
+    "Preserve no-newline markers in unified patches; git apply --check tested.",
+    "Export actual arithmetic WITNESS_RESULT and FINAL_RESULT events."
+  ],
+  "schema": "nomad.operations-corrections.v18",
+  "starting_commit": "a0732c2b6c67b5c209ec0b0469dd1b1756cf2388",
+  "status": "CORRECTED_PENDING_FINAL_RECHECK"
+}

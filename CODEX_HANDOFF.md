@@ -1,3 +1,14 @@
+> Current engineering work: MAKE IT WORK. Read `docs/OPERATIONS_REPORT_V018.md`,
+> `docs/OPERATIONS_USAGE_V018.md` and `docs/OPERATIONS_LEDGER_V018.md` first.
+> Starting SHA a0732c2b6c67b5c209ec0b0469dd1b1756cf2388. Version stays0.18.0.
+> Source seal: results/RELEASE_MANIFEST_OPERATIONS_V018.json. Earlier handoffs
+> below are historical. Do not rerun the frozen 576-trial study or its replay.
+> Current runtime defaults are detector-off temporal operation, with explicit
+> native/frequency choices. Preserve all original BGR/research files and results.
+> User authorized WSL/Docker setup without reboot; actual setup receipts, not
+> that authorization, determine available infrastructure. No image was approved
+> by that setup authorization. No main merge/release/version/visibility change.
+
 > Current snapshot: Temporal Ascension, November 15, 2026. Start with
 > `docs/TEMPORAL_REPORT_V018.md` and the current temporal handoff below.
 > Earlier instructions and handoffs are retained as historical context.

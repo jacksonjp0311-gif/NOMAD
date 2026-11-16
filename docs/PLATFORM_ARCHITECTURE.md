@@ -193,3 +193,29 @@ of a separate candidate and original. It does not install a modification.
 [Native evidence](NATIVE_FRONTIER_V018.md) and the [current report](FRONTIER_REPORT_V018.md)
 keep all four gates HOLD. Synthetic Bitwork mechanism results do not substitute
 for independently accepted real-repository missions or cross-task transfer.
+
+
+## Operational corrections: MAKE IT WORK
+
+The CLI function path now selects conventional temporal learning by default;
+`--mechanism native` uses the unchanged original native BGR. The operating
+profile disables change detection and delayed-credit selection and retains
+selective warm states. Explicit research configurations remain distinct and
+frozen research code is not rewritten to adopt these engineering defaults.
+
+A fixed mechanism is bound into the immutable mission allocation. Both runtime
+and replay enforce that choice, its current commitment and a reserved independent
+verification budget. Cold reconstruction uses the same fixed mechanism; a warm
+cache with a different operating choice is not silently reused. Within a
+commitment, the candidate order is retained and the live learned state continues,
+without a redundant full control snapshot after each failed attempt. Every
+public outcome still receives its durable update; restart and corruption checks
+retain their authority. Independent memory validation replay remains necessary
+and is not claimed to be free.
+
+`inspect-source` performs source admission without an engine or source import.
+`repair` reuses the existing initializer/controller/worker/WITNESS pipeline after
+validating native containment and live engine readiness. `review`, `accept` and
+`reject` revalidate terminal evidence and export a unified diff with hashes and
+receipts. They do not overwrite the original repository or confer deployment
+permission. The new workflow adds no frontend, service or execution backend.

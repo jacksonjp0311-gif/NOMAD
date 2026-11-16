@@ -1137,6 +1137,19 @@ PERSISTENT_JOURNAL_BYTES = 64_000_000
 _PERSISTENT_VALIDATED = {}
 
 
+def operational_config():
+    """Conservative operating policy, separate from frozen research defaults."""
+    return PersistentConfig(state_policy='selectivewarm', detector_enabled=False,
+                            delayed_credit=False)
+
+
+def _persistent_decide(controller, public_state, budget, mechanism=None):
+    if mechanism is not None and mechanism not in ('frequency', 'temporal', 'native'):
+        raise ValueError('unsupported operating mechanism')
+    options = {'available_actions': (mechanism,)} if mechanism else {}
+    return controller.decide(public_state, remaining_budget=budget, **options)
+
+
 def _persistent_semantics(document):
     """Compare learned state while retaining all policy/evidence/decision fields.
 
@@ -1191,13 +1204,15 @@ def _persistent_prefix(config,records):
     return history,bindings,chosen
 
 
-def _persistent_from_memory(config, models, epoch):
+def _persistent_from_memory(config, models, epoch, operating_mechanism=None):
     """Exact-prefix cache reuse; otherwise measured rebuilding of admitted data."""
     history,bindings,chosen=_persistent_prefix(config,models.get('eligible_records',[]))
     reason='no accepted exact-prefix checkpoint'
     for record,_ in chosen:
         evidence=record.get('persistent_evidence')
         if not evidence: continue
+        if record['origin'].get('persistent',{}).get('operating_mechanism') != operating_mechanism:
+            reason='accepted checkpoint operating mechanism differs'; continue
         document=evidence['terminal_state']; saved=PersistentConfig(**document['payload']['config'])
         if asdict(replace(saved,epoch=config.epoch))!=asdict(config):
             reason='accepted checkpoint policy differs'; continue
@@ -1211,21 +1226,26 @@ def _persistent_from_memory(config, models, epoch):
         except (ValueError,RuntimeError) as error:
             reason=str(error)
     controller=PersistentController(replace(config,epoch=epoch))
-    for action,outcome in history: controller.ingest_public(action,outcome)
+    for action,outcome in history:
+        if operating_mechanism and (not controller.decisions or len(controller.history)>=controller.next_decision):
+            _persistent_decide(controller,{}, {'steps':min(config.commitment,config.max_history-len(controller.history)),
+                'max_cost_seconds':120.}, operating_mechanism)
+        controller.ingest_public(action,outcome)
     return controller,{'status':'REBUILT' if history else 'COLD','reason':reason,'bindings':bindings,
         'public_prefix_sha256':prefix_digest(history),'observations':len(history),'checkpoint_sha256':None}
 
 
-def _persistent_allocation(controller,analysis,*,max_candidates,probe_budget,max_executions,public_command):
+def _persistent_allocation(controller,analysis,*,max_candidates,probe_budget,max_executions,public_command,
+                           operating_mechanism=None):
     reserve=3+int(bool(public_command)); before=controller.snapshot()
     steps=max(0,min(max_candidates,max_executions-reserve-1,controller.config.max_history-len(controller.history),
                     controller.config.commitment))
     state=_controller_state(analysis); budget={'steps':steps,'max_cost_seconds':120.0}
-    decision=controller.decide(state,remaining_budget=budget); mechanism=decision['mechanism']
+    decision=_persistent_decide(controller,state,budget,operating_mechanism); mechanism=decision['mechanism']
     probes=min(probe_budget,{'frequency':1,'temporal':2,'native':probe_budget,'abstain':0}[mechanism])
     cap=min({'frequency':16,'temporal':32,'native':max_candidates,'abstain':0}[mechanism],
             max_candidates,max(0,max_executions-reserve-probes),controller.config.max_history-len(controller.history))
-    return {'schema':PERSISTENT_MISSION_SCHEMA,'config':asdict(controller.config),
+    result = {'schema':PERSISTENT_MISSION_SCHEMA,'config':asdict(controller.config),
         'controller_before':before,'controller_after':controller.snapshot(),'decision':decision,
         'public_state':state,'remaining_budget':budget,'max_candidates':cap,'probe_budget':probes,
         'private_dispatch_reserve':reserve,'genesis_max_eval':{'frequency':0,'temporal':1024,'native':4096,'abstain':0}[mechanism],
@@ -1233,6 +1253,9 @@ def _persistent_allocation(controller,analysis,*,max_candidates,probe_budget,max
         'use_localization':mechanism in ('temporal','native'),
         'use_retrieval':mechanism in ('temporal','native') and analysis['eligible_memory_tasks']>=3,
         'scope':'registered bounded effort heuristic; no established coding advantage'}
+    if operating_mechanism is not None:
+        result['operating_mechanism'] = operating_mechanism
+    return result
 
 
 def _persistent_order(goal,remaining,probabilities,posterior,recall):
@@ -1309,7 +1332,7 @@ def _replay_persistent_trace(goal,rows,*,complete=False,selected=None):
     expected=_persistent_allocation(model,{**goal['analysis'],'proposals':[]},
         max_candidates=allocation['requested_limits']['max_candidates'],
         probe_budget=allocation['requested_limits']['probe_budget'],max_executions=goal['max_executions'],
-        public_command=goal['public_command'])
+        public_command=goal['public_command'], operating_mechanism=allocation.get('operating_mechanism'))
     for key,value in expected.items():
         if key.startswith('controller_'):
             if _persistent_semantics(value)!=_persistent_semantics(allocation[key]):
@@ -1351,7 +1374,7 @@ def _replay_persistent_trace(goal,rows,*,complete=False,selected=None):
             if data['public_state']!=public_state or data['remaining_budget']!=budget:
                 raise MissionHold('persistent continuation budget or public evidence changed')
             model=_persistent_load(state,config,history,epoch)
-            decision=model.decide(public_state,remaining_budget=budget)
+            decision=_persistent_decide(model,public_state,budget,allocation.get('operating_mechanism'))
             probabilities=list(model.peek_probabilities(decision['mechanism']))
             baseline=list(model.peek_probabilities('frequency'))
             if data['decision']!=decision or data['probabilities']!=probabilities or data['frequency_probabilities']!=baseline:
@@ -1371,6 +1394,12 @@ def _replay_persistent_trace(goal,rows,*,complete=False,selected=None):
             remaining=[identity for identity in control['order'] if identity not in seen]
             if not remaining or data['candidate']!=remaining[0] or data['state_before_sha256']!=digest(canonical(state)):
                 raise MissionHold('persistent forecast source/order changed')
+            if allocation.get('operating_mechanism') is not None and (
+                    len(history)>=state['payload']['next_decision']
+                    or state['payload']['selected']!=allocation['operating_mechanism']
+                    or control['decision']['mechanism']!=allocation['operating_mechanism']
+                    or goal['max_executions']-dispatches<=allocation['private_dispatch_reserve']):
+                raise MissionHold('operating forecast requires a current authorized control and verification budget')
             proposal=_function_proposal(goal,data['candidate']);action=int(proposal['family']!='comparison')
             model=_persistent_load(state,config,history,epoch);prediction=model.predict(action)
             if data['action']!=action or data['p']!=prediction or data['mechanism']!=model.selected:
@@ -1423,7 +1452,7 @@ def _replay_persistent_trace(goal,rows,*,complete=False,selected=None):
             'forecast':forecast,'updated':updated,'dispatches':dispatches,'diagnosis':diagnosis}
 
 
-def read_function_persistent_controller(memory_root: Path, *, config=None, now_epoch=0):
+def read_function_persistent_controller(memory_root: Path, *, config=None, now_epoch=0, operating_mechanism=None):
     """Read-only admitted reconstruction/cache reuse; never accept external state."""
     config=config or PersistentConfig(state_policy='selectivewarm')
     if type(config) is dict: config=PersistentConfig(**config)
@@ -1432,7 +1461,7 @@ def read_function_persistent_controller(memory_root: Path, *, config=None, now_e
     if path.exists():
         with exclusive_owner(path):models=_function_memory(path,mode='frequency',epoch=now_epoch)
     else:models=_function_memory(None,mode='frequency',epoch=now_epoch)
-    return _persistent_from_memory(config,models,now_epoch)
+    return _persistent_from_memory(config,models,now_epoch,operating_mechanism)
 
 
 def _persistent_diagnosis(goal,journal,observe,append):
@@ -1493,7 +1522,16 @@ def _persistent_search(root,goal,journal,observe,patch,append,checkpoint):
         state=context['state'];history=context['history']
         if forecast is None:
             cached_control=context['control']
-            if cached_control is not None and cached_control['state']==state:
+            # An operating mechanism is explicitly fixed. Within its committed
+            # interval keep its ordered inventory and live learned state. Public
+            # updates still receive durable checkpoints; no redundant ranking
+            # checkpoint is needed before every failed candidate's successor.
+            retain_control = (allocation.get('operating_mechanism') is not None
+                and cached_control is not None
+                and cached_control['decision']['mechanism'] == controller.selected != 'abstain'
+                and len(history) < controller.next_decision
+                and goal['max_executions']-context['dispatches'] > allocation['private_dispatch_reserve'])
+            if cached_control is not None and (cached_control['state']==state or retain_control):
                 control=cached_control;decision=control['decision']
             else:
                 started=(time.perf_counter(),time.process_time())
@@ -1501,7 +1539,7 @@ def _persistent_search(root,goal,journal,observe,patch,append,checkpoint):
                                 config.max_history-len(history),config.commitment))
                 if len(context['probes'])==len(goal['public']) and not completed and all(p['result']['supported'] for p in context['probes']):steps=0
                 public_state=_persistent_public_state(goal,context['probes']+completed);budget={'steps':steps,'max_cost_seconds':120.}
-                decision=controller.decide(public_state,remaining_budget=budget)
+                decision=_persistent_decide(controller,public_state,budget,allocation.get('operating_mechanism'))
                 probabilities=list(controller.peek_probabilities(decision['mechanism']));baseline=list(controller.peek_probabilities('frequency'))
                 retrieval,recall=_persistent_recall(goal,remaining,decision['mechanism'])
                 control={'state_before_sha256':digest(canonical(state)),'public_state':public_state,'remaining_budget':budget,
@@ -1512,8 +1550,10 @@ def _persistent_search(root,goal,journal,observe,patch,append,checkpoint):
                 append('F_P_CONTROL',control);checkpoint('after_persistent_control')
             if decision['mechanism']=='abstain':
                 patch(None,'persistent-abstain');append('F_ABSTAINED',{'reason':'persistent continuation declined remaining search'});return None
-            identity=control['order'][0];proposal=_function_proposal(goal,identity)
-            action=int(proposal['family']!='comparison');state=control['state']
+            identity=next(identity for identity in control['order'] if identity in remaining)
+            proposal=_function_proposal(goal,identity)
+            action=int(proposal['family']!='comparison')
+            if not retain_control: state=control['state']
             prediction=controller.predict(action)
             append('F_P_FORECAST',{'candidate':identity,'action':action,'p':prediction,'mechanism':controller.selected,
                 'state_before_sha256':digest(canonical(state))});checkpoint('after_persistent_forecast')
@@ -1919,7 +1959,8 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
         challenge: list[dict], final: list[dict], policy: SandboxPolicy, ranker=None,
         memory_root: Path | None = None, capture_epoch=0, adaptive_enabled=True,
         max_candidates=64, max_executions=96, probe_budget=3, max_files_changed=2,
-        public_command: list[str] | None = None, computation_controller=None, persistent_controller=None) -> dict:
+        public_command: list[str] | None = None, computation_controller=None, persistent_controller=None,
+        operating_mechanism=None) -> dict:
     """Initialize a bounded function mission without importing repository code.
 
     Public cases, finite AST inventory and planning models are frozen. Private
@@ -1928,6 +1969,12 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
     policy.validate()
     config=None
     persistent_config=None
+    if operating_mechanism is not None:
+        if operating_mechanism not in ('frequency', 'temporal', 'native'):
+            raise ValueError('unsupported operating mechanism')
+        if persistent_controller is not None or computation_controller is not None or ranker is not None:
+            raise ValueError('operating mechanism cannot be combined with research controllers or rankers')
+        persistent_controller=operational_config()
     if persistent_controller is not None:
         if computation_controller is not None or ranker is not None:raise ValueError('persistent and adaptive/static controllers are mutually exclusive')
         if type(persistent_controller) is dict:
@@ -1989,10 +2036,11 @@ def initialize_functions(root: Path, source: Path, *, goal_text: str, public: li
         if config or persistent_config:
             analysis['eligible_memory_tasks']=models['eligible_tasks']
             if persistent_config:
-                controller,cache=_persistent_from_memory(persistent_config,models,capture_epoch)
+                controller,cache=_persistent_from_memory(persistent_config,models,capture_epoch,operating_mechanism)
             else:controller=_controller_from_memory(config,models)
             allocation=(_persistent_allocation if persistent_config else _allocation)(controller,analysis,max_candidates=max_candidates,probe_budget=probe_budget,
-                                   max_executions=max_executions,public_command=public_command)
+                                   max_executions=max_executions,public_command=public_command,
+                                   **({'operating_mechanism':operating_mechanism} if persistent_config else {}))
             inspection_cost=_computation_cost(started)
             started=(time.perf_counter(),time.process_time())
             # Only source-reachable modules enter the optional inventory. This

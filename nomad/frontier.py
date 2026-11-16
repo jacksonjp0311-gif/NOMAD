@@ -503,10 +503,10 @@ def admit_function_sources(files: dict[str, str]) -> dict:
     return {'modules': modules, 'symbols': symbols, 'graph': {k: sorted(v) for k, v in graph.items()}}
 
 
-def inspect_function_structure(root: Path, public: list[dict]) -> dict:
+def inspect_function_structure(root: Path, public: list[dict] | None = None) -> dict:
     """Admit source and contracts without generating or executing candidates."""
     from .isolation import _input_paths, SandboxPolicy
-    public = validate_function_cases(public)
+    public = validate_function_cases(public) if public is not None else []
     files = {}
     admitted_paths=_input_paths(Path(root),policy=SandboxPolicy('inspection@sha256:'+'0'*64))
     for path,relative,metadata in admitted_paths:

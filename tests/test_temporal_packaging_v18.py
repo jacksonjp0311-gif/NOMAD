@@ -15,19 +15,22 @@ HELPERS={'experiment_temporal_v18.py','audit_temporal_metrics_v18.py',
 
 class TemporalPackagingTests(unittest.TestCase):
     def test_runtime_keeps_helpers_native_test_dependencies_and_old_seal(self):
-        self.assertEqual(release.MANIFEST,'results/RELEASE_MANIFEST_TEMPORAL_V018.json')
-        self.assertEqual(release.GATES,'results/GATES_TEMPORAL_V018.json')
+        self.assertEqual(release.MANIFEST,'results/RELEASE_MANIFEST_OPERATIONS_V018.json')
+        self.assertEqual(release.GATES,'results/GATES_OPERATIONS_V018.json')
         self.assertLessEqual(HELPERS,release.RUNTIME_SCRIPTS)
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary)
             names={*(f'scripts/{name}' for name in HELPERS),*release.RUNTIME_TESTS,
                 release.MANIFEST,release.GATES,'results/RELEASE_MANIFEST_ADAPTIVE_V018.json',
+                'results/RELEASE_MANIFEST_TEMPORAL_V018.json','results/GATES_TEMPORAL_V018.json',
                 'tests/not_a_runtime_dependency.py','scripts/not_a_runtime_helper.py'}
             for name in names:
                 path=root/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_text('{}')
             selected={name for name,_ in release.files(root,'runtime')}
             self.assertLessEqual({f'scripts/{name}' for name in HELPERS}|release.RUNTIME_TESTS,selected)
             self.assertIn('results/RELEASE_MANIFEST_ADAPTIVE_V018.json',selected)
+            self.assertIn('results/RELEASE_MANIFEST_TEMPORAL_V018.json',selected)
+            self.assertIn('results/GATES_TEMPORAL_V018.json',selected)
             self.assertIn(release.GATES,selected);self.assertNotIn(release.MANIFEST,selected)
             self.assertNotIn('scripts/not_a_runtime_helper.py',selected)
             self.assertNotIn('tests/not_a_runtime_dependency.py',selected)

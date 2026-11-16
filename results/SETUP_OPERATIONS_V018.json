@@ -1,0 +1,166 @@
+{
+  "schema": "nomad.operations-native-setup.v18",
+  "created_utc": "2026-11-16T05:52:25Z",
+  "status": "SOFTWARE_INSTALLED_RESTART_REQUIRED_BACKEND_HOLD",
+  "authorization": {
+    "wsl_install": true,
+    "docker_desktop_per_user_wsl2_install": true,
+    "reboot": false,
+    "image_pull_or_run": false
+  },
+  "prior_initial_inventory": "results/PREREQUISITES_OPERATIONS_V018.json",
+  "prior_initial_inventory_preserved": true,
+  "preserved_failed_attempt": "results/SETUP_ATTEMPT_OPERATIONS_V018.json",
+  "attempts": [
+    {
+      "kind": "elevated Windows PowerShell script",
+      "result": "BLOCKED_BEFORE_INSTALLER_EXECUTION",
+      "event_id": 4100,
+      "reason": "Script execution disabled in that host; no installer started."
+    },
+    {
+      "kind": "direct signed System32 wsl.exe RunAs",
+      "arguments": [
+        "--install",
+        "--no-distribution"
+      ],
+      "result": "COMPLETED",
+      "exit_code": 0,
+      "pid": 45500,
+      "completed_utc": "2026-11-16T05:44:36.8754604Z"
+    },
+    {
+      "kind": "verified Docker Desktop installer, normal user",
+      "arguments": [
+        "install",
+        "--user",
+        "--backend=wsl-2",
+        "--no-windows-containers",
+        "--quiet"
+      ],
+      "result": "COMPLETED",
+      "exit_code": 0,
+      "pid": 50716,
+      "completed_utc": "2026-11-16T05:48:01.9051570Z"
+    }
+  ],
+  "wsl": {
+    "installed": true,
+    "version": "3.0.5.0",
+    "kernel": "6.18.58.1-1",
+    "default_version": 2,
+    "virtual_machine_platform_enabled": true,
+    "backend_ready": false,
+    "status_observation": "WSL2 is unable to start since virtualization is not enabled on this machine.",
+    "launcher_sha256": "51d92e6e565162f4a84f2c9b34cc320ae24f3d5a2c6141fac4b8d122b05146fc",
+    "launcher_signature_status": "Valid",
+    "launcher_signer": "Microsoft Windows / Microsoft Corporation"
+  },
+  "docker": {
+    "installed": true,
+    "version": "4.99.0",
+    "file_version": "4.99.0.245822",
+    "client_version": "Docker version 29.9.3, build 5457199",
+    "inherited_codex_path_contains_docker": false,
+    "client_version_check_used_absolute_path": true,
+    "path_scope": "The installed absolute CLI works; this already-running Codex process retains its earlier PATH. No global environment change or backend retry was issued.",
+    "installation_mode": "per-user",
+    "installation_path": "C:\\Users\\jacks\\AppData\\Local\\Programs\\DockerDesktop",
+    "installed_executable_sha256": "87a205d0e46508b0b62864a559cb9c1b845b5fa9d7fe9b6c5d2f818e20077c65",
+    "installed_signature_status": "Valid",
+    "installed_signer": "Docker Inc",
+    "settings": {
+      "engineTypeWindows": "wsl2",
+      "noWindowsContainers": true
+    },
+    "installer": {
+      "release": "4.99.0",
+      "build": 245822,
+      "bytes": 623969712,
+      "url": "https://desktop.docker.com/win/main/amd64/245822/Docker%20Desktop%20Installer.exe",
+      "official_checksum_url": "https://desktop.docker.com/win/main/amd64/245822/checksums.txt",
+      "actual_and_official_sha256": "a5e299131c9c53d60f3f752b162078945eb5faf6eedcf0be20a214c6e6cea444",
+      "checksum_matched": true,
+      "signature_status": "Valid",
+      "signer": "Docker Inc",
+      "certificate_thumbprint": "B6BD29272B07AD4D0F1322A739499D67CA3BAC3F"
+    },
+    "backend_start_requested": false,
+    "desktop_process_running": false,
+    "license_acceptance_flag_used": false,
+    "first_start_may_require_license_acceptance": true
+  },
+  "post_setup": {
+    "cbs_reboot_pending": true,
+    "windows_update_reboot_required": false,
+    "last_boot_utc": "2026-11-10T20:18:39.5497650Z",
+    "engine_pipes": [
+      {
+        "name": "dockerDesktopLinuxEngine",
+        "available": false,
+        "winerror": 2
+      },
+      {
+        "name": "docker_engine",
+        "available": false,
+        "winerror": 2
+      }
+    ],
+    "unrelated_optional_features": "Legacy WSL1, Hyper-V, HypervisorPlatform and Windows Sandbox remain disabled."
+  },
+  "next_step": "Operator may choose a later restart, then start Docker Desktop and complete first-start prompts. This session did not restart or activate the backend. A separately reviewed exact image digest is still required before image acquisition and actual native probes.",
+  "reboot_initiated": false,
+  "execution_policy_changed": false,
+  "unrelated_optional_features_enabled": false,
+  "container_image_pull_commands": 0,
+  "container_run_commands": 0,
+  "repository_code_executed": false,
+  "native_containment_gate": "HOLD",
+  "native_recovery_gate": "HOLD",
+  "qualification_probes_executed": 0,
+  "coding_repair_claim": false,
+  "raw_evidence_directory": "C:\\Users\\jacks\\Documents\\Codex\\2026-11-14\\files-pasted-by-the-user-nomad\\work\\operations-native-20261116",
+  "raw_evidence_sha256": {
+    "docker-4.99.0-checksums.txt": "0935982286341b59ecc4082c9ed0082b20136103899e42f96db1efbf139e4e0e",
+    "docker-install-cli-log.txt": "e4da85c3295232abe0380230a4d244afb7bde98f2d8bba4372daa01abbc23ed4",
+    "docker-install-completion.json": "ded61ef42831d2aa598b2adeca7de52ce68ae95fa98649a96b98ab385dd17591",
+    "docker-install-launch.json": "7935f2e2d68cf24ef9493e69b48752ea8e533aac96969c657630392e48df44c3",
+    "docker-install-log.txt": "511c8eb4345198e3f59c5f568d81fcc8ca3d4e38a6e51a9296847261bedb39b8",
+    "docker-install-settings.json": "97bfa669c3003df084090c01b0d463a5eb13d533fe3834f3c4c6ecaf7cae8b86",
+    "docker-install.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docker-install.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docker-installed-identity.json": "3fa6244da8f903d3b3f084a96c6fd0dc3f4c9b6670707e3dd67ddaadcc8d97f5",
+    "docker-installer-review.json": "4cbd9fe0161ab084ed77e03e8d765d48ab1b2439ad6af6a8ccbe4821369cdd5b",
+    "install-wsl-no-reboot.ps1": "dc7db5642faa9e0b0171aa3a28d7eb38b72e92fde13579df0e688435f031839f",
+    "post-denial-readonly.json": "41eb7f434d530f00650b7939698b80b805a38817ccb3da816e88e30e7c078f4f",
+    "post-setup-readonly-inventory.json": "37aed1d772af604c9b11f8e3d317afcf11cd5f1382cdb230c2c6b1fb71ec4053",
+    "post-wsl-readonly-inventory.json": "55744bf5234ee9385398c1587348dfc4a383bcbc3e0452c74da6cace689d5d22",
+    "post-wsl-restart-state.json": "b8119f585b39722de795fea40700544f80cfdfdf37cf59634f8fa702ace6d1b5",
+    "wsl-elevation-launch.json": "f1b4f3e5baa38a0e9e2c4fd2b066a5252cc9a29f7be8bb29a77250eadf414a1e",
+    "wsl-native-completion.json": "243e732ce5e29225012c5100485dfb76d22813fcc1b1f393258e778ce20ecf20",
+    "wsl-native-launch.json": "5b9b2af1f710faf1e88558b7136ab1528c3e97394085e30ef19c60fa33fb1985",
+    "wsl-script-policy-denial.json": "5c42874d89ac68ebca2beb23b6cde5a7cffc97f515572abd6d432c10afc514da"
+  },
+  "ancillary_export": {
+    "status": "REJECTED_NOT_RETRIED",
+    "action": "Combined optional log-ZIP and receipt shell command",
+    "reason": "blocked by policy; no specific reason supplied",
+    "zip_created": false,
+    "raw_logs_preserved_in_place": true,
+    "installer_executable_outside_package": true,
+    "receipt_written_with_dedicated_file_edit_tool": true
+  },
+  "official_references": [
+    "https://learn.microsoft.com/en-us/windows/wsl/install",
+    "https://learn.microsoft.com/en-us/windows/wsl/basic-commands",
+    "https://docs.docker.com/desktop/setup/install/windows-install/",
+    "https://docs.docker.com/desktop/release-notes/#4990"
+  ],
+  "limitations": [
+    "Installation is not a working or qualified isolation backend.",
+    "Original environment snapshots remain historical and unchanged.",
+    "No container image was selected, pulled or run.",
+    "No restart, engine activation, repository trial or benchmark rerun occurred."
+  ],
+  "receipt_sha256": "714bcabd48bbb977f014f4b45d8f2829398b6bff50bbafef4563e78cf2c5158f"
+}
