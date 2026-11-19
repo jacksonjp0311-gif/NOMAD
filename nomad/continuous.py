@@ -1,10 +1,10 @@
 """Continuous cybernetic loop for NOMAD.
 
 Awake: proposer generates the next task from field and SIM, readout biases prior, then synthesis.
-Sleep: consolidate and evolve under multiple cellular automata rules. Treatment updates; control freezes.
+Sleep: consolidate, evolve under CA rules, and run self-rewrite diagnosis + targeted edits.
 SIM: recent history gates whether a success is reinforced.
 Scoreboard: treatment-minus-control delta after each pair.
-No transformers. Field builds, evolves, and proposes its own next work.
+No transformers. Field builds, evolves, proposes, and rewrites itself.
 """
 from __future__ import annotations
 
@@ -23,6 +23,7 @@ from .sensors import telemetry
 from .sim import recent, should_reinforce
 from .scoreboard import record as record_delta
 from .proposer import propose
+from .rewrite import rewrite
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "continuous"
@@ -125,13 +126,14 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
     return outcome
 
 def sleep(*, arm: str = "treatment") -> dict[str, Any]:
-    """Consolidation and multi-rule CA evolution. Control arm freezes."""
+    """Consolidation, multi-rule CA evolution, and self-rewrite. Control arm freezes."""
     _ensure()
     snap = telemetry()
     if arm != "treatment":
         return {"mode": "sleep", "arm": arm, "status": "frozen", "telemetry": snap, "ts": _now()}
     merged = merge_similar()
     rules = try_rules(steps=1)
+    rewrite_result = rewrite(test=True)
     prior = _load_prior()
     _save_prior(prior)
     row = {
@@ -140,6 +142,7 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
         "status": "consolidated",
         "merged": merged,
         "rules": rules,
+        "rewrite": rewrite_result,
         "telemetry": snap,
         "ts": _now(),
     }
