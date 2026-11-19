@@ -6,6 +6,7 @@ Packets can be split, merged, and queried by integer overlap.
 The field is the living weight store. No floating-point neural weights.
 
 SIM recording is the caller's responsibility. accumulate does not record.
+reinforce increases the count of a matching domain packet on success.
 """
 from __future__ import annotations
 
@@ -62,6 +63,10 @@ def load_packets() -> list[Packet]:
                     )
                 )
     return packets
+
+def _write(packets: list[Packet]) -> None:
+    _ensure()
+    PACKETS.write_text("".join(json.dumps(p.as_dict(), separators=(",", ":")) + "\n" for p in packets))
 
 def readout(query_bits: set[int], k: int = 16) -> list[dict[str, Any]]:
     """Fixed readout. Top-k packets by integer overlap, weighted by count."""
@@ -121,8 +126,20 @@ def merge_similar(threshold: int = 32) -> int:
         else:
             new_packets.append(p)
     if merged:
-        PACKETS.write_text("".join(json.dumps(p.as_dict(), separators=(",", ":")) + "\n" for p in new_packets))
+        _write(new_packets)
     return merged
+
+def reinforce(label: str, amount: int = 1) -> int:
+    """Increase the count of packets matching label. Returns new count or 0."""
+    packets = load_packets()
+    found = 0
+    for p in packets:
+        if p.label == label:
+            p.count += amount
+            found = p.count
+    if found:
+        _write(packets)
+    return found
 
 def accumulate(
     query_bits: set[int],
