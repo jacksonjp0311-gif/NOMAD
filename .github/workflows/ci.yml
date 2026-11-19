@@ -24,7 +24,20 @@ jobs:
           node-version: '24'
       - name: Initialize installed Rust toolchain
         timeout-minutes: 2
-        run: rustc --version
+        shell: python {0}
+        run: |
+          import os, pathlib, subprocess, tempfile, time
+          started = time.monotonic()
+          subprocess.run(['rustc', '--version'], check=True, timeout=30)
+          with tempfile.TemporaryDirectory(prefix='nomad-rust-setup-') as directory:
+              root = pathlib.Path(directory)
+              source = root / 'setup.rs'
+              binary = root / ('setup.exe' if os.name == 'nt' else 'setup')
+              source.write_text('fn main() { println!("NOMAD toolchain ready"); }', encoding='utf-8')
+              subprocess.run(['rustc', '--edition=2021', '-O', str(source), '-o', str(binary)],
+                             check=True, timeout=60)
+              subprocess.run([str(binary)], check=True, timeout=7)
+          print(f'Rust toolchain setup wall seconds: {time.monotonic() - started:.6f}')
       - name: Check sealed source bytes
         run: python -B scripts/verify_package_v18.py
       - name: Run inherited and platform engineering tests

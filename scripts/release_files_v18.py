@@ -6,7 +6,7 @@ import stat
 
 # Keep the first engineering seal as historical evidence. Qualification fixes
 # remain v0.18.0 and receive a distinct, immutable internal snapshot seal.
-MANIFEST = 'results/RELEASE_MANIFEST_RUNNERS_V018.json'
+MANIFEST = 'results/RELEASE_MANIFEST_RUNNER_READY_V018.json'
 GATES = 'results/GATES_OPERATIONS_V018.json'
 EXCLUDED = {'.git', '.venv', 'venv', '__pycache__', '.pytest_cache', '.mypy_cache',
             'node_modules', 'runs', 'work', 'outputs', 'build', 'dist'}

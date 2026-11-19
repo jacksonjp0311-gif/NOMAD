@@ -46,5 +46,22 @@ remote conclusions and logs are available under
 [development CI](https://github.com/jacksonjp0311-gif/NOMAD/actions/workflows/ci.yml?query=branch%3Av0.18-platform).
 Public visibility does not change qualification: Gates A/B/C/D remain HOLD.
 The previous operations seal and all frozen scientific results remain intact.
-This internal snapshot uses `RELEASE_MANIFEST_RUNNERS_V018.json`; version remains
+This internal snapshot uses `RELEASE_MANIFEST_RUNNER_READY_V018.json`; version remains
 0.18.0. No scientific benchmark replay is required for these test/CI changes.
+
+## Cold compiler startup correction
+
+[Run 44474543777](https://github.com/jacksonjp0311-gif/NOMAD/actions/runs/44474543777)
+confirmed that a version check alone was insufficient on Ubuntu: each Python
+version ran 485 tests with one failure and 13 skips. The first native Rust
+compile exceeded seven seconds; the second compile passed. The recovery errors
+were resolved. The failed source snapshot and its manifest remain preserved.
+
+CI setup now compiles and executes a fixed, trusted readiness program and prints
+the complete setup wall time. Setup has a separate bounded deadline; all native
+candidate tests retain their original seven-second limit. This establishes a
+ready compiler for functional regression testing. It does not demonstrate cold
+candidate compilation within seven seconds or remove initialization cost from
+any research metric. Cold toolchain latency remains a runtime limitation: native
+execution reports failure if its configured deadline expires. No runtime source
+or frozen scientific implementation changed.
