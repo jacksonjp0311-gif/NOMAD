@@ -5,7 +5,89 @@
       "propose": 1.0
     },
     "contribution": 0.0,
-    "inbox": []
+    "inbox": [
+      {
+        "to": "spark",
+        "message": {
+          "mode": "sleep",
+          "arm": "treatment",
+          "status": "consolidated",
+          "merged": 0,
+          "rules": {
+            "noop": 4,
+            "majority": 0,
+            "growth": 2,
+            "decay": 0,
+            "stabilize": 0,
+            "winner": "noop"
+          },
+          "rewrite": {
+            "status": "proposed",
+            "edit": {
+              "bits": [
+                143,
+                255,
+                458,
+                492,
+                1152,
+                1450,
+                1575,
+                1782,
+                1832,
+                2191,
+                2228,
+                2557,
+                2622,
+                2677,
+                2728,
+                2734,
+                2858,
+                3094,
+                3166,
+                3217,
+                3257,
+                3393,
+                3519,
+                3549,
+                3644,
+                3674,
+                3772,
+                3899,
+                3917,
+                4095
+              ],
+              "count": 2,
+              "label": "packet:minimal-variant",
+              "receipt": {
+                "predicted": "reinforce recent success",
+                "measured": "public_correct",
+                "context": {
+                  "task": "packet:minimal-variant",
+                  "arm": "treatment",
+                  "proposal": {
+                    "task": "packet:minimal-variant",
+                    "reason": "reinforce recent success",
+                    "source": "sim"
+                  }
+                }
+              }
+            },
+            "target_label": "packet:minimal-variant"
+          },
+          "telemetry": {
+            "ts": "2026-11-19T19:37:01Z",
+            "uptime": 1795117021.4978628,
+            "packets": 4,
+            "fitness": {
+              "success": 2.0,
+              "cycles": 2.0
+            }
+          },
+          "ts": "2026-11-19T19:37:01Z"
+        },
+        "ts": "2026-11-19T19:37:01Z"
+      }
+    ]
   },
   "keeper": {
     "name": "keeper",
@@ -300,6 +382,22 @@
           }
         },
         "ts": "2026-11-19T11:32:45Z"
+      },
+      {
+        "to": "keeper",
+        "message": {
+          "ts": "2026-11-19T19:37:01Z",
+          "measurement": {
+            "ts": "2026-11-19T19:37:01Z",
+            "uptime": 1795117021.4978628,
+            "packets": 4,
+            "fitness": {
+              "success": 2.0,
+              "cycles": 2.0
+            }
+          }
+        },
+        "ts": "2026-11-19T19:37:01Z"
       }
     ]
   }
