@@ -6,6 +6,10 @@ SIM: one receipt per outcome. No double-count.
 Scoreboard: each arm records itself; delta is computed only when both are present.
 Observation: writes a live snapshot for external agents on every cycle.
 No transformers. Field builds, evolves, proposes, and rewrites itself only after evidence.
+
+Packet readout now changes synthesis: high-overlap successful packets bias the
+grammar prior operator order and select a different example set. The chosen
+bias is logged before synthesis so the causal path is inspectable.
 """
 from __future__ import annotations
 
@@ -35,6 +39,25 @@ PRIOR_PATH = DATA / "prior.json"
 LOG_PATH = DATA / "log.jsonl"
 BITS = 4096
 
+# Example sets that vary with field bias.
+EXAMPLES = {
+    "add": (
+        IOExample(1, 2, 3),
+        IOExample(2, 3, 5),
+        IOExample(4, 5, 9),
+    ),
+    "sub": (
+        IOExample(5, 2, 3),
+        IOExample(8, 3, 5),
+        IOExample(10, 1, 9),
+    ),
+    "mult": (
+        IOExample(2, 3, 6),
+        IOExample(4, 5, 20),
+        IOExample(3, 3, 9),
+    ),
+}
+
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -49,19 +72,34 @@ def _hash_bits(text: str, density: int = 64) -> set[int]:
         bits.add(idx)
     return bits
 
-def _examples_for(task: str) -> tuple:
-    """Bounded examples that vary with the task label."""
-    if "variant" in task or "cycle" not in task:
-        return (
-            IOExample(2, 3, 5),
-            IOExample(5, 7, 12),
-            IOExample(1, 1, 2),
-        )
-    return (
-        IOExample(1, 2, 3),
-        IOExample(2, 3, 5),
-        IOExample(4, 5, 9),
-    )
+def _bias_from_context(context: list[dict]) -> dict[str, Any]:
+    """Derive an operator bias and example family from high-overlap successful packets."""
+    bias = {"operator": None, "examples": "add", "reason": "default", "overlap": 0}
+    for c in context:
+        if c.get("overlap", 0) <= 0:
+            continue
+        receipt = c.get("receipt", {})
+        if receipt.get("measured") != "public_correct":
+            continue
+        label = c.get("label", "")
+        # Map packet label patterns to operator preference.
+        if "mult" in label or "product" in label:
+            bias["operator"] = "Mult"
+            bias["examples"] = "mult"
+            bias["reason"] = "packet label suggests mult"
+        elif "sub" in label or "diff" in label:
+            bias["operator"] = "Sub"
+            bias["examples"] = "sub"
+            bias["reason"] = "packet label suggests sub"
+        else:
+            # Default successful packet biases toward Add, but with a different example set
+            # once the field has more than the original minimal packets.
+            bias["operator"] = "Add"
+            bias["examples"] = "add" if "minimal" in label and "variant" not in label else "mult"
+            bias["reason"] = "successful packet overlap"
+        bias["overlap"] = c.get("overlap", 0)
+        break
+    return bias
 
 def _load_memory() -> EvidenceMemory:
     if MEMORY_PATH.exists():
@@ -105,10 +143,14 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
     prior = _load_prior()
     query_bits = _hash_bits(task_text)
     context = readout(query_bits)
-    if context and any(c["overlap"] > 0 for c in context):
+    bias = _bias_from_context(context)
+    # Apply bias to the prior so it changes operator order.
+    if bias["operator"]:
+        # Boost the preferred operator by updating global counts.
+        prior.operator.update(0, bias["operator"], True)
         prior.operator.contextual = True
     history = recent(8)
-    public = _examples_for(task_text)
+    public = EXAMPLES[bias["examples"]]
     task = SynthesisTask(
         task_id=f"continuous-{task_text}-{_now()[:13]}",
         source="def solve(x, y):\n    return 0\n",
@@ -116,6 +158,8 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
         challenge=(),
         final=(),
     )
+    # Log the chosen order before synthesis so the causal path is inspectable.
+    order = prior.order(0)
     result = synthesize(task, prior=prior)
     outcome = {
         "mode": "awake",
@@ -123,6 +167,8 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
         "task": task_text,
         "proposal": proposal,
         "context": context,
+        "bias": bias,
+        "operator_order": list(order),
         "sim_history": history,
         "candidate": result.candidate,
         "public_correct": result.public_correct,
@@ -140,7 +186,7 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
         edit=f"packet:{task_text}",
         predicted=predicted,
         measured=measured,
-        context={"task": task_text, "arm": arm},
+        context={"task": task_text, "arm": arm, "bias": bias},
     )
     if arm == "treatment":
         update_fitness(bool(decision.get("pass")))
@@ -151,8 +197,10 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
                 label=task_text,
                 predicted=predicted,
                 measured=measured,
-                context={"task": task_text, "arm": arm, "proposal": proposal},
+                context={"task": task_text, "arm": arm, "proposal": proposal, "bias": bias},
             )
+        # Persist the biased prior so the next cycle starts from it.
+        _save_prior(prior)
     paired = record_arm(task.task_id, arm, bool(decision.get("pass")))
     if paired:
         outcome["scoreboard"] = paired
