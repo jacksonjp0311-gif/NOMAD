@@ -2,8 +2,8 @@
 
 Awake: proposer generates the next task from field and SIM, readout biases prior, then synthesis.
 Sleep: consolidate, evaluate CA rules on independent snapshots, propose rewrite (no auto-commit).
-SIM: records both successes and failures.
-Scoreboard: records treatment outcome for later pairing.
+SIM: one receipt per outcome. No double-count.
+Scoreboard: each arm records itself; delta is computed only when both are present.
 Observation: writes a live snapshot for external agents on every cycle.
 No transformers. Field builds, evolves, proposes, and rewrites itself only after evidence.
 """
@@ -22,10 +22,11 @@ from .weights import accumulate, readout, merge_similar
 from .automata import try_rules
 from .sensors import telemetry
 from .sim import recent, should_reinforce, record as sim_record
-from .scoreboard import record as record_delta
+from .scoreboard import record_arm
 from .proposer import propose
 from .rewrite import rewrite
 from .observe import write_snapshot
+from .learner import Counts
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "continuous"
@@ -75,6 +76,16 @@ def _load_prior() -> GrammarPrior:
     if PRIOR_PATH.exists():
         snap = json.loads(PRIOR_PATH.read_text())
         prior.operator.contextual = snap.get("contextual", True)
+        for fam, counts in snap.get("global", {}).items():
+            prior.operator.global_counts[fam] = Counts(**counts)
+        for key, counts in snap.get("contexts", {}).items():
+            if ":" in key:
+                sig_s, fam = key.split(":", 1)
+                try:
+                    sig = int(sig_s)
+                    prior.operator.context_counts[(sig, fam)] = Counts(**counts)
+                except ValueError:
+                    pass
     return prior
 
 def _save_prior(prior: GrammarPrior) -> None:
@@ -99,7 +110,7 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
     history = recent(8)
     public = _examples_for(task_text)
     task = SynthesisTask(
-        task_id=f"continuous-{_now()}",
+        task_id=f"continuous-{task_text}-{_now()[:13]}",
         source="def solve(x, y):\n    return 0\n",
         public=public,
         challenge=(),
@@ -142,7 +153,9 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
                 measured=measured,
                 context={"task": task_text, "arm": arm, "proposal": proposal},
             )
-        record_delta(bool(decision.get("pass")), False)
+    paired = record_arm(task.task_id, arm, bool(decision.get("pass")))
+    if paired:
+        outcome["scoreboard"] = paired
     write_snapshot()
     return outcome
 
