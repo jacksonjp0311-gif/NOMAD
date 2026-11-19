@@ -2,7 +2,7 @@
 
 Structured receipts for every field update.
 Records the prediction, the measured outcome, and the context.
-Used by the continuous loop so later cycles do not retry known dead ends.
+Later cycles check recent entries before reinforcing.
 """
 from __future__ import annotations
 
@@ -48,3 +48,18 @@ def recent(n: int = 16) -> list[dict[str, Any]]:
         if line:
             out.append(json.loads(line))
     return out
+
+def should_reinforce(predicted: str) -> bool:
+    """Skip if the same prediction recently failed."""
+    history = recent(32)
+    failures = sum(
+        1 for row in history
+        if row.get("predicted") == predicted and row.get("measured") != "public_correct"
+    )
+    successes = sum(
+        1 for row in history
+        if row.get("predicted") == predicted and row.get("measured") == "public_correct"
+    )
+    if failures > successes and failures >= 2:
+        return False
+    return True
