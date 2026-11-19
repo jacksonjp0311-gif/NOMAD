@@ -1,0 +1,24 @@
+name: NOMAD development checks
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python: ['3.12']
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Run tests
+        run: python -B -m unittest discover -s tests -v
+      - name: Continuous import smoke
+        run: python -c "import nomad.continuous; import nomad.cycle; import nomad.weights; import nomad.automata; import nomad.scoreboard"
