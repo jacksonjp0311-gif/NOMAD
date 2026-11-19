@@ -11,14 +11,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install dependencies
+      - name: Run minimal cycle
         run: |
-          pip install -q --upgrade pip
-          if [ -f requirements.txt ]; then pip install -q -r requirements.txt; fi
-      - name: Run awake
-        run: |
-          set -x
-          python -m nomad.continuous awake --arm treatment || true
+          python -m nomad.cycle awake
       - name: Commit data
         run: |
           git config user.name "nomad"
@@ -26,18 +21,3 @@ jobs:
           git add data/ || true
           git diff --staged --quiet || git commit -m "continuous awake"
           git push || true
-  control:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: Install dependencies
-        run: |
-          pip install -q --upgrade pip
-          if [ -f requirements.txt ]; then pip install -q -r requirements.txt; fi
-      - name: Run awake (control)
-        run: |
-          set -x
-          python -m nomad.continuous awake --arm control || true
