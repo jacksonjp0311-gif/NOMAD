@@ -5,7 +5,7 @@ Sleep: consolidate. Treatment accumulates successful packets; control freezes.
 Society layer: registry, bus, fitness, gate.
 Weight packets: sparse binary, splittable, integer overlap. The living field.
 Sensors: local telemetry for the swarm.
-No transformers. No auto-promotion. Human authorize for durable change.
+No transformers. Field updates itself on measured success.
 """
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ from typing import Any
 from .genesis import IOExample, SynthesisTask, synthesize, GrammarPrior
 from .mnemonic import EvidenceMemory
 from .society import post, update_fitness, gate
-from .weights import accumulate, readout
+from .weights import accumulate, readout, merge_similar
 from .sensors import telemetry
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -107,14 +107,15 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
     return outcome
 
 def sleep(*, arm: str = "treatment") -> dict[str, Any]:
-    """Consolidation. Control arm freezes."""
+    """Consolidation. Control arm freezes. Treatment merges similar packets."""
     _ensure()
     snap = telemetry()
     if arm != "treatment":
         return {"mode": "sleep", "arm": arm, "status": "frozen", "telemetry": snap, "ts": _now()}
+    merged = merge_similar()
     prior = _load_prior()
     _save_prior(prior)
-    row = {"mode": "sleep", "arm": arm, "status": "consolidated", "telemetry": snap, "ts": _now()}
+    row = {"mode": "sleep", "arm": arm, "status": "consolidated", "merged": merged, "telemetry": snap, "ts": _now()}
     _log(row)
     post("spark", row)
     return row
