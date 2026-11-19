@@ -1,0 +1,15 @@
+name: debug-continuous
+on:
+  workflow_dispatch:
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Show import error
+        run: |
+          python -c "import traceback; import nomad.continuous" || true
+          python -m nomad.continuous awake --arm treatment || true
