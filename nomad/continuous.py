@@ -7,8 +7,8 @@ Scoreboard: each arm records itself; delta is computed only when both are presen
 Observation: writes a live snapshot for external agents on every cycle.
 No transformers. Field builds, evolves, proposes, and rewrites itself only after evidence.
 
-Domain packets (seeded) are preferred for bias when present. Their receipt carries
-the operator and example family. Learned packets remain the fallback.
+Domain packets are preferred for bias. On measured success under a domain bias,
+the matching domain packet count is increased so the field strengthens what worked.
 """
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ from typing import Any
 from .genesis import IOExample, SynthesisTask, synthesize, GrammarPrior
 from .mnemonic import EvidenceMemory
 from .society import post, update_fitness, gate
-from .weights import accumulate, readout, merge_similar
+from .weights import accumulate, readout, merge_similar, reinforce
 from .automata import try_rules
 from .sensors import telemetry
 from .sim import recent, should_reinforce, record as sim_record
@@ -71,28 +71,22 @@ def _hash_bits(text: str, density: int = 64) -> set[int]:
     return bits
 
 def _bias_from_context(context: list[dict]) -> dict[str, Any]:
-    """Derive operator bias from domain packets first, then learned packets.
-
-    Seeded domain packets carry their preferred operator and example family in
-    the receipt. They are preferred when present. Learned public_correct packets
-    are the fallback.
-    """
-    # Prefer domain packets (seeded).
+    """Derive operator bias from domain packets first, then learned packets."""
     domain = [
         c for c in context
         if c.get("label", "").startswith("domain:")
         and c.get("receipt", {}).get("measured") == "seeded"
     ]
     if domain:
-        chosen = max(domain, key=lambda c: c.get("overlap", 0))
+        chosen = max(domain, key=lambda c: c.get("overlap", 0) * c.get("count", 1))
         ctx = chosen.get("receipt", {}).get("context", {})
         return {
             "operator": ctx.get("operator", "Add"),
             "examples": ctx.get("examples", "add"),
             "reason": f"domain:{ctx.get('domain', 'unknown')}",
             "overlap": chosen.get("overlap", 0),
+            "label": chosen.get("label", ""),
         }
-    # Fallback: learned successful packets, preferring non-minimal.
     successful = [
         c for c in context
         if c.get("receipt", {}).get("measured") == "public_correct"
@@ -212,6 +206,11 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
                 measured=measured,
                 context={"task": task_text, "arm": arm, "proposal": proposal, "bias": bias},
             )
+            # Strengthen the domain packet that drove the bias.
+            reason = bias.get("reason", "")
+            if reason.startswith("domain:"):
+                domain_label = f"domain:{reason.split(':', 1)[1]}"
+                reinforce(domain_label, 1)
         _save_prior(prior)
     paired = record_arm(task.task_id, arm, bool(decision.get("pass")))
     if paired:
