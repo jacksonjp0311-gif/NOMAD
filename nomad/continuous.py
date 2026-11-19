@@ -4,6 +4,7 @@ Awake: proposer generates the next task from field and SIM, readout biases prior
 Sleep: consolidate, evolve under CA rules, and run self-rewrite diagnosis + targeted edits.
 SIM: recent history gates whether a success is reinforced.
 Scoreboard: treatment-minus-control delta after each pair.
+Observation: writes a live snapshot for external agents on every cycle.
 No transformers. Field builds, evolves, proposes, and rewrites itself.
 """
 from __future__ import annotations
@@ -24,6 +25,7 @@ from .sim import recent, should_reinforce
 from .scoreboard import record as record_delta
 from .proposer import propose
 from .rewrite import rewrite
+from .observe import write_snapshot
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "continuous"
@@ -123,6 +125,7 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
                 measured="public_correct",
                 context={"task": task_text, "arm": arm, "proposal": proposal},
             )
+    write_snapshot()
     return outcome
 
 def sleep(*, arm: str = "treatment") -> dict[str, Any]:
@@ -148,6 +151,7 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
     }
     _log(row)
     post("spark", row)
+    write_snapshot()
     return row
 
 def main(argv: list[str] | None = None) -> int:
