@@ -7,10 +7,8 @@ Scoreboard: each arm records itself; delta is computed only when both are presen
 Observation: writes a live snapshot for external agents on every cycle.
 No transformers. Field builds, evolves, proposes, and rewrites itself only after evidence.
 
-Packet readout now changes synthesis: successful packets bias the grammar prior
-operator order and select a different example set. Non-minimal (variant) packets
-are preferred over minimal ones so the field can shift the operator away from
-addition. The chosen bias is logged before synthesis.
+Domain packets (seeded) are preferred for bias when present. Their receipt carries
+the operator and example family. Learned packets remain the fallback.
 """
 from __future__ import annotations
 
@@ -73,22 +71,36 @@ def _hash_bits(text: str, density: int = 64) -> set[int]:
     return bits
 
 def _bias_from_context(context: list[dict]) -> dict[str, Any]:
-    """Derive an operator bias and example family from successful packets.
+    """Derive operator bias from domain packets first, then learned packets.
 
-    Non-minimal (variant) packets are preferred so the field can shift the
-    operator. Bit overlap is preferred when present; otherwise the first
-    successful non-minimal packet, then any successful packet.
+    Seeded domain packets carry their preferred operator and example family in
+    the receipt. They are preferred when present. Learned public_correct packets
+    are the fallback.
     """
+    # Prefer domain packets (seeded).
+    domain = [
+        c for c in context
+        if c.get("label", "").startswith("domain:")
+        and c.get("receipt", {}).get("measured") == "seeded"
+    ]
+    if domain:
+        chosen = max(domain, key=lambda c: c.get("overlap", 0))
+        ctx = chosen.get("receipt", {}).get("context", {})
+        return {
+            "operator": ctx.get("operator", "Add"),
+            "examples": ctx.get("examples", "add"),
+            "reason": f"domain:{ctx.get('domain', 'unknown')}",
+            "overlap": chosen.get("overlap", 0),
+        }
+    # Fallback: learned successful packets, preferring non-minimal.
     successful = [
         c for c in context
         if c.get("receipt", {}).get("measured") == "public_correct"
     ]
-    # Prefer non-minimal packets.
     preferred = [c for c in successful if "variant" in c.get("label", "")]
     candidates = preferred or successful
     if not candidates:
         return {"operator": None, "examples": "add", "reason": "default", "overlap": 0}
-    # Prefer higher overlap within the preferred set.
     chosen = max(candidates, key=lambda c: c.get("overlap", 0))
     label = chosen.get("label", "")
     overlap = chosen.get("overlap", 0)
