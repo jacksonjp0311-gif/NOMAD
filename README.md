@@ -2,47 +2,25 @@
 
 # NOMAD
 
-Continuous cybernetic intelligence.
+Continuous cybernetic system.
 
-Bitwork geometry. Bounded synthesis. Persistent memory. Continuous runners.
+Sparse binary weight packets accumulate measured outcomes. Awake and sleep runners act and consolidate on a 30/30 sprint. A society layer routes and records. Twin control measures whether the field improves.
 
-The system wakes, acts, sleeps, and keeps what holds. The field and the receipts are the persistent body. Communication with it is through the same interface the runners use: a task, a fixed readout from memory, an outcome, and the exact numbers that produced it.
-
-No transformers. No auto-promotion. Human authorize for anything that becomes durable.
+No transformers. Human authorize for anything that becomes durable.
 
 ---
 
-## Architecture
+## Layers
 
-**Bitwork → RESONANCE → WORLD MODEL → INQUIRY → GENESIS → execution → WITNESS → MNEMONIC → continuous loop → next action.**
+- **Weight packets** — Bitwork geometry. Sets of bits + count. Splittable. Integer overlap readout.
+- **Continuous loop** — Awake on the hour, sleep on the half hour. Treatment updates; control freezes.
+- **Society** — Registry, bus, fitness, gate. Absorbed from Colony.
+- **Cognition** — Attend and decide by integer overlap.
+- **Sensors** — Local telemetry of packet count, fitness, and uptime.
 
-The original modules remain. The continuous loop surrounds them:
-
-- Awake runners propose and check under a fixed readout from the memory field.
-- Sleep runners consolidate the field and the prior from measured outcomes.
-- Twin control runs in parallel. Only a measured difference counts.
-- Colony patterns (registry, bus, fitness, gate, witness) are absorbed as the society layer around the existing spine.
-
-See [continuous loop](docs/CONTINUOUS.md) and [next phase](docs/NEXT_PHASE.md).
-
-## What it is becoming
-
-A host that can absorb measured mechanisms from other systems (Colony, Bitwork, Memorilla-style fixed readout) without losing its claim boundaries. The goal is a system you can eventually reach into: give it work, receive a result and the receipt of what the field contributed.
-
-Production and containment gates remain on HOLD until the evidence exists.
+The field is the living weight store. The runners keep it moving. The receipts stay inspectable.
 
 ---
-
-## Start
-
-```powershell
-.\NOMAD.cmd setup
-.\NOMAD.cmd doctor
-python -m nomad.continuous awake
-python -m nomad.continuous sleep
-```
-
-Workflows for continuous awake and sleep are present. Enable them when the runners have push permission.
 
 ## Boundaries
 
