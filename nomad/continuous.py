@@ -1,11 +1,11 @@
 """Continuous cybernetic loop for NOMAD.
 
 Awake: proposer generates the next task from field and SIM, readout biases prior, then synthesis.
-Sleep: consolidate, evolve under CA rules, and run self-rewrite diagnosis + targeted edits.
-SIM: recent history gates whether a success is reinforced.
-Scoreboard: treatment-minus-control delta after each pair.
+Sleep: consolidate, evaluate CA rules on independent snapshots, propose rewrite (no auto-commit).
+SIM: records both successes and failures.
+Scoreboard: records treatment outcome for later pairing.
 Observation: writes a live snapshot for external agents on every cycle.
-No transformers. Field builds, evolves, proposes, and rewrites itself.
+No transformers. Field builds, evolves, proposes, and rewrites itself only after evidence.
 """
 from __future__ import annotations
 
@@ -19,9 +19,9 @@ from .genesis import IOExample, SynthesisTask, synthesize, GrammarPrior
 from .mnemonic import EvidenceMemory
 from .society import post, update_fitness, gate
 from .weights import accumulate, readout, merge_similar
-from .automata import evolve, try_rules
+from .automata import try_rules
 from .sensors import telemetry
-from .sim import recent, should_reinforce
+from .sim import recent, should_reinforce, record as sim_record
 from .scoreboard import record as record_delta
 from .proposer import propose
 from .rewrite import rewrite
@@ -47,6 +47,20 @@ def _hash_bits(text: str, density: int = 64) -> set[int]:
         idx = int.from_bytes(h[i % 32:(i % 32) + 4], "big") % BITS
         bits.add(idx)
     return bits
+
+def _examples_for(task: str) -> tuple:
+    """Bounded examples that vary with the task label."""
+    if "variant" in task or "cycle" not in task:
+        return (
+            IOExample(2, 3, 5),
+            IOExample(5, 7, 12),
+            IOExample(1, 1, 2),
+        )
+    return (
+        IOExample(1, 2, 3),
+        IOExample(2, 3, 5),
+        IOExample(4, 5, 9),
+    )
 
 def _load_memory() -> EvidenceMemory:
     if MEMORY_PATH.exists():
@@ -83,11 +97,7 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
     if context and any(c["overlap"] > 0 for c in context):
         prior.operator.contextual = True
     history = recent(8)
-    public = (
-        IOExample(1, 2, 3),
-        IOExample(2, 3, 5),
-        IOExample(4, 5, 9),
-    )
+    public = _examples_for(task_text)
     task = SynthesisTask(
         task_id=f"continuous-{_now()}",
         source="def solve(x, y):\n    return 0\n",
@@ -113,30 +123,38 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
     outcome["gate"] = decision
     _log(outcome)
     post("keeper", outcome)
+    predicted = proposal.get("reason", "public success")
+    measured = "public_correct" if decision.get("pass") else "fail"
+    sim_record(
+        edit=f"packet:{task_text}",
+        predicted=predicted,
+        measured=measured,
+        context={"task": task_text, "arm": arm},
+    )
     if arm == "treatment":
         update_fitness(bool(decision.get("pass")))
-        predicted = proposal.get("reason", "public success")
         if decision.get("pass") and should_reinforce(predicted):
             accumulate(
                 query_bits,
                 True,
                 label=task_text,
                 predicted=predicted,
-                measured="public_correct",
+                measured=measured,
                 context={"task": task_text, "arm": arm, "proposal": proposal},
             )
+        record_delta(bool(decision.get("pass")), False)
     write_snapshot()
     return outcome
 
 def sleep(*, arm: str = "treatment") -> dict[str, Any]:
-    """Consolidation, multi-rule CA evolution, and self-rewrite. Control arm freezes."""
+    """Consolidation, independent CA evaluation, rewrite proposal. Control freezes."""
     _ensure()
     snap = telemetry()
     if arm != "treatment":
         return {"mode": "sleep", "arm": arm, "status": "frozen", "telemetry": snap, "ts": _now()}
     merged = merge_similar()
     rules = try_rules(steps=1)
-    rewrite_result = rewrite(test=True)
+    rewrite_result = rewrite()
     prior = _load_prior()
     _save_prior(prior)
     row = {
