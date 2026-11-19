@@ -1,10 +1,10 @@
 """Continuous cybernetic loop for NOMAD.
 
-Awake: fixed readout from weight packets biases the prior, then bounded synthesis.
+Awake: proposer generates the next task from field and SIM, readout biases prior, then synthesis.
 Sleep: consolidate and evolve. Treatment updates; control freezes.
 SIM: recent history gates whether a success is reinforced.
 Scoreboard: treatment-minus-control delta after each pair.
-No transformers. Field builds and evolves itself on measured success.
+No transformers. Field builds, evolves, and proposes its own next work.
 """
 from __future__ import annotations
 
@@ -22,6 +22,7 @@ from .automata import evolve
 from .sensors import telemetry
 from .sim import recent, should_reinforce
 from .scoreboard import record as record_delta
+from .proposer import propose
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "continuous"
@@ -68,13 +69,14 @@ def _log(row: dict[str, Any]) -> None:
         f.write(json.dumps(row, separators=(",", ":")) + "\n")
 
 def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]:
-    """One awake cycle. Readout biases the prior, then synthesis."""
+    """One awake cycle. Proposer generates the task, readout biases the prior, then synthesis."""
     _ensure()
     snap = telemetry()
+    proposal = propose(task_text)
+    task_text = proposal["task"]
     prior = _load_prior()
     query_bits = _hash_bits(task_text)
     context = readout(query_bits)
-    # Field biases the prior when high-overlap packets exist
     if context and any(c["overlap"] > 0 for c in context):
         prior.operator.contextual = True
     history = recent(8)
@@ -95,6 +97,7 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
         "mode": "awake",
         "arm": arm,
         "task": task_text,
+        "proposal": proposal,
         "context": context,
         "sim_history": history,
         "candidate": result.candidate,
@@ -109,7 +112,7 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
     post("keeper", outcome)
     if arm == "treatment":
         update_fitness(bool(decision.get("pass")))
-        predicted = "public success on arithmetic"
+        predicted = proposal.get("reason", "public success")
         if decision.get("pass") and should_reinforce(predicted):
             accumulate(
                 query_bits,
@@ -117,7 +120,7 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
                 label=task_text,
                 predicted=predicted,
                 measured="public_correct",
-                context={"task": task_text, "arm": arm},
+                context={"task": task_text, "arm": arm, "proposal": proposal},
             )
     return outcome
 
