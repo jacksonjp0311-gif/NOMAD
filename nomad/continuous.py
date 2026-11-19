@@ -1,14 +1,16 @@
 """Continuous cybernetic loop for NOMAD.
 
-Awake: proposer generates the next task from field and SIM, readout biases prior, then synthesis.
-Sleep: consolidate, evaluate CA rules on independent snapshots, propose rewrite (no auto-commit).
+Awake: proposer generates the next task from field and SIM, readout biases prior,
+selects a tool from domain bias, then synthesis on domain or default examples.
+Sleep: consolidate, evaluate CA rules on independent snapshots, propose rewrite.
 SIM: one receipt per outcome. No double-count.
 Scoreboard: each arm records itself; delta is computed only when both are present.
 Observation: writes a live snapshot for external agents on every cycle.
+Query: answers by field readout (see query.py).
 No transformers. Field builds, evolves, proposes, and rewrites itself only after evidence.
 
 Domain packets are preferred for bias. On measured success under a domain bias,
-the matching domain packet count is increased so the field strengthens what worked.
+the matching domain packet count is increased. Domain tasks use their own examples.
 """
 from __future__ import annotations
 
@@ -30,6 +32,9 @@ from .proposer import propose
 from .rewrite import rewrite
 from .observe import write_snapshot
 from .learner import Counts
+from .domain_tasks import examples_for
+from .tools import select as select_tool
+from .query import query as field_query
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "continuous"
@@ -111,6 +116,13 @@ def _label_bias(label: str, overlap: int) -> dict[str, Any]:
         return {"operator": "Mult", "examples": "mult", "reason": "variant packet", "overlap": overlap}
     return {"operator": "Add", "examples": "add", "reason": "minimal packet", "overlap": overlap}
 
+def _examples_for_bias(bias: dict[str, Any]) -> tuple:
+    reason = bias.get("reason", "")
+    if reason.startswith("domain:"):
+        domain = reason.split(":", 1)[1]
+        return examples_for(domain)
+    return EXAMPLES.get(bias.get("examples", "add"), EXAMPLES["add"])
+
 def _load_memory() -> EvidenceMemory:
     if MEMORY_PATH.exists():
         return EvidenceMemory.load(MEMORY_PATH)
@@ -145,7 +157,7 @@ def _log(row: dict[str, Any]) -> None:
         f.write(json.dumps(row, separators=(",", ":")) + "\n")
 
 def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]:
-    """One awake cycle. Proposer generates the task, readout biases the prior, then synthesis."""
+    """One awake cycle. Proposer generates the task, readout biases the prior, selects tool, then synthesis."""
     _ensure()
     snap = telemetry()
     proposal = propose(task_text)
@@ -154,11 +166,12 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
     query_bits = _hash_bits(task_text)
     context = readout(query_bits)
     bias = _bias_from_context(context)
+    tool = select_tool(bias)
     if bias["operator"]:
         prior.operator.update(0, bias["operator"], True)
         prior.operator.contextual = True
     history = recent(8)
-    public = EXAMPLES[bias["examples"]]
+    public = _examples_for_bias(bias)
     task = SynthesisTask(
         task_id=f"continuous-{task_text}-{_now()[:13]}",
         source="def solve(x, y):\n    return 0\n",
@@ -175,6 +188,7 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
         "proposal": proposal,
         "context": context,
         "bias": bias,
+        "tool": tool,
         "operator_order": list(order),
         "sim_history": history,
         "candidate": result.candidate,
@@ -193,7 +207,7 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
         edit=f"packet:{task_text}",
         predicted=predicted,
         measured=measured,
-        context={"task": task_text, "arm": arm, "bias": bias},
+        context={"task": task_text, "arm": arm, "bias": bias, "tool": tool},
     )
     if arm == "treatment":
         update_fitness(bool(decision.get("pass")))
@@ -204,9 +218,8 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
                 label=task_text,
                 predicted=predicted,
                 measured=measured,
-                context={"task": task_text, "arm": arm, "proposal": proposal, "bias": bias},
+                context={"task": task_text, "arm": arm, "proposal": proposal, "bias": bias, "tool": tool},
             )
-            # Strengthen the domain packet that drove the bias.
             reason = bias.get("reason", "")
             if reason.startswith("domain:"):
                 domain_label = f"domain:{reason.split(':', 1)[1]}"
@@ -247,13 +260,16 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
 def main(argv: list[str] | None = None) -> int:
     import argparse
     parser = argparse.ArgumentParser(description="NOMAD continuous cybernetic loop")
-    parser.add_argument("mode", choices=("awake", "sleep"))
+    parser.add_argument("mode", choices=("awake", "sleep", "query"))
     parser.add_argument("--arm", choices=("treatment", "control"), default="treatment")
     parser.add_argument("--task", default="cycle")
+    parser.add_argument("--question", default="")
     args = parser.parse_args(argv)
     if args.mode == "awake":
         result = awake(args.task, arm=args.arm)
         print(json.dumps(result, indent=2))
+    elif args.mode == "query":
+        print(json.dumps(field_query(args.question or args.task), indent=2))
     else:
         print(json.dumps(sleep(arm=args.arm), indent=2))
     return 0
