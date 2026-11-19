@@ -398,6 +398,195 @@
           }
         },
         "ts": "2026-11-19T19:37:01Z"
+      },
+      {
+        "to": "keeper",
+        "message": {
+          "ts": "2026-11-19T20:02:39Z",
+          "measurement": {
+            "ts": "2026-11-19T20:02:39Z",
+            "uptime": 1795118559.1068218,
+            "packets": 4,
+            "fitness": {
+              "success": 2.0,
+              "cycles": 2.0
+            }
+          }
+        },
+        "ts": "2026-11-19T20:02:39Z"
+      },
+      {
+        "to": "keeper",
+        "message": {
+          "mode": "awake",
+          "arm": "treatment",
+          "task": "packet:packet:packet:minimal-variant-variant-variant",
+          "proposal": {
+            "task": "packet:packet:packet:minimal-variant-variant-variant",
+            "reason": "reinforce recent success",
+            "source": "sim"
+          },
+          "context": [
+            {
+              "overlap": 0,
+              "count": 1,
+              "label": "minimal",
+              "size": 8,
+              "receipt": {
+                "predicted": "public success",
+                "measured": "public_correct",
+                "context": {}
+              }
+            },
+            {
+              "overlap": 0,
+              "count": 1,
+              "label": "minimal",
+              "size": 8,
+              "receipt": {
+                "predicted": "public success",
+                "measured": "public_correct",
+                "context": {}
+              }
+            },
+            {
+              "overlap": 0,
+              "count": 1,
+              "label": "packet:minimal-variant",
+              "size": 30,
+              "receipt": {
+                "predicted": "reinforce recent success",
+                "measured": "public_correct",
+                "context": {
+                  "task": "packet:minimal-variant",
+                  "arm": "treatment",
+                  "proposal": {
+                    "task": "packet:minimal-variant",
+                    "reason": "reinforce recent success",
+                    "source": "sim"
+                  }
+                }
+              }
+            },
+            {
+              "overlap": 0,
+              "count": 1,
+              "label": "packet:packet:minimal-variant-variant",
+              "size": 30,
+              "receipt": {
+                "predicted": "reinforce recent success",
+                "measured": "public_correct",
+                "context": {
+                  "task": "packet:packet:minimal-variant-variant",
+                  "arm": "treatment",
+                  "proposal": {
+                    "task": "packet:packet:minimal-variant-variant",
+                    "reason": "reinforce recent success",
+                    "source": "sim"
+                  }
+                }
+              }
+            }
+          ],
+          "bias": {
+            "operator": null,
+            "examples": "add",
+            "reason": "default",
+            "overlap": 0
+          },
+          "operator_order": [
+            "Add",
+            "Sub",
+            "Mult"
+          ],
+          "sim_history": [
+            {
+              "ts": "2026-11-19T06:40:19Z",
+              "edit": "minimal-cycle",
+              "predicted": "public success",
+              "measured": "minimal",
+              "context": {
+                "mode": "awake"
+              }
+            },
+            {
+              "ts": "2026-11-19T06:40:19Z",
+              "edit": "packet:minimal",
+              "predicted": "public success",
+              "measured": "public_correct",
+              "context": {}
+            },
+            {
+              "ts": "2026-11-19T06:43:15Z",
+              "edit": "minimal-cycle",
+              "predicted": "public success",
+              "measured": "minimal",
+              "context": {
+                "mode": "awake"
+              }
+            },
+            {
+              "ts": "2026-11-19T06:43:15Z",
+              "edit": "packet:minimal",
+              "predicted": "public success",
+              "measured": "public_correct",
+              "context": {}
+            },
+            {
+              "ts": "2026-11-19T11:21:12Z",
+              "edit": "packet:packet:minimal-variant",
+              "predicted": "reinforce recent success",
+              "measured": "public_correct",
+              "context": {
+                "task": "packet:minimal-variant",
+                "arm": "treatment"
+              }
+            },
+            {
+              "ts": "2026-11-19T11:21:12Z",
+              "edit": "packet:packet:minimal-variant",
+              "predicted": "reinforce recent success",
+              "measured": "public_correct",
+              "context": {
+                "task": "packet:minimal-variant",
+                "arm": "treatment",
+                "proposal": {
+                  "task": "packet:minimal-variant",
+                  "reason": "reinforce recent success",
+                  "source": "sim"
+                }
+              }
+            },
+            {
+              "ts": "2026-11-19T11:32:45Z",
+              "edit": "packet:packet:packet:minimal-variant-variant",
+              "predicted": "reinforce recent success",
+              "measured": "public_correct",
+              "context": {
+                "task": "packet:packet:minimal-variant-variant",
+                "arm": "treatment"
+              }
+            }
+          ],
+          "candidate": "(x+y)",
+          "public_correct": true,
+          "abstained": null,
+          "telemetry": {
+            "ts": "2026-11-19T20:02:39Z",
+            "uptime": 1795118559.1068218,
+            "packets": 4,
+            "fitness": {
+              "success": 2.0,
+              "cycles": 2.0
+            }
+          },
+          "ts": "2026-11-19T20:02:39Z",
+          "gate": {
+            "pass": true,
+            "reason": "public_correct"
+          }
+        },
+        "ts": "2026-11-19T20:02:39Z"
       }
     ]
   }
