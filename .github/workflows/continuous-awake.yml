@@ -3,6 +3,8 @@ on:
   schedule:
     - cron: "0 * * * *"
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   treatment:
     runs-on: ubuntu-latest
@@ -12,12 +14,11 @@ jobs:
         with:
           python-version: "3.12"
       - name: Run minimal cycle
-        run: |
-          python -m nomad.cycle awake
+        run: python -m nomad.cycle awake
       - name: Commit data
         run: |
           git config user.name "nomad"
           git config user.email "nomad@users.noreply.github.com"
           git add data/ || true
           git diff --staged --quiet || git commit -m "continuous awake"
-          git push || true
+          git push
