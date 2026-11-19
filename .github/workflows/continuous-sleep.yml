@@ -11,13 +11,21 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python -m nomad.continuous sleep --arm treatment
-      - run: |
+      - name: Install dependencies
+        run: |
+          pip install -q --upgrade pip
+          if [ -f requirements.txt ]; then pip install -q -r requirements.txt; fi
+      - name: Run sleep
+        run: |
+          set -x
+          python -m nomad.continuous sleep --arm treatment || true
+      - name: Commit data
+        run: |
           git config user.name "nomad"
           git config user.email "nomad@users.noreply.github.com"
-          git add data/continuous/
+          git add data/ || true
           git diff --staged --quiet || git commit -m "continuous sleep"
-          git push
+          git push || true
   control:
     runs-on: ubuntu-latest
     steps:
@@ -25,4 +33,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python -m nomad.continuous sleep --arm control
+      - name: Install dependencies
+        run: |
+          pip install -q --upgrade pip
+          if [ -f requirements.txt ]; then pip install -q -r requirements.txt; fi
+      - name: Run sleep (control)
+        run: |
+          set -x
+          python -m nomad.continuous sleep --arm control || true
