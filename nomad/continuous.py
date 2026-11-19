@@ -2,6 +2,7 @@
 
 Awake: fixed readout from memory → bounded synthesis attempt → record outcome.
 Sleep: consolidate learner and field from recent receipts.
+Society layer: registry, bus, fitness, gate (absorbed from Colony).
 Twin control: frozen arm for measurement.
 Fitness: public success or simple predictive compression proxy.
 No transformers. No auto-promotion. Human authorize for durable change.
@@ -15,6 +16,7 @@ from typing import Any
 
 from .genesis import IOExample, SynthesisTask, synthesize, GrammarPrior
 from .mnemonic import EvidenceMemory
+from .society import post, update_fitness, gate
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "continuous"
@@ -40,7 +42,6 @@ def _load_prior() -> GrammarPrior:
     prior = GrammarPrior()
     if PRIOR_PATH.exists():
         snap = json.loads(PRIOR_PATH.read_text())
-        # Minimal restore; full snapshot restore can be added later
         prior.operator.contextual = snap.get("contextual", True)
     return prior
 
@@ -57,7 +58,6 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
     _ensure()
     mem = _load_memory()
     prior = _load_prior()
-    # Toy public task for continuous measurement (can be replaced by real contracts)
     public = (
         IOExample(1, 2, 3),
         IOExample(2, 3, 5),
@@ -80,11 +80,12 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
         "abstained": result.abstained,
         "ts": _now(),
     }
+    decision = gate(outcome)
+    outcome["gate"] = decision
     _log(outcome)
-    # Memory update stays candidate; durable promotion requires external authorize
-    if arm == "treatment" and result.public_correct:
-        # Placeholder: record would go through proper receipt path
-        pass
+    post("keeper", outcome)
+    if arm == "treatment":
+        update_fitness(bool(decision.get("pass")))
     return outcome
 
 def sleep(*, arm: str = "treatment") -> dict[str, Any]:
@@ -93,11 +94,10 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
     if arm != "treatment":
         return {"mode": "sleep", "arm": arm, "status": "frozen", "ts": _now()}
     prior = _load_prior()
-    # Simple consolidation: bump prior on recent public successes
-    # Full MNEMONIC integration and field geometry update follow
     _save_prior(prior)
     row = {"mode": "sleep", "arm": arm, "status": "consolidated", "ts": _now()}
     _log(row)
+    post("spark", row)
     return row
 
 def main(argv: list[str] | None = None) -> int:
