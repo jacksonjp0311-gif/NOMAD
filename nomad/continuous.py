@@ -4,6 +4,7 @@ Awake: fixed readout from weight packets → bounded synthesis → record outcom
 Sleep: consolidate and evolve the field with cellular automata. Treatment updates; control freezes.
 Society layer: registry, bus, fitness, gate.
 Weight packets: sparse binary, splittable, integer overlap. The living field.
+Self-Improvement Memory: every successful packet carries predicted and measured effect.
 Sensors: local telemetry for the swarm.
 No transformers. Field builds and evolves itself on measured success.
 """
@@ -21,6 +22,7 @@ from .society import post, update_fitness, gate
 from .weights import accumulate, readout, merge_similar
 from .automata import evolve
 from .sensors import telemetry
+from .sim import recent
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "continuous"
@@ -73,6 +75,7 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
     prior = _load_prior()
     query_bits = _hash_bits(task_text)
     context = readout(query_bits)
+    history = recent(8)
     public = (
         IOExample(1, 2, 3),
         IOExample(2, 3, 5),
@@ -91,6 +94,7 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
         "arm": arm,
         "task": task_text,
         "context": context,
+        "sim_history": history,
         "candidate": result.candidate,
         "public_correct": result.public_correct,
         "abstained": result.abstained,
@@ -104,7 +108,14 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
     if arm == "treatment":
         update_fitness(bool(decision.get("pass")))
         if decision.get("pass"):
-            accumulate(query_bits, True, label=task_text)
+            accumulate(
+                query_bits,
+                True,
+                label=task_text,
+                predicted="public success on arithmetic",
+                measured="public_correct",
+                context={"task": task_text, "arm": arm},
+            )
     return outcome
 
 def sleep(*, arm: str = "treatment") -> dict[str, Any]:
