@@ -2,13 +2,18 @@
 
 Local rules evolve sparse binary packets.
 Each rule is evaluated on an independent snapshot.
-Only the rule that produces the highest survival count is committed.
+No-op is always an eligible winner.
+A rule commits only if it preserves every packet that has a successful receipt
+and does not reduce the count of successful packets.
 Integer only.
 """
 from __future__ import annotations
 
 import copy
-from .weights import Packet, load_packets, append_packet
+import json
+from pathlib import Path
+
+from .weights import Packet, load_packets
 
 RULES = {
     "majority": lambda n, c: c + 1 if n >= 3 and c > 0 else (c if n == 2 else max(0, c - 1)),
@@ -16,6 +21,13 @@ RULES = {
     "decay": lambda n, c: c if n >= 2 else max(0, c - 1),
     "stabilize": lambda n, c: c if n == 2 else (c + 1 if n > 2 else max(0, c - 1)),
 }
+
+def _successful(packets: list[Packet]) -> set[str]:
+    return {
+        p.label
+        for p in packets
+        if p.receipt.get("measured") == "public_correct" and p.label
+    }
 
 def _apply_rule(packets: list[Packet], rule, steps: int = 1) -> list[Packet]:
     current = copy.deepcopy(packets)
@@ -29,32 +41,30 @@ def _apply_rule(packets: list[Packet], rule, steps: int = 1) -> list[Packet]:
         current = next_packets
     return current
 
-def try_rules(steps: int = 1) -> dict[str, int]:
-    """Evaluate every rule on an independent snapshot. Commit only the best."""
+def try_rules(steps: int = 1) -> dict:
+    """Evaluate every rule on an independent snapshot. Prefer no-op."""
     original = load_packets()
     if not original:
         return {}
-    results = {}
-    best_name = None
-    best_count = -1
-    best_packets = None
+    original_success = _successful(original)
+    results = {"noop": len(original)}
+    best_name = "noop"
+    best_packets = original
     for name, rule in RULES.items():
         evolved = _apply_rule(original, rule, steps)
-        count = len(evolved)
-        results[name] = count
-        if count > best_count:
-            best_count = count
+        evolved_success = _successful(evolved)
+        results[name] = len(evolved)
+        # Only consider a rule if it preserves every successful label
+        if original_success.issubset(evolved_success) and len(evolved) >= len(original):
             best_name = name
             best_packets = evolved
-    if best_packets is not None and best_name is not None:
-        # Clear and rewrite with the winner only
-        from pathlib import Path
-        import json
+    if best_name != "noop":
         path = Path(__file__).resolve().parent.parent / "data" / "weights" / "packets.jsonl"
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("".join(json.dumps(p.as_dict(), separators=(",", ":")) + "\n" for p in best_packets))
-        results["winner"] = best_name
+    results["winner"] = best_name
     return results
 
 def seed(bits: set[int], count: int = 1, label: str = "seed") -> None:
+    from .weights import append_packet
     append_packet(Packet(bits, count, label))
