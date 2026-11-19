@@ -1,14 +1,14 @@
 """Continuous cybernetic loop for NOMAD.
 
-Awake: fixed readout from memory → bounded synthesis attempt → record outcome.
-Sleep: consolidate learner and field from recent receipts.
-Society layer: registry, bus, fitness, gate (absorbed from Colony).
-Twin control: frozen arm for measurement.
-Fitness: public success or simple predictive compression proxy.
+Awake: fixed readout from weight packets → bounded synthesis → record outcome.
+Sleep: consolidate. Treatment accumulates successful packets; control freezes.
+Society layer: registry, bus, fitness, gate.
+Weight packets: sparse binary, splittable, integer overlap. The living field.
 No transformers. No auto-promotion. Human authorize for durable change.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -17,18 +17,28 @@ from typing import Any
 from .genesis import IOExample, SynthesisTask, synthesize, GrammarPrior
 from .mnemonic import EvidenceMemory
 from .society import post, update_fitness, gate
+from .weights import accumulate, readout
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "continuous"
 MEMORY_PATH = DATA / "mnemonic.json"
 PRIOR_PATH = DATA / "prior.json"
 LOG_PATH = DATA / "log.jsonl"
+BITS = 4096
 
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 def _ensure() -> None:
     DATA.mkdir(parents=True, exist_ok=True)
+
+def _hash_bits(text: str, density: int = 64) -> set[int]:
+    h = hashlib.sha256(text.encode()).digest()
+    bits = set()
+    for i in range(density):
+        idx = int.from_bytes(h[i % 32:(i % 32) + 4], "big") % BITS
+        bits.add(idx)
+    return bits
 
 def _load_memory() -> EvidenceMemory:
     if MEMORY_PATH.exists():
@@ -54,10 +64,11 @@ def _log(row: dict[str, Any]) -> None:
         f.write(json.dumps(row, separators=(",", ":")) + "\n")
 
 def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]:
-    """One awake cycle. Fixed context from memory, attempt synthesis, record."""
+    """One awake cycle. Readout from weight packets, attempt synthesis, record."""
     _ensure()
-    mem = _load_memory()
     prior = _load_prior()
+    query_bits = _hash_bits(task_text)
+    context = readout(query_bits)
     public = (
         IOExample(1, 2, 3),
         IOExample(2, 3, 5),
@@ -75,6 +86,7 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
         "mode": "awake",
         "arm": arm,
         "task": task_text,
+        "context": context,
         "candidate": result.candidate,
         "public_correct": result.public_correct,
         "abstained": result.abstained,
@@ -86,10 +98,12 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
     post("keeper", outcome)
     if arm == "treatment":
         update_fitness(bool(decision.get("pass")))
+        if decision.get("pass"):
+            accumulate(query_bits, True, label=task_text)
     return outcome
 
 def sleep(*, arm: str = "treatment") -> dict[str, Any]:
-    """Consolidation. Updates prior from recent successes. Control arm freezes."""
+    """Consolidation. Control arm freezes."""
     _ensure()
     if arm != "treatment":
         return {"mode": "sleep", "arm": arm, "status": "frozen", "ts": _now()}
