@@ -11,6 +11,9 @@ from nomad.persistent import PersistentController, read_checkpoint, write_checkp
 from nomad.supervised import run_supervised
 
 ROOT=Path(__file__).resolve().parents[1]
+# Job Object limits are Windows-only. These trusted recovery fixtures also run
+# under POSIX process-group supervision; they never claim hostile containment.
+PROCESS_BUDGETS=({'windows_memory_mib':512,'windows_max_processes':4} if os.name=='nt' else {})
 
 
 class PersistentProcessTests(unittest.TestCase):
@@ -31,7 +34,7 @@ class PersistentProcessTests(unittest.TestCase):
                   'exec("for a,y in json.load(open(sys.argv[2])):\\n out.append(m.predict(a)); m.observe(a,y)"); '
                   'print(json.dumps(out))')
             result=run_supervised([sys.executable,'-B','-c',code,str(snapshot),str(data)],cwd=ROOT,
-                timeout_s=30,max_output_bytes=20000,windows_memory_mib=512,windows_max_processes=4)
+                timeout_s=30,max_output_bytes=20000,**PROCESS_BUDGETS)
             self.assertEqual(result.returncode,0,result.output.decode(errors='replace'))
             self.assertFalse(result.timed_out)
             self.assertEqual(json.loads(result.output),expected)
@@ -46,7 +49,7 @@ class PersistentProcessTests(unittest.TestCase):
                   'm=PersistentController(); m.predict(0); m.observe(0,1); '
                   'os.replace=lambda *args: os._exit(7); write_checkpoint(Path(sys.argv[1]),m.snapshot())')
             result=run_supervised([sys.executable,'-B','-c',code,str(path)],cwd=ROOT,
-                timeout_s=30,max_output_bytes=20000,windows_memory_mib=512,windows_max_processes=4)
+                timeout_s=30,max_output_bytes=20000,**PROCESS_BUDGETS)
             self.assertEqual(result.returncode,7)
             self.assertEqual(path.read_bytes(),before)
             self.assertEqual(PersistentController.load(read_checkpoint(path)).history,[])

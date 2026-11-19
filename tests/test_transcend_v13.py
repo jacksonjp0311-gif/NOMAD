@@ -46,7 +46,7 @@ class TranscendTests(unittest.TestCase):
         self.assertIn('i64',program)
         if native_available('rust'):
             result=run_native('rust',self.solution,self.task.public)
-            self.assertEqual(result.status,'passed')
+            self.assertEqual(result.status,'passed',result.reason)
         else:
             result=run_native('rust',self.solution,self.task.public)
             self.assertEqual(result.status,'unavailable')
@@ -137,7 +137,7 @@ class TranscendTests(unittest.TestCase):
 
     def test_no_native_rust_claim_without_compiler(self):
         status=run_native('rust',self.solution,self.task.public)
-        self.assertEqual(status.status,'passed' if native_available('rust') else 'unavailable')
+        self.assertEqual(status.status,'passed' if native_available('rust') else 'unavailable',status.reason)
 
 
 if __name__=='__main__':unittest.main()

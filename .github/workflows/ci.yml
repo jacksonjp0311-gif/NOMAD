@@ -8,6 +8,7 @@ permissions:
 jobs:
   verify:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
         python: ['3.11', '3.12']
@@ -21,6 +22,9 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '24'
+      - name: Initialize installed Rust toolchain
+        timeout-minutes: 2
+        run: rustc --version
       - name: Check sealed source bytes
         run: python -B scripts/verify_package_v18.py
       - name: Run inherited and platform engineering tests
