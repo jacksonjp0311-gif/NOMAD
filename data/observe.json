@@ -1,13 +1,16 @@
 {
   "sense": {
-    "ts": "2026-11-19T06:43:15Z",
-    "uptime": 1795070595.3010075,
-    "packets": 2,
-    "fitness": {}
+    "ts": "2026-11-19T11:21:12Z",
+    "uptime": 1795087272.8250818,
+    "packets": 3,
+    "fitness": {
+      "success": 1.0,
+      "cycles": 1.0
+    }
   },
   "fitness": {
-    "success": 0.0,
-    "cycles": 0.0
+    "success": 1.0,
+    "cycles": 1.0
   },
   "recent_bus": [
     {
@@ -48,26 +51,109 @@
         }
       },
       "ts": "2026-11-19T06:43:15Z"
+    },
+    {
+      "to": "keeper",
+      "message": {
+        "ts": "2026-11-19T11:21:12Z",
+        "measurement": {
+          "ts": "2026-11-19T11:21:12Z",
+          "uptime": 1795087272.8228085,
+          "packets": 2,
+          "fitness": {}
+        }
+      },
+      "ts": "2026-11-19T11:21:12Z"
+    },
+    {
+      "to": "keeper",
+      "message": {
+        "mode": "awake",
+        "arm": "treatment",
+        "task": "packet:minimal-variant",
+        "proposal": {
+          "task": "packet:minimal-variant",
+          "reason": "reinforce recent success",
+          "source": "sim"
+        },
+        "context": [
+          {
+            "overlap": 0,
+            "count": 1,
+            "label": "minimal",
+            "size": 8,
+            "receipt": {
+              "predicted": "public success",
+              "measured": "public_correct",
+              "context": {}
+            }
+          },
+          {
+            "overlap": 0,
+            "count": 1,
+            "label": "minimal",
+            "size": 8,
+            "receipt": {
+              "predicted": "public success",
+              "measured": "public_correct",
+              "context": {}
+            }
+          }
+        ],
+        "sim_history": [
+          {
+            "ts": "2026-11-19T06:40:19Z",
+            "edit": "minimal-cycle",
+            "predicted": "public success",
+            "measured": "minimal",
+            "context": {
+              "mode": "awake"
+            }
+          },
+          {
+            "ts": "2026-11-19T06:40:19Z",
+            "edit": "packet:minimal",
+            "predicted": "public success",
+            "measured": "public_correct",
+            "context": {}
+          },
+          {
+            "ts": "2026-11-19T06:43:15Z",
+            "edit": "minimal-cycle",
+            "predicted": "public success",
+            "measured": "minimal",
+            "context": {
+              "mode": "awake"
+            }
+          },
+          {
+            "ts": "2026-11-19T06:43:15Z",
+            "edit": "packet:minimal",
+            "predicted": "public success",
+            "measured": "public_correct",
+            "context": {}
+          }
+        ],
+        "candidate": "(x+y)",
+        "public_correct": true,
+        "abstained": null,
+        "telemetry": {
+          "ts": "2026-11-19T11:21:12Z",
+          "uptime": 1795087272.8228085,
+          "packets": 2,
+          "fitness": {}
+        },
+        "ts": "2026-11-19T11:21:12Z",
+        "gate": {
+          "pass": true,
+          "reason": "public_correct"
+        }
+      },
+      "ts": "2026-11-19T11:21:12Z"
     }
   ],
   "recent_sim": [
     {
-      "ts": "2026-11-19T06:40:19Z",
-      "edit": "minimal-cycle",
-      "predicted": "public success",
-      "measured": "minimal",
-      "context": {
-        "mode": "awake"
-      }
-    },
-    {
-      "ts": "2026-11-19T06:40:19Z",
-      "edit": "packet:minimal",
-      "predicted": "public success",
-      "measured": "public_correct",
-      "context": {}
-    },
-    {
       "ts": "2026-11-19T06:43:15Z",
       "edit": "minimal-cycle",
       "predicted": "public success",
@@ -82,6 +168,31 @@
       "predicted": "public success",
       "measured": "public_correct",
       "context": {}
+    },
+    {
+      "ts": "2026-11-19T11:21:12Z",
+      "edit": "packet:packet:minimal-variant",
+      "predicted": "reinforce recent success",
+      "measured": "public_correct",
+      "context": {
+        "task": "packet:minimal-variant",
+        "arm": "treatment"
+      }
+    },
+    {
+      "ts": "2026-11-19T11:21:12Z",
+      "edit": "packet:packet:minimal-variant",
+      "predicted": "reinforce recent success",
+      "measured": "public_correct",
+      "context": {
+        "task": "packet:minimal-variant",
+        "arm": "treatment",
+        "proposal": {
+          "task": "packet:minimal-variant",
+          "reason": "reinforce recent success",
+          "source": "sim"
+        }
+      }
     }
   ]
 }
