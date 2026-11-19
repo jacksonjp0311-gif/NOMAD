@@ -4,6 +4,8 @@ Sparse binary packets that accumulate learned knowledge.
 Each packet is a set of bit positions plus a count and a SIM receipt.
 Packets can be split, merged, and queried by integer overlap.
 The field is the living weight store. No floating-point neural weights.
+
+SIM recording is the caller's responsibility. accumulate does not record.
 """
 from __future__ import annotations
 
@@ -11,8 +13,6 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
-
-from .sim import record as sim_record
 
 ROOT = Path(__file__).resolve().parent.parent
 PACKETS = ROOT / "data" / "weights" / "packets.jsonl"
@@ -132,7 +132,7 @@ def accumulate(
     measured: str = "",
     context: dict[str, Any] | None = None,
 ) -> None:
-    """Add or reinforce a packet from an outcome and record the SIM receipt."""
+    """Add or reinforce a packet from an outcome. Does not record SIM."""
     if not success:
         return
     receipt = {
@@ -141,10 +141,4 @@ def accumulate(
         "context": context or {},
     }
     append_packet(Packet(query_bits, 1, label, receipt))
-    sim_record(
-        edit=f"packet:{label}",
-        predicted=predicted,
-        measured=measured or "public_correct",
-        context=context,
-    )
     merge_similar()
