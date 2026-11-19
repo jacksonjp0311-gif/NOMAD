@@ -2,10 +2,19 @@
 
 Awake and sleep runners that live inside NOMAD.
 
+## Schedule
+
+30/30 sprint.
+
+- Awake: top of every hour (`0 * * * *`).
+- Sleep: half hour (`30 * * * *`).
+
+Awake acts. Sleep consolidates. Then the next awake. Control arm freezes updates on both.
+
 ## Loop
 
 - **Awake**: loads MNEMONIC and the grammar prior, attempts bounded synthesis on a public task, records the outcome (candidate, public_correct, abstention) with timestamp.
-- **Sleep**: consolidates the prior from recent successes. Control arm freezes updates.
+- **Sleep**: consolidates the prior from recent successes. Control arm freezes.
 - **Twin**: treatment and control run the same schedule. Only measured difference on public success counts as learning.
 
 ## Fitness
