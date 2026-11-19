@@ -1,14 +1,14 @@
 """Self-rewrite for the Bitwork field.
 
 Diagnoses differences between successful and failed cycles using packet overlap and SIM receipts.
-Proposes small targeted edits (bit flips or count adjustments) to high-impact packets.
-Edits are tested before commit. Integer only. No gradients.
+Proposes small targeted edits. Does not commit. Caller must test and decide.
+Integer only. No gradients.
 """
 from __future__ import annotations
 
 from typing import Any
 
-from .weights import Packet, load_packets, append_packet
+from .weights import Packet, load_packets
 from .sim import recent
 
 def diagnose() -> dict[str, Any]:
@@ -19,7 +19,6 @@ def diagnose() -> dict[str, Any]:
     packets = load_packets()
     if not packets or not successes:
         return {"candidates": []}
-    # Simple differential: packets that appear more in success contexts
     scored = []
     for p in packets:
         success_hits = sum(1 for s in successes if s.get("context", {}).get("task") == p.label)
@@ -35,13 +34,13 @@ def diagnose() -> dict[str, Any]:
         ]
     }
 
-def propose_edit(packet: Packet, strength: float = 0.1) -> Packet:
-    """Propose a small count adjustment or bit reinforcement."""
-    new_count = max(1, int(packet.count * (1 + strength)))
+def propose_edit(packet: Packet, strength: int = 1) -> Packet:
+    """Propose a small integer count increase."""
+    new_count = packet.count + strength
     return Packet(packet.bits, new_count, packet.label, packet.receipt)
 
-def rewrite(test: bool = True) -> dict[str, Any]:
-    """Diagnose, propose, and optionally commit a small edit."""
+def rewrite() -> dict[str, Any]:
+    """Diagnose and propose. Never commits."""
     diag = diagnose()
     if not diag["candidates"]:
         return {"status": "no_candidates"}
@@ -50,9 +49,4 @@ def rewrite(test: bool = True) -> dict[str, Any]:
     if not target:
         return {"status": "no_target"}
     edited = propose_edit(target)
-    if test:
-        # Placeholder test: in practice run against twin or practice task
-        # For now, commit if diagnosis is positive
-        append_packet(edited)
-        return {"status": "committed", "edit": edited.as_dict()}
-    return {"status": "proposed", "edit": edited.as_dict()}
+    return {"status": "proposed", "edit": edited.as_dict(), "target_label": target.label}
