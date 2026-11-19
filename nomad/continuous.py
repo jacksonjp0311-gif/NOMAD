@@ -4,7 +4,8 @@ Awake: proposer generates the next task from field and SIM, readout biases prior
 selects a tool from domain bias, then synthesis on domain or default examples.
 Sleep: consolidate, evaluate CA rules on independent snapshots, propose rewrite.
 SIM: one receipt per outcome. No double-count.
-Scoreboard: each arm records itself; delta is computed only when both are present.
+Scoreboard: each arm records itself under a stable task key; delta is computed
+only when both arms for that key are present.
 Observation: writes a live snapshot for external agents on every cycle.
 Query: answers by field readout (see query.py).
 No transformers. Field builds, evolves, proposes, and rewrites itself only after evidence.
@@ -225,7 +226,8 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
                 domain_label = f"domain:{reason.split(':', 1)[1]}"
                 reinforce(domain_label, 1)
         _save_prior(prior)
-    paired = record_arm(task.task_id, arm, bool(decision.get("pass")))
+    # Stable key so treatment and control pair across runs.
+    paired = record_arm(task_text, arm, bool(decision.get("pass")))
     if paired:
         outcome["scoreboard"] = paired
     write_snapshot()
@@ -260,7 +262,7 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
 def main(argv: list[str] | None = None) -> int:
     import argparse
     parser = argparse.ArgumentParser(description="NOMAD continuous cybernetic loop")
-    parser.add_argument("mode", choices=("awake", "sleep", "query"))
+    parser.add_argument("mode", choices=("awake", "sleep", "query", "pair"))
     parser.add_argument("--arm", choices=("treatment", "control"), default="treatment")
     parser.add_argument("--task", default="cycle")
     parser.add_argument("--question", default="")
@@ -268,6 +270,10 @@ def main(argv: list[str] | None = None) -> int:
     if args.mode == "awake":
         result = awake(args.task, arm=args.arm)
         print(json.dumps(result, indent=2))
+    elif args.mode == "pair":
+        treatment = awake(args.task, arm="treatment")
+        control = awake(args.task, arm="control")
+        print(json.dumps({"treatment": treatment, "control": control}, indent=2))
     elif args.mode == "query":
         print(json.dumps(field_query(args.question or args.task), indent=2))
     else:
