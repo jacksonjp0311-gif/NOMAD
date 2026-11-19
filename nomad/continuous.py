@@ -8,9 +8,9 @@ Observation: writes a live snapshot for external agents on every cycle.
 No transformers. Field builds, evolves, proposes, and rewrites itself only after evidence.
 
 Packet readout now changes synthesis: successful packets bias the grammar prior
-operator order and select a different example set. Bit overlap is preferred;
-when overlap is zero, the presence of a successful packet still applies a label-based bias.
-The chosen bias is logged before synthesis so the causal path is inspectable.
+operator order and select a different example set. Non-minimal (variant) packets
+are preferred over minimal ones so the field can shift the operator away from
+addition. The chosen bias is logged before synthesis.
 """
 from __future__ import annotations
 
@@ -75,30 +75,25 @@ def _hash_bits(text: str, density: int = 64) -> set[int]:
 def _bias_from_context(context: list[dict]) -> dict[str, Any]:
     """Derive an operator bias and example family from successful packets.
 
-    Bit overlap is preferred. When overlap is zero, the existence of a successful
-    packet still applies a label-based bias so the field can change the next synthesis.
+    Non-minimal (variant) packets are preferred so the field can shift the
+    operator. Bit overlap is preferred when present; otherwise the first
+    successful non-minimal packet, then any successful packet.
     """
-    bias = {"operator": None, "examples": "add", "reason": "default", "overlap": 0}
-    # Prefer high-overlap successful packets.
-    for c in context:
-        if c.get("overlap", 0) <= 0:
-            continue
-        receipt = c.get("receipt", {})
-        if receipt.get("measured") != "public_correct":
-            continue
-        label = c.get("label", "")
-        bias = _label_bias(label, c.get("overlap", 0))
-        bias["reason"] = "packet overlap"
-        return bias
-    # Fallback: any successful packet, even with zero overlap.
-    for c in context:
-        receipt = c.get("receipt", {})
-        if receipt.get("measured") != "public_correct":
-            continue
-        label = c.get("label", "")
-        bias = _label_bias(label, 0)
-        bias["reason"] = "successful packet present"
-        return bias
+    successful = [
+        c for c in context
+        if c.get("receipt", {}).get("measured") == "public_correct"
+    ]
+    # Prefer non-minimal packets.
+    preferred = [c for c in successful if "variant" in c.get("label", "")]
+    candidates = preferred or successful
+    if not candidates:
+        return {"operator": None, "examples": "add", "reason": "default", "overlap": 0}
+    # Prefer higher overlap within the preferred set.
+    chosen = max(candidates, key=lambda c: c.get("overlap", 0))
+    label = chosen.get("label", "")
+    overlap = chosen.get("overlap", 0)
+    bias = _label_bias(label, overlap)
+    bias["reason"] = "non-minimal packet" if preferred else "successful packet present"
     return bias
 
 def _label_bias(label: str, overlap: int) -> dict[str, Any]:
@@ -106,7 +101,6 @@ def _label_bias(label: str, overlap: int) -> dict[str, Any]:
         return {"operator": "Mult", "examples": "mult", "reason": "label", "overlap": overlap}
     if "sub" in label or "diff" in label:
         return {"operator": "Sub", "examples": "sub", "reason": "label", "overlap": overlap}
-    # Successful non-minimal packets shift to mult so the field is not stuck on add.
     if "variant" in label:
         return {"operator": "Mult", "examples": "mult", "reason": "variant packet", "overlap": overlap}
     return {"operator": "Add", "examples": "add", "reason": "minimal packet", "overlap": overlap}
