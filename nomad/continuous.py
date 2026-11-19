@@ -7,9 +7,10 @@ Scoreboard: each arm records itself; delta is computed only when both are presen
 Observation: writes a live snapshot for external agents on every cycle.
 No transformers. Field builds, evolves, proposes, and rewrites itself only after evidence.
 
-Packet readout now changes synthesis: high-overlap successful packets bias the
-grammar prior operator order and select a different example set. The chosen
-bias is logged before synthesis so the causal path is inspectable.
+Packet readout now changes synthesis: successful packets bias the grammar prior
+operator order and select a different example set. Bit overlap is preferred;
+when overlap is zero, the presence of a successful packet still applies a label-based bias.
+The chosen bias is logged before synthesis so the causal path is inspectable.
 """
 from __future__ import annotations
 
@@ -39,7 +40,6 @@ PRIOR_PATH = DATA / "prior.json"
 LOG_PATH = DATA / "log.jsonl"
 BITS = 4096
 
-# Example sets that vary with field bias.
 EXAMPLES = {
     "add": (
         IOExample(1, 2, 3),
@@ -73,8 +73,13 @@ def _hash_bits(text: str, density: int = 64) -> set[int]:
     return bits
 
 def _bias_from_context(context: list[dict]) -> dict[str, Any]:
-    """Derive an operator bias and example family from high-overlap successful packets."""
+    """Derive an operator bias and example family from successful packets.
+
+    Bit overlap is preferred. When overlap is zero, the existence of a successful
+    packet still applies a label-based bias so the field can change the next synthesis.
+    """
     bias = {"operator": None, "examples": "add", "reason": "default", "overlap": 0}
+    # Prefer high-overlap successful packets.
     for c in context:
         if c.get("overlap", 0) <= 0:
             continue
@@ -82,24 +87,29 @@ def _bias_from_context(context: list[dict]) -> dict[str, Any]:
         if receipt.get("measured") != "public_correct":
             continue
         label = c.get("label", "")
-        # Map packet label patterns to operator preference.
-        if "mult" in label or "product" in label:
-            bias["operator"] = "Mult"
-            bias["examples"] = "mult"
-            bias["reason"] = "packet label suggests mult"
-        elif "sub" in label or "diff" in label:
-            bias["operator"] = "Sub"
-            bias["examples"] = "sub"
-            bias["reason"] = "packet label suggests sub"
-        else:
-            # Default successful packet biases toward Add, but with a different example set
-            # once the field has more than the original minimal packets.
-            bias["operator"] = "Add"
-            bias["examples"] = "add" if "minimal" in label and "variant" not in label else "mult"
-            bias["reason"] = "successful packet overlap"
-        bias["overlap"] = c.get("overlap", 0)
-        break
+        bias = _label_bias(label, c.get("overlap", 0))
+        bias["reason"] = "packet overlap"
+        return bias
+    # Fallback: any successful packet, even with zero overlap.
+    for c in context:
+        receipt = c.get("receipt", {})
+        if receipt.get("measured") != "public_correct":
+            continue
+        label = c.get("label", "")
+        bias = _label_bias(label, 0)
+        bias["reason"] = "successful packet present"
+        return bias
     return bias
+
+def _label_bias(label: str, overlap: int) -> dict[str, Any]:
+    if "mult" in label or "product" in label:
+        return {"operator": "Mult", "examples": "mult", "reason": "label", "overlap": overlap}
+    if "sub" in label or "diff" in label:
+        return {"operator": "Sub", "examples": "sub", "reason": "label", "overlap": overlap}
+    # Successful non-minimal packets shift to mult so the field is not stuck on add.
+    if "variant" in label:
+        return {"operator": "Mult", "examples": "mult", "reason": "variant packet", "overlap": overlap}
+    return {"operator": "Add", "examples": "add", "reason": "minimal packet", "overlap": overlap}
 
 def _load_memory() -> EvidenceMemory:
     if MEMORY_PATH.exists():
@@ -144,9 +154,7 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
     query_bits = _hash_bits(task_text)
     context = readout(query_bits)
     bias = _bias_from_context(context)
-    # Apply bias to the prior so it changes operator order.
     if bias["operator"]:
-        # Boost the preferred operator by updating global counts.
         prior.operator.update(0, bias["operator"], True)
         prior.operator.contextual = True
     history = recent(8)
@@ -158,7 +166,6 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
         challenge=(),
         final=(),
     )
-    # Log the chosen order before synthesis so the causal path is inspectable.
     order = prior.order(0)
     result = synthesize(task, prior=prior)
     outcome = {
@@ -199,7 +206,6 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
                 measured=measured,
                 context={"task": task_text, "arm": arm, "proposal": proposal, "bias": bias},
             )
-        # Persist the biased prior so the next cycle starts from it.
         _save_prior(prior)
     paired = record_arm(task.task_id, arm, bool(decision.get("pass")))
     if paired:
