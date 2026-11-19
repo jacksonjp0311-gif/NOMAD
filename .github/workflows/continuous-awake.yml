@@ -1,7 +1,7 @@
 name: continuous-awake
 on:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "7 * * * *"
   workflow_dispatch:
 permissions:
   contents: write
@@ -13,8 +13,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run minimal cycle
-        run: python -m nomad.cycle awake
+      - name: Run awake
+        run: python -m nomad.continuous awake --arm treatment
       - name: Commit data
         run: |
           git config user.name "nomad"
@@ -22,3 +22,12 @@ jobs:
           git add data/ || true
           git diff --staged --quiet || git commit -m "continuous awake"
           git push
+  control:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run awake (control)
+        run: python -m nomad.continuous awake --arm control
