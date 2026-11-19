@@ -6,13 +6,13 @@ Continuous cybernetic system.
 
 Sparse binary weight packets accumulate measured outcomes. Awake and sleep runners act and consolidate on a 30/30 sprint. A society layer routes and records. Twin control measures whether the field improves.
 
-No transformers. Human authorize for anything that becomes durable.
+No transformers. The field builds itself on measured success.
 
 ---
 
 ## Layers
 
-- **Weight packets** — Bitwork geometry. Sets of bits + count. Splittable. Integer overlap readout.
+- **Weight packets** — Bitwork geometry. Sets of bits + count. Splittable. Integer overlap readout. Merges on consolidation.
 - **Continuous loop** — Awake on the hour, sleep on the half hour. Treatment updates; control freezes.
 - **Society** — Registry, bus, fitness, gate. Absorbed from Colony.
 - **Cognition** — Attend and decide by integer overlap.
@@ -24,8 +24,8 @@ The field is the living weight store. The runners keep it moving. The receipts s
 
 ## Boundaries
 
-Not a mind. Not AGI. Not unrestricted coding. Not autonomous promotion.
+Not a mind. Not AGI. Not unrestricted coding.
 
-The field grows by append. The readout is fixed. The gate decides. The human authorizes what sticks.
+The field grows by append and merge on public success. The readout is fixed. The gate decides. Twin control measures the difference.
 
 **Protect the system. Preserve the intelligence. Advance verified capability.**
