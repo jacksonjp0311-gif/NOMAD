@@ -1,9 +1,10 @@
 """Field query.
 
 Answers by reading the weight field. A question is checked for a domain
-name first. If present, that domain packet is returned. Otherwise the
-question is hashed and the strongest overlapping packet supplies the answer.
-No generation.
+name first. If present, that domain packet is returned along with a
+candidate expression produced by the synthesizer on the domain examples.
+Otherwise the question is hashed and the strongest overlapping packet
+supplies the answer. No free-form generation.
 """
 from __future__ import annotations
 
@@ -11,6 +12,8 @@ import hashlib
 from typing import Any
 
 from .weights import readout, load_packets
+from .genesis import SynthesisTask, synthesize, GrammarPrior
+from .domain_tasks import examples_for
 
 BITS = 4096
 DOMAINS = (
@@ -27,6 +30,26 @@ def _hash_bits(text: str, density: int = 64) -> set[int]:
         bits.add(idx)
     return bits
 
+def _candidate_for(domain: str) -> str | None:
+    examples = examples_for(domain)
+    task = SynthesisTask(
+        task_id=f"query-{domain}",
+        source="def solve(x, y):\n    return 0\n",
+        public=examples,
+        challenge=(),
+        final=(),
+    )
+    prior = GrammarPrior()
+    # Bias toward the domain operator.
+    packets = load_packets()
+    for p in packets:
+        if p.label == f"domain:{domain}":
+            op = p.receipt.get("context", {}).get("operator", "Add")
+            prior.operator.update(0, op, True)
+            break
+    result = synthesize(task, prior=prior)
+    return result.candidate
+
 def query(question: str, k: int = 5) -> dict[str, Any]:
     """Answer a question from the field."""
     q = question.lower()
@@ -35,10 +58,12 @@ def query(question: str, k: int = 5) -> dict[str, Any]:
             packets = load_packets()
             for p in packets:
                 if p.label == f"domain:{domain}":
+                    candidate = _candidate_for(domain)
                     return {
                         "question": question,
                         "answer": domain,
                         "operator": p.receipt.get("context", {}).get("operator"),
+                        "candidate": candidate,
                         "overlap": len(p.bits),
                         "count": p.count,
                         "label": p.label,
