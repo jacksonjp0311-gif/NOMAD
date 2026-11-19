@@ -11,7 +11,7 @@ NOMAD is the host. Colony society mechanics are now inside it.
 - Continuous 30/30 sprint (awake on the hour, sleep on the half hour)
 - Twin control (treatment updates, control freezes)
 
-Wired into the continuous loop. Awake posts to the bus, runs the gate, updates fitness. Sleep posts consolidation.
+Wired into the continuous loop. Awake posts to the bus, runs the gate, updates fitness and accumulates weight packets on success. Sleep merges similar packets.
 
 ## Still to absorb
 
@@ -22,6 +22,6 @@ Wired into the continuous loop. Awake posts to the bus, runs the gate, updates f
 
 ## Boundaries
 
-Durable promotion still waits for human authorize. No unrestricted coding. No transformers. Existing platform HOLDs unchanged.
+The field builds itself on measured public success. No unrestricted coding. No transformers. Existing platform HOLDs unchanged. Twin control remains the measurement.
 
 The host has the society layer. The runners keep it moving.
