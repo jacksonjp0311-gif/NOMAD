@@ -1,17 +1,18 @@
 """Bitwork weight packets.
 
 Sparse binary packets that accumulate learned knowledge.
-Each packet is a set of bit positions plus a count.
+Each packet is a set of bit positions plus a count and a SIM receipt.
 Packets can be split, merged, and queried by integer overlap.
 The field is the living weight store. No floating-point neural weights.
 """
 from __future__ import annotations
 
 import json
-from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
+
+from .sim import record as sim_record
 
 ROOT = Path(__file__).resolve().parent.parent
 PACKETS = ROOT / "data" / "weights" / "packets.jsonl"
@@ -25,12 +26,18 @@ class Packet:
     bits: set[int]
     count: int = 1
     label: str = ""
+    receipt: dict[str, Any] = field(default_factory=dict)
 
     def overlap(self, other: set[int]) -> int:
         return len(self.bits & other)
 
     def as_dict(self) -> dict[str, Any]:
-        return {"bits": sorted(self.bits), "count": self.count, "label": self.label}
+        return {
+            "bits": sorted(self.bits),
+            "count": self.count,
+            "label": self.label,
+            "receipt": self.receipt,
+        }
 
 def append_packet(packet: Packet) -> None:
     _ensure()
@@ -46,7 +53,14 @@ def load_packets() -> list[Packet]:
             line = line.strip()
             if line:
                 row = json.loads(line)
-                packets.append(Packet(set(row["bits"]), row.get("count", 1), row.get("label", "")))
+                packets.append(
+                    Packet(
+                        set(row["bits"]),
+                        row.get("count", 1),
+                        row.get("label", ""),
+                        row.get("receipt", {}),
+                    )
+                )
     return packets
 
 def readout(query_bits: set[int], k: int = 16) -> list[dict[str, Any]]:
@@ -54,12 +68,18 @@ def readout(query_bits: set[int], k: int = 16) -> list[dict[str, Any]]:
     scored = [(p.overlap(query_bits) * p.count, p) for p in load_packets()]
     scored.sort(key=lambda x: x[0], reverse=True)
     return [
-        {"overlap": ov, "count": p.count, "label": p.label, "size": len(p.bits)}
+        {
+            "overlap": ov,
+            "count": p.count,
+            "label": p.label,
+            "size": len(p.bits),
+            "receipt": p.receipt,
+        }
         for ov, p in scored[:k]
     ]
 
 def split_packet(packet: Packet, parts: int = 2) -> list[Packet]:
-    """Split a packet into smaller packets that share the same count."""
+    """Split a packet into smaller packets that share the same count and receipt."""
     if parts < 2 or not packet.bits:
         return [packet]
     items = list(packet.bits)
@@ -68,7 +88,7 @@ def split_packet(packet: Packet, parts: int = 2) -> list[Packet]:
     for i in range(0, len(items), size):
         chunk = set(items[i:i + size])
         if chunk:
-            out.append(Packet(chunk, packet.count, packet.label))
+            out.append(Packet(chunk, packet.count, packet.label, packet.receipt))
     return out
 
 def merge_similar(threshold: int = 32) -> int:
@@ -96,7 +116,7 @@ def merge_similar(threshold: int = 32) -> int:
             for g in group:
                 bits |= g.bits
                 count += g.count
-            new_packets.append(Packet(bits, count, group[0].label))
+            new_packets.append(Packet(bits, count, group[0].label, group[0].receipt))
             merged += len(group) - 1
         else:
             new_packets.append(p)
@@ -104,9 +124,27 @@ def merge_similar(threshold: int = 32) -> int:
         PACKETS.write_text("".join(json.dumps(p.as_dict(), separators=(",", ":")) + "\n" for p in new_packets))
     return merged
 
-def accumulate(query_bits: set[int], success: bool, label: str = "") -> None:
-    """Add or reinforce a packet from an outcome."""
+def accumulate(
+    query_bits: set[int],
+    success: bool,
+    label: str = "",
+    predicted: str = "public success",
+    measured: str = "",
+    context: dict[str, Any] | None = None,
+) -> None:
+    """Add or reinforce a packet from an outcome and record the SIM receipt."""
     if not success:
         return
-    append_packet(Packet(query_bits, 1, label))
+    receipt = {
+        "predicted": predicted,
+        "measured": measured or "public_correct",
+        "context": context or {},
+    }
+    append_packet(Packet(query_bits, 1, label, receipt))
+    sim_record(
+        edit=f"packet:{label}",
+        predicted=predicted,
+        measured=measured or "public_correct",
+        context=context,
+    )
     merge_similar()
