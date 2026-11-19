@@ -1,11 +1,9 @@
 """Continuous cybernetic loop for NOMAD.
 
-Awake: fixed readout from weight packets → bounded synthesis → record outcome.
-Sleep: consolidate and evolve the field with cellular automata. Treatment updates; control freezes.
-Society layer: registry, bus, fitness, gate.
-Weight packets: sparse binary, splittable, integer overlap. The living field.
-Self-Improvement Memory: every successful packet carries predicted and measured effect.
-Sensors: local telemetry for the swarm.
+Awake: fixed readout from weight packets biases the prior, then bounded synthesis.
+Sleep: consolidate and evolve. Treatment updates; control freezes.
+SIM: recent history gates whether a success is reinforced.
+Scoreboard: treatment-minus-control delta after each pair.
 No transformers. Field builds and evolves itself on measured success.
 """
 from __future__ import annotations
@@ -22,7 +20,8 @@ from .society import post, update_fitness, gate
 from .weights import accumulate, readout, merge_similar
 from .automata import evolve
 from .sensors import telemetry
-from .sim import recent
+from .sim import recent, should_reinforce
+from .scoreboard import record as record_delta
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "continuous"
@@ -69,12 +68,15 @@ def _log(row: dict[str, Any]) -> None:
         f.write(json.dumps(row, separators=(",", ":")) + "\n")
 
 def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]:
-    """One awake cycle. Readout from weight packets, attempt synthesis, record."""
+    """One awake cycle. Readout biases the prior, then synthesis."""
     _ensure()
     snap = telemetry()
     prior = _load_prior()
     query_bits = _hash_bits(task_text)
     context = readout(query_bits)
+    # Field biases the prior when high-overlap packets exist
+    if context and any(c["overlap"] > 0 for c in context):
+        prior.operator.contextual = True
     history = recent(8)
     public = (
         IOExample(1, 2, 3),
@@ -107,12 +109,13 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
     post("keeper", outcome)
     if arm == "treatment":
         update_fitness(bool(decision.get("pass")))
-        if decision.get("pass"):
+        predicted = "public success on arithmetic"
+        if decision.get("pass") and should_reinforce(predicted):
             accumulate(
                 query_bits,
                 True,
                 label=task_text,
-                predicted="public success on arithmetic",
+                predicted=predicted,
                 measured="public_correct",
                 context={"task": task_text, "arm": arm},
             )
@@ -149,7 +152,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--task", default="cycle")
     args = parser.parse_args(argv)
     if args.mode == "awake":
-        print(json.dumps(awake(args.task, arm=args.arm), indent=2))
+        result = awake(args.task, arm=args.arm)
+        print(json.dumps(result, indent=2))
     else:
         print(json.dumps(sleep(arm=args.arm), indent=2))
     return 0
