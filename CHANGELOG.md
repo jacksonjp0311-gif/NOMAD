@@ -1,5 +1,9 @@
 # NOMAD — Change History
 
+## Revert drill in CI (2026-11-20)
+
+- `tests/test_revert_drill.py` runs both drill scenarios (regressed -> `nomad-revert` pushed to a throwaway origin; healthy -> keep) on every CI run. ~4 s; live main never touched.
+
 ## Cheaper search (2026-11-20)
 
 - `world._redundant`: exact, evaluation-free skips of combinations that are provably invalid or duplicate (uniform-condition `ite`, divide by zero, `x-x`, `x+0`, `x*1`, ...). Same programs found on every task; applies to cold and field alike, so counts before/after are not comparable.
