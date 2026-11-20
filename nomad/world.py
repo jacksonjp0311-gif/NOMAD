@@ -569,7 +569,8 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     if not library and not split and aim is None:
         s = _drive(_search_gen(task, cold_order, {}, max_size, max_eval))
         return _with_sense(_variation_fallback(task, s, mut, max_eval), rec)
-    return _with_sense(_drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split, aim)), rec)
+    return _with_sense(_drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split, aim,
+                                             blockprobe_enabled())), rec)
 
 
 def _with_sense(s: Search, rec: dict | None) -> Search:
@@ -633,9 +634,18 @@ def _variation_fallback(task: WorldTask, s: Search, mut: list[tuple[str, list]],
     return Search(None, evals, s.reason, s.order, s.library_used, None, tried)
 
 
+BLOCKPROBE_TRIGGER = 0.5   # fraction of max_eval stage 1 may spend before the block probe
+BLOCKPROBE_CAP = 0.5       # fraction of max_eval the block probe may spend
+
+
+def blockprobe_enabled() -> bool:
+    import os
+    return os.environ.get("NOMAD_BLOCKPROBE", "on").strip().lower() not in ("off", "0", "false", "no")
+
+
 def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list],
                 max_size: int, max_eval: int, variation: list[tuple[str, list]] | None = None,
-                split: bool = False, aim: tuple[str, ...] | None = None):
+                split: bool = False, aim: tuple[str, ...] | None = None, blockprobe: bool = False):
     """Staged transfer as one incremental search (a generator, like _search_gen).
 
     Stage 1 is exactly the cold search below ``max_size`` (same order, same
@@ -649,6 +659,14 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
     re-entered at that smaller size as a stage-2 entry, so every value of a
     tree of size <= max_size over cold + library atoms is still enumerated.
     Pure cost saving; no held-out task informs it.
+
+    ``blockprobe`` (BLOCKPROBE, docs/SCIENCE.md): when stage 1 has spent
+    ``BLOCKPROBE_TRIGGER * max_eval`` evaluations without a hit and the field
+    has library blocks for this signature, stage 1 pauses once and a capped
+    probe (``BLOCKPROBE_CAP * max_eval``) enumerates, on a copy of stage 1's
+    pools, only combinations that contain a library block, up to max_size.
+    Then stage 1 resumes unchanged. A task stage 1 solves before the trigger
+    is untouched, so cheap tasks can never cost more than the control.
     """
     rows = [r for r, _ in task.public]
     goal = tuple(e for _, e in task.public)
@@ -658,15 +676,17 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
     evals = 0
     stage1 = max(1, max_size - 1)
 
-    def offer(sz: int, tree: list, vals: tuple, fresh: bool) -> list | None:
+    def offer(sz: int, tree: list, vals: tuple, fresh: bool, P=None, B=None) -> list | None:
+        P = pools if P is None else P
+        B = best if B is None else B
         t = type_of(vals[0]) if vals else "bad"
         if t == "bad" or any(type_of(v) != t for v in vals):
             return None
         k = (t, _key(vals))
-        if k in best and best[k] <= sz:
+        if k in B and B[k] <= sz:
             return None
-        best[k] = sz
-        pools.setdefault(sz, {}).setdefault(t, []).append((tree, vals, fresh))
+        B[k] = sz
+        P.setdefault(sz, {}).setdefault(t, []).append((tree, vals, fresh))
         if t == task.out and vals == goal:
             return tree
         return None
@@ -680,8 +700,41 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             return None
         return offer(1, a, vals, fresh)
 
+    probe_at = [int(BLOCKPROBE_TRIGGER * max_eval)] if (blockprobe and library) else []
+    pinfo: dict = {}
+
+    def probe():
+        """The block probe: library-containing combinations on a copy of the pools."""
+        nonlocal evals
+        P = {sz_: {t: list(l) for t, l in d.items()} for sz_, d in pools.items()}
+        B = dict(best)
+        limit = min(max_eval, evals + int(BLOCKPROBE_CAP * max_eval))
+        start = evals
+        for n in library:
+            if evals >= limit:
+                break
+            evals += 1
+            yield evals
+            try:
+                vals = tuple(run(["lib", n], r, library) for r in rows)
+            except Invalid:
+                continue
+            hit = offer(1, ["lib", n], vals, True, P, B)
+            if hit is not None:
+                pinfo.update(spent=evals - start, hit=True)
+                return hit
+        for sz_ in range(2, max_size + 1):
+            hit = yield from level(sz_, True, cap=limit, P=P, B=B)
+            if hit in ("budget", "cap"):
+                break
+            if hit is not None:
+                pinfo.update(spent=evals - start, hit=True)
+                return hit
+        pinfo.update(spent=evals - start, hit=False)
+        return None
+
     def level(sz: int, fresh_only: bool, ops: tuple[str, ...] = order, fresh_ops: tuple[str, ...] = (),
-              cap: int | None = None):
+              cap: int | None = None, P=None, B=None):
         """Enumerate one size level; yields per evaluation, returns a hit or None.
 
         ``fresh_ops``: operators whose stage-1-only combinations at this size
@@ -689,12 +742,14 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         touching a stage-2 entry are evaluated for them.
         """
         nonlocal evals
+        main = P is None
+        P = pools if P is None else P
         lim = max_eval if cap is None else min(cap, max_eval)
         for name in ops:
             op = OPS[name]
             need_fresh = fresh_only or name in fresh_ops
             for split in _compositions(sz - 1, len(op.args)):
-                lists = [list((pools.get(s_, {}).get(t) or [])) for s_, t in zip(split, op.args)]
+                lists = [list((P.get(s_, {}).get(t) or [])) for s_, t in zip(split, op.args)]
                 if any(not l for l in lists):
                     continue
                 for combo in product(*lists):
@@ -704,6 +759,11 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                         continue
                     if _redundant(name, combo):
                         continue
+                    if main and not need_fresh and probe_at and sz <= stage1 and evals >= probe_at[0]:
+                        probe_at.clear()
+                        ph = yield from probe()
+                        if ph is not None:
+                            return ph
                     if evals >= lim:
                         return "budget" if lim >= max_eval else "cap"
                     evals += 1
@@ -716,7 +776,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                             continue
                     except (Invalid, ValueError, TypeError, IndexError, OverflowError):
                         continue
-                    hit = offer(sz, [name] + [c[0] for c in combo], vals, need_fresh or any(c[2] for c in combo))
+                    hit = offer(sz, [name] + [c[0] for c in combo], vals, need_fresh or any(c[2] for c in combo), P, B)
                     if hit is not None:
                         return hit
         return None
@@ -727,7 +787,8 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
 
     def done(hit):
         libs = [s[1] for s in subtrees(hit) if s[0] == "lib"]
-        return Search(hit, evals, None, order, libs, None, tried, sinfo)
+        via = "blockprobe" if pinfo.get("hit") else None
+        return Search(hit, evals, None, order, libs, via, tried, sinfo)
 
     # stage 1: the cold search below max_size
     for a in [["var", n] for n, _ in task.inputs] + [["const", c] for c in INT_CONSTANTS]:

@@ -1,6 +1,7 @@
 """Measurement only: the frozen SCIENCE suite, cold vs field. Changes no live state.
 
-    python3 scripts/science_probe.py            # JSON to stdout
+    python3 scripts/science_probe.py            # JSON to stdout (sealed suite)
+    python3 scripts/science_probe.py --suite /tmp/dev.json --no-diag   # an uncommitted dev suite
 
 Arms (budget 10,000, max_size 7, the deep-suite criterion; see docs/SCIENCE.md):
 - cold:            the twin control (prior=None)
@@ -66,7 +67,8 @@ def section(entries, tasks, arms, max_size):
 
 
 def main():
-    suite, easy, hard = SS.load()
+    path = Path(sys.argv[sys.argv.index("--suite") + 1]) if "--suite" in sys.argv else SS.OUT
+    suite, easy, hard = SS.load(path, check=path == SS.OUT)
     p, vs, _ = VP.train()
     p2, vs2, _ = VP.train()
     train_more(p2, vs2, easy)

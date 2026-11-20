@@ -74,6 +74,19 @@ PROBES: dict[str, list[dict[str, Any]]] = {
     "xs:list": [{"xs": xs} for xs in ((), (5,), (2, 9, 4), (7, 7, 1, 3), (0, -2, 8), (11, 3))],
 }
 
+# SCIENCE signatures (nomad/science.py): named int inputs. Probe values are a
+# fixed pattern chosen once, independent of every science row; a stated
+# constant column (k, c, kH, kO, kW) keeps its stated value, as in every task.
+_SCI_PATTERN = ((1, 0, 2), (0, 1, 3), (3, 2, 1), (6, 6, 6), (12, 5, 2), (5, 12, 4), (2, -3, 7), (20, 3, 5))
+for _names, _const in ((("u", "a", "t"), {}), (("u", "a", "d"), {}), (("u", "v", "t"), {}),
+                       (("m", "u", "v"), {}), (("I", "R", "t"), {}),
+                       (("h", "m", "s", "k"), {"k": 60}), (("v", "t", "k", "c"), {"k": 1000, "c": 3600}),
+                       (("gH", "gO", "kH", "kO", "kW"), {"kH": 2, "kO": 32, "kW": 18})):
+    _free = [n for n in _names if n not in _const]
+    PROBES[",".join(f"{n}:int" for n in _names)] = [
+        {**{n: pat[i % 3] * (i + 1) for i, n in enumerate(_free)}, **_const} for pat in _SCI_PATTERN]
+del _names, _const, _free
+
 
 def sig_key(inputs: Iterable[Sequence[str]]) -> str:
     return ",".join(f"{n}:{t}" for n, t in inputs)

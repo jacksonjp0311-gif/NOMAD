@@ -121,3 +121,64 @@ checks that NOMAD can find the formula from examples; it is not scientific
 reasoning, units are not typed, and constants are given, not known.
 The `easy` numbers for field + science are in-sample. Variation has no probe
 inputs for the new signatures, so mutants never run on science tasks.
+
+## Iteration 2: BLOCKPROBE (learned blocks before the cold search finishes)
+
+Diagnosis from the miss above: at 10,000 evaluations the staged field never
+leaves stage 1 (the cold re-search below max_size) on 3-5 input science
+signatures, so learned blocks are never tried.
+
+Change (`nomad/world.py`, `_staged_gen`, off switch `NOMAD_BLOCKPROBE=off`):
+when stage 1 has spent `BLOCKPROBE_TRIGGER x max_eval` evaluations without a
+hit and the field holds library blocks for the task's signature, stage 1
+pauses once; a probe capped at `BLOCKPROBE_CAP x max_eval` enumerates, on a
+copy of stage 1's pools, only combinations containing a library block (sizes
+up to max_size); then stage 1 resumes unchanged (then case split, variation,
+library stage as before). A task stage 1 solves before the trigger is
+untouched, so cheap tasks cost exactly what the control costs. A probe hit
+still goes through WITNESS like any program (`via = "blockprobe"`).
+
+Also: `variation.PROBES` now has fixed probe inputs for the eight science
+signatures, so variation runs on science tasks (stated constants keep their
+stated values). It changed no dev result.
+
+Tuning, on an **uncommitted dev science suite** only
+(`python3 scripts/science_suite.py --seed 7 --out /tmp/sci_dev.json`; same
+28 formulas, different rows, also 14 hard; caveat: same formulas, so dev and
+sealed are not independent problems). field + science curriculum, hard dev
+tasks certified @10k:
+
+| trigger \ cap | 0.3 | 0.5 |
+|---|---|---|
+| 0.2 | 4 | 5 |
+| 0.35 | 4 | 5 |
+| 0.5 | 4 | 5 |
+
+Guard check on the deep suite (a non-regression guard, used to reject
+settings, not to rank them): (0.2, 0.5) drops the deep field to 3/40 (case
+split starved of budget); (0.5, 0.3), (0.5, 0.5), (0.35, 0.3) keep 6/40.
+Chosen: **trigger 0.5, cap 0.5** (the latest trigger, so the most tasks stay
+untouched, with the best dev count). Fixed before the sealed run below. Bars
+are unchanged from the pre-registration above.
+
+### Sealed result, iteration 2 (measured once, 2026-11-20, `python3 scripts/science_probe.py`)
+
+| Criterion | Bar | Result | Met? |
+|---|---|---|---|
+| 4A. No harm on hard | 0 tasks worse than cold | 0 for every arm | yes |
+| 4B. field + science curriculum on hard @10k | >= 25% | **4 / 14 (28.6%)** in 121,445 evals; cold 0/14, cold + split 0/14, field(main) 0/14 (140,000 each) | **yes** |
+| Easy (report only) | | 14/14 for every arm; cold, cold + split and field(main) all 23,109 evals; field + science 2,038 (in-sample) | |
+| 3. Tests | all green | 346 tests OK (6 skipped), incl. `tests/test_blockprobe.py` (5) | yes |
+| 5. No regression | | `casesplit_probe.py` output identical to before the change: LOFO 5,883 every arm, worst 1.0x; deep field 6/40, 0 worse; held-outs unchanged | yes |
+
+Certified by the block probe: `at²/2` (6,544 evals), `u + at/2` (5,139),
+`I²Rt` (6,172), h:m -> s (5,443), each using a block learned on an easy
+family (`mul(a, t)`, `mul(I, R)`, `mul(k, h)`). The probe also proposed a
+public-row fit for `(u+v)t/2` that WITNESS rejected. field(main) is
+unchanged because it holds no blocks for science signatures. Post-hoc
+200k diagnostic (not a bar): cold 5/14, field + science 8/14.
+
+Honest reading: the pass is narrow (4 tasks against a threshold of 3.5).
+Dev and sealed share formulas, so the dev tuning was not independent of the
+sealed problems. The win is curriculum transfer (easy formulas teach blocks
+the hard ones reuse), not the field "knowing physics".
