@@ -72,3 +72,50 @@ field trained on all 16 training families as in `scripts/casesplit_probe.py`.
 6. Evaluations are reported, not barred. Held-outs are report-only.
 
 Results are recorded below once measured. Nothing is re-tuned after.
+
+## Results (2026-11-20, `python3 scripts/sense_probe.py`, frozen suite `da3ae9bf…6fbd`)
+
+| Criterion | Bar | Cold | Field (pre-sense main) | Field + sense | Met? |
+|---|---|---|---|---|---|
+| 1. Deep: certified among 40 cold misses @10k | >= 8 (stretch 10) | 0 | 6 (15%) | **14 (35%)** | yes, stretch too |
+| 2. Pre-sense field wins lost / tasks worse than cold | 0 / 0 | | | 0 / 0 | yes |
+| 3. LOFO total (16 families), worst family | <= 5,883, 1.0x | 5,883 | 5,883, 1.0x | 5,883, 1.0x | yes |
+| 4. Classifier on 20 known-label families | >= 18 | | | 20 / 20 | yes (consistency check, see caveat) |
+| 5. Off switch reproduces pre-sense numbers | exact | | | tested (`tests/test_sense.py`) | yes |
+| 6. Deep evaluations, all 40 tasks (report) | | 284,839 | 204,588 | 187,678 | |
+
+New certifications by the lead block (8): deep_01, deep_07, deep_09, deep_14
+(`mul` lead, growth) and deep_02, deep_28, deep_36, deep_37 (`sub` lead,
+negative). deep_26 is now certified by the lead block instead of the split
+(both certified). The 6 split wins are kept (deep_16 now costs 9,128
+evaluations instead of 5,279: the lead block runs first; still certified).
+
+Sense breakdown on the deep suite (all 40 are `mathematics`):
+
+| Kind | Tasks | Field | Field + sense |
+|---|---|---|---|
+| quotient | 16 | 0 | 0 |
+| polynomial | 13 | 2 | 7 |
+| other | 7 | 3 | 5 |
+| linear | 2 | 0 | 1 |
+| piecewise | 2 | 1 | 1 |
+
+| Shape | Tasks | Field | Field + sense |
+|---|---|---|---|
+| bounded | 18 | 1 | 1 |
+| growth | 9 | 1 | 5 |
+| negative | 7 | 1 | 5 |
+| mixed | 6 | 3 | 3 |
+
+Held-outs (report-only): absdiff, last_first_upper and sum_minus_max are
+unchanged; quartic_sum is still certified but costs 23,054 evaluations instead
+of 21,375 (+7.9%: growth shape, so the `mul` lead block runs before the
+library atoms).
+
+Honest caveats: the gain comes from the *shape* (sign and growth of the
+outputs), not from the finer kind labels; `bounded` tasks (div/mod-like, 18
+of 40) get nothing yet, and they are the biggest remaining block. The lead
+block reorders work after the cold stage, so a task cold would solve at
+exactly `max_size` within budget could cost more in the field arm (none in
+LOFO, the deep suite or the held-outs). Nothing was re-tuned after this
+measurement.

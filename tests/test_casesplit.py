@@ -61,7 +61,9 @@ class CaseSplitTests(unittest.TestCase):
     def test_budget_accounting_is_charged_and_capped(self) -> None:
         from nomad.world import WorldPrior, synthesize
         t = _int_task("pw1", PIECEWISE)
-        s = synthesize(t, prior=WorldPrior(), max_eval=10000, casesplit=True)
+        # sense=False: this pins the split right after the cold stage (SENSE's
+        # lead block would otherwise run first on this growth-shaped task)
+        s = synthesize(t, prior=WorldPrior(), max_eval=10000, casesplit=True, sense=False)
         base = synthesize(t, prior=None, max_size=6, max_eval=10**7)  # the cold stage alone
         info = s.casesplit
         self.assertEqual(info["charged"], info["conditions"] + info["terms"] + info["pairs"] + info["candidates"])
@@ -69,7 +71,7 @@ class CaseSplitTests(unittest.TestCase):
         self.assertGreater(info["conditions"], 0)
         self.assertEqual(s.evaluations, base.evaluations + info["charged"])
         for cap in (base.evaluations + 1, base.evaluations + 50, base.evaluations + 400):
-            s2 = synthesize(t, prior=WorldPrior(), max_eval=cap, casesplit=True)
+            s2 = synthesize(t, prior=WorldPrior(), max_eval=cap, casesplit=True, sense=False)
             self.assertLessEqual(s2.evaluations, cap)
             self.assertIsNone(s2.tree)
             self.assertEqual(s2.reason, "candidate_budget")

@@ -362,6 +362,7 @@ class Search:
     via: str | None = None                                  # "variation:<kind>" when a mutant hit
     variation: list[dict] = field(default_factory=list)     # mutants tried (kind, tree, fitness)
     casesplit: dict = field(default_factory=dict)           # case-split charges/outcome when it ran
+    sense: dict | None = None                               # SENSE record (field arm, NOMAD_SENSE on)
 
 
 def _key(vals: tuple) -> str:
@@ -507,7 +508,8 @@ def familiar(prior: WorldPrior | None, family: str | None) -> bool:
 
 def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bool = True,
                use_library: bool = True, max_size: int = 7, max_eval: int = 20000,
-               staged: bool = True, variation: Any = None, casesplit: bool | None = None) -> Search:
+               staged: bool = True, variation: Any = None, casesplit: bool | None = None,
+               sense: dict | bool | None = None) -> Search:
     """Search with the cold order, the field, or a staged transfer.
 
     On a familiar family (one the field has certified before) the field's own
@@ -531,6 +533,13 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     ``ite``. A field with no library for the task then also runs staged
     (cold stage, split, the max_size level), so the split has a cold stage to
     reuse. The cold control (``prior=None``) never splits.
+
+    ``sense`` (default: on unless ``NOMAD_SENSE=off``; pass ``False`` to
+    disable or a precomputed record) classifies the task from its public rows
+    (``nomad/sense.py``) before search. On the staged path only, the kind
+    orders the operators of the levels after stage 1 and gates the case
+    split; stage 1 stays the exact cold search. Familiar families and the
+    cold control are untouched. SENSE never certifies.
     """
     opset = OPSETS[task.opset]
     cold_order = tuple(opset)
@@ -544,13 +553,28 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     mut = _variation_candidates(task, prior, variation, fam)
     from . import casesplit as _cs
     split = (_cs.enabled() if casesplit is None else bool(casesplit)) and _cs.applicable(task)
+    from . import sense as _sense
+    if sense is False:
+        rec = None
+    elif isinstance(sense, dict):
+        rec = sense
+    else:
+        rec = _sense.sense(task) if (sense is True or _sense.enabled()) else None
     if not staged or familiar(prior, fam):
         s = _drive(_search_gen(task, order, library, max_size, max_eval))
-        return _variation_fallback(task, s, mut, max_eval)
-    if not library and not split:
+        return _with_sense(_variation_fallback(task, s, mut, max_eval), rec)
+    aim = None
+    if rec is not None:
+        aim = _sense.lead_ops(rec, cold_order) or None
+    if not library and not split and aim is None:
         s = _drive(_search_gen(task, cold_order, {}, max_size, max_eval))
-        return _variation_fallback(task, s, mut, max_eval)
-    return _drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split))
+        return _with_sense(_variation_fallback(task, s, mut, max_eval), rec)
+    return _with_sense(_drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split, aim)), rec)
+
+
+def _with_sense(s: Search, rec: dict | None) -> Search:
+    s.sense = rec
+    return s
 
 
 def _variation_candidates(task: WorldTask, prior: WorldPrior, variation: Any,
@@ -611,7 +635,7 @@ def _variation_fallback(task: WorldTask, s: Search, mut: list[tuple[str, list]],
 
 def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list],
                 max_size: int, max_eval: int, variation: list[tuple[str, list]] | None = None,
-                split: bool = False):
+                split: bool = False, aim: tuple[str, ...] | None = None):
     """Staged transfer as one incremental search (a generator, like _search_gen).
 
     Stage 1 is exactly the cold search below ``max_size`` (same order, same
@@ -656,24 +680,32 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             return None
         return offer(1, a, vals, fresh)
 
-    def level(sz: int, fresh_only: bool):
-        """Enumerate one size level; yields per evaluation, returns a hit or None."""
+    def level(sz: int, fresh_only: bool, ops: tuple[str, ...] = order, fresh_ops: tuple[str, ...] = (),
+              cap: int | None = None):
+        """Enumerate one size level; yields per evaluation, returns a hit or None.
+
+        ``fresh_ops``: operators whose stage-1-only combinations at this size
+        were already evaluated (the SENSE lead block), so only combinations
+        touching a stage-2 entry are evaluated for them.
+        """
         nonlocal evals
-        for name in order:
+        lim = max_eval if cap is None else min(cap, max_eval)
+        for name in ops:
             op = OPS[name]
+            need_fresh = fresh_only or name in fresh_ops
             for split in _compositions(sz - 1, len(op.args)):
                 lists = [list((pools.get(s_, {}).get(t) or [])) for s_, t in zip(split, op.args)]
                 if any(not l for l in lists):
                     continue
                 for combo in product(*lists):
-                    if fresh_only and not any(c[2] for c in combo):
+                    if need_fresh and not any(c[2] for c in combo):
                         continue
                     if op.commutative and _key(combo[0][1]) > _key(combo[1][1]):
                         continue
                     if _redundant(name, combo):
                         continue
-                    if evals >= max_eval:
-                        return "budget"
+                    if evals >= lim:
+                        return "budget" if lim >= max_eval else "cap"
                     evals += 1
                     yield evals
                     try:
@@ -684,7 +716,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                             continue
                     except (Invalid, ValueError, TypeError, IndexError, OverflowError):
                         continue
-                    hit = offer(sz, [name] + [c[0] for c in combo], vals, fresh_only or any(c[2] for c in combo))
+                    hit = offer(sz, [name] + [c[0] for c in combo], vals, need_fresh or any(c[2] for c in combo))
                     if hit is not None:
                         return hit
         return None
@@ -711,6 +743,27 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             return Search(None, evals, "candidate_budget", order)
         if hit is not None:
             return done(hit)
+    # stage 1.4: SENSE lead block (field arm only, NOMAD_SENSE on). The
+    # max_size level restricted to the operators the task's sense points at,
+    # over stage 1's pools only, before library atoms enter. Charged 1 per
+    # candidate like every level; the rest of that level later skips exactly
+    # these combinations, so nothing is evaluated twice.
+    # When the case split will run next, the lead block leaves it a reserve
+    # (SPLIT_RESERVE of the budget); a block cut short by that reserve is not
+    # treated as done, so the full level later re-covers it.
+    lead = tuple(o for o in (aim or ()) if o in order)
+    lead_done = False
+    if lead and max_size > stage1:
+        from .sense import SPLIT_RESERVE
+        cap = max_eval - int(SPLIT_RESERVE * max_eval) if split else None
+        hit = yield from level(max_size, fresh_only=False, ops=lead, cap=cap)
+        lead_done = hit != "cap"
+        if hit == "cap":
+            hit = None
+        if hit == "budget":
+            return Search(None, evals, "candidate_budget", order, [], None, tried, sinfo)
+        if hit is not None:
+            return Search(hit, evals, None, order, [], "sense:" + "+".join(lead), tried, sinfo)
     # stage 1.25: case split over stage 1's int pools (field arm only).
     # Reuses the values stage 1 computed; charges 1 per term/condition tested.
     if split:
@@ -736,7 +789,8 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         if hit is not None:
             return done(hit)
     for sz in range(2, max_size + 1):
-        hit = yield from level(sz, fresh_only=sz <= stage1)
+        hit = yield from level(sz, fresh_only=sz <= stage1,
+                               fresh_ops=lead if (lead_done and sz == max_size and max_size > stage1) else ())
         if hit == "budget":
             return Search(None, evals, "candidate_budget", order, [], None, tried, sinfo)
         if hit is not None:
@@ -783,6 +837,7 @@ class WorldEvaluation:
     library_used: tuple[str, ...]
     via: str | None = None
     variation: tuple = ()
+    sense: dict | None = None   # SENSE record; never part of certification
 
     @property
     def certified(self) -> bool:
@@ -791,26 +846,29 @@ class WorldEvaluation:
 
 def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bool = True,
              use_library: bool = True, max_size: int = 7, max_eval: int = 20000,
-             variation: Any = None, casesplit: bool | None = None) -> tuple[WorldEvaluation, WitnessReceipt | None]:
+             variation: Any = None, casesplit: bool | None = None,
+             sense: dict | bool | None = None) -> tuple[WorldEvaluation, WitnessReceipt | None]:
     library = (prior.primitives_for(task.inputs)
                if (prior is not None and use_library and prior.wants_library(task.family if use_family else None))
                else {})
     s = synthesize(task, prior=prior, use_family=use_family, use_library=use_library,
-                   max_size=max_size, max_eval=max_eval, variation=variation, casesplit=casesplit)
+                   max_size=max_size, max_eval=max_eval, variation=variation, casesplit=casesplit,
+                   sense=sense)
     vt = tuple(s.variation)
+    sr = s.sense
     if s.tree is None:
         return WorldEvaluation(task.task_id, task.family, None, None, False, False, False,
-                               s.evaluations, s.reason, s.order, (), None, vt), None
+                               s.evaluations, s.reason, s.order, (), None, vt, sr), None
     # Certify the standalone program: library calls are inlined first.
     # A mutant only fits the public rows; WITNESS decides here like for any program.
     tree = expand(s.tree, library)
     receipt, public_ok, final_ok = certify(task, tree)
     if receipt is None:
         return WorldEvaluation(task.task_id, task.family, render(tree), tree, False, False, False,
-                               s.evaluations, "invalid_on_rows", s.order, tuple(s.library_used), s.via, vt), None
+                               s.evaluations, "invalid_on_rows", s.order, tuple(s.library_used), s.via, vt, sr), None
     return WorldEvaluation(task.task_id, task.family, render(tree), tree, public_ok,
                            receipt.supported, final_ok, s.evaluations, None, s.order,
-                           tuple(s.library_used), s.via, vt), receipt
+                           tuple(s.library_used), s.via, vt, sr), receipt
 
 
 def certify(task: WorldTask, tree: list) -> tuple[WitnessReceipt | None, bool, bool]:

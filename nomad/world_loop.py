@@ -15,7 +15,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from . import field_queue, variation
+from . import field_queue, sense, variation
 from .curriculum import choose
 from .paths import data_root
 from .scoreboard import record_arm, recent as board_recent
@@ -84,7 +84,8 @@ def world_pair(domain: str | None = None) -> dict[str, Any]:
         "control": {"certified": control.certified, "evaluations": control.evaluations, "candidate": control.candidate},
         "treatment": {"certified": treat.certified, "evaluations": treat.evaluations, "candidate": treat.candidate,
                       "order": list(treat.order), "library_used": list(treat.library_used),
-                      "via": treat.via, "variation_tried": len(treat.variation)},
+                      "via": treat.via, "variation_tried": len(treat.variation),
+                      "sense": sense.brief(treat.sense)},
         "field_version": version, "ts": _now(),
     }
     if explored is not None:
@@ -98,6 +99,7 @@ def world_pair(domain: str | None = None) -> dict[str, Any]:
             measured="witness_and_final", domain=None,
             extra={"world": "typed", "tree": treat.tree, "family": task.family,
                    "opset": task.opset, "inputs": [list(i) for i in task.inputs],
+                   **({"sense": sense.brief(treat.sense)} if treat.sense else {}),
                    **({"variation": trace} if trace else {})},
         )
         out["enqueued"] = {"packet_id": packet["packet_id"], **field_queue.enqueue(packet)}

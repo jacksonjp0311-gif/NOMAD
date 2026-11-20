@@ -133,3 +133,16 @@ Measured with `python3 scripts/casesplit_probe.py` (pre-registered metric in `do
 - **It is the mechanism, not the learned field:** cold + split certifies exactly the same 6 tasks with the same counts as the trained field. Field without the split certifies 0.
 - **Overfitting is the limit:** 5 public rows. The split fired on 16 deep tasks; 6 passed WITNESS, 10 were public-row fits that WITNESS rejected. 13 of the 40 deep tasks are ones where cold itself stops on a WITNESS-rejected fit inside stage 1, which the field shares by construction, so they are unwinnable for any post-stage-1 organ.
 - **Held-out cost (report-only, not targeted):** on the offline test field, absdiff's Occam split `ite(sub(x, 2), sub(x, y), 3)` fits the public rows, is rejected by WITNESS, and pre-empts the library stage that used to certify absdiff at 8,640; the absdiff test is now pinned with the split off. Live, absdiff was not certified before either (the live library lacks `min(x, y)`) and still is not.
+
+## Sense: classify before search (2026-11-20)
+
+`nomad/sense.py` reads a task's types and public rows and records `domain`
+(mathematics / language / coding / science-by-tag / other), `kind` and
+`shape` before search. On the field arm's staged path, after the cold stage
+misses, the `max_size` level is first enumerated for one lead top operator
+(`sub` when every output is <= 0, `mul` when outputs outgrow the inputs),
+leaving 20% of the budget for the case split; the rest of the level skips
+what the lead block already paid for. Frozen deep suite: 14 of 40 cold misses
+certified at 10k (was 6), LOFO unchanged at 5,883. `NOMAD_SENSE=off` restores
+the prior search. The record is logged in `world_pair` output, treatment
+packets and feed evidence. Details: `docs/SENSE.md`.

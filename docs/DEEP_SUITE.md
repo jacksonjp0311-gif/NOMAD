@@ -29,3 +29,7 @@ Results are recorded below once measured.
 | Deep: tasks worse than cold | 0 | | 0 | 0 | 0 | yes |
 
 Certified by the split (field and cold + split alike): deep_06, deep_15, deep_16, deep_26, deep_27, deep_30. The split also proposed 10 public-row fits that WITNESS rejected. Nothing was re-tuned after this measurement. Details: `docs/WORLD.md` "Case split".
+
+## SENSE step (2026-11-20, `python3 scripts/sense_probe.py`)
+
+Criteria pre-registered in `docs/SENSE.md` (commit db61a83) before this suite was measured with SENSE. Field + sense certifies **14 of 40** cold misses at 10,000 evaluations (35%; pre-sense field 6, cold 0), no pre-sense win lost, no task worse than cold, LOFO 5,883 (worst 1.0x), 187,678 evaluations over the suite (pre-sense field 204,588; cold 284,839). This is the first pass to clear the 25% bar above. Details: `docs/SENSE.md`.

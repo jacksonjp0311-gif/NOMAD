@@ -30,6 +30,7 @@ from typing import Any
 from .paths import PACKAGE_ROOT, data_root
 from .world import WorldPrior, WorldTask, _freeze, certify, evaluate, render, run, subtrees, Invalid
 from .world_tasks import all_training, domain_of
+from .sense import brief as sense_brief
 
 SCHEMA = "nomad.feed.packet.v1"
 MANIFEST_SCHEMA = "nomad.feed.manifest.v1"
@@ -171,6 +172,7 @@ def build(prior: WorldPrior | None = None) -> dict:
             "treatment": {"certified": True, "evaluations": ev.evaluations,
                           "library_used": sorted(set(ev.library_used))},
             "budget": BUDGET,
+            **({"sense": sense_brief(ev.sense)} if ev.sense else {}),
         })
     blocks = []
     for name in sorted(library):
