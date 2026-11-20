@@ -1,0 +1,2361 @@
+{
+ "budget": 10000,
+ "excluded_heldouts": [
+  "absdiff",
+  "quartic_sum",
+  "square_product",
+  "last_first_upper",
+  "sum_minus_max"
+ ],
+ "max_size": 7,
+ "opset": "int",
+ "rows": {
+  "challenge": [
+   [
+    11,
+    6
+   ],
+   [
+    3,
+    10
+   ],
+   [
+    8,
+    8
+   ]
+  ],
+  "final": [
+   [
+    13,
+    4
+   ],
+   [
+    5,
+    12
+   ],
+   [
+    6,
+    1
+   ]
+  ],
+  "public": [
+   [
+    2,
+    5
+   ],
+   [
+    7,
+    3
+   ],
+   [
+    4,
+    4
+   ],
+   [
+    9,
+    2
+   ],
+   [
+    10,
+    1
+   ]
+  ]
+ },
+ "schema": "nomad.deep-suite.v1",
+ "seed": 20261120,
+ "sizes": [
+  8,
+  12
+ ],
+ "stats": {
+  "cold_certified": 168,
+  "duplicate": 31,
+  "heldout_lookalike": 0,
+  "invalid_or_trivial": 420,
+  "sampled": 659
+ },
+ "tasks": [
+  {
+   "cold_evaluations": 59,
+   "cold_reason": null,
+   "family": "deep_00",
+   "size": 9,
+   "task_id": "d-00",
+   "tree": [
+    "min",
+    [
+     "div",
+     [
+      "max",
+      [
+       "mod",
+       [
+        "const",
+        3
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    [
+     "const",
+     3
+    ]
+   ],
+   "values": [
+    0,
+    2,
+    1,
+    3,
+    3,
+    1,
+    0,
+    1,
+    3,
+    0,
+    3
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_01",
+   "size": 9,
+   "task_id": "d-01",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "sub",
+      [
+       "const",
+       3
+      ],
+      [
+       "const",
+       0
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ],
+   "values": [
+    -6,
+    84,
+    12,
+    162,
+    210,
+    264,
+    0,
+    120,
+    390,
+    30,
+    54
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_02",
+   "size": 12,
+   "task_id": "d-02",
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "sub",
+      [
+       "const",
+       3
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "add",
+      [
+       "ite",
+       [
+        "const",
+        1
+       ],
+       [
+        "var",
+        "x"
+       ],
+       [
+        "const",
+        0
+       ]
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ],
+    [
+     "var",
+     "y"
+    ]
+   ],
+   "values": [
+    -20,
+    -27,
+    -24,
+    -22,
+    -12,
+    -78,
+    -50,
+    -80,
+    -60,
+    -84,
+    -8
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_03",
+   "size": 12,
+   "task_id": "d-03",
+   "tree": [
+    "sub",
+    [
+     "const",
+     2
+    ],
+    [
+     "mul",
+     [
+      "ite",
+      [
+       "const",
+       0
+      ],
+      [
+       "var",
+       "y"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       1
+      ],
+      [
+       "sub",
+       [
+        "const",
+        1
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ]
+     ]
+    ]
+   ],
+   "values": [
+    17,
+    5,
+    10,
+    2,
+    1,
+    26,
+    82,
+    50,
+    10,
+    122,
+    1
+   ]
+  },
+  {
+   "cold_evaluations": 1078,
+   "cold_reason": null,
+   "family": "deep_04",
+   "size": 11,
+   "task_id": "d-04",
+   "tree": [
+    "sub",
+    [
+     "div",
+     [
+      "const",
+      3
+     ],
+     [
+      "div",
+      [
+       "max",
+       [
+        "const",
+        0
+       ],
+       [
+        "var",
+        "x"
+       ]
+      ],
+      [
+       "min",
+       [
+        "const",
+        3
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ]
+    ],
+    [
+     "var",
+     "x"
+    ]
+   ],
+   "values": [
+    -1,
+    -7,
+    -4,
+    -9,
+    -10,
+    -11,
+    -2,
+    -8,
+    -13,
+    -5,
+    -6
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_05",
+   "size": 12,
+   "task_id": "d-05",
+   "tree": [
+    "mul",
+    [
+     "min",
+     [
+      "const",
+      2
+     ],
+     [
+      "sub",
+      [
+       "sub",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "const",
+        0
+       ]
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ]
+    ],
+    [
+     "ite",
+     [
+      "var",
+      "y"
+     ],
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ],
+   "values": [
+    -6,
+    4,
+    0,
+    4,
+    4,
+    4,
+    -14,
+    0,
+    4,
+    -14,
+    4
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_06",
+   "size": 12,
+   "task_id": "d-06",
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "const",
+      3
+     ],
+     [
+      "var",
+      "x"
+     ]
+    ],
+    [
+     "mod",
+     [
+      "mul",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ],
+     [
+      "ite",
+      [
+       "const",
+       0
+      ],
+      [
+       "var",
+       "y"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ]
+    ]
+   ],
+   "values": [
+    4,
+    -4,
+    0,
+    -6,
+    0,
+    -8,
+    0,
+    0,
+    -10,
+    -2,
+    0
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_07",
+   "size": 10,
+   "task_id": "d-07",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "const",
+      3
+     ],
+     [
+      "ite",
+      [
+       "const",
+       0
+      ],
+      [
+       "const",
+       1
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "y"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ],
+   "values": [
+    60,
+    18,
+    36,
+    6,
+    0,
+    90,
+    270,
+    168,
+    36,
+    396,
+    0
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_08",
+   "size": 11,
+   "task_id": "d-08",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "sub",
+       [
+        "const",
+        1
+       ],
+       [
+        "var",
+        "x"
+       ]
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ],
+    [
+     "min",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ],
+   "values": [
+    -4,
+    -123,
+    -33,
+    -213,
+    -267,
+    -327,
+    -15,
+    -165,
+    -465,
+    -57,
+    -87
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_09",
+   "size": 9,
+   "task_id": "d-09",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "const",
+      0
+     ],
+     [
+      "add",
+      [
+       "add",
+       [
+        "const",
+        3
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "x"
+    ]
+   ],
+   "values": [
+    16,
+    91,
+    40,
+    135,
+    160,
+    187,
+    27,
+    112,
+    247,
+    55,
+    72
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_10",
+   "size": 9,
+   "task_id": "d-10",
+   "tree": [
+    "mod",
+    [
+     "mul",
+     [
+      "max",
+      [
+       "const",
+       3
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "var",
+     "y"
+    ]
+   ],
+   "values": [
+    2,
+    1,
+    0,
+    0,
+    0,
+    2,
+    2,
+    0,
+    0,
+    8,
+    0
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_11",
+   "size": 9,
+   "task_id": "d-11",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "const",
+      3
+     ],
+     [
+      "mul",
+      [
+       "min",
+       [
+        "const",
+        3
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ]
+    ],
+    [
+     "const",
+     3
+    ]
+   ],
+   "values": [
+    54,
+    36,
+    45,
+    21,
+    12,
+    63,
+    99,
+    81,
+    45,
+    117,
+    12
+   ]
+  },
+  {
+   "cold_evaluations": 1520,
+   "cold_reason": null,
+   "family": "deep_12",
+   "size": 11,
+   "task_id": "d-12",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "const",
+      0
+     ],
+     [
+      "add",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "max",
+     [
+      "div",
+      [
+       "const",
+       3
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ],
+   "values": [
+    2,
+    1,
+    2,
+    1,
+    1,
+    2,
+    4,
+    3,
+    2,
+    4,
+    1
+   ]
+  },
+  {
+   "cold_evaluations": 58,
+   "cold_reason": null,
+   "family": "deep_13",
+   "size": 10,
+   "task_id": "d-13",
+   "tree": [
+    "add",
+    [
+     "ite",
+     [
+      "var",
+      "y"
+     ],
+     [
+      "const",
+      3
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "sub",
+     [
+      "max",
+      [
+       "const",
+       3
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ]
+   ],
+   "values": [
+    1,
+    3,
+    2,
+    4,
+    5,
+    0,
+    -4,
+    -2,
+    2,
+    -6,
+    5
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_14",
+   "size": 9,
+   "task_id": "d-14",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "const",
+      3
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ]
+    ],
+    [
+     "add",
+     [
+      "const",
+      3
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ],
+   "values": [
+    24,
+    57,
+    42,
+    48,
+    24,
+    192,
+    84,
+    186,
+    150,
+    174,
+    12
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_15",
+   "size": 11,
+   "task_id": "d-15",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "var",
+      "y"
+     ],
+     [
+      "max",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ]
+    ],
+    [
+     "min",
+     [
+      "var",
+      "y"
+     ],
+     [
+      "mod",
+      [
+       "const",
+       1
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ]
+    ]
+   ],
+   "values": [
+    10,
+    6,
+    8,
+    4,
+    0,
+    12,
+    20,
+    16,
+    8,
+    24,
+    0
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_16",
+   "size": 10,
+   "task_id": "d-16",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "x"
+    ],
+    [
+     "sub",
+     [
+      "min",
+      [
+       "ite",
+       [
+        "var",
+        "y"
+       ],
+       [
+        "const",
+        3
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ],
+     [
+      "var",
+      "x"
+     ]
+    ]
+   ],
+   "values": [
+    0,
+    -28,
+    -4,
+    -54,
+    -70,
+    -88,
+    0,
+    -40,
+    -130,
+    -10,
+    -18
+   ]
+  },
+  {
+   "cold_evaluations": 768,
+   "cold_reason": null,
+   "family": "deep_17",
+   "size": 9,
+   "task_id": "d-17",
+   "tree": [
+    "div",
+    [
+     "sub",
+     [
+      "const",
+      3
+     ],
+     [
+      "sub",
+      [
+       "const",
+       0
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "max",
+     [
+      "var",
+      "y"
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ],
+   "values": [
+    1,
+    1,
+    1,
+    2,
+    2,
+    0,
+    0,
+    0,
+    1,
+    0,
+    2
+   ]
+  },
+  {
+   "cold_evaluations": 2891,
+   "cold_reason": null,
+   "family": "deep_18",
+   "size": 9,
+   "task_id": "d-18",
+   "tree": [
+    "max",
+    [
+     "var",
+     "x"
+    ],
+    [
+     "sub",
+     [
+      "mod",
+      [
+       "const",
+       3
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ],
+   "values": [
+    4,
+    7,
+    4,
+    9,
+    10,
+    11,
+    3,
+    8,
+    13,
+    5,
+    6
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_19",
+   "size": 10,
+   "task_id": "d-19",
+   "tree": [
+    "max",
+    [
+     "var",
+     "x"
+    ],
+    [
+     "add",
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "ite",
+      [
+       "const",
+       0
+      ],
+      [
+       "var",
+       "x"
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ],
+   "values": [
+    8,
+    8,
+    8,
+    9,
+    10,
+    11,
+    8,
+    8,
+    13,
+    8,
+    8
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_20",
+   "size": 12,
+   "task_id": "d-20",
+   "tree": [
+    "mul",
+    [
+     "ite",
+     [
+      "const",
+      2
+     ],
+     [
+      "var",
+      "x"
+     ],
+     [
+      "const",
+      0
+     ]
+    ],
+    [
+     "sub",
+     [
+      "sub",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "div",
+       [
+        "const",
+        2
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ],
+   "values": [
+    -2,
+    28,
+    4,
+    45,
+    50,
+    88,
+    0,
+    40,
+    130,
+    10,
+    6
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_21",
+   "size": 11,
+   "task_id": "d-21",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "max",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "const",
+      2
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ]
+   ],
+   "values": [
+    -36,
+    -27,
+    -36,
+    0,
+    36,
+    -156,
+    -120,
+    -180,
+    -90,
+    -210,
+    24
+   ]
+  },
+  {
+   "cold_evaluations": 2671,
+   "cold_reason": null,
+   "family": "deep_22",
+   "size": 12,
+   "task_id": "d-22",
+   "tree": [
+    "ite",
+    [
+     "max",
+     [
+      "div",
+      [
+       "const",
+       2
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ],
+     [
+      "const",
+      0
+     ]
+    ],
+    [
+     "sub",
+     [
+      "max",
+      [
+       "const",
+       1
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "var",
+     "y"
+    ]
+   ],
+   "values": [
+    3,
+    3,
+    4,
+    2,
+    1,
+    6,
+    10,
+    8,
+    4,
+    12,
+    1
+   ]
+  },
+  {
+   "cold_evaluations": 2465,
+   "cold_reason": null,
+   "family": "deep_23",
+   "size": 10,
+   "task_id": "d-23",
+   "tree": [
+    "mul",
+    [
+     "min",
+     [
+      "sub",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "ite",
+       [
+        "const",
+        1
+       ],
+       [
+        "const",
+        1
+       ],
+       [
+        "var",
+        "x"
+       ]
+      ]
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    [
+     "const",
+     1
+    ]
+   ],
+   "values": [
+    1,
+    3,
+    3,
+    2,
+    1,
+    6,
+    2,
+    7,
+    4,
+    4,
+    1
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_24",
+   "size": 10,
+   "task_id": "d-24",
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "mul",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     [
+      "ite",
+      [
+       "const",
+       3
+      ],
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "y"
+    ]
+   ],
+   "values": [
+    115,
+    6,
+    48,
+    -10,
+    -9,
+    150,
+    970,
+    448,
+    12,
+    1668,
+    -5
+   ]
+  },
+  {
+   "cold_evaluations": 80,
+   "cold_reason": null,
+   "family": "deep_25",
+   "size": 11,
+   "task_id": "d-25",
+   "tree": [
+    "mod",
+    [
+     "max",
+     [
+      "var",
+      "y"
+     ],
+     [
+      "mul",
+      [
+       "sub",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        1
+       ]
+      ],
+      [
+       "add",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "const",
+        3
+       ]
+      ]
+     ]
+    ],
+    [
+     "const",
+     3
+    ]
+   ],
+   "values": [
+    2,
+    1,
+    1,
+    0,
+    1,
+    2,
+    1,
+    2,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_26",
+   "size": 12,
+   "task_id": "d-26",
+   "tree": [
+    "max",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "ite",
+       [
+        "const",
+        3
+       ],
+       [
+        "const",
+        3
+       ],
+       [
+        "const",
+        0
+       ]
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     [
+      "max",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ],
+    [
+     "var",
+     "y"
+    ]
+   ],
+   "values": [
+    24,
+    42,
+    28,
+    45,
+    40,
+    99,
+    39,
+    88,
+    91,
+    75,
+    24
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_27",
+   "size": 12,
+   "task_id": "d-27",
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "ite",
+      [
+       "const",
+       1
+      ],
+      [
+       "const",
+       3
+      ],
+      [
+       "const",
+       1
+      ]
+     ],
+     [
+      "var",
+      "x"
+     ]
+    ],
+    [
+     "add",
+     [
+      "min",
+      [
+       "const",
+       2
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ],
+   "values": [
+    3,
+    -12,
+    -3,
+    -18,
+    -14,
+    -24,
+    0,
+    -15,
+    -30,
+    -6,
+    -6
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_28",
+   "size": 11,
+   "task_id": "d-28",
+   "tree": [
+    "min",
+    [
+     "const",
+     0
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "mul",
+      [
+       "max",
+       [
+        "const",
+        2
+       ],
+       [
+        "add",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         3
+        ]
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ]
+   ],
+   "values": [
+    -3,
+    0,
+    -1,
+    0,
+    0,
+    0,
+    -2,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_29",
+   "size": 9,
+   "task_id": "d-29",
+   "tree": [
+    "max",
+    [
+     "div",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "mod",
+     [
+      "add",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "var",
+      "x"
+     ]
+    ]
+   ],
+   "values": [
+    1,
+    6,
+    3,
+    5,
+    5,
+    9,
+    1,
+    4,
+    7,
+    2,
+    4
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_30",
+   "size": 11,
+   "task_id": "d-30",
+   "tree": [
+    "sub",
+    [
+     "sub",
+     [
+      "div",
+      [
+       "const",
+       1
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "div",
+      [
+       "const",
+       2
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "y"
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ],
+   "values": [
+    -4,
+    -1,
+    -2,
+    0,
+    1,
+    -4,
+    -8,
+    -6,
+    -2,
+    -10,
+    1
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_31",
+   "size": 9,
+   "task_id": "d-31",
+   "tree": [
+    "sub",
+    [
+     "var",
+     "y"
+    ],
+    [
+     "add",
+     [
+      "min",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "mod",
+      [
+       "const",
+       1
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ]
+    ]
+   ],
+   "values": [
+    1,
+    -1,
+    0,
+    -1,
+    0,
+    2,
+    6,
+    4,
+    0,
+    8,
+    0
+   ]
+  },
+  {
+   "cold_evaluations": 94,
+   "cold_reason": null,
+   "family": "deep_32",
+   "size": 11,
+   "task_id": "d-32",
+   "tree": [
+    "mod",
+    [
+     "div",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      1
+     ]
+    ],
+    [
+     "min",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ],
+   "values": [
+    0,
+    2,
+    2,
+    2,
+    2,
+    2,
+    0,
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_33",
+   "size": 9,
+   "task_id": "d-33",
+   "tree": [
+    "min",
+    [
+     "const",
+     2
+    ],
+    [
+     "mod",
+     [
+      "sub",
+      [
+       "const",
+       1
+      ],
+      [
+       "min",
+       [
+        "const",
+        3
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ],
+   "values": [
+    1,
+    1,
+    1,
+    2,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "cold_evaluations": 572,
+   "cold_reason": null,
+   "family": "deep_34",
+   "size": 12,
+   "task_id": "d-34",
+   "tree": [
+    "min",
+    [
+     "mul",
+     [
+      "ite",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "x"
+      ],
+      [
+       "const",
+       0
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "sub",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "x"
+       ]
+      ]
+     ]
+    ],
+    [
+     "var",
+     "y"
+    ]
+   ],
+   "values": [
+    4,
+    3,
+    4,
+    2,
+    1,
+    6,
+    9,
+    8,
+    4,
+    12,
+    1
+   ]
+  },
+  {
+   "cold_evaluations": 71,
+   "cold_reason": null,
+   "family": "deep_35",
+   "size": 8,
+   "task_id": "d-35",
+   "tree": [
+    "div",
+    [
+     "max",
+     [
+      "ite",
+      [
+       "const",
+       1
+      ],
+      [
+       "const",
+       3
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     [
+      "const",
+      0
+     ]
+    ],
+    [
+     "var",
+     "x"
+    ]
+   ],
+   "values": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_36",
+   "size": 10,
+   "task_id": "d-36",
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "ite",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "const",
+       0
+      ],
+      [
+       "const",
+       0
+      ]
+     ],
+     [
+      "mod",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ]
+    ],
+    [
+     "const",
+     3
+    ]
+   ],
+   "values": [
+    -3,
+    -9,
+    0,
+    -6,
+    -3,
+    -18,
+    -3,
+    0,
+    -12,
+    -6,
+    -3
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_37",
+   "size": 12,
+   "task_id": "d-37",
+   "tree": [
+    "sub",
+    [
+     "var",
+     "y"
+    ],
+    [
+     "add",
+     [
+      "max",
+      [
+       "mul",
+       [
+        "const",
+        3
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "ite",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "x"
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ],
+   "values": [
+    -6,
+    -13,
+    -9,
+    -16,
+    -18,
+    -14,
+    -2,
+    -9,
+    -18,
+    -2,
+    -14
+   ]
+  },
+  {
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "family": "deep_38",
+   "size": 9,
+   "task_id": "d-38",
+   "tree": [
+    "max",
+    [
+     "min",
+     [
+      "add",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ]
+     ],
+     [
+      "var",
+      "x"
+     ]
+    ],
+    [
+     "const",
+     3
+    ]
+   ],
+   "values": [
+    3,
+    7,
+    4,
+    8,
+    7,
+    11,
+    3,
+    8,
+    10,
+    5,
+    6
+   ]
+  },
+  {
+   "cold_evaluations": 2512,
+   "cold_reason": null,
+   "family": "deep_39",
+   "size": 10,
+   "task_id": "d-39",
+   "tree": [
+    "max",
+    [
+     "ite",
+     [
+      "sub",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "var",
+      "x"
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    [
+     "div",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ],
+   "values": [
+    2,
+    3,
+    4,
+    2,
+    2,
+    11,
+    3,
+    8,
+    13,
+    5,
+    2
+   ]
+  }
+ ]
+}
