@@ -97,3 +97,12 @@ Comparability: the redundancy skips also lower the **cold control's** counts, so
 | sum_minus_max @5k | 203 | 203 (tie) |
 
 Before (old engine) LOFO was 12,972 = 12,972. Neither change alone fits absdiff in 10k; together they do, while LOFO stays never worse than cold by construction (stage 1 is still the exact cold search). String and list held-outs remain ties, not wins.
+
+## Live check after the body handoff (2026-11-20, 11:49 UTC)
+
+The body that started at 09:35 UTC (run 44712062354) runs the cheaper search. Its live numbers, measured honestly against the cold control:
+
+- **Live twin pairs (body run, 09:36-11:49 UTC):** 319 WORLD pairs over 16 training families, all 319 certified in both arms. The field used 19,180 evaluations against 113,840 for cold (ratio 0.168).
+- **Live held-out probe (`data/continuous/world_heldout.json`, field_witnessed 1,319, library 5 blocks):** absdiff is **not certified at 10k** in either arm. quartic_sum: field certified at 13,463 where cold hits its frontier at 8,414. last_first_upper (332) and sum_minus_max (203) are ties.
+- **Why the 8,608 absdiff win isn't live:** the test field (`tests/test_world.py::_train`) keeps four int library atoms (`min(x, y)`, `sub(x, y)`, `x*x`, `y*y`). The live field keeps three: `min(x, y)` is not among its 5 blocks. With the live library, staged search on absdiff reaches 11,244 evaluations without a budget limit and stops at a public-row fit (`mod(sub(x, y), mul(x, 3))`) that WITNESS rejects on the frozen rows. So the 8,608 result depends on the library the field happens to hold. It is a test-field result, not a live one.
+- No parameter was changed for this. Choosing library blocks to suit absdiff would be tuning to a held-out. The feed packet reports the live probe as measured (absdiff `field_beats_control: false`).
