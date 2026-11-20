@@ -2,7 +2,7 @@
 
 # NOMAD
 
-Artificial intelligence. Artificial recursive learning. GenX swarm machine.
+Artificial intelligence. Artificial recursive learning. Agent swarm machine.
 
 Sparse binary weight packets are the field. The field is the mind. Awake and sleep runners act, measure, and consolidate. Agents in the swarm select tools, propose tasks, and write outcomes back into the packets. The system improves by changing what it synthesizes from its own field.
 
@@ -25,7 +25,7 @@ The field is the living weight store. The runners keep it moving. The swarm acts
 
 ## Boundaries
 
-Architecture is artificial recursive learning on a swarm. Current capability is bounded integer synthesis and field query. Not unrestricted coding. Not free-form generation. Not AGI.
+Architecture is artificial recursive learning on an agent swarm. Current capability is bounded integer synthesis and field query. Not unrestricted coding. Not free-form generation. Not AGI.
 
 The field grows by append, reinforce, and merge on public success. The readout is fixed. The gate decides. Twin control measures the difference.
 
