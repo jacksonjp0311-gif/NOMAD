@@ -72,3 +72,28 @@ Question: can the cold stage of staged transfer be sized adaptively so absdiff f
 - absdiff and pick_gt are indistinguishable at the point where the choice must be made (both unsolved by cold and library search to size 4), so no principled familiarity or confidence signal separates them. Fitting a signal to that pair would be tuning to a held-out.
 
 Result: no change to `synthesize`. Staged transfer keeps LOFO = cold (12,972, worst 1.0x), string/list ties, and absdiff remains a loss at 10k (certified at 19,982). Trade-off stays explicit: strict never-worse-than-cold and a 10k absdiff win are incompatible with the current library search; a cheaper library search (not a different stage size) would be the next lever.
+
+
+## Cheaper search: exact redundancy skips + resumed library stage (2026-11-20)
+
+Lever: make the search cheaper, not the cold stage shorter. Two changes, both judged on leave-one-family-out (LOFO) first; held-outs were measured afterwards and inform no parameter.
+
+1. **Exact redundancy skips (shared engine, both arms).** `world._redundant` skips a combination from the children's cached public-row values when its result is provably invalid or provably equal to a child's values or an integer-constant atom (both already deduped at a smaller size): `ite` with a condition that is >0 on every row or <=0 on every row, or with equal branches; `div`/`mod` by a divisor with a zero; `div(a, 1)`; `sub/min/max/div/mod(a, a)`; `a + 0`, `0 + b`, `a - 0`; `mul` by all-0 or all-1. A skip costs no evaluation (like the existing commutative-order skip). Pools, offers and the program found are identical with and without it (test: same tree on every training and held-out task). On absdiff's cold size-6 space, 7,175 of 11,496 evaluations were `ite` duplicates.
+2. **Resumed library stage.** Stage 1 is still exactly the cold search below max_size. Stage 2 now resumes from stage 1's pools: combinations whose children all came from stage 1 and whose size is below max_size were already evaluated there, so only combinations touching a library-stage entry, plus the whole max_size level, are evaluated. A value that a library tree reaches at a smaller size than stage 1 did is re-entered at that size, so reach is unchanged (test: staged finds a program whenever a from-scratch library search does).
+
+Comparability: the redundancy skips also lower the **cold control's** counts, so evaluation numbers before and after this change are not comparable; within a run both arms share the engine, so twin deltas stay fair.
+
+| Measure (engine after change unless noted) | Cold | Field (staged) |
+|---|---|---|
+| LOFO total, 16 families | 5,883 | 5,883 (every family = cold, worst 1.0x) |
+| LOFO pick_gt (largest) | 3,283 | 3,283 |
+| absdiff @10k | not found | **certified, 8,608** |
+| absdiff unlimited | 21,264 | 8,608 |
+| absdiff, skips only (restart stage 2) | | 11,130 |
+| absdiff, resume only (old engine) | 29,660 | 16,902 |
+| absdiff, before (old engine, restart) | 29,660 | 19,982 |
+| quartic_sum @150k | not found (8,414, frontier) | certified, 21,343 |
+| last_first_upper @5k | 332 | 332 (tie) |
+| sum_minus_max @5k | 203 | 203 (tie) |
+
+Before (old engine) LOFO was 12,972 = 12,972. Neither change alone fits absdiff in 10k; together they do, while LOFO stays never worse than cold by construction (stage 1 is still the exact cold search). String and list held-outs remain ties, not wins.

@@ -365,6 +365,47 @@ def _key(vals: tuple) -> str:
     return json.dumps(vals, separators=(",", ":"))
 
 
+def _redundant(name: str, combo: Sequence[tuple]) -> bool:
+    """True when a combination provably yields nothing new, without running it.
+
+    Decided from the children's cached public-row values only, so it costs no
+    candidate evaluation (like the commutative-order skip). Every rule is
+    exact: the skipped result is either invalid on some row, or equal to a
+    child's values or to an integer-constant atom's values, all of which are
+    already in the dedup set at a smaller size. Pools, offers and the program
+    found are therefore identical with or without this check; only wasted
+    evaluations disappear, for the cold control and the field alike.
+    """
+    v = [c[1] for c in combo]
+    if name == "ite":
+        cond = v[0]
+        if all(isinstance(x, int) and x > 0 for x in cond) or all(isinstance(x, int) and x <= 0 for x in cond):
+            return True  # uniform condition: result is the then- or else-branch
+        return v[1] == v[2]
+    if len(v) != 2:
+        return False
+    a, b = v
+    if name in ("div", "mod"):
+        if any(x == 0 for x in b):
+            return True  # division by zero on some row: invalid
+        if name == "div" and all(x == 1 for x in b):
+            return True  # div(a, 1) = a
+        if a == b:
+            return True  # 1 or 0 on every row: a constant atom
+        return False
+    if name in ("sub", "min", "max") and a == b:
+        return True  # 0 / a / a
+    if name in ("add", "sub") and all(x == 0 for x in b):
+        return True  # a + 0, a - 0
+    if name == "add" and all(x == 0 for x in a):
+        return True  # 0 + b
+    if name == "mul" and (all(x == 0 for x in a) or all(x == 0 for x in b)):
+        return True  # constant 0
+    if name == "mul" and (all(x == 1 for x in a) or all(x == 1 for x in b)):
+        return True  # a * 1, 1 * b
+    return False
+
+
 def _search_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list],
                 max_size: int, max_eval: int):
     """Bottom-up typed enumeration over public rows only, as a generator.
@@ -426,6 +467,8 @@ def _search_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 for combo in product(*lists):
                     if op.commutative and _key(combo[0][1]) > _key(combo[1][1]):
                         continue
+                    if _redundant(name, combo):
+                        continue
                     if evals >= max_eval:
                         return Search(None, evals, "candidate_budget", order)
                     evals += 1
@@ -475,7 +518,9 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     be beaten there) and only then spends the remaining budget on the cold
     order extended with library atoms, which is where certified sub-programs
     reach programs the cold search cannot. Order evidence still needs
-    family evidence, matching the GENESIS balance rule.
+    family evidence, matching the GENESIS balance rule. The library stage
+    resumes from the cold stage's pools (``_staged_gen``) rather than
+    restarting; see docs/WORLD.md "Cheaper search".
     """
     opset = OPSETS[task.opset]
     cold_order = tuple(opset)
@@ -489,12 +534,121 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
         return _drive(_search_gen(task, order, library, max_size, max_eval))
     if not library:
         return _drive(_search_gen(task, cold_order, {}, max_size, max_eval))
-    first = _drive(_search_gen(task, cold_order, {}, max(1, max_size - 1), max_eval))
-    if first.tree is not None or first.evaluations >= max_eval:
-        return first
-    rest = _drive(_search_gen(task, cold_order, library, max_size, max_eval - first.evaluations))
-    return Search(rest.tree, first.evaluations + rest.evaluations, rest.reason,
-                  rest.order, rest.library_used)
+    return _drive(_staged_gen(task, cold_order, library, max_size, max_eval))
+
+
+def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list],
+                max_size: int, max_eval: int):
+    """Staged transfer as one incremental search (a generator, like _search_gen).
+
+    Stage 1 is exactly the cold search below ``max_size`` (same order, same
+    pools, same evaluation count), so it can never be beaten there. Stage 2
+    adds the library atoms and *resumes* from stage 1's pools instead of
+    restarting: a combination whose children all came from stage 1 and whose
+    size is below ``max_size`` was already evaluated in stage 1 (and missed),
+    so only combinations that touch a stage-2 entry, plus the whole
+    ``max_size`` level, are evaluated. Reach is unchanged: a value first found
+    by stage 1 at size s that a library tree now reaches at a smaller size is
+    re-entered at that smaller size as a stage-2 entry, so every value of a
+    tree of size <= max_size over cold + library atoms is still enumerated.
+    Pure cost saving; no held-out task informs it.
+    """
+    rows = [r for r, _ in task.public]
+    goal = tuple(e for _, e in task.public)
+    # pools[sz][type] -> list of (tree, vals, fresh); fresh = entered in stage 2
+    pools: dict[int, dict[str, list[tuple[list, tuple, bool]]]] = {}
+    best: dict[tuple[str, str], int] = {}  # (type, value key) -> smallest size seen
+    evals = 0
+    stage1 = max(1, max_size - 1)
+
+    def offer(sz: int, tree: list, vals: tuple, fresh: bool) -> list | None:
+        t = type_of(vals[0]) if vals else "bad"
+        if t == "bad" or any(type_of(v) != t for v in vals):
+            return None
+        k = (t, _key(vals))
+        if k in best and best[k] <= sz:
+            return None
+        best[k] = sz
+        pools.setdefault(sz, {}).setdefault(t, []).append((tree, vals, fresh))
+        if t == task.out and vals == goal:
+            return tree
+        return None
+
+    def atom(a: list, fresh: bool):
+        nonlocal evals
+        evals += 1
+        try:
+            vals = tuple(run(a, r, library) for r in rows)
+        except Invalid:
+            return None
+        return offer(1, a, vals, fresh)
+
+    def level(sz: int, fresh_only: bool):
+        """Enumerate one size level; yields per evaluation, returns a hit or None."""
+        nonlocal evals
+        for name in order:
+            op = OPS[name]
+            for split in _compositions(sz - 1, len(op.args)):
+                lists = [list((pools.get(s_, {}).get(t) or [])) for s_, t in zip(split, op.args)]
+                if any(not l for l in lists):
+                    continue
+                for combo in product(*lists):
+                    if fresh_only and not any(c[2] for c in combo):
+                        continue
+                    if op.commutative and _key(combo[0][1]) > _key(combo[1][1]):
+                        continue
+                    if _redundant(name, combo):
+                        continue
+                    if evals >= max_eval:
+                        return "budget"
+                    evals += 1
+                    yield evals
+                    try:
+                        vals = tuple(op.fn(*args) for args in zip(*(c[1] for c in combo)))
+                        if any(type_of(v) != op.out for v in vals):
+                            continue
+                        if op.out == "str" and any(len(v) > MAX_STR for v in vals):
+                            continue
+                    except (Invalid, ValueError, TypeError, IndexError, OverflowError):
+                        continue
+                    hit = offer(sz, [name] + [c[0] for c in combo], vals, fresh_only or any(c[2] for c in combo))
+                    if hit is not None:
+                        return hit
+        return None
+
+    def done(hit):
+        libs = [s[1] for s in subtrees(hit) if s[0] == "lib"]
+        return Search(hit, evals, None, order, libs)
+
+    # stage 1: the cold search below max_size
+    for a in [["var", n] for n, _ in task.inputs] + [["const", c] for c in INT_CONSTANTS]:
+        if evals >= max_eval:
+            return Search(None, evals, "candidate_budget", order)
+        hit = atom(a, False)
+        yield evals
+        if hit is not None:
+            return done(hit)
+    for sz in range(2, stage1 + 1):
+        hit = yield from level(sz, fresh_only=False)
+        if hit == "budget":
+            return Search(None, evals, "candidate_budget", order)
+        if hit is not None:
+            return done(hit)
+    # stage 2: library atoms, resume
+    for n in library:
+        if evals >= max_eval:
+            return Search(None, evals, "candidate_budget", order)
+        hit = atom(["lib", n], True)
+        yield evals
+        if hit is not None:
+            return done(hit)
+    for sz in range(2, max_size + 1):
+        hit = yield from level(sz, fresh_only=sz <= stage1)
+        if hit == "budget":
+            return Search(None, evals, "candidate_budget", order)
+        if hit is not None:
+            return done(hit)
+    return Search(None, evals, "frontier", order)
 
 
 def _compositions(total: int, parts: int) -> list[tuple[int, ...]]:

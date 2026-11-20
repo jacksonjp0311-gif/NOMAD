@@ -1,5 +1,12 @@
 # NOMAD — Change History
 
+## Cheaper search (2026-11-20)
+
+- `world._redundant`: exact, evaluation-free skips of combinations that are provably invalid or duplicate (uniform-condition `ite`, divide by zero, `x-x`, `x+0`, `x*1`, ...). Same programs found on every task; applies to cold and field alike, so counts before/after are not comparable.
+- `world._staged_gen`: staged transfer resumes the library stage from the cold stage's pools instead of restarting.
+- LOFO: field = cold on all 16 families (total 5,883 each). absdiff back under its 10k budget: certified at 8,608 (cold not found at 10k; 21,264 unlimited). Was 19,982. quartic_sum 21,343 (cold unreachable); string/list held-outs still tie.
+- `nomad-watch`: a fresh but unreleased lease whose GitHub body run has finished is treated as orphaned and the body is re-dispatched (before, a crashed body fired the watch inside the 30-min stale window and nothing restarted it). Awake/sleep log a notice when parked behind a live body.
+
 ## Adaptive cold-stage experiment (2026-11-20)
 
 - Negative result, no behaviour change: sizing the cold stage adaptively cannot recover absdiff at 10k without breaking LOFO never-worse-than-cold (details in `docs/WORLD.md`). Added `scripts/lofo_stage_probe.py` (measurement only).

@@ -98,16 +98,17 @@ class LearningTests(unittest.TestCase):
                 self.assertLess(f.evaluations, c.evaluations)
 
     def test_new_heldout_family_absdiff_field_beats_control(self) -> None:
-        # Staged transfer pays the full cold shallow search first, so absdiff
-        # no longer fits the 10k probe budget; at 2x budget the field certifies
-        # while cold still cannot (honest trade-off, see docs/WORLD.md).
+        # Exact redundancy skips plus a resumed (not restarted) library stage
+        # bring the staged field back under the 10k probe budget; cold still
+        # cannot certify there. Measured, not tuned: no parameter reads absdiff.
         from nomad.world import evaluate
         from nomad.world_tasks import HELDOUT
-        t = HELDOUT["absdiff"]["task"]
-        c, _ = evaluate(t, max_eval=20000)
-        f, _ = evaluate(t, prior=self.field, use_family=False, max_eval=20000)
+        h = HELDOUT["absdiff"]
+        c, _ = evaluate(h["task"], max_eval=h["max_eval"])
+        f, _ = evaluate(h["task"], prior=self.field, use_family=False, max_eval=h["max_eval"])
         self.assertFalse(c.certified)
         self.assertTrue(f.certified)
+        self.assertLessEqual(f.evaluations, h["max_eval"])
 
     def test_staged_transfer_never_worse_than_cold_on_unfamiliar_shallow(self) -> None:
         from nomad.world import evaluate
@@ -182,3 +183,78 @@ class WorldLoopTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SearchCostTests(unittest.TestCase):
+    """Cheaper search must not change what search finds."""
+
+    def test_redundant_skip_is_exact(self) -> None:
+        import random
+        from nomad.world import INT_CONSTANTS, OPS, Invalid, _redundant
+        rng = random.Random(7)
+        consts = {tuple([k] * 4) for k in INT_CONSTANTS}
+        pick = lambda: tuple(rng.choice([-3, -1, 0, 0, 1, 1, 2, 5]) for _ in range(4))
+        skipped = 0
+        for _ in range(20000):
+            name = rng.choice(["add", "sub", "mul", "div", "mod", "min", "max", "ite"])
+            k = len(OPS[name].args)
+            vals = [pick() for _ in range(k)]
+            if rng.random() < 0.2 and k >= 2:
+                vals[-1] = vals[-2]
+            combo = [(None, v) for v in vals]
+            if not _redundant(name, combo):
+                continue
+            skipped += 1
+            try:
+                out = tuple(OPS[name].fn(*args) for args in zip(*vals))
+            except Invalid:
+                continue
+            self.assertTrue(out in vals or out in consts, (name, vals, out))
+        self.assertGreater(skipped, 1000)
+
+    def test_skip_leaves_found_programs_unchanged(self) -> None:
+        import nomad.world as W
+        from nomad.world_tasks import HELDOUT, all_training
+        tasks = list(all_training()) + [h["task"] for n, h in HELDOUT.items() if n != "quartic_sum"]
+        on = {t.task_id: W.synthesize(t, max_eval=40000) for t in tasks}
+        real = W._redundant
+        W._redundant = lambda name, combo: False
+        try:
+            off = {t.task_id: W.synthesize(t, max_eval=40000) for t in tasks}
+        finally:
+            W._redundant = real
+        for t in tasks:
+            with self.subTest(task=t.task_id):
+                a, b = on[t.task_id], off[t.task_id]
+                self.assertEqual(a.tree, b.tree)
+                self.assertLessEqual(a.evaluations, b.evaluations)
+
+    def test_resumed_stage_reaches_what_a_restart_reaches(self) -> None:
+        # Stage 2 resumes from stage 1 pools; it must still find a program
+        # whenever restarting the library search from scratch finds one.
+        import nomad.world as W
+        from nomad.world_tasks import HELDOUT, all_training
+        field = _train()
+        for t in list(all_training()) + [h["task"] for h in HELDOUT.values()]:
+            lib = field.primitives_for(t.inputs)
+            if not lib:
+                continue
+            order = tuple(W.OPSETS[t.opset])
+            with self.subTest(task=t.task_id):
+                restart = W._drive(W._search_gen(t, order, lib, 7, 200000))
+                staged = W._drive(W._staged_gen(t, order, lib, 7, 200000))
+                self.assertEqual(restart.tree is not None, staged.tree is not None)
+
+    def test_leave_one_family_out_staged_never_worse_than_cold(self) -> None:
+        from nomad.world import synthesize
+        from nomad.world_tasks import all_training
+        ts = all_training()
+        for fam in sorted({t.family for t in ts}):
+            p = _train({x.family for x in ts if x.family != fam})
+            for t in [x for x in ts if x.family == fam]:
+                with self.subTest(family=fam):
+                    c = synthesize(t, max_eval=20000)
+                    f = synthesize(t, prior=p, max_eval=20000)
+                    self.assertEqual(c.tree is not None, True)
+                    self.assertIsNotNone(f.tree)
+                    self.assertLessEqual(f.evaluations, c.evaluations)
