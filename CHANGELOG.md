@@ -1,5 +1,13 @@
 # NOMAD — Change History
 
+## Variation operator, novelty reward, payoff memory (2026-11-20)
+
+- `nomad/variation.py`: one-step mutants of certified patterns (`op_swap`, `const_flip`, `var_swap`, `reorder`); bounded novelty archive (cap 48; score = fitness + 0.5 x behavioural novelty on fixed probe inputs; novel zero-fitness mutants kept); per-situation payoff memory (Laplace, pooled prior) that orders mutation kinds. Persisted at `data/continuous/variation.json` (+ `.prev`), checkpointed with the field.
+- `world.synthesize/evaluate(variation=...)`: field arm only. Unfamiliar families try at most 32 mutants after the cold stage 1 misses; familiar ones only after a failed search, with leftover budget. Mutants must pass WITNESS like any program. The cold control never reads variation state.
+- `world_loop.world_pair`: bounded awake exploration (12 mutants, outside the twin); trace rides in the packet. `consolidate` is the only writer: re-attests every paid mutant, refuses held-out families. `NOMAD_VARIATION=off` disables it.
+- Measured (`scripts/variation_probe.py`): LOFO 5,883 = cold before and after (worst 1.0x). Held-outs: no gain yet; absdiff 8,608 -> 8,640, quartic_sum 21,343 -> 21,375, string/list ties. Twin unchanged (offline 4,538 vs cold 5,883). Exploration paid 4 re-attested mutants in the offline 2-round run and 3 in a 48-pair dry run on a copy of live data. See `docs/VARIATION.md`.
+- Tests: `tests/test_variation.py` (20).
+
 ## Revert drill in CI (2026-11-20)
 
 - `tests/test_revert_drill.py` runs both drill scenarios (regressed -> `nomad-revert` pushed to a throwaway origin; healthy -> keep) on every CI run. ~4 s; live main never touched.

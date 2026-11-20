@@ -97,6 +97,9 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
     prior, prior_source = load_prior_safe()
     from .world_loop import load_world_prior, save_world_prior
     wprior = load_world_prior()
+    from . import variation as _var
+    vstate = _var.load_state()
+    var_applied = 0
     world_applied = 0
     dropped: dict[str, int] = defaultdict(int)
     applied: list[dict[str, Any]] = []
@@ -109,6 +112,26 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
         seen.add(pid)
         if p.get("arm") != "treatment":
             dropped["not_treatment"] += 1
+            continue
+        extra = p.get("extra") or {}
+        if not p.get("certified") and extra.get("world") == "variation" and isinstance(extra.get("variation"), dict):
+            # Uncertified variation trace: tried counts and novelty only. The
+            # learner re-attests any "paid" mutant itself; nothing is certified here.
+            ok, _, reason = policy.decide(current - int(p.get("field_version", 0)))
+            if not ok:
+                dropped[reason or "stale"] += 1
+                continue
+            fam = extra.get("family")
+            lib: list = []
+            from .world_tasks import by_family
+            t = by_family(fam) if isinstance(fam, str) else None
+            if t is not None:
+                lib = _var.library_trees(wprior, t.inputs)
+            res = _var.apply_trace(vstate, {**extra["variation"], "family": fam}, library=lib)
+            if res.get("refused"):
+                dropped["variation_refused"] += 1
+            else:
+                var_applied += 1
             continue
         if not p.get("certified"):
             dropped["uncertified"] += 1
@@ -133,6 +156,17 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
                 continue
             world_applied += 1
             applied.append({"packet_id": pid, "task": p.get("task"), "lag": lag, "weight": weight, "world": True})
+            # Variation: the receipt-verified tree becomes an elite source; any
+            # trace updates payoff memory and the novelty archive.
+            fam = extra.get("family")
+            trace = extra.get("variation") if isinstance(extra.get("variation"), dict) else {}
+            from .world_tasks import by_family
+            t = by_family(fam) if isinstance(fam, str) else None
+            if t is not None:
+                res = _var.apply_trace(vstate, {**trace, "family": fam}, certified_tree=extra["tree"],
+                                       library=_var.library_trees(wprior, t.inputs))
+                if not res.get("refused"):
+                    var_applied += 1
             continue
         try:
             prior.add_witnessed(int(p.get("context_sig", 0)), p.get("candidate") or "", receipt,
@@ -172,6 +206,9 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
     if world_applied:
         wprior.decay(gamma)
         save_world_prior(wprior)
+    if var_applied:
+        vstate.decay(gamma)
+        _var.save_state(vstate)
     if applied:
         new_version = field_queue.bump_version(f"consolidated {len(applied)} packet(s)")
     field_queue.ack()
@@ -185,6 +222,8 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
         "prior_witnessed": prior.witnessed,
         "world_applied": world_applied,
         "world_witnessed": wprior.witnessed,
+        "variation_applied": var_applied,
+        "variation_archive": len(vstate.archive),
         "decay": gamma if applied else None,
         "policy": {"max_lag": policy.max_lag, "mode": policy.mode, "decay": policy.decay,
                    "min_weight": policy.min_weight},

@@ -359,6 +359,8 @@ class Search:
     reason: str | None
     order: tuple[str, ...] = ()
     library_used: list[str] = field(default_factory=list)
+    via: str | None = None                                  # "variation:<kind>" when a mutant hit
+    variation: list[dict] = field(default_factory=list)     # mutants tried (kind, tree, fitness)
 
 
 def _key(vals: tuple) -> str:
@@ -504,7 +506,7 @@ def familiar(prior: WorldPrior | None, family: str | None) -> bool:
 
 def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bool = True,
                use_library: bool = True, max_size: int = 7, max_eval: int = 20000,
-               staged: bool = True) -> Search:
+               staged: bool = True, variation: Any = None) -> Search:
     """Search with the cold order, the field, or a staged transfer.
 
     On a familiar family (one the field has certified before) the field's own
@@ -525,20 +527,80 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     opset = OPSETS[task.opset]
     cold_order = tuple(opset)
     if prior is None:
+        # The twin cold control: never reads variation state.
         return _drive(_search_gen(task, cold_order, {}, max_size, max_eval))
     fam = task.family if use_family else None
     order = prior.order(opset, fam)
     lib_ok = use_library and prior.wants_library(fam)
     library = prior.primitives_for(task.inputs) if lib_ok else {}
+    mut = _variation_candidates(task, prior, variation, fam)
     if not staged or familiar(prior, fam):
-        return _drive(_search_gen(task, order, library, max_size, max_eval))
+        s = _drive(_search_gen(task, order, library, max_size, max_eval))
+        return _variation_fallback(task, s, mut, max_eval)
     if not library:
-        return _drive(_search_gen(task, cold_order, {}, max_size, max_eval))
-    return _drive(_staged_gen(task, cold_order, library, max_size, max_eval))
+        s = _drive(_search_gen(task, cold_order, {}, max_size, max_eval))
+        return _variation_fallback(task, s, mut, max_eval)
+    return _drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut))
+
+
+def _variation_candidates(task: WorldTask, prior: WorldPrior, variation: Any,
+                          family: str | None) -> list[tuple[str, list]]:
+    """Bounded, memory-ordered mutants of certified patterns (field arm only)."""
+    if variation is None:
+        return []
+    from .variation import SEARCH_TRIES
+    lib = [expand(t, prior.library) for t in prior.primitives_for(task.inputs).values()]
+    srcs = variation.sources(task, lib, exclude_family=family)
+    return variation.candidates(task, srcs, SEARCH_TRIES)
+
+
+def _variation_stage(task: WorldTask, mut: list[tuple[str, list]], evals: int, max_eval: int):
+    """Try mutants as whole programs on the public rows; 1 evaluation each.
+
+    Generator like the searches. Returns (hit tree, kind, evals, tried rows).
+    """
+    rows = [r for r, _ in task.public]
+    goal = tuple(e for _, e in task.public)
+    tried: list[dict] = []
+    for kind, t in mut:
+        if evals >= max_eval:
+            break
+        evals += 1
+        yield evals
+        try:
+            vals = tuple(run(t, r) for r in rows)
+        except Invalid:
+            tried.append({"kind": kind, "tree": t, "fitness": 0.0})
+            continue
+        fit = sum(1 for v, g in zip(vals, goal) if v == g and type_of(v) == task.out) / max(1, len(goal))
+        tried.append({"kind": kind, "tree": t, "fitness": round(fit, 4)})
+        if fit == 1.0:
+            return t, kind, evals, tried
+    return None, None, evals, tried
+
+
+def _variation_fallback(task: WorldTask, s: Search, mut: list[tuple[str, list]], max_eval: int) -> Search:
+    """After a failed search, spend only the budget it left unused on mutants.
+
+    A search that found a program is returned untouched, so this can never
+    cost more than the search alone did on anything that search solves.
+    """
+    if s.tree is not None or not mut or s.evaluations >= max_eval:
+        return s
+    g = _variation_stage(task, mut, s.evaluations, max_eval)
+    while True:
+        try:
+            next(g)
+        except StopIteration as stop:
+            hit, kind, evals, tried = stop.value
+            break
+    if hit is not None:
+        return Search(hit, evals, None, s.order, [], f"variation:{kind}", tried)
+    return Search(None, evals, s.reason, s.order, s.library_used, None, tried)
 
 
 def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list],
-                max_size: int, max_eval: int):
+                max_size: int, max_eval: int, variation: list[tuple[str, list]] | None = None):
     """Staged transfer as one incremental search (a generator, like _search_gen).
 
     Stage 1 is exactly the cold search below ``max_size`` (same order, same
@@ -616,9 +678,11 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                         return hit
         return None
 
+    tried: list[dict] = []
+
     def done(hit):
         libs = [s[1] for s in subtrees(hit) if s[0] == "lib"]
-        return Search(hit, evals, None, order, libs)
+        return Search(hit, evals, None, order, libs, None, tried)
 
     # stage 1: the cold search below max_size
     for a in [["var", n] for n, _ in task.inputs] + [["const", c] for c in INT_CONSTANTS]:
@@ -634,10 +698,16 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             return Search(None, evals, "candidate_budget", order)
         if hit is not None:
             return done(hit)
+    # stage 1.5: mutants of certified patterns (bounded, memory-ordered).
+    # Only reached when the cold search below max_size has missed.
+    if variation:
+        vhit, vkind, evals, tried = yield from _variation_stage(task, variation, evals, max_eval)
+        if vhit is not None:
+            return Search(vhit, evals, None, order, [], f"variation:{vkind}", tried)
     # stage 2: library atoms, resume
     for n in library:
         if evals >= max_eval:
-            return Search(None, evals, "candidate_budget", order)
+            return Search(None, evals, "candidate_budget", order, [], None, tried)
         hit = atom(["lib", n], True)
         yield evals
         if hit is not None:
@@ -645,10 +715,10 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
     for sz in range(2, max_size + 1):
         hit = yield from level(sz, fresh_only=sz <= stage1)
         if hit == "budget":
-            return Search(None, evals, "candidate_budget", order)
+            return Search(None, evals, "candidate_budget", order, [], None, tried)
         if hit is not None:
             return done(hit)
-    return Search(None, evals, "frontier", order)
+    return Search(None, evals, "frontier", order, [], None, tried)
 
 
 def _compositions(total: int, parts: int) -> list[tuple[int, ...]]:
@@ -688,6 +758,8 @@ class WorldEvaluation:
     reason: str | None
     order: tuple[str, ...]
     library_used: tuple[str, ...]
+    via: str | None = None
+    variation: tuple = ()
 
     @property
     def certified(self) -> bool:
@@ -695,25 +767,27 @@ class WorldEvaluation:
 
 
 def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bool = True,
-             use_library: bool = True, max_size: int = 7, max_eval: int = 20000
-             ) -> tuple[WorldEvaluation, WitnessReceipt | None]:
+             use_library: bool = True, max_size: int = 7, max_eval: int = 20000,
+             variation: Any = None) -> tuple[WorldEvaluation, WitnessReceipt | None]:
     library = (prior.primitives_for(task.inputs)
                if (prior is not None and use_library and prior.wants_library(task.family if use_family else None))
                else {})
     s = synthesize(task, prior=prior, use_family=use_family, use_library=use_library,
-                   max_size=max_size, max_eval=max_eval)
+                   max_size=max_size, max_eval=max_eval, variation=variation)
+    vt = tuple(s.variation)
     if s.tree is None:
         return WorldEvaluation(task.task_id, task.family, None, None, False, False, False,
-                               s.evaluations, s.reason, s.order, ()), None
+                               s.evaluations, s.reason, s.order, (), None, vt), None
     # Certify the standalone program: library calls are inlined first.
+    # A mutant only fits the public rows; WITNESS decides here like for any program.
     tree = expand(s.tree, library)
     receipt, public_ok, final_ok = certify(task, tree)
     if receipt is None:
         return WorldEvaluation(task.task_id, task.family, render(tree), tree, False, False, False,
-                               s.evaluations, "invalid_on_rows", s.order, tuple(s.library_used)), None
+                               s.evaluations, "invalid_on_rows", s.order, tuple(s.library_used), s.via, vt), None
     return WorldEvaluation(task.task_id, task.family, render(tree), tree, public_ok,
                            receipt.supported, final_ok, s.evaluations, None, s.order,
-                           tuple(s.library_used)), receipt
+                           tuple(s.library_used), s.via, vt), receipt
 
 
 def certify(task: WorldTask, tree: list) -> tuple[WitnessReceipt | None, bool, bool]:

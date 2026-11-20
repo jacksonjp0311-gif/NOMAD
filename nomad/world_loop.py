@@ -15,7 +15,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from . import field_queue
+from . import field_queue, variation
 from .curriculum import choose
 from .paths import data_root
 from .scoreboard import record_arm, recent as board_recent
@@ -65,22 +65,50 @@ def world_pair(domain: str | None = None) -> dict[str, Any]:
     record_arm(key, "control", control.certified, kind="world-certified", pair_id=pair_id,
                field_version=version, evaluations=control.evaluations)
     field = load_world_prior()
-    treat, receipt = evaluate(task, prior=field)
+    vstate = variation.load_state() if variation.enabled() else None
+    treat, receipt = evaluate(task, prior=field, variation=vstate)
+    # Awake exploration (actor): bounded mutants of other families' certified
+    # patterns on this training task. Reported separately; never part of the twin.
+    explored = (variation.explore(task, vstate, variation.library_trees(field, task.inputs))
+                if vstate is not None else None)
+    trace = None
+    if explored is not None:
+        paid = list(explored["paid"])
+        if treat.certified and treat.via:
+            paid.append({"kind": treat.via.split(":", 1)[1], "tree": treat.tree})
+        trace = {"family": task.family, "situation": explored["situation"],
+                 "tried": list(treat.variation) + explored["tried"], "paid": paid}
     out: dict[str, Any] = {
         "mode": "world_pair", "pair_id": pair_id, "family": task.family, "level": task.level,
         "domain": domain_of(task.family), "plan": {k: plan[k] for k in ("open_levels", "chosen", "level")},
         "control": {"certified": control.certified, "evaluations": control.evaluations, "candidate": control.candidate},
         "treatment": {"certified": treat.certified, "evaluations": treat.evaluations, "candidate": treat.candidate,
-                      "order": list(treat.order), "library_used": list(treat.library_used)},
+                      "order": list(treat.order), "library_used": list(treat.library_used),
+                      "via": treat.via, "variation_tried": len(treat.variation)},
         "field_version": version, "ts": _now(),
     }
+    if explored is not None:
+        out["variation"] = {"situation": explored["situation"], "explore_evaluations": explored["evaluations"],
+                            "explore_paid": len(explored["paid"]),
+                            "note": "exploration is outside the twin comparison"}
     if treat.certified and receipt is not None:
         packet = field_queue.make_packet(
             task=key, arm="treatment", field_version=version, certified=True,
             candidate=treat.candidate, context_sig=0, receipt=receipt, pair_id=pair_id,
             measured="witness_and_final", domain=None,
             extra={"world": "typed", "tree": treat.tree, "family": task.family,
-                   "opset": task.opset, "inputs": [list(i) for i in task.inputs]},
+                   "opset": task.opset, "inputs": [list(i) for i in task.inputs],
+                   **({"variation": trace} if trace else {})},
+        )
+        out["enqueued"] = {"packet_id": packet["packet_id"], **field_queue.enqueue(packet)}
+    elif trace and trace["tried"]:
+        # Uncertified treatment: the trace alone goes to the learner. It can
+        # only lower payoff rates or add novelty stepping stones; the learner
+        # re-attests every "paid" row itself.
+        packet = field_queue.make_packet(
+            task=key, arm="treatment", field_version=version, certified=False, candidate=None,
+            context_sig=0, pair_id=pair_id, measured="variation_trace",
+            extra={"world": "variation", "family": task.family, "variation": trace},
         )
         out["enqueued"] = {"packet_id": packet["packet_id"], **field_queue.enqueue(packet)}
     row = record_arm(key, "treatment", treat.certified, kind="world-certified", pair_id=pair_id,
@@ -92,21 +120,29 @@ def world_pair(domain: str | None = None) -> dict[str, Any]:
     return out
 
 
-def probe_heldout(field: WorldPrior | None = None, write: bool = True) -> dict[str, Any]:
-    """Cold vs field on every never-trained family at its fixed budget."""
-    field = field if field is not None else load_world_prior()
+def probe_heldout(field: WorldPrior | None = None, write: bool = True, vstate: Any = None) -> dict[str, Any]:
+    """Cold vs field on every never-trained family at its fixed budget.
+
+    With no field given, the live field and the live variation state are used
+    (read-only). Probe results are never enqueued: held-outs never train.
+    """
+    if field is None:
+        field = load_world_prior()
+        if vstate is None and variation.enabled():
+            vstate = variation.load_state()
     rows = {}
     for name, h in HELDOUT.items():
         t = h["task"]
         c, _ = evaluate(t, prior=None, max_eval=h["max_eval"], max_size=h["max_size"])
-        f, _ = evaluate(t, prior=field, use_family=False, max_eval=h["max_eval"], max_size=h["max_size"])
+        f, _ = evaluate(t, prior=field, use_family=False, max_eval=h["max_eval"], max_size=h["max_size"],
+                        variation=vstate)
         win_cert = f.certified and not c.certified
         win_cost = f.certified and c.certified and f.evaluations < c.evaluations
         rows[name] = {
             "needs": h["needs"], "max_eval": h["max_eval"],
             "cold": {"certified": c.certified, "evaluations": c.evaluations},
             "field": {"certified": f.certified, "evaluations": f.evaluations, "candidate": f.candidate,
-                      "library_used": list(f.library_used)},
+                      "library_used": list(f.library_used), "via": f.via},
             "field_beats_control": bool(win_cert or win_cost),
             "kind": "certified_correctness" if win_cert else "evaluations" if win_cost else "none",
         }
