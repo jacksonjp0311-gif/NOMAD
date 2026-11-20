@@ -1,248 +1,18 @@
 {
   "sense": {
-    "ts": "2026-11-19T21:46:08Z",
-    "uptime": 1795124768.8889067,
-    "packets": 19,
+    "ts": "2026-11-20T01:02:47Z",
+    "uptime": 1795136567.0480957,
+    "packets": 20,
     "fitness": {
-      "success": 7.0,
-      "cycles": 7.0
+      "success": 8.0,
+      "cycles": 8.0
     }
   },
   "fitness": {
-    "success": 7.0,
-    "cycles": 7.0
+    "success": 8.0,
+    "cycles": 8.0
   },
   "recent_bus": [
-    {
-      "to": "keeper",
-      "message": {
-        "ts": "2026-11-19T20:04:01Z",
-        "measurement": {
-          "ts": "2026-11-19T20:04:01Z",
-          "uptime": 1795118641.14294,
-          "packets": 5,
-          "fitness": {
-            "success": 3.0,
-            "cycles": 3.0
-          }
-        }
-      },
-      "ts": "2026-11-19T20:04:01Z"
-    },
-    {
-      "to": "keeper",
-      "message": {
-        "mode": "awake",
-        "arm": "treatment",
-        "task": "packet:packet:packet:packet:minimal-variant-variant-variant-variant",
-        "proposal": {
-          "task": "packet:packet:packet:packet:minimal-variant-variant-variant-variant",
-          "reason": "reinforce recent success",
-          "source": "sim"
-        },
-        "context": [
-          {
-            "overlap": 0,
-            "count": 1,
-            "label": "minimal",
-            "size": 8,
-            "receipt": {
-              "predicted": "public success",
-              "measured": "public_correct",
-              "context": {}
-            }
-          },
-          {
-            "overlap": 0,
-            "count": 1,
-            "label": "minimal",
-            "size": 8,
-            "receipt": {
-              "predicted": "public success",
-              "measured": "public_correct",
-              "context": {}
-            }
-          },
-          {
-            "overlap": 0,
-            "count": 1,
-            "label": "packet:minimal-variant",
-            "size": 30,
-            "receipt": {
-              "predicted": "reinforce recent success",
-              "measured": "public_correct",
-              "context": {
-                "task": "packet:minimal-variant",
-                "arm": "treatment",
-                "proposal": {
-                  "task": "packet:minimal-variant",
-                  "reason": "reinforce recent success",
-                  "source": "sim"
-                }
-              }
-            }
-          },
-          {
-            "overlap": 0,
-            "count": 1,
-            "label": "packet:packet:minimal-variant-variant",
-            "size": 30,
-            "receipt": {
-              "predicted": "reinforce recent success",
-              "measured": "public_correct",
-              "context": {
-                "task": "packet:packet:minimal-variant-variant",
-                "arm": "treatment",
-                "proposal": {
-                  "task": "packet:packet:minimal-variant-variant",
-                  "reason": "reinforce recent success",
-                  "source": "sim"
-                }
-              }
-            }
-          },
-          {
-            "overlap": 0,
-            "count": 1,
-            "label": "packet:packet:packet:minimal-variant-variant-variant",
-            "size": 30,
-            "receipt": {
-              "predicted": "reinforce recent success",
-              "measured": "public_correct",
-              "context": {
-                "task": "packet:packet:packet:minimal-variant-variant-variant",
-                "arm": "treatment",
-                "proposal": {
-                  "task": "packet:packet:packet:minimal-variant-variant-variant",
-                  "reason": "reinforce recent success",
-                  "source": "sim"
-                },
-                "bias": {
-                  "operator": null,
-                  "examples": "add",
-                  "reason": "default",
-                  "overlap": 0
-                }
-              }
-            }
-          }
-        ],
-        "bias": {
-          "operator": "Add",
-          "examples": "add",
-          "reason": "successful packet present",
-          "overlap": 0
-        },
-        "operator_order": [
-          "Add",
-          "Sub",
-          "Mult"
-        ],
-        "sim_history": [
-          {
-            "ts": "2026-11-19T06:40:19Z",
-            "edit": "minimal-cycle",
-            "predicted": "public success",
-            "measured": "minimal",
-            "context": {
-              "mode": "awake"
-            }
-          },
-          {
-            "ts": "2026-11-19T06:40:19Z",
-            "edit": "packet:minimal",
-            "predicted": "public success",
-            "measured": "public_correct",
-            "context": {}
-          },
-          {
-            "ts": "2026-11-19T06:43:15Z",
-            "edit": "minimal-cycle",
-            "predicted": "public success",
-            "measured": "minimal",
-            "context": {
-              "mode": "awake"
-            }
-          },
-          {
-            "ts": "2026-11-19T06:43:15Z",
-            "edit": "packet:minimal",
-            "predicted": "public success",
-            "measured": "public_correct",
-            "context": {}
-          },
-          {
-            "ts": "2026-11-19T11:21:12Z",
-            "edit": "packet:packet:minimal-variant",
-            "predicted": "reinforce recent success",
-            "measured": "public_correct",
-            "context": {
-              "task": "packet:minimal-variant",
-              "arm": "treatment"
-            }
-          },
-          {
-            "ts": "2026-11-19T11:21:12Z",
-            "edit": "packet:packet:minimal-variant",
-            "predicted": "reinforce recent success",
-            "measured": "public_correct",
-            "context": {
-              "task": "packet:minimal-variant",
-              "arm": "treatment",
-              "proposal": {
-                "task": "packet:minimal-variant",
-                "reason": "reinforce recent success",
-                "source": "sim"
-              }
-            }
-          },
-          {
-            "ts": "2026-11-19T11:32:45Z",
-            "edit": "packet:packet:packet:minimal-variant-variant",
-            "predicted": "reinforce recent success",
-            "measured": "public_correct",
-            "context": {
-              "task": "packet:packet:minimal-variant-variant",
-              "arm": "treatment"
-            }
-          },
-          {
-            "ts": "2026-11-19T20:02:39Z",
-            "edit": "packet:packet:packet:packet:minimal-variant-variant-variant",
-            "predicted": "reinforce recent success",
-            "measured": "public_correct",
-            "context": {
-              "task": "packet:packet:packet:minimal-variant-variant-variant",
-              "arm": "treatment",
-              "bias": {
-                "operator": null,
-                "examples": "add",
-                "reason": "default",
-                "overlap": 0
-              }
-            }
-          }
-        ],
-        "candidate": "(x+y)",
-        "public_correct": true,
-        "abstained": null,
-        "telemetry": {
-          "ts": "2026-11-19T20:04:01Z",
-          "uptime": 1795118641.14294,
-          "packets": 5,
-          "fitness": {
-            "success": 3.0,
-            "cycles": 3.0
-          }
-        },
-        "ts": "2026-11-19T20:04:01Z",
-        "gate": {
-          "pass": true,
-          "reason": "public_correct"
-        }
-      },
-      "ts": "2026-11-19T20:04:01Z"
-    },
     {
       "to": "keeper",
       "message": {
@@ -1392,25 +1162,344 @@
         }
       },
       "ts": "2026-11-19T21:46:08Z"
+    },
+    {
+      "to": "keeper",
+      "message": {
+        "ts": "2026-11-20T01:02:47Z",
+        "measurement": {
+          "ts": "2026-11-20T01:02:47Z",
+          "uptime": 1795136567.0391917,
+          "packets": 19,
+          "fitness": {
+            "success": 7.0,
+            "cycles": 7.0
+          }
+        }
+      },
+      "ts": "2026-11-20T01:02:47Z"
+    },
+    {
+      "to": "keeper",
+      "message": {
+        "mode": "awake",
+        "arm": "treatment",
+        "task": "domain:mathematics",
+        "proposal": {
+          "task": "domain:mathematics",
+          "reason": "exercise domain",
+          "source": "field",
+          "domain": "mathematics"
+        },
+        "context": [
+          {
+            "overlap": 2,
+            "count": 1,
+            "label": "domain:reasoning",
+            "size": 30,
+            "receipt": {
+              "predicted": "domain prior",
+              "measured": "seeded",
+              "context": {
+                "source": "seed",
+                "domain": "reasoning",
+                "operator": "Mult",
+                "examples": "mult"
+              }
+            },
+            "orbit": true
+          },
+          {
+            "overlap": 1,
+            "count": 1,
+            "label": "domain:logic",
+            "size": 30,
+            "receipt": {
+              "predicted": "domain prior",
+              "measured": "seeded",
+              "context": {
+                "source": "seed",
+                "domain": "logic",
+                "operator": "Add",
+                "examples": "add"
+              }
+            },
+            "orbit": true
+          },
+          {
+            "overlap": 0,
+            "count": 1,
+            "label": "minimal",
+            "size": 8,
+            "receipt": {
+              "predicted": "public success",
+              "measured": "public_correct",
+              "context": {}
+            },
+            "orbit": true
+          },
+          {
+            "overlap": 0,
+            "count": 1,
+            "label": "minimal",
+            "size": 8,
+            "receipt": {
+              "predicted": "public success",
+              "measured": "public_correct",
+              "context": {}
+            },
+            "orbit": true
+          },
+          {
+            "overlap": 0,
+            "count": 1,
+            "label": "packet:minimal-variant",
+            "size": 30,
+            "receipt": {
+              "predicted": "reinforce recent success",
+              "measured": "public_correct",
+              "context": {
+                "task": "packet:minimal-variant",
+                "arm": "treatment",
+                "proposal": {
+                  "task": "packet:minimal-variant",
+                  "reason": "reinforce recent success",
+                  "source": "sim"
+                }
+              }
+            },
+            "orbit": true
+          },
+          {
+            "overlap": 0,
+            "count": 1,
+            "label": "packet:packet:minimal-variant-variant",
+            "size": 30,
+            "receipt": {
+              "predicted": "reinforce recent success",
+              "measured": "public_correct",
+              "context": {
+                "task": "packet:packet:minimal-variant-variant",
+                "arm": "treatment",
+                "proposal": {
+                  "task": "packet:packet:minimal-variant-variant",
+                  "reason": "reinforce recent success",
+                  "source": "sim"
+                }
+              }
+            },
+            "orbit": true
+          },
+          {
+            "overlap": 0,
+            "count": 1,
+            "label": "packet:packet:packet:minimal-variant-variant-variant",
+            "size": 30,
+            "receipt": {
+              "predicted": "reinforce recent success",
+              "measured": "public_correct",
+              "context": {
+                "task": "packet:packet:packet:minimal-variant-variant-variant",
+                "arm": "treatment",
+                "proposal": {
+                  "task": "packet:packet:packet:minimal-variant-variant-variant",
+                  "reason": "reinforce recent success",
+                  "source": "sim"
+                },
+                "bias": {
+                  "operator": null,
+                  "examples": "add",
+                  "reason": "default",
+                  "overlap": 0
+                }
+              }
+            },
+            "orbit": true
+          },
+          {
+            "overlap": 0,
+            "count": 1,
+            "label": "packet:packet:packet:packet:minimal-variant-variant-variant-variant",
+            "size": 30,
+            "receipt": {
+              "predicted": "reinforce recent success",
+              "measured": "public_correct",
+              "context": {
+                "task": "packet:packet:packet:packet:minimal-variant-variant-variant-variant",
+                "arm": "treatment",
+                "proposal": {
+                  "task": "packet:packet:packet:packet:minimal-variant-variant-variant-variant",
+                  "reason": "reinforce recent success",
+                  "source": "sim"
+                },
+                "bias": {
+                  "operator": "Add",
+                  "examples": "add",
+                  "reason": "successful packet present",
+                  "overlap": 0
+                }
+              }
+            },
+            "orbit": true
+          }
+        ],
+        "bias": {
+          "operator": "Mult",
+          "examples": "mult",
+          "reason": "domain:reasoning",
+          "overlap": 2,
+          "label": "domain:reasoning"
+        },
+        "tool": {
+          "domain": "reasoning",
+          "tool": "measure_consistency",
+          "reason": "domain:reasoning"
+        },
+        "operator_order": [
+          "Add",
+          "Sub",
+          "Mult"
+        ],
+        "sim_history": [
+          {
+            "ts": "2026-11-19T11:21:12Z",
+            "edit": "packet:packet:minimal-variant",
+            "predicted": "reinforce recent success",
+            "measured": "public_correct",
+            "context": {
+              "task": "packet:minimal-variant",
+              "arm": "treatment"
+            }
+          },
+          {
+            "ts": "2026-11-19T11:21:12Z",
+            "edit": "packet:packet:minimal-variant",
+            "predicted": "reinforce recent success",
+            "measured": "public_correct",
+            "context": {
+              "task": "packet:minimal-variant",
+              "arm": "treatment",
+              "proposal": {
+                "task": "packet:minimal-variant",
+                "reason": "reinforce recent success",
+                "source": "sim"
+              }
+            }
+          },
+          {
+            "ts": "2026-11-19T11:32:45Z",
+            "edit": "packet:packet:packet:minimal-variant-variant",
+            "predicted": "reinforce recent success",
+            "measured": "public_correct",
+            "context": {
+              "task": "packet:packet:minimal-variant-variant",
+              "arm": "treatment"
+            }
+          },
+          {
+            "ts": "2026-11-19T20:02:39Z",
+            "edit": "packet:packet:packet:packet:minimal-variant-variant-variant",
+            "predicted": "reinforce recent success",
+            "measured": "public_correct",
+            "context": {
+              "task": "packet:packet:packet:minimal-variant-variant-variant",
+              "arm": "treatment",
+              "bias": {
+                "operator": null,
+                "examples": "add",
+                "reason": "default",
+                "overlap": 0
+              }
+            }
+          },
+          {
+            "ts": "2026-11-19T20:04:01Z",
+            "edit": "packet:packet:packet:packet:packet:minimal-variant-variant-variant-variant",
+            "predicted": "reinforce recent success",
+            "measured": "public_correct",
+            "context": {
+              "task": "packet:packet:packet:packet:minimal-variant-variant-variant-variant",
+              "arm": "treatment",
+              "bias": {
+                "operator": "Add",
+                "examples": "add",
+                "reason": "successful packet present",
+                "overlap": 0
+              }
+            }
+          },
+          {
+            "ts": "2026-11-19T20:08:05Z",
+            "edit": "packet:packet:packet:packet:packet:packet:minimal-variant-variant-variant-variant-variant",
+            "predicted": "reinforce recent success",
+            "measured": "public_correct",
+            "context": {
+              "task": "packet:packet:packet:packet:packet:minimal-variant-variant-variant-variant-variant",
+              "arm": "treatment",
+              "bias": {
+                "operator": "Mult",
+                "examples": "mult",
+                "reason": "non-minimal packet",
+                "overlap": 2
+              }
+            }
+          },
+          {
+            "ts": "2026-11-19T20:26:59Z",
+            "edit": "packet:packet:packet:packet:packet:packet:packet:minimal-variant-variant-variant-variant-variant-variant",
+            "predicted": "reinforce recent success",
+            "measured": "public_correct",
+            "context": {
+              "task": "packet:packet:packet:packet:packet:packet:minimal-variant-variant-variant-variant-variant-variant",
+              "arm": "treatment",
+              "bias": {
+                "operator": "Mult",
+                "examples": "mult",
+                "reason": "domain:reasoning",
+                "overlap": 1
+              }
+            }
+          },
+          {
+            "ts": "2026-11-19T21:46:08Z",
+            "edit": "packet:packet:packet:packet:packet:packet:packet:packet:minimal-variant-variant-variant-variant-variant-variant-variant",
+            "predicted": "reinforce recent success",
+            "measured": "public_correct",
+            "context": {
+              "task": "packet:packet:packet:packet:packet:packet:packet:minimal-variant-variant-variant-variant-variant-variant-variant",
+              "arm": "treatment",
+              "bias": {
+                "operator": "Add",
+                "examples": "add",
+                "reason": "domain:evidence",
+                "overlap": 2,
+                "label": "domain:evidence"
+              }
+            }
+          }
+        ],
+        "candidate": "(x*y)",
+        "public_correct": true,
+        "abstained": null,
+        "telemetry": {
+          "ts": "2026-11-20T01:02:47Z",
+          "uptime": 1795136567.0391917,
+          "packets": 19,
+          "fitness": {
+            "success": 7.0,
+            "cycles": 7.0
+          }
+        },
+        "ts": "2026-11-20T01:02:47Z",
+        "gate": {
+          "pass": true,
+          "reason": "public_correct"
+        }
+      },
+      "ts": "2026-11-20T01:02:47Z"
     }
   ],
   "recent_sim": [
-    {
-      "ts": "2026-11-19T20:04:01Z",
-      "edit": "packet:packet:packet:packet:packet:minimal-variant-variant-variant-variant",
-      "predicted": "reinforce recent success",
-      "measured": "public_correct",
-      "context": {
-        "task": "packet:packet:packet:packet:minimal-variant-variant-variant-variant",
-        "arm": "treatment",
-        "bias": {
-          "operator": "Add",
-          "examples": "add",
-          "reason": "successful packet present",
-          "overlap": 0
-        }
-      }
-    },
     {
       "ts": "2026-11-19T20:08:05Z",
       "edit": "packet:packet:packet:packet:packet:packet:minimal-variant-variant-variant-variant-variant",
@@ -1457,6 +1546,28 @@
           "reason": "domain:evidence",
           "overlap": 2,
           "label": "domain:evidence"
+        }
+      }
+    },
+    {
+      "ts": "2026-11-20T01:02:47Z",
+      "edit": "packet:domain:mathematics",
+      "predicted": "exercise domain",
+      "measured": "public_correct",
+      "context": {
+        "task": "domain:mathematics",
+        "arm": "treatment",
+        "bias": {
+          "operator": "Mult",
+          "examples": "mult",
+          "reason": "domain:reasoning",
+          "overlap": 2,
+          "label": "domain:reasoning"
+        },
+        "tool": {
+          "domain": "reasoning",
+          "tool": "measure_consistency",
+          "reason": "domain:reasoning"
         }
       }
     }
