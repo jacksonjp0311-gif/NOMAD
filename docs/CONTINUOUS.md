@@ -67,3 +67,8 @@ GitHub throttles scheduled runs, so NOMAD keeps its own pulse (`scripts/heartbea
 ## Self-evolution
 
 `nomad/evolve.py` evolves **parameters, not code**: the genome (`data/genome.json`: decay, library_k, patience, max_lag, all bounded). When due (every 2 h, nothing awaiting verification) it mutates one gene, runs a fixed offline benchmark (frozen training families + never-trained probes), and keeps the change only if the benchmark is strictly better (more held-out wins, or equal wins and less search, with no loss of certified training families) **and** the full unit-test suite passes. The accepted change is committed to main as `nomad-evolve: <id> …`. After at least 6 live WORLD pairs, the guard compares the live treatment/control cost ratio with the value before the change; if it worsened by more than 15%, the body (or fallback sleep) runs `git revert` on that commit (`nomad-revert: <id> …`).
+
+### Revert drill
+
+`python3 scripts/revert_drill.py` exercises the self-revert path end to end without touching live main. It clones the repo and the current live `data/` into a temp directory, with a throwaway bare repo as `origin`. Then it writes an accepted genome change exactly as the body does (`nomad-evolve: <id>` commit), appends 8 world twin rows, and runs the real `python -m nomad.body evolve-step --push`. It runs two scenarios. With regressed rows (3x the pre-change treatment/control cost ratio) the guard must revert: `nomad-revert: <id>` commit, genome restored, evolution log resolved, both pushed to the throwaway origin. With healthy rows it must keep. The script exits non-zero if any check fails.
+

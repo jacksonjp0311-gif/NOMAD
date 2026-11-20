@@ -1,5 +1,9 @@
 # NOMAD — Change History
 
+## Self-revert drill (2026-11-20)
+
+- `scripts/revert_drill.py`: dry run of guard -> `git revert` -> push on a temp clone of the live data with a throwaway origin; regressed and healthy scenarios. First run: revert (live ratio 0.314 -> 0.94) and keep (0.314 -> 0.31), all checks passed.
+
 ## Intelligence feed (2026-11-20)
 
 - `nomad/feed.py`, `feed/`: versioned, hash-chained packets of WITNESS-certified building blocks, per-family evidence (rows, program, receipt, cold-control cost) and live scores, for other agents to pull and test against their own controls. `python -m nomad.feed verify` re-attests every receipt; publish refuses a packet that fails. The body publishes at most every 4 h. Format: `docs/FEED.md`.
