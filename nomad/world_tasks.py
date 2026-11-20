@@ -123,4 +123,7 @@ def domain_of(family: str) -> str | None:
         for ts in levels.values():
             if any(t.family == family for t in ts):
                 return dom
-    return None
+    # Science families (nomad/science.py) are not training families; they are
+    # tagged so the sensing step can key on them. See docs/SCIENCE.md.
+    from .science import DOMAIN, is_science
+    return DOMAIN if is_science(family) else None
