@@ -28,7 +28,7 @@
     ]
    ],
    "tree_sha256": "38c83dccb9474914589294137aed5283870393402bb187e82d3254ac6449ead7",
-   "uses": 5.9558
+   "uses": 5.6525
   },
   {
    "block_id": "L915ba1af",
@@ -53,7 +53,7 @@
     ]
    ],
    "tree_sha256": "a47c202ae79fb40749db9ed656d9912cb6819ff6790e6cbad909a647703d9df9",
-   "uses": 5.8003
+   "uses": 6.6317
   },
   {
    "block_id": "Lda56c88a",
@@ -80,7 +80,7 @@
     ]
    ],
    "tree_sha256": "56030449b1887958364397ace9ab393d7dbfddc7b48557a1ff02062bbc679144",
-   "uses": 12.2782
+   "uses": 13.7918
   },
   {
    "block_id": "Le41f5b00",
@@ -111,7 +111,7 @@
     ]
    ],
    "tree_sha256": "1ef9aa7d777db2360b92d31c7eeedbfeea87b86cbbe3f616c40a1451dc742f52",
-   "uses": 11.4346
+   "uses": 12.0346
   },
   {
    "block_id": "Lfd47622b",
@@ -141,7 +141,7 @@
     ]
    ],
    "tree_sha256": "8f2e0e2ed308f492019fab9ffe14f676f17b4c65fbc98777c1834d7d53f125c7",
-   "uses": 5.9066
+   "uses": 5.6003
   }
  ],
  "boundaries": "Tiny typed programs (<= 7 nodes). Certified on frozen rows only; not general coding.",
@@ -2578,33 +2578,33 @@
    }
   }
  ],
- "feed_version": 2,
+ "feed_version": 3,
  "language": {
   "ast": "nomad.world DSL v1: [op, *children] | ['var', name] | ['const', value]",
   "interpreter": "nomad.world.run",
   "witness": "nomad-witness-world-v1"
  },
- "packet_sha256": "328811d30783cb2c232a5b898adf1e1c2b61ddc6959823802dc071ad7473e962",
- "prev_sha256": "a0b475ebfef82b4997147009bd97c21119f4c3f4401360155690068e12bb98c1",
- "published": "2026-11-20T09:46:21Z",
+ "packet_sha256": "23fa128043e4df0e41e722866ed236ea81f2b87ceb79bf5dc59c29f4a277bc6f",
+ "prev_sha256": "328811d30783cb2c232a5b898adf1e1c2b61ddc6959823802dc071ad7473e962",
+ "published": "2026-11-20T13:52:28Z",
  "schema": "nomad.feed.packet.v1",
  "scores": {
   "genesis_twin": {
    "all_fail_rate": 0.0,
-   "all_pass_rate": 0.999031007751938,
-   "both_certified_pairs_with_cost": 1028,
-   "control_evaluations": 66427,
+   "all_pass_rate": 0.9993686868686869,
+   "both_certified_pairs_with_cost": 1580,
+   "control_evaluations": 102307,
    "estimator": "rloo",
-   "groups": 1032,
+   "groups": 1584,
    "informative_pairs": 1,
-   "informative_rate": 0.0009689922480620155,
-   "mean_evaluations_saved": 56.39007782101167,
+   "informative_rate": 0.0006313131313131314,
+   "mean_evaluations_saved": 56.60316455696203,
    "mean_treatment_advantage": 1.0,
    "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage.",
-   "pairs_with_cost": 1028,
-   "pass_rate": 0.999515503875969,
-   "treatment_evaluations": 8458,
-   "treatment_over_control": 0.1273
+   "pairs_with_cost": 1580,
+   "pass_rate": 0.9996843434343434,
+   "treatment_evaluations": 12874,
+   "treatment_over_control": 0.1258
   },
   "heldout": {
    "absdiff": {
@@ -2664,27 +2664,27 @@
   "world_twin": {
    "all_fail_rate": 0.0,
    "all_pass_rate": 1.0,
-   "both_certified_pairs_with_cost": 1028,
-   "control_evaluations": 823006,
+   "both_certified_pairs_with_cost": 1580,
+   "control_evaluations": 1026750,
    "estimator": "rloo",
-   "groups": 1028,
+   "groups": 1580,
    "informative_pairs": 0,
    "informative_rate": 0.0,
-   "mean_evaluations_saved": 676.784046692607,
+   "mean_evaluations_saved": 547.9664556962025,
    "mean_treatment_advantage": null,
    "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage.",
-   "pairs_with_cost": 1028,
+   "pairs_with_cost": 1580,
    "pass_rate": 1.0,
-   "treatment_evaluations": 127272,
-   "treatment_over_control": 0.1546
+   "treatment_evaluations": 160963,
+   "treatment_over_control": 0.1568
   }
  },
  "source": {
-  "commit": "e473689f946eb27fb9e4fd78224378bd4bfc25b6",
-  "field_version": 343,
+  "commit": "be95dd3aaf7eab2f131f7b64e420fe778e99d15d",
+  "field_version": 527,
   "host": null,
   "repo": "jacksonjp0311-gif/NOMAD",
-  "world_witnessed": 1028
+  "world_witnessed": 1580
  },
  "verification": {
   "blocks": "each block must be a subtree of a program in certified_in",
