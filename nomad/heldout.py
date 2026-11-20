@@ -1,8 +1,8 @@
 """Held-out comparison.
 
 Runs a domain task with an empty prior (cold start) and with the field
-prior. Records the candidates and whether each is public-correct.
-The difference is the field advantage.
+prior. Records candidates, correctness, evaluations, and operator order.
+The difference is the field advantage in cost or correctness.
 """
 from __future__ import annotations
 
@@ -37,12 +37,20 @@ def compare(domain: str = "mathematics") -> dict[str, Any]:
         "cold": {
             "candidate": cold_result.candidate,
             "public_correct": cold_result.public_correct,
+            "evaluations": cold_result.candidates_evaluated,
+            "order": list(cold.order(0)),
         },
         "field": {
             "candidate": field_result.candidate,
             "public_correct": field_result.public_correct,
+            "evaluations": field_result.candidates_evaluated,
+            "order": list(field.order(0)),
         },
-        "advantage": field_result.public_correct and not cold_result.public_correct,
+        "advantage": (
+            field_result.public_correct and not cold_result.public_correct
+        ) or (
+            field_result.candidates_evaluated < cold_result.candidates_evaluated
+        ),
     }
 
 def main(argv: list[str] | None = None) -> int:
