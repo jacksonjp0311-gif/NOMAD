@@ -2,9 +2,8 @@
 
 Answers by reading the weight field. A question is checked for a domain
 name first. If present, that domain packet is returned along with a
-candidate expression produced by the synthesizer on the domain examples.
-Otherwise the question is hashed and the strongest overlapping packet
-supplies the answer. No free-form generation.
+candidate expression and a short reply. Otherwise the question is hashed
+and the strongest overlapping packet supplies the answer. No free-form generation.
 """
 from __future__ import annotations
 
@@ -40,7 +39,6 @@ def _candidate_for(domain: str) -> str | None:
         final=(),
     )
     prior = GrammarPrior()
-    # Bias toward the domain operator.
     packets = load_packets()
     for p in packets:
         if p.label == f"domain:{domain}":
@@ -49,6 +47,11 @@ def _candidate_for(domain: str) -> str | None:
             break
     result = synthesize(task, prior=prior)
     return result.candidate
+
+def _reply(domain: str, operator: str | None, candidate: str | None) -> str:
+    op = operator or "unknown"
+    cand = candidate or "none"
+    return f"{domain}: {cand} under {op}"
 
 def query(question: str, k: int = 5) -> dict[str, Any]:
     """Answer a question from the field."""
@@ -59,11 +62,13 @@ def query(question: str, k: int = 5) -> dict[str, Any]:
             for p in packets:
                 if p.label == f"domain:{domain}":
                     candidate = _candidate_for(domain)
+                    operator = p.receipt.get("context", {}).get("operator")
                     return {
                         "question": question,
                         "answer": domain,
-                        "operator": p.receipt.get("context", {}).get("operator"),
+                        "operator": operator,
                         "candidate": candidate,
+                        "reply": _reply(domain, operator, candidate),
                         "overlap": len(p.bits),
                         "count": p.count,
                         "label": p.label,
@@ -72,16 +77,18 @@ def query(question: str, k: int = 5) -> dict[str, Any]:
     bits = _hash_bits(question)
     context = readout(bits, k=k)
     if not context:
-        return {"question": question, "answer": None, "reason": "empty field"}
+        return {"question": question, "answer": None, "reply": None, "reason": "empty field"}
     domain = [c for c in context if c.get("label", "").startswith("domain:")]
     chosen = domain[0] if domain else context[0]
     receipt = chosen.get("receipt", {})
+    answer = receipt.get("context", {}).get("domain") or chosen.get("label")
     return {
         "question": question,
-        "answer": receipt.get("context", {}).get("domain") or chosen.get("label"),
+        "answer": answer,
         "operator": receipt.get("context", {}).get("operator"),
         "overlap": chosen.get("overlap"),
         "count": chosen.get("count"),
         "label": chosen.get("label"),
+        "reply": f"{answer} from field",
         "reason": "field readout",
     }
