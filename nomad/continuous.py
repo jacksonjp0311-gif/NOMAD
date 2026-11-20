@@ -1,18 +1,19 @@
 """Continuous cybernetic loop for NOMAD.
 
-Awake: proposer generates the next task from field and SIM, orbit readout biases prior,
-selects a tool from domain bias, then synthesis on external or domain examples.
-Sleep: consolidate, evaluate CA rules on independent snapshots, propose rewrite.
-SIM: one receipt per outcome. No double-count.
-Scoreboard: each arm records itself under a stable task key; delta is computed
-only when both arms for that key are present.
-Observation: writes a live snapshot for external agents on every cycle.
-Query: answers by field readout (see query.py).
-Orbit: one-hop relational pull (see orbit.py and docs/ORBIT.md).
-No transformers. Field builds, evolves, proposes, and rewrites itself only after evidence.
+Awake pair: control runs first as a cold prior on the same proposed task;
+treatment then uses the field prior. Only a paired, WITNESS-and-final
+delta is a learning measurement. Public-only correctness is recorded,
+never counted as learning, and never updates the field.
 
-Domain packets are preferred for bias. On measured success under a domain bias,
-the matching domain packet count is increased. External examples override domain sets.
+Acting domain is the proposer's domain. Orbit is logged but cannot
+redirect the cycle to a different domain.
+
+Treatment may call GrammarPrior.add_witnessed only after a supported
+WITNESS receipt and a passing final split. That is what moves synthesis
+order. Control never writes packets, prior, or fitness.
+
+Sleep: consolidate, evaluate CA rules, propose a rewrite (no commit).
+No transformers. Search and memory do not certify.
 """
 from __future__ import annotations
 
@@ -22,10 +23,15 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from .genesis import IOExample, SynthesisTask, synthesize, GrammarPrior
-from .mnemonic import EvidenceMemory
+from .genesis import (
+    GrammarPrior,
+    SynthesisTask,
+    evaluate_task,
+    load_prior_file,
+    save_prior_file,
+)
 from .society import post, update_fitness, gate
-from .weights import accumulate, readout, merge_similar, reinforce
+from .weights import accumulate, merge_similar, reinforce
 from .automata import try_rules
 from .sensors import telemetry
 from .sim import recent, should_reinforce, record as sim_record
@@ -33,44 +39,40 @@ from .scoreboard import record_arm
 from .proposer import propose
 from .rewrite import rewrite
 from .observe import write_snapshot
-from .learner import Counts
-from .domain_tasks import examples_for
+from .domain_tasks import splits_for
 from .tools import select as select_tool
 from .query import query as field_query
 from .orbit import orbit
 from .external import load_examples
+from .heldout import compare_live
+from .paths import data_root
 
-ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data" / "continuous"
-EXTERNAL = ROOT / "data" / "external"
-MEMORY_PATH = DATA / "mnemonic.json"
-PRIOR_PATH = DATA / "prior.json"
-LOG_PATH = DATA / "log.jsonl"
 BITS = 4096
 
-EXAMPLES = {
-    "add": (
-        IOExample(1, 2, 3),
-        IOExample(2, 3, 5),
-        IOExample(4, 5, 9),
-    ),
-    "sub": (
-        IOExample(5, 2, 3),
-        IOExample(8, 3, 5),
-        IOExample(10, 1, 9),
-    ),
-    "mult": (
-        IOExample(2, 3, 6),
-        IOExample(4, 5, 20),
-        IOExample(3, 3, 9),
-    ),
-}
+
+def _data() -> Path:
+    return data_root() / "continuous"
+
+
+def _external() -> Path:
+    return data_root() / "external"
+
+
+def _prior_path() -> Path:
+    return _data() / "prior.json"
+
+
+def _log_path() -> Path:
+    return _data() / "log.jsonl"
+
 
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
+
 def _ensure() -> None:
-    DATA.mkdir(parents=True, exist_ok=True)
+    _data().mkdir(parents=True, exist_ok=True)
+
 
 def _hash_bits(text: str, density: int = 64) -> set[int]:
     h = hashlib.sha256(text.encode()).digest()
@@ -80,130 +82,125 @@ def _hash_bits(text: str, density: int = 64) -> set[int]:
         bits.add(idx)
     return bits
 
-def _bias_from_context(context: list[dict]) -> dict[str, Any]:
-    """Derive operator bias from domain packets first, then learned packets."""
-    domain = [
-        c for c in context
-        if c.get("label", "").startswith("domain:")
-        and c.get("receipt", {}).get("measured") == "seeded"
-    ]
+
+def _acting_domain(proposal: dict[str, Any]) -> str | None:
+    domain = proposal.get("domain")
     if domain:
-        chosen = max(domain, key=lambda c: c.get("overlap", 0) * c.get("count", 1))
-        ctx = chosen.get("receipt", {}).get("context", {})
-        return {
-            "operator": ctx.get("operator", "Add"),
-            "examples": ctx.get("examples", "add"),
-            "reason": f"domain:{ctx.get('domain', 'unknown')}",
-            "overlap": chosen.get("overlap", 0),
-            "label": chosen.get("label", ""),
-        }
-    successful = [
-        c for c in context
-        if c.get("receipt", {}).get("measured") == "public_correct"
-    ]
-    preferred = [c for c in successful if "variant" in c.get("label", "")]
-    candidates = preferred or successful
-    if not candidates:
-        return {"operator": None, "examples": "add", "reason": "default", "overlap": 0}
-    chosen = max(candidates, key=lambda c: c.get("overlap", 0))
-    label = chosen.get("label", "")
-    overlap = chosen.get("overlap", 0)
-    bias = _label_bias(label, overlap)
-    bias["reason"] = "non-minimal packet" if preferred else "successful packet present"
-    return bias
+        return domain
+    task = str(proposal.get("task") or "")
+    if task.startswith("domain:"):
+        return task.split(":", 1)[1]
+    return None
 
-def _label_bias(label: str, overlap: int) -> dict[str, Any]:
-    if "mult" in label or "product" in label:
-        return {"operator": "Mult", "examples": "mult", "reason": "label", "overlap": overlap}
-    if "sub" in label or "diff" in label:
-        return {"operator": "Sub", "examples": "sub", "reason": "label", "overlap": overlap}
-    if "variant" in label:
-        return {"operator": "Mult", "examples": "mult", "reason": "variant packet", "overlap": overlap}
-    return {"operator": "Add", "examples": "add", "reason": "minimal packet", "overlap": overlap}
 
-def _examples_for_bias(bias: dict[str, Any]) -> tuple:
+def _bias_for_domain(domain: str) -> dict[str, Any]:
+    splits = splits_for(domain)
+    return {
+        "operator": splits["operator"],
+        "examples": domain,
+        "reason": f"domain:{domain}",
+        "overlap": 0,
+        "label": f"domain:{domain}",
+    }
+
+
+def _splits_for_bias(bias: dict[str, Any]) -> dict[str, Any]:
     reason = bias.get("reason", "")
     if reason.startswith("domain:"):
         domain = reason.split(":", 1)[1]
-        path = EXTERNAL / f"{domain}.txt"
+        splits = splits_for(domain)
+        path = _external() / f"{domain}.txt"
         if path.exists():
             loaded = load_examples(path)
             if loaded:
-                return loaded
-        return examples_for(domain)
-    return EXAMPLES.get(bias.get("examples", "add"), EXAMPLES["add"])
+                # External files currently provide public rows only.
+                # Challenge and final stay the domain withheld splits.
+                splits = dict(splits)
+                splits["public"] = loaded
+                splits["source"] = "external"
+                return splits
+        splits = dict(splits)
+        splits["source"] = "domain"
+        return splits
+    # Non-domain fallback: addition, still with withheld splits.
+    splits = dict(splits_for("meta"))
+    splits["source"] = "default"
+    return splits
 
-def _load_memory() -> EvidenceMemory:
-    if MEMORY_PATH.exists():
-        return EvidenceMemory.load(MEMORY_PATH)
-    return EvidenceMemory()
-
-def _save_memory(mem: EvidenceMemory) -> None:
-    mem.save(MEMORY_PATH)
-
-def _load_prior() -> GrammarPrior:
-    prior = GrammarPrior()
-    if PRIOR_PATH.exists():
-        snap = json.loads(PRIOR_PATH.read_text())
-        prior.operator.contextual = snap.get("contextual", True)
-        for fam, counts in snap.get("global", {}).items():
-            prior.operator.global_counts[fam] = Counts(**counts)
-        for key, counts in snap.get("contexts", {}).items():
-            if ":" in key:
-                sig_s, fam = key.split(":", 1)
-                try:
-                    sig = int(sig_s)
-                    prior.operator.context_counts[(sig, fam)] = Counts(**counts)
-                except ValueError:
-                    pass
-    return prior
-
-def _save_prior(prior: GrammarPrior) -> None:
-    PRIOR_PATH.write_text(json.dumps(prior.operator.snapshot(), indent=2))
 
 def _log(row: dict[str, Any]) -> None:
     _ensure()
-    with LOG_PATH.open("a") as f:
+    with _log_path().open("a") as f:
         f.write(json.dumps(row, separators=(",", ":")) + "\n")
 
-def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]:
-    """One awake cycle. Proposer generates the task, orbit readout biases the prior, selects tool, then synthesis."""
+
+def awake(
+    task_text: str = "cycle",
+    *,
+    arm: str = "treatment",
+    proposal: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """One awake cycle on a single arm.
+
+    Control uses a cold prior and never writes the field. Treatment uses
+    the saved field prior and may update it only after WITNESS + final.
+    When the proposer names a domain, that domain is the acting domain.
+    """
     _ensure()
     snap = telemetry()
-    proposal = propose(task_text)
-    task_text = proposal["task"]
-    prior = _load_prior()
+    if proposal is None:
+        proposal = propose(task_text)
+    task_text = proposal.get("task") or task_text
+    domain = _acting_domain(proposal)
     query_bits = _hash_bits(task_text)
     context = orbit(query_bits)
-    bias = _bias_from_context(context)
+    if domain:
+        bias = _bias_for_domain(domain)
+    else:
+        bias = {"operator": None, "examples": "meta", "reason": "default", "overlap": 0, "label": ""}
     tool = select_tool(bias)
-    if bias["operator"]:
-        prior.operator.update(0, bias["operator"], True)
-        prior.operator.contextual = True
+    splits = _splits_for_bias(bias)
+    if arm == "control":
+        prior = GrammarPrior()
+    else:
+        prior = load_prior_file(_prior_path())
     history = recent(8)
-    public = _examples_for_bias(bias)
     task = SynthesisTask(
-        task_id=f"continuous-{task_text}-{_now()[:13]}",
+        task_id=f"continuous-{task_text}",
         source="def solve(x, y):\n    return 0\n",
-        public=public,
-        challenge=(),
-        final=(),
+        public=tuple(splits["public"]),
+        challenge=tuple(splits["challenge"]),
+        final=tuple(splits["final"]),
+        hidden_family=domain or "default",
     )
-    order = prior.order(0)
-    result = synthesize(task, prior=prior)
+    context_sig = 0
+    # Order is read from the prior *before* this cycle's witness update.
+    # For treatment this is the field; for control it is always default.
+    # Signature is computed inside evaluate_task/synthesize.
+    evaluated, receipt = evaluate_task(task, prior=prior)
+    context_sig = evaluated.learned_context
+    order = list(prior.order(context_sig))
+    certified = bool(evaluated.witness_supported and evaluated.final_correct)
     outcome = {
         "mode": "awake",
         "arm": arm,
         "task": task_text,
         "proposal": proposal,
+        "acting_domain": domain,
         "context": context,
         "bias": bias,
         "tool": tool,
-        "operator_order": list(order),
+        "example_source": splits.get("source"),
+        "operator_order": order,
+        "prior_witnessed": prior.witnessed,
         "sim_history": history,
-        "candidate": result.candidate,
-        "public_correct": result.public_correct,
-        "abstained": result.abstained,
+        "candidate": evaluated.candidate,
+        "public_correct": evaluated.public_tests,
+        "witness_supported": evaluated.witness_supported,
+        "final_correct": evaluated.final_correct,
+        "certified": certified,
+        "evaluations": evaluated.candidate_evaluations,
+        "abstained": evaluated.abstained,
         "telemetry": snap,
         "ts": _now(),
     }
@@ -211,35 +208,59 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
     outcome["gate"] = decision
     _log(outcome)
     post("keeper", outcome)
-    predicted = proposal.get("reason", "public success")
-    measured = "public_correct" if decision.get("pass") else "fail"
+    predicted = proposal.get("reason", "certified success")
+    measured = "witness_and_final" if certified else (
+        "public_only" if evaluated.public_tests else "fail"
+    )
     sim_record(
         edit=f"packet:{task_text}",
         predicted=predicted,
         measured=measured,
-        context={"task": task_text, "arm": arm, "bias": bias, "tool": tool},
+        context={"task": task_text, "arm": arm, "bias": bias, "tool": tool, "certified": certified},
     )
     if arm == "treatment":
         update_fitness(bool(decision.get("pass")))
-        if decision.get("pass") and should_reinforce(predicted):
+        if decision.get("pass") and receipt is not None and should_reinforce(predicted):
+            prior.add_witnessed(context_sig, evaluated.candidate or "", receipt)
             accumulate(
                 query_bits,
                 True,
                 label=task_text,
                 predicted=predicted,
                 measured=measured,
-                context={"task": task_text, "arm": arm, "proposal": proposal, "bias": bias, "tool": tool},
+                context={
+                    "task": task_text,
+                    "arm": arm,
+                    "proposal": proposal,
+                    "bias": bias,
+                    "tool": tool,
+                    "operator": bias.get("operator"),
+                    "certified": True,
+                },
             )
-            reason = bias.get("reason", "")
-            if reason.startswith("domain:"):
-                domain_label = f"domain:{reason.split(':', 1)[1]}"
-                reinforce(domain_label, 1)
-        _save_prior(prior)
-    paired = record_arm(task_text, arm, bool(decision.get("pass")))
+            if domain:
+                reinforce(f"domain:{domain}", 1)
+            save_prior_file(prior, _prior_path())
+            outcome["prior_witnessed_after"] = prior.witnessed
+            outcome["operator_order_after"] = list(prior.order(context_sig))
+    paired = record_arm(task_text, arm, certified, kind="certified")
     if paired:
         outcome["scoreboard"] = paired
+        outcome["learning_measurement"] = {
+            "paired": True,
+            "delta": paired["delta"],
+            "kind": "certified",
+        }
+    else:
+        outcome["learning_measurement"] = {
+            "paired": False,
+            "delta": None,
+            "kind": "certified",
+            "note": "Unpaired arm result is not a learning measurement.",
+        }
     write_snapshot()
     return outcome
+
 
 def sleep(*, arm: str = "treatment") -> dict[str, Any]:
     """Consolidation, independent CA evaluation, rewrite proposal. Control freezes."""
@@ -250,8 +271,6 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
     merged = merge_similar()
     rules = try_rules(steps=1)
     rewrite_result = rewrite()
-    prior = _load_prior()
-    _save_prior(prior)
     row = {
         "mode": "sleep",
         "arm": arm,
@@ -267,10 +286,53 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
     write_snapshot()
     return row
 
+
+def pair(task_text: str = "cycle") -> dict[str, Any]:
+    """Run control then treatment on one proposed task and record the twin delta.
+
+    Control is evaluated first so treatment field updates cannot leak into it.
+    A held-out live comparison is written afterward and never trains on the
+    held-out family.
+    """
+    proposal = propose(task_text)
+    control = awake(task_text, arm="control", proposal=proposal)
+    treatment = awake(task_text, arm="treatment", proposal=proposal)
+    scoreboard = treatment.get("scoreboard") or control.get("scoreboard")
+    heldout = compare_live()
+    heldout_path = _data() / "heldout.json"
+    heldout_path.write_text(json.dumps(heldout, indent=2))
+    result = {
+        "mode": "pair",
+        "proposal": proposal,
+        "control": control,
+        "treatment": treatment,
+        "scoreboard": scoreboard,
+        "learning_measurement": (
+            {
+                "paired": True,
+                "delta": scoreboard["delta"],
+                "task": scoreboard["task"],
+                "kind": "certified",
+                "note": "Only this paired certified delta is a learning measurement.",
+            }
+            if scoreboard
+            else {
+                "paired": False,
+                "delta": None,
+                "note": "No paired scoreboard row was produced.",
+            }
+        ),
+        "heldout_live": heldout,
+        "ts": _now(),
+    }
+    _log({"mode": "pair", "task": proposal.get("task"), "learning_measurement": result["learning_measurement"], "ts": result["ts"]})
+    return result
+
+
 def main(argv: list[str] | None = None) -> int:
     import argparse
     parser = argparse.ArgumentParser(description="NOMAD continuous cybernetic loop")
-    parser.add_argument("mode", choices=("awake", "sleep", "query", "pair"))
+    parser.add_argument("mode", choices=("awake", "sleep", "query", "pair", "heldout"))
     parser.add_argument("--arm", choices=("treatment", "control"), default="treatment")
     parser.add_argument("--task", default="cycle")
     parser.add_argument("--question", default="")
@@ -279,11 +341,11 @@ def main(argv: list[str] | None = None) -> int:
         result = awake(args.task, arm=args.arm)
         print(json.dumps(result, indent=2))
     elif args.mode == "pair":
-        treatment = awake(args.task, arm="treatment")
-        control = awake(args.task, arm="control")
-        print(json.dumps({"treatment": treatment, "control": control}, indent=2))
+        print(json.dumps(pair(args.task), indent=2))
     elif args.mode == "query":
         print(json.dumps(field_query(args.question or args.task), indent=2))
+    elif args.mode == "heldout":
+        print(json.dumps(compare_live(), indent=2))
     else:
         print(json.dumps(sleep(arm=args.arm), indent=2))
     return 0

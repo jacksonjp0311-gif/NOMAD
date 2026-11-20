@@ -4,16 +4,16 @@
 
 Recursive field intelligence.
 
-Sparse binary weight packets are the field. The field is the mind. Awake and sleep runners act, measure, and consolidate. Agents propose, select tools, and write outcomes back into the packets. The system improves by changing what it synthesizes from its own field.
+Sparse binary weight packets are the field. The field is the mind. Awake and sleep runners act, measure, and consolidate. Agents propose, select tools, and write outcomes back into the packets. The system improves only when a paired twin measurement shows a certified difference: WITNESS-supported, final-correct treatment versus a cold control on the same task.
 
-No transformers. Recursive learning on measured success. The field builds itself.
+No transformers. Search and memory never certify. WITNESS certifies. The field updates itself only after that certification.
 
 ---
 
 ## Layers
 
 - **Weight packets** — Bitwork geometry. Sets of bits + count. Splittable. Integer overlap readout. Merges on consolidation. Domain packets and learned packets accumulate.
-- **Continuous loop** — Awake and sleep runners. Treatment updates; control freezes. Twin delta measures whether the field improves.
+- **Continuous loop** — A single pair job runs control (cold prior) then treatment (field prior) on the same proposed task. Only a paired certified delta is a learning measurement. Sleep consolidates. Data commits are serialized.
 - **Society** — Registry, bus, fitness, gate. Agents route, observe, and act.
 - **Cognition** — Attend and decide by integer overlap and orbit. Query answers from the field.
 - **Sensors** — Local telemetry of packet count, fitness, and uptime. Tool selection from domain bias.
@@ -27,6 +27,6 @@ The field is the living weight store. The runners keep it moving. The agents act
 
 Architecture is recursive field intelligence. Current capability is bounded integer synthesis and field query. Not unrestricted coding. Not free-form generation. Not AGI.
 
-The field grows by append, reinforce, and merge on public success. The readout is fixed. The gate decides. Twin control measures the difference.
+The field grows by append, reinforce, and merge only on WITNESS-supported and final-correct treatment outcomes. Public-only success is recorded and is not learning. The readout is fixed. The gate decides. The twin scoreboard measures the difference only when both arms are present.
 
 **Protect the system. Preserve the intelligence. Advance verified capability.**

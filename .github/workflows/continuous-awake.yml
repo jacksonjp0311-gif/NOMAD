@@ -1,4 +1,7 @@
 name: continuous-awake
+# Pair both arms in one job so the scoreboard records a real certified delta.
+# Control runs first (cold prior). Treatment uses the field and may update it
+# only after WITNESS + final. Concurrent data writers share one group.
 # re-registered 2026-11-20 shifted minutes
 on:
   schedule:
@@ -9,30 +12,36 @@ on:
     types: [awake]
 permissions:
   contents: write
+concurrency:
+  group: nomad-continuous-data
+  cancel-in-progress: false
 jobs:
-  treatment:
+  pair:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run awake
-        run: python -m nomad.continuous awake --arm treatment
+      - name: Run paired awake
+        run: python -m nomad.continuous pair
       - name: Commit data
         run: |
+          set -euo pipefail
           git config user.name "nomad"
           git config user.email "nomad@users.noreply.github.com"
           git add data/ || true
-          git diff --staged --quiet || git commit -m "continuous awake"
-          git pull --rebase origin main
-          git push
-  control:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: Run awake (control)
-        run: python -m nomad.continuous awake --arm control
+          if git diff --staged --quiet; then
+            echo "no data changes"
+            exit 0
+          fi
+          git commit -m "continuous awake"
+          for i in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push; then
+              exit 0
+            fi
+            git rebase --abort || true
+            sleep $((i * 2))
+          done
+          echo "rebase-retry exhausted" >&2
+          exit 1

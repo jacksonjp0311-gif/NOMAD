@@ -14,15 +14,14 @@ from .observe import write_snapshot
 from .sim import record as sim_record
 from .weights import accumulate
 
-ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data" / "continuous"
-LOG = DATA / "log.jsonl"
+from .paths import data_root
+
 
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 def _ensure() -> None:
-    DATA.mkdir(parents=True, exist_ok=True)
+    (data_root() / "continuous").mkdir(parents=True, exist_ok=True)
 
 def run(mode: str = "awake") -> dict:
     _ensure()
@@ -33,7 +32,7 @@ def run(mode: str = "awake") -> dict:
         "telemetry": snap,
         "status": "minimal",
     }
-    with LOG.open("a") as f:
+    with (data_root() / "continuous" / "log.jsonl").open("a") as f:
         f.write(json.dumps(row, separators=(",", ":")) + "\n")
     if mode == "awake":
         sim_record(

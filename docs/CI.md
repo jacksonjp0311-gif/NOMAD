@@ -7,3 +7,5 @@
 `.github/workflows/ci-dev.yml` runs tests and a continuous-module import smoke on every push. It does not require the sealed v0.18 manifest to match the current tree.
 
 This separates historical release integrity from current development validation.
+
+Development checks also run `tests/test_continuous_learning.py` (weights, orbit, scoreboard pairing, prior-bias, and the frozen held-out comparison). Tests set `NOMAD_DATA` so they do not mutate the live field.

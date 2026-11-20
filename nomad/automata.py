@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 
 from .weights import Packet, load_packets
+from .paths import data_root
 
 RULES = {
     "majority": lambda n, c: c + 1 if n >= 3 and c > 0 else (c if n == 2 else max(0, c - 1)),
@@ -59,7 +60,7 @@ def try_rules(steps: int = 1) -> dict:
             best_name = name
             best_packets = evolved
     if best_name != "noop":
-        path = Path(__file__).resolve().parent.parent / "data" / "weights" / "packets.jsonl"
+        path = data_root() / "weights" / "packets.jsonl"
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("".join(json.dumps(p.as_dict(), separators=(",", ":")) + "\n" for p in best_packets))
     results["winner"] = best_name

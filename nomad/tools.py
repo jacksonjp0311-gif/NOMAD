@@ -5,12 +5,11 @@ Tools can load external examples from a file when present.
 """
 from __future__ import annotations
 
-from pathlib import Path
 from typing import Any
 
 from .external import load_examples
-from .domain_tasks import examples_for
-from .genesis import IOExample
+from .domain_tasks import examples_for, DOMAIN_EXAMPLES
+from .paths import data_root
 
 TOOLS = {
     "mathematics": "measure_overlap",
@@ -25,16 +24,15 @@ TOOLS = {
     "meta": "measure_fitness",
 }
 
-EXTERNAL = Path(__file__).resolve().parent.parent / "data" / "external"
 
 def select(bias: dict[str, Any]) -> dict[str, Any]:
     """Select a tool from the bias reason and load examples."""
     reason = bias.get("reason", "")
     domain = reason.split(":", 1)[1] if reason.startswith("domain:") else "meta"
     tool = TOOLS.get(domain, "measure_overlap")
-    external_path = EXTERNAL / f"{domain}.txt"
+    external_path = data_root() / "external" / f"{domain}.txt"
     external = load_examples(external_path) if external_path.exists() else ()
-    base = examples_for(domain) if domain in TOOLS else ()
+    base = examples_for(domain) if domain in DOMAIN_EXAMPLES else ()
     examples = external or base
     return {
         "domain": domain,

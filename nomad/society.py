@@ -2,7 +2,7 @@
 
 Minimal registry, bus, fitness, and gate.
 Roles enter and leave. Messages deliver. Fitness updates from outcomes.
-Gate rejects what fails. Durable promotion still waits for human authorize.
+Gate rejects what fails. Packet updates require a WITNESS-supported, final-correct treatment outcome. They are not a general skill promotion. External or irreversible actions remain separately gated.
 """
 from __future__ import annotations
 
@@ -12,17 +12,29 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-ROOT = Path(__file__).resolve().parent.parent
-SOCIETY = ROOT / "data" / "society"
-REGISTRY = SOCIETY / "registry.json"
-BUS = SOCIETY / "bus.jsonl"
-FITNESS = SOCIETY / "fitness.json"
+from .paths import data_root
+
+
+def _society() -> Path:
+    return data_root() / "society"
+
+
+def _registry() -> Path:
+    return _society() / "registry.json"
+
+
+def _bus() -> Path:
+    return _society() / "bus.jsonl"
+
+
+def _fitness() -> Path:
+    return _society() / "fitness.json"
 
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 def _ensure() -> None:
-    SOCIETY.mkdir(parents=True, exist_ok=True)
+    _society().mkdir(parents=True, exist_ok=True)
 
 @dataclass
 class Role:
@@ -33,22 +45,22 @@ class Role:
 
 def load_registry() -> dict[str, Role]:
     _ensure()
-    if not REGISTRY.exists():
+    if not _registry().exists():
         return {
             "spark": Role("spark", {"propose": 1.0}),
             "keeper": Role("keeper", {"record": 1.0}),
         }
-    data = json.loads(REGISTRY.read_text())
+    data = json.loads(_registry().read_text())
     return {k: Role(**v) for k, v in data.items()}
 
 def save_registry(reg: dict[str, Role]) -> None:
     _ensure()
-    REGISTRY.write_text(json.dumps({k: vars(v) for k, v in reg.items()}, indent=2))
+    _registry().write_text(json.dumps({k: vars(v) for k, v in reg.items()}, indent=2))
 
 def post(role: str, message: dict[str, Any]) -> None:
     _ensure()
     row = {"to": role, "message": message, "ts": _now()}
-    with BUS.open("a") as f:
+    with _bus().open("a") as f:
         f.write(json.dumps(row, separators=(",", ":")) + "\n")
     reg = load_registry()
     if role in reg:
@@ -57,19 +69,25 @@ def post(role: str, message: dict[str, Any]) -> None:
 
 def load_fitness() -> dict[str, float]:
     _ensure()
-    if not FITNESS.exists():
+    if not _fitness().exists():
         return {"success": 0.0, "cycles": 0.0}
-    return json.loads(FITNESS.read_text())
+    return json.loads(_fitness().read_text())
 
 def update_fitness(success: bool) -> None:
     fit = load_fitness()
     fit["cycles"] = fit.get("cycles", 0) + 1
     if success:
         fit["success"] = fit.get("success", 0) + 1
-    FITNESS.write_text(json.dumps(fit, indent=2))
+    _fitness().write_text(json.dumps(fit, indent=2))
 
 def gate(outcome: dict[str, Any]) -> dict[str, Any]:
-    """Simple gate. Public success passes. Everything else is candidate or reject."""
+    """Certify only what WITNESS supports and the final split confirms.
+
+    Public-example success is recorded but is not a pass. Search and memory
+    do not certify. An empty or missing withheld split cannot pass.
+    """
+    if outcome.get("witness_supported") and outcome.get("final_correct"):
+        return {"pass": True, "reason": "witness_and_final"}
     if outcome.get("public_correct"):
-        return {"pass": True, "reason": "public_correct"}
+        return {"pass": False, "reason": "public_only_not_certified"}
     return {"pass": False, "reason": outcome.get("abstained") or "no_success"}

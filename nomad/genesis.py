@@ -359,3 +359,40 @@ def train_prior(tasks:Iterable[SynthesisTask], *, max_nodes:int=7, max_eval:int=
             prior.add_witnessed(evaluated.learned_context,evaluated.candidate or '',receipt)
             accepted+=1
     return prior,{'attempted':attempted,'verified_skills':accepted}
+
+
+def prior_from_snapshot(snap: dict) -> GrammarPrior:
+    """Restore a GrammarPrior from a snapshot, including older continuous files.
+
+    Older continuous priors stored operator counts at the top level and omitted
+    `witnessed`. Those load with witnessed=0 so order stays default until a
+    WITNESS-backed success is recorded.
+    """
+    prior = GrammarPrior(contextual=bool(snap.get("contextual", True)))
+    prior.witnessed = int(snap.get("witnessed", 0))
+    op_snap = snap.get("operator", snap)
+    prior.operator.contextual = bool(op_snap.get("contextual", prior.contextual))
+    from .learner import Counts
+    for fam, counts in (op_snap.get("global") or {}).items():
+        prior.operator.global_counts[fam] = Counts(**counts)
+    for key, counts in (op_snap.get("contexts") or {}).items():
+        if ":" not in key:
+            continue
+        sig_s, fam = key.split(":", 1)
+        try:
+            sig = int(sig_s)
+        except ValueError:
+            continue
+        prior.operator.context_counts[(sig, fam)] = Counts(**counts)
+    return prior
+
+
+def load_prior_file(path: Path) -> GrammarPrior:
+    if not path.exists():
+        return GrammarPrior()
+    return prior_from_snapshot(json.loads(path.read_text()))
+
+
+def save_prior_file(prior: GrammarPrior, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(prior.snapshot(), indent=2))

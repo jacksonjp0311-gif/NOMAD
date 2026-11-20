@@ -15,12 +15,16 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-ROOT = Path(__file__).resolve().parent.parent
-PACKETS = ROOT / "data" / "weights" / "packets.jsonl"
+from .paths import data_root
+
 BITS = 4096
 
+
+def _packets_path() -> Path:
+    return data_root() / "weights" / "packets.jsonl"
+
 def _ensure() -> None:
-    PACKETS.parent.mkdir(parents=True, exist_ok=True)
+    _packets_path().parent.mkdir(parents=True, exist_ok=True)
 
 @dataclass
 class Packet:
@@ -42,14 +46,14 @@ class Packet:
 
 def append_packet(packet: Packet) -> None:
     _ensure()
-    with PACKETS.open("a") as f:
+    with _packets_path().open("a") as f:
         f.write(json.dumps(packet.as_dict(), separators=(",", ":")) + "\n")
 
 def load_packets() -> list[Packet]:
-    if not PACKETS.exists():
+    if not _packets_path().exists():
         return []
     packets = []
-    with PACKETS.open() as f:
+    with _packets_path().open() as f:
         for line in f:
             line = line.strip()
             if line:
@@ -66,7 +70,7 @@ def load_packets() -> list[Packet]:
 
 def _write(packets: list[Packet]) -> None:
     _ensure()
-    PACKETS.write_text("".join(json.dumps(p.as_dict(), separators=(",", ":")) + "\n" for p in packets))
+    _packets_path().write_text("".join(json.dumps(p.as_dict(), separators=(",", ":")) + "\n" for p in packets))
 
 def readout(query_bits: set[int], k: int = 16) -> list[dict[str, Any]]:
     """Fixed readout. Top-k packets by integer overlap, weighted by count."""

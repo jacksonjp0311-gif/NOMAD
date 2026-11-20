@@ -5,7 +5,7 @@ Ten seeded packets for domain bias. Each is a 30-bit contiguous set in the 4096-
 | Domain | Bits | Operator | Examples |
 |---|---|---|---|
 | mathematics | 1100–1129 | Mult | mult |
-| science | 1200–1229 | Add | add |
+| science | 1200–1229 | Mult | product (mass × accel) |
 | language | 1300–1329 | Sub | sub |
 | reasoning | 1400–1429 | Mult | mult |
 | understanding | 1500–1529 | Add | add |
@@ -15,4 +15,4 @@ Ten seeded packets for domain bias. Each is a 30-bit contiguous set in the 4096-
 | coding | 1900–1929 | Mult | mult |
 | meta | 2000–2029 | Add | add |
 
-The bias path prefers any domain packet present in the readout. Its receipt supplies the operator and example family. Learned packets remain the fallback. These are priors, not measured skills.
+When the proposer names a domain, that domain is the acting domain: operator, public examples, withheld splits, and tool all come from it. Orbit is context only. Seeded packets are priors, not measured skills. Science uses Mult because its examples are products; the earlier Add label did not match the examples.
