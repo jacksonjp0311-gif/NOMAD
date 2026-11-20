@@ -1,5 +1,9 @@
 # NOMAD — Change History
 
+## Adaptive cold-stage experiment (2026-11-20)
+
+- Negative result, no behaviour change: sizing the cold stage adaptively cannot recover absdiff at 10k without breaking LOFO never-worse-than-cold (details in `docs/WORLD.md`). Added `scripts/lofo_stage_probe.py` (measurement only).
+
 ## Self-revert drill (2026-11-20)
 
 - `scripts/revert_drill.py`: dry run of guard -> `git revert` -> push on a temp clone of the live data with a throwaway origin; regressed and healthy scenarios. First run: revert (live ratio 0.314 -> 0.94) and keep (0.314 -> 0.31), all checks passed.

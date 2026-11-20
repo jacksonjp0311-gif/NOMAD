@@ -61,3 +61,14 @@ On trained families, the field typically reaches the same certified program with
 - absdiff no longer fits its 10k budget under staged transfer.
 - Programs are still tiny (size ≤ 7 nodes, ≤ 6 library atoms). This is not unrestricted coding.
 - Domain names label small task families. "Language" means a few string transforms, not language understanding.
+
+## Adaptive cold-stage size: tried on LOFO, not adopted (2026-11-20)
+
+Question: can the cold stage of staged transfer be sized adaptively so absdiff fits its 10,000 budget again without losing the "never worse than cold" LOFO property? Measured with `scripts/lofo_stage_probe.py` (LOFO priors, cold vs library-augmented search at each max_size).
+
+- absdiff's cheapest library route is a size-5 program (`max(@sub(x,y), sub(y,x))`-class) costing 8,480 library-search evaluations; a cold stage can therefore be at most ~1,500 evaluations (cold to size 4 costs 414, to size 5 costs 4,374) to stay under 10k.
+- On LOFO, cold solves most families within 80-900 evaluations, but pick_gt needs 9,561 cold and its library search needs 11,396. Any cold stage short enough for absdiff (cold to size 4, then library) makes pick_gt ~11.8k vs 9.6k cold, and square_plus_y, ysquare_minus_x, first_last and range 2-4x worse than cold.
+- Lock-step or geometric (iterative-deepening) interleaving of cold and library search keeps the loss bounded (a constant factor) but not zero, and absdiff needs the library arm to get nearly the whole budget, so a share small enough to protect LOFO cannot solve it.
+- absdiff and pick_gt are indistinguishable at the point where the choice must be made (both unsolved by cold and library search to size 4), so no principled familiarity or confidence signal separates them. Fitting a signal to that pair would be tuning to a held-out.
+
+Result: no change to `synthesize`. Staged transfer keeps LOFO = cold (12,972, worst 1.0x), string/list ties, and absdiff remains a loss at 10k (certified at 19,982). Trade-off stays explicit: strict never-worse-than-cold and a 10k absdiff win are incompatible with the current library search; a cheaper library search (not a different stage size) would be the next lever.
