@@ -74,7 +74,7 @@ def world_pair(domain: str | None = None) -> dict[str, Any]:
     trace = None
     if explored is not None:
         paid = list(explored["paid"])
-        if treat.certified and treat.via:
+        if treat.certified and treat.via and treat.via.startswith("variation:"):
             paid.append({"kind": treat.via.split(":", 1)[1], "tree": treat.tree})
         trace = {"family": task.family, "situation": explored["situation"],
                  "tried": list(treat.variation) + explored["tried"], "paid": paid}

@@ -111,7 +111,7 @@ class VariationOperatorTests(unittest.TestCase):
         from nomad.world import make_task
         never = make_task("t2", "never_fits", "int", {"x": "int", "y": "int"}, "int",
                           [({"x": 1, "y": 2}, 999)], [({"x": 3, "y": 4}, 999)], [({"x": 5, "y": 6}, 999)])
-        ev, _ = evaluate(never, prior=WorldPrior(), max_size=1, variation=vs)
+        ev, _ = evaluate(never, prior=WorldPrior(), max_size=1, variation=vs, casesplit=False)
         self.assertFalse(ev.certified)
         self.assertEqual(len(ev.variation), SEARCH_TRIES)
         self.assertLessEqual(ev.evaluations, 6 + SEARCH_TRIES)  # atoms + mutants only

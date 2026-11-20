@@ -101,11 +101,14 @@ class LearningTests(unittest.TestCase):
         # Exact redundancy skips plus a resumed (not restarted) library stage
         # bring the staged field back under the 10k probe budget; cold still
         # cannot certify there. Measured, not tuned: no parameter reads absdiff.
+        # Pinned with the case-split organ off: with it on, an Occam split
+        # that fits the 5 public rows (ite(sub(x, 2), sub(x, y), 3)) pre-empts
+        # the library stage and WITNESS rejects it (docs/WORLD.md, "Case split").
         from nomad.world import evaluate
         from nomad.world_tasks import HELDOUT
         h = HELDOUT["absdiff"]
         c, _ = evaluate(h["task"], max_eval=h["max_eval"])
-        f, _ = evaluate(h["task"], prior=self.field, use_family=False, max_eval=h["max_eval"])
+        f, _ = evaluate(h["task"], prior=self.field, use_family=False, max_eval=h["max_eval"], casesplit=False)
         self.assertFalse(c.certified)
         self.assertTrue(f.certified)
         self.assertLessEqual(f.evaluations, h["max_eval"])

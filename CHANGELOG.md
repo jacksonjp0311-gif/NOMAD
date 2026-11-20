@@ -1,5 +1,12 @@
 # NOMAD — Change History
 
+## Case split + frozen deep suite (2026-11-20)
+
+- `scripts/deep_suite.py` + `data/deep/deep_suite.json` (`7dde50b`, committed with SHA-256 `da3ae9bf...6fbd` before any field measurement): 40 seeded int tasks of size 8-12 that cold does not certify at 10,000 evaluations; held-out look-alikes excluded; pre-registered metric in `docs/DEEP_SUITE.md`.
+- `nomad/casesplit.py`: EUSolver-style case split after the cold stage misses, field arm only, int/`ite` opsets only; reuses stage-1 values, charges 1 evaluation per condition, term and assembled candidate; Occam choice; depth 2 opt-in (`NOMAD_CASESPLIT=depth2`); `NOMAD_CASESPLIT=off` disables. Cold control untouched. `world.synthesize/evaluate(casesplit=...)`.
+- Measured (`scripts/casesplit_probe.py`): LOFO 5,883 = cold (worst 1.0x). Deep suite: field 6/40 = 15% certified where cold certifies 0 (**pre-registered 25% bar missed**), 0 tasks worse than cold; cold + split also 6/40, so the gain is the mechanism, not learning. Held-outs (report-only): offline test-field absdiff regresses (8,640 certified -> rejected split at 4,296); live absdiff unchanged (not certified); quartic_sum and string/list unchanged.
+- Tests: `tests/test_casesplit.py` (13); absdiff and variation-bound tests pinned with `casesplit=False`.
+
 ## Variation operator, novelty reward, payoff memory (2026-11-20)
 
 - `nomad/variation.py`: one-step mutants of certified patterns (`op_swap`, `const_flip`, `var_swap`, `reorder`); bounded novelty archive (cap 48; score = fitness + 0.5 x behavioural novelty on fixed probe inputs; novel zero-fitness mutants kept); per-situation payoff memory (Laplace, pooled prior) that orders mutation kinds. Persisted at `data/continuous/variation.json` (+ `.prev`), checkpointed with the field.

@@ -361,6 +361,7 @@ class Search:
     library_used: list[str] = field(default_factory=list)
     via: str | None = None                                  # "variation:<kind>" when a mutant hit
     variation: list[dict] = field(default_factory=list)     # mutants tried (kind, tree, fitness)
+    casesplit: dict = field(default_factory=dict)           # case-split charges/outcome when it ran
 
 
 def _key(vals: tuple) -> str:
@@ -506,7 +507,7 @@ def familiar(prior: WorldPrior | None, family: str | None) -> bool:
 
 def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bool = True,
                use_library: bool = True, max_size: int = 7, max_eval: int = 20000,
-               staged: bool = True, variation: Any = None) -> Search:
+               staged: bool = True, variation: Any = None, casesplit: bool | None = None) -> Search:
     """Search with the cold order, the field, or a staged transfer.
 
     On a familiar family (one the field has certified before) the field's own
@@ -523,6 +524,13 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     family evidence, matching the GENESIS balance rule. The library stage
     resumes from the cold stage's pools (``_staged_gen``) rather than
     restarting; see docs/WORLD.md "Cheaper search".
+
+    ``casesplit`` (default: on unless ``NOMAD_CASESPLIT=off``) adds the
+    case-split organ (``nomad/casesplit.py``) right after the cold stage
+    misses, in the field arm only and only for int tasks whose opset has
+    ``ite``. A field with no library for the task then also runs staged
+    (cold stage, split, the max_size level), so the split has a cold stage to
+    reuse. The cold control (``prior=None``) never splits.
     """
     opset = OPSETS[task.opset]
     cold_order = tuple(opset)
@@ -534,13 +542,15 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     lib_ok = use_library and prior.wants_library(fam)
     library = prior.primitives_for(task.inputs) if lib_ok else {}
     mut = _variation_candidates(task, prior, variation, fam)
+    from . import casesplit as _cs
+    split = (_cs.enabled() if casesplit is None else bool(casesplit)) and _cs.applicable(task)
     if not staged or familiar(prior, fam):
         s = _drive(_search_gen(task, order, library, max_size, max_eval))
         return _variation_fallback(task, s, mut, max_eval)
-    if not library:
+    if not library and not split:
         s = _drive(_search_gen(task, cold_order, {}, max_size, max_eval))
         return _variation_fallback(task, s, mut, max_eval)
-    return _drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut))
+    return _drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split))
 
 
 def _variation_candidates(task: WorldTask, prior: WorldPrior, variation: Any,
@@ -600,7 +610,8 @@ def _variation_fallback(task: WorldTask, s: Search, mut: list[tuple[str, list]],
 
 
 def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list],
-                max_size: int, max_eval: int, variation: list[tuple[str, list]] | None = None):
+                max_size: int, max_eval: int, variation: list[tuple[str, list]] | None = None,
+                split: bool = False):
     """Staged transfer as one incremental search (a generator, like _search_gen).
 
     Stage 1 is exactly the cold search below ``max_size`` (same order, same
@@ -680,9 +691,11 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
 
     tried: list[dict] = []
 
+    sinfo: dict = {}
+
     def done(hit):
         libs = [s[1] for s in subtrees(hit) if s[0] == "lib"]
-        return Search(hit, evals, None, order, libs, None, tried)
+        return Search(hit, evals, None, order, libs, None, tried, sinfo)
 
     # stage 1: the cold search below max_size
     for a in [["var", n] for n, _ in task.inputs] + [["const", c] for c in INT_CONSTANTS]:
@@ -698,16 +711,26 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             return Search(None, evals, "candidate_budget", order)
         if hit is not None:
             return done(hit)
+    # stage 1.25: case split over stage 1's int pools (field arm only).
+    # Reuses the values stage 1 computed; charges 1 per term/condition tested.
+    if split:
+        from .casesplit import split_gen
+        ents = [(sz, tr, vs) for sz in sorted(pools) for (tr, vs, _f) in pools[sz].get("int", [])]
+        shit, evals, sinfo = yield from split_gen(ents, goal, rows, evals, max_eval)
+        if shit is not None:
+            return Search(shit, evals, None, order, [], f"casesplit:d{sinfo['depth']}", tried, sinfo)
+        if sinfo.get("reason") == "candidate_budget":
+            return Search(None, evals, "candidate_budget", order, [], None, tried, sinfo)
     # stage 1.5: mutants of certified patterns (bounded, memory-ordered).
     # Only reached when the cold search below max_size has missed.
     if variation:
         vhit, vkind, evals, tried = yield from _variation_stage(task, variation, evals, max_eval)
         if vhit is not None:
-            return Search(vhit, evals, None, order, [], f"variation:{vkind}", tried)
+            return Search(vhit, evals, None, order, [], f"variation:{vkind}", tried, sinfo)
     # stage 2: library atoms, resume
     for n in library:
         if evals >= max_eval:
-            return Search(None, evals, "candidate_budget", order, [], None, tried)
+            return Search(None, evals, "candidate_budget", order, [], None, tried, sinfo)
         hit = atom(["lib", n], True)
         yield evals
         if hit is not None:
@@ -715,10 +738,10 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
     for sz in range(2, max_size + 1):
         hit = yield from level(sz, fresh_only=sz <= stage1)
         if hit == "budget":
-            return Search(None, evals, "candidate_budget", order, [], None, tried)
+            return Search(None, evals, "candidate_budget", order, [], None, tried, sinfo)
         if hit is not None:
             return done(hit)
-    return Search(None, evals, "frontier", order, [], None, tried)
+    return Search(None, evals, "frontier", order, [], None, tried, sinfo)
 
 
 def _compositions(total: int, parts: int) -> list[tuple[int, ...]]:
@@ -768,12 +791,12 @@ class WorldEvaluation:
 
 def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bool = True,
              use_library: bool = True, max_size: int = 7, max_eval: int = 20000,
-             variation: Any = None) -> tuple[WorldEvaluation, WitnessReceipt | None]:
+             variation: Any = None, casesplit: bool | None = None) -> tuple[WorldEvaluation, WitnessReceipt | None]:
     library = (prior.primitives_for(task.inputs)
                if (prior is not None and use_library and prior.wants_library(task.family if use_family else None))
                else {})
     s = synthesize(task, prior=prior, use_family=use_family, use_library=use_library,
-                   max_size=max_size, max_eval=max_eval, variation=variation)
+                   max_size=max_size, max_eval=max_eval, variation=variation, casesplit=casesplit)
     vt = tuple(s.variation)
     if s.tree is None:
         return WorldEvaluation(task.task_id, task.family, None, None, False, False, False,

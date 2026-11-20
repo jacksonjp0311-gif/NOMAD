@@ -37,7 +37,7 @@ def train(families=None, rounds=2, with_var=True):
                 ex = V.explore(t, vs, V.library_trees(p, t.inputs))
                 stats["explore_evals"] += ex["evaluations"]
                 paid = list(ex["paid"])
-                if ev.certified and ev.via:
+                if ev.certified and ev.via and ev.via.startswith("variation:"):
                     stats["search_hits"] += 1
                     paid.append({"kind": ev.via.split(":", 1)[1], "tree": ev.tree})
                 trace = {"family": t.family, "tried": list(ev.variation) + ex["tried"], "paid": paid}

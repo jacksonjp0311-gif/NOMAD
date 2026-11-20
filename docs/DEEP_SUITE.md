@@ -19,3 +19,13 @@ Frozen before any field was measured on it. Generated once by
 4. Held-outs are report-only (absdiff under 10k live without min(x, y) is noted, not targeted).
 
 Results are recorded below once measured.
+
+## Results (2026-11-20, `python3 scripts/casesplit_probe.py`, after `7dde50b`)
+
+| Metric | Bar | Cold | Cold + split | Field, split off | Field | Met? |
+|---|---|---|---|---|---|---|
+| LOFO total (16 families) | <= 5,883, worst 1.0x | 5,883 | 5,883 | 5,883 | 5,883, worst 1.0x | yes |
+| Deep: certified among 40 cold misses @10k | >= 25% | 0 | 6 (15%) | 0 | 6 (15%) | **no** |
+| Deep: tasks worse than cold | 0 | | 0 | 0 | 0 | yes |
+
+Certified by the split (field and cold + split alike): deep_06, deep_15, deep_16, deep_26, deep_27, deep_30. The split also proposed 10 public-row fits that WITNESS rejected. Nothing was re-tuned after this measurement. Details: `docs/WORLD.md` "Case split".

@@ -110,3 +110,26 @@ The body that started at 09:35 UTC (run 44712062354) runs the cheaper search. It
 ## Variation, novelty and payoff memory (2026-11-20)
 
 Certified patterns are now perturbed (operator swap, constant flip, variable swap, argument reorder), novel mutants are kept in a bounded archive even when not yet better, and a per-situation payoff memory biases which perturbation is tried first. LOFO stays 5,883 = cold (worst 1.0x). Held-outs: no gain yet, absdiff 8,608 -> 8,640 and quartic_sum 21,343 -> 21,375 (32 mutants tried, none fit), string/list ties. Details and caveats: `docs/VARIATION.md`.
+
+## Case split: divide-and-conquer unification (2026-11-20)
+
+A new **organ** (not learning): `nomad/casesplit.py`, EUSolver-style. In the field arm's staged search, right after the cold stage (cold search below max_size) misses, it reuses the int programs that stage already enumerated: *terms* that are right on a subset of the public rows and *conditions* whose `> 0` mask separates those subsets, assembled into `ite(c, t1, t2)` with the smallest total size (Occam). Charged: 1 evaluation per condition tested, per term tested and per assembled candidate (the values were already paid for in stage 1, so this is a double charge); only bit-mask table lookups are free. Eligible: int output and an opset with `ite` (the `int` opset; not genesis, str or list). A field with no library for a task now also runs staged when the split is eligible. The cold control never splits. WITNESS + final split certify, as for every program. `NOMAD_CASESPLIT=off` disables it; `NOMAD_CASESPLIT=depth2` also allows one nested split (off by default, see below).
+
+Development used a separate dev suite (`scripts/deep_suite.py --seed 7`, not committed); the frozen suite (`docs/DEEP_SUITE.md`, committed with its SHA-256 in `7dde50b` before any field measurement) and the held-outs informed nothing. On the dev suite: depth 1 certified 4/40; depth 2 added 0 (0 of 6 nested candidates passed WITNESS, each pre-empting the library stage), so it is opt-in; requiring 2+ public rows per leaf (1/40) and a leave-one-row-out stability check (2/40) were worse and were dropped.
+
+Measured with `python3 scripts/casesplit_probe.py` (pre-registered metric in `docs/DEEP_SUITE.md`):
+
+| Measure | Cold | Cold + split | Field, split off | Field (split on) |
+|---|---|---|---|---|
+| LOFO total, 16 families | 5,883 | 5,883 | 5,883 | 5,883 (worst 1.0x) |
+| Deep suite certified, 40 tasks cold misses @10k | 0 | 6 (15%) | 0 | **6 (15%)** |
+| Deep tasks worse than cold | | 0 | 0 | 0 |
+| absdiff @10k (offline test field) | not found | rejected split, 4,296 | certified, 8,640 | **rejected split, 4,296** |
+| absdiff @10k (live field, read-only) | not found | | not found, 10,000 | rejected split, 4,296 |
+| quartic_sum @150k (test / live) | not found | not found | 21,375 / 13,495 | 21,375 / 13,495 |
+| last_first_upper, sum_minus_max | 332, 203 | ties | ties | ties |
+
+- **Pre-registered bar missed:** 6/40 = 15%, below the 25% target. LOFO held (5,883 = cold, worst 1.0x) and no deep task got worse than cold.
+- **It is the mechanism, not the learned field:** cold + split certifies exactly the same 6 tasks with the same counts as the trained field. Field without the split certifies 0.
+- **Overfitting is the limit:** 5 public rows. The split fired on 16 deep tasks; 6 passed WITNESS, 10 were public-row fits that WITNESS rejected. 13 of the 40 deep tasks are ones where cold itself stops on a WITNESS-rejected fit inside stage 1, which the field shares by construction, so they are unwinnable for any post-stage-1 organ.
+- **Held-out cost (report-only, not targeted):** on the offline test field, absdiff's Occam split `ite(sub(x, 2), sub(x, y), 3)` fits the public rows, is rejected by WITNESS, and pre-empts the library stage that used to certify absdiff at 8,640; the absdiff test is now pinned with the split off. Live, absdiff was not certified before either (the live library lacks `min(x, y)`) and still is not.
