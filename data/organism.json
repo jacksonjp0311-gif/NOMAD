@@ -1,10 +1,10 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-20T12:20:29Z",
+  "ts": "2026-11-20T12:30:35Z",
   "sense": {
-    "last_pair": "2026-11-20T12:20:15Z",
-    "last_world_pair": "2026-11-20T12:20:15Z",
-    "last_sleep": "2026-11-20T12:20:27Z"
+    "last_pair": "2026-11-20T12:30:33Z",
+    "last_world_pair": "2026-11-20T12:30:33Z",
+    "last_sleep": "2026-11-20T12:30:08Z"
   },
   "think": {
     "curriculum_open_levels": {
@@ -37,15 +37,15 @@
       "informative_pairs": 0,
       "mean_treatment_advantage": null,
       "both_certified_pairs_with_cost": 128,
-      "mean_evaluations_saved": 302.4296875,
+      "mean_evaluations_saved": 305.8671875,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     }
   },
   "remember": {
-    "queued": 0,
+    "queued": 2,
     "inflight": 0,
-    "certified_queued": 0,
-    "field_version": 463,
+    "certified_queued": 2,
+    "field_version": 470,
     "genesis_heldout": {
       "field_certified": true,
       "cold_certified": false
@@ -239,6 +239,51 @@
         },
         "accepted": false,
         "reason": "not_better"
+      },
+      {
+        "ts": "2026-11-20T12:30:35Z",
+        "seed": 1244641274,
+        "gene": "library_k",
+        "before": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2
+        },
+        "after": {
+          "decay": 0.97,
+          "library_k": 8,
+          "patience": 4,
+          "max_lag": 2
+        },
+        "benchmark_before": {
+          "heldout_wins": 2,
+          "train_evaluations": 4538,
+          "train_certified": 16,
+          "probe_evaluations": 30486,
+          "total_evaluations": 35024,
+          "probes": {
+            "absdiff": "certified_correctness",
+            "quartic_sum": "certified_correctness",
+            "last_first_upper": "none",
+            "sum_minus_max": "none"
+          }
+        },
+        "benchmark_after": {
+          "heldout_wins": 2,
+          "train_evaluations": 4538,
+          "train_certified": 16,
+          "probe_evaluations": 30486,
+          "total_evaluations": 35024,
+          "probes": {
+            "absdiff": "certified_correctness",
+            "quartic_sum": "certified_correctness",
+            "last_first_upper": "none",
+            "sum_minus_max": "none"
+          }
+        },
+        "accepted": false,
+        "reason": "not_better"
       }
     ]
   },
@@ -246,11 +291,11 @@
     "recent_events": [],
     "body_lease": {
       "host": "gh-44712062354",
-      "heartbeat": "2026-11-20T12:20:29Z",
-      "age_min": 0.01012805,
+      "heartbeat": "2026-11-20T12:30:35Z",
+      "age_min": 0.004228433333333333,
       "alive": true,
-      "cycles": 387,
-      "cycles_per_hour": 141.2,
+      "cycles": 409,
+      "cycles_per_hour": 140.6,
       "released": false
     }
   },
