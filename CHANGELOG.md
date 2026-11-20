@@ -1,5 +1,11 @@
 # NOMAD — Change History
 
+## Continuous loop: balance and unlearning (2026-11-19)
+
+- `GrammarPrior` keeps per-domain operator evidence and a `decay(gamma)`; treatment orders by its domain's evidence, untrained domains keep the cold order. Held-out family still uses the global field.
+- Scoreboard records per-arm evaluations and `evaluations_saved`.
+- Bar (`python -m nomad.heldout balance`): held-out won, subtract 8 vs 29 cold evaluations (was 50 under a multiply-only field), no domain regresses.
+
 ## Continuous loop: actor/learner split (2026-11-19)
 
 - Awake treatment enqueues a versioned packet instead of writing the prior; sleep (`nomad/consolidate.py`) is the single learner. Receipts are re-verified, stale packets rejected (`nomad/staleness.py`), queue bounded with crash-safe claim/ack (`nomad/field_queue.py`).

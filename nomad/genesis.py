@@ -130,31 +130,75 @@ class GrammarPrior:
 
     This is not an invented unrestricted grammar. The productions themselves
     are fixed; experience may change their order but cannot certify outcomes.
+
+    Balance (unlearning): each witnessed program may also carry a task family
+    (the proposer's domain). ``order(context, family=...)`` then uses only
+    that family's evidence, and a family with no witnessed evidence keeps the
+    cold default order, so a multiply-heavy field cannot slow a subtract task
+    below the control. ``family=None`` keeps the old global/contextual order,
+    which is what the never-trained held-out family uses. ``decay(gamma)``
+    shrinks every count so old wins fade unless re-earned.
     """
+    NAMES = ("Add", "Sub", "Mult")
+
     def __init__(self, *, contextual: bool = True) -> None:
         self.operator = ContextualOperatorLearner(contextual=contextual)
         self.witnessed = 0
         self.contextual = contextual
+        self.families: dict[str, dict[str, list[float]]] = {}
 
-    def add_witnessed(self, context: int, expr: str, receipt: WitnessReceipt) -> None:
+    def add_witnessed(self, context: int, expr: str, receipt: WitnessReceipt,
+                      family: str | None = None) -> None:
         if not receipt.supported or not receipt.verify_checksum():
             raise ValueError("Cannot learn from an unverified or failed WITNESS receipt")
         tree = ast.parse(expr, mode="eval")
         if not isinstance(tree.body, ast.BinOp):
             return
-        for op in ("Add", "Sub", "Mult"):
-            self.operator.update(context, op, type(tree.body.op).__name__ == op)
+        root = type(tree.body.op).__name__
+        for op in self.NAMES:
+            self.operator.update(context, op, root == op)
+        if family:
+            fam = self.families.setdefault(family, {op: [0.0, 0.0] for op in self.NAMES})
+            for op in self.NAMES:
+                fam.setdefault(op, [0.0, 0.0])[0 if root == op else 1] += 1.0
         self.witnessed += 1
 
-    def order(self, context: int) -> tuple[str, ...]:
+    def decay(self, gamma: float) -> None:
+        """Multiply every count by gamma (0 < gamma <= 1). Witnessed count is history and is kept."""
+        if not 0.0 < gamma <= 1.0:
+            raise ValueError("gamma must be in (0, 1]")
+        for counts in list(self.operator.global_counts.values()) + list(self.operator.context_counts.values()):
+            counts.success *= gamma
+            counts.failure *= gamma
+        for fam in self.families.values():
+            for pair in fam.values():
+                pair[0] *= gamma
+                pair[1] *= gamma
+
+    def family_evidence(self, family: str) -> float:
+        fam = self.families.get(family) or {}
+        return sum(s + f for s, f in fam.values()) / max(1, len(self.NAMES))
+
+    def order(self, context: int, family: str | None = None) -> tuple[str, ...]:
+        names = self.NAMES
         if self.witnessed == 0:
-            return ("Add", "Sub", "Mult")
-        names = ("Add", "Sub", "Mult")
+            return names
+        if family is not None:
+            fam = self.families.get(family)
+            if not fam or self.family_evidence(family) <= 0:
+                return names
+            def fscore(op: str) -> float:
+                s, f = fam.get(op, [0.0, 0.0])
+                return (s + 1.0) / (s + f + 2.0)
+            return tuple(sorted(names, key=lambda op: (-fscore(op), names.index(op))))
         return tuple(sorted(names, key=lambda op: (-self.operator.score(context, op), names.index(op))))
 
     def snapshot(self) -> dict:
-        return {"schema": "nomad.v0.10.grammar-prior.v1", "witnessed": self.witnessed,
+        snap = {"schema": "nomad.v0.10.grammar-prior.v1", "witnessed": self.witnessed,
                 "contextual": self.contextual, "operator": self.operator.snapshot()}
+        if self.families:
+            snap["families"] = {k: {op: list(v) for op, v in fam.items()} for k, fam in sorted(self.families.items())}
+        return snap
 
 
 _OPERATOR = {"Add": "+", "Sub": "-", "Mult": "*"}
@@ -232,6 +276,7 @@ def _enumerate(
 def synthesize(
     task: SynthesisTask, *, prior: GrammarPrior | None = None,
     max_nodes: int = 7, max_eval: int = 65000, max_counterexamples: int = 6,
+    family: str | None = None,
 ) -> SynthesisRun:
     """Search sees public examples only; hidden splits remain inaccessible.
 
@@ -241,7 +286,12 @@ def synthesize(
     if not task.public or max_nodes < 1 or max_eval <= 0:
         return SynthesisRun(None,0,0,0,False,"invalid_budget_or_examples",0)
     context = _signature(task)
-    root_order = prior.order(context) if prior is not None else ("Add","Sub","Mult")
+    if prior is None:
+        root_order = ("Add","Sub","Mult")
+    elif family is not None:
+        root_order = prior.order(context, family=family)
+    else:
+        root_order = prior.order(context)
     active = [0,1,2] if len(task.public) >= 3 else list(range(len(task.public)))
     consumed = 0
     classes = 0
@@ -319,8 +369,9 @@ class Evaluation:
 
 
 def evaluate_task(task:SynthesisTask, *, prior:GrammarPrior|None=None,
-                  max_nodes:int=7,max_eval:int=65000, actual_tests:bool=False) -> tuple[Evaluation, WitnessReceipt|None]:
-    search=synthesize(task,prior=prior,max_nodes=max_nodes,max_eval=max_eval)
+                  max_nodes:int=7,max_eval:int=65000, actual_tests:bool=False,
+                  family:str|None=None) -> tuple[Evaluation, WitnessReceipt|None]:
+    search=synthesize(task,prior=prior,max_nodes=max_nodes,max_eval=max_eval,family=family)
     reachable, count=fixed_v9_reachable(task)
     if search.candidate is None:
         return Evaluation(task.task_id,task.hidden_family,False,False,False,False,reachable,count,
@@ -384,6 +435,8 @@ def prior_from_snapshot(snap: dict) -> GrammarPrior:
         except ValueError:
             continue
         prior.operator.context_counts[(sig, fam)] = Counts(**counts)
+    for family, ops in (snap.get("families") or {}).items():
+        prior.families[family] = {op: [float(v[0]), float(v[1])] for op, v in ops.items()}
     return prior
 
 

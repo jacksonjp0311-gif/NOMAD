@@ -119,7 +119,10 @@ def twin_summary(rows: Iterable[dict], name: str = "rloo") -> dict[str, object]:
     est = estimator(name)
     groups = []
     adv = []
+    saved = []
     for row in rows:
+        if "evaluations_saved" in row and row.get("treatment") and row.get("control"):
+            saved.append(int(row["evaluations_saved"]))
         if "treatment" not in row or "control" not in row:
             continue
         g = [float(bool(row["control"])), float(bool(row["treatment"]))]
@@ -132,5 +135,7 @@ def twin_summary(rows: Iterable[dict], name: str = "rloo") -> dict[str, object]:
         **stats,
         "informative_pairs": len(adv),
         "mean_treatment_advantage": (sum(adv) / len(adv)) if adv else None,
+        "both_certified_pairs_with_cost": len(saved),
+        "mean_evaluations_saved": (sum(saved) / len(saved)) if saved else None,
         "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage.",
     }

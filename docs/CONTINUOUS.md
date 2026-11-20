@@ -23,6 +23,10 @@ Public-example correctness alone is not learning. A learning measurement require
 2. WITNESS support and final-split correctness as the success bit,
 3. a scoreboard row with both arms present.
 
+## Balance and unlearning
+
+Each consolidated packet also trains its acting domain's own operator counts. Treatment orders search by that domain's evidence only; a domain with no witnessed evidence keeps the cold order, so a multiply-heavy field cannot slow a subtract task below control. The never-trained held-out family still reads the global field. Every consolidation that applies packets multiplies all counts by `NOMAD_DECAY` (default 0.97) so old wins fade unless re-earned. Scoreboard rows now also carry `control_evaluations`, `treatment_evaluations`, and `evaluations_saved`, because GENESIS tasks are usually certified by both arms and the cost is the only contrast. `python -m nomad.heldout balance` reports the bar: on frozen training rows, held-out square_product is won by the field (cold misses at 2000), subtract costs 8 evaluations under the field against 29 cold (a multiply-only field cost 50), and no domain costs more than cold. Untrained domains show no transfer yet (field = cold).
+
 ## Actor / learner split
 
 Ideas taken from NVIDIA Molt and re-implemented in pure Python (see `docs/MOLT_EXTRACTION.md`). In the current schedule awake and sleep are serialized by one concurrency group, so packet lag is normally 0; the staleness bound matters when packets survive a failed sleep, are resumed from `queue.inflight.jsonl`, or if awake is ever fanned out. `NOMAD_LEARNER=inline` consolidates right after each treatment awake (old synchronous behaviour, same checks). The staleness weight is a discount, not true importance sampling; GrammarPrior counts are integers, so it only gates.

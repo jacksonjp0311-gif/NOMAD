@@ -191,9 +191,12 @@ def awake(
     # Order is read from the prior *before* this cycle's witness update.
     # For treatment this is the field; for control it is always default.
     # Signature is computed inside evaluate_task/synthesize.
-    evaluated, receipt = evaluate_task(task, prior=prior)
+    # Treatment reads the field through the acting domain's own evidence
+    # (balance): an untrained domain keeps the cold order.
+    family = domain if arm == "treatment" else None
+    evaluated, receipt = evaluate_task(task, prior=prior, family=family)
     context_sig = evaluated.learned_context
-    order = list(prior.order(context_sig))
+    order = list(prior.order(context_sig, family=family)) if family else list(prior.order(context_sig))
     certified = bool(evaluated.witness_supported and evaluated.final_correct)
     outcome = {
         "mode": "awake",
@@ -259,8 +262,9 @@ def awake(
                 outcome["consolidated"] = learned
                 after = load_prior_file(_prior_path())
                 outcome["prior_witnessed_after"] = after.witnessed
-                outcome["operator_order_after"] = list(after.order(context_sig))
-    paired = record_arm(task_text, arm, certified, kind="certified", pair_id=pair_id, field_version=version)
+                outcome["operator_order_after"] = list(after.order(context_sig, family=domain))
+    paired = record_arm(task_text, arm, certified, kind="certified", pair_id=pair_id,
+                        field_version=version, evaluations=evaluated.candidate_evaluations)
     if paired:
         outcome["scoreboard"] = paired
         outcome["learning_measurement"] = {

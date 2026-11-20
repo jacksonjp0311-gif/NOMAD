@@ -90,6 +90,7 @@ def record_arm(
     kind: str = "certified",
     pair_id: str | None = None,
     field_version: int | None = None,
+    evaluations: int | None = None,
     max_age_s: float = MAX_PENDING_AGE_S,
 ) -> dict[str, Any] | None:
     """Record one arm. Return the paired delta if both arms are now present.
@@ -119,6 +120,8 @@ def record_arm(
     entry["pair_id"] = pair_id
     if field_version is not None:
         entry[f"{arm}_field_version"] = field_version
+    if evaluations is not None:
+        entry[f"{arm}_evaluations"] = int(evaluations)
     pending[task_id] = entry
     _save_pending(pending)
     if "treatment" in entry and "control" in entry:
@@ -133,6 +136,11 @@ def record_arm(
         }
         if pair_id:
             row["pair_id"] = pair_id
+        if "treatment_evaluations" in entry and "control_evaluations" in entry:
+            row["treatment_evaluations"] = entry["treatment_evaluations"]
+            row["control_evaluations"] = entry["control_evaluations"]
+            # Positive = the field reached the same outcome with less search.
+            row["evaluations_saved"] = entry["control_evaluations"] - entry["treatment_evaluations"]
         if "treatment_field_version" in entry:
             row["field_version"] = entry["treatment_field_version"]
         with _board().open("a") as f:

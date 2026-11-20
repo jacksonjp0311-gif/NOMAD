@@ -28,6 +28,9 @@ from .staleness import StalenessPolicy
 from .witness import WitnessReceipt
 
 
+DEFAULT_DECAY = 0.97
+
+
 def prior_path() -> Path:
     return data_root() / "continuous" / "prior.json"
 
@@ -112,7 +115,8 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
             dropped[reason or "stale"] += 1
             continue
         try:
-            prior.add_witnessed(int(p.get("context_sig", 0)), p.get("candidate") or "", receipt)
+            prior.add_witnessed(int(p.get("context_sig", 0)), p.get("candidate") or "", receipt,
+                                family=p.get("domain"))
         except (ValueError, SyntaxError):
             dropped["bad_receipt"] += 1
             continue
@@ -137,7 +141,11 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
             reinforce(f"domain:{p['domain']}", 1)
         applied.append({"packet_id": pid, "task": p.get("task"), "lag": lag, "weight": weight})
     new_version = current
+    gamma = float(os.environ.get("NOMAD_DECAY", str(DEFAULT_DECAY)))
     if applied:
+        # Unlearning: old evidence fades a little each time new evidence lands,
+        # so the order follows what is still being re-earned.
+        prior.decay(gamma)
         save_prior_atomic(prior)
         new_version = field_queue.bump_version(f"consolidated {len(applied)} packet(s)")
     field_queue.ack()
@@ -149,6 +157,7 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
         "field_version_after": new_version,
         "prior_source": prior_source,
         "prior_witnessed": prior.witnessed,
+        "decay": gamma if applied else None,
         "policy": {"max_lag": policy.max_lag, "mode": policy.mode, "decay": policy.decay,
                    "min_weight": policy.min_weight},
     }

@@ -128,6 +128,63 @@ def compare_live() -> dict[str, Any]:
     return _compare_with(field, field_source=str(path) if path.exists() else "empty_live_prior")
 
 
+def train_balanced_prior(gamma: float = 0.97) -> GrammarPrior:
+    """Field from witnessed multiply (mathematics) and subtract (language) training only."""
+    from .domain_tasks import TRAIN_SUBTRACT
+    prior = GrammarPrior()
+    for family, specs in (("mathematics", TRAIN_MULTIPLY), ("language", TRAIN_SUBTRACT)):
+        for spec in specs:
+            task = SynthesisTask(
+                task_id=spec["task_id"], source="def solve(x, y):\n    return 0\n",
+                public=spec["public"], challenge=spec["challenge"], final=spec["final"],
+                hidden_family=family,
+            )
+            evaluated, receipt = evaluate_task(task, prior=prior, family=family)
+            if evaluated.witness_supported and evaluated.final_correct and receipt is not None:
+                prior.add_witnessed(evaluated.learned_context, evaluated.candidate or "", receipt, family=family)
+                prior.decay(gamma)
+    return prior
+
+
+def balance_report(field: GrammarPrior | None = None) -> dict[str, Any]:
+    """Per-domain cold vs field cost, plus the held-out family, under the balanced field.
+
+    Pass bar: held-out square_product stays won, and no domain needs more
+    evaluations under the field than under the cold control.
+    """
+    from .domain_tasks import DOMAIN_OPERATORS, splits_for
+    field = field or train_balanced_prior()
+    cold = GrammarPrior()
+    domains = {}
+    regressions = []
+    for domain in DOMAIN_OPERATORS:
+        sp = splits_for(domain)
+        task = SynthesisTask(
+            task_id=f"balance-{domain}", source="def solve(x, y):\n    return 0\n",
+            public=sp["public"], challenge=sp["challenge"], final=sp["final"], hidden_family=domain,
+        )
+        c, _ = evaluate_task(task, prior=cold)
+        f, _ = evaluate_task(task, prior=field, family=domain)
+        row = {
+            "operator": sp["operator"],
+            "cold": {"certified": bool(c.witness_supported and c.final_correct), "evaluations": c.candidate_evaluations},
+            "field": {"certified": bool(f.witness_supported and f.final_correct), "evaluations": f.candidate_evaluations},
+        }
+        row["evaluations_saved"] = row["cold"]["evaluations"] - row["field"]["evaluations"]
+        if (row["cold"]["certified"] and not row["field"]["certified"]) or row["evaluations_saved"] < 0:
+            regressions.append(domain)
+        domains[domain] = row
+    held = _compare_with(field, field_source="balanced_training")
+    return {
+        "heldout": {"family": held["family"], "field_certified": held["field"]["certified"],
+                    "cold_certified": held["cold"]["certified"], "advantage_kind": held["advantage_kind"]},
+        "domains": domains,
+        "regressions": regressions,
+        "pass": bool(held["field"]["certified"] and not held["cold"]["certified"] and not regressions),
+        "note": "Matched budget, frozen rows. Domain names label small integer families.",
+    }
+
+
 def compare(domain: str = "mathematics") -> dict[str, Any]:
     """Default entry: the frozen held-out mechanism comparison.
 
@@ -141,9 +198,12 @@ def compare(domain: str = "mathematics") -> dict[str, Any]:
 def main(argv: list[str] | None = None) -> int:
     import argparse
     parser = argparse.ArgumentParser(description="NOMAD held-out cold vs field comparison")
-    parser.add_argument("mode", nargs="?", choices=("mechanism", "live"), default="mechanism")
+    parser.add_argument("mode", nargs="?", choices=("mechanism", "live", "balance"), default="mechanism")
     args = parser.parse_args(argv)
-    result = compare_live() if args.mode == "live" else compare_mechanism()
+    if args.mode == "balance":
+        result = balance_report()
+    else:
+        result = compare_live() if args.mode == "live" else compare_mechanism()
     print(json.dumps(result, indent=2))
     return 0
 

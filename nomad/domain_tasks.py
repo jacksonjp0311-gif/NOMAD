@@ -168,3 +168,14 @@ TRAIN_MULTIPLY = (
         "final": (IOExample(9, 3, 27), IOExample(5, 6, 30)),
     },
 )
+
+# Frozen subtract training rows for the balance check. Disjoint from the
+# language domain public/challenge/final rows above.
+TRAIN_SUBTRACT = (
+    {
+        "task_id": "train-sub-a",
+        "public": (IOExample(7, 3, 4), IOExample(9, 5, 4), IOExample(6, 1, 5)),
+        "challenge": (IOExample(13, 4, 9), IOExample(20, 8, 12)),
+        "final": (IOExample(17, 9, 8), IOExample(14, 2, 12)),
+    },
+)
