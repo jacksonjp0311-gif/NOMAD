@@ -248,6 +248,152 @@
           "ts": "2026-11-20T03:32:51Z"
         },
         "ts": "2026-11-20T03:32:51Z"
+      },
+      {
+        "to": "spark",
+        "message": {
+          "mode": "sleep",
+          "arm": "treatment",
+          "status": "consolidated",
+          "learner": {
+            "claimed": 4,
+            "applied": [
+              {
+                "packet_id": "abc934d4f705f096",
+                "task": "domain:understanding",
+                "lag": 0,
+                "weight": 1.0
+              },
+              {
+                "packet_id": "8b09ef3a2b9b7321",
+                "task": "world:div_pair",
+                "lag": 0,
+                "weight": 1.0,
+                "world": true
+              },
+              {
+                "packet_id": "2835aa4d221dfa05",
+                "task": "domain:understanding",
+                "lag": 0,
+                "weight": 1.0
+              },
+              {
+                "packet_id": "5c2b80e37cd977ec",
+                "task": "world:first_last",
+                "lag": 0,
+                "weight": 1.0,
+                "world": true
+              }
+            ],
+            "dropped": {},
+            "field_version_before": 0,
+            "field_version_after": 1,
+            "prior_source": "current",
+            "prior_witnessed": 5,
+            "world_applied": 2,
+            "world_witnessed": 2,
+            "decay": 0.97,
+            "policy": {
+              "max_lag": 2,
+              "mode": "mask",
+              "decay": 0.5,
+              "min_weight": 0.25
+            }
+          },
+          "pending_pruned": 6,
+          "world_heldout": {
+            "absdiff": "none",
+            "quartic_sum": "none",
+            "last_first_upper": "none",
+            "sum_minus_max": "none"
+          },
+          "twin": {
+            "estimator": "rloo",
+            "groups": 8,
+            "pass_rate": 0.9375,
+            "all_pass_rate": 0.875,
+            "all_fail_rate": 0.0,
+            "informative_rate": 0.125,
+            "informative_pairs": 1,
+            "mean_treatment_advantage": 1.0,
+            "both_certified_pairs_with_cost": 4,
+            "mean_evaluations_saved": 0.0,
+            "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
+          },
+          "merged": 0,
+          "rules": {
+            "noop": 27,
+            "majority": 23,
+            "growth": 27,
+            "decay": 23,
+            "stabilize": 23,
+            "winner": "growth"
+          },
+          "rewrite": {
+            "status": "proposed",
+            "edit": {
+              "bits": [
+                143,
+                255,
+                458,
+                492,
+                1152,
+                1450,
+                1575,
+                1782,
+                1832,
+                2191,
+                2228,
+                2557,
+                2622,
+                2677,
+                2728,
+                2734,
+                2858,
+                3094,
+                3166,
+                3217,
+                3257,
+                3393,
+                3519,
+                3549,
+                3644,
+                3674,
+                3772,
+                3899,
+                3917,
+                4095
+              ],
+              "count": 3,
+              "label": "packet:minimal-variant",
+              "receipt": {
+                "predicted": "reinforce recent success",
+                "measured": "public_correct",
+                "context": {
+                  "task": "packet:minimal-variant",
+                  "arm": "treatment",
+                  "proposal": {
+                    "task": "packet:minimal-variant",
+                    "reason": "reinforce recent success",
+                    "source": "sim"
+                  }
+                }
+              }
+            },
+            "target_label": "packet:minimal-variant"
+          },
+          "telemetry": {
+            "ts": "2026-11-20T03:57:14Z",
+            "uptime": 1795147034.5793278,
+            "packets": 25,
+            "fitness": {
+              "success": 15.0,
+              "cycles": 15.0
+            }
+          },
+          "ts": "2026-11-20T03:57:14Z"
+        },
+        "ts": "2026-11-20T03:57:14Z"
       }
     ]
   },
@@ -7481,6 +7627,22 @@
           }
         },
         "ts": "2026-11-20T03:57:00Z"
+      },
+      {
+        "to": "keeper",
+        "message": {
+          "ts": "2026-11-20T03:57:14Z",
+          "measurement": {
+            "ts": "2026-11-20T03:57:14Z",
+            "uptime": 1795147034.5793278,
+            "packets": 25,
+            "fitness": {
+              "success": 15.0,
+              "cycles": 15.0
+            }
+          }
+        },
+        "ts": "2026-11-20T03:57:14Z"
       }
     ]
   }

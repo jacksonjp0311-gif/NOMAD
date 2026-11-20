@@ -1,44 +1,60 @@
 {
   "schema": "nomad.v0.10.grammar-prior.v1",
-  "witnessed": 3,
+  "witnessed": 5,
   "contextual": true,
   "operator": {
     "contextual": true,
     "global": {
       "Add": {
-        "success": 2,
-        "failure": 3
+        "success": 3.88,
+        "failure": 2.91
       },
       "Mult": {
-        "success": 7,
-        "failure": 1
+        "success": 6.79,
+        "failure": 2.91
       },
       "Sub": {
-        "success": 1,
-        "failure": 2
+        "success": 0.97,
+        "failure": 3.88
       }
     },
     "contexts": {
       "0:Add": {
-        "success": 2,
-        "failure": 0
+        "success": 1.94,
+        "failure": 0.0
       },
       "0:Mult": {
-        "success": 5,
-        "failure": 0
+        "success": 4.85,
+        "failure": 0.0
       },
       "1216:Add": {
-        "success": 0,
-        "failure": 3
+        "success": 1.94,
+        "failure": 2.91
       },
       "1216:Mult": {
-        "success": 2,
-        "failure": 1
+        "success": 1.94,
+        "failure": 2.91
       },
       "1216:Sub": {
-        "success": 1,
-        "failure": 2
+        "success": 0.97,
+        "failure": 3.88
       }
+    }
+  },
+  "families": {
+    "understanding": {
+      "Add": [
+        1.94,
+        0.0
+      ],
+      "Sub": [
+        0.0,
+        1.94
+      ],
+      "Mult": [
+        0.0,
+        1.94
+      ]
     }
   }
 }
