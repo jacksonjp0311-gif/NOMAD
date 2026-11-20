@@ -1,7 +1,7 @@
 """Continuous cybernetic loop for NOMAD.
 
 Awake: proposer generates the next task from field and SIM, orbit readout biases prior,
-selects a tool from domain bias, then synthesis on domain or default examples.
+selects a tool from domain bias, then synthesis on external or domain examples.
 Sleep: consolidate, evaluate CA rules on independent snapshots, propose rewrite.
 SIM: one receipt per outcome. No double-count.
 Scoreboard: each arm records itself under a stable task key; delta is computed
@@ -12,7 +12,7 @@ Orbit: one-hop relational pull (see orbit.py and docs/ORBIT.md).
 No transformers. Field builds, evolves, proposes, and rewrites itself only after evidence.
 
 Domain packets are preferred for bias. On measured success under a domain bias,
-the matching domain packet count is increased. Domain tasks use their own examples.
+the matching domain packet count is increased. External examples override domain sets.
 """
 from __future__ import annotations
 
@@ -38,9 +38,11 @@ from .domain_tasks import examples_for
 from .tools import select as select_tool
 from .query import query as field_query
 from .orbit import orbit
+from .external import load_examples
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "continuous"
+EXTERNAL = ROOT / "data" / "external"
 MEMORY_PATH = DATA / "mnemonic.json"
 PRIOR_PATH = DATA / "prior.json"
 LOG_PATH = DATA / "log.jsonl"
@@ -123,6 +125,11 @@ def _examples_for_bias(bias: dict[str, Any]) -> tuple:
     reason = bias.get("reason", "")
     if reason.startswith("domain:"):
         domain = reason.split(":", 1)[1]
+        path = EXTERNAL / f"{domain}.txt"
+        if path.exists():
+            loaded = load_examples(path)
+            if loaded:
+                return loaded
         return examples_for(domain)
     return EXAMPLES.get(bias.get("examples", "add"), EXAMPLES["add"])
 
