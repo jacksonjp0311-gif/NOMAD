@@ -91,6 +91,13 @@ class FrozenScienceSuite(unittest.TestCase):
         self.assertGreaterEqual(len(self.hard), 10)
         self.assertEqual({e["kind"] for e in self.suite["hard"]}, set(S.KINDS))
 
+    def test_sense_classifies_every_suite_task_as_science(self):
+        from nomad import sense as SN
+        for e, t in zip(self.suite["easy"] + self.suite["hard"], self.easy + self.hard):
+            r = SN.sense(t)
+            self.assertEqual((r["domain"], r["kind"], r["source"]), ("science", e["kind"], "tag"), e["family"])
+            self.assertEqual(SN.lead_ops(r), ())   # SENSE does not aim science tasks
+
     def test_regeneration_is_identical(self):
         self.assertEqual(SS.suite_hash(SS.generate(self.suite["seed"])), SS.suite_hash(self.suite))
 

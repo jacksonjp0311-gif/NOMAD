@@ -168,7 +168,7 @@ are unchanged from the pre-registration above.
 | 4A. No harm on hard | 0 tasks worse than cold | 0 for every arm | yes |
 | 4B. field + science curriculum on hard @10k | >= 25% | **4 / 14 (28.6%)** in 121,445 evals; cold 0/14, cold + split 0/14, field(main) 0/14 (140,000 each) | **yes** |
 | Easy (report only) | | 14/14 for every arm; cold, cold + split and field(main) all 23,109 evals; field + science 2,038 (in-sample) | |
-| 3. Tests | all green | 346 tests OK (6 skipped), incl. `tests/test_blockprobe.py` (5) | yes |
+| 3. Tests | all green | 351 tests OK (6 skipped), incl. `tests/test_blockprobe.py` (5) and a SENSE check in `tests/test_science.py` | yes |
 | 5. No regression | | `casesplit_probe.py` output identical to before the change: LOFO 5,883 every arm, worst 1.0x; deep field 6/40, 0 worse; held-outs unchanged | yes |
 
 Certified by the block probe: `at²/2` (6,544 evals), `u + at/2` (5,139),
@@ -182,3 +182,9 @@ Honest reading: the pass is narrow (4 tasks against a threshold of 3.5).
 Dev and sealed share formulas, so the dev tuning was not independent of the
 sealed problems. The win is curriculum transfer (easy formulas teach blocks
 the hard ones reuse), not the field "knowing physics".
+
+After rebasing onto SENSE (`064404d`, deep baseline now 14/40): the sealed
+science numbers are identical (SENSE labels science tasks `domain=science`,
+`kind` from the tag, and does not aim them). `casesplit_probe.py` with
+BLOCKPROBE on and with `NOMAD_BLOCKPROBE=off` gives byte-identical output:
+LOFO 5,883 every arm (worst 1.0x), deep field 14/40, 0 worse than cold.
