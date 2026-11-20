@@ -1,41 +1,41 @@
 {
   "sense": {
-    "ts": "2026-11-20T09:35:41Z",
-    "uptime": 1795167341.5750244,
-    "packets": 1026,
+    "ts": "2026-11-20T09:46:21Z",
+    "uptime": 1795167981.0153735,
+    "packets": 1053,
     "fitness": {
-      "success": 1014.0,
-      "cycles": 1014.0
+      "success": 1041.0,
+      "cycles": 1041.0
     }
   },
   "fitness": {
-    "success": 1014.0,
-    "cycles": 1014.0
+    "success": 1041.0,
+    "cycles": 1041.0
   },
   "recent_bus": [
     {
       "to": "keeper",
       "message": {
-        "ts": "2026-11-20T09:35:00Z",
+        "ts": "2026-11-20T09:45:48Z",
         "measurement": {
-          "ts": "2026-11-20T09:35:00Z",
-          "uptime": 1795167300.9519777,
-          "packets": 1023,
+          "ts": "2026-11-20T09:45:48Z",
+          "uptime": 1795167948.5971503,
+          "packets": 1050,
           "fitness": {
-            "success": 1013.0,
-            "cycles": 1013.0
+            "success": 1039.0,
+            "cycles": 1039.0
           }
         }
       },
-      "ts": "2026-11-20T09:35:00Z"
+      "ts": "2026-11-20T09:45:48Z"
     },
     {
       "to": "keeper",
       "message": {
         "mode": "awake",
-        "arm": "control",
-        "pair_id": "dd631c2e48b1",
-        "field_version": 333,
+        "arm": "treatment",
+        "pair_id": "50ce6422019c",
+        "field_version": 342,
         "task": "domain:science",
         "proposal": {
           "task": "domain:science",
@@ -47,7 +47,7 @@
         "context": [
           {
             "overlap": 30,
-            "count": 1325,
+            "count": 1362,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -84,7 +84,7 @@
           },
           {
             "overlap": 30,
-            "count": 1323,
+            "count": 1360,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -119,7 +119,7 @@
           },
           {
             "overlap": 30,
-            "count": 1322,
+            "count": 1359,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -154,7 +154,7 @@
           },
           {
             "overlap": 30,
-            "count": 1321,
+            "count": 1358,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -189,7 +189,7 @@
           },
           {
             "overlap": 30,
-            "count": 1318,
+            "count": 1355,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -224,7 +224,7 @@
           },
           {
             "overlap": 30,
-            "count": 1317,
+            "count": 1354,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -259,7 +259,7 @@
           },
           {
             "overlap": 30,
-            "count": 1316,
+            "count": 1353,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -294,7 +294,570 @@
           },
           {
             "overlap": 30,
-            "count": 1313,
+            "count": 1350,
+            "label": "domain:science",
+            "size": 30,
+            "receipt": {
+              "predicted": "exercise domain",
+              "measured": "witness_and_final",
+              "context": {
+                "task": "domain:science",
+                "arm": "treatment",
+                "certified": true,
+                "packet_id": "1f0206ba324b7bfa",
+                "field_version": 5,
+                "lag": 0,
+                "weight": 1.0,
+                "bias": {
+                  "operator": "Mult",
+                  "examples": "science",
+                  "reason": "domain:science",
+                  "overlap": 0,
+                  "label": "domain:science"
+                },
+                "tool": {
+                  "domain": "science",
+                  "tool": "measure_relation",
+                  "reason": "domain:science",
+                  "examples": 3,
+                  "source": "domain"
+                },
+                "operator": "Mult"
+              }
+            },
+            "orbit": true
+          }
+        ],
+        "bias": {
+          "operator": "Mult",
+          "examples": "science",
+          "reason": "domain:science",
+          "overlap": 0,
+          "label": "domain:science"
+        },
+        "tool": {
+          "domain": "science",
+          "tool": "measure_relation",
+          "reason": "domain:science",
+          "examples": 3,
+          "source": "domain"
+        },
+        "example_source": "domain",
+        "context_sig": 1216,
+        "operator_order": [
+          "Mult",
+          "Add",
+          "Sub"
+        ],
+        "prior_witnessed": 1028,
+        "sim_history": [
+          {
+            "ts": "2026-11-20T09:44:20Z",
+            "edit": "packet:domain:science",
+            "predicted": "exercise domain",
+            "measured": "witness_and_final",
+            "context": {
+              "task": "domain:science",
+              "arm": "treatment",
+              "bias": {
+                "operator": "Mult",
+                "examples": "science",
+                "reason": "domain:science",
+                "overlap": 0,
+                "label": "domain:science"
+              },
+              "tool": {
+                "domain": "science",
+                "tool": "measure_relation",
+                "reason": "domain:science",
+                "examples": 3,
+                "source": "domain"
+              },
+              "certified": true
+            }
+          },
+          {
+            "ts": "2026-11-20T09:44:38Z",
+            "edit": "packet:domain:science",
+            "predicted": "exercise domain",
+            "measured": "witness_and_final",
+            "context": {
+              "task": "domain:science",
+              "arm": "control",
+              "bias": {
+                "operator": "Mult",
+                "examples": "science",
+                "reason": "domain:science",
+                "overlap": 0,
+                "label": "domain:science"
+              },
+              "tool": {
+                "domain": "science",
+                "tool": "measure_relation",
+                "reason": "domain:science",
+                "examples": 3,
+                "source": "domain"
+              },
+              "certified": true
+            }
+          },
+          {
+            "ts": "2026-11-20T09:44:40Z",
+            "edit": "packet:domain:science",
+            "predicted": "exercise domain",
+            "measured": "witness_and_final",
+            "context": {
+              "task": "domain:science",
+              "arm": "treatment",
+              "bias": {
+                "operator": "Mult",
+                "examples": "science",
+                "reason": "domain:science",
+                "overlap": 0,
+                "label": "domain:science"
+              },
+              "tool": {
+                "domain": "science",
+                "tool": "measure_relation",
+                "reason": "domain:science",
+                "examples": 3,
+                "source": "domain"
+              },
+              "certified": true
+            }
+          },
+          {
+            "ts": "2026-11-20T09:44:58Z",
+            "edit": "packet:domain:science",
+            "predicted": "exercise domain",
+            "measured": "witness_and_final",
+            "context": {
+              "task": "domain:science",
+              "arm": "control",
+              "bias": {
+                "operator": "Mult",
+                "examples": "science",
+                "reason": "domain:science",
+                "overlap": 0,
+                "label": "domain:science"
+              },
+              "tool": {
+                "domain": "science",
+                "tool": "measure_relation",
+                "reason": "domain:science",
+                "examples": 3,
+                "source": "domain"
+              },
+              "certified": true
+            }
+          },
+          {
+            "ts": "2026-11-20T09:45:01Z",
+            "edit": "packet:domain:science",
+            "predicted": "exercise domain",
+            "measured": "witness_and_final",
+            "context": {
+              "task": "domain:science",
+              "arm": "treatment",
+              "bias": {
+                "operator": "Mult",
+                "examples": "science",
+                "reason": "domain:science",
+                "overlap": 0,
+                "label": "domain:science"
+              },
+              "tool": {
+                "domain": "science",
+                "tool": "measure_relation",
+                "reason": "domain:science",
+                "examples": 3,
+                "source": "domain"
+              },
+              "certified": true
+            }
+          },
+          {
+            "ts": "2026-11-20T09:45:28Z",
+            "edit": "packet:domain:science",
+            "predicted": "exercise domain",
+            "measured": "witness_and_final",
+            "context": {
+              "task": "domain:science",
+              "arm": "control",
+              "bias": {
+                "operator": "Mult",
+                "examples": "science",
+                "reason": "domain:science",
+                "overlap": 0,
+                "label": "domain:science"
+              },
+              "tool": {
+                "domain": "science",
+                "tool": "measure_relation",
+                "reason": "domain:science",
+                "examples": 3,
+                "source": "domain"
+              },
+              "certified": true
+            }
+          },
+          {
+            "ts": "2026-11-20T09:45:30Z",
+            "edit": "packet:domain:science",
+            "predicted": "exercise domain",
+            "measured": "witness_and_final",
+            "context": {
+              "task": "domain:science",
+              "arm": "treatment",
+              "bias": {
+                "operator": "Mult",
+                "examples": "science",
+                "reason": "domain:science",
+                "overlap": 0,
+                "label": "domain:science"
+              },
+              "tool": {
+                "domain": "science",
+                "tool": "measure_relation",
+                "reason": "domain:science",
+                "examples": 3,
+                "source": "domain"
+              },
+              "certified": true
+            }
+          },
+          {
+            "ts": "2026-11-20T09:45:48Z",
+            "edit": "packet:domain:science",
+            "predicted": "exercise domain",
+            "measured": "witness_and_final",
+            "context": {
+              "task": "domain:science",
+              "arm": "control",
+              "bias": {
+                "operator": "Mult",
+                "examples": "science",
+                "reason": "domain:science",
+                "overlap": 0,
+                "label": "domain:science"
+              },
+              "tool": {
+                "domain": "science",
+                "tool": "measure_relation",
+                "reason": "domain:science",
+                "examples": 3,
+                "source": "domain"
+              },
+              "certified": true
+            }
+          }
+        ],
+        "candidate": "(x*y)",
+        "public_correct": true,
+        "witness_supported": true,
+        "final_correct": true,
+        "certified": true,
+        "evaluations": 8,
+        "abstained": null,
+        "telemetry": {
+          "ts": "2026-11-20T09:45:48Z",
+          "uptime": 1795167948.5971503,
+          "packets": 1050,
+          "fitness": {
+            "success": 1039.0,
+            "cycles": 1039.0
+          }
+        },
+        "ts": "2026-11-20T09:45:50Z",
+        "gate": {
+          "pass": true,
+          "reason": "witness_and_final"
+        }
+      },
+      "ts": "2026-11-20T09:45:50Z"
+    },
+    {
+      "to": "keeper",
+      "message": {
+        "ts": "2026-11-20T09:46:06Z",
+        "measurement": {
+          "ts": "2026-11-20T09:46:06Z",
+          "uptime": 1795167966.4074345,
+          "packets": 1050,
+          "fitness": {
+            "success": 1040.0,
+            "cycles": 1040.0
+          }
+        }
+      },
+      "ts": "2026-11-20T09:46:06Z"
+    },
+    {
+      "to": "keeper",
+      "message": {
+        "mode": "awake",
+        "arm": "control",
+        "pair_id": "006ae6ca6c43",
+        "field_version": 342,
+        "task": "domain:science",
+        "proposal": {
+          "task": "domain:science",
+          "reason": "exercise domain",
+          "source": "field",
+          "domain": "science"
+        },
+        "acting_domain": "science",
+        "context": [
+          {
+            "overlap": 30,
+            "count": 1362,
+            "label": "domain:science",
+            "size": 30,
+            "receipt": {
+              "predicted": "exercise domain",
+              "measured": "witness_and_final",
+              "context": {
+                "task": "domain:science",
+                "arm": "treatment",
+                "proposal": {
+                  "task": "domain:science",
+                  "reason": "exercise domain",
+                  "source": "field",
+                  "domain": "science"
+                },
+                "bias": {
+                  "operator": "Mult",
+                  "examples": "science",
+                  "reason": "domain:science",
+                  "overlap": 0,
+                  "label": "domain:science"
+                },
+                "tool": {
+                  "domain": "science",
+                  "tool": "measure_relation",
+                  "reason": "domain:science",
+                  "examples": 3,
+                  "source": "domain"
+                },
+                "operator": "Mult",
+                "certified": true
+              }
+            },
+            "orbit": true
+          },
+          {
+            "overlap": 30,
+            "count": 1360,
+            "label": "domain:science",
+            "size": 30,
+            "receipt": {
+              "predicted": "exercise domain",
+              "measured": "witness_and_final",
+              "context": {
+                "task": "domain:science",
+                "arm": "treatment",
+                "certified": true,
+                "packet_id": "b295a5679a816359",
+                "field_version": 1,
+                "lag": 0,
+                "weight": 1.0,
+                "bias": {
+                  "operator": "Mult",
+                  "examples": "science",
+                  "reason": "domain:science",
+                  "overlap": 0,
+                  "label": "domain:science"
+                },
+                "tool": {
+                  "domain": "science",
+                  "tool": "measure_relation",
+                  "reason": "domain:science",
+                  "examples": 3,
+                  "source": "domain"
+                },
+                "operator": "Mult"
+              }
+            },
+            "orbit": true
+          },
+          {
+            "overlap": 30,
+            "count": 1359,
+            "label": "domain:science",
+            "size": 30,
+            "receipt": {
+              "predicted": "exercise domain",
+              "measured": "witness_and_final",
+              "context": {
+                "task": "domain:science",
+                "arm": "treatment",
+                "certified": true,
+                "packet_id": "85a2da052971b431",
+                "field_version": 1,
+                "lag": 0,
+                "weight": 1.0,
+                "bias": {
+                  "operator": "Mult",
+                  "examples": "science",
+                  "reason": "domain:science",
+                  "overlap": 0,
+                  "label": "domain:science"
+                },
+                "tool": {
+                  "domain": "science",
+                  "tool": "measure_relation",
+                  "reason": "domain:science",
+                  "examples": 3,
+                  "source": "domain"
+                },
+                "operator": "Mult"
+              }
+            },
+            "orbit": true
+          },
+          {
+            "overlap": 30,
+            "count": 1358,
+            "label": "domain:science",
+            "size": 30,
+            "receipt": {
+              "predicted": "exercise domain",
+              "measured": "witness_and_final",
+              "context": {
+                "task": "domain:science",
+                "arm": "treatment",
+                "certified": true,
+                "packet_id": "8d877290021d55e2",
+                "field_version": 1,
+                "lag": 0,
+                "weight": 1.0,
+                "bias": {
+                  "operator": "Mult",
+                  "examples": "science",
+                  "reason": "domain:science",
+                  "overlap": 0,
+                  "label": "domain:science"
+                },
+                "tool": {
+                  "domain": "science",
+                  "tool": "measure_relation",
+                  "reason": "domain:science",
+                  "examples": 3,
+                  "source": "domain"
+                },
+                "operator": "Mult"
+              }
+            },
+            "orbit": true
+          },
+          {
+            "overlap": 30,
+            "count": 1355,
+            "label": "domain:science",
+            "size": 30,
+            "receipt": {
+              "predicted": "exercise domain",
+              "measured": "witness_and_final",
+              "context": {
+                "task": "domain:science",
+                "arm": "treatment",
+                "certified": true,
+                "packet_id": "2d73855683e325d0",
+                "field_version": 3,
+                "lag": 0,
+                "weight": 1.0,
+                "bias": {
+                  "operator": "Mult",
+                  "examples": "science",
+                  "reason": "domain:science",
+                  "overlap": 0,
+                  "label": "domain:science"
+                },
+                "tool": {
+                  "domain": "science",
+                  "tool": "measure_relation",
+                  "reason": "domain:science",
+                  "examples": 3,
+                  "source": "domain"
+                },
+                "operator": "Mult"
+              }
+            },
+            "orbit": true
+          },
+          {
+            "overlap": 30,
+            "count": 1354,
+            "label": "domain:science",
+            "size": 30,
+            "receipt": {
+              "predicted": "exercise domain",
+              "measured": "witness_and_final",
+              "context": {
+                "task": "domain:science",
+                "arm": "treatment",
+                "certified": true,
+                "packet_id": "6b1a46a436b09ec2",
+                "field_version": 3,
+                "lag": 0,
+                "weight": 1.0,
+                "bias": {
+                  "operator": "Mult",
+                  "examples": "science",
+                  "reason": "domain:science",
+                  "overlap": 0,
+                  "label": "domain:science"
+                },
+                "tool": {
+                  "domain": "science",
+                  "tool": "measure_relation",
+                  "reason": "domain:science",
+                  "examples": 3,
+                  "source": "domain"
+                },
+                "operator": "Mult"
+              }
+            },
+            "orbit": true
+          },
+          {
+            "overlap": 30,
+            "count": 1353,
+            "label": "domain:science",
+            "size": 30,
+            "receipt": {
+              "predicted": "exercise domain",
+              "measured": "witness_and_final",
+              "context": {
+                "task": "domain:science",
+                "arm": "treatment",
+                "certified": true,
+                "packet_id": "60a7fa6db92032ff",
+                "field_version": 3,
+                "lag": 0,
+                "weight": 1.0,
+                "bias": {
+                  "operator": "Mult",
+                  "examples": "science",
+                  "reason": "domain:science",
+                  "overlap": 0,
+                  "label": "domain:science"
+                },
+                "tool": {
+                  "domain": "science",
+                  "tool": "measure_relation",
+                  "reason": "domain:science",
+                  "examples": 3,
+                  "source": "domain"
+                },
+                "operator": "Mult"
+              }
+            },
+            "orbit": true
+          },
+          {
+            "overlap": 30,
+            "count": 1350,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -352,7 +915,7 @@
         "prior_witnessed": 0,
         "sim_history": [
           {
-            "ts": "2026-11-20T09:33:30Z",
+            "ts": "2026-11-20T09:44:38Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -377,7 +940,7 @@
             }
           },
           {
-            "ts": "2026-11-20T09:33:32Z",
+            "ts": "2026-11-20T09:44:40Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -402,7 +965,7 @@
             }
           },
           {
-            "ts": "2026-11-20T09:33:50Z",
+            "ts": "2026-11-20T09:44:58Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -427,7 +990,7 @@
             }
           },
           {
-            "ts": "2026-11-20T09:33:53Z",
+            "ts": "2026-11-20T09:45:01Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -452,7 +1015,7 @@
             }
           },
           {
-            "ts": "2026-11-20T09:34:22Z",
+            "ts": "2026-11-20T09:45:28Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -477,7 +1040,7 @@
             }
           },
           {
-            "ts": "2026-11-20T09:34:25Z",
+            "ts": "2026-11-20T09:45:30Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -502,7 +1065,7 @@
             }
           },
           {
-            "ts": "2026-11-20T09:34:43Z",
+            "ts": "2026-11-20T09:45:48Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -527,7 +1090,7 @@
             }
           },
           {
-            "ts": "2026-11-20T09:34:45Z",
+            "ts": "2026-11-20T09:45:51Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -560,45 +1123,45 @@
         "evaluations": 65,
         "abstained": null,
         "telemetry": {
-          "ts": "2026-11-20T09:35:00Z",
-          "uptime": 1795167300.9519777,
-          "packets": 1023,
+          "ts": "2026-11-20T09:46:06Z",
+          "uptime": 1795167966.4074345,
+          "packets": 1050,
           "fitness": {
-            "success": 1013.0,
-            "cycles": 1013.0
+            "success": 1040.0,
+            "cycles": 1040.0
           }
         },
-        "ts": "2026-11-20T09:35:02Z",
+        "ts": "2026-11-20T09:46:07Z",
         "gate": {
           "pass": true,
           "reason": "witness_and_final"
         }
       },
-      "ts": "2026-11-20T09:35:02Z"
+      "ts": "2026-11-20T09:46:07Z"
     },
     {
       "to": "keeper",
       "message": {
-        "ts": "2026-11-20T09:35:03Z",
+        "ts": "2026-11-20T09:46:09Z",
         "measurement": {
-          "ts": "2026-11-20T09:35:03Z",
-          "uptime": 1795167303.794905,
-          "packets": 1023,
+          "ts": "2026-11-20T09:46:09Z",
+          "uptime": 1795167969.3570566,
+          "packets": 1050,
           "fitness": {
-            "success": 1013.0,
-            "cycles": 1013.0
+            "success": 1040.0,
+            "cycles": 1040.0
           }
         }
       },
-      "ts": "2026-11-20T09:35:03Z"
+      "ts": "2026-11-20T09:46:09Z"
     },
     {
       "to": "keeper",
       "message": {
         "mode": "awake",
         "arm": "treatment",
-        "pair_id": "dd631c2e48b1",
-        "field_version": 333,
+        "pair_id": "006ae6ca6c43",
+        "field_version": 342,
         "task": "domain:science",
         "proposal": {
           "task": "domain:science",
@@ -610,7 +1173,7 @@
         "context": [
           {
             "overlap": 30,
-            "count": 1325,
+            "count": 1362,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -647,7 +1210,7 @@
           },
           {
             "overlap": 30,
-            "count": 1323,
+            "count": 1360,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -682,7 +1245,7 @@
           },
           {
             "overlap": 30,
-            "count": 1322,
+            "count": 1359,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -717,7 +1280,7 @@
           },
           {
             "overlap": 30,
-            "count": 1321,
+            "count": 1358,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -752,7 +1315,7 @@
           },
           {
             "overlap": 30,
-            "count": 1318,
+            "count": 1355,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -787,7 +1350,7 @@
           },
           {
             "overlap": 30,
-            "count": 1317,
+            "count": 1354,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -822,7 +1385,7 @@
           },
           {
             "overlap": 30,
-            "count": 1316,
+            "count": 1353,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -857,7 +1420,7 @@
           },
           {
             "overlap": 30,
-            "count": 1313,
+            "count": 1350,
             "label": "domain:science",
             "size": 30,
             "receipt": {
@@ -912,10 +1475,10 @@
           "Add",
           "Sub"
         ],
-        "prior_witnessed": 1001,
+        "prior_witnessed": 1028,
         "sim_history": [
           {
-            "ts": "2026-11-20T09:33:32Z",
+            "ts": "2026-11-20T09:44:40Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -940,7 +1503,7 @@
             }
           },
           {
-            "ts": "2026-11-20T09:33:50Z",
+            "ts": "2026-11-20T09:44:58Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -965,7 +1528,7 @@
             }
           },
           {
-            "ts": "2026-11-20T09:33:53Z",
+            "ts": "2026-11-20T09:45:01Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -990,7 +1553,7 @@
             }
           },
           {
-            "ts": "2026-11-20T09:34:22Z",
+            "ts": "2026-11-20T09:45:28Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -1015,7 +1578,7 @@
             }
           },
           {
-            "ts": "2026-11-20T09:34:25Z",
+            "ts": "2026-11-20T09:45:30Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -1040,7 +1603,7 @@
             }
           },
           {
-            "ts": "2026-11-20T09:34:43Z",
+            "ts": "2026-11-20T09:45:48Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -1065,7 +1628,7 @@
             }
           },
           {
-            "ts": "2026-11-20T09:34:45Z",
+            "ts": "2026-11-20T09:45:51Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -1090,7 +1653,7 @@
             }
           },
           {
-            "ts": "2026-11-20T09:35:03Z",
+            "ts": "2026-11-20T09:46:09Z",
             "edit": "packet:domain:science",
             "predicted": "exercise domain",
             "measured": "witness_and_final",
@@ -1123,37 +1686,37 @@
         "evaluations": 8,
         "abstained": null,
         "telemetry": {
-          "ts": "2026-11-20T09:35:03Z",
-          "uptime": 1795167303.794905,
-          "packets": 1023,
+          "ts": "2026-11-20T09:46:09Z",
+          "uptime": 1795167969.3570566,
+          "packets": 1050,
           "fitness": {
-            "success": 1013.0,
-            "cycles": 1013.0
+            "success": 1040.0,
+            "cycles": 1040.0
           }
         },
-        "ts": "2026-11-20T09:35:05Z",
+        "ts": "2026-11-20T09:46:10Z",
         "gate": {
           "pass": true,
           "reason": "witness_and_final"
         }
       },
-      "ts": "2026-11-20T09:35:05Z"
+      "ts": "2026-11-20T09:46:10Z"
     },
     {
       "to": "keeper",
       "message": {
-        "ts": "2026-11-20T09:35:06Z",
+        "ts": "2026-11-20T09:46:12Z",
         "measurement": {
-          "ts": "2026-11-20T09:35:06Z",
-          "uptime": 1795167306.6402764,
-          "packets": 1023,
+          "ts": "2026-11-20T09:46:12Z",
+          "uptime": 1795167972.1818993,
+          "packets": 1050,
           "fitness": {
-            "success": 1014.0,
-            "cycles": 1014.0
+            "success": 1041.0,
+            "cycles": 1041.0
           }
         }
       },
-      "ts": "2026-11-20T09:35:06Z"
+      "ts": "2026-11-20T09:46:12Z"
     },
     {
       "to": "spark",
@@ -1165,52 +1728,52 @@
           "claimed": 6,
           "applied": [
             {
-              "packet_id": "d99d50f5dd499bba",
+              "packet_id": "edb8ed619d3cd9b4",
               "task": "domain:science",
               "lag": 0,
               "weight": 1.0
             },
             {
-              "packet_id": "023d52969923ded1",
-              "task": "world:relu_diff",
+              "packet_id": "c236f3575f2d1bde",
+              "task": "world:rev_upper",
               "lag": 0,
               "weight": 1.0,
               "world": true
             },
             {
-              "packet_id": "2ecd1344528e43b8",
+              "packet_id": "a7c9e4caf6642ff1",
               "task": "domain:science",
               "lag": 0,
               "weight": 1.0
             },
             {
-              "packet_id": "3ccd2c11040d5521",
-              "task": "world:second_smallest",
+              "packet_id": "f74265bb7e24e7d7",
+              "task": "world:sum_tail",
               "lag": 0,
               "weight": 1.0,
               "world": true
             },
             {
-              "packet_id": "bf81169229620004",
+              "packet_id": "e4a441aa9267cca7",
               "task": "domain:science",
               "lag": 0,
               "weight": 1.0
             },
             {
-              "packet_id": "51434e59faed8970",
-              "task": "world:sort_desc",
+              "packet_id": "861d71bee6ee7914",
+              "task": "world:double_lower",
               "lag": 0,
               "weight": 1.0,
               "world": true
             }
           ],
           "dropped": {},
-          "field_version_before": 333,
-          "field_version_after": 334,
+          "field_version_before": 342,
+          "field_version_after": 343,
           "prior_source": "current",
-          "prior_witnessed": 1004,
+          "prior_witnessed": 1031,
           "world_applied": 3,
-          "world_witnessed": 1001,
+          "world_witnessed": 1028,
           "decay": 0.97,
           "policy": {
             "max_lag": 2,
@@ -1221,7 +1784,7 @@
         },
         "pending_pruned": 0,
         "world_heldout": {
-          "absdiff": "certified_correctness",
+          "absdiff": "none",
           "quartic_sum": "certified_correctness",
           "last_first_upper": "none",
           "sum_minus_max": "none"
@@ -1236,123 +1799,38 @@
           "informative_pairs": 0,
           "mean_treatment_advantage": null,
           "both_certified_pairs_with_cost": 64,
-          "mean_evaluations_saved": 381.109375,
+          "mean_evaluations_saved": 275.984375,
           "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
         },
         "merged": 0,
         "rules": {
-          "noop": 1026,
-          "majority": 1026,
-          "growth": 1026,
-          "decay": 1026,
-          "stabilize": 1026,
+          "noop": 1053,
+          "majority": 1053,
+          "growth": 1053,
+          "decay": 1053,
+          "stabilize": 1053,
           "winner": "stabilize"
         },
         "rewrite": {
           "status": "no_candidates"
         },
         "telemetry": {
-          "ts": "2026-11-20T09:35:06Z",
-          "uptime": 1795167306.6402764,
-          "packets": 1023,
+          "ts": "2026-11-20T09:46:12Z",
+          "uptime": 1795167972.1818993,
+          "packets": 1050,
           "fitness": {
-            "success": 1014.0,
-            "cycles": 1014.0
+            "success": 1041.0,
+            "cycles": 1041.0
           }
         },
-        "ts": "2026-11-20T09:35:16Z"
+        "ts": "2026-11-20T09:46:19Z"
       },
-      "ts": "2026-11-20T09:35:16Z"
-    },
-    {
-      "to": "keeper",
-      "message": {
-        "ts": "2026-11-20T09:35:32Z",
-        "measurement": {
-          "ts": "2026-11-20T09:35:32Z",
-          "uptime": 1795167332.4594357,
-          "packets": 1026,
-          "fitness": {
-            "success": 1014.0,
-            "cycles": 1014.0
-          }
-        }
-      },
-      "ts": "2026-11-20T09:35:32Z"
-    },
-    {
-      "to": "spark",
-      "message": {
-        "mode": "sleep",
-        "arm": "treatment",
-        "status": "consolidated",
-        "learner": {
-          "claimed": 0,
-          "applied": [],
-          "dropped": {},
-          "field_version_before": 334,
-          "field_version_after": 334,
-          "prior_source": "current",
-          "prior_witnessed": 1004,
-          "world_applied": 0,
-          "world_witnessed": 1001,
-          "decay": null,
-          "policy": {
-            "max_lag": 2,
-            "mode": "mask",
-            "decay": 0.5,
-            "min_weight": 0.25
-          }
-        },
-        "pending_pruned": 0,
-        "world_heldout": {
-          "absdiff": "certified_correctness",
-          "quartic_sum": "certified_correctness",
-          "last_first_upper": "none",
-          "sum_minus_max": "none"
-        },
-        "twin": {
-          "estimator": "rloo",
-          "groups": 64,
-          "pass_rate": 1.0,
-          "all_pass_rate": 1.0,
-          "all_fail_rate": 0.0,
-          "informative_rate": 0.0,
-          "informative_pairs": 0,
-          "mean_treatment_advantage": null,
-          "both_certified_pairs_with_cost": 64,
-          "mean_evaluations_saved": 381.109375,
-          "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
-        },
-        "merged": 0,
-        "rules": {
-          "noop": 1026,
-          "majority": 1024,
-          "growth": 1026,
-          "decay": 1024,
-          "stabilize": 1024,
-          "winner": "growth"
-        },
-        "rewrite": {
-          "status": "no_candidates"
-        },
-        "telemetry": {
-          "ts": "2026-11-20T09:35:32Z",
-          "uptime": 1795167332.4594357,
-          "packets": 1026,
-          "fitness": {
-            "success": 1014.0,
-            "cycles": 1014.0
-          }
-        },
-        "ts": "2026-11-20T09:35:40Z"
-      },
-      "ts": "2026-11-20T09:35:40Z"
+      "ts": "2026-11-20T09:46:19Z"
     }
   ],
   "recent_sim": [
     {
-      "ts": "2026-11-20T09:34:43Z",
+      "ts": "2026-11-20T09:45:48Z",
       "edit": "packet:domain:science",
       "predicted": "exercise domain",
       "measured": "witness_and_final",
@@ -1377,7 +1855,7 @@
       }
     },
     {
-      "ts": "2026-11-20T09:34:45Z",
+      "ts": "2026-11-20T09:45:51Z",
       "edit": "packet:domain:science",
       "predicted": "exercise domain",
       "measured": "witness_and_final",
@@ -1402,7 +1880,7 @@
       }
     },
     {
-      "ts": "2026-11-20T09:35:03Z",
+      "ts": "2026-11-20T09:46:09Z",
       "edit": "packet:domain:science",
       "predicted": "exercise domain",
       "measured": "witness_and_final",
@@ -1427,7 +1905,7 @@
       }
     },
     {
-      "ts": "2026-11-20T09:35:06Z",
+      "ts": "2026-11-20T09:46:12Z",
       "edit": "packet:domain:science",
       "predicted": "exercise domain",
       "measured": "witness_and_final",
