@@ -1,8 +1,10 @@
 name: continuous-awake
 # Pair both arms in one job so the scoreboard records a real certified delta.
-# Control runs first (cold prior). Treatment uses the field and may update it
-# only after WITNESS + final. Concurrent data writers share one group.
-# re-registered 2026-11-20 shifted minutes
+# Control runs first (cold prior). Treatment uses the field and only enqueues
+# versioned packets; sleep is the single learner. Concurrent data writers
+# share one group.
+# Heartbeat: a successful awake dispatches continuous-sleep (scripts/heartbeat.sh).
+# Crons stay as a fallback restart; nomad-watch re-dispatches if the chain dies.
 on:
   schedule:
     - cron: "8 * * * *"
@@ -12,12 +14,14 @@ on:
     types: [awake]
 permissions:
   contents: write
+  actions: write
 concurrency:
   group: nomad-continuous-data
   cancel-in-progress: false
 jobs:
   pair:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -25,6 +29,8 @@ jobs:
           python-version: "3.12"
       - name: Run paired awake
         run: python -m nomad.continuous pair
+      - name: Organism status
+        run: python -m nomad.organism status > /dev/null
       - name: Commit data
         run: |
           set -euo pipefail
@@ -45,3 +51,8 @@ jobs:
           done
           echo "rebase-retry exhausted" >&2
           exit 1
+      - name: Heartbeat -> sleep
+        if: ${{ success() && vars.NOMAD_HEARTBEAT != 'off' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash scripts/heartbeat.sh chain continuous-sleep.yml 0

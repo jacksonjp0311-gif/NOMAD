@@ -48,3 +48,14 @@ Awake and sleep share the `nomad-continuous-data` concurrency group (`cancel-in-
 - Existing platform HOLDs and claim boundaries unchanged.
 
 The field and the receipts are the persistent geometry. The runners keep it moving.
+
+## Heartbeat (self-sustaining schedule)
+
+GitHub throttles scheduled runs, so NOMAD keeps its own pulse (`scripts/heartbeat.sh`):
+
+- A successful **awake** dispatches **continuous-sleep** right away.
+- A successful **sleep** dispatches the next **continuous-awake**, but not before `NOMAD_CHAIN_GAP_MIN` minutes (repo variable, default 15) after the last awake was created, so the chain cannot spin.
+- Only one chain lives: both run in the `nomad-continuous-data` concurrency group, and the script skips dispatch when the target is already queued or running.
+- **nomad-watch** runs after every awake/sleep completion and on its own cron. If no awake succeeded in `NOMAD_STALE_MIN` minutes (default 90) and nothing is queued or running, it re-dispatches awake and logs the gap to `data/organism_events.jsonl`. It is not in the data group, so it can never cancel a pending run.
+- The original crons stay as a fallback restart. Set repo variable `NOMAD_HEARTBEAT=off` to stop chaining.
+- `data/organism.json` (written by `python -m nomad.organism status` every awake and sleep) is the organism-level health view: last pulses, curriculum levels, twin summaries, field version, queue, held-out probes, evolution and heartbeat events.

@@ -1,7 +1,8 @@
 name: continuous-sleep
-# Treatment consolidates. Control is frozen and has nothing to persist.
+# Treatment consolidates (single learner). Control is frozen.
 # Shares the data concurrency group with awake so commits cannot race.
-# re-registered 2026-11-20 shifted minutes
+# Heartbeat: a successful sleep dispatches the next continuous-awake, not
+# before NOMAD_CHAIN_GAP_MIN minutes (default 15) after the last awake began.
 on:
   schedule:
     - cron: "38 * * * *"
@@ -10,12 +11,14 @@ on:
     types: [sleep]
 permissions:
   contents: write
+  actions: write
 concurrency:
   group: nomad-continuous-data
   cancel-in-progress: false
 jobs:
   treatment:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -23,6 +26,8 @@ jobs:
           python-version: "3.12"
       - name: Run sleep
         run: python -m nomad.continuous sleep --arm treatment
+      - name: Organism status
+        run: python -m nomad.organism status > /dev/null
       - name: Commit data
         run: |
           set -euo pipefail
@@ -53,3 +58,15 @@ jobs:
           python-version: "3.12"
       - name: Run sleep (control)
         run: python -m nomad.continuous sleep --arm control
+
+  heartbeat:
+    needs: treatment
+    if: ${{ success() && vars.NOMAD_HEARTBEAT != 'off' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Heartbeat -> awake
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash scripts/heartbeat.sh chain continuous-awake.yml "${{ vars.NOMAD_CHAIN_GAP_MIN || '15' }}"
