@@ -259,6 +259,7 @@ class WorldPrior:
         self.library_sig: dict[str, list[list[str]]] = {}
         # per family: [certified solutions that reused a library sub-program, ones that did not]
         self.family_lib: dict[str, list[float]] = {}
+        self.library_k = 6  # set from the genome by the loop; not persisted
 
     # ---- ordering
     def order(self, opset: Sequence[str], family: str | None = None) -> tuple[str, ...]:
@@ -311,7 +312,8 @@ class WorldPrior:
         hits, misses = self.family_lib[family]
         return hits > 0
 
-    def primitives_for(self, inputs: Sequence[Sequence[str]], k: int = 6) -> dict[str, list]:
+    def primitives_for(self, inputs: Sequence[Sequence[str]], k: int | None = None) -> dict[str, list]:
+        k = self.library_k if k is None else k
         sig = [list(i) for i in inputs]
         names = [n for n in self.library if self.library_sig.get(n) == sig]
         names.sort(key=lambda n: (-self.library_uses.get(n, 0.0), n))

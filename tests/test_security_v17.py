@@ -189,7 +189,11 @@ pathlib.Path(sys.argv[1]).write_text(str(p.pid))
             childpid=int(pid.read_text())
             for _ in range(20):
                 statpath=Path('/proc')/str(childpid)/'stat'
-                if not statpath.exists() or statpath.read_text().split()[2]=='Z':
+                try:
+                    # The child can vanish between exists() and read_text(); gone means cleaned.
+                    if not statpath.exists() or statpath.read_text().split()[2]=='Z':
+                        break
+                except (FileNotFoundError, ProcessLookupError):
                     break
                 time.sleep(0.1)
             else:

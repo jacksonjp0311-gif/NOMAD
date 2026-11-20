@@ -1,5 +1,13 @@
 # NOMAD — Change History
 
+## Body, heartbeat, self-evolution (2026-11-19)
+
+- `nomad/body.py`: long-lived, host-agnostic runtime (`python -m nomad.body --hours N --push`) with single-body lease (`nomad/lease.py`), git checkpoints (`nomad/hostgit.py`), and log retention (`nomad/retention.py`). `nomad-body.yml` is the GitHub wrapper (~5.5 h, successor dispatch).
+- Heartbeat chain awake -> sleep -> awake with min gap and single-chain guard; `nomad-watch` restarts the body on a stale lease. Awake/sleep fallbacks no-op while a body lives.
+- `nomad/genome.py`, `nomad/evolve.py`: bounded parameter evolution, test-gated and benchmark-gated, committed to main; live-regression guard reverts with `git revert`. Code is never self-rewritten.
+- `nomad/organism.py`: organism health file `data/organism.json`.
+- Fixed a TOCTOU flake in `test_orphaned_descendant_is_cleaned`.
+
 ## WORLD: wider world, curriculum, library learning, string and list domains (2026-11-19)
 
 - `nomad/world.py`: typed bounded interpreter and enumerator (div, mod, min, max, ite, strings, int lists); WITNESS on withheld rows; library inlined before certification.

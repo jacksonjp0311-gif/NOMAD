@@ -50,6 +50,16 @@ def log_event(kind: str, **fields: Any) -> dict:
     return row
 
 
+def _lease_view() -> dict[str, Any] | None:
+    from . import lease
+    cur = lease.read()
+    if not cur:
+        return None
+    return {"host": cur.get("host"), "heartbeat": cur.get("heartbeat"), "age_min": lease.age_min(cur),
+            "alive": lease.alive(cur), "cycles": cur.get("cycles"), "cycles_per_hour": cur.get("cycles_per_hour"),
+            "released": cur.get("released")}
+
+
 def status(write: bool = True) -> dict[str, Any]:
     from . import field_queue
     from .advantage import twin_summary
@@ -88,7 +98,7 @@ def status(write: bool = True) -> dict[str, Any]:
                      "world_heldout": {k: v.get("kind") for k, v in probes.items()},
                      "world_library_size": world_heldout.get("library_size")},
         "evolve": {"recent": evolve},
-        "heartbeat": {"recent_events": events},
+        "heartbeat": {"recent_events": events, "body_lease": _lease_view()},
         "boundaries": "No transformers. WITNESS certifies; search and memory never do. Bounded programs only.",
     }
     if write:

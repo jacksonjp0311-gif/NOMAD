@@ -78,8 +78,10 @@ def choose(rows: Iterable[dict], domain: str | None = None, step: int = 0) -> tu
 
     def rank(t: WorldTask):
         r = records.get(t.family, {"attempts": 0, "beaten": False})
-        parked = (not r["beaten"]) and r["attempts"] >= PATIENCE
+        parked = (not r["beaten"]) and r["attempts"] >= patience
         return (r["beaten"] or parked, r["attempts"], -t.level, t.family)
+    from . import genome
+    patience = int(genome.get("patience"))
     candidates.sort(key=rank)
     chosen = candidates[0]
     return chosen, {"open_levels": levels, "records": records, "chosen": chosen.family,

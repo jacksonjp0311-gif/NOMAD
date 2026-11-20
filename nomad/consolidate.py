@@ -60,9 +60,14 @@ def save_prior_atomic(prior: GrammarPrior) -> None:
     os.replace(tmp, path)
 
 
+def _genome_lag() -> int:
+    from . import genome
+    return int(genome.get("max_lag"))
+
+
 def policy_from_env() -> StalenessPolicy:
     return StalenessPolicy(
-        max_lag=int(os.environ.get("NOMAD_MAX_LAG", "2")),
+        max_lag=int(os.environ.get("NOMAD_MAX_LAG", str(_genome_lag()))),
         mode=os.environ.get("NOMAD_STALENESS_MODE", "mask"),
         decay=float(os.environ.get("NOMAD_STALENESS_DECAY", "0.5")),
         min_weight=float(os.environ.get("NOMAD_STALENESS_MIN_WEIGHT", "0.25")),
@@ -156,7 +161,8 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
             reinforce(f"domain:{p['domain']}", 1)
         applied.append({"packet_id": pid, "task": p.get("task"), "lag": lag, "weight": weight})
     new_version = current
-    gamma = float(os.environ.get("NOMAD_DECAY", str(DEFAULT_DECAY)))
+    from . import genome
+    gamma = float(os.environ.get("NOMAD_DECAY", str(genome.get("decay"))))
     genesis_applied = len(applied) - world_applied
     if genesis_applied:
         # Unlearning: old evidence fades a little each time new evidence lands,

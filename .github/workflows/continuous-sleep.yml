@@ -1,5 +1,7 @@
 name: continuous-sleep
-# Treatment consolidates (single learner). Control is frozen.
+# Fallback runtime: no-ops while a nomad-body lease is fresh. Treatment
+# consolidates (single learner), then the evolve organ guards the last genome
+# change (git revert on live regression) and maybe tries one gene. Control is frozen.
 # Shares the data concurrency group with awake so commits cannot race.
 # Heartbeat: a successful sleep dispatches the next continuous-awake, not
 # before NOMAD_CHAIN_GAP_MIN minutes (default 15) after the last awake began.
@@ -21,14 +23,22 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Body lease
+        id: lease
+        run: python -m nomad.body lease
       - name: Run sleep
+        if: ${{ steps.lease.outputs.alive != 'true' }}
         run: python -m nomad.continuous sleep --arm treatment
       - name: Organism status
+        if: ${{ steps.lease.outputs.alive != 'true' }}
         run: python -m nomad.organism status > /dev/null
       - name: Commit data
+        if: ${{ steps.lease.outputs.alive != 'true' }}
         run: |
           set -euo pipefail
           git config user.name "nomad"
@@ -48,6 +58,11 @@ jobs:
           done
           echo "rebase-retry exhausted" >&2
           exit 1
+      - name: Evolve organ (guard + maybe one gene)
+        if: ${{ success() && steps.lease.outputs.alive != 'true' && vars.NOMAD_EVOLVE != 'off' }}
+        run: python -m nomad.body evolve-step --push
+    outputs:
+      alive: ${{ steps.lease.outputs.alive }}
 
   control:
     runs-on: ubuntu-latest
@@ -61,7 +76,7 @@ jobs:
 
   heartbeat:
     needs: treatment
-    if: ${{ success() && vars.NOMAD_HEARTBEAT != 'off' }}
+    if: ${{ success() && needs.treatment.outputs.alive != 'true' && vars.NOMAD_HEARTBEAT != 'off' }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:

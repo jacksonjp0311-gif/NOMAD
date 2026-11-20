@@ -24,6 +24,20 @@ The field is the living weight store. The runners keep it moving. The agents act
 
 ---
 
+## Run anywhere
+
+NOMAD's body is a plain CLI. GitHub Actions is one host; your desktop is another. State lives in git (`data/` is the field and its records), so any host can pull, run, and push back.
+
+```bash
+git clone https://github.com/jacksonjp0311-gif/NOMAD && cd NOMAD
+python -m nomad.body --hours 2 --push      # Windows: py -3.12 -m nomad.body --hours 2 --push
+```
+
+- `--push` pulls first, commits `data/` every checkpoint (default 10 min), and pushes with rebase-retry. Without it the body runs locally; push later with `git push` and the online body resumes from your field.
+- A single-body lease (`data/lease.json`, host id + heartbeat) keeps two hosts from writing at once. A host takes over only when the lease is released or older than 30 minutes. If the online body is alive, your desktop body stands by; set repo variable `NOMAD_BODY=off` (and wait for the lease to go stale or be released) to run the desktop as the primary.
+- Online, `nomad-body` runs ~5.5 h per job and dispatches its successor; `nomad-watch` restarts it if the heartbeat is older than 30 minutes; the short awake/sleep workflows and crons are fallbacks that no-op while a body is alive.
+- `data/organism.json` shows the organism's health: last pulses, body lease, twin results, curriculum, held-out probes, evolution.
+
 ## Boundaries
 
 Architecture is recursive field intelligence. Current capability is bounded program synthesis (GENESIS integer expressions plus the WORLD typed table of integer, string, and list operators, at most 7 nodes, with learned library primitives) and field query. Not unrestricted coding. Not free-form generation. Not AGI.

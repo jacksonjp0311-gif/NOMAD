@@ -28,13 +28,18 @@ def world_prior_path() -> Path:
 
 
 def load_world_prior() -> WorldPrior:
+    from . import genome
     for path in (world_prior_path(), world_prior_path().with_suffix(".prev.json")):
         if path.exists():
             try:
-                return WorldPrior.from_snapshot(json.loads(path.read_text()))
+                p = WorldPrior.from_snapshot(json.loads(path.read_text()))
+                p.library_k = int(genome.get("library_k"))
+                return p
             except (json.JSONDecodeError, TypeError, ValueError, KeyError):
                 continue
-    return WorldPrior()
+    p = WorldPrior()
+    p.library_k = int(genome.get("library_k"))
+    return p
 
 
 def save_world_prior(prior: WorldPrior) -> None:

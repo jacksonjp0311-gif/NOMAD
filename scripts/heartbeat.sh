@@ -7,8 +7,8 @@
 #       or in progress. Waits until <min-gap> minutes have passed since the
 #       target's last run was created, so the chain cannot spin tightly.
 #   heartbeat.sh watch <stale-minutes>
-#       If no awake run succeeded in <stale-minutes> and nothing is queued or
-#       running, re-dispatch awake and log the gap to the organism health file.
+#       If the body lease heartbeat is older than <stale-minutes> and no body
+#       run is queued or running, re-dispatch nomad-body and log the gap.
 #
 # Needs GH_TOKEN (the job's GITHUB_TOKEN with actions: write) and GITHUB_REPOSITORY.
 set -euo pipefail
@@ -46,18 +46,18 @@ case "${1:-}" in
     echo "heartbeat: dispatched $target"
     ;;
   watch)
-    stale_min="${2:-90}"
-    last_ok=$(gh run list -R "$REPO" -w "$AWAKE" -s success -L 1 --json updatedAt -q '.[0].updatedAt // empty')
-    now=$(date -u +%s)
-    if [[ -z "$last_ok" ]]; then gap_min=99999; else gap_min=$(( (now - $(epoch "$last_ok")) / 60 )); fi
-    echo "heartbeat-watch: last successful awake ${gap_min} min ago"
-    if (( gap_min < stale_min )); then exit 0; fi
-    if [[ "$(active "$AWAKE")" -gt 0 || "$(active "$SLEEP")" -gt 0 ]]; then
-      echo "heartbeat-watch: stale but a run is queued/running; leaving it"; exit 0
+    # Primary: the long-lived body. Restart it when its lease heartbeat is
+    # older than <stale-minutes> and no body run is queued or running.
+    stale_min="${2:-30}"
+    read -r alive age < <(python -c "import json,sys; from nomad import lease; l=lease.read(); a=lease.age_min(l); print('true' if lease.alive(l, $stale_min) else 'false', int(a) if a is not None else 99999)")
+    echo "heartbeat-watch: body lease alive=${alive} age=${age} min"
+    if [[ "$alive" == "true" ]]; then exit 0; fi
+    if [[ "$(active nomad-body.yml)" -gt 0 ]]; then
+      echo "heartbeat-watch: a body run is queued/running; leaving it"; exit 0
     fi
-    gh workflow run "$AWAKE" -R "$REPO" --ref main
-    echo "heartbeat-watch: re-dispatched $AWAKE"
-    echo "GAP_MINUTES=${gap_min}" >> "${GITHUB_ENV:-/dev/null}"
+    gh workflow run nomad-body.yml -R "$REPO" --ref main
+    echo "heartbeat-watch: re-dispatched nomad-body"
+    echo "GAP_MINUTES=${age}" >> "${GITHUB_ENV:-/dev/null}"
     ;;
   *)
     echo "usage: heartbeat.sh chain <workflow> <gap-min> | watch <stale-min>" >&2; exit 2;;

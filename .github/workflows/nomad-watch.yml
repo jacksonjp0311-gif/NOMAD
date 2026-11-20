@@ -1,12 +1,13 @@
 name: nomad-watch
-# Watchdog for the heartbeat chain. Runs after every awake/sleep completion
-# and on a fallback cron. If no awake succeeded in the last 90 minutes and
-# nothing is queued or running, it re-dispatches awake and logs the gap to
-# data/organism_events.jsonl. Deliberately NOT in the data concurrency group,
+# Watchdog. Runs after every awake/sleep/body completion and on a fallback
+# cron. If the body's lease heartbeat (data/lease.json) is older than 30
+# minutes and no body run is queued or running, it re-dispatches nomad-body
+# and logs the gap to data/organism_events.jsonl. The awake/sleep chain and
+# crons remain as a second fallback. Deliberately NOT in the data concurrency group,
 # so it can never cancel a pending awake/sleep.
 on:
   workflow_run:
-    workflows: [continuous-awake, continuous-sleep]
+    workflows: [continuous-awake, continuous-sleep, nomad-body]
     types: [completed]
   schedule:
     - cron: "17,47 * * * *"
@@ -29,15 +30,16 @@ jobs:
       - name: Check heartbeat
         env:
           GH_TOKEN: ${{ github.token }}
-        run: bash scripts/heartbeat.sh watch "${{ vars.NOMAD_STALE_MIN || '90' }}"
+        run: bash scripts/heartbeat.sh watch "${{ vars.NOMAD_STALE_MIN || '30' }}"
       - name: Log gap to organism health
         if: ${{ env.GAP_MINUTES != '' }}
         run: |
           set -euo pipefail
-          python -m nomad.organism event heartbeat_gap --minutes "$GAP_MINUTES" --action redispatched_awake > /dev/null
+          python -m nomad.organism event heartbeat_gap --minutes "$GAP_MINUTES" --action redispatched_body > /dev/null
           git config user.name "nomad"
           git config user.email "nomad@users.noreply.github.com"
-          git add data/organism_events.jsonl data/organism.json
+          git add data/organism_events.jsonl
+          git checkout -- data/organism.json 2>/dev/null || true
           git commit -m "nomad-watch: heartbeat gap ${GAP_MINUTES} min" || exit 0
           for i in 1 2 3 4 5; do
             if git pull --rebase origin main && git push; then exit 0; fi

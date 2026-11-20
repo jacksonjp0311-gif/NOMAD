@@ -3,6 +3,7 @@ name: continuous-awake
 # Control runs first (cold prior). Treatment uses the field and only enqueues
 # versioned packets; sleep is the single learner. Concurrent data writers
 # share one group.
+# Fallback runtime: no-ops while a nomad-body lease is fresh (data/lease.json).
 # Heartbeat: a successful awake dispatches continuous-sleep (scripts/heartbeat.sh).
 # Crons stay as a fallback restart; nomad-watch re-dispatches if the chain dies.
 on:
@@ -27,11 +28,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Body lease
+        id: lease
+        run: python -m nomad.body lease
       - name: Run paired awake
+        if: ${{ steps.lease.outputs.alive != 'true' }}
         run: python -m nomad.continuous pair
       - name: Organism status
+        if: ${{ steps.lease.outputs.alive != 'true' }}
         run: python -m nomad.organism status > /dev/null
       - name: Commit data
+        if: ${{ steps.lease.outputs.alive != 'true' }}
         run: |
           set -euo pipefail
           git config user.name "nomad"
@@ -52,7 +59,7 @@ jobs:
           echo "rebase-retry exhausted" >&2
           exit 1
       - name: Heartbeat -> sleep
-        if: ${{ success() && vars.NOMAD_HEARTBEAT != 'off' }}
+        if: ${{ success() && steps.lease.outputs.alive != 'true' && vars.NOMAD_HEARTBEAT != 'off' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: bash scripts/heartbeat.sh chain continuous-sleep.yml 0

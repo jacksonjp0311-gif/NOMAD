@@ -291,6 +291,8 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
         return {"mode": "sleep", "arm": arm, "status": "frozen", "telemetry": snap, "ts": _now()}
     learned = consolidate()
     pruned = prune_pending()
+    from .retention import trim
+    trim()
     from .world_loop import probe_heldout
     world_probe = probe_heldout()
     merged = merge_similar()
