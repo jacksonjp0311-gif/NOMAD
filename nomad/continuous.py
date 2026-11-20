@@ -291,6 +291,8 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
         return {"mode": "sleep", "arm": arm, "status": "frozen", "telemetry": snap, "ts": _now()}
     learned = consolidate()
     pruned = prune_pending()
+    from .world_loop import probe_heldout
+    world_probe = probe_heldout()
     merged = merge_similar()
     rules = try_rules(steps=1)
     rewrite_result = rewrite()
@@ -300,6 +302,7 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
         "status": "consolidated",
         "learner": learned,
         "pending_pruned": pruned,
+        "world_heldout": {k: v["kind"] for k, v in world_probe["probes"].items()},
         "twin": twin_summary(board_recent(64)),
         "merged": merged,
         "rules": rules,
@@ -321,10 +324,14 @@ def pair(task_text: str = "cycle") -> dict[str, Any]:
     held-out family.
     """
     proposal = propose(task_text)
-    pair_id = hashlib.sha256(f"{_now()}:{proposal.get('task')}:{os.getpid()}".encode()).hexdigest()[:12]
+    pair_id = hashlib.sha256(f"{_now()}:{proposal.get('task')}:{os.urandom(8).hex()}".encode()).hexdigest()[:12]
     control = awake(task_text, arm="control", proposal=proposal, pair_id=pair_id)
     treatment = awake(task_text, arm="treatment", proposal=proposal, pair_id=pair_id)
     scoreboard = treatment.get("scoreboard") or control.get("scoreboard")
+    world = None
+    if os.environ.get("NOMAD_WORLD", "on") != "off":
+        from .world_loop import world_pair
+        world = world_pair()
     heldout = compare_live()
     heldout_path = _data() / "heldout.json"
     heldout_path.write_text(json.dumps(heldout, indent=2))
@@ -350,8 +357,11 @@ def pair(task_text: str = "cycle") -> dict[str, Any]:
             }
         ),
         "heldout_live": heldout,
+        "world": world,
         "ts": _now(),
     }
+    if world is not None:
+        _log({"mode": "world_pair", **{k: world[k] for k in ("family", "level", "control", "treatment", "scoreboard", "ts")}})
     _log({"mode": "pair", "task": proposal.get("task"), "learning_measurement": result["learning_measurement"], "ts": result["ts"]})
     return result
 
@@ -359,7 +369,7 @@ def pair(task_text: str = "cycle") -> dict[str, Any]:
 def main(argv: list[str] | None = None) -> int:
     import argparse
     parser = argparse.ArgumentParser(description="NOMAD continuous cybernetic loop")
-    parser.add_argument("mode", choices=("awake", "sleep", "query", "pair", "heldout"))
+    parser.add_argument("mode", choices=("awake", "sleep", "query", "pair", "heldout", "world", "probe"))
     parser.add_argument("--arm", choices=("treatment", "control"), default="treatment")
     parser.add_argument("--task", default="cycle")
     parser.add_argument("--question", default="")
@@ -371,6 +381,12 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(pair(args.task), indent=2))
     elif args.mode == "query":
         print(json.dumps(field_query(args.question or args.task), indent=2))
+    elif args.mode == "world":
+        from .world_loop import world_pair
+        print(json.dumps(world_pair(), indent=2))
+    elif args.mode == "probe":
+        from .world_loop import probe_heldout
+        print(json.dumps(probe_heldout(), indent=2))
     elif args.mode == "heldout":
         print(json.dumps(compare_live(), indent=2))
     else:

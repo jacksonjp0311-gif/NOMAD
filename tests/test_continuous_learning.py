@@ -183,7 +183,7 @@ class PairAndDomainTests(DataIsolationTest):
         self.assertEqual(result["control"]["operator_order"][0], "Add")
         self.assertTrue(result["learning_measurement"]["paired"])
         self.assertIn("delta", result["learning_measurement"])
-        board = recent(1)
+        board = [r for r in recent(8) if not str(r["task"]).startswith("world:")]
         self.assertEqual(len(board), 1)
         self.assertEqual(board[0]["kind"], "certified")
         # Control must not write packets or prior. Treatment may, if certified.
@@ -196,7 +196,8 @@ class PairAndDomainTests(DataIsolationTest):
             from nomad.continuous import sleep
             from nomad.genesis import load_prior_file
             slept = sleep(arm="treatment")
-            self.assertEqual(len(slept["learner"]["applied"]), 1)
+            genesis = [a for a in slept["learner"]["applied"] if not a.get("world")]
+            self.assertEqual(len(genesis), 1)
             prior = load_prior_file(self.data / "continuous" / "prior.json")
             self.assertGreater(prior.witnessed, 0)
             self.assertEqual(prior.order(result["treatment"]["context_sig"])[0], "Mult")

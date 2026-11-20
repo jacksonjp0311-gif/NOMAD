@@ -90,6 +90,9 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
     packets = field_queue.claim()
     current = field_queue.field_version()
     prior, prior_source = load_prior_safe()
+    from .world_loop import load_world_prior, save_world_prior
+    wprior = load_world_prior()
+    world_applied = 0
     dropped: dict[str, int] = defaultdict(int)
     applied: list[dict[str, Any]] = []
     seen: set[str] = set()
@@ -113,6 +116,18 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
         ok, weight, reason = policy.decide(lag)
         if not ok:
             dropped[reason or "stale"] += 1
+            continue
+        extra = p.get("extra") or {}
+        if extra.get("world") == "typed":
+            from .world import OPSETS
+            try:
+                wprior.add_witnessed(extra["tree"], receipt, family=extra.get("family"),
+                                     opset=OPSETS[extra["opset"]], inputs=extra["inputs"])
+            except (ValueError, KeyError, TypeError):
+                dropped["bad_receipt"] += 1
+                continue
+            world_applied += 1
+            applied.append({"packet_id": pid, "task": p.get("task"), "lag": lag, "weight": weight, "world": True})
             continue
         try:
             prior.add_witnessed(int(p.get("context_sig", 0)), p.get("candidate") or "", receipt,
@@ -142,11 +157,16 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
         applied.append({"packet_id": pid, "task": p.get("task"), "lag": lag, "weight": weight})
     new_version = current
     gamma = float(os.environ.get("NOMAD_DECAY", str(DEFAULT_DECAY)))
-    if applied:
+    genesis_applied = len(applied) - world_applied
+    if genesis_applied:
         # Unlearning: old evidence fades a little each time new evidence lands,
         # so the order follows what is still being re-earned.
         prior.decay(gamma)
         save_prior_atomic(prior)
+    if world_applied:
+        wprior.decay(gamma)
+        save_world_prior(wprior)
+    if applied:
         new_version = field_queue.bump_version(f"consolidated {len(applied)} packet(s)")
     field_queue.ack()
     return {
@@ -157,6 +177,8 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
         "field_version_after": new_version,
         "prior_source": prior_source,
         "prior_witnessed": prior.witnessed,
+        "world_applied": world_applied,
+        "world_witnessed": wprior.witnessed,
         "decay": gamma if applied else None,
         "policy": {"max_lag": policy.max_lag, "mode": policy.mode, "decay": policy.decay,
                    "min_weight": policy.min_weight},

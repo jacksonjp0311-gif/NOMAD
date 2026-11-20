@@ -1,5 +1,11 @@
 # NOMAD — Change History
 
+## WORLD: wider world, curriculum, library learning, string and list domains (2026-11-19)
+
+- `nomad/world.py`: typed bounded interpreter and enumerator (div, mod, min, max, ite, strings, int lists); WITNESS on withheld rows; library inlined before certification.
+- `nomad/world_tasks.py`, `nomad/curriculum.py`, `nomad/world_loop.py`: frozen families by domain and level, level gating on beating control, world twin pair every awake, held-out probes every sleep.
+- Offline results: absdiff and quartic_sum won by the field (cold misses / cannot reach); string and list held-outs not won. Details in `docs/WORLD.md`.
+
 ## Continuous loop: balance and unlearning (2026-11-19)
 
 - `GrammarPrior` keeps per-domain operator evidence and a `decay(gamma)`; treatment orders by its domain's evidence, untrained domains keep the cold order. Held-out family still uses the global field.

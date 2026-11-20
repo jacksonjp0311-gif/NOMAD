@@ -17,6 +17,7 @@ No transformers. Search and memory never certify. WITNESS certifies. The field u
 - **Society** — Registry, bus, fitness, gate. Agents route, observe, and act.
 - **Cognition** — Attend and decide by integer overlap and orbit. Query answers from the field.
 - **Sensors** — Local telemetry of packet count, fitness, and uptime. Tool selection from domain bias.
+- **World** — Typed bounded programs (ints, strings, lists), a curriculum that opens harder families only after beating control, library primitives harvested from certified solutions, and never-trained held-out probes. See `docs/WORLD.md`.
 - **Orbit** — One-hop relational pull. Packets related by overlap or shared operator enter the readout even without direct query overlap.
 
 The field is the living weight store. The runners keep it moving. The agents act on it. The receipts stay inspectable.
@@ -25,7 +26,7 @@ The field is the living weight store. The runners keep it moving. The agents act
 
 ## Boundaries
 
-Architecture is recursive field intelligence. Current capability is bounded integer synthesis and field query. Not unrestricted coding. Not free-form generation. Not AGI.
+Architecture is recursive field intelligence. Current capability is bounded program synthesis (GENESIS integer expressions plus the WORLD typed table of integer, string, and list operators, at most 7 nodes, with learned library primitives) and field query. Not unrestricted coding. Not free-form generation. Not AGI.
 
 The field grows by append, reinforce, and merge only on WITNESS-supported and final-correct treatment outcomes. Public-only success is recorded and is not learning. The readout is fixed. The gate decides. The twin scoreboard measures the difference only when both arms are present.
 
