@@ -1,68 +1,123 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-20T03:57:15Z",
+  "ts": "2026-11-20T04:16:47Z",
   "sense": {
-    "last_pair": "2026-11-20T03:57:00Z",
-    "last_world_pair": "2026-11-20T03:57:00Z",
-    "last_sleep": "2026-11-20T03:57:14Z"
+    "last_pair": "2026-11-20T04:16:43Z",
+    "last_world_pair": "2026-11-20T04:16:43Z",
+    "last_sleep": "2026-11-20T04:16:27Z"
   },
   "think": {
     "curriculum_open_levels": {
-      "mathematics": 1,
-      "language": 1,
-      "coding": 1
+      "mathematics": 2,
+      "language": 2,
+      "coding": 2
     }
   },
   "act_verify": {
     "genesis_twin": {
       "estimator": "rloo",
-      "groups": 6,
-      "pass_rate": 0.9166666666666666,
-      "all_pass_rate": 0.8333333333333334,
+      "groups": 46,
+      "pass_rate": 0.9891304347826086,
+      "all_pass_rate": 0.9782608695652174,
       "all_fail_rate": 0.0,
-      "informative_rate": 0.16666666666666666,
+      "informative_rate": 0.021739130434782608,
       "informative_pairs": 1,
       "mean_treatment_advantage": 1.0,
-      "both_certified_pairs_with_cost": 2,
-      "mean_evaluations_saved": 0.0,
+      "both_certified_pairs_with_cost": 42,
+      "mean_evaluations_saved": 42.07142857142857,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     },
     "world_twin": {
       "estimator": "rloo",
-      "groups": 2,
+      "groups": 42,
       "pass_rate": 1.0,
       "all_pass_rate": 1.0,
       "all_fail_rate": 0.0,
       "informative_rate": 0.0,
       "informative_pairs": 0,
       "mean_treatment_advantage": null,
-      "both_certified_pairs_with_cost": 2,
-      "mean_evaluations_saved": 0.0,
+      "both_certified_pairs_with_cost": 42,
+      "mean_evaluations_saved": 313.07142857142856,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     }
   },
   "remember": {
-    "queued": 0,
+    "queued": 2,
     "inflight": 0,
-    "certified_queued": 0,
-    "field_version": 1,
+    "certified_queued": 2,
+    "field_version": 14,
     "genesis_heldout": {
       "field_certified": true,
       "cold_certified": false
     },
     "world_heldout": {
-      "absdiff": "none",
-      "quartic_sum": "none",
+      "absdiff": "certified_correctness",
+      "quartic_sum": "certified_correctness",
       "last_first_upper": "none",
       "sum_minus_max": "none"
     },
-    "world_library_size": 0
+    "world_library_size": 5
   },
   "evolve": {
-    "recent": []
+    "recent": [
+      {
+        "ts": "2026-11-20T04:16:47Z",
+        "seed": 1512272517,
+        "gene": "library_k",
+        "before": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2
+        },
+        "after": {
+          "decay": 0.97,
+          "library_k": 8,
+          "patience": 4,
+          "max_lag": 2
+        },
+        "benchmark_before": {
+          "heldout_wins": 2,
+          "train_evaluations": 10855,
+          "train_certified": 16,
+          "probe_evaluations": 118020,
+          "total_evaluations": 128875,
+          "probes": {
+            "absdiff": "certified_correctness",
+            "quartic_sum": "certified_correctness",
+            "last_first_upper": "none",
+            "sum_minus_max": "none"
+          }
+        },
+        "benchmark_after": {
+          "heldout_wins": 2,
+          "train_evaluations": 10855,
+          "train_certified": 16,
+          "probe_evaluations": 118020,
+          "total_evaluations": 128875,
+          "probes": {
+            "absdiff": "certified_correctness",
+            "quartic_sum": "certified_correctness",
+            "last_first_upper": "none",
+            "sum_minus_max": "none"
+          }
+        },
+        "accepted": false,
+        "reason": "not_better"
+      }
+    ]
   },
   "heartbeat": {
-    "recent_events": []
+    "recent_events": [],
+    "body_lease": {
+      "host": "gh-44672166283",
+      "heartbeat": "2026-11-20T04:16:47Z",
+      "age_min": 0.014963283333333332,
+      "alive": true,
+      "cycles": 40,
+      "cycles_per_hour": 236.9,
+      "released": false
+    }
   },
   "boundaries": "No transformers. WITNESS certifies; search and memory never do. Bounded programs only."
 }
