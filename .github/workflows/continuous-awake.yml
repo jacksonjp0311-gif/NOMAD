@@ -31,6 +31,9 @@ jobs:
       - name: Body lease
         id: lease
         run: python -m nomad.body lease
+      - name: Chain parked (body is the runtime)
+        if: ${{ steps.lease.outputs.alive == 'true' }}
+        run: echo "::notice::body lease is fresh; this fallback link no-ops and does not dispatch the next link (by design). Check data/lease.json heartbeat for liveness, not awake/sleep runs."
       - name: Run paired awake
         if: ${{ steps.lease.outputs.alive != 'true' }}
         run: python -m nomad.continuous pair

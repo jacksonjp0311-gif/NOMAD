@@ -64,6 +64,28 @@ def alive(lease: dict[str, Any] | None = None, stale_min: float = STALE_MIN) -> 
     return a is not None and a < stale_min
 
 
+def gh_run_id(lease: dict[str, Any] | None) -> str | None:
+    """GitHub run id behind a ``gh-<run_id>`` host, else None (desktop/other host)."""
+    host = (lease or {}).get("host") or ""
+    rid = host[3:] if host.startswith("gh-") else ""
+    return rid if rid.isdigit() else None
+
+
+def orphaned(lease: dict[str, Any] | None, run_status: str | None) -> bool:
+    """A fresh-looking lease whose GitHub body run has already finished.
+
+    A body that crashes or is killed (job timeout, runner loss) leaves an
+    unreleased lease with a recent heartbeat, and its completion fires the
+    watch before the 30-minute stale window. Without this check the watch
+    sees ``alive`` and nothing restarts the body (GitHub cron is not a
+    reliable backstop). Only GitHub-run hosts can be judged this way; a
+    desktop or other host is still judged by heartbeat age alone.
+    """
+    if not lease or lease.get("released") or gh_run_id(lease) is None:
+        return False
+    return run_status == "completed"
+
+
 def held_by_other(me: str, stale_min: float = STALE_MIN) -> bool:
     lease = read()
     return alive(lease, stale_min) and lease.get("host") != me

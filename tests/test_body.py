@@ -37,6 +37,19 @@ class LeaseTests(Isolated):
         lease.write("desktop", released=True)
         self.assertFalse(lease.alive())
 
+    def test_orphaned_lease_only_for_finished_github_run(self) -> None:
+        from nomad import lease
+        fresh = {"host": "gh-123", "released": False, "heartbeat": "2026-01-01T00:00:00Z"}
+        self.assertEqual(lease.gh_run_id(fresh), "123")
+        self.assertTrue(lease.orphaned(fresh, "completed"))
+        self.assertFalse(lease.orphaned(fresh, "in_progress"))
+        self.assertFalse(lease.orphaned(fresh, "unknown"))
+        self.assertFalse(lease.orphaned({**fresh, "released": True}, "completed"))
+        desk = {"host": "james-pc-4242", "released": False}
+        self.assertIsNone(lease.gh_run_id(desk))
+        self.assertFalse(lease.orphaned(desk, "completed"))
+        self.assertFalse(lease.orphaned(None, "completed"))
+
     def test_body_stands_by_when_another_host_holds_lease(self) -> None:
         from nomad import lease
         from nomad.body import run

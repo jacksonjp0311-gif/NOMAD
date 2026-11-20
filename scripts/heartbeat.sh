@@ -51,7 +51,17 @@ case "${1:-}" in
     stale_min="${2:-30}"
     read -r alive age < <(python -c "import json,sys; from nomad import lease; l=lease.read(); a=lease.age_min(l); print('true' if lease.alive(l, $stale_min) else 'false', int(a) if a is not None else 99999)")
     echo "heartbeat-watch: body lease alive=${alive} age=${age} min"
-    if [[ "$alive" == "true" ]]; then exit 0; fi
+    if [[ "$alive" == "true" ]]; then
+      # A fresh lease can still be orphaned: the body run crashed or was
+      # killed and fired this watch before the stale window. Judge GitHub
+      # hosts by their run status; other hosts by heartbeat age only.
+      rid=$(python -c "from nomad import lease; print(lease.gh_run_id(lease.read()) or '')")
+      [[ -z "$rid" ]] && exit 0
+      status=$(gh run view "$rid" -R "$REPO" --json status -q .status 2>/dev/null || echo unknown)
+      orphan=$(python -c "import sys; from nomad import lease; print('true' if lease.orphaned(lease.read(), sys.argv[1]) else 'false')" "$status")
+      if [[ "$orphan" != "true" ]]; then exit 0; fi
+      echo "heartbeat-watch: lease holder run $rid is $status but lease unreleased; orphaned"
+    fi
     if [[ "$(active nomad-body.yml)" -gt 0 ]]; then
       echo "heartbeat-watch: a body run is queued/running; leaving it"; exit 0
     fi
