@@ -190,8 +190,16 @@ class PairAndDomainTests(DataIsolationTest):
         labels = [p.label for p in load_packets()]
         self.assertIn("domain:mathematics", labels)
         if result["treatment"]["certified"]:
-            self.assertGreater(result["treatment"].get("prior_witnessed_after", 0), 0)
-            self.assertEqual(result["treatment"]["operator_order_after"][0], "Mult")
+            # Awake is an actor: it enqueues a versioned packet. Sleep is the
+            # single learner that moves the prior.
+            self.assertIn("enqueued", result["treatment"])
+            from nomad.continuous import sleep
+            from nomad.genesis import load_prior_file
+            slept = sleep(arm="treatment")
+            self.assertEqual(len(slept["learner"]["applied"]), 1)
+            prior = load_prior_file(self.data / "continuous" / "prior.json")
+            self.assertGreater(prior.witnessed, 0)
+            self.assertEqual(prior.order(result["treatment"]["context_sig"])[0], "Mult")
         else:
             # If treatment was not certified, the field prior must still be absent or unwitnessed.
             prior_path = self.data / "continuous" / "prior.json"

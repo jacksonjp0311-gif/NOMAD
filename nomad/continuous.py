@@ -8,17 +8,25 @@ never counted as learning, and never updates the field.
 Acting domain is the proposer's domain. Orbit is logged but cannot
 redirect the cycle to a different domain.
 
-Treatment may call GrammarPrior.add_witnessed only after a supported
-WITNESS receipt and a passing final split. That is what moves synthesis
-order. Control never writes packets, prior, or fitness.
+Actor/learner split (ideas credited to NVIDIA Molt, see
+docs/MOLT_EXTRACTION.md): awake is an actor. It reads the field version,
+attempts, and enqueues a versioned packet. A treatment packet carries the
+WITNESS receipt only after a supported receipt and a passing final split.
+Sleep is the single learner: it re-verifies each receipt, rejects stale
+packets, and only then calls GrammarPrior.add_witnessed, which is what
+moves synthesis order. Control never enqueues and never writes packets,
+prior, or fitness. NOMAD_LEARNER=inline consolidates right after each
+treatment awake (the old synchronous behaviour, same code path).
 
-Sleep: consolidate, evaluate CA rules, propose a rewrite (no commit).
+Sleep: consolidate the queue, prune stale unpaired scoreboard rows,
+evaluate CA rules, propose a rewrite (no commit).
 No transformers. Search and memory do not certify.
 """
 from __future__ import annotations
 
 import hashlib
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -45,6 +53,10 @@ from .query import query as field_query
 from .orbit import orbit
 from .external import load_examples
 from .heldout import compare_live
+from . import field_queue
+from .consolidate import consolidate
+from .advantage import twin_summary
+from .scoreboard import prune_pending, recent as board_recent
 from .paths import data_root
 
 BITS = 4096
@@ -139,6 +151,7 @@ def awake(
     *,
     arm: str = "treatment",
     proposal: dict[str, Any] | None = None,
+    pair_id: str | None = None,
 ) -> dict[str, Any]:
     """One awake cycle on a single arm.
 
@@ -160,6 +173,7 @@ def awake(
         bias = {"operator": None, "examples": "meta", "reason": "default", "overlap": 0, "label": ""}
     tool = select_tool(bias)
     splits = _splits_for_bias(bias)
+    version = field_queue.field_version()
     if arm == "control":
         prior = GrammarPrior()
     else:
@@ -184,6 +198,8 @@ def awake(
     outcome = {
         "mode": "awake",
         "arm": arm,
+        "pair_id": pair_id,
+        "field_version": version,
         "task": task_text,
         "proposal": proposal,
         "acting_domain": domain,
@@ -191,6 +207,7 @@ def awake(
         "bias": bias,
         "tool": tool,
         "example_source": splits.get("source"),
+        "context_sig": context_sig,
         "operator_order": order,
         "prior_witnessed": prior.witnessed,
         "sim_history": history,
@@ -221,29 +238,29 @@ def awake(
     if arm == "treatment":
         update_fitness(bool(decision.get("pass")))
         if decision.get("pass") and receipt is not None and should_reinforce(predicted):
-            prior.add_witnessed(context_sig, evaluated.candidate or "", receipt)
-            accumulate(
-                query_bits,
-                True,
-                label=task_text,
+            packet = field_queue.make_packet(
+                task=task_text,
+                arm=arm,
+                field_version=version,
+                certified=True,
+                candidate=evaluated.candidate,
+                context_sig=context_sig,
+                receipt=receipt,
+                pair_id=pair_id,
                 predicted=predicted,
                 measured=measured,
-                context={
-                    "task": task_text,
-                    "arm": arm,
-                    "proposal": proposal,
-                    "bias": bias,
-                    "tool": tool,
-                    "operator": bias.get("operator"),
-                    "certified": True,
-                },
+                domain=domain,
+                query_bits=sorted(query_bits),
+                extra={"bias": bias, "tool": tool, "operator": bias.get("operator")},
             )
-            if domain:
-                reinforce(f"domain:{domain}", 1)
-            save_prior_file(prior, _prior_path())
-            outcome["prior_witnessed_after"] = prior.witnessed
-            outcome["operator_order_after"] = list(prior.order(context_sig))
-    paired = record_arm(task_text, arm, certified, kind="certified")
+            outcome["enqueued"] = {"packet_id": packet["packet_id"], **field_queue.enqueue(packet)}
+            if os.environ.get("NOMAD_LEARNER", "queue") == "inline":
+                learned = consolidate()
+                outcome["consolidated"] = learned
+                after = load_prior_file(_prior_path())
+                outcome["prior_witnessed_after"] = after.witnessed
+                outcome["operator_order_after"] = list(after.order(context_sig))
+    paired = record_arm(task_text, arm, certified, kind="certified", pair_id=pair_id, field_version=version)
     if paired:
         outcome["scoreboard"] = paired
         outcome["learning_measurement"] = {
@@ -268,6 +285,8 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
     snap = telemetry()
     if arm != "treatment":
         return {"mode": "sleep", "arm": arm, "status": "frozen", "telemetry": snap, "ts": _now()}
+    learned = consolidate()
+    pruned = prune_pending()
     merged = merge_similar()
     rules = try_rules(steps=1)
     rewrite_result = rewrite()
@@ -275,6 +294,9 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
         "mode": "sleep",
         "arm": arm,
         "status": "consolidated",
+        "learner": learned,
+        "pending_pruned": pruned,
+        "twin": twin_summary(board_recent(64)),
         "merged": merged,
         "rules": rules,
         "rewrite": rewrite_result,
@@ -295,8 +317,9 @@ def pair(task_text: str = "cycle") -> dict[str, Any]:
     held-out family.
     """
     proposal = propose(task_text)
-    control = awake(task_text, arm="control", proposal=proposal)
-    treatment = awake(task_text, arm="treatment", proposal=proposal)
+    pair_id = hashlib.sha256(f"{_now()}:{proposal.get('task')}:{os.getpid()}".encode()).hexdigest()[:12]
+    control = awake(task_text, arm="control", proposal=proposal, pair_id=pair_id)
+    treatment = awake(task_text, arm="treatment", proposal=proposal, pair_id=pair_id)
     scoreboard = treatment.get("scoreboard") or control.get("scoreboard")
     heldout = compare_live()
     heldout_path = _data() / "heldout.json"

@@ -13,7 +13,7 @@ No transformers. Search and memory never certify. WITNESS certifies. The field u
 ## Layers
 
 - **Weight packets** — Bitwork geometry. Sets of bits + count. Splittable. Integer overlap readout. Merges on consolidation. Domain packets and learned packets accumulate.
-- **Continuous loop** — A single pair job runs control (cold prior) then treatment (field prior) on the same proposed task. Only a paired certified delta is a learning measurement. Sleep consolidates. Data commits are serialized.
+- **Continuous loop** — A single pair job runs control (cold prior) then treatment (field prior) on the same proposed task. Only a paired certified delta is a learning measurement. Awake attempts are actors that enqueue versioned packets; sleep is the single learner that re-verifies WITNESS receipts, rejects stale packets, and alone writes the field. Data commits are serialized.
 - **Society** — Registry, bus, fitness, gate. Agents route, observe, and act.
 - **Cognition** — Attend and decide by integer overlap and orbit. Query answers from the field.
 - **Sensors** — Local telemetry of packet count, fitness, and uptime. Tool selection from domain bias.

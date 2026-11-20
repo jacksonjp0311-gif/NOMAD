@@ -138,8 +138,29 @@ class NativeResult:
     reason: str = ''
 
 
+# Cold CI runners can take well over 7s for an optimised rustc build.
+RUST_COMPILE_TIMEOUT = 90.0
+_RUSTC_OK: bool | None = None
+
+
+def _rustc_works() -> bool:
+    # A rustup shim can exist on PATH without a configured toolchain. Only a
+    # rustc that answers --version counts as an available native compiler.
+    global _RUSTC_OK
+    if _RUSTC_OK is None:
+        if shutil.which('rustc') is None:
+            _RUSTC_OK = False
+        else:
+            try:
+                _RUSTC_OK = subprocess.run(['rustc', '--version'], capture_output=True, text=True,
+                                           timeout=30, check=False).returncode == 0
+            except (OSError, subprocess.TimeoutExpired):
+                _RUSTC_OK = False
+    return _RUSTC_OK
+
+
 def native_available(language: str) -> bool:
-    return language == 'python' or language == 'javascript' and shutil.which('node') is not None or language == 'rust' and shutil.which('rustc') is not None
+    return language == 'python' or language == 'javascript' and shutil.which('node') is not None or language == 'rust' and _rustc_works()
 
 
 def run_native(language: str, expr: str, rows: tuple[IOExample, ...], *, timeout: float = 7.0) -> NativeResult:
@@ -171,7 +192,7 @@ def run_native(language: str, expr: str, rows: tuple[IOExample, ...], *, timeout
             else:
                 executable=folder/'nomad-rust-case'
                 compile_run=subprocess.run(['rustc','--edition=2021','-O',str(program),'-o',str(executable)],
-                                           cwd=folder,capture_output=True,text=True,timeout=timeout,check=False)
+                                           cwd=folder,capture_output=True,text=True,timeout=max(timeout,RUST_COMPILE_TIMEOUT),check=False)
                 if compile_run.returncode:
                     return NativeResult('failed',(),language,src_hash,'Rust compile error: '+compile_run.stderr[:1500])
                 command=[str(executable)]

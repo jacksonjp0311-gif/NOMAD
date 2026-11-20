@@ -1,5 +1,13 @@
 # NOMAD — Change History
 
+## Continuous loop: actor/learner split (2026-11-19)
+
+- Awake treatment enqueues a versioned packet instead of writing the prior; sleep (`nomad/consolidate.py`) is the single learner. Receipts are re-verified, stale packets rejected (`nomad/staleness.py`), queue bounded with crash-safe claim/ack (`nomad/field_queue.py`).
+- Scoreboard pairs only within one `pair_id`; old unpaired rows are discarded, never paired with a newer arm.
+- Descriptive twin statistics (`nomad/advantage.py`): pre-filter pass rate, uniform-pair rates, leave-one-out treatment advantage.
+- Rust native gate only counts a rustc that answers `--version`; compile timeout raised for cold runners.
+- Ideas credited to NVIDIA Molt (Apache-2.0); no Molt code copied. See `docs/MOLT_EXTRACTION.md`. No new capability claim.
+
 ## v0.18.0 — PLATFORM (2026-11-14, engineering snapshot)
 
 - Added offline source installation, Windows command launcher, configuration, doctor, native runtime smoke checks, and explicit recovery commands.
