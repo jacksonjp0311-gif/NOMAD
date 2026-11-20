@@ -63067,6 +63067,75 @@
           "ts": "2026-11-20T15:04:31Z"
         },
         "ts": "2026-11-20T15:04:31Z"
+      },
+      {
+        "to": "spark",
+        "message": {
+          "mode": "sleep",
+          "arm": "treatment",
+          "status": "consolidated",
+          "learner": {
+            "claimed": 0,
+            "applied": [],
+            "dropped": {},
+            "field_version_before": 574,
+            "field_version_after": 574,
+            "prior_source": "current",
+            "prior_witnessed": 1724,
+            "world_applied": 0,
+            "world_witnessed": 1721,
+            "decay": null,
+            "policy": {
+              "max_lag": 2,
+              "mode": "mask",
+              "decay": 0.5,
+              "min_weight": 0.25
+            }
+          },
+          "pending_pruned": 0,
+          "world_heldout": {
+            "absdiff": "none",
+            "quartic_sum": "certified_correctness",
+            "last_first_upper": "none",
+            "sum_minus_max": "none"
+          },
+          "twin": {
+            "estimator": "rloo",
+            "groups": 64,
+            "pass_rate": 1.0,
+            "all_pass_rate": 1.0,
+            "all_fail_rate": 0.0,
+            "informative_rate": 0.0,
+            "informative_pairs": 0,
+            "mean_treatment_advantage": null,
+            "both_certified_pairs_with_cost": 64,
+            "mean_evaluations_saved": 181.703125,
+            "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
+          },
+          "merged": 0,
+          "rules": {
+            "noop": 1746,
+            "majority": 1746,
+            "growth": 1746,
+            "decay": 1746,
+            "stabilize": 1746,
+            "winner": "stabilize"
+          },
+          "rewrite": {
+            "status": "no_candidates"
+          },
+          "telemetry": {
+            "ts": "2026-11-20T15:04:54Z",
+            "uptime": 1795187094.4819193,
+            "packets": 1746,
+            "fitness": {
+              "success": 1734.0,
+              "cycles": 1734.0
+            }
+          },
+          "ts": "2026-11-20T15:05:08Z"
+        },
+        "ts": "2026-11-20T15:05:08Z"
       }
     ]
   },
@@ -2013540,6 +2013609,22 @@
           }
         },
         "ts": "2026-11-20T15:04:13Z"
+      },
+      {
+        "to": "keeper",
+        "message": {
+          "ts": "2026-11-20T15:04:54Z",
+          "measurement": {
+            "ts": "2026-11-20T15:04:54Z",
+            "uptime": 1795187094.4819193,
+            "packets": 1746,
+            "fitness": {
+              "success": 1734.0,
+              "cycles": 1734.0
+            }
+          }
+        },
+        "ts": "2026-11-20T15:04:54Z"
       }
     ]
   }
