@@ -1,6 +1,6 @@
 """Continuous cybernetic loop for NOMAD.
 
-Awake: proposer generates the next task from field and SIM, readout biases prior,
+Awake: proposer generates the next task from field and SIM, orbit readout biases prior,
 selects a tool from domain bias, then synthesis on domain or default examples.
 Sleep: consolidate, evaluate CA rules on independent snapshots, propose rewrite.
 SIM: one receipt per outcome. No double-count.
@@ -8,6 +8,7 @@ Scoreboard: each arm records itself under a stable task key; delta is computed
 only when both arms for that key are present.
 Observation: writes a live snapshot for external agents on every cycle.
 Query: answers by field readout (see query.py).
+Orbit: one-hop relational pull (see orbit.py and docs/ORBIT.md).
 No transformers. Field builds, evolves, proposes, and rewrites itself only after evidence.
 
 Domain packets are preferred for bias. On measured success under a domain bias,
@@ -36,6 +37,7 @@ from .learner import Counts
 from .domain_tasks import examples_for
 from .tools import select as select_tool
 from .query import query as field_query
+from .orbit import orbit
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "continuous"
@@ -158,14 +160,14 @@ def _log(row: dict[str, Any]) -> None:
         f.write(json.dumps(row, separators=(",", ":")) + "\n")
 
 def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]:
-    """One awake cycle. Proposer generates the task, readout biases the prior, selects tool, then synthesis."""
+    """One awake cycle. Proposer generates the task, orbit readout biases the prior, selects tool, then synthesis."""
     _ensure()
     snap = telemetry()
     proposal = propose(task_text)
     task_text = proposal["task"]
     prior = _load_prior()
     query_bits = _hash_bits(task_text)
-    context = readout(query_bits)
+    context = orbit(query_bits)
     bias = _bias_from_context(context)
     tool = select_tool(bias)
     if bias["operator"]:
@@ -226,7 +228,6 @@ def awake(task_text: str = "cycle", *, arm: str = "treatment") -> dict[str, Any]
                 domain_label = f"domain:{reason.split(':', 1)[1]}"
                 reinforce(domain_label, 1)
         _save_prior(prior)
-    # Stable key so treatment and control pair across runs.
     paired = record_arm(task_text, arm, bool(decision.get("pass")))
     if paired:
         outcome["scoreboard"] = paired
