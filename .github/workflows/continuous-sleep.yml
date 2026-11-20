@@ -1,9 +1,11 @@
 name: continuous-sleep
-# schedule re-registered 2026-11-20
+# re-registered 2026-11-20 shifted minutes
 on:
   schedule:
-    - cron: "37 * * * *"
+    - cron: "38 * * * *"
   workflow_dispatch:
+  repository_dispatch:
+    types: [sleep]
 permissions:
   contents: write
 jobs:
