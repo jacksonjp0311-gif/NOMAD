@@ -1,23 +1,44 @@
 {
+  "schema": "nomad.v0.10.grammar-prior.v1",
+  "witnessed": 1,
   "contextual": true,
-  "global": {
-    "Add": {
-      "success": 2,
-      "failure": 0
+  "operator": {
+    "contextual": true,
+    "global": {
+      "Add": {
+        "success": 2,
+        "failure": 1
+      },
+      "Mult": {
+        "success": 6,
+        "failure": 0
+      },
+      "Sub": {
+        "success": 0,
+        "failure": 1
+      }
     },
-    "Mult": {
-      "success": 5,
-      "failure": 0
-    }
-  },
-  "contexts": {
-    "0:Add": {
-      "success": 2,
-      "failure": 0
-    },
-    "0:Mult": {
-      "success": 5,
-      "failure": 0
+    "contexts": {
+      "0:Add": {
+        "success": 2,
+        "failure": 0
+      },
+      "0:Mult": {
+        "success": 5,
+        "failure": 0
+      },
+      "1216:Add": {
+        "success": 0,
+        "failure": 1
+      },
+      "1216:Mult": {
+        "success": 1,
+        "failure": 0
+      },
+      "1216:Sub": {
+        "success": 0,
+        "failure": 1
+      }
     }
   }
 }
