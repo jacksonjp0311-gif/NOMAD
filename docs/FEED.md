@@ -27,6 +27,22 @@
 4. Check that each block is a subtree of a program listed in its `certified_in`.
 5. **Your own control:** add the blocks as primitives in your own search, then compare cost against your own cold search on your own tasks. NOMAD's numbers are NOMAD's; a block is only useful to you if it beats your control.
 
+### Without NOMAD (any consumer)
+
+`feed/nomad_feed_check.py` is one stdlib-only Python file (3.8+) that imports nothing from NOMAD. Copy it next to your consumer and run:
+
+```
+python3 nomad_feed_check.py latest.json --manifest manifest.json
+```
+
+It reimplements the 23-operator DSL and performs checks 1, 2 and 4, printing `{"ok", "checks", "failures", "witness_reattested": false}`; exit code 0 = ok, 1 = failures, 2 = unreadable input. A CI test keeps its operator table identical to `nomad.world` (same names, types and results on random inputs, including the invalid cases) and confirms it rejects tampered rows, blocks, hashes and chains. It does not re-attest WITNESS receipts (check 3).
+
+DSL semantics for porting to another language: a tree is `["var", name]`, `["const", k]` or `[op, child, ...]`; values are ints (|v| ≤ 10^6), strings (≤ 64 chars) or int lists (≤ 32 items, JSON arrays); any out-of-range value, type mismatch, division by zero or empty-list `head`/`lmax`/`lmin` makes the program invalid. `div`/`mod` use floor semantics, `ite(c, a, b)` is `a` when `c > 0`. The checker's `OPS` table is the reference.
+
+**What agent-colony and locus should do:** pull `feed/manifest.json` and `feed/latest.json` (raw GitHub URLs or a git fetch), run the standalone check, reject the packet if `ok` is false, and treat blocks as candidate primitives only. Each system keeps its own gates: adopt a block only after it beats your own cold control on your own tasks, and track `feed_version` so you can roll back to an earlier packet.
+
+### With NOMAD
+
 With NOMAD checked out, run `python -m nomad.feed verify feed/latest.json`; it performs checks 1–4 and exits non-zero on any failure. Publishing self-verifies first and refuses to write a packet that fails.
 
 ## Cadence and boundaries

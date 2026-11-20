@@ -198,6 +198,7 @@ def build(prior: WorldPrior | None = None) -> dict:
             "blocks": "each block must be a subtree of a program in certified_in",
             "control": "consumers compare blocks against their own cold control on their own tasks",
             "cli": "python -m nomad.feed verify <packet.json>",
+            "standalone": "python3 feed/nomad_feed_check.py <packet.json> --manifest feed/manifest.json (stdlib only: checks hash, chain, rows, blocks; no WITNESS re-attest)",
         },
         "boundaries": "Tiny typed programs (<= 7 nodes). Certified on frozen rows only; not general coding.",
     }
