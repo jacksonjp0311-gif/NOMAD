@@ -38,6 +38,10 @@ python -m nomad.body --hours 2 --push      # Windows: py -3.12 -m nomad.body --h
 - Online, `nomad-body` runs ~5.5 h per job and dispatches its successor; `nomad-watch` restarts it if the heartbeat is older than 30 minutes; the short awake/sleep workflows and crons are fallbacks that no-op while a body is alive.
 - `data/organism.json` shows the organism's health: last pulses, body lease, twin results, curriculum, held-out probes, evolution.
 
+## Intelligence feed
+
+`feed/` publishes versioned, hash-chained packets of WITNESS-certified building blocks and scores (field vs cold control), so other agents can pull them and test them against their own controls. To verify a packet, run `python -m nomad.feed verify feed/latest.json`. Details are in [docs/FEED.md](docs/FEED.md).
+
 ## Boundaries
 
 Architecture is recursive field intelligence. Current capability is bounded program synthesis (GENESIS integer expressions plus the WORLD typed table of integer, string, and list operators, at most 7 nodes, with learned library primitives) and field query. Not unrestricted coding. Not free-form generation. Not AGI.

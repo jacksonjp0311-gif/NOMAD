@@ -36,6 +36,9 @@ def branch() -> str:
 
 def commit(message: str, paths: list[str] | tuple[str, ...] = ("data/",)) -> bool:
     """Stage paths and commit if anything changed. Returns True when a commit was made."""
+    paths = [p for p in paths if (PACKAGE_ROOT / p).exists()]
+    if not paths:
+        return False
     git("add", "--", *paths, check=False)
     if git("diff", "--staged", "--quiet", check=False).returncode == 0:
         return False

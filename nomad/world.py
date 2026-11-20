@@ -553,7 +553,23 @@ def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bo
                                s.evaluations, s.reason, s.order, ()), None
     # Certify the standalone program: library calls are inlined first.
     tree = expand(s.tree, library)
+    receipt, public_ok, final_ok = certify(task, tree)
+    if receipt is None:
+        return WorldEvaluation(task.task_id, task.family, render(tree), tree, False, False, False,
+                               s.evaluations, "invalid_on_rows", s.order, tuple(s.library_used)), None
+    return WorldEvaluation(task.task_id, task.family, render(tree), tree, public_ok,
+                           receipt.supported, final_ok, s.evaluations, None, s.order,
+                           tuple(s.library_used)), receipt
 
+
+def certify(task: WorldTask, tree: list) -> tuple[WitnessReceipt | None, bool, bool]:
+    """WITNESS-attest a standalone program on a task's rows.
+
+    Deterministic: the same task rows and program always give the same
+    receipt_hash, so anyone holding the rows can re-attest and compare.
+    Returns (receipt or None if the program is invalid on public/challenge
+    rows, public_ok, final_ok).
+    """
     def vals(rs):
         out = []
         for r, _ in rs:
@@ -565,8 +581,7 @@ def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bo
 
     pub, cha, fin = vals(task.public), vals(task.challenge), vals(task.final)
     if any(v is None for v in pub + cha):
-        return WorldEvaluation(task.task_id, task.family, render(tree), tree, False, False, False,
-                               s.evaluations, "invalid_on_rows", s.order, tuple(s.library_used)), None
+        return None, False, False
     d = _DEFAULT[task.out]
     receipt = Witness(witness_id="nomad-witness-world-v1").attest(
         task_id=task.task_id,
@@ -581,6 +596,4 @@ def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bo
     )
     final_ok = all(v == e for v, (_, e) in zip(fin, task.final))
     public_ok = all(v == e for v, (_, e) in zip(pub, task.public))
-    return WorldEvaluation(task.task_id, task.family, render(tree), tree, public_ok,
-                           receipt.supported, final_ok, s.evaluations, None, s.order,
-                           tuple(s.library_used)), receipt
+    return receipt, public_ok, final_ok

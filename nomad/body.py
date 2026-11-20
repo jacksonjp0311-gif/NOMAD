@@ -64,7 +64,7 @@ def evolve_step(*, push: bool) -> dict[str, Any]:
 
 def run(hours: float, *, push: bool = False, checkpoint_min: float = 10.0, cycle_gap_s: float = 15.0,
         sleep_every: int = 3, stale_min: float = lease.STALE_MIN, max_cycles: int | None = None,
-        evolve: bool = True) -> dict[str, Any]:
+        evolve: bool = True, feed_on: bool = True) -> dict[str, Any]:
     from .continuous import pair, sleep
     from .organism import log_event, status
 
@@ -107,16 +107,24 @@ def run(hours: float, *, push: bool = False, checkpoint_min: float = 10.0, cycle
                 ev = {"error": repr(exc)[:300]}
         else:
             ev = None
+        fd = None
+        if feed_on:
+            try:
+                from . import feed
+                if feed.due():
+                    fd = feed.publish()
+            except Exception as exc:  # the body must not die on a feed failure
+                fd = {"error": repr(exc)[:300]}
         lease.write(me, started=started, released=final, cycles=cycles,
                     cycles_per_hour=round(cycles / elapsed_h, 1), checkpoints=checkpoints)
         rep = status()
         print(json.dumps({"checkpoint": checkpoints, "cycles": cycles, "sleeps": sleeps,
-                          "cycles_per_hour": round(cycles / elapsed_h, 1), "evolve": ev,
+                          "cycles_per_hour": round(cycles / elapsed_h, 1), "evolve": ev, "feed": fd,
                           "world_heldout": rep["remember"]["world_heldout"],
                           "field_version": rep["remember"]["field_version"], "ts": _now()}, default=str), flush=True)
         last_ckpt = time.time()
         if use_git:
-            hostgit.commit(f"nomad-body: checkpoint {checkpoints} ({cycles} cycles){' final' if final else ''}", ["data/"])
+            hostgit.commit(f"nomad-body: checkpoint {checkpoints} ({cycles} cycles){' final' if final else ''}", ["data/", "feed/"])
             hostgit.sync()
             if lease.held_by_other(me, stale_min):
                 return False

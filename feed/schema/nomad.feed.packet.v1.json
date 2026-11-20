@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jacksonjp0311-gif/NOMAD/feed/schema/nomad.feed.packet.v1.json",
+  "title": "NOMAD intelligence feed packet v1",
+  "type": "object",
+  "required": ["schema", "feed_version", "published", "prev_sha256", "source", "language",
+               "blocks", "evidence", "scores", "verification", "packet_sha256"],
+  "properties": {
+    "schema": {"const": "nomad.feed.packet.v1"},
+    "feed_version": {"type": "integer", "minimum": 1},
+    "published": {"type": "string", "description": "UTC, YYYY-MM-DDTHH:MM:SSZ"},
+    "prev_sha256": {"type": ["string", "null"], "description": "packet_sha256 of the previous packet (hash chain)"},
+    "packet_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$",
+                      "description": "sha256 of canonical JSON (sort_keys, separators , :) of the packet without this field"},
+    "source": {"type": "object", "required": ["repo", "commit", "field_version", "world_witnessed"]},
+    "language": {"type": "object", "required": ["ast", "interpreter", "witness"]},
+    "blocks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["block_id", "tree", "rendered", "signature", "uses", "certified_in", "tree_sha256"],
+        "properties": {
+          "block_id": {"type": "string"},
+          "tree": {"type": "array", "description": "typed AST, e.g. [\"mul\", [\"var\", \"x\"], [\"var\", \"x\"]]"},
+          "rendered": {"type": "string"},
+          "signature": {"type": ["array", "null"], "description": "[[name, type], ...] inputs the block is typed for"},
+          "uses": {"type": "number", "description": "decayed reuse count in the field"},
+          "certified_in": {"type": "array", "items": {"type": "string"}, "minItems": 1,
+                           "description": "task_ids in this packet's evidence whose certified program contains the block"},
+          "tree_sha256": {"type": "string"}
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["task", "domain", "program", "rendered", "final_correct", "receipt", "control", "treatment", "budget"],
+        "properties": {
+          "task": {"type": "object", "required": ["task_id", "family", "opset", "inputs", "out", "public", "challenge", "final"]},
+          "program": {"type": "array"},
+          "receipt": {"type": "object", "required": ["receipt_hash", "verdict", "public_match", "challenge_match"]},
+          "control": {"type": "object", "required": ["certified", "evaluations"]},
+          "treatment": {"type": "object", "required": ["certified", "evaluations", "library_used"]},
+          "budget": {"type": "integer"}
+        }
+      }
+    },
+    "scores": {"type": "object", "required": ["world_twin", "genesis_twin", "heldout"]},
+    "verification": {"type": "object"}
+  }
+}

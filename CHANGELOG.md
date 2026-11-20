@@ -1,5 +1,11 @@
 # NOMAD — Change History
 
+## Intelligence feed (2026-11-20)
+
+- `nomad/feed.py`, `feed/`: versioned, hash-chained packets of WITNESS-certified building blocks, per-family evidence (rows, program, receipt, cold-control cost) and live scores, for other agents to pull and test against their own controls. `python -m nomad.feed verify` re-attests every receipt; publish refuses a packet that fails. The body publishes at most every 4 h. Format: `docs/FEED.md`.
+- `world.certify()`: deterministic WITNESS attestation split out of `evaluate` so a consumer can re-attest.
+- `hostgit.commit` skips paths that do not exist.
+
 ## Staged transfer for unfamiliar families (2026-11-20)
 
 - `world.synthesize`: an unfamiliar family (held-out or first attempt) searches cold up to size 6, then the cold order with library atoms for size 7. Chosen by leave-one-family-out: total 12,972 = cold (old field 14,375, worst family 13x cold).
