@@ -365,19 +365,15 @@ def _key(vals: tuple) -> str:
     return json.dumps(vals, separators=(",", ":"))
 
 
-def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bool = True,
-               use_library: bool = True, max_size: int = 7, max_eval: int = 20000) -> Search:
-    """Bottom-up typed enumeration over public rows only."""
+def _search_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list],
+                max_size: int, max_eval: int):
+    """Bottom-up typed enumeration over public rows only, as a generator.
+
+    Yields once per candidate evaluation so two searches can share one budget
+    in lockstep; the final Search is the generator's return value.
+    """
     rows = [r for r, _ in task.public]
     goal = tuple(e for _, e in task.public)
-    opset = OPSETS[task.opset]
-    if prior is None:
-        order = tuple(opset)
-        library: dict[str, list] = {}
-    else:
-        order = prior.order(opset, task.family if use_family else None)
-        lib_ok = use_library and prior.wants_library(task.family if use_family else None)
-        library = prior.primitives_for(task.inputs) if lib_ok else {}
     pools: dict[int, dict[str, dict[str, tuple[list, tuple]]]] = {}
     seen: set[tuple[str, str]] = set()
     evals = 0
@@ -411,6 +407,7 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
         if evals >= max_eval:
             return Search(None, evals, "candidate_budget", order)
         vals = evaluate(a)
+        yield evals
         if vals is None:
             continue
         hit = offer(1, a, vals)
@@ -432,6 +429,7 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
                     if evals >= max_eval:
                         return Search(None, evals, "candidate_budget", order)
                     evals += 1
+                    yield evals
                     try:
                         vals = tuple(op.fn(*args) for args in zip(*(c[1] for c in combo)))
                         if any(type_of(v) != op.out for v in vals):
@@ -446,6 +444,57 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
                         libs = [s[1] for s in subtrees(hit) if s[0] == "lib"]
                         return Search(hit, evals, None, order, libs)
     return Search(None, evals, "frontier", order)
+
+
+def _drive(g) -> Search:
+    while True:
+        try:
+            next(g)
+        except StopIteration as stop:
+            return stop.value
+
+
+def familiar(prior: WorldPrior | None, family: str | None) -> bool:
+    """A family is familiar when the field holds its own operator evidence."""
+    return bool(prior is not None and family is not None and prior.families.get(family))
+
+
+def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bool = True,
+               use_library: bool = True, max_size: int = 7, max_eval: int = 20000,
+               staged: bool = True) -> Search:
+    """Search with the cold order, the field, or a staged transfer.
+
+    On a familiar family (one the field has certified before) the field's own
+    order and library search alone. On an unfamiliar family (held-out, or a
+    family's first attempt) the field has no evidence that its cross-family
+    order or library atoms apply. Leave-one-family-out validation on the
+    training families showed both add cost there (cold 12,972 evaluations in
+    total vs 14,955 with the global order and 14,375 with order + library;
+    worst single family 13x cold). So ``staged`` transfer first exhausts the
+    cold search below ``max_size`` (identical to the control, so it can never
+    be beaten there) and only then spends the remaining budget on the cold
+    order extended with library atoms, which is where certified sub-programs
+    reach programs the cold search cannot. Order evidence still needs
+    family evidence, matching the GENESIS balance rule.
+    """
+    opset = OPSETS[task.opset]
+    cold_order = tuple(opset)
+    if prior is None:
+        return _drive(_search_gen(task, cold_order, {}, max_size, max_eval))
+    fam = task.family if use_family else None
+    order = prior.order(opset, fam)
+    lib_ok = use_library and prior.wants_library(fam)
+    library = prior.primitives_for(task.inputs) if lib_ok else {}
+    if not staged or familiar(prior, fam):
+        return _drive(_search_gen(task, order, library, max_size, max_eval))
+    if not library:
+        return _drive(_search_gen(task, cold_order, {}, max_size, max_eval))
+    first = _drive(_search_gen(task, cold_order, {}, max(1, max_size - 1), max_eval))
+    if first.tree is not None or first.evaluations >= max_eval:
+        return first
+    rest = _drive(_search_gen(task, cold_order, library, max_size, max_eval - first.evaluations))
+    return Search(rest.tree, first.evaluations + rest.evaluations, rest.reason,
+                  rest.order, rest.library_used)
 
 
 def _compositions(total: int, parts: int) -> list[tuple[int, ...]]:

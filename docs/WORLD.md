@@ -27,19 +27,37 @@ Each awake `pair()` now also runs one `world_pair()`: control is a cold `WorldPr
 
 ## Held-out probes (never trained)
 
-| Probe | Needs | Budget | Cold | Field after a short curriculum (2 rounds offline) |
-|---|---|---|---|---|
-| absdiff = \|x − y\| | wider world | 10,000 | not found (budget) | certified, `sub(max(x, y), min(x, y))`, ~1.7k–7.8k evaluations |
-| quartic_sum = x⁴ + y⁴ | learned building blocks | 150,000 | **unreachable** (size 15 > 7; cold exhausts the full space at 9,603) | certified via library `mul(x, x)`, `mul(y, y)`, ~64k–108k evaluations |
-| last_first_upper | string world | 5,000 | certified, 358 | certified, ~600–1,500: **no win** |
-| sum_minus_max | list world | 5,000 | certified, 241 | certified, ~250–430: **no win** |
+Since the staged-transfer change (below), an unfamiliar family searches the cold space up to size 6 first, then adds library atoms for size 7.
 
-Budgets were first drafted at 5,000 / 20,000 and raised after one measurement; this is stated in `world_tasks.py`. For absdiff the robust fact is the cost ratio at an unlimited budget (field with library 7,820 vs cold 29,660 in one run). For quartic_sum, cold cannot reach the program at any budget within `max_size` 7.
+| Probe | Needs | Budget | Cold | Field before (order + library) | Field now (staged) |
+|---|---|---|---|---|---|
+| absdiff = \|x − y\| | wider world | 10,000 | not found (29,660 unlimited) | certified, ~1.7k–7.8k | **not found at 10k**; certified at 19,982 |
+| quartic_sum = x⁴ + y⁴ | learned building blocks | 150,000 | **unreachable** (exhausts at 9,603) | certified, ~64k–108k | certified, 23,352 |
+| last_first_upper | string world | 5,000 | certified, 358 | certified, ~600–1,468 | certified, 358 (tie) |
+| sum_minus_max | list world | 5,000 | certified, 241 | certified, ~250–411 | certified, 241 (tie) |
 
-On trained families, the field typically reaches the same certified program with far less search after one certified attempt (offline 48-cycle run: max/min/mod/div 86–179 → 8; pick_gt 9,561 → 921; double_lower 80 → 8; second_smallest 113 → 12). A family's first field attempt can cost more than cold when library atoms widen the search (square_plus_y 296 → 454 first, 53 later); sort_desc never beat cold (17 vs 17–28) and is parked.
+Budgets were first drafted at 5,000 / 20,000 and raised after one measurement; this is stated in `world_tasks.py`. They were **not** changed for staged transfer, so absdiff now counts as a loss at its budget.
+
+## Unfamiliar families: staged transfer
+
+Cause of the string/list gap, measured by leave-one-family-out (LOFO) on the 16 training families (train on 15, solve the 16th with no family evidence, 2 offline rounds):
+
+| Unfamiliar-family policy | LOFO total evaluations | Worst family vs cold |
+|---|---|---|
+| cold order, no library (control) | 12,972 | 1.0× |
+| field global order, no library | 14,955 | 3.8× |
+| cold order + library | 18,001 | 3.9× |
+| field global order + library (old) | 14,375 | 13× |
+| 1:1 hedge of old field and cold | 17,470 | 2.1× |
+| **staged: cold to size 6, then cold order + library** | **12,972** | **1.0×** |
+
+The cross-family operator order and library atoms do not transfer on average; library atoms only pay when the program is deeper than the cold space reaches. Staged transfer was chosen on the LOFO numbers, before the held-outs were measured with it. Familiar families still use their own order and library. Cost: anything that needs library atoms pays the full shallow cold search first (absdiff now loses at 10k).
+
+On trained families, the field typically reaches the same certified program with far less search after one certified attempt (offline 48-cycle run: max/min/mod/div 86–179 → 8; pick_gt 9,561 → 921; double_lower 80 → 8; second_smallest 113 → 12). A family's first field attempt now costs exactly the cold search when the program has ≤ 6 nodes; sort_desc never beat cold (17 vs 17–28) and is parked.
 
 ## Honest limits
 
-- String and list held-outs show **no transfer**: the field is slower than cold there.
+- String and list held-outs show **no transfer**: staged transfer ties cold there; it no longer loses, but it does not win either.
+- absdiff no longer fits its 10k budget under staged transfer.
 - Programs are still tiny (size ≤ 7 nodes, ≤ 6 library atoms). This is not unrestricted coding.
 - Domain names label small task families. "Language" means a few string transforms, not language understanding.

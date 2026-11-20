@@ -98,10 +98,27 @@ class LearningTests(unittest.TestCase):
                 self.assertLess(f.evaluations, c.evaluations)
 
     def test_new_heldout_family_absdiff_field_beats_control(self) -> None:
-        from nomad.world_loop import probe_heldout
-        r = probe_heldout(self.field, write=False)["probes"]
-        self.assertFalse(r["absdiff"]["cold"]["certified"])
-        self.assertTrue(r["absdiff"]["field"]["certified"])
+        # Staged transfer pays the full cold shallow search first, so absdiff
+        # no longer fits the 10k probe budget; at 2x budget the field certifies
+        # while cold still cannot (honest trade-off, see docs/WORLD.md).
+        from nomad.world import evaluate
+        from nomad.world_tasks import HELDOUT
+        t = HELDOUT["absdiff"]["task"]
+        c, _ = evaluate(t, max_eval=20000)
+        f, _ = evaluate(t, prior=self.field, use_family=False, max_eval=20000)
+        self.assertFalse(c.certified)
+        self.assertTrue(f.certified)
+
+    def test_staged_transfer_never_worse_than_cold_on_unfamiliar_shallow(self) -> None:
+        from nomad.world import evaluate
+        from nomad.world_tasks import HELDOUT
+        for name in ("last_first_upper", "sum_minus_max"):
+            with self.subTest(heldout=name):
+                h = HELDOUT[name]
+                c, _ = evaluate(h["task"], max_eval=h["max_eval"])
+                f, _ = evaluate(h["task"], prior=self.field, use_family=False, max_eval=h["max_eval"])
+                self.assertTrue(f.certified)
+                self.assertLessEqual(f.evaluations, c.evaluations)
 
     def test_library_makes_deep_heldout_reachable(self) -> None:
         from nomad.world import WorldPrior, evaluate

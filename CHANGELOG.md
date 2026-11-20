@@ -1,5 +1,10 @@
 # NOMAD — Change History
 
+## Staged transfer for unfamiliar families (2026-11-20)
+
+- `world.synthesize`: an unfamiliar family (held-out or first attempt) searches cold up to size 6, then the cold order with library atoms for size 7. Chosen by leave-one-family-out: total 12,972 = cold (old field 14,375, worst family 13x cold).
+- Held-outs: last_first_upper 1,468 -> 358 (= cold), sum_minus_max 346 -> 241 (= cold), quartic_sum 108,386 -> 23,352 (cold unreachable); absdiff now 19,982, which is **over** its 10k budget (was won). Ties, not wins, on string and list.
+
 ## Body, heartbeat, self-evolution (2026-11-19)
 
 - `nomad/body.py`: long-lived, host-agnostic runtime (`python -m nomad.body --hours N --push`) with single-body lease (`nomad/lease.py`), git checkpoints (`nomad/hostgit.py`), and log retention (`nomad/retention.py`). `nomad-body.yml` is the GitHub wrapper (~5.5 h, successor dispatch).
