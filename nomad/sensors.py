@@ -12,15 +12,14 @@ from pathlib import Path
 from typing import Any
 
 from .society import post
+from .paths import data_root
 
-ROOT = Path(__file__).resolve().parent.parent
-TELEMETRY = ROOT / "data" / "telemetry.jsonl"
 
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 def _ensure() -> None:
-    TELEMETRY.parent.mkdir(parents=True, exist_ok=True)
+    (data_root()).mkdir(parents=True, exist_ok=True)
 
 def sense() -> dict[str, Any]:
     """Local sensory snapshot."""
@@ -32,14 +31,14 @@ def sense() -> dict[str, Any]:
     }
 
 def _count_packets() -> int:
-    path = ROOT / "data" / "weights" / "packets.jsonl"
+    path = data_root() / "weights" / "packets.jsonl"
     if not path.exists():
         return 0
     with path.open() as f:
         return sum(1 for _ in f)
 
 def _load_fitness() -> dict[str, Any]:
-    path = ROOT / "data" / "society" / "fitness.json"
+    path = data_root() / "society" / "fitness.json"
     if not path.exists():
         return {}
     return json.loads(path.read_text())
@@ -48,7 +47,7 @@ def record(measurement: dict[str, Any]) -> None:
     """Append a telemetry row and post it to the bus."""
     _ensure()
     row = {"ts": _now(), "measurement": measurement}
-    with TELEMETRY.open("a") as f:
+    with (data_root() / "telemetry.jsonl").open("a") as f:
         f.write(json.dumps(row, separators=(",", ":")) + "\n")
     post("keeper", row)
 

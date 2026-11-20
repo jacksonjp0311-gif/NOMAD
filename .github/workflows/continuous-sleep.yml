@@ -1,4 +1,6 @@
 name: continuous-sleep
+# Treatment consolidates. Control is frozen and has nothing to persist.
+# Shares the data concurrency group with awake so commits cannot race.
 # re-registered 2026-11-20 shifted minutes
 on:
   schedule:
@@ -8,6 +10,9 @@ on:
     types: [sleep]
 permissions:
   contents: write
+concurrency:
+  group: nomad-continuous-data
+  cancel-in-progress: false
 jobs:
   treatment:
     runs-on: ubuntu-latest
@@ -20,12 +25,25 @@ jobs:
         run: python -m nomad.continuous sleep --arm treatment
       - name: Commit data
         run: |
+          set -euo pipefail
           git config user.name "nomad"
           git config user.email "nomad@users.noreply.github.com"
           git add data/ || true
-          git diff --staged --quiet || git commit -m "continuous sleep"
-          git pull --rebase origin main
-          git push
+          if git diff --staged --quiet; then
+            echo "no data changes"
+            exit 0
+          fi
+          git commit -m "continuous sleep"
+          for i in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push; then
+              exit 0
+            fi
+            git rebase --abort || true
+            sleep $((i * 2))
+          done
+          echo "rebase-retry exhausted" >&2
+          exit 1
+
   control:
     runs-on: ubuntu-latest
     steps:

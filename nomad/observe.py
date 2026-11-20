@@ -11,9 +11,8 @@ from typing import Any
 
 from .sensors import sense
 from .society import load_fitness
+from .paths import data_root
 
-ROOT = Path(__file__).resolve().parent.parent
-SNAPSHOT = ROOT / "data" / "observe.json"
 
 def snapshot() -> dict[str, Any]:
     """Current state of the field."""
@@ -25,23 +24,28 @@ def snapshot() -> dict[str, Any]:
     }
 
 def _tail_bus(n: int) -> list[dict[str, Any]]:
-    path = ROOT / "data" / "society" / "bus.jsonl"
+    path = data_root() / "society" / "bus.jsonl"
     if not path.exists():
         return []
     lines = path.read_text().strip().splitlines()
     return [json.loads(line) for line in lines[-n:] if line]
 
 def _tail_sim(n: int) -> list[dict[str, Any]]:
-    path = ROOT / "data" / "sim.jsonl"
+    path = data_root() / "sim.jsonl"
     if not path.exists():
         return []
     lines = path.read_text().strip().splitlines()
     return [json.loads(line) for line in lines[-n:] if line]
 
+def _snapshot_path() -> Path:
+    return data_root() / "observe.json"
+
+
 def write_snapshot() -> None:
-    SNAPSHOT.parent.mkdir(parents=True, exist_ok=True)
-    SNAPSHOT.write_text(json.dumps(snapshot(), indent=2))
+    path = _snapshot_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(snapshot(), indent=2))
 
 if __name__ == "__main__":
     write_snapshot()
-    print(SNAPSHOT.read_text())
+    print(_snapshot_path().read_text())
