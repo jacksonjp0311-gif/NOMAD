@@ -85,3 +85,45 @@ honest note. Measured once, from a code snapshot.
 
 Expectation (stated before measuring): criterion 1 passes by a wide margin on the 3-5 part goals;
 `m_head_mid_tail` (a middle slice) and the integer controls stay unsolved by the chain; 2-6 pass.
+
+## Sealed result (measured once, 2026-11-21, code `9207b34`; `results/text_chain/`): **PASS**
+
+Sealed suite (sha `630f7a9e...d4eb`, 22 hard), certified / evaluations:
+
+| arm | certified | evaluations |
+|---|---|---|
+| cold | 0 | 220,000 |
+| empty_off | 0 | 220,000 |
+| empty_on | 0 | 220,000 |
+| trained_off | 10 | 170,828 |
+| **trained_on** | **22** | **111,785** |
+| world_only_off / _on | 2 / 20 | 210,053 / 120,413 |
+| bridge_only_off / _on | 10 / 22 | 170,516 / 111,323 |
+| trained_on_text_off | 3 | 205,418 |
+
+The 12 gains are all `port:invent:text:chain` (3-5 part goals: take/take/take, tail:tail, rot/rot,
+word:name/k, both initials + total length, head:mid:tail, ...); `m_lower_rot_ctrl` also got cheaper
+(5,228 -> 5,052). Against the stated expectation, `m_head_mid_tail` was solved too (the probe pool
+held `concat(take(ma, mj), ms)`).
+
+| criterion | result |
+|---|---|
+| 1 it helps (>= +3) | **pass**: +12 (10 -> 22 of 22), 34.6% fewer evaluations |
+| 2 empty_on - empty_off <= 1 | **pass**: 0 - 0 (empty_on - cold = 0) |
+| 3 no sealed task worse | **pass**: no loss vs trained_off; nothing worse than cold |
+| 4 existing suites, (a) default genome and (b) SELFEDIT G\* | **pass**: 0 losses in both on every arm of learning (deep, science), TRANSFER-1..4, secondary, TEXT, BRIDGE, INVENT_TEXT, TRANSFER-5, TRANSFER-6, SELFEDIT-2. Gains: TEXT 26 -> 56 certified records (lang 7 -> 17, all_sci 10 -> 20), BRIDGE 47 -> 60 (trained 13 -> 15), INVENT_TEXT 39 -> 51 (trained_on 13 -> 15 of 15), secondary 265 -> 275; TRANSFER-1..6, SELFEDIT-2 (14) unchanged |
+| 5 LOFO, tests | **pass**: LOFO 5,883 (cold / trained / trained_port_off), worst 1.0x, (a) and (b); 464 passed, 6 skipped |
+| 6 safety | **pass**: off arms reproduce INVENT_TEXT 13, BRIDGE 13, TEXT lang 7 / all_sci 10, TRANSFER-5 26, TRANSFER-6 23, SELFEDIT-2 14 |
+
+Decision (pre-registered rule): all pass -> `NOMAD_TEXT_CHAIN` default ON in a separate commit.
+
+Honest reading:
+- The gain needs a field arm (the chain runs inside the PORT / INVENT_TEXT path, which an empty field
+  never reaches), but not specific string memory: `world_only` (no bridge training) goes 2 -> 20.
+  Most chain parts are probe-pool values; the field mainly buys the probe and its budget. This is a
+  search operator that the field unlocks, not new learned content.
+- Peeling is counted as free (comparisons on computed values); only assembled chains are charged.
+  That is the INVENT_TEXT convention, stated before measuring; a charged-lookup variant would cost
+  more evaluations.
+- No new anti-unified string abstraction was added: invented blocks enter as parts, but nothing new
+  is abstracted from certified chains yet (a next step: lift certified chains into templates).
