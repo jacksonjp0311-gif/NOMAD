@@ -135,12 +135,76 @@ def bridge_training() -> list[WorldTask]:
     return _BRIDGE_TASKS
 
 
+# ---------------------------------------------------------------- live word curriculum (docs/LIVE_WORDS.md)
+# NOMAD_LIVE_WORDS=on (default off; the body workflow passes the repo variable NOMAD_LIVE_WORDS) adds
+# the 72 MEANING training word problems (nomad.meaning_tasks.TRAIN, told as stories with numbers) as one
+# more domain at level 1, so they compete by attempts instead of jumping the queue. The treatment arm
+# passes the story as ``words`` (MEANING's stage reads it once a lexicon exists) and the packet carries
+# it, so the sleep learner grows the lexicon from live receipts. The cold control never reads words.
+# Off: the curriculum is exactly what it was. all_training() (evolve benchmark, feed, judges) never changes.
+WORDS_DOMAIN = "words"
+_WORDS: dict[str, tuple[WorldTask, str]] = {}
+
+
+def live_words_enabled() -> bool:
+    import os
+    if os.environ.get("NOMAD_LIVE_WORDS", "off").strip().lower() not in ("on", "1", "true", "yes"):
+        return False
+    from .meaning import enabled
+    return enabled()   # words are only read and learned while MEANING is on
+
+
+def _words_table() -> dict[str, tuple[WorldTask, str]]:
+    if not _WORDS:
+        import dataclasses
+        from .meaning_tasks import to_task, train_story_entries
+        for e in train_story_entries():
+            _WORDS[e["family"]] = (dataclasses.replace(to_task(e), level=1), e["story"])
+    return _WORDS
+
+
+def words_training() -> list[WorldTask]:
+    return [t for t, _s in _words_table().values()]
+
+
+def words_of(family: str) -> str | None:
+    """The story of a live word family (resolved whatever the switch says now), else None."""
+    if not family.startswith("wt_"):
+        return None
+    rec = _words_table().get(family)
+    return rec[1] if rec else None
+
+
 def curriculum_train() -> dict[str, dict[int, list[WorldTask]]]:
-    """The live curriculum's domain -> level -> tasks: TRAIN itself when NOMAD_LIVE_BRIDGE is off."""
-    if not live_bridge_enabled():
+    """The live curriculum's domain -> level -> tasks: TRAIN itself when NOMAD_LIVE_BRIDGE and NOMAD_LIVE_WORDS are off."""
+    bridge, words = live_bridge_enabled(), live_words_enabled()
+    if not bridge and not words:
         return TRAIN
-    ts = bridge_training()
-    return {**TRAIN, BRIDGE_DOMAIN: {min(t.level for t in ts): list(ts)}}
+    out = dict(TRAIN)
+    if bridge:
+        ts = bridge_training()
+        out[BRIDGE_DOMAIN] = {min(t.level for t in ts): list(ts)}
+    if words:
+        out[WORDS_DOMAIN] = {1: words_window()}
+    return out
+
+
+WORDS_WINDOW = 18          # word families offered at once: 6 concepts x their 3 domains
+WORDS_ROTATE = 40          # field versions per window (the learner advances the version)
+
+
+def words_window(version: int | None = None) -> list[WorldTask]:
+    """The word families the live curriculum offers now: a contiguous window of ``WORDS_WINDOW``
+    (catalogue order groups a concept's three domains), rotating every ``WORDS_ROTATE`` field
+    versions, so word practice stays near a third of the cycles instead of swamping the 32 other
+    families. Deterministic given the field version."""
+    if version is None:
+        from .field_queue import field_version
+        version = field_version()
+    ts = words_training()
+    k = max(1, len(ts) // WORDS_WINDOW)
+    i = (int(version) // WORDS_ROTATE) % k
+    return ts[i * WORDS_WINDOW:(i + 1) * WORDS_WINDOW]
 
 
 def by_family(family: str) -> WorldTask | None:
@@ -154,6 +218,8 @@ def by_family(family: str) -> WorldTask | None:
         for t in bridge_training():
             if t.family == family:
                 return t
+    if family.startswith("wt_") and family in _words_table():   # live word families (LIVE_WORDS)
+        return _words_table()[family][0]
     return None
 
 
@@ -165,6 +231,8 @@ def domain_of(family: str) -> str | None:
     from .bridge import TRAIN_FAMILIES
     if family in TRAIN_FAMILIES:
         return BRIDGE_DOMAIN
+    if family.startswith("wt_") and family in _words_table():
+        return WORDS_DOMAIN
     # Science families (nomad/science.py) are not training families; they are
     # tagged so the sensing step can key on them. See docs/SCIENCE.md.
     from .science import DOMAIN, is_science

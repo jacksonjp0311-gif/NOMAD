@@ -25,6 +25,8 @@ from .world_tasks import curriculum_train
 
 
 PATIENCE = 4
+WORDS_SHARE = 0.25   # LIVE_WORDS: most share of the last WORDS_RECENT world cycles spent on word families
+WORDS_RECENT = 60
 
 
 def _key(family: str) -> str:
@@ -71,8 +73,18 @@ def choose(rows: Iterable[dict], domain: str | None = None, step: int = 0) -> tu
     records = family_records(rows)
     levels = open_levels(records)
     candidates: list[WorldTask] = []
-    for dom, levels_map in curriculum_train().items():
+    ct = curriculum_train()
+    skip_words = False
+    if domain is None and "words" in ct:
+        # LIVE_WORDS (docs/LIVE_WORDS.md): word practice is capped at WORDS_SHARE of the recent
+        # world cycles, so 18 fresh word families never starve the other domains.
+        recent = [str(r.get("task", "")) for r in rows if str(r.get("task", "")).startswith("world:")][-WORDS_RECENT:]
+        if recent and sum(t.startswith("world:wt_") for t in recent) >= WORDS_SHARE * len(recent):
+            skip_words = True
+    for dom, levels_map in ct.items():
         if domain and dom != domain:
+            continue
+        if skip_words and dom == "words":
             continue
         for L, tasks in levels_map.items():
             if L <= levels[dom]:

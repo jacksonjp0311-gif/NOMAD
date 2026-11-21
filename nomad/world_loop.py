@@ -20,7 +20,7 @@ from .curriculum import choose
 from .paths import data_root
 from .scoreboard import record_arm, recent as board_recent
 from .world import OPSETS, WorldPrior, evaluate
-from .world_tasks import HELDOUT, domain_of
+from .world_tasks import HELDOUT, domain_of, words_of
 
 
 def world_prior_path() -> Path:
@@ -66,7 +66,9 @@ def world_pair(domain: str | None = None) -> dict[str, Any]:
                field_version=version, evaluations=control.evaluations)
     field = load_world_prior()
     vstate = variation.load_state() if variation.enabled() else None
-    treat, receipt = evaluate(task, prior=field, variation=vstate)
+    # LIVE_WORDS (docs/LIVE_WORDS.md): a live word family's story goes to the treatment only
+    words = words_of(task.family)
+    treat, receipt = evaluate(task, prior=field, variation=vstate, words=words)
     # Awake exploration (actor): bounded mutants of other families' certified
     # patterns on this training task. Reported separately; never part of the twin.
     explored = (variation.explore(task, vstate, variation.library_trees(field, task.inputs))
@@ -100,6 +102,8 @@ def world_pair(domain: str | None = None) -> dict[str, Any]:
             extra={"world": "typed", "tree": treat.tree, "family": task.family,
                    "opset": task.opset, "inputs": [list(i) for i in task.inputs],
                    **({"sense": sense.brief(treat.sense)} if treat.sense else {}),
+                   **({"words": words, "out": task.out,
+                       "sense_kind": (treat.sense or {}).get("kind")} if words else {}),
                    **({"variation": trace} if trace else {})},
         )
         out["enqueued"] = {"packet_id": packet["packet_id"], **field_queue.enqueue(packet)}

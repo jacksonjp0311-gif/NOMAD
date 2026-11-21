@@ -63,6 +63,9 @@ jobs:
           # Bridge training families (string x int) in the live curriculum; repo variable
           # NOMAD_LIVE_BRIDGE=off turns it off (code default is off everywhere else).
           NOMAD_LIVE_BRIDGE: ${{ vars.NOMAD_LIVE_BRIDGE || 'on' }}
+          # MEANING word problems (stories) in the live curriculum, so the lexicon grows from live
+          # receipts (docs/LIVE_WORDS.md); repo variable NOMAD_LIVE_WORDS=off turns it off.
+          NOMAD_LIVE_WORDS: ${{ vars.NOMAD_LIVE_WORDS || 'on' }}
         run: |
           git config user.name "nomad"
           git config user.email "nomad@users.noreply.github.com"
