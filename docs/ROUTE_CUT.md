@@ -103,3 +103,9 @@ Otherwise it stays off, and the code and the result are committed as they are.
 
 Not measured here: MEANING's sealed suite (59f6add), whose owner has not yet
 run its single sealed measurement.
+
+Generated (`python3 scripts/route_cut_suite.py`, cold control only):
+`data/deep/transfer7_suite.json`, sha256
+`f8906d60f56e03dcc1205ec1e73aa1fe8ece00dbce548d258b4b8816233ae175`; 51
+families, 19 easy, **31 hard**, 1 lookup drop (p7_waste: memory already
+holds `mod(sub(ups, lfs), ups)`).

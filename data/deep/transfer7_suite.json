@@ -1,0 +1,6793 @@
+{
+ "budget": 10000,
+ "domains": [
+  "clinic",
+  "print",
+  "harbour"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 146,
+   "cold_reason": null,
+   "domain": "clinic",
+   "family": "c7_beds",
+   "formula": "beds plus one isolation bed per ward = wrd bpw + wrd",
+   "inputs": [
+    "wrd",
+    "bpw"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "bpw": 11,
+      "wrd": 16
+     },
+     192
+    ],
+    [
+     {
+      "bpw": 6,
+      "wrd": 13
+     },
+     91
+    ],
+    [
+     {
+      "bpw": 5,
+      "wrd": 28
+     },
+     168
+    ],
+    [
+     {
+      "bpw": 34,
+      "wrd": 10
+     },
+     350
+    ],
+    [
+     {
+      "bpw": 23,
+      "wrd": 16
+     },
+     384
+    ],
+    [
+     {
+      "bpw": 30,
+      "wrd": 9
+     },
+     279
+    ],
+    [
+     {
+      "bpw": 13,
+      "wrd": 15
+     },
+     210
+    ],
+    [
+     {
+      "bpw": 30,
+      "wrd": 13
+     },
+     403
+    ],
+    [
+     {
+      "bpw": 11,
+      "wrd": 17
+     },
+     204
+    ],
+    [
+     {
+      "bpw": 24,
+      "wrd": 21
+     },
+     525
+    ],
+    [
+     {
+      "bpw": 36,
+      "wrd": 6
+     },
+     222
+    ]
+   ],
+   "task_id": "t-04",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "wrd"
+     ],
+     [
+      "var",
+      "bpw"
+     ]
+    ],
+    [
+     "var",
+     "wrd"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 864,
+   "cold_reason": null,
+   "domain": "clinic",
+   "family": "c7_bed_pairs",
+   "formula": "neighbouring bed pairs, beds in a line per ward = wrd (bpw - 1)",
+   "inputs": [
+    "wrd",
+    "bpw"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "bpw": 40,
+      "wrd": 25
+     },
+     975
+    ],
+    [
+     {
+      "bpw": 36,
+      "wrd": 17
+     },
+     595
+    ],
+    [
+     {
+      "bpw": 14,
+      "wrd": 26
+     },
+     338
+    ],
+    [
+     {
+      "bpw": 5,
+      "wrd": 3
+     },
+     12
+    ],
+    [
+     {
+      "bpw": 24,
+      "wrd": 15
+     },
+     345
+    ],
+    [
+     {
+      "bpw": 15,
+      "wrd": 8
+     },
+     112
+    ],
+    [
+     {
+      "bpw": 35,
+      "wrd": 16
+     },
+     544
+    ],
+    [
+     {
+      "bpw": 40,
+      "wrd": 24
+     },
+     936
+    ],
+    [
+     {
+      "bpw": 28,
+      "wrd": 11
+     },
+     297
+    ],
+    [
+     {
+      "bpw": 17,
+      "wrd": 21
+     },
+     336
+    ],
+    [
+     {
+      "bpw": 12,
+      "wrd": 24
+     },
+     264
+    ]
+   ],
+   "task_id": "t-05",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "wrd"
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "bpw"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 8041,
+   "cold_reason": null,
+   "domain": "clinic",
+   "family": "c7_rounds",
+   "formula": "doctor visits: every bed twice and every ward once = 2 wrd bpw + wrd",
+   "inputs": [
+    "wrd",
+    "bpw"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "bpw": 18,
+      "wrd": 5
+     },
+     185
+    ],
+    [
+     {
+      "bpw": 16,
+      "wrd": 9
+     },
+     297
+    ],
+    [
+     {
+      "bpw": 15,
+      "wrd": 10
+     },
+     310
+    ],
+    [
+     {
+      "bpw": 3,
+      "wrd": 22
+     },
+     154
+    ],
+    [
+     {
+      "bpw": 40,
+      "wrd": 3
+     },
+     243
+    ],
+    [
+     {
+      "bpw": 34,
+      "wrd": 10
+     },
+     690
+    ],
+    [
+     {
+      "bpw": 24,
+      "wrd": 11
+     },
+     539
+    ],
+    [
+     {
+      "bpw": 13,
+      "wrd": 29
+     },
+     783
+    ],
+    [
+     {
+      "bpw": 7,
+      "wrd": 23
+     },
+     345
+    ],
+    [
+     {
+      "bpw": 20,
+      "wrd": 6
+     },
+     246
+    ],
+    [
+     {
+      "bpw": 9,
+      "wrd": 13
+     },
+     247
+    ]
+   ],
+   "task_id": "t-06",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "wrd"
+      ],
+      [
+       "var",
+       "wrd"
+      ]
+     ],
+     [
+      "var",
+      "bpw"
+     ]
+    ],
+    [
+     "var",
+     "wrd"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 232,
+   "cold_reason": null,
+   "domain": "clinic",
+   "family": "c7_shifts",
+   "formula": "shifts worked plus 3 cover shifts a week = nrs sft + 3",
+   "inputs": [
+    "nrs",
+    "sft"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "nrs": 14,
+      "sft": 3
+     },
+     45
+    ],
+    [
+     {
+      "nrs": 27,
+      "sft": 3
+     },
+     84
+    ],
+    [
+     {
+      "nrs": 14,
+      "sft": 2
+     },
+     31
+    ],
+    [
+     {
+      "nrs": 20,
+      "sft": 3
+     },
+     63
+    ],
+    [
+     {
+      "nrs": 15,
+      "sft": 5
+     },
+     78
+    ],
+    [
+     {
+      "nrs": 60,
+      "sft": 1
+     },
+     63
+    ],
+    [
+     {
+      "nrs": 5,
+      "sft": 4
+     },
+     23
+    ],
+    [
+     {
+      "nrs": 53,
+      "sft": 7
+     },
+     374
+    ],
+    [
+     {
+      "nrs": 32,
+      "sft": 4
+     },
+     131
+    ],
+    [
+     {
+      "nrs": 19,
+      "sft": 4
+     },
+     79
+    ],
+    [
+     {
+      "nrs": 44,
+      "sft": 1
+     },
+     47
+    ]
+   ],
+   "task_id": "t-08",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "nrs"
+     ],
+     [
+      "var",
+      "sft"
+     ]
+    ],
+    [
+     "const",
+     3
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 7147,
+   "cold_reason": null,
+   "domain": "clinic",
+   "family": "c7_bottles",
+   "formula": "bottles for every pill = ceil(pil / ppb)",
+   "inputs": [
+    "pil",
+    "ppb",
+    "bpc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bpc": 17,
+      "pil": 47,
+      "ppb": 37
+     },
+     2
+    ],
+    [
+     {
+      "bpc": 4,
+      "pil": 3108,
+      "ppb": 111
+     },
+     28
+    ],
+    [
+     {
+      "bpc": 15,
+      "pil": 3252,
+      "ppb": 54
+     },
+     61
+    ],
+    [
+     {
+      "bpc": 6,
+      "pil": 1548,
+      "ppb": 31
+     },
+     50
+    ],
+    [
+     {
+      "bpc": 20,
+      "pil": 3728,
+      "ppb": 60
+     },
+     63
+    ],
+    [
+     {
+      "bpc": 10,
+      "pil": 1285,
+      "ppb": 96
+     },
+     14
+    ],
+    [
+     {
+      "bpc": 15,
+      "pil": 4842,
+      "ppb": 69
+     },
+     71
+    ],
+    [
+     {
+      "bpc": 19,
+      "pil": 4462,
+      "ppb": 68
+     },
+     66
+    ],
+    [
+     {
+      "bpc": 5,
+      "pil": 1713,
+      "ppb": 40
+     },
+     43
+    ],
+    [
+     {
+      "bpc": 4,
+      "pil": 1347,
+      "ppb": 51
+     },
+     27
+    ],
+    [
+     {
+      "bpc": 17,
+      "pil": 2791,
+      "ppb": 67
+     },
+     42
+    ]
+   ],
+   "task_id": "t-12",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "pil"
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "ppb"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "ppb"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 6867,
+   "cold_reason": null,
+   "domain": "clinic",
+   "family": "c7_cases",
+   "formula": "cases for those bottles = ceil(ceil(pil / ppb) / bpc)",
+   "inputs": [
+    "pil",
+    "ppb",
+    "bpc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bpc": 5,
+      "pil": 3420,
+      "ppb": 70
+     },
+     10
+    ],
+    [
+     {
+      "bpc": 13,
+      "pil": 3313,
+      "ppb": 41
+     },
+     7
+    ],
+    [
+     {
+      "bpc": 21,
+      "pil": 3960,
+      "ppb": 29
+     },
+     7
+    ],
+    [
+     {
+      "bpc": 18,
+      "pil": 4881,
+      "ppb": 109
+     },
+     3
+    ],
+    [
+     {
+      "bpc": 19,
+      "pil": 453,
+      "ppb": 10
+     },
+     3
+    ],
+    [
+     {
+      "bpc": 16,
+      "pil": 4979,
+      "ppb": 25
+     },
+     13
+    ],
+    [
+     {
+      "bpc": 11,
+      "pil": 3312,
+      "ppb": 84
+     },
+     4
+    ],
+    [
+     {
+      "bpc": 13,
+      "pil": 3715,
+      "ppb": 68
+     },
+     5
+    ],
+    [
+     {
+      "bpc": 17,
+      "pil": 4646,
+      "ppb": 14
+     },
+     20
+    ],
+    [
+     {
+      "bpc": 8,
+      "pil": 2479,
+      "ppb": 44
+     },
+     8
+    ],
+    [
+     {
+      "bpc": 12,
+      "pil": 2375,
+      "ppb": 61
+     },
+     4
+    ]
+   ],
+   "task_id": "t-13",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "pil"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "ppb"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "ppb"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "bpc"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "bpc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2134,
+   "cold_reason": null,
+   "domain": "clinic",
+   "family": "c7_full_cases",
+   "formula": "cases of full bottles = (pil // ppb) // bpc",
+   "inputs": [
+    "pil",
+    "ppb",
+    "bpc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bpc": 14,
+      "pil": 2060,
+      "ppb": 84
+     },
+     1
+    ],
+    [
+     {
+      "bpc": 22,
+      "pil": 1508,
+      "ppb": 88
+     },
+     0
+    ],
+    [
+     {
+      "bpc": 20,
+      "pil": 3083,
+      "ppb": 72
+     },
+     2
+    ],
+    [
+     {
+      "bpc": 2,
+      "pil": 921,
+      "ppb": 36
+     },
+     12
+    ],
+    [
+     {
+      "bpc": 24,
+      "pil": 1245,
+      "ppb": 117
+     },
+     0
+    ],
+    [
+     {
+      "bpc": 16,
+      "pil": 584,
+      "ppb": 116
+     },
+     0
+    ],
+    [
+     {
+      "bpc": 8,
+      "pil": 2151,
+      "ppb": 85
+     },
+     3
+    ],
+    [
+     {
+      "bpc": 21,
+      "pil": 870,
+      "ppb": 56
+     },
+     0
+    ],
+    [
+     {
+      "bpc": 11,
+      "pil": 906,
+      "ppb": 29
+     },
+     2
+    ],
+    [
+     {
+      "bpc": 2,
+      "pil": 2646,
+      "ppb": 47
+     },
+     28
+    ],
+    [
+     {
+      "bpc": 11,
+      "pil": 3847,
+      "ppb": 74
+     },
+     4
+    ]
+   ],
+   "task_id": "t-14",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "div",
+     [
+      "var",
+      "pil"
+     ],
+     [
+      "var",
+      "ppb"
+     ]
+    ],
+    [
+     "var",
+     "bpc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 110,
+   "cold_reason": null,
+   "domain": "clinic",
+   "family": "c7_loose_pills",
+   "formula": "pills left over after full bottles = pil mod ppb",
+   "inputs": [
+    "pil",
+    "ppb",
+    "bpc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bpc": 9,
+      "pil": 2888,
+      "ppb": 34
+     },
+     32
+    ],
+    [
+     {
+      "bpc": 8,
+      "pil": 1780,
+      "ppb": 50
+     },
+     30
+    ],
+    [
+     {
+      "bpc": 17,
+      "pil": 2010,
+      "ppb": 74
+     },
+     12
+    ],
+    [
+     {
+      "bpc": 12,
+      "pil": 216,
+      "ppb": 55
+     },
+     51
+    ],
+    [
+     {
+      "bpc": 17,
+      "pil": 954,
+      "ppb": 87
+     },
+     84
+    ],
+    [
+     {
+      "bpc": 24,
+      "pil": 4908,
+      "ppb": 27
+     },
+     21
+    ],
+    [
+     {
+      "bpc": 22,
+      "pil": 2388,
+      "ppb": 76
+     },
+     32
+    ],
+    [
+     {
+      "bpc": 21,
+      "pil": 792,
+      "ppb": 87
+     },
+     9
+    ],
+    [
+     {
+      "bpc": 15,
+      "pil": 4823,
+      "ppb": 61
+     },
+     4
+    ],
+    [
+     {
+      "bpc": 6,
+      "pil": 3935,
+      "ppb": 19
+     },
+     2
+    ],
+    [
+     {
+      "bpc": 4,
+      "pil": 3777,
+      "ppb": 13
+     },
+     7
+    ]
+   ],
+   "task_id": "t-15",
+   "tier": "easy",
+   "tree": [
+    "mod",
+    [
+     "var",
+     "pil"
+    ],
+    [
+     "var",
+     "ppb"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 6035,
+   "cold_reason": null,
+   "domain": "print",
+   "family": "p7_pages_cover",
+   "formula": "printed pages with a 4-page cover = cps (pgs + 4)",
+   "inputs": [
+    "pgs",
+    "cps"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cps": 9,
+      "pgs": 284
+     },
+     2592
+    ],
+    [
+     {
+      "cps": 16,
+      "pgs": 289
+     },
+     4688
+    ],
+    [
+     {
+      "cps": 37,
+      "pgs": 299
+     },
+     11211
+    ],
+    [
+     {
+      "cps": 29,
+      "pgs": 158
+     },
+     4698
+    ],
+    [
+     {
+      "cps": 11,
+      "pgs": 293
+     },
+     3267
+    ],
+    [
+     {
+      "cps": 14,
+      "pgs": 27
+     },
+     434
+    ],
+    [
+     {
+      "cps": 35,
+      "pgs": 96
+     },
+     3500
+    ],
+    [
+     {
+      "cps": 50,
+      "pgs": 113
+     },
+     5850
+    ],
+    [
+     {
+      "cps": 42,
+      "pgs": 311
+     },
+     13230
+    ],
+    [
+     {
+      "cps": 42,
+      "pgs": 96
+     },
+     4200
+    ],
+    [
+     {
+      "cps": 43,
+      "pgs": 199
+     },
+     8729
+    ]
+   ],
+   "task_id": "t-18",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "cps"
+    ],
+    [
+     "add",
+     [
+      "var",
+      "pgs"
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 133,
+   "cold_reason": null,
+   "domain": "print",
+   "family": "p7_proofs",
+   "formula": "proof pages: the whole book twice plus one page per copy = 2 pgs + cps",
+   "inputs": [
+    "pgs",
+    "cps"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cps": 47,
+      "pgs": 35
+     },
+     117
+    ],
+    [
+     {
+      "cps": 48,
+      "pgs": 175
+     },
+     398
+    ],
+    [
+     {
+      "cps": 46,
+      "pgs": 66
+     },
+     178
+    ],
+    [
+     {
+      "cps": 44,
+      "pgs": 205
+     },
+     454
+    ],
+    [
+     {
+      "cps": 20,
+      "pgs": 377
+     },
+     774
+    ],
+    [
+     {
+      "cps": 10,
+      "pgs": 305
+     },
+     620
+    ],
+    [
+     {
+      "cps": 42,
+      "pgs": 103
+     },
+     248
+    ],
+    [
+     {
+      "cps": 9,
+      "pgs": 239
+     },
+     487
+    ],
+    [
+     {
+      "cps": 23,
+      "pgs": 267
+     },
+     557
+    ],
+    [
+     {
+      "cps": 39,
+      "pgs": 336
+     },
+     711
+    ],
+    [
+     {
+      "cps": 50,
+      "pgs": 151
+     },
+     352
+    ]
+   ],
+   "task_id": "t-19",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "add",
+     [
+      "var",
+      "pgs"
+     ],
+     [
+      "var",
+      "pgs"
+     ]
+    ],
+    [
+     "var",
+     "cps"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 7194,
+   "cold_reason": null,
+   "domain": "print",
+   "family": "p7_press_sheets",
+   "formula": "press sheets for lfs leaves, ups up = ceil(lfs / ups)",
+   "inputs": [
+    "lfs",
+    "ups",
+    "rms"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "lfs": 1285,
+      "rms": 5,
+      "ups": 4
+     },
+     322
+    ],
+    [
+     {
+      "lfs": 1221,
+      "rms": 3,
+      "ups": 3
+     },
+     407
+    ],
+    [
+     {
+      "lfs": 2606,
+      "rms": 4,
+      "ups": 5
+     },
+     522
+    ],
+    [
+     {
+      "lfs": 2826,
+      "rms": 5,
+      "ups": 4
+     },
+     707
+    ],
+    [
+     {
+      "lfs": 1157,
+      "rms": 5,
+      "ups": 7
+     },
+     166
+    ],
+    [
+     {
+      "lfs": 977,
+      "rms": 8,
+      "ups": 1
+     },
+     977
+    ],
+    [
+     {
+      "lfs": 1789,
+      "rms": 5,
+      "ups": 2
+     },
+     895
+    ],
+    [
+     {
+      "lfs": 2448,
+      "rms": 6,
+      "ups": 7
+     },
+     350
+    ],
+    [
+     {
+      "lfs": 2903,
+      "rms": 5,
+      "ups": 5
+     },
+     581
+    ],
+    [
+     {
+      "lfs": 2305,
+      "rms": 2,
+      "ups": 4
+     },
+     577
+    ],
+    [
+     {
+      "lfs": 2991,
+      "rms": 3,
+      "ups": 4
+     },
+     748
+    ]
+   ],
+   "task_id": "t-22",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "lfs"
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "ups"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "ups"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 7035,
+   "cold_reason": null,
+   "domain": "print",
+   "family": "p7_poster_frame",
+   "formula": "frame round the poster plus a 2-unit hanger = 2 (pstw + psth) + 2",
+   "inputs": [
+    "pstw",
+    "psth"
+   ],
+   "kind": "length",
+   "rows": [
+    [
+     {
+      "psth": 46,
+      "pstw": 22
+     },
+     138
+    ],
+    [
+     {
+      "psth": 36,
+      "pstw": 54
+     },
+     182
+    ],
+    [
+     {
+      "psth": 45,
+      "pstw": 16
+     },
+     124
+    ],
+    [
+     {
+      "psth": 35,
+      "pstw": 17
+     },
+     106
+    ],
+    [
+     {
+      "psth": 22,
+      "pstw": 18
+     },
+     82
+    ],
+    [
+     {
+      "psth": 52,
+      "pstw": 14
+     },
+     134
+    ],
+    [
+     {
+      "psth": 8,
+      "pstw": 35
+     },
+     88
+    ],
+    [
+     {
+      "psth": 61,
+      "pstw": 51
+     },
+     226
+    ],
+    [
+     {
+      "psth": 73,
+      "pstw": 35
+     },
+     218
+    ],
+    [
+     {
+      "psth": 28,
+      "pstw": 15
+     },
+     88
+    ],
+    [
+     {
+      "psth": 57,
+      "pstw": 34
+     },
+     184
+    ]
+   ],
+   "task_id": "t-27",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "add",
+      [
+       "var",
+       "pstw"
+      ],
+      [
+       "var",
+       "psth"
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 6152,
+   "cold_reason": null,
+   "domain": "print",
+   "family": "p7_poster_diag",
+   "formula": "sum of the squared sides = pstw^2 + psth^2",
+   "inputs": [
+    "pstw",
+    "psth"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "psth": 10,
+      "pstw": 5
+     },
+     125
+    ],
+    [
+     {
+      "psth": 69,
+      "pstw": 56
+     },
+     7897
+    ],
+    [
+     {
+      "psth": 2,
+      "pstw": 43
+     },
+     1853
+    ],
+    [
+     {
+      "psth": 22,
+      "pstw": 12
+     },
+     628
+    ],
+    [
+     {
+      "psth": 41,
+      "pstw": 5
+     },
+     1706
+    ],
+    [
+     {
+      "psth": 32,
+      "pstw": 58
+     },
+     4388
+    ],
+    [
+     {
+      "psth": 62,
+      "pstw": 6
+     },
+     3880
+    ],
+    [
+     {
+      "psth": 27,
+      "pstw": 12
+     },
+     873
+    ],
+    [
+     {
+      "psth": 18,
+      "pstw": 23
+     },
+     853
+    ],
+    [
+     {
+      "psth": 67,
+      "pstw": 53
+     },
+     7298
+    ],
+    [
+     {
+      "psth": 58,
+      "pstw": 10
+     },
+     3464
+    ]
+   ],
+   "task_id": "t-30",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "pstw"
+     ],
+     [
+      "var",
+      "pstw"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "psth"
+     ],
+     [
+      "var",
+      "psth"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 869,
+   "cold_reason": null,
+   "domain": "harbour",
+   "family": "h7_moves",
+   "formula": "crane moves: unload and reload every box = 2 shp cbx",
+   "inputs": [
+    "shp",
+    "cbx"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cbx": 172,
+      "shp": 30
+     },
+     10320
+    ],
+    [
+     {
+      "cbx": 282,
+      "shp": 14
+     },
+     7896
+    ],
+    [
+     {
+      "cbx": 212,
+      "shp": 23
+     },
+     9752
+    ],
+    [
+     {
+      "cbx": 204,
+      "shp": 15
+     },
+     6120
+    ],
+    [
+     {
+      "cbx": 180,
+      "shp": 9
+     },
+     3240
+    ],
+    [
+     {
+      "cbx": 29,
+      "shp": 1
+     },
+     58
+    ],
+    [
+     {
+      "cbx": 268,
+      "shp": 22
+     },
+     11792
+    ],
+    [
+     {
+      "cbx": 295,
+      "shp": 19
+     },
+     11210
+    ],
+    [
+     {
+      "cbx": 393,
+      "shp": 15
+     },
+     11790
+    ],
+    [
+     {
+      "cbx": 266,
+      "shp": 26
+     },
+     13832
+    ],
+    [
+     {
+      "cbx": 206,
+      "shp": 12
+     },
+     4944
+    ]
+   ],
+   "task_id": "t-35",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "var",
+      "shp"
+     ],
+     [
+      "var",
+      "shp"
+     ]
+    ],
+    [
+     "var",
+     "cbx"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 134,
+   "cold_reason": null,
+   "domain": "harbour",
+   "family": "h7_quay_edge",
+   "formula": "fendered edge: two lengths and one width = 2 dkl + dkw",
+   "inputs": [
+    "dkw",
+    "dkl"
+   ],
+   "kind": "length",
+   "rows": [
+    [
+     {
+      "dkl": 38,
+      "dkw": 49
+     },
+     125
+    ],
+    [
+     {
+      "dkl": 40,
+      "dkw": 20
+     },
+     100
+    ],
+    [
+     {
+      "dkl": 44,
+      "dkw": 17
+     },
+     105
+    ],
+    [
+     {
+      "dkl": 40,
+      "dkw": 36
+     },
+     116
+    ],
+    [
+     {
+      "dkl": 33,
+      "dkw": 23
+     },
+     89
+    ],
+    [
+     {
+      "dkl": 64,
+      "dkw": 4
+     },
+     132
+    ],
+    [
+     {
+      "dkl": 63,
+      "dkw": 34
+     },
+     160
+    ],
+    [
+     {
+      "dkl": 12,
+      "dkw": 49
+     },
+     73
+    ],
+    [
+     {
+      "dkl": 51,
+      "dkw": 43
+     },
+     145
+    ],
+    [
+     {
+      "dkl": 32,
+      "dkw": 32
+     },
+     96
+    ],
+    [
+     {
+      "dkl": 26,
+      "dkw": 4
+     },
+     56
+    ]
+   ],
+   "task_id": "t-43",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "add",
+     [
+      "var",
+      "dkl"
+     ],
+     [
+      "var",
+      "dkl"
+     ]
+    ],
+    [
+     "var",
+     "dkw"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1025,
+   "cold_reason": null,
+   "domain": "harbour",
+   "family": "h7_quay_paint",
+   "formula": "quay plus a 1-unit kerb strip on the length = dkw dkl + 2 dkl",
+   "inputs": [
+    "dkw",
+    "dkl"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "dkl": 89,
+      "dkw": 21
+     },
+     2047
+    ],
+    [
+     {
+      "dkl": 36,
+      "dkw": 27
+     },
+     1044
+    ],
+    [
+     {
+      "dkl": 15,
+      "dkw": 35
+     },
+     555
+    ],
+    [
+     {
+      "dkl": 67,
+      "dkw": 17
+     },
+     1273
+    ],
+    [
+     {
+      "dkl": 27,
+      "dkw": 19
+     },
+     567
+    ],
+    [
+     {
+      "dkl": 23,
+      "dkw": 27
+     },
+     667
+    ],
+    [
+     {
+      "dkl": 80,
+      "dkw": 13
+     },
+     1200
+    ],
+    [
+     {
+      "dkl": 64,
+      "dkw": 41
+     },
+     2752
+    ],
+    [
+     {
+      "dkl": 64,
+      "dkw": 30
+     },
+     2048
+    ],
+    [
+     {
+      "dkl": 33,
+      "dkw": 29
+     },
+     1023
+    ],
+    [
+     {
+      "dkl": 39,
+      "dkw": 20
+     },
+     858
+    ]
+   ],
+   "task_id": "t-46",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "dkw"
+     ],
+     [
+      "var",
+      "dkl"
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "dkl"
+     ],
+     [
+      "var",
+      "dkl"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 309,
+   "cold_reason": null,
+   "domain": "harbour",
+   "family": "h7_bins",
+   "formula": "bins for every cargo unit = ceil(crg / upb)",
+   "inputs": [
+    "crg",
+    "upb",
+    "bpk"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bpk": 21,
+      "crg": 4649,
+      "upb": 37
+     },
+     126
+    ],
+    [
+     {
+      "bpk": 15,
+      "crg": 4333,
+      "upb": 14
+     },
+     310
+    ],
+    [
+     {
+      "bpk": 30,
+      "crg": 696,
+      "upb": 46
+     },
+     16
+    ],
+    [
+     {
+      "bpk": 8,
+      "crg": 2639,
+      "upb": 43
+     },
+     62
+    ],
+    [
+     {
+      "bpk": 3,
+      "crg": 5087,
+      "upb": 20
+     },
+     255
+    ],
+    [
+     {
+      "bpk": 30,
+      "crg": 5196,
+      "upb": 41
+     },
+     127
+    ],
+    [
+     {
+      "bpk": 29,
+      "crg": 3763,
+      "upb": 43
+     },
+     88
+    ],
+    [
+     {
+      "bpk": 19,
+      "crg": 4916,
+      "upb": 33
+     },
+     149
+    ],
+    [
+     {
+      "bpk": 14,
+      "crg": 1895,
+      "upb": 35
+     },
+     55
+    ],
+    [
+     {
+      "bpk": 2,
+      "crg": 5588,
+      "upb": 16
+     },
+     350
+    ],
+    [
+     {
+      "bpk": 27,
+      "crg": 3118,
+      "upb": 56
+     },
+     56
+    ]
+   ],
+   "task_id": "t-47",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "crg"
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "upb"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "upb"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2135,
+   "cold_reason": null,
+   "domain": "harbour",
+   "family": "h7_full_trucks",
+   "formula": "trucks of full bins = (crg // upb) // bpk",
+   "inputs": [
+    "crg",
+    "upb",
+    "bpk"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bpk": 9,
+      "crg": 4017,
+      "upb": 48
+     },
+     9
+    ],
+    [
+     {
+      "bpk": 23,
+      "crg": 3002,
+      "upb": 10
+     },
+     13
+    ],
+    [
+     {
+      "bpk": 28,
+      "crg": 5415,
+      "upb": 14
+     },
+     13
+    ],
+    [
+     {
+      "bpk": 15,
+      "crg": 2998,
+      "upb": 43
+     },
+     4
+    ],
+    [
+     {
+      "bpk": 24,
+      "crg": 4475,
+      "upb": 50
+     },
+     3
+    ],
+    [
+     {
+      "bpk": 7,
+      "crg": 2997,
+      "upb": 54
+     },
+     7
+    ],
+    [
+     {
+      "bpk": 28,
+      "crg": 1618,
+      "upb": 35
+     },
+     1
+    ],
+    [
+     {
+      "bpk": 9,
+      "crg": 2448,
+      "upb": 9
+     },
+     30
+    ],
+    [
+     {
+      "bpk": 22,
+      "crg": 2707,
+      "upb": 11
+     },
+     11
+    ],
+    [
+     {
+      "bpk": 17,
+      "crg": 5870,
+      "upb": 48
+     },
+     7
+    ],
+    [
+     {
+      "bpk": 9,
+      "crg": 1227,
+      "upb": 28
+     },
+     4
+    ]
+   ],
+   "task_id": "t-49",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "div",
+     [
+      "var",
+      "crg"
+     ],
+     [
+      "var",
+      "upb"
+     ]
+    ],
+    [
+     "var",
+     "bpk"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3760,
+   "cold_reason": null,
+   "domain": "harbour",
+   "family": "h7_spare_bins",
+   "formula": "full bins left after full trucks = (crg // upb) mod bpk",
+   "inputs": [
+    "crg",
+    "upb",
+    "bpk"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bpk": 6,
+      "crg": 3795,
+      "upb": 33
+     },
+     1
+    ],
+    [
+     {
+      "bpk": 19,
+      "crg": 2470,
+      "upb": 24
+     },
+     7
+    ],
+    [
+     {
+      "bpk": 10,
+      "crg": 715,
+      "upb": 18
+     },
+     9
+    ],
+    [
+     {
+      "bpk": 25,
+      "crg": 2997,
+      "upb": 36
+     },
+     8
+    ],
+    [
+     {
+      "bpk": 25,
+      "crg": 1296,
+      "upb": 19
+     },
+     18
+    ],
+    [
+     {
+      "bpk": 5,
+      "crg": 46,
+      "upb": 12
+     },
+     3
+    ],
+    [
+     {
+      "bpk": 2,
+      "crg": 5801,
+      "upb": 60
+     },
+     0
+    ],
+    [
+     {
+      "bpk": 29,
+      "crg": 3516,
+      "upb": 46
+     },
+     18
+    ],
+    [
+     {
+      "bpk": 13,
+      "crg": 2249,
+      "upb": 10
+     },
+     3
+    ],
+    [
+     {
+      "bpk": 3,
+      "crg": 1234,
+      "upb": 52
+     },
+     2
+    ],
+    [
+     {
+      "bpk": 29,
+      "crg": 4687,
+      "upb": 42
+     },
+     24
+    ]
+   ],
+   "task_id": "t-50",
+   "tier": "easy",
+   "tree": [
+    "mod",
+    [
+     "div",
+     [
+      "var",
+      "crg"
+     ],
+     [
+      "var",
+      "upb"
+     ]
+    ],
+    [
+     "var",
+     "bpk"
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "clinic",
+   "family": "c7_doses",
+   "formula": "doses with one spare per patient = pat (dpd trd + 1)",
+   "inputs": [
+    "pat",
+    "dpd",
+    "trd"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "dpd": 3,
+      "pat": 35,
+      "trd": 12
+     },
+     1295
+    ],
+    [
+     {
+      "dpd": 5,
+      "pat": 22,
+      "trd": 6
+     },
+     682
+    ],
+    [
+     {
+      "dpd": 1,
+      "pat": 15,
+      "trd": 11
+     },
+     180
+    ],
+    [
+     {
+      "dpd": 2,
+      "pat": 30,
+      "trd": 4
+     },
+     270
+    ],
+    [
+     {
+      "dpd": 4,
+      "pat": 35,
+      "trd": 3
+     },
+     455
+    ],
+    [
+     {
+      "dpd": 4,
+      "pat": 17,
+      "trd": 14
+     },
+     969
+    ],
+    [
+     {
+      "dpd": 1,
+      "pat": 24,
+      "trd": 21
+     },
+     528
+    ],
+    [
+     {
+      "dpd": 6,
+      "pat": 21,
+      "trd": 8
+     },
+     1029
+    ],
+    [
+     {
+      "dpd": 1,
+      "pat": 5,
+      "trd": 2
+     },
+     15
+    ],
+    [
+     {
+      "dpd": 2,
+      "pat": 18,
+      "trd": 21
+     },
+     774
+    ],
+    [
+     {
+      "dpd": 2,
+      "pat": 10,
+      "trd": 1
+     },
+     30
+    ]
+   ],
+   "task_id": "t-00",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "pat"
+    ],
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "dpd"
+      ],
+      [
+       "var",
+       "trd"
+      ]
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "clinic",
+   "family": "c7_doses_loading",
+   "formula": "a double first-day dose = pat dpd (trd + 1)",
+   "inputs": [
+    "pat",
+    "dpd",
+    "trd"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "dpd": 3,
+      "pat": 29,
+      "trd": 18
+     },
+     1653
+    ],
+    [
+     {
+      "dpd": 1,
+      "pat": 23,
+      "trd": 21
+     },
+     506
+    ],
+    [
+     {
+      "dpd": 6,
+      "pat": 10,
+      "trd": 2
+     },
+     180
+    ],
+    [
+     {
+      "dpd": 1,
+      "pat": 28,
+      "trd": 17
+     },
+     504
+    ],
+    [
+     {
+      "dpd": 3,
+      "pat": 2,
+      "trd": 8
+     },
+     54
+    ],
+    [
+     {
+      "dpd": 6,
+      "pat": 27,
+      "trd": 11
+     },
+     1944
+    ],
+    [
+     {
+      "dpd": 4,
+      "pat": 32,
+      "trd": 15
+     },
+     2048
+    ],
+    [
+     {
+      "dpd": 4,
+      "pat": 35,
+      "trd": 5
+     },
+     840
+    ],
+    [
+     {
+      "dpd": 4,
+      "pat": 23,
+      "trd": 17
+     },
+     1656
+    ],
+    [
+     {
+      "dpd": 4,
+      "pat": 14,
+      "trd": 4
+     },
+     280
+    ],
+    [
+     {
+      "dpd": 4,
+      "pat": 29,
+      "trd": 6
+     },
+     812
+    ]
+   ],
+   "task_id": "t-01",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "pat"
+     ],
+     [
+      "var",
+      "dpd"
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "trd"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "clinic",
+   "family": "c7_doses_taper",
+   "formula": "last two days at one dose = pat (dpd (trd - 2) + 2)",
+   "inputs": [
+    "pat",
+    "dpd",
+    "trd"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "dpd": 1,
+      "pat": 32,
+      "trd": 7
+     },
+     224
+    ],
+    [
+     {
+      "dpd": 5,
+      "pat": 2,
+      "trd": 17
+     },
+     154
+    ],
+    [
+     {
+      "dpd": 6,
+      "pat": 7,
+      "trd": 9
+     },
+     308
+    ],
+    [
+     {
+      "dpd": 5,
+      "pat": 17,
+      "trd": 4
+     },
+     204
+    ],
+    [
+     {
+      "dpd": 4,
+      "pat": 29,
+      "trd": 21
+     },
+     2262
+    ],
+    [
+     {
+      "dpd": 2,
+      "pat": 5,
+      "trd": 20
+     },
+     190
+    ],
+    [
+     {
+      "dpd": 2,
+      "pat": 25,
+      "trd": 9
+     },
+     400
+    ],
+    [
+     {
+      "dpd": 5,
+      "pat": 2,
+      "trd": 12
+     },
+     104
+    ],
+    [
+     {
+      "dpd": 6,
+      "pat": 8,
+      "trd": 6
+     },
+     208
+    ],
+    [
+     {
+      "dpd": 6,
+      "pat": 8,
+      "trd": 17
+     },
+     736
+    ],
+    [
+     {
+      "dpd": 6,
+      "pat": 33,
+      "trd": 19
+     },
+     3432
+    ]
+   ],
+   "task_id": "t-02",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "pat"
+    ],
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "dpd"
+      ],
+      [
+       "sub",
+       [
+        "var",
+        "trd"
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "clinic",
+   "family": "c7_weeks",
+   "formula": "treatment weeks started = ceil(trd / 7), for pat patients",
+   "inputs": [
+    "pat",
+    "dpd",
+    "trd"
+   ],
+   "kind": "time",
+   "rows": [
+    [
+     {
+      "dpd": 5,
+      "pat": 36,
+      "trd": 5
+     },
+     36
+    ],
+    [
+     {
+      "dpd": 3,
+      "pat": 32,
+      "trd": 18
+     },
+     96
+    ],
+    [
+     {
+      "dpd": 2,
+      "pat": 33,
+      "trd": 7
+     },
+     33
+    ],
+    [
+     {
+      "dpd": 6,
+      "pat": 2,
+      "trd": 4
+     },
+     2
+    ],
+    [
+     {
+      "dpd": 4,
+      "pat": 14,
+      "trd": 14
+     },
+     28
+    ],
+    [
+     {
+      "dpd": 3,
+      "pat": 8,
+      "trd": 10
+     },
+     16
+    ],
+    [
+     {
+      "dpd": 4,
+      "pat": 31,
+      "trd": 16
+     },
+     93
+    ],
+    [
+     {
+      "dpd": 3,
+      "pat": 40,
+      "trd": 4
+     },
+     40
+    ],
+    [
+     {
+      "dpd": 3,
+      "pat": 26,
+      "trd": 5
+     },
+     26
+    ],
+    [
+     {
+      "dpd": 2,
+      "pat": 28,
+      "trd": 3
+     },
+     28
+    ],
+    [
+     {
+      "dpd": 5,
+      "pat": 40,
+      "trd": 21
+     },
+     120
+    ]
+   ],
+   "task_id": "t-03",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "pat"
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "trd"
+      ],
+      [
+       "sub",
+       [
+        "add",
+        [
+         "add",
+         [
+          "const",
+          2
+         ],
+         [
+          "const",
+          2
+         ]
+        ],
+        [
+         "const",
+         3
+        ]
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "add",
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "clinic",
+   "family": "c7_ward_transfers",
+   "formula": "ordered moves between wards = bpw wrd (wrd - 1)",
+   "inputs": [
+    "wrd",
+    "bpw"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "bpw": 31,
+      "wrd": 17
+     },
+     8432
+    ],
+    [
+     {
+      "bpw": 11,
+      "wrd": 1
+     },
+     0
+    ],
+    [
+     {
+      "bpw": 29,
+      "wrd": 27
+     },
+     20358
+    ],
+    [
+     {
+      "bpw": 33,
+      "wrd": 20
+     },
+     12540
+    ],
+    [
+     {
+      "bpw": 19,
+      "wrd": 20
+     },
+     7220
+    ],
+    [
+     {
+      "bpw": 32,
+      "wrd": 21
+     },
+     13440
+    ],
+    [
+     {
+      "bpw": 6,
+      "wrd": 27
+     },
+     4212
+    ],
+    [
+     {
+      "bpw": 8,
+      "wrd": 18
+     },
+     2448
+    ],
+    [
+     {
+      "bpw": 27,
+      "wrd": 19
+     },
+     9234
+    ],
+    [
+     {
+      "bpw": 26,
+      "wrd": 16
+     },
+     6240
+    ],
+    [
+     {
+      "bpw": 25,
+      "wrd": 23
+     },
+     12650
+    ]
+   ],
+   "task_id": "t-07",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "bpw"
+     ],
+     [
+      "var",
+      "wrd"
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "wrd"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "clinic",
+   "family": "c7_handovers",
+   "formula": "handovers between nurses = nrs (nrs - 1) / 2, sft weeks",
+   "inputs": [
+    "nrs",
+    "sft"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "nrs": 36,
+      "sft": 1
+     },
+     630
+    ],
+    [
+     {
+      "nrs": 22,
+      "sft": 3
+     },
+     693
+    ],
+    [
+     {
+      "nrs": 43,
+      "sft": 7
+     },
+     6321
+    ],
+    [
+     {
+      "nrs": 50,
+      "sft": 2
+     },
+     2450
+    ],
+    [
+     {
+      "nrs": 57,
+      "sft": 3
+     },
+     4788
+    ],
+    [
+     {
+      "nrs": 59,
+      "sft": 7
+     },
+     11977
+    ],
+    [
+     {
+      "nrs": 42,
+      "sft": 5
+     },
+     4305
+    ],
+    [
+     {
+      "nrs": 37,
+      "sft": 6
+     },
+     3996
+    ],
+    [
+     {
+      "nrs": 41,
+      "sft": 3
+     },
+     2460
+    ],
+    [
+     {
+      "nrs": 38,
+      "sft": 1
+     },
+     703
+    ],
+    [
+     {
+      "nrs": 30,
+      "sft": 7
+     },
+     3045
+    ]
+   ],
+   "task_id": "t-09",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "sft"
+      ],
+      [
+       "var",
+       "nrs"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "nrs"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "clinic",
+   "family": "c7_hours",
+   "formula": "hours: 8 per shift plus 1 handover hour per nurse = 8 nrs sft + nrs",
+   "inputs": [
+    "nrs",
+    "sft"
+   ],
+   "kind": "time",
+   "rows": [
+    [
+     {
+      "nrs": 50,
+      "sft": 4
+     },
+     1650
+    ],
+    [
+     {
+      "nrs": 40,
+      "sft": 3
+     },
+     1000
+    ],
+    [
+     {
+      "nrs": 54,
+      "sft": 6
+     },
+     2646
+    ],
+    [
+     {
+      "nrs": 51,
+      "sft": 1
+     },
+     459
+    ],
+    [
+     {
+      "nrs": 16,
+      "sft": 1
+     },
+     144
+    ],
+    [
+     {
+      "nrs": 24,
+      "sft": 1
+     },
+     216
+    ],
+    [
+     {
+      "nrs": 16,
+      "sft": 3
+     },
+     400
+    ],
+    [
+     {
+      "nrs": 46,
+      "sft": 2
+     },
+     782
+    ],
+    [
+     {
+      "nrs": 28,
+      "sft": 3
+     },
+     700
+    ],
+    [
+     {
+      "nrs": 21,
+      "sft": 3
+     },
+     525
+    ],
+    [
+     {
+      "nrs": 12,
+      "sft": 2
+     },
+     204
+    ]
+   ],
+   "task_id": "t-10",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "add",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         2
+        ]
+       ]
+      ],
+      [
+       "var",
+       "nrs"
+      ]
+     ],
+     [
+      "var",
+      "sft"
+     ]
+    ],
+    [
+     "var",
+     "nrs"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "clinic",
+   "family": "c7_teams",
+   "formula": "teams of 4 nurses, rounded up, per shift = sft ceil(nrs / 4)",
+   "inputs": [
+    "nrs",
+    "sft"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "nrs": 2,
+      "sft": 5
+     },
+     5
+    ],
+    [
+     {
+      "nrs": 19,
+      "sft": 2
+     },
+     10
+    ],
+    [
+     {
+      "nrs": 31,
+      "sft": 3
+     },
+     24
+    ],
+    [
+     {
+      "nrs": 33,
+      "sft": 4
+     },
+     36
+    ],
+    [
+     {
+      "nrs": 16,
+      "sft": 4
+     },
+     16
+    ],
+    [
+     {
+      "nrs": 40,
+      "sft": 3
+     },
+     30
+    ],
+    [
+     {
+      "nrs": 6,
+      "sft": 1
+     },
+     2
+    ],
+    [
+     {
+      "nrs": 22,
+      "sft": 6
+     },
+     36
+    ],
+    [
+     {
+      "nrs": 47,
+      "sft": 6
+     },
+     72
+    ],
+    [
+     {
+      "nrs": 3,
+      "sft": 5
+     },
+     5
+    ],
+    [
+     {
+      "nrs": 22,
+      "sft": 2
+     },
+     12
+    ]
+   ],
+   "task_id": "t-11",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "sft"
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "nrs"
+      ],
+      [
+       "sub",
+       [
+        "add",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         2
+        ]
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "clinic",
+   "family": "c7_case_space",
+   "formula": "pills a case holds minus those packed in the last case = ppb bpc - pil mod (ppb bpc)",
+   "inputs": [
+    "pil",
+    "ppb",
+    "bpc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bpc": 9,
+      "pil": 4947,
+      "ppb": 87
+     },
+     534
+    ],
+    [
+     {
+      "bpc": 18,
+      "pil": 1127,
+      "ppb": 109
+     },
+     835
+    ],
+    [
+     {
+      "bpc": 3,
+      "pil": 4595,
+      "ppb": 29
+     },
+     16
+    ],
+    [
+     {
+      "bpc": 6,
+      "pil": 1237,
+      "ppb": 112
+     },
+     107
+    ],
+    [
+     {
+      "bpc": 5,
+      "pil": 3517,
+      "ppb": 61
+     },
+     143
+    ],
+    [
+     {
+      "bpc": 15,
+      "pil": 3723,
+      "ppb": 78
+     },
+     957
+    ],
+    [
+     {
+      "bpc": 15,
+      "pil": 2741,
+      "ppb": 38
+     },
+     109
+    ],
+    [
+     {
+      "bpc": 24,
+      "pil": 2602,
+      "ppb": 74
+     },
+     950
+    ],
+    [
+     {
+      "bpc": 24,
+      "pil": 1748,
+      "ppb": 76
+     },
+     76
+    ],
+    [
+     {
+      "bpc": 19,
+      "pil": 2461,
+      "ppb": 74
+     },
+     351
+    ],
+    [
+     {
+      "bpc": 23,
+      "pil": 3560,
+      "ppb": 118
+     },
+     1868
+    ]
+   ],
+   "task_id": "t-16",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "ppb"
+     ],
+     [
+      "var",
+      "bpc"
+     ]
+    ],
+    [
+     "mod",
+     [
+      "var",
+      "pil"
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "ppb"
+      ],
+      [
+       "var",
+       "bpc"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "print",
+   "family": "p7_sheets",
+   "formula": "sheets, two pages a sheet, per copy = cps ceil(pgs / 2)",
+   "inputs": [
+    "pgs",
+    "cps"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "cps": 24,
+      "pgs": 63
+     },
+     768
+    ],
+    [
+     {
+      "cps": 14,
+      "pgs": 261
+     },
+     1834
+    ],
+    [
+     {
+      "cps": 46,
+      "pgs": 49
+     },
+     1150
+    ],
+    [
+     {
+      "cps": 37,
+      "pgs": 315
+     },
+     5846
+    ],
+    [
+     {
+      "cps": 32,
+      "pgs": 298
+     },
+     4768
+    ],
+    [
+     {
+      "cps": 19,
+      "pgs": 120
+     },
+     1140
+    ],
+    [
+     {
+      "cps": 28,
+      "pgs": 141
+     },
+     1988
+    ],
+    [
+     {
+      "cps": 25,
+      "pgs": 377
+     },
+     4725
+    ],
+    [
+     {
+      "cps": 5,
+      "pgs": 284
+     },
+     710
+    ],
+    [
+     {
+      "cps": 40,
+      "pgs": 269
+     },
+     5400
+    ],
+    [
+     {
+      "cps": 33,
+      "pgs": 225
+     },
+     3729
+    ]
+   ],
+   "task_id": "t-17",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "cps"
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "pgs"
+      ],
+      [
+       "sub",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "print",
+   "family": "p7_spreads",
+   "formula": "facing-page spreads per book = pgs // 2 - 1, over cps copies",
+   "inputs": [
+    "pgs",
+    "cps"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cps": 6,
+      "pgs": 384
+     },
+     1146
+    ],
+    [
+     {
+      "cps": 42,
+      "pgs": 64
+     },
+     1302
+    ],
+    [
+     {
+      "cps": 42,
+      "pgs": 186
+     },
+     3864
+    ],
+    [
+     {
+      "cps": 18,
+      "pgs": 12
+     },
+     90
+    ],
+    [
+     {
+      "cps": 8,
+      "pgs": 215
+     },
+     848
+    ],
+    [
+     {
+      "cps": 35,
+      "pgs": 170
+     },
+     2940
+    ],
+    [
+     {
+      "cps": 1,
+      "pgs": 130
+     },
+     64
+    ],
+    [
+     {
+      "cps": 19,
+      "pgs": 95
+     },
+     874
+    ],
+    [
+     {
+      "cps": 33,
+      "pgs": 20
+     },
+     297
+    ],
+    [
+     {
+      "cps": 30,
+      "pgs": 215
+     },
+     3180
+    ],
+    [
+     {
+      "cps": 33,
+      "pgs": 370
+     },
+     6072
+    ]
+   ],
+   "task_id": "t-20",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "cps"
+    ],
+    [
+     "sub",
+     [
+      "div",
+      [
+       "var",
+       "pgs"
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "print",
+   "family": "p7_signatures",
+   "formula": "16-page signatures per copy, rounded up = cps ceil(pgs / 16)",
+   "inputs": [
+    "pgs",
+    "cps"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "cps": 2,
+      "pgs": 145
+     },
+     20
+    ],
+    [
+     {
+      "cps": 43,
+      "pgs": 332
+     },
+     903
+    ],
+    [
+     {
+      "cps": 16,
+      "pgs": 165
+     },
+     176
+    ],
+    [
+     {
+      "cps": 27,
+      "pgs": 352
+     },
+     594
+    ],
+    [
+     {
+      "cps": 30,
+      "pgs": 221
+     },
+     420
+    ],
+    [
+     {
+      "cps": 36,
+      "pgs": 341
+     },
+     792
+    ],
+    [
+     {
+      "cps": 18,
+      "pgs": 113
+     },
+     144
+    ],
+    [
+     {
+      "cps": 28,
+      "pgs": 161
+     },
+     308
+    ],
+    [
+     {
+      "cps": 17,
+      "pgs": 295
+     },
+     323
+    ],
+    [
+     {
+      "cps": 36,
+      "pgs": 220
+     },
+     504
+    ],
+    [
+     {
+      "cps": 22,
+      "pgs": 58
+     },
+     88
+    ]
+   ],
+   "task_id": "t-21",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "cps"
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "pgs"
+      ],
+      [
+       "sub",
+       [
+        "mul",
+        [
+         "add",
+         [
+          "const",
+          2
+         ],
+         [
+          "const",
+          2
+         ]
+        ],
+        [
+         "add",
+         [
+          "const",
+          2
+         ],
+         [
+          "const",
+          2
+         ]
+        ]
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "mul",
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "print",
+   "family": "p7_reams",
+   "formula": "reams of rms hundred sheets = ceil(ceil(lfs / ups) / (100 rms))",
+   "inputs": [
+    "lfs",
+    "ups",
+    "rms"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "lfs": 2153,
+      "rms": 5,
+      "ups": 6
+     },
+     1
+    ],
+    [
+     {
+      "lfs": 1807,
+      "rms": 8,
+      "ups": 2
+     },
+     2
+    ],
+    [
+     {
+      "lfs": 1917,
+      "rms": 4,
+      "ups": 1
+     },
+     5
+    ],
+    [
+     {
+      "lfs": 136,
+      "rms": 5,
+      "ups": 2
+     },
+     1
+    ],
+    [
+     {
+      "lfs": 137,
+      "rms": 8,
+      "ups": 2
+     },
+     1
+    ],
+    [
+     {
+      "lfs": 1883,
+      "rms": 10,
+      "ups": 5
+     },
+     1
+    ],
+    [
+     {
+      "lfs": 1208,
+      "rms": 7,
+      "ups": 2
+     },
+     1
+    ],
+    [
+     {
+      "lfs": 177,
+      "rms": 4,
+      "ups": 4
+     },
+     1
+    ],
+    [
+     {
+      "lfs": 2274,
+      "rms": 6,
+      "ups": 4
+     },
+     1
+    ],
+    [
+     {
+      "lfs": 1140,
+      "rms": 7,
+      "ups": 1
+     },
+     2
+    ],
+    [
+     {
+      "lfs": 1923,
+      "rms": 9,
+      "ups": 7
+     },
+     1
+    ]
+   ],
+   "task_id": "t-23",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "lfs"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "ups"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "ups"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "mul",
+        [
+         "mul",
+         [
+          "const",
+          2
+         ],
+         [
+          "add",
+          [
+           "const",
+           2
+          ],
+          [
+           "const",
+           3
+          ]
+         ]
+        ],
+        [
+         "mul",
+         [
+          "const",
+          2
+         ],
+         [
+          "add",
+          [
+           "const",
+           2
+          ],
+          [
+           "const",
+           3
+          ]
+         ]
+        ]
+       ],
+       [
+        "var",
+        "rms"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "add",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         3
+        ]
+       ]
+      ],
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "add",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         3
+        ]
+       ]
+      ]
+     ],
+     [
+      "var",
+      "rms"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "print",
+   "family": "p7_makeready",
+   "formula": "sheets with 10 make-ready sheets per ream started = ceil(lfs/ups) + 10 rms",
+   "inputs": [
+    "lfs",
+    "ups",
+    "rms"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "lfs": 2812,
+      "rms": 6,
+      "ups": 6
+     },
+     529
+    ],
+    [
+     {
+      "lfs": 2052,
+      "rms": 8,
+      "ups": 5
+     },
+     491
+    ],
+    [
+     {
+      "lfs": 264,
+      "rms": 7,
+      "ups": 6
+     },
+     114
+    ],
+    [
+     {
+      "lfs": 903,
+      "rms": 5,
+      "ups": 4
+     },
+     276
+    ],
+    [
+     {
+      "lfs": 2587,
+      "rms": 4,
+      "ups": 3
+     },
+     903
+    ],
+    [
+     {
+      "lfs": 2818,
+      "rms": 8,
+      "ups": 8
+     },
+     433
+    ],
+    [
+     {
+      "lfs": 2112,
+      "rms": 7,
+      "ups": 4
+     },
+     598
+    ],
+    [
+     {
+      "lfs": 2721,
+      "rms": 9,
+      "ups": 5
+     },
+     635
+    ],
+    [
+     {
+      "lfs": 1570,
+      "rms": 2,
+      "ups": 7
+     },
+     245
+    ],
+    [
+     {
+      "lfs": 1596,
+      "rms": 6,
+      "ups": 8
+     },
+     260
+    ],
+    [
+     {
+      "lfs": 211,
+      "rms": 2,
+      "ups": 1
+     },
+     231
+    ]
+   ],
+   "task_id": "t-25",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "lfs"
+      ],
+      [
+       "sub",
+       [
+        "var",
+        "ups"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "var",
+      "ups"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ]
+     ],
+     [
+      "var",
+      "rms"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "print",
+   "family": "p7_poster_trim",
+   "formula": "a 1-unit trim margin all round = pstw psth - (pstw - 2)(psth - 2)",
+   "inputs": [
+    "pstw",
+    "psth"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "psth": 78,
+      "pstw": 37
+     },
+     226
+    ],
+    [
+     {
+      "psth": 28,
+      "pstw": 38
+     },
+     128
+    ],
+    [
+     {
+      "psth": 25,
+      "pstw": 52
+     },
+     150
+    ],
+    [
+     {
+      "psth": 71,
+      "pstw": 17
+     },
+     172
+    ],
+    [
+     {
+      "psth": 32,
+      "pstw": 60
+     },
+     180
+    ],
+    [
+     {
+      "psth": 42,
+      "pstw": 53
+     },
+     186
+    ],
+    [
+     {
+      "psth": 60,
+      "pstw": 41
+     },
+     198
+    ],
+    [
+     {
+      "psth": 25,
+      "pstw": 22
+     },
+     90
+    ],
+    [
+     {
+      "psth": 70,
+      "pstw": 55
+     },
+     246
+    ],
+    [
+     {
+      "psth": 50,
+      "pstw": 22
+     },
+     140
+    ],
+    [
+     {
+      "psth": 79,
+      "pstw": 41
+     },
+     236
+    ]
+   ],
+   "task_id": "t-26",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "pstw"
+     ],
+     [
+      "var",
+      "psth"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "pstw"
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "psth"
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "print",
+   "family": "p7_poster_tiles",
+   "formula": "A-size tiles 3 by 4 needed = ceil(pstw / 3) ceil(psth / 4)",
+   "inputs": [
+    "pstw",
+    "psth"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "psth": 75,
+      "pstw": 10
+     },
+     76
+    ],
+    [
+     {
+      "psth": 20,
+      "pstw": 56
+     },
+     95
+    ],
+    [
+     {
+      "psth": 49,
+      "pstw": 31
+     },
+     143
+    ],
+    [
+     {
+      "psth": 68,
+      "pstw": 31
+     },
+     187
+    ],
+    [
+     {
+      "psth": 26,
+      "pstw": 5
+     },
+     14
+    ],
+    [
+     {
+      "psth": 78,
+      "pstw": 25
+     },
+     180
+    ],
+    [
+     {
+      "psth": 48,
+      "pstw": 35
+     },
+     144
+    ],
+    [
+     {
+      "psth": 8,
+      "pstw": 48
+     },
+     32
+    ],
+    [
+     {
+      "psth": 17,
+      "pstw": 24
+     },
+     40
+    ],
+    [
+     {
+      "psth": 19,
+      "pstw": 19
+     },
+     35
+    ],
+    [
+     {
+      "psth": 39,
+      "pstw": 57
+     },
+     190
+    ]
+   ],
+   "task_id": "t-28",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "pstw"
+      ],
+      [
+       "sub",
+       [
+        "const",
+        3
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "psth"
+      ],
+      [
+       "sub",
+       [
+        "add",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         2
+        ]
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "print",
+   "family": "p7_poster_mount",
+   "formula": "mount board with a 2-unit border = (pstw + 4)(psth + 4)",
+   "inputs": [
+    "pstw",
+    "psth"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "psth": 79,
+      "pstw": 40
+     },
+     3652
+    ],
+    [
+     {
+      "psth": 39,
+      "pstw": 8
+     },
+     516
+    ],
+    [
+     {
+      "psth": 3,
+      "pstw": 17
+     },
+     147
+    ],
+    [
+     {
+      "psth": 5,
+      "pstw": 2
+     },
+     54
+    ],
+    [
+     {
+      "psth": 76,
+      "pstw": 38
+     },
+     3360
+    ],
+    [
+     {
+      "psth": 68,
+      "pstw": 15
+     },
+     1368
+    ],
+    [
+     {
+      "psth": 67,
+      "pstw": 27
+     },
+     2201
+    ],
+    [
+     {
+      "psth": 66,
+      "pstw": 4
+     },
+     560
+    ],
+    [
+     {
+      "psth": 35,
+      "pstw": 30
+     },
+     1326
+    ],
+    [
+     {
+      "psth": 24,
+      "pstw": 22
+     },
+     728
+    ],
+    [
+     {
+      "psth": 14,
+      "pstw": 53
+     },
+     1026
+    ]
+   ],
+   "task_id": "t-29",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "var",
+      "pstw"
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "psth"
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "print",
+   "family": "p7_set_pages",
+   "formula": "pages in the set plus 2 endpapers a volume = vol (sgv pps + 2)",
+   "inputs": [
+    "vol",
+    "sgv",
+    "pps"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "pps": 6,
+      "sgv": 7,
+      "vol": 6
+     },
+     264
+    ],
+    [
+     {
+      "pps": 10,
+      "sgv": 6,
+      "vol": 4
+     },
+     248
+    ],
+    [
+     {
+      "pps": 11,
+      "sgv": 13,
+      "vol": 14
+     },
+     2030
+    ],
+    [
+     {
+      "pps": 7,
+      "sgv": 10,
+      "vol": 1
+     },
+     72
+    ],
+    [
+     {
+      "pps": 12,
+      "sgv": 4,
+      "vol": 1
+     },
+     50
+    ],
+    [
+     {
+      "pps": 25,
+      "sgv": 20,
+      "vol": 5
+     },
+     2510
+    ],
+    [
+     {
+      "pps": 9,
+      "sgv": 25,
+      "vol": 7
+     },
+     1589
+    ],
+    [
+     {
+      "pps": 17,
+      "sgv": 7,
+      "vol": 3
+     },
+     363
+    ],
+    [
+     {
+      "pps": 15,
+      "sgv": 13,
+      "vol": 2
+     },
+     394
+    ],
+    [
+     {
+      "pps": 21,
+      "sgv": 25,
+      "vol": 10
+     },
+     5270
+    ],
+    [
+     {
+      "pps": 30,
+      "sgv": 9,
+      "vol": 3
+     },
+     816
+    ]
+   ],
+   "task_id": "t-31",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "vol"
+    ],
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "sgv"
+      ],
+      [
+       "var",
+       "pps"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "print",
+   "family": "p7_stitches",
+   "formula": "stitches: 3 per signature and 2 per volume = 3 vol sgv + 2 vol",
+   "inputs": [
+    "vol",
+    "sgv",
+    "pps"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "pps": 29,
+      "sgv": 17,
+      "vol": 7
+     },
+     371
+    ],
+    [
+     {
+      "pps": 4,
+      "sgv": 21,
+      "vol": 5
+     },
+     325
+    ],
+    [
+     {
+      "pps": 8,
+      "sgv": 10,
+      "vol": 15
+     },
+     480
+    ],
+    [
+     {
+      "pps": 18,
+      "sgv": 8,
+      "vol": 15
+     },
+     390
+    ],
+    [
+     {
+      "pps": 17,
+      "sgv": 20,
+      "vol": 20
+     },
+     1240
+    ],
+    [
+     {
+      "pps": 22,
+      "sgv": 8,
+      "vol": 4
+     },
+     104
+    ],
+    [
+     {
+      "pps": 30,
+      "sgv": 21,
+      "vol": 13
+     },
+     845
+    ],
+    [
+     {
+      "pps": 10,
+      "sgv": 21,
+      "vol": 13
+     },
+     845
+    ],
+    [
+     {
+      "pps": 25,
+      "sgv": 14,
+      "vol": 2
+     },
+     88
+    ],
+    [
+     {
+      "pps": 32,
+      "sgv": 10,
+      "vol": 2
+     },
+     64
+    ],
+    [
+     {
+      "pps": 16,
+      "sgv": 20,
+      "vol": 3
+     },
+     186
+    ]
+   ],
+   "task_id": "t-32",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "const",
+       3
+      ],
+      [
+       "var",
+       "vol"
+      ]
+     ],
+     [
+      "var",
+      "sgv"
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "vol"
+     ],
+     [
+      "var",
+      "vol"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "print",
+   "family": "p7_folds",
+   "formula": "folded quarter-sheets: vol sgv (pps // 4)",
+   "inputs": [
+    "vol",
+    "sgv",
+    "pps"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "pps": 6,
+      "sgv": 30,
+      "vol": 20
+     },
+     600
+    ],
+    [
+     {
+      "pps": 9,
+      "sgv": 7,
+      "vol": 20
+     },
+     280
+    ],
+    [
+     {
+      "pps": 9,
+      "sgv": 21,
+      "vol": 2
+     },
+     84
+    ],
+    [
+     {
+      "pps": 21,
+      "sgv": 29,
+      "vol": 6
+     },
+     870
+    ],
+    [
+     {
+      "pps": 17,
+      "sgv": 7,
+      "vol": 20
+     },
+     560
+    ],
+    [
+     {
+      "pps": 9,
+      "sgv": 6,
+      "vol": 13
+     },
+     156
+    ],
+    [
+     {
+      "pps": 10,
+      "sgv": 24,
+      "vol": 15
+     },
+     720
+    ],
+    [
+     {
+      "pps": 27,
+      "sgv": 17,
+      "vol": 5
+     },
+     510
+    ],
+    [
+     {
+      "pps": 31,
+      "sgv": 9,
+      "vol": 11
+     },
+     693
+    ],
+    [
+     {
+      "pps": 17,
+      "sgv": 10,
+      "vol": 3
+     },
+     120
+    ],
+    [
+     {
+      "pps": 20,
+      "sgv": 8,
+      "vol": 1
+     },
+     40
+    ]
+   ],
+   "task_id": "t-33",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "vol"
+     ],
+     [
+      "var",
+      "sgv"
+     ]
+    ],
+    [
+     "div",
+     [
+      "var",
+      "pps"
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "print",
+   "family": "p7_index",
+   "formula": "index entries: one per page and one per signature = vol sgv pps + vol sgv",
+   "inputs": [
+    "vol",
+    "sgv",
+    "pps"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "pps": 24,
+      "sgv": 16,
+      "vol": 8
+     },
+     3200
+    ],
+    [
+     {
+      "pps": 29,
+      "sgv": 14,
+      "vol": 11
+     },
+     4620
+    ],
+    [
+     {
+      "pps": 22,
+      "sgv": 21,
+      "vol": 3
+     },
+     1449
+    ],
+    [
+     {
+      "pps": 10,
+      "sgv": 13,
+      "vol": 10
+     },
+     1430
+    ],
+    [
+     {
+      "pps": 25,
+      "sgv": 22,
+      "vol": 20
+     },
+     11440
+    ],
+    [
+     {
+      "pps": 31,
+      "sgv": 29,
+      "vol": 4
+     },
+     3712
+    ],
+    [
+     {
+      "pps": 32,
+      "sgv": 25,
+      "vol": 8
+     },
+     6600
+    ],
+    [
+     {
+      "pps": 24,
+      "sgv": 30,
+      "vol": 4
+     },
+     3000
+    ],
+    [
+     {
+      "pps": 28,
+      "sgv": 26,
+      "vol": 13
+     },
+     9802
+    ],
+    [
+     {
+      "pps": 31,
+      "sgv": 15,
+      "vol": 8
+     },
+     3840
+    ],
+    [
+     {
+      "pps": 18,
+      "sgv": 12,
+      "vol": 17
+     },
+     3876
+    ]
+   ],
+   "task_id": "t-34",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "vol"
+      ],
+      [
+       "var",
+       "sgv"
+      ]
+     ],
+     [
+      "var",
+      "pps"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "vol"
+     ],
+     [
+      "var",
+      "sgv"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "harbour",
+   "family": "h7_lines",
+   "formula": "mooring lines: 6 per ship plus 1 per 50 boxes rounded up = 6 shp + ceil(cbx/50)",
+   "inputs": [
+    "shp",
+    "cbx"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cbx": 48,
+      "shp": 4
+     },
+     25
+    ],
+    [
+     {
+      "cbx": 35,
+      "shp": 6
+     },
+     37
+    ],
+    [
+     {
+      "cbx": 122,
+      "shp": 8
+     },
+     51
+    ],
+    [
+     {
+      "cbx": 320,
+      "shp": 30
+     },
+     187
+    ],
+    [
+     {
+      "cbx": 262,
+      "shp": 14
+     },
+     90
+    ],
+    [
+     {
+      "cbx": 287,
+      "shp": 9
+     },
+     60
+    ],
+    [
+     {
+      "cbx": 258,
+      "shp": 11
+     },
+     72
+    ],
+    [
+     {
+      "cbx": 240,
+      "shp": 3
+     },
+     23
+    ],
+    [
+     {
+      "cbx": 196,
+      "shp": 11
+     },
+     70
+    ],
+    [
+     {
+      "cbx": 122,
+      "shp": 26
+     },
+     159
+    ],
+    [
+     {
+      "cbx": 23,
+      "shp": 29
+     },
+     175
+    ]
+   ],
+   "task_id": "t-36",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "var",
+      "shp"
+     ]
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "cbx"
+      ],
+      [
+       "sub",
+       [
+        "mul",
+        [
+         "mul",
+         [
+          "const",
+          2
+         ],
+         [
+          "add",
+          [
+           "const",
+           2
+          ],
+          [
+           "const",
+           3
+          ]
+         ]
+        ],
+        [
+         "add",
+         [
+          "const",
+          2
+         ],
+         [
+          "const",
+          3
+         ]
+        ]
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "add",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         3
+        ]
+       ]
+      ],
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "harbour",
+   "family": "h7_berth_pairs",
+   "formula": "ship pairs plus box total = shp(shp-1)/2 + shp cbx",
+   "inputs": [
+    "shp",
+    "cbx"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cbx": 350,
+      "shp": 12
+     },
+     4266
+    ],
+    [
+     {
+      "cbx": 36,
+      "shp": 27
+     },
+     1323
+    ],
+    [
+     {
+      "cbx": 192,
+      "shp": 13
+     },
+     2574
+    ],
+    [
+     {
+      "cbx": 159,
+      "shp": 2
+     },
+     319
+    ],
+    [
+     {
+      "cbx": 317,
+      "shp": 20
+     },
+     6530
+    ],
+    [
+     {
+      "cbx": 129,
+      "shp": 30
+     },
+     4305
+    ],
+    [
+     {
+      "cbx": 264,
+      "shp": 9
+     },
+     2412
+    ],
+    [
+     {
+      "cbx": 47,
+      "shp": 10
+     },
+     515
+    ],
+    [
+     {
+      "cbx": 59,
+      "shp": 30
+     },
+     2205
+    ],
+    [
+     {
+      "cbx": 344,
+      "shp": 13
+     },
+     4550
+    ],
+    [
+     {
+      "cbx": 393,
+      "shp": 7
+     },
+     2772
+    ]
+   ],
+   "task_id": "t-37",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "shp"
+      ],
+      [
+       "sub",
+       [
+        "var",
+        "shp"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "shp"
+     ],
+     [
+      "var",
+      "cbx"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "harbour",
+   "family": "h7_stack",
+   "formula": "stacks 5 high per ship = shp ceil(cbx / 5)",
+   "inputs": [
+    "shp",
+    "cbx"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "cbx": 28,
+      "shp": 4
+     },
+     24
+    ],
+    [
+     {
+      "cbx": 35,
+      "shp": 11
+     },
+     77
+    ],
+    [
+     {
+      "cbx": 17,
+      "shp": 7
+     },
+     28
+    ],
+    [
+     {
+      "cbx": 292,
+      "shp": 16
+     },
+     944
+    ],
+    [
+     {
+      "cbx": 212,
+      "shp": 2
+     },
+     86
+    ],
+    [
+     {
+      "cbx": 322,
+      "shp": 29
+     },
+     1885
+    ],
+    [
+     {
+      "cbx": 353,
+      "shp": 22
+     },
+     1562
+    ],
+    [
+     {
+      "cbx": 273,
+      "shp": 10
+     },
+     550
+    ],
+    [
+     {
+      "cbx": 351,
+      "shp": 13
+     },
+     923
+    ],
+    [
+     {
+      "cbx": 114,
+      "shp": 10
+     },
+     230
+    ],
+    [
+     {
+      "cbx": 209,
+      "shp": 26
+     },
+     1092
+    ]
+   ],
+   "task_id": "t-38",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "shp"
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "cbx"
+      ],
+      [
+       "sub",
+       [
+        "add",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         3
+        ]
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "harbour",
+   "family": "h7_lifts",
+   "formula": "lifts with a 1-hour break per crane = crn lph (wkh - 1)",
+   "inputs": [
+    "crn",
+    "lph",
+    "wkh"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "crn": 4,
+      "lph": 6,
+      "wkh": 22
+     },
+     504
+    ],
+    [
+     {
+      "crn": 8,
+      "lph": 16,
+      "wkh": 19
+     },
+     2304
+    ],
+    [
+     {
+      "crn": 7,
+      "lph": 10,
+      "wkh": 24
+     },
+     1610
+    ],
+    [
+     {
+      "crn": 7,
+      "lph": 22,
+      "wkh": 18
+     },
+     2618
+    ],
+    [
+     {
+      "crn": 9,
+      "lph": 5,
+      "wkh": 10
+     },
+     405
+    ],
+    [
+     {
+      "crn": 7,
+      "lph": 9,
+      "wkh": 3
+     },
+     126
+    ],
+    [
+     {
+      "crn": 9,
+      "lph": 16,
+      "wkh": 5
+     },
+     576
+    ],
+    [
+     {
+      "crn": 4,
+      "lph": 32,
+      "wkh": 24
+     },
+     2944
+    ],
+    [
+     {
+      "crn": 7,
+      "lph": 7,
+      "wkh": 22
+     },
+     1029
+    ],
+    [
+     {
+      "crn": 2,
+      "lph": 22,
+      "wkh": 14
+     },
+     572
+    ],
+    [
+     {
+      "crn": 7,
+      "lph": 39,
+      "wkh": 16
+     },
+     4095
+    ]
+   ],
+   "task_id": "t-39",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "crn"
+     ],
+     [
+      "var",
+      "lph"
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "wkh"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "harbour",
+   "family": "h7_lifts_ramp",
+   "formula": "first hour at half rate: crn (lph wkh - lph // 2)",
+   "inputs": [
+    "crn",
+    "lph",
+    "wkh"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "crn": 6,
+      "lph": 18,
+      "wkh": 6
+     },
+     594
+    ],
+    [
+     {
+      "crn": 12,
+      "lph": 27,
+      "wkh": 14
+     },
+     4380
+    ],
+    [
+     {
+      "crn": 11,
+      "lph": 17,
+      "wkh": 14
+     },
+     2530
+    ],
+    [
+     {
+      "crn": 7,
+      "lph": 25,
+      "wkh": 9
+     },
+     1491
+    ],
+    [
+     {
+      "crn": 4,
+      "lph": 37,
+      "wkh": 18
+     },
+     2592
+    ],
+    [
+     {
+      "crn": 2,
+      "lph": 33,
+      "wkh": 10
+     },
+     628
+    ],
+    [
+     {
+      "crn": 7,
+      "lph": 16,
+      "wkh": 21
+     },
+     2296
+    ],
+    [
+     {
+      "crn": 8,
+      "lph": 36,
+      "wkh": 16
+     },
+     4464
+    ],
+    [
+     {
+      "crn": 4,
+      "lph": 11,
+      "wkh": 3
+     },
+     112
+    ],
+    [
+     {
+      "crn": 6,
+      "lph": 29,
+      "wkh": 24
+     },
+     4092
+    ],
+    [
+     {
+      "crn": 12,
+      "lph": 40,
+      "wkh": 14
+     },
+     6480
+    ]
+   ],
+   "task_id": "t-40",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "crn"
+    ],
+    [
+     "sub",
+     [
+      "mul",
+      [
+       "var",
+       "lph"
+      ],
+      [
+       "var",
+       "wkh"
+      ]
+     ],
+     [
+      "div",
+      [
+       "var",
+       "lph"
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "harbour",
+   "family": "h7_crane_shifts",
+   "formula": "8-hour shifts per crane, rounded up = crn ceil(wkh / 8)",
+   "inputs": [
+    "crn",
+    "lph",
+    "wkh"
+   ],
+   "kind": "time",
+   "rows": [
+    [
+     {
+      "crn": 3,
+      "lph": 17,
+      "wkh": 1
+     },
+     3
+    ],
+    [
+     {
+      "crn": 4,
+      "lph": 38,
+      "wkh": 14
+     },
+     8
+    ],
+    [
+     {
+      "crn": 2,
+      "lph": 9,
+      "wkh": 6
+     },
+     2
+    ],
+    [
+     {
+      "crn": 7,
+      "lph": 37,
+      "wkh": 21
+     },
+     21
+    ],
+    [
+     {
+      "crn": 9,
+      "lph": 38,
+      "wkh": 4
+     },
+     9
+    ],
+    [
+     {
+      "crn": 3,
+      "lph": 8,
+      "wkh": 19
+     },
+     9
+    ],
+    [
+     {
+      "crn": 10,
+      "lph": 22,
+      "wkh": 8
+     },
+     10
+    ],
+    [
+     {
+      "crn": 2,
+      "lph": 40,
+      "wkh": 18
+     },
+     6
+    ],
+    [
+     {
+      "crn": 7,
+      "lph": 6,
+      "wkh": 4
+     },
+     7
+    ],
+    [
+     {
+      "crn": 12,
+      "lph": 31,
+      "wkh": 8
+     },
+     12
+    ],
+    [
+     {
+      "crn": 11,
+      "lph": 20,
+      "wkh": 6
+     },
+     11
+    ]
+   ],
+   "task_id": "t-41",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "crn"
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "wkh"
+      ],
+      [
+       "sub",
+       [
+        "mul",
+        [
+         "const",
+         2
+        ],
+        [
+         "add",
+         [
+          "const",
+          2
+         ],
+         [
+          "const",
+          2
+         ]
+        ]
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "harbour",
+   "family": "h7_crane_total",
+   "formula": "lifts plus 2 safety checks per crane-hour = crn wkh (lph + 2)",
+   "inputs": [
+    "crn",
+    "lph",
+    "wkh"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "crn": 8,
+      "lph": 17,
+      "wkh": 11
+     },
+     1672
+    ],
+    [
+     {
+      "crn": 5,
+      "lph": 38,
+      "wkh": 19
+     },
+     3800
+    ],
+    [
+     {
+      "crn": 1,
+      "lph": 14,
+      "wkh": 5
+     },
+     80
+    ],
+    [
+     {
+      "crn": 9,
+      "lph": 21,
+      "wkh": 21
+     },
+     4347
+    ],
+    [
+     {
+      "crn": 6,
+      "lph": 12,
+      "wkh": 1
+     },
+     84
+    ],
+    [
+     {
+      "crn": 12,
+      "lph": 26,
+      "wkh": 10
+     },
+     3360
+    ],
+    [
+     {
+      "crn": 1,
+      "lph": 24,
+      "wkh": 16
+     },
+     416
+    ],
+    [
+     {
+      "crn": 1,
+      "lph": 8,
+      "wkh": 21
+     },
+     210
+    ],
+    [
+     {
+      "crn": 12,
+      "lph": 33,
+      "wkh": 12
+     },
+     5040
+    ],
+    [
+     {
+      "crn": 9,
+      "lph": 24,
+      "wkh": 6
+     },
+     1404
+    ],
+    [
+     {
+      "crn": 9,
+      "lph": 31,
+      "wkh": 7
+     },
+     2079
+    ]
+   ],
+   "task_id": "t-42",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "crn"
+     ],
+     [
+      "var",
+      "wkh"
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "lph"
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "harbour",
+   "family": "h7_quay_lane",
+   "formula": "quay less a 2-unit lane round it = (dkw - 4)(dkl - 4)",
+   "inputs": [
+    "dkw",
+    "dkl"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "dkl": 54,
+      "dkw": 8
+     },
+     200
+    ],
+    [
+     {
+      "dkl": 39,
+      "dkw": 16
+     },
+     420
+    ],
+    [
+     {
+      "dkl": 43,
+      "dkw": 29
+     },
+     975
+    ],
+    [
+     {
+      "dkl": 77,
+      "dkw": 17
+     },
+     949
+    ],
+    [
+     {
+      "dkl": 42,
+      "dkw": 9
+     },
+     190
+    ],
+    [
+     {
+      "dkl": 35,
+      "dkw": 22
+     },
+     558
+    ],
+    [
+     {
+      "dkl": 58,
+      "dkw": 12
+     },
+     432
+    ],
+    [
+     {
+      "dkl": 57,
+      "dkw": 12
+     },
+     424
+    ],
+    [
+     {
+      "dkl": 86,
+      "dkw": 36
+     },
+     2624
+    ],
+    [
+     {
+      "dkl": 61,
+      "dkw": 13
+     },
+     513
+    ],
+    [
+     {
+      "dkl": 52,
+      "dkw": 50
+     },
+     2208
+    ]
+   ],
+   "task_id": "t-44",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "var",
+      "dkw"
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "dkl"
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "harbour",
+   "family": "h7_bollards",
+   "formula": "bollards every 5 units along both lengths, plus corners = 2 (dkl // 5) + 4",
+   "inputs": [
+    "dkw",
+    "dkl"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "dkl": 72,
+      "dkw": 19
+     },
+     32
+    ],
+    [
+     {
+      "dkl": 65,
+      "dkw": 9
+     },
+     30
+    ],
+    [
+     {
+      "dkl": 37,
+      "dkw": 11
+     },
+     18
+    ],
+    [
+     {
+      "dkl": 42,
+      "dkw": 48
+     },
+     20
+    ],
+    [
+     {
+      "dkl": 64,
+      "dkw": 21
+     },
+     28
+    ],
+    [
+     {
+      "dkl": 60,
+      "dkw": 24
+     },
+     28
+    ],
+    [
+     {
+      "dkl": 80,
+      "dkw": 33
+     },
+     36
+    ],
+    [
+     {
+      "dkl": 8,
+      "dkw": 45
+     },
+     6
+    ],
+    [
+     {
+      "dkl": 24,
+      "dkw": 41
+     },
+     12
+    ],
+    [
+     {
+      "dkl": 28,
+      "dkw": 17
+     },
+     14
+    ],
+    [
+     {
+      "dkl": 9,
+      "dkw": 35
+     },
+     6
+    ]
+   ],
+   "task_id": "t-45",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "div",
+      [
+       "var",
+       "dkl"
+      ],
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ]
+     ]
+    ],
+    [
+     "add",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "harbour",
+   "family": "h7_trucks",
+   "formula": "trucks for those bins = ceil(ceil(crg / upb) / bpk)",
+   "inputs": [
+    "crg",
+    "upb",
+    "bpk"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bpk": 24,
+      "crg": 184,
+      "upb": 45
+     },
+     1
+    ],
+    [
+     {
+      "bpk": 3,
+      "crg": 1105,
+      "upb": 50
+     },
+     8
+    ],
+    [
+     {
+      "bpk": 4,
+      "crg": 3806,
+      "upb": 16
+     },
+     60
+    ],
+    [
+     {
+      "bpk": 8,
+      "crg": 2002,
+      "upb": 24
+     },
+     11
+    ],
+    [
+     {
+      "bpk": 22,
+      "crg": 2760,
+      "upb": 11
+     },
+     12
+    ],
+    [
+     {
+      "bpk": 20,
+      "crg": 4424,
+      "upb": 17
+     },
+     14
+    ],
+    [
+     {
+      "bpk": 6,
+      "crg": 4764,
+      "upb": 50
+     },
+     16
+    ],
+    [
+     {
+      "bpk": 2,
+      "crg": 4699,
+      "upb": 42
+     },
+     56
+    ],
+    [
+     {
+      "bpk": 3,
+      "crg": 3114,
+      "upb": 29
+     },
+     36
+    ],
+    [
+     {
+      "bpk": 29,
+      "crg": 2505,
+      "upb": 33
+     },
+     3
+    ],
+    [
+     {
+      "bpk": 3,
+      "crg": 3372,
+      "upb": 28
+     },
+     41
+    ]
+   ],
+   "task_id": "t-48",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "crg"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "upb"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "upb"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "bpk"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "bpk"
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "int",
+ "schema": "nomad.transfer7-suite.v1",
+ "seed": 20261213,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 19,
+  "families": 51,
+  "hard": 31,
+  "lookup_dropped": [
+   {
+    "easy_twin": [],
+    "family": "p7_waste",
+    "memory_lookup": [
+     "mod(sub(ups, lfs), ups)",
+     "sub(mod(sub(ups, lfs), ups), div(2, lfs))"
+    ]
+   }
+  ]
+ },
+ "trained_on_by_any_arm": false
+}
