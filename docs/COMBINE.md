@@ -107,8 +107,9 @@ Suite sha `d76ef187...57d8`, 16 hard (cold certifies none).
 | 6 LOFO, tests | **pass**: LOFO 5,883 worst 1.0x; full suite passed before the pre-registration push |
 
 The one new certification: `cs_jar_left` (leftover of a volume) in 323 evaluations, composed as
-`mod(volume, d)`; `cs_cup_left` (same composite, the volume concept stored in a different form)
-stayed uncertified (1,143 evaluations in all vs 8,328 off). The five `port:anchor` certifications are the same in every
+`mod(volume, d)`; `cs_cup_left` (same composite) stayed uncertified: COMBINE returned a wrong
+composition that fit the public rows (`mod(v, boxes_needed(..))`), which then failed the final rows
+(1,143 evaluations in all vs 8,328 off). The five `port:anchor` certifications are the same in every
 field arm (PORT finds them without words); COMBINE's miss adds 768 evaluations to each.
 
 Honest reading (diagnosis after the single measurement; nothing re-run on the sealed suite). Dev
