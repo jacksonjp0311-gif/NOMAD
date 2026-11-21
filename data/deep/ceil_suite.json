@@ -1,0 +1,3662 @@
+{
+ "budget": 10000,
+ "domains": [
+  "museum",
+  "marina",
+  "brewery"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 8012,
+   "cold_reason": null,
+   "domain": "marina",
+   "family": "cl_h_docks",
+   "formula": "docks, one per 2 boats, plus le pilots = ceil(ld / 2) + le",
+   "inputs": [
+    "ld",
+    "le",
+    "lf"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "ld": 6,
+      "le": 1,
+      "lf": 5
+     },
+     4
+    ],
+    [
+     {
+      "ld": 19,
+      "le": 4,
+      "lf": 8
+     },
+     14
+    ],
+    [
+     {
+      "ld": 13,
+      "le": 5,
+      "lf": 1
+     },
+     12
+    ],
+    [
+     {
+      "ld": 16,
+      "le": 3,
+      "lf": 8
+     },
+     11
+    ],
+    [
+     {
+      "ld": 19,
+      "le": 5,
+      "lf": 4
+     },
+     15
+    ],
+    [
+     {
+      "ld": 8,
+      "le": 3,
+      "lf": 7
+     },
+     7
+    ],
+    [
+     {
+      "ld": 17,
+      "le": 10,
+      "lf": 3
+     },
+     19
+    ],
+    [
+     {
+      "ld": 12,
+      "le": 7,
+      "lf": 3
+     },
+     13
+    ],
+    [
+     {
+      "ld": 14,
+      "le": 3,
+      "lf": 3
+     },
+     10
+    ],
+    [
+     {
+      "ld": 15,
+      "le": 4,
+      "lf": 1
+     },
+     12
+    ],
+    [
+     {
+      "ld": 10,
+      "le": 9,
+      "lf": 3
+     },
+     14
+    ]
+   ],
+   "task_id": "t-15",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "ld"
+      ],
+      [
+       "sub",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "var",
+     "le"
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "museum",
+   "family": "cl_m_guides",
+   "formula": "guides, one per 9 visitors = ceil(la lb / 9)",
+   "inputs": [
+    "la",
+    "lb",
+    "lc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "la": 11,
+      "lb": 12,
+      "lc": 2
+     },
+     15
+    ],
+    [
+     {
+      "la": 12,
+      "lb": 7,
+      "lc": 3
+     },
+     10
+    ],
+    [
+     {
+      "la": 17,
+      "lb": 10,
+      "lc": 9
+     },
+     19
+    ],
+    [
+     {
+      "la": 5,
+      "lb": 6,
+      "lc": 8
+     },
+     4
+    ],
+    [
+     {
+      "la": 2,
+      "lb": 6,
+      "lc": 2
+     },
+     2
+    ],
+    [
+     {
+      "la": 22,
+      "lb": 11,
+      "lc": 6
+     },
+     27
+    ],
+    [
+     {
+      "la": 15,
+      "lb": 7,
+      "lc": 8
+     },
+     12
+    ],
+    [
+     {
+      "la": 2,
+      "lb": 4,
+      "lc": 4
+     },
+     1
+    ],
+    [
+     {
+      "la": 9,
+      "lb": 5,
+      "lc": 3
+     },
+     5
+    ],
+    [
+     {
+      "la": 23,
+      "lb": 11,
+      "lc": 5
+     },
+     29
+    ],
+    [
+     {
+      "la": 10,
+      "lb": 8,
+      "lc": 8
+     },
+     9
+    ]
+   ],
+   "task_id": "t-00",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "la"
+      ],
+      [
+       "var",
+       "lb"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        3
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      3
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "museum",
+   "family": "cl_m_benches",
+   "formula": "benches seating 2, for la groups of lb = ceil(la lb / 2)",
+   "inputs": [
+    "la",
+    "lb",
+    "lc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "la": 6,
+      "lb": 4,
+      "lc": 9
+     },
+     12
+    ],
+    [
+     {
+      "la": 23,
+      "lb": 10,
+      "lc": 4
+     },
+     115
+    ],
+    [
+     {
+      "la": 27,
+      "lb": 8,
+      "lc": 4
+     },
+     108
+    ],
+    [
+     {
+      "la": 19,
+      "lb": 2,
+      "lc": 1
+     },
+     19
+    ],
+    [
+     {
+      "la": 17,
+      "lb": 5,
+      "lc": 6
+     },
+     43
+    ],
+    [
+     {
+      "la": 28,
+      "lb": 5,
+      "lc": 6
+     },
+     70
+    ],
+    [
+     {
+      "la": 24,
+      "lb": 9,
+      "lc": 1
+     },
+     108
+    ],
+    [
+     {
+      "la": 20,
+      "lb": 11,
+      "lc": 8
+     },
+     110
+    ],
+    [
+     {
+      "la": 24,
+      "lb": 4,
+      "lc": 1
+     },
+     48
+    ],
+    [
+     {
+      "la": 17,
+      "lb": 2,
+      "lc": 9
+     },
+     17
+    ],
+    [
+     {
+      "la": 27,
+      "lb": 4,
+      "lc": 3
+     },
+     54
+    ]
+   ],
+   "task_id": "t-01",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "la"
+      ],
+      [
+       "var",
+       "lb"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "museum",
+   "family": "cl_m_booklets",
+   "formula": "booklets, one per 4 visitors = ceil(la lb / 4)",
+   "inputs": [
+    "la",
+    "lb",
+    "lc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "la": 19,
+      "lb": 5,
+      "lc": 5
+     },
+     24
+    ],
+    [
+     {
+      "la": 19,
+      "lb": 10,
+      "lc": 8
+     },
+     48
+    ],
+    [
+     {
+      "la": 29,
+      "lb": 11,
+      "lc": 5
+     },
+     80
+    ],
+    [
+     {
+      "la": 28,
+      "lb": 2,
+      "lc": 2
+     },
+     14
+    ],
+    [
+     {
+      "la": 19,
+      "lb": 6,
+      "lc": 7
+     },
+     29
+    ],
+    [
+     {
+      "la": 7,
+      "lb": 9,
+      "lc": 4
+     },
+     16
+    ],
+    [
+     {
+      "la": 2,
+      "lb": 11,
+      "lc": 7
+     },
+     6
+    ],
+    [
+     {
+      "la": 25,
+      "lb": 5,
+      "lc": 3
+     },
+     32
+    ],
+    [
+     {
+      "la": 10,
+      "lb": 2,
+      "lc": 5
+     },
+     5
+    ],
+    [
+     {
+      "la": 1,
+      "lb": 7,
+      "lc": 7
+     },
+     2
+    ],
+    [
+     {
+      "la": 29,
+      "lb": 7,
+      "lc": 6
+     },
+     51
+    ]
+   ],
+   "task_id": "t-02",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "la"
+      ],
+      [
+       "var",
+       "lb"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "museum",
+   "family": "cl_m_lockers",
+   "formula": "locker rows of 3 for la groups and lb staff = ceil((la + lb) / 3)",
+   "inputs": [
+    "la",
+    "lb",
+    "lc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "la": 19,
+      "lb": 3,
+      "lc": 7
+     },
+     8
+    ],
+    [
+     {
+      "la": 25,
+      "lb": 8,
+      "lc": 2
+     },
+     11
+    ],
+    [
+     {
+      "la": 4,
+      "lb": 4,
+      "lc": 6
+     },
+     3
+    ],
+    [
+     {
+      "la": 23,
+      "lb": 5,
+      "lc": 5
+     },
+     10
+    ],
+    [
+     {
+      "la": 4,
+      "lb": 6,
+      "lc": 6
+     },
+     4
+    ],
+    [
+     {
+      "la": 15,
+      "lb": 2,
+      "lc": 9
+     },
+     6
+    ],
+    [
+     {
+      "la": 12,
+      "lb": 5,
+      "lc": 5
+     },
+     6
+    ],
+    [
+     {
+      "la": 1,
+      "lb": 11,
+      "lc": 7
+     },
+     4
+    ],
+    [
+     {
+      "la": 7,
+      "lb": 1,
+      "lc": 6
+     },
+     3
+    ],
+    [
+     {
+      "la": 26,
+      "lb": 6,
+      "lc": 6
+     },
+     11
+    ],
+    [
+     {
+      "la": 8,
+      "lb": 3,
+      "lc": 1
+     },
+     4
+    ]
+   ],
+   "task_id": "t-03",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "var",
+       "la"
+      ],
+      [
+       "var",
+       "lb"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "const",
+       3
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     3
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "museum",
+   "family": "cl_m_shifts",
+   "formula": "6-hour shifts covering la hours on lc days = ceil(la lc / 6)",
+   "inputs": [
+    "la",
+    "lb",
+    "lc"
+   ],
+   "kind": "time",
+   "rows": [
+    [
+     {
+      "la": 15,
+      "lb": 11,
+      "lc": 4
+     },
+     10
+    ],
+    [
+     {
+      "la": 17,
+      "lb": 5,
+      "lc": 6
+     },
+     17
+    ],
+    [
+     {
+      "la": 18,
+      "lb": 3,
+      "lc": 2
+     },
+     6
+    ],
+    [
+     {
+      "la": 15,
+      "lb": 7,
+      "lc": 4
+     },
+     10
+    ],
+    [
+     {
+      "la": 12,
+      "lb": 3,
+      "lc": 8
+     },
+     16
+    ],
+    [
+     {
+      "la": 27,
+      "lb": 4,
+      "lc": 5
+     },
+     23
+    ],
+    [
+     {
+      "la": 28,
+      "lb": 3,
+      "lc": 6
+     },
+     28
+    ],
+    [
+     {
+      "la": 27,
+      "lb": 1,
+      "lc": 7
+     },
+     32
+    ],
+    [
+     {
+      "la": 10,
+      "lb": 4,
+      "lc": 9
+     },
+     15
+    ],
+    [
+     {
+      "la": 12,
+      "lb": 7,
+      "lc": 6
+     },
+     12
+    ],
+    [
+     {
+      "la": 25,
+      "lb": 1,
+      "lc": 8
+     },
+     34
+    ]
+   ],
+   "task_id": "t-04",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "la"
+      ],
+      [
+       "var",
+       "lc"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "museum",
+   "family": "cl_m_audio",
+   "formula": "audio-guide boxes of 12 = ceil(la lb lc / 12)",
+   "inputs": [
+    "la",
+    "lb",
+    "lc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "la": 6,
+      "lb": 12,
+      "lc": 3
+     },
+     18
+    ],
+    [
+     {
+      "la": 11,
+      "lb": 1,
+      "lc": 6
+     },
+     6
+    ],
+    [
+     {
+      "la": 3,
+      "lb": 7,
+      "lc": 7
+     },
+     13
+    ],
+    [
+     {
+      "la": 6,
+      "lb": 4,
+      "lc": 9
+     },
+     18
+    ],
+    [
+     {
+      "la": 5,
+      "lb": 5,
+      "lc": 8
+     },
+     17
+    ],
+    [
+     {
+      "la": 22,
+      "lb": 12,
+      "lc": 2
+     },
+     44
+    ],
+    [
+     {
+      "la": 22,
+      "lb": 9,
+      "lc": 1
+     },
+     17
+    ],
+    [
+     {
+      "la": 14,
+      "lb": 1,
+      "lc": 7
+     },
+     9
+    ],
+    [
+     {
+      "la": 23,
+      "lb": 2,
+      "lc": 9
+     },
+     35
+    ],
+    [
+     {
+      "la": 5,
+      "lb": 10,
+      "lc": 8
+     },
+     34
+    ],
+    [
+     {
+      "la": 26,
+      "lb": 12,
+      "lc": 4
+     },
+     104
+    ]
+   ],
+   "task_id": "t-05",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "la"
+       ],
+       [
+        "var",
+        "lb"
+       ]
+      ],
+      [
+       "var",
+       "lc"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "mul",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         3
+        ]
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "museum",
+   "family": "cl_m_badges",
+   "formula": "badge sheets of 4 per day for la groups = lc ceil(la / 4)",
+   "inputs": [
+    "la",
+    "lb",
+    "lc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "la": 17,
+      "lb": 7,
+      "lc": 2
+     },
+     10
+    ],
+    [
+     {
+      "la": 16,
+      "lb": 9,
+      "lc": 2
+     },
+     8
+    ],
+    [
+     {
+      "la": 8,
+      "lb": 6,
+      "lc": 1
+     },
+     2
+    ],
+    [
+     {
+      "la": 28,
+      "lb": 12,
+      "lc": 3
+     },
+     21
+    ],
+    [
+     {
+      "la": 5,
+      "lb": 6,
+      "lc": 8
+     },
+     16
+    ],
+    [
+     {
+      "la": 26,
+      "lb": 6,
+      "lc": 6
+     },
+     42
+    ],
+    [
+     {
+      "la": 12,
+      "lb": 10,
+      "lc": 6
+     },
+     18
+    ],
+    [
+     {
+      "la": 18,
+      "lb": 12,
+      "lc": 9
+     },
+     45
+    ],
+    [
+     {
+      "la": 19,
+      "lb": 12,
+      "lc": 7
+     },
+     35
+    ],
+    [
+     {
+      "la": 1,
+      "lb": 7,
+      "lc": 4
+     },
+     4
+    ],
+    [
+     {
+      "la": 10,
+      "lb": 2,
+      "lc": 4
+     },
+     12
+    ]
+   ],
+   "task_id": "t-06",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "lc"
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "la"
+      ],
+      [
+       "sub",
+       [
+        "mul",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         2
+        ]
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "museum",
+   "family": "cl_m_weeks",
+   "formula": "weeks started over la lc visit-days = ceil(la lc / 7)",
+   "inputs": [
+    "la",
+    "lb",
+    "lc"
+   ],
+   "kind": "time",
+   "rows": [
+    [
+     {
+      "la": 20,
+      "lb": 3,
+      "lc": 4
+     },
+     12
+    ],
+    [
+     {
+      "la": 6,
+      "lb": 10,
+      "lc": 4
+     },
+     4
+    ],
+    [
+     {
+      "la": 8,
+      "lb": 2,
+      "lc": 5
+     },
+     6
+    ],
+    [
+     {
+      "la": 12,
+      "lb": 5,
+      "lc": 1
+     },
+     2
+    ],
+    [
+     {
+      "la": 24,
+      "lb": 6,
+      "lc": 6
+     },
+     21
+    ],
+    [
+     {
+      "la": 28,
+      "lb": 4,
+      "lc": 9
+     },
+     36
+    ],
+    [
+     {
+      "la": 6,
+      "lb": 1,
+      "lc": 1
+     },
+     1
+    ],
+    [
+     {
+      "la": 14,
+      "lb": 5,
+      "lc": 2
+     },
+     4
+    ],
+    [
+     {
+      "la": 5,
+      "lb": 4,
+      "lc": 4
+     },
+     3
+    ],
+    [
+     {
+      "la": 15,
+      "lb": 8,
+      "lc": 9
+     },
+     20
+    ],
+    [
+     {
+      "la": 27,
+      "lb": 11,
+      "lc": 8
+     },
+     31
+    ]
+   ],
+   "task_id": "t-07",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "la"
+      ],
+      [
+       "var",
+       "lc"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "add",
+       [
+        "add",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         2
+        ]
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "add",
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "marina",
+   "family": "cl_h_rafts",
+   "formula": "life rafts for 6, ld boats of le crew = ceil(ld le / 6)",
+   "inputs": [
+    "ld",
+    "le",
+    "lf"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "ld": 16,
+      "le": 3,
+      "lf": 2
+     },
+     8
+    ],
+    [
+     {
+      "ld": 11,
+      "le": 7,
+      "lf": 2
+     },
+     13
+    ],
+    [
+     {
+      "ld": 10,
+      "le": 10,
+      "lf": 3
+     },
+     17
+    ],
+    [
+     {
+      "ld": 18,
+      "le": 10,
+      "lf": 6
+     },
+     30
+    ],
+    [
+     {
+      "ld": 14,
+      "le": 8,
+      "lf": 8
+     },
+     19
+    ],
+    [
+     {
+      "ld": 20,
+      "le": 8,
+      "lf": 1
+     },
+     27
+    ],
+    [
+     {
+      "ld": 18,
+      "le": 9,
+      "lf": 5
+     },
+     27
+    ],
+    [
+     {
+      "ld": 10,
+      "le": 3,
+      "lf": 1
+     },
+     5
+    ],
+    [
+     {
+      "ld": 12,
+      "le": 7,
+      "lf": 3
+     },
+     14
+    ],
+    [
+     {
+      "ld": 9,
+      "le": 1,
+      "lf": 6
+     },
+     2
+    ],
+    [
+     {
+      "ld": 7,
+      "le": 9,
+      "lf": 4
+     },
+     11
+    ]
+   ],
+   "task_id": "t-08",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "ld"
+      ],
+      [
+       "var",
+       "le"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "marina",
+   "family": "cl_h_moorings",
+   "formula": "mooring slots of 3 trips = ceil(ld lf / 3)",
+   "inputs": [
+    "ld",
+    "le",
+    "lf"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "ld": 11,
+      "le": 2,
+      "lf": 5
+     },
+     19
+    ],
+    [
+     {
+      "ld": 10,
+      "le": 6,
+      "lf": 2
+     },
+     7
+    ],
+    [
+     {
+      "ld": 3,
+      "le": 8,
+      "lf": 6
+     },
+     6
+    ],
+    [
+     {
+      "ld": 7,
+      "le": 8,
+      "lf": 7
+     },
+     17
+    ],
+    [
+     {
+      "ld": 7,
+      "le": 2,
+      "lf": 4
+     },
+     10
+    ],
+    [
+     {
+      "ld": 5,
+      "le": 1,
+      "lf": 8
+     },
+     14
+    ],
+    [
+     {
+      "ld": 19,
+      "le": 2,
+      "lf": 1
+     },
+     7
+    ],
+    [
+     {
+      "ld": 10,
+      "le": 5,
+      "lf": 3
+     },
+     10
+    ],
+    [
+     {
+      "ld": 4,
+      "le": 3,
+      "lf": 6
+     },
+     8
+    ],
+    [
+     {
+      "ld": 18,
+      "le": 5,
+      "lf": 7
+     },
+     42
+    ],
+    [
+     {
+      "ld": 11,
+      "le": 6,
+      "lf": 8
+     },
+     30
+    ]
+   ],
+   "task_id": "t-09",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "ld"
+      ],
+      [
+       "var",
+       "lf"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "const",
+       3
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     3
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "marina",
+   "family": "cl_h_lifeboats",
+   "formula": "lifeboats for 4 = ceil(ld le / 4)",
+   "inputs": [
+    "ld",
+    "le",
+    "lf"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "ld": 18,
+      "le": 3,
+      "lf": 6
+     },
+     14
+    ],
+    [
+     {
+      "ld": 7,
+      "le": 10,
+      "lf": 8
+     },
+     18
+    ],
+    [
+     {
+      "ld": 16,
+      "le": 8,
+      "lf": 7
+     },
+     32
+    ],
+    [
+     {
+      "ld": 13,
+      "le": 9,
+      "lf": 4
+     },
+     30
+    ],
+    [
+     {
+      "ld": 20,
+      "le": 1,
+      "lf": 4
+     },
+     5
+    ],
+    [
+     {
+      "ld": 1,
+      "le": 2,
+      "lf": 2
+     },
+     1
+    ],
+    [
+     {
+      "ld": 7,
+      "le": 8,
+      "lf": 6
+     },
+     14
+    ],
+    [
+     {
+      "ld": 16,
+      "le": 4,
+      "lf": 4
+     },
+     16
+    ],
+    [
+     {
+      "ld": 9,
+      "le": 1,
+      "lf": 1
+     },
+     3
+    ],
+    [
+     {
+      "ld": 17,
+      "le": 2,
+      "lf": 2
+     },
+     9
+    ],
+    [
+     {
+      "ld": 12,
+      "le": 5,
+      "lf": 2
+     },
+     15
+    ]
+   ],
+   "task_id": "t-10",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "ld"
+      ],
+      [
+       "var",
+       "le"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "marina",
+   "family": "cl_h_fuel",
+   "formula": "fuel drums, one per 9 crew-trips = ceil(ld le lf / 9)",
+   "inputs": [
+    "ld",
+    "le",
+    "lf"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "ld": 11,
+      "le": 6,
+      "lf": 4
+     },
+     30
+    ],
+    [
+     {
+      "ld": 12,
+      "le": 8,
+      "lf": 4
+     },
+     43
+    ],
+    [
+     {
+      "ld": 10,
+      "le": 8,
+      "lf": 2
+     },
+     18
+    ],
+    [
+     {
+      "ld": 1,
+      "le": 8,
+      "lf": 8
+     },
+     8
+    ],
+    [
+     {
+      "ld": 10,
+      "le": 7,
+      "lf": 2
+     },
+     16
+    ],
+    [
+     {
+      "ld": 17,
+      "le": 10,
+      "lf": 6
+     },
+     114
+    ],
+    [
+     {
+      "ld": 7,
+      "le": 7,
+      "lf": 3
+     },
+     17
+    ],
+    [
+     {
+      "ld": 13,
+      "le": 5,
+      "lf": 1
+     },
+     8
+    ],
+    [
+     {
+      "ld": 18,
+      "le": 3,
+      "lf": 8
+     },
+     48
+    ],
+    [
+     {
+      "ld": 2,
+      "le": 5,
+      "lf": 1
+     },
+     2
+    ],
+    [
+     {
+      "ld": 14,
+      "le": 7,
+      "lf": 4
+     },
+     44
+    ]
+   ],
+   "task_id": "t-11",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "ld"
+       ],
+       [
+        "var",
+        "le"
+       ]
+      ],
+      [
+       "var",
+       "lf"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        3
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      3
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "marina",
+   "family": "cl_h_ropes",
+   "formula": "rope pairs for ld boats and le spares = ceil((ld + le) / 2)",
+   "inputs": [
+    "ld",
+    "le",
+    "lf"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "ld": 1,
+      "le": 8,
+      "lf": 1
+     },
+     5
+    ],
+    [
+     {
+      "ld": 6,
+      "le": 2,
+      "lf": 3
+     },
+     4
+    ],
+    [
+     {
+      "ld": 8,
+      "le": 4,
+      "lf": 4
+     },
+     6
+    ],
+    [
+     {
+      "ld": 8,
+      "le": 7,
+      "lf": 6
+     },
+     8
+    ],
+    [
+     {
+      "ld": 7,
+      "le": 10,
+      "lf": 6
+     },
+     9
+    ],
+    [
+     {
+      "ld": 14,
+      "le": 1,
+      "lf": 5
+     },
+     8
+    ],
+    [
+     {
+      "ld": 17,
+      "le": 5,
+      "lf": 8
+     },
+     11
+    ],
+    [
+     {
+      "ld": 4,
+      "le": 9,
+      "lf": 8
+     },
+     7
+    ],
+    [
+     {
+      "ld": 3,
+      "le": 3,
+      "lf": 2
+     },
+     3
+    ],
+    [
+     {
+      "ld": 4,
+      "le": 4,
+      "lf": 7
+     },
+     4
+    ],
+    [
+     {
+      "ld": 10,
+      "le": 10,
+      "lf": 8
+     },
+     10
+    ]
+   ],
+   "task_id": "t-12",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "var",
+       "ld"
+      ],
+      [
+       "var",
+       "le"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "marina",
+   "family": "cl_h_tides",
+   "formula": "tide windows of 5 boat-trips = ceil(ld lf / 5)",
+   "inputs": [
+    "ld",
+    "le",
+    "lf"
+   ],
+   "kind": "time",
+   "rows": [
+    [
+     {
+      "ld": 3,
+      "le": 2,
+      "lf": 3
+     },
+     2
+    ],
+    [
+     {
+      "ld": 15,
+      "le": 3,
+      "lf": 3
+     },
+     9
+    ],
+    [
+     {
+      "ld": 2,
+      "le": 3,
+      "lf": 2
+     },
+     1
+    ],
+    [
+     {
+      "ld": 2,
+      "le": 5,
+      "lf": 1
+     },
+     1
+    ],
+    [
+     {
+      "ld": 2,
+      "le": 3,
+      "lf": 5
+     },
+     2
+    ],
+    [
+     {
+      "ld": 12,
+      "le": 10,
+      "lf": 2
+     },
+     5
+    ],
+    [
+     {
+      "ld": 14,
+      "le": 6,
+      "lf": 5
+     },
+     14
+    ],
+    [
+     {
+      "ld": 5,
+      "le": 8,
+      "lf": 3
+     },
+     3
+    ],
+    [
+     {
+      "ld": 16,
+      "le": 5,
+      "lf": 8
+     },
+     26
+    ],
+    [
+     {
+      "ld": 15,
+      "le": 10,
+      "lf": 6
+     },
+     18
+    ],
+    [
+     {
+      "ld": 1,
+      "le": 3,
+      "lf": 6
+     },
+     2
+    ]
+   ],
+   "task_id": "t-13",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "ld"
+      ],
+      [
+       "var",
+       "lf"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "add",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "marina",
+   "family": "cl_h_crates",
+   "formula": "crates of 8 crew-trip rations = ceil(ld le lf / 8)",
+   "inputs": [
+    "ld",
+    "le",
+    "lf"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "ld": 11,
+      "le": 2,
+      "lf": 5
+     },
+     14
+    ],
+    [
+     {
+      "ld": 6,
+      "le": 6,
+      "lf": 1
+     },
+     5
+    ],
+    [
+     {
+      "ld": 2,
+      "le": 1,
+      "lf": 8
+     },
+     2
+    ],
+    [
+     {
+      "ld": 19,
+      "le": 3,
+      "lf": 4
+     },
+     29
+    ],
+    [
+     {
+      "ld": 19,
+      "le": 5,
+      "lf": 7
+     },
+     84
+    ],
+    [
+     {
+      "ld": 18,
+      "le": 9,
+      "lf": 1
+     },
+     21
+    ],
+    [
+     {
+      "ld": 20,
+      "le": 5,
+      "lf": 7
+     },
+     88
+    ],
+    [
+     {
+      "ld": 9,
+      "le": 9,
+      "lf": 5
+     },
+     51
+    ],
+    [
+     {
+      "ld": 4,
+      "le": 10,
+      "lf": 2
+     },
+     10
+    ],
+    [
+     {
+      "ld": 18,
+      "le": 10,
+      "lf": 7
+     },
+     158
+    ],
+    [
+     {
+      "ld": 14,
+      "le": 6,
+      "lf": 5
+     },
+     53
+    ]
+   ],
+   "task_id": "t-14",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "ld"
+       ],
+       [
+        "var",
+        "le"
+       ]
+      ],
+      [
+       "var",
+       "lf"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "mul",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         2
+        ]
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "cl_b_cases",
+   "formula": "cases of 6 for lg batches of lh = ceil(lg lh / 6)",
+   "inputs": [
+    "lg",
+    "lh",
+    "li"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "lg": 10,
+      "lh": 5,
+      "li": 7
+     },
+     9
+    ],
+    [
+     {
+      "lg": 6,
+      "lh": 10,
+      "li": 5
+     },
+     10
+    ],
+    [
+     {
+      "lg": 19,
+      "lh": 1,
+      "li": 9
+     },
+     4
+    ],
+    [
+     {
+      "lg": 19,
+      "lh": 8,
+      "li": 3
+     },
+     26
+    ],
+    [
+     {
+      "lg": 15,
+      "lh": 12,
+      "li": 7
+     },
+     30
+    ],
+    [
+     {
+      "lg": 6,
+      "lh": 3,
+      "li": 1
+     },
+     3
+    ],
+    [
+     {
+      "lg": 24,
+      "lh": 1,
+      "li": 2
+     },
+     4
+    ],
+    [
+     {
+      "lg": 23,
+      "lh": 9,
+      "li": 2
+     },
+     35
+    ],
+    [
+     {
+      "lg": 21,
+      "lh": 5,
+      "li": 6
+     },
+     18
+    ],
+    [
+     {
+      "lg": 3,
+      "lh": 12,
+      "li": 4
+     },
+     6
+    ],
+    [
+     {
+      "lg": 9,
+      "lh": 3,
+      "li": 7
+     },
+     5
+    ]
+   ],
+   "task_id": "t-16",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "lg"
+      ],
+      [
+       "var",
+       "lh"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "cl_b_kegs",
+   "formula": "kegs of 3 = ceil(lg lh / 3)",
+   "inputs": [
+    "lg",
+    "lh",
+    "li"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "lg": 12,
+      "lh": 10,
+      "li": 7
+     },
+     40
+    ],
+    [
+     {
+      "lg": 18,
+      "lh": 10,
+      "li": 1
+     },
+     60
+    ],
+    [
+     {
+      "lg": 2,
+      "lh": 3,
+      "li": 4
+     },
+     2
+    ],
+    [
+     {
+      "lg": 19,
+      "lh": 10,
+      "li": 1
+     },
+     64
+    ],
+    [
+     {
+      "lg": 21,
+      "lh": 1,
+      "li": 5
+     },
+     7
+    ],
+    [
+     {
+      "lg": 12,
+      "lh": 6,
+      "li": 4
+     },
+     24
+    ],
+    [
+     {
+      "lg": 24,
+      "lh": 5,
+      "li": 2
+     },
+     40
+    ],
+    [
+     {
+      "lg": 3,
+      "lh": 6,
+      "li": 10
+     },
+     6
+    ],
+    [
+     {
+      "lg": 15,
+      "lh": 9,
+      "li": 4
+     },
+     45
+    ],
+    [
+     {
+      "lg": 6,
+      "lh": 9,
+      "li": 1
+     },
+     18
+    ],
+    [
+     {
+      "lg": 24,
+      "lh": 3,
+      "li": 6
+     },
+     24
+    ]
+   ],
+   "task_id": "t-17",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "lg"
+      ],
+      [
+       "var",
+       "lh"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "const",
+       3
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     3
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "cl_b_pallets",
+   "formula": "pallets of 4 over li days = ceil(lg lh li / 4)",
+   "inputs": [
+    "lg",
+    "lh",
+    "li"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "lg": 13,
+      "lh": 11,
+      "li": 2
+     },
+     72
+    ],
+    [
+     {
+      "lg": 24,
+      "lh": 12,
+      "li": 9
+     },
+     648
+    ],
+    [
+     {
+      "lg": 2,
+      "lh": 6,
+      "li": 10
+     },
+     30
+    ],
+    [
+     {
+      "lg": 22,
+      "lh": 11,
+      "li": 6
+     },
+     363
+    ],
+    [
+     {
+      "lg": 7,
+      "lh": 8,
+      "li": 1
+     },
+     14
+    ],
+    [
+     {
+      "lg": 20,
+      "lh": 7,
+      "li": 4
+     },
+     140
+    ],
+    [
+     {
+      "lg": 18,
+      "lh": 7,
+      "li": 5
+     },
+     158
+    ],
+    [
+     {
+      "lg": 8,
+      "lh": 5,
+      "li": 8
+     },
+     80
+    ],
+    [
+     {
+      "lg": 24,
+      "lh": 12,
+      "li": 7
+     },
+     504
+    ],
+    [
+     {
+      "lg": 13,
+      "lh": 9,
+      "li": 7
+     },
+     205
+    ],
+    [
+     {
+      "lg": 3,
+      "lh": 7,
+      "li": 6
+     },
+     32
+    ]
+   ],
+   "task_id": "t-18",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "lg"
+       ],
+       [
+        "var",
+        "lh"
+       ]
+      ],
+      [
+       "var",
+       "li"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "cl_b_tanks",
+   "formula": "tanks of 4 for lg batches and li spare days = ceil((lg + li) / 4)",
+   "inputs": [
+    "lg",
+    "lh",
+    "li"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "lg": 16,
+      "lh": 12,
+      "li": 8
+     },
+     6
+    ],
+    [
+     {
+      "lg": 13,
+      "lh": 12,
+      "li": 3
+     },
+     4
+    ],
+    [
+     {
+      "lg": 7,
+      "lh": 5,
+      "li": 3
+     },
+     3
+    ],
+    [
+     {
+      "lg": 25,
+      "lh": 8,
+      "li": 2
+     },
+     7
+    ],
+    [
+     {
+      "lg": 10,
+      "lh": 11,
+      "li": 3
+     },
+     4
+    ],
+    [
+     {
+      "lg": 7,
+      "lh": 7,
+      "li": 8
+     },
+     4
+    ],
+    [
+     {
+      "lg": 8,
+      "lh": 1,
+      "li": 3
+     },
+     3
+    ],
+    [
+     {
+      "lg": 16,
+      "lh": 12,
+      "li": 2
+     },
+     5
+    ],
+    [
+     {
+      "lg": 4,
+      "lh": 10,
+      "li": 9
+     },
+     4
+    ],
+    [
+     {
+      "lg": 4,
+      "lh": 5,
+      "li": 6
+     },
+     3
+    ],
+    [
+     {
+      "lg": 5,
+      "lh": 9,
+      "li": 1
+     },
+     2
+    ]
+   ],
+   "task_id": "t-19",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "var",
+       "lg"
+      ],
+      [
+       "var",
+       "li"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "cl_b_crews",
+   "formula": "crews of 2 for lg batch-days li = ceil(lg li / 2)",
+   "inputs": [
+    "lg",
+    "lh",
+    "li"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "lg": 5,
+      "lh": 6,
+      "li": 10
+     },
+     25
+    ],
+    [
+     {
+      "lg": 13,
+      "lh": 5,
+      "li": 9
+     },
+     59
+    ],
+    [
+     {
+      "lg": 8,
+      "lh": 8,
+      "li": 2
+     },
+     8
+    ],
+    [
+     {
+      "lg": 19,
+      "lh": 3,
+      "li": 2
+     },
+     19
+    ],
+    [
+     {
+      "lg": 14,
+      "lh": 10,
+      "li": 4
+     },
+     28
+    ],
+    [
+     {
+      "lg": 21,
+      "lh": 2,
+      "li": 2
+     },
+     21
+    ],
+    [
+     {
+      "lg": 22,
+      "lh": 12,
+      "li": 2
+     },
+     22
+    ],
+    [
+     {
+      "lg": 2,
+      "lh": 5,
+      "li": 1
+     },
+     1
+    ],
+    [
+     {
+      "lg": 19,
+      "lh": 3,
+      "li": 10
+     },
+     95
+    ],
+    [
+     {
+      "lg": 8,
+      "lh": 8,
+      "li": 7
+     },
+     28
+    ],
+    [
+     {
+      "lg": 16,
+      "lh": 2,
+      "li": 2
+     },
+     16
+    ]
+   ],
+   "task_id": "t-20",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "lg"
+      ],
+      [
+       "var",
+       "li"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "cl_b_sixpacks",
+   "formula": "six-pack carriers per batch for lg batches = lg ceil(lh / 6)",
+   "inputs": [
+    "lg",
+    "lh",
+    "li"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "lg": 8,
+      "lh": 6,
+      "li": 10
+     },
+     8
+    ],
+    [
+     {
+      "lg": 11,
+      "lh": 8,
+      "li": 9
+     },
+     22
+    ],
+    [
+     {
+      "lg": 2,
+      "lh": 6,
+      "li": 5
+     },
+     2
+    ],
+    [
+     {
+      "lg": 4,
+      "lh": 7,
+      "li": 10
+     },
+     8
+    ],
+    [
+     {
+      "lg": 2,
+      "lh": 10,
+      "li": 7
+     },
+     4
+    ],
+    [
+     {
+      "lg": 9,
+      "lh": 7,
+      "li": 9
+     },
+     18
+    ],
+    [
+     {
+      "lg": 14,
+      "lh": 7,
+      "li": 1
+     },
+     28
+    ],
+    [
+     {
+      "lg": 21,
+      "lh": 5,
+      "li": 2
+     },
+     21
+    ],
+    [
+     {
+      "lg": 7,
+      "lh": 6,
+      "li": 10
+     },
+     7
+    ],
+    [
+     {
+      "lg": 5,
+      "lh": 7,
+      "li": 3
+     },
+     10
+    ],
+    [
+     {
+      "lg": 4,
+      "lh": 3,
+      "li": 6
+     },
+     4
+    ]
+   ],
+   "task_id": "t-21",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "lg"
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "lh"
+      ],
+      [
+       "sub",
+       [
+        "mul",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         3
+        ]
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "cl_b_labels",
+   "formula": "label rolls of 10 = ceil(lg lh / 10)",
+   "inputs": [
+    "lg",
+    "lh",
+    "li"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "lg": 22,
+      "lh": 8,
+      "li": 7
+     },
+     18
+    ],
+    [
+     {
+      "lg": 16,
+      "lh": 8,
+      "li": 3
+     },
+     13
+    ],
+    [
+     {
+      "lg": 2,
+      "lh": 7,
+      "li": 10
+     },
+     2
+    ],
+    [
+     {
+      "lg": 8,
+      "lh": 7,
+      "li": 7
+     },
+     6
+    ],
+    [
+     {
+      "lg": 8,
+      "lh": 1,
+      "li": 5
+     },
+     1
+    ],
+    [
+     {
+      "lg": 7,
+      "lh": 4,
+      "li": 10
+     },
+     3
+    ],
+    [
+     {
+      "lg": 21,
+      "lh": 11,
+      "li": 2
+     },
+     24
+    ],
+    [
+     {
+      "lg": 21,
+      "lh": 1,
+      "li": 3
+     },
+     3
+    ],
+    [
+     {
+      "lg": 13,
+      "lh": 12,
+      "li": 5
+     },
+     16
+    ],
+    [
+     {
+      "lg": 1,
+      "lh": 7,
+      "li": 8
+     },
+     1
+    ],
+    [
+     {
+      "lg": 1,
+      "lh": 3,
+      "li": 1
+     },
+     1
+    ]
+   ],
+   "task_id": "t-22",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "lg"
+      ],
+      [
+       "var",
+       "lh"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "add",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         3
+        ]
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "cl_b_squares",
+   "formula": "3x3 racks for a lg x lg grid of bottles = ceil(lg lg / 9)",
+   "inputs": [
+    "lg",
+    "lh",
+    "li"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "lg": 14,
+      "lh": 1,
+      "li": 4
+     },
+     22
+    ],
+    [
+     {
+      "lg": 2,
+      "lh": 2,
+      "li": 3
+     },
+     1
+    ],
+    [
+     {
+      "lg": 24,
+      "lh": 8,
+      "li": 5
+     },
+     64
+    ],
+    [
+     {
+      "lg": 1,
+      "lh": 3,
+      "li": 8
+     },
+     1
+    ],
+    [
+     {
+      "lg": 9,
+      "lh": 9,
+      "li": 9
+     },
+     9
+    ],
+    [
+     {
+      "lg": 9,
+      "lh": 11,
+      "li": 8
+     },
+     9
+    ],
+    [
+     {
+      "lg": 8,
+      "lh": 5,
+      "li": 8
+     },
+     8
+    ],
+    [
+     {
+      "lg": 21,
+      "lh": 5,
+      "li": 8
+     },
+     49
+    ],
+    [
+     {
+      "lg": 8,
+      "lh": 1,
+      "li": 10
+     },
+     8
+    ],
+    [
+     {
+      "lg": 24,
+      "lh": 12,
+      "li": 2
+     },
+     64
+    ],
+    [
+     {
+      "lg": 22,
+      "lh": 1,
+      "li": 8
+     },
+     54
+    ]
+   ],
+   "task_id": "t-23",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "lg"
+      ],
+      [
+       "var",
+       "lg"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        3
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      3
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "int",
+ "schema": "nomad.ceil-suite.v1",
+ "seed": 20270307,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 1,
+  "families": 24,
+  "hard": 23,
+  "lookup_dropped": []
+ },
+ "trained_on_by_any_arm": false
+}

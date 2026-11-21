@@ -44,6 +44,7 @@ JUDGES = {
     "textpat": ["scripts/textpat_judge.py"],          # TEXT_ABSTRACT sealed suite (this step)
     "roles": ["scripts/roles_judge.py"],               # ROLES sealed suite (ROLES; not re-run by ROLES itself)
     "combine": ["scripts/combine_judge.py"],           # COMBINE sealed suite (COMBINE; not re-run by COMBINE itself)
+    "ceil": ["scripts/ceil_judge.py"],                 # CEIL sealed suite (CEIL; not re-run by CEIL itself)
 }
 
 

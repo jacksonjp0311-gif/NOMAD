@@ -86,6 +86,42 @@ def floor_fit() -> bool:
     return bool(_gene("inv_floor_fit", 0))
 
 
+def ceil_enabled() -> bool:
+    """NOMAD_CEIL (docs/CEIL.md, pre-registered; default OFF): ceiling-division fit in the INVENT
+    phase. A block value v already computed in the phase with ceil(v / k) equal to the goal on
+    every public row (and v / k not exact on every row), k a learned or derived constant, is
+    offered as ``(v + (k - 1)) // k`` (WITNESS-gated, 1 evaluation per offer). An empty field
+    has no constants, so it gains nothing."""
+    return W._flag("NOMAD_CEIL", "off")
+
+
+CEIL_REWIRE = None   # judge-only control (docs/CEIL.md): a seed -> the fit's constants are replaced by
+                     # as many constants drawn (seeded) from 2..12 outside the learned / derived set
+
+
+def ceil_constants(learned: list, consts: list) -> list[tuple[int, list]]:
+    """The ceiling fit's constants: learned scales + derived constants (k >= 2), or, under the
+    rewired control (CEIL_REWIRE), the same number of seeded non-learned constants."""
+    ks = sorted({k: kt for k, kt in list(learned) + list(consts) if k >= 2}.items())
+    if CEIL_REWIRE is None or not ks:
+        return ks
+    import random
+    have = {k for k, _ in ks}
+    pool = [k for k in range(2, 13) if k not in have]
+    rng = random.Random(int(CEIL_REWIRE))
+    pick = sorted(rng.sample(pool, min(len(ks), len(pool))))
+    return [(k, _const_tree(k)) for k in pick]
+
+
+def _const_tree(k: int) -> list:
+    """k >= 2 as a sum of the leaves 2 and 3 (the control's constants are built, not learned)."""
+    parts = [3] * (k // 3) if k % 3 == 0 else [3] * ((k - 2) // 3) + [2] if k % 3 == 2 else [3] * ((k - 4) // 3) + [2, 2]
+    t = ["const", parts[0]]
+    for x in parts[1:]:
+        t = ["add", t, ["const", x]]
+    return t
+
+
 def text_enabled() -> bool:
     """NOMAD_INVENT_TEXT (docs/INVENT_TEXT.md): concat residual anchors and an evidence-gated early
     INVENT phase on string goals. Default on since its sealed judge passed (docs/INVENT_TEXT.md)."""
@@ -832,6 +868,7 @@ class Kit:
     rounds: dict = None  # instance name -> invention round
     floor: bool = False  # floor-division fit by learned / derived constants (genome gene inv_floor_fit)
     floor_consts: list = None   # derived constants for the floor fit only (genome genes)
+    ceil: bool = False   # NOMAD_CEIL: ceiling-division fit by learned / derived constants (docs/CEIL.md)
 
 
 def kit(prior, task, bank: list) -> Kit | None:
@@ -871,4 +908,5 @@ def kit(prior, task, bank: list) -> Kit | None:
             rnd[nm] = x.round
             if len(inst) >= MAX_INSTANCES:
                 break
-    return Kit(ops if PROBE_OPS else {}, consts, inst if INSTANCES else [], rnd, floor, fconsts)
+    return Kit(ops if PROBE_OPS else {}, consts, inst if INSTANCES else [], rnd, floor, fconsts,
+               ceil_enabled() and task.out == "int")

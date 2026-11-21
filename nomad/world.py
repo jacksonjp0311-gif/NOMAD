@@ -2074,6 +2074,22 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     yield evals
             return None
 
+        # NOMAD_CEIL (docs/CEIL.md): ceiling-division fit, the floor fit's twin. A computed block value v
+        # with ceil(v / k) == goal on every public row (not exact on every row: exact division is the
+        # rescaled target's) is offered as (v + (k - 1)) // k; the test is a lookup on a value already
+        # computed, only the WITNESS-gated offer counts.
+        ceils = _I.ceil_constants(learned, inv.consts) if getattr(inv, "ceil", False) and task.out == "int" else []
+
+        def ceil_fit(t, v, rnd):
+            for k, kt in ceils:
+                if all(type(x) is int for x in v) and not all(x % k == 0 for x in v) \
+                        and tuple(-(-x // k) for x in v) == goal_t:
+                    hit = fit(["div", ["add", t, ["sub", kt, ["const", 1]]], kt], f"ceil{k}", rnd)
+                    if hit is not None:
+                        return hit
+                    yield evals
+            return None
+
         # (1) invented blocks over the task's inputs
         ri = []
         for n, t in inv.instances:
@@ -2100,12 +2116,22 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 hit = yield from floor_fit(t, v, inv.rounds.get(n, 1))
                 if hit is not None:
                     return hit
+            if ceils and _key(v) not in tset:
+                hit = yield from ceil_fit(t, v, inv.rounds.get(n, 1))
+                if hit is not None:
+                    return hit
             ri.append((None, n, t, v))
         inst_names = {n for n, _t in inv.instances}
         if floors:
             # floor-division fit on the bank blocks' values (already computed by the probe)
             for z in ranked:
                 hit = yield from floor_fit(z[2], z[3], 0)
+                if hit is not None:
+                    return hit
+        if ceils:
+            # ceiling-division fit on the bank blocks' values (already computed by the probe)
+            for z in ranked:
+                hit = yield from ceil_fit(z[2], z[3], 0)
                 if hit is not None:
                     return hit
         if task.out == "str" and text_invent():
@@ -2184,6 +2210,10 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                                 continue
                             if floors and iop.out == "int":
                                 hit = yield from floor_fit(tree, vals, iop.round)
+                                if hit is not None:
+                                    return hit
+                            if ceils and iop.out == "int":
+                                hit = yield from ceil_fit(tree, vals, iop.round)
                                 if hit is not None:
                                     return hit
                             if k in B or k in istate["seen"]:
