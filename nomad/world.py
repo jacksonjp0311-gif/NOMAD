@@ -941,7 +941,10 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     if route_enabled() and prior.route:
         rkey = route_key(rec if rec is not None else _sense.sense(task))
         rel = {} if prior.route.get(rkey) else None
-    bank = port_bank(prior, task, rkey, rel) if (lib_ok and probe_on and port_enabled()) else []
+    ckey = None
+    if route_cut_enabled() and prior.route and rel is None:
+        ckey = route_key(rec if rec is not None else _sense.sense(task))
+    bank = port_bank(prior, task, rkey, rel, ckey) if (lib_ok and probe_on and port_enabled()) else []
     if not library and not split and aim is None and not bank:
         s = _drive(_search_gen(task, cold_order, {}, max_size, max_eval))
         return _with_sense(_variation_fallback(task, s, mut, max_eval), rec)
@@ -1192,35 +1195,22 @@ def route_sort_key(z: tuple, rel: dict | None):
     return (sc, r, n)
 
 
-def port_bank(prior: "WorldPrior", task: WorldTask, key: str | None = None,
-              rel: dict | None = None) -> list[tuple[str, list]]:
-    """The portable bank: learned blocks and whole certified programs from any
-    input signature, instantiated over this task's inputs by type-preserving
-    renaming of their variables. Most-used first; within a source, the
-    identity renaming first. Only learned memory enters: an empty field has
-    an empty bank. Library references are never in a bank tree."""
+def route_cut_enabled() -> bool:
+    """NOMAD_ROUTE_CUT: when the portable bank is cut at PORT_SCAN, the usage
+    head is kept and the tail is filled in learned-relevance order (docs/ROUTE_CUT.md)."""
+    return _flag("NOMAD_ROUTE_CUT", "off")
+
+
+CUT_HEAD = 350           # ROUTE_CUT: bank instances kept in main's usage order before the learned tail (dev-chosen)
+CUT_MIN_REL = 0.5        # ROUTE_CUT: tail sources need learned relevance above the uniform prior (dev-chosen)
+CUT_EXTRA = 0            # ROUTE_CUT dev probe: keep all PORT_SCAN of main's and add this many learned (0: off)
+
+
+def _port_instances(srcs: list, by_type: dict, seen: set, consts: bool):
+    """Bank instances of ``srcs`` in order: (name, tree, source name)."""
     from itertools import permutations
-    srcs = [(-prior.library_uses.get(n, 0.0), n, t, prior.library_sig.get(n)) for n, t in prior.library.items()]
-    srcs += [(-prior.programs_uses.get(n, 0.0), n, t, prior.programs_sig.get(n)) for n, t in prior.programs.items()]
-    srcs.sort(key=lambda z: (z[0], z[1]))
-    # ROUTE (NOMAD_ROUTE on, evidence for this task's SENSE key): sources in
-    # learned-relevance order before the PORT_SCAN cut (usage breaks ties).
-    srel: dict[str, float] = {}
-    if rel is not None and key and route_enabled() and prior.route.get(key):
-        for _u, n, _t, _s in srcs:
-            r = prior.relevance(key, "lib" if n in prior.library else "prog", n)
-            if r is not None:
-                srel[n] = r
-        srcs.sort(key=lambda z: (-srel.get(z[1], 0.0), z[0], z[1]))
-    by_type: dict[str, list[str]] = {}
-    for nm, ty in task.inputs:
-        by_type.setdefault(ty, []).append(nm)
-    out: list[tuple[str, list]] = []
-    seen: set[str] = set()
-    consts = const_enabled()
     for _u, _n, t, bsig in srcs:
         types = {a: b for a, b in (bsig or [])}
-        rr = srel.get(_n)
         vs = _var_names(t, [])
         if not vs and consts and size(t) >= 3 and not any(x[0] == "lib" for x in subtrees(t)):
             try:
@@ -1230,11 +1220,7 @@ def port_bank(prior: "WorldPrior", task: WorldTask, key: str | None = None,
             k = json.dumps(t)
             if type_of(c) == "int" and c not in INT_CONSTANTS and k not in seen:
                 seen.add(k)
-                out.append(("K" + hashlib.sha256(k.encode()).hexdigest()[:8], t))
-                if rr is not None and rel is not None:
-                    rel[out[-1][0]] = rr
-                if len(out) >= PORT_SCAN:
-                    return out
+                yield ("K" + hashlib.sha256(k.encode()).hexdigest()[:8], t, _n)
             continue
         if not vs or any(v not in types for v in vs) or any(x[0] == "lib" for x in subtrees(t)):
             continue
@@ -1255,11 +1241,75 @@ def port_bank(prior: "WorldPrior", task: WorldTask, key: str | None = None,
             if k in seen:
                 continue
             seen.add(k)
-            out.append(("P" + hashlib.sha256(k.encode()).hexdigest()[:8], inst))
-            if rr is not None and rel is not None:
-                rel[out[-1][0]] = rr
-            if len(out) >= PORT_SCAN:
-                return out
+            yield ("P" + hashlib.sha256(k.encode()).hexdigest()[:8], inst, _n)
+
+
+def port_bank(prior: "WorldPrior", task: WorldTask, key: str | None = None,
+              rel: dict | None = None, cut_key: str | None = None) -> list[tuple[str, list]]:
+    """The portable bank: learned blocks and whole certified programs from any
+    input signature, instantiated over this task's inputs by type-preserving
+    renaming of their variables. Most-used first; within a source, the
+    identity renaming first. Only learned memory enters: an empty field has
+    an empty bank. Library references are never in a bank tree.
+
+    ROUTE_CUT (``cut_key``, NOMAD_ROUTE_CUT on, evidence for the key): only
+    when the bank reaches PORT_SCAN, its first CUT_HEAD instances are main's
+    and the rest of the PORT_SCAN slots go to the remaining sources in
+    learned-relevance order (usage breaks ties)."""
+    srcs = [(-prior.library_uses.get(n, 0.0), n, t, prior.library_sig.get(n)) for n, t in prior.library.items()]
+    srcs += [(-prior.programs_uses.get(n, 0.0), n, t, prior.programs_sig.get(n)) for n, t in prior.programs.items()]
+    srcs.sort(key=lambda z: (z[0], z[1]))
+    # ROUTE (NOMAD_ROUTE on, evidence for this task's SENSE key): sources in
+    # learned-relevance order before the PORT_SCAN cut (usage breaks ties).
+    srel: dict[str, float] = {}
+    if rel is not None and key and route_enabled() and prior.route.get(key):
+        for _u, n, _t, _s in srcs:
+            r = prior.relevance(key, "lib" if n in prior.library else "prog", n)
+            if r is not None:
+                srel[n] = r
+        srcs.sort(key=lambda z: (-srel.get(z[1], 0.0), z[0], z[1]))
+    by_type: dict[str, list[str]] = {}
+    for nm, ty in task.inputs:
+        by_type.setdefault(ty, []).append(nm)
+    out: list[tuple[str, list]] = []
+    seen: set[str] = set()
+    consts = const_enabled()
+    cut = bool(cut_key) and not srel and route_cut_enabled() and bool(prior.route.get(cut_key))
+    keys: list[str] = []
+    for nm, t, src in _port_instances(srcs, by_type, seen, consts):
+        if len(out) >= PORT_SCAN:
+            break           # (cut only) the bank overflows PORT_SCAN
+        out.append((nm, t))
+        keys.append(json.dumps(t))
+        rr = srel.get(src)
+        if rr is not None and rel is not None:
+            rel[nm] = rr
+        if len(out) >= PORT_SCAN and not cut:
+            return out
+    else:
+        return out          # bank within PORT_SCAN: main's bank exactly
+    cap = PORT_SCAN
+    if CUT_EXTRA:
+        cap = PORT_SCAN + CUT_EXTRA
+        seen = set(keys)
+    else:
+        out = out[:CUT_HEAD]
+        seen = set(keys[:CUT_HEAD])
+    crel: dict[str, float] = {}
+    for _u, n, _t, _s in srcs:
+        r = prior.relevance(cut_key, "lib" if n in prior.library else "prog", n)
+        if r is not None:
+            crel[n] = r
+    rest = sorted((z for z in srcs if crel.get(z[1], 0.0) > CUT_MIN_REL),
+                  key=lambda z: (-crel.get(z[1], 0.0), z[0], z[1]))
+    for nm, t, _src in _port_instances(rest, by_type, seen, consts):
+        out.append((nm, t))
+        if len(out) >= cap:
+            return out
+    for nm, t, _src in _port_instances(srcs, by_type, seen, consts):
+        out.append((nm, t))     # slots the learned sources leave: main's usage order
+        if len(out) >= cap:
+            break
     return out
 
 
