@@ -1,4 +1,4 @@
-"""MEANING: words grounded in verified structure (docs/MEANING.md). Switch ``NOMAD_MEANING`` (default off).
+"""MEANING: words grounded in verified structure (docs/MEANING.md). Switch ``NOMAD_MEANING`` (default ON since the sealed judge passed; ``off`` restores the plain search).
 
 A first, testable rung of "understanding": NOMAD links the words a task is
 described with to the certified program that solved it, so a new task
@@ -56,7 +56,7 @@ if then than so as into onto per each every all any some one can will would shou
 
 
 def enabled() -> bool:
-    return os.environ.get("NOMAD_MEANING", "off").strip().lower() not in ("off", "0", "false", "no")
+    return os.environ.get("NOMAD_MEANING", "on").strip().lower() not in ("off", "0", "false", "no")   # default ON since the sealed PASS
 
 
 # ---------------------------------------------------------------- tokens

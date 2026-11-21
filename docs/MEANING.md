@@ -6,7 +6,7 @@ the WITNESS-certified program that solved it, so a new task described in words p
 the right **concept** before any search starts. "Rug area", "tiles on a floor" and "seats
 in a hall" are one idea, rows x columns; the test is whether words learned in one domain
 retrieve that idea in another domain with different nouns, input names and distractor
-quantities. Everything is behind **`NOMAD_MEANING`, default OFF**. No transformers, no
+quantities. Everything is behind **`NOMAD_MEANING`, default ON since the sealed judge below passed** (off switch: `NOMAD_MEANING=off`). No transformers, no
 neural nets, no embeddings: counts, like the rest of the field.
 
 ## What is built

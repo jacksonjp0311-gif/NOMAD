@@ -1,4 +1,4 @@
-"""MEANING (docs/MEANING.md): words grounded in certified concepts; switch NOMAD_MEANING (default off)."""
+"""MEANING (docs/MEANING.md): words grounded in certified concepts; switch NOMAD_MEANING (default on)."""
 from __future__ import annotations
 
 import json
@@ -45,9 +45,11 @@ TRAIN = [e for e in MT.train_entries() if e["concept"] in ("product", "two_areas
 
 
 class MeaningTests(unittest.TestCase):
-    def test_default_off(self):
+    def test_default_on_and_off_switch(self):
         os.environ.pop("NOMAD_MEANING", None)
-        self.assertFalse(M.enabled())
+        self.assertTrue(M.enabled())     # default ON since the sealed PASS (docs/MEANING.md)
+        with _env("off"):
+            self.assertFalse(M.enabled())
 
     def test_tokens_drop_placeholders_numbers_and_stop_words(self):
         t = M.tokens("A hall has {a} rows with 12 seats in each row. How many seats in total?")
