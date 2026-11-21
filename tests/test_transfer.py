@@ -80,3 +80,26 @@ class FrozenTransferSuite(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TransferIsMemory(unittest.TestCase):
+    """The sealed result's mechanism: a math-only field certifies a finance task
+    an empty field cannot, through renamed learned memory (PORT)."""
+
+    def test_math_field_transfers_to_finance(self):
+        import os
+        from nomad.world import WorldPrior, evaluate
+        import variation_probe as VP
+        _, _, hard = TS.load()
+        t = next(x for x in hard if x.family == "fin_amount")
+        p, vs, _ = VP.train(set(TS.MATH_FAMILIES))
+        old = os.environ.pop("NOMAD_PORT", None)
+        try:
+            ev = evaluate(t, prior=p, variation=vs, casesplit=True, max_eval=10000)[0]
+            em = evaluate(t, prior=WorldPrior(), casesplit=True, max_eval=10000)[0]
+        finally:
+            if old is not None:
+                os.environ["NOMAD_PORT"] = old
+        self.assertTrue(ev.certified)
+        self.assertTrue(ev.via.startswith("port:"))
+        self.assertFalse(em.certified)

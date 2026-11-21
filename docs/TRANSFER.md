@@ -98,6 +98,69 @@ couple of principled fixes, each behind an off switch, kept only if it passes
 on dev first, then confirmed once on the sealed suite. Results are recorded
 below whether positive or negative; nothing is re-tuned on the sealed suite.
 
-## Sealed result
+## Sealed result (measured once, 2026-11-21, `python3 scripts/transfer_judge.py`, after `5d729d2`)
 
-(Recorded after the single sealed measurement.)
+Correction to the prose above, not to the suite: the sealed section has
+**14 geometry + 6 finance** tasks (the list above is right; "13 / 7" was a
+miscount). The suite file and sha are exactly as committed in `5d729d2`.
+
+| Arm | Certified /20 | Geometry /14 | Finance /6 | Evaluations | vs empty |
+|---|---|---|---|---|---|
+| cold | 0 | 0 | 0 | 190,918 | |
+| empty (no memory) | 2 | 2 | 0 | 188,241 | |
+| math only | **7** | 2 | 5 | 162,028 (-13.9%) | **+5** |
+| math + science | **11** | 5 | 6 | 147,457 (-21.7%) | **+9** |
+| all 16 WORLD + science (report) | 11 | 5 | 6 | 147,457 | +9 |
+| math + science, PORT off (report) | 2 | 2 | 0 | 188,241 | 0 |
+
+| Criterion | Bar | Result | Met? |
+|---|---|---|---|
+| 1. Transfer, math+science vs empty | >= +3 | **+9** (11 vs 2) | yes |
+| 2. Transfer, math only vs empty (reported, same bar) | >= +3 | **+5** (7 vs 2) | yes |
+| 3. No arm worse than cold | 0 tasks | 0 | yes |
+| 3b. No field arm below empty (count) | | math 7, math_sci 11 >= 2 | yes (one per-task loss, below) |
+| 4. More domains = more transfer? | > 0 | math_sci - math = **+4**; all_sci adds 0 over math_sci | yes |
+| 5. Suites, cold, LOFO, tests | 5,883, 1.0x | 5,883, 1.0x; deep / science / cold untouched | yes |
+
+Decision: **transfer passes.** No fix was needed or tried.
+
+Where it comes from: every one of the 9 extra certifications is
+`port:anchor` or `port:probe`; with PORT off the trained field scores exactly
+the empty field (2, identical evaluations). So the transfer is carried by
+renamed learned memory, not by search. Examples (certified programs):
+
+- math only -> finance: `fin_amount` `(P/C)*(C + r*Y)`, `fin_simple_interest`,
+  `fin_discounted`, `fin_taxed`, `fin_installment` `P/Y + r*(P/C)`. The bank
+  pieces in these programs are small renamed math programs: `div(P, C)`,
+  `div(P, Y)` (the WORLD `div_pair` program `x // y` renamed), `max(C, P)`,
+  `min(r, P)`.
+- math + science -> geometry and finance: the bank adds larger renamed science
+  blocks: `mul(sub(S, K), N)` and `mul(sub(B, T), Z)` (a difference times a
+  quantity, as in impulse `m*(v-u)`), `mul(L, mul(L, H))` (a square times a
+  quantity), `mul(r, div(P, C))`, `add(C, mul(r, Y))`. They give
+  `fin_net_profit` `(S-K)*N - X`, `geo_trap_diff` `(B-T)*Z/2`,
+  `geo_square_pyramid` `L*L*H/3`, `geo_box_lateral` `2WH + 2LH`.
+- Language / coding training adds nothing (all_sci = math_sci): their blocks
+  are str / list typed and cannot be renamed onto int inputs.
+
+Per-task loss: `geo_square_pyramid` is certified by empty (6,940, SENSE lead
+`mul`) and by math+science (6,573), but not by math-only (bank work pushes it
+past the budget), the same kind of loss as `sci_d_uvt` under PORT.
+
+Honest caveats:
+
+- WITNESS certifies programs that are exact on the domain the rows come from,
+  not symbolic identities: `fin_discounted` was certified as
+  `max(C, P) - r*(P/C)` (P >= 100 = C on every row of that range) and
+  `fin_simple_interest` (math-only) as `min(r, P)*(Y*(P/C))` (r <= 20 < P).
+  Both are correct on every row of the stated ranges, final rows included.
+- The transfer is of small blocks (products, halves, percent-of, a difference
+  times a quantity). The 9 unsolved tasks need sums of three products
+  (`geo_box_surface`, `geo_diag3`, `geo_open_box`, `geo_frame`), the constant
+  4 (`geo_box_edges`), or a halving placed after a product that a learned
+  "half of a sum" block cannot provide under integer division
+  (`geo_trap_area`, `geo_tri_prism`, `geo_diagonals`, `geo_tri_count`).
+- Dev replication (uncommitted, other row seeds of the same 34 formulas,
+  measured *after* the sealed run, no tuning): seed 7: empty 3, math 7,
+  math+science 9; seed 11: 3 / 7 / 11; seed 13: 1 / 7 / 10. Pass on all
+  three, math+science > math on all three.
