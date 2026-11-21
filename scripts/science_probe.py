@@ -23,7 +23,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import science_suite as SS  # noqa: E402
 import variation_probe as VP  # noqa: E402
 from nomad import variation as V  # noqa: E402
-from nomad.world import OPSETS, WorldPrior, evaluate  # noqa: E402
+from nomad.world import OPSETS, WorldPrior, evaluate, task_route_key  # noqa: E402
 
 BUDGET = 10000
 
@@ -39,7 +39,8 @@ def train_more(p, vs, tasks, rounds=2):
                 paid.append({"kind": ev.via.split(":", 1)[1], "tree": ev.tree})
             trace = {"family": t.family, "tried": list(ev.variation) + ex["tried"], "paid": paid}
             if ev.certified:
-                p.add_witnessed(ev.tree, r, family=t.family, opset=OPSETS[t.opset], inputs=t.inputs)
+                p.add_witnessed(ev.tree, r, family=t.family, opset=OPSETS[t.opset], inputs=t.inputs,
+                                sense_key=task_route_key(t))
                 p.decay(0.97)
             V.apply_trace(vs, trace, certified_tree=ev.tree if ev.certified else None,
                           library=V.library_trees(p, t.inputs))

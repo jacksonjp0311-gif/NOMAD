@@ -17,7 +17,7 @@ import sys
 
 sys.path.insert(0, ".")
 from nomad import variation as V  # noqa: E402
-from nomad.world import OPSETS, WorldPrior, evaluate, synthesize  # noqa: E402
+from nomad.world import OPSETS, WorldPrior, evaluate, synthesize, task_route_key  # noqa: E402
 from nomad.world_tasks import HELDOUT, all_training  # noqa: E402
 
 
@@ -42,7 +42,8 @@ def train(families=None, rounds=2, with_var=True):
                     paid.append({"kind": ev.via.split(":", 1)[1], "tree": ev.tree})
                 trace = {"family": t.family, "tried": list(ev.variation) + ex["tried"], "paid": paid}
             if ev.certified:
-                p.add_witnessed(ev.tree, r, family=t.family, opset=OPSETS[t.opset], inputs=t.inputs)
+                p.add_witnessed(ev.tree, r, family=t.family, opset=OPSETS[t.opset], inputs=t.inputs,
+                                sense_key=task_route_key(t))
                 p.decay(0.97)
             if with_var:
                 res = V.apply_trace(vs, trace, certified_tree=ev.tree if ev.certified else None,

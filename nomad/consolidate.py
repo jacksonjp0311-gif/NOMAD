@@ -147,10 +147,14 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
             continue
         extra = p.get("extra") or {}
         if extra.get("world") == "typed":
-            from .world import OPSETS
+            from .world import OPSETS, task_route_key
+            from .world_tasks import by_family as _by_family
+            _fam = extra.get("family")
+            _t = _by_family(_fam) if isinstance(_fam, str) else None
             try:
                 wprior.add_witnessed(extra["tree"], receipt, family=extra.get("family"),
-                                     opset=OPSETS[extra["opset"]], inputs=extra["inputs"])
+                                     opset=OPSETS[extra["opset"]], inputs=extra["inputs"],
+                                     sense_key=task_route_key(_t) if _t is not None else None)
             except (ValueError, KeyError, TypeError):
                 dropped["bad_receipt"] += 1
                 continue

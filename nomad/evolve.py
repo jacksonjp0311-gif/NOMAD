@@ -70,7 +70,7 @@ def propose(genes: dict[str, Any], seed: int) -> tuple[dict[str, Any], str]:
 
 def benchmark(genes: dict[str, Any], rounds: int = 2) -> dict[str, Any]:
     """Deterministic offline fitness. Uses frozen training families and probes only."""
-    from .world import OPSETS, WorldPrior, evaluate
+    from .world import OPSETS, WorldPrior, evaluate, task_route_key
     from .world_loop import probe_heldout
     from .world_tasks import all_training
 
@@ -85,7 +85,8 @@ def benchmark(genes: dict[str, Any], rounds: int = 2) -> dict[str, Any]:
                 train_evals += ev.evaluations
                 certified += int(ev.certified)
             if ev.certified and r is not None:
-                field.add_witnessed(ev.tree, r, family=t.family, opset=OPSETS[t.opset], inputs=t.inputs)
+                field.add_witnessed(ev.tree, r, family=t.family, opset=OPSETS[t.opset], inputs=t.inputs,
+                                    sense_key=task_route_key(t))
                 field.decay(float(genes["decay"]))
     probes = probe_heldout(field, write=False)["probes"]
     wins = sum(1 for v in probes.values() if v["field_beats_control"])

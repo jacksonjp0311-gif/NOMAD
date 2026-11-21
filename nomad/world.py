@@ -301,6 +301,45 @@ def make_task(task_id: str, family: str, opset: str, inputs: dict[str, str], out
 PROGRAMS_CAP = 512   # whole certified programs kept (least-used evicted)
 
 
+def route_enabled() -> bool:
+    """NOMAD_ROUTE: rank the portable bank by learned relevance x match (docs/ROUTE.md)."""
+    return _flag("NOMAD_ROUTE", "off")
+
+
+def route_key(rec: dict | None) -> str | None:
+    """The SENSE key ROUTE learns under: I/O feature kind and output shape
+    (domain-free, so a science task and a mathematics task of the same shape
+    share evidence)."""
+    if not rec:
+        return None
+    feats = rec.get("features") or {}
+    return f"{feats.get('feature_kind', rec.get('kind'))}/{rec.get('shape')}"
+
+
+def task_route_key(task: "WorldTask") -> str | None:
+    from . import sense as _sense
+    return route_key(_sense.sense(task))
+
+
+ROUTE_GRAIN = "group"     # "group": memory kind x source SENSE key; "block": each block up to renaming
+
+
+def route_group(kind: str, src: str | None, tree: list | None = None) -> str:
+    if ROUTE_GRAIN == "block" and tree is not None:
+        return "b:" + hashlib.sha256(json.dumps(_canon_vars(tree)).encode()).hexdigest()[:10]
+    return f"{kind}:{src or '?'}"
+
+
+def _canon_vars(tree: list, m: dict | None = None) -> list:
+    """Variables renamed by first occurrence (block identity up to renaming)."""
+    m = {} if m is None else m
+    if tree[0] == "var":
+        return ["var", m.setdefault(tree[1], f"_v{len(m)}")]
+    if tree[0] in ("const", "lib"):
+        return tree
+    return [tree[0]] + [_canon_vars(c, m) for c in tree[1:]]
+
+
 class WorldPrior:
     """Operator preference and library of certified sub-programs.
 
@@ -324,6 +363,16 @@ class WorldPrior:
         self.programs: dict[str, list] = {}
         self.programs_sig: dict[str, list[list[str]]] = {}
         self.programs_uses: dict[str, float] = {}
+        # ROUTE (docs/ROUTE.md): learned routing table. route[task_key][group]
+        # = [certified solutions of a task of that SENSE key that contained a
+        # block from memory group, ones that did not]; a group is the memory
+        # kind ("lib" / "prog") and the SENSE key of the task whose certified
+        # solution put the block into memory (library_src / programs_src).
+        # Updated only from verified receipts (add_witnessed), decays like the
+        # other counts; read only when NOMAD_ROUTE is on.
+        self.route: dict[str, dict[str, list[float]]] = {}
+        self.library_src: dict[str, str] = {}
+        self.programs_src: dict[str, str] = {}
 
     # ---- ordering
     def order(self, opset: Sequence[str], family: str | None = None) -> tuple[str, ...]:
@@ -339,9 +388,12 @@ class WorldPrior:
 
     # ---- learning (only from a verified receipt)
     def add_witnessed(self, tree: list, receipt: WitnessReceipt, *, family: str | None,
-                      opset: Sequence[str], inputs: Sequence[Sequence[str]], harvest: bool = True) -> None:
+                      opset: Sequence[str], inputs: Sequence[Sequence[str]], harvest: bool = True,
+                      sense_key: str | None = None) -> None:
         if not receipt.supported or not receipt.verify_checksum():
             raise ValueError("Cannot learn from an unverified or failed WITNESS receipt")
+        if sense_key:
+            self._route_learn(tree, sense_key)
         used = set(ops_used(tree))
         tables = [self.global_counts]
         if family:
@@ -356,24 +408,57 @@ class WorldPrior:
             pair = self.family_lib.setdefault(family, [0.0, 0.0])
             pair[0 if hit else 1] += 1.0
         if harvest:
-            self._harvest(tree, [list(i) for i in inputs])
-            self._keep_program(tree, [list(i) for i in inputs])
+            self._harvest(tree, [list(i) for i in inputs], sense_key)
+            self._keep_program(tree, [list(i) for i in inputs], sense_key)
         self.witnessed += 1
 
-    def _keep_program(self, tree: list, inputs: list[list[str]]) -> None:
+    def _route_learn(self, tree: list, key: str) -> None:
+        """ROUTE: which memory groups' blocks (up to variable renaming)
+        occur in this certified solution; one Beta update per known group."""
+        canon = {json.dumps(_canon_vars(sub)) for sub in subtrees(tree)}
+        used: set[str] = set()
+        groups: set[str] = set()
+        for kind, mem, src in (("lib", self.library, self.library_src), ("prog", self.programs, self.programs_src)):
+            for n, t in mem.items():
+                g = route_group(kind, src.get(n), t)
+                groups.add(g)
+                if g not in used and json.dumps(_canon_vars(t)) in canon:
+                    used.add(g)
+        if not groups:
+            return
+        table = self.route.setdefault(key, {})
+        for g in groups:
+            pair = table.setdefault(g, [0.0, 0.0])
+            pair[0 if g in used else 1] += 1.0
+
+    def relevance(self, key: str | None, kind: str, name: str) -> float | None:
+        """Learned relevance of a memory entry to a task of SENSE key ``key``
+        (posterior mean of its group's Beta counts); None when the table has
+        no evidence for this key (callers then keep the unrouted order)."""
+        table = self.route.get(key) if key else None
+        if not table:
+            return None
+        src = self.library_src if kind == "lib" else self.programs_src
+        mem = self.library if kind == "lib" else self.programs
+        s, f = table.get(route_group(kind, src.get(name), mem.get(name)), [0.0, 0.0])
+        return (s + 1.0) / (s + f + 2.0)
+
+    def _keep_program(self, tree: list, inputs: list[list[str]], src: str | None = None) -> None:
         """Remember a whole certified program (PORT reuses it on other tasks)."""
         if size(tree) < 3:
             return
         name = "W" + hashlib.sha256(json.dumps(tree).encode()).hexdigest()[:8]
         self.programs.setdefault(name, tree)
         self.programs_sig.setdefault(name, inputs)
+        if src and name not in self.programs_src:
+            self.programs_src[name] = src
         self.programs_uses[name] = self.programs_uses.get(name, 0.0) + 1.0
         if len(self.programs) > PROGRAMS_CAP:
             drop = min(self.programs, key=lambda n: (self.programs_uses.get(n, 0.0), n))
-            for d in (self.programs, self.programs_sig, self.programs_uses):
+            for d in (self.programs, self.programs_sig, self.programs_uses, self.programs_src):
                 d.pop(drop, None)
 
-    def _harvest(self, tree: list, inputs: list[list[str]]) -> None:
+    def _harvest(self, tree: list, inputs: list[list[str]], src: str | None = None) -> None:
         for sub in subtrees(tree):
             if sub is tree or size(sub) < 3:
                 continue
@@ -382,6 +467,8 @@ class WorldPrior:
             self.library.setdefault(name, sub)
             self.library_sig.setdefault(name, inputs)
             self.library_uses[name] = self.library_uses.get(name, 0.0) + 1.0
+            if src and name not in self.library_src:
+                self.library_src[name] = src
 
     def wants_library(self, family: str | None) -> bool:
         """Use the library for unknown families, and for known ones only if it has helped there."""
@@ -408,6 +495,10 @@ class WorldPrior:
             self.library_uses[n] *= gamma
         for n in list(self.programs_uses):
             self.programs_uses[n] *= gamma
+        for table in self.route.values():
+            for pair in table.values():
+                pair[0] *= gamma
+                pair[1] *= gamma
 
     # ---- persistence
     def snapshot(self) -> dict:
@@ -416,7 +507,8 @@ class WorldPrior:
                 "library": self.library, "library_uses": self.library_uses,
                 "library_sig": self.library_sig, "family_lib": self.family_lib,
                 "programs": self.programs, "programs_sig": self.programs_sig,
-                "programs_uses": self.programs_uses}
+                "programs_uses": self.programs_uses,
+                "route": self.route, "library_src": self.library_src, "programs_src": self.programs_src}
 
     @classmethod
     def from_snapshot(cls, snap: dict) -> "WorldPrior":
@@ -432,6 +524,10 @@ class WorldPrior:
         p.programs = dict(snap.get("programs") or {})
         p.programs_sig = dict(snap.get("programs_sig") or {})
         p.programs_uses = {k: float(v) for k, v in (snap.get("programs_uses") or {}).items()}
+        p.route = {k: {g: [float(a), float(b)] for g, (a, b) in t.items()}
+                   for k, t in (snap.get("route") or {}).items()}
+        p.library_src = dict(snap.get("library_src") or {})
+        p.programs_src = dict(snap.get("programs_src") or {})
         return p
 
 
@@ -659,7 +755,12 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     if rec is not None:
         aim = _sense.lead_ops(rec, cold_order) or None
     probe_on = blockprobe_enabled()
-    bank = port_bank(prior, task) if (lib_ok and probe_on and port_enabled()) else []
+    rel: dict | None = None
+    rkey = None
+    if route_enabled() and prior.route:
+        rkey = route_key(rec if rec is not None else _sense.sense(task))
+        rel = {} if prior.route.get(rkey) else None
+    bank = port_bank(prior, task, rkey, rel) if (lib_ok and probe_on and port_enabled()) else []
     if not library and not split and aim is None and not bank:
         s = _drive(_search_gen(task, cold_order, {}, max_size, max_eval))
         return _with_sense(_variation_fallback(task, s, mut, max_eval), rec)
@@ -670,7 +771,7 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
             inv = _invent.kit(prior, task, bank)   # used only by the INVENT phase (main's path unchanged)
     gate = _WitnessGate(task, library) if witness_continue_enabled() else None
     s = _drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split, aim,
-                           probe_on, gate, bank, inv))
+                           probe_on, gate, bank, inv, rel or None))
     return _with_sense(_witness_finish(s, gate), rec)
 
 
@@ -887,7 +988,24 @@ def _var_names(tree: list, out: list) -> list:
     return out
 
 
-def port_bank(prior: "WorldPrior", task: WorldTask) -> list[tuple[str, list]]:
+ROUTE_ATOMS = True       # PORT_K atoms by (eq, relevance, rest of score); dev-chosen
+ROUTE_MODE = "tie"       # how learned relevance combines with block_score (docs/ROUTE.md; dev-chosen)
+
+
+def route_sort_key(z: tuple, rel: dict | None):
+    """Sort key (descending) of a ranked bank entry (score, name, tree, vals).
+    Without routing evidence: block_score then name (main's order)."""
+    sc, n = z[0], z[1]
+    r = rel.get(n, 0.5) if rel else 0.5
+    if ROUTE_MODE == "eqr":
+        return (sc[:1], r, sc[1:], n)
+    if ROUTE_MODE == "mult":
+        return ((sc[0] + 1.0) * r, sc, n)
+    return (sc, r, n)
+
+
+def port_bank(prior: "WorldPrior", task: WorldTask, key: str | None = None,
+              rel: dict | None = None) -> list[tuple[str, list]]:
     """The portable bank: learned blocks and whole certified programs from any
     input signature, instantiated over this task's inputs by type-preserving
     renaming of their variables. Most-used first; within a source, the
@@ -897,6 +1015,15 @@ def port_bank(prior: "WorldPrior", task: WorldTask) -> list[tuple[str, list]]:
     srcs = [(-prior.library_uses.get(n, 0.0), n, t, prior.library_sig.get(n)) for n, t in prior.library.items()]
     srcs += [(-prior.programs_uses.get(n, 0.0), n, t, prior.programs_sig.get(n)) for n, t in prior.programs.items()]
     srcs.sort(key=lambda z: (z[0], z[1]))
+    # ROUTE (NOMAD_ROUTE on, evidence for this task's SENSE key): sources in
+    # learned-relevance order before the PORT_SCAN cut (usage breaks ties).
+    srel: dict[str, float] = {}
+    if rel is not None and key and route_enabled() and prior.route.get(key):
+        for _u, n, _t, _s in srcs:
+            r = prior.relevance(key, "lib" if n in prior.library else "prog", n)
+            if r is not None:
+                srel[n] = r
+        srcs.sort(key=lambda z: (-srel.get(z[1], 0.0), z[0], z[1]))
     by_type: dict[str, list[str]] = {}
     for nm, ty in task.inputs:
         by_type.setdefault(ty, []).append(nm)
@@ -905,6 +1032,7 @@ def port_bank(prior: "WorldPrior", task: WorldTask) -> list[tuple[str, list]]:
     consts = const_enabled()
     for _u, _n, t, bsig in srcs:
         types = {a: b for a, b in (bsig or [])}
+        rr = srel.get(_n)
         vs = _var_names(t, [])
         if not vs and consts and size(t) >= 3 and not any(x[0] == "lib" for x in subtrees(t)):
             try:
@@ -915,6 +1043,8 @@ def port_bank(prior: "WorldPrior", task: WorldTask) -> list[tuple[str, list]]:
             if type_of(c) == "int" and c not in INT_CONSTANTS and k not in seen:
                 seen.add(k)
                 out.append(("K" + hashlib.sha256(k.encode()).hexdigest()[:8], t))
+                if rr is not None and rel is not None:
+                    rel[out[-1][0]] = rr
                 if len(out) >= PORT_SCAN:
                     return out
             continue
@@ -938,6 +1068,8 @@ def port_bank(prior: "WorldPrior", task: WorldTask) -> list[tuple[str, list]]:
                 continue
             seen.add(k)
             out.append(("P" + hashlib.sha256(k.encode()).hexdigest()[:8], inst))
+            if rr is not None and rel is not None:
+                rel[out[-1][0]] = rr
             if len(out) >= PORT_SCAN:
                 return out
     return out
@@ -988,7 +1120,8 @@ def blockprobe_enabled() -> bool:
 def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list],
                 max_size: int, max_eval: int, variation: list[tuple[str, list]] | None = None,
                 split: bool = False, aim: tuple[str, ...] | None = None, blockprobe: bool = False,
-                gate: "_WitnessGate | None" = None, bank: list | None = None, inv=None):
+                gate: "_WitnessGate | None" = None, bank: list | None = None, inv=None,
+                rel: dict | None = None):
     """Staged transfer as one incremental search (a generator, like _search_gen).
 
     Stage 1 is exactly the cold search below ``max_size`` (same order, same
@@ -1110,7 +1243,10 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             if type_of(v[0]) == task.out:
                 table.setdefault(_key(v), t)
             ranked.append((block_score(v, goal, task.out), n, t, v))
-        ranked.sort(key=lambda z: (z[0], z[1]), reverse=True)
+        if rel:
+            ranked.sort(key=lambda z: route_sort_key(z, rel), reverse=True)
+        else:
+            ranked.sort(key=lambda z: (z[0], z[1]), reverse=True)
         if task.out == "int":
             rej0 = len(gate.rejected) if gate is not None else 0
             for sc, _n, t, v in ranked[:PORT_ANCHOR_N]:
@@ -1151,7 +1287,10 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         # then the best-scoring bank blocks
         own = {json.dumps(t) for t in library.values()}
         keep = [z for z in ranked if json.dumps(z[2]) in own]
-        keep += [z for z in ranked if json.dumps(z[2]) not in own][:PORT_K]
+        rest = [z for z in ranked if json.dumps(z[2]) not in own]
+        if rel and ROUTE_ATOMS:
+            rest.sort(key=lambda z: (z[0][:1], rel.get(z[1], 0.5), z[0][1:], z[1]), reverse=True)
+        keep += rest[:PORT_K]
         for _sc, _n, t, v in keep:
             hit = offer(1, t, v, True, P, B)
             if hit is not None:
@@ -1182,7 +1321,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             if any(abs(x) > MAX_INT for x in g2):
                 continue
             rk = sorted(((block_score(z[3], g2, task.out),) + z[1:] for z in ranked),
-                        key=lambda z: (z[0], z[1]), reverse=True)
+                        key=(lambda z: route_sort_key(z, rel)) if rel else (lambda z: (z[0], z[1])), reverse=True)
             hit = yield from anchor1(rk, table, limit, g2, wrap)
             if hit is not None:
                 pinfo["port"] = "scale:" + tag
@@ -1486,7 +1625,10 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             seenv.add(_key(v))
             if all(0 <= x <= g for x, g in zip(v, goal)) and any(x > 0 for x in v):
                 top.append(z)
-        top.sort(key=lambda z: (-z[0][2], z[0][1], z[1]))
+        if rel:
+            top.sort(key=lambda z: (-z[0][2], z[0][1], -rel.get(z[1], 0.0), z[1]))
+        else:
+            top.sort(key=lambda z: (-z[0][2], z[0][1], z[1]))
         top = top[:ANCHOR2_M]
         for i in range(len(top)):
             for j in range(i, len(top)):
