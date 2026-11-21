@@ -6,7 +6,7 @@ Those knobs were frozen in code. SELFEDIT makes them **bounded genome genes** an
 adds a **sandbox** in which NOMAD proposes a tiny change to them, tests it, replays
 what it just did under the change, and advances or rolls back -- at checkpoint
 cadence, never inside a sleep. Everything is behind **`NOMAD_SELFEDIT`, default
-OFF until the sealed judge below passes**. No transformers, no neural weights, no
+OFF** (the sealed judge below failed two criteria, so it stays off). No transformers, no neural weights, no
 LLM; WITNESS certifies every program; the sandbox edits genome *data*, never code;
 the cold control is untouched.
 
@@ -119,3 +119,60 @@ dev 7) the tuned genome changed nothing (byte-identical certified and evaluation
 Expectation for the sealed suite: criterion 1 passes with a smaller margin than dev
 (the sealed constants and shapes differ; 7, 60 and the ceilings are out of reach);
 criteria 2-6 pass.
+
+## Sealed result (measured once, 2026-11-21, code `6690d61`; `results/selfedit/`): **FAIL -> NOMAD_SELFEDIT stays OFF**
+
+Sandbox (K = 24, base seed 20261128): 4 edits accepted -- `inv_floor_fit` 0 -> 1
+(dev 6 -> 8), `inv_max_constants` 2 -> 6 (8 -> 9), `inv_const_depth` 1 -> 2 (9 -> 12),
+`inv_max_constants` 6 -> 8 (12 -> 12, fewer evaluations); `inv_rounds` 2 -> 3 was
+rejected by the keep set. **G\*** = {max_constants 8, const_depth 2, rounds 2,
+floor_fit 1} (`results/selfedit/genome_tuned.json`). data/ fingerprint unchanged.
+
+Sealed suite (sha `a7d061be...56a5`, 23 hard), certified / evaluations:
+
+| arm | certified | evaluations |
+|---|---|---|
+| cold | 0 | 221,117 |
+| empty_default | 2 | 214,273 |
+| empty_tuned | 2 | 214,273 |
+| trained_off | 8 | 189,521 |
+| trained_default | 8 | 189,521 |
+| **trained_tuned** | **17** | **165,279** |
+| math_sci_tuned | 17 | 165,279 |
+
+All 9 gains are floor-division fits by learned constants (`port:invent:...:floor8 /
+floor12 / floor16 / floor18`: phrases of 8, sets of 12, warm-up // 16, relay // 4,
+six-a-side // 6, balls // 12, straps // 12, slots // 8, legs // 36). Out of reach as
+expected: // 7, 60·zu, the three ceilings, // 16 bracket, (zu zv + zw) // 6.
+
+| criterion | result |
+|---|---|
+| 1 self-edit helps (>= +3) | **pass**: +9 certified, 12.8% fewer evaluations |
+| 2 gains vanish with an empty field | **FAIL as written**: `empty_tuned - empty_default` = 0, but `empty_tuned - cold` = 2 > 1 (the empty field's own SENSE / case-split wins on `se_m_beats44`, `se_m_stands`, identical without the self-edit) |
+| 3 no sealed task worse | **pass**: no loss vs trained_default, nothing worse than cold |
+| 4a existing suites, default genome | **pass**: 0 losses, 0 gains on every arm of deep, science, transfer 1-4, secondary, text, bridge (byte-identical) |
+| 4b existing suites, G\* | **FAIL**: 1 loss -- TEXT `t_line_len`, arm `all_sci`, evaluations 3,817 -> 4,089 (still certified); 1 gain (TRANSFER-2 `g2_kite`, `math_sci_grow_off`, 5,900 -> 5,887) |
+| 5 LOFO, tests | **pass**: LOFO 5,883, worst 1.0x; 441 passed, 6 skipped |
+| 6 safety | **pass**: trained_off == trained_default on every task; sandbox left data/ untouched |
+
+Decision (pre-registered rule): two criteria fail, so **`NOMAD_SELFEDIT` stays OFF**.
+Nothing in the live body changes (switch off: invent ignores the genome, the body never
+runs the sandbox, the old evolve organ runs as before).
+
+Honest reading:
+- The mechanism works where it was aimed: a self-edit loop that only touches genome
+  data found, on its own dev benchmark, a genome that more than doubles the trained
+  field on blind sealed tasks (8 -> 17 of 23), and the gain is memory (an empty field
+  gains 0 from it).
+- Criterion 2 was mis-specified: copying earlier rounds' `empty - cold <= 1` measured
+  the empty field's base search features, not the self-edit. It is recorded as a fail
+  anyway; a corrected criterion would have to be pre-registered on a fresh sealed suite.
+- Criterion 4b is a real cost. Diagnosed after the measurement (diagnosis only, no
+  change made): the extra 272 evaluations come from **`inv_const_depth` = 2** alone
+  (more derived-constant targets -> more residual anchors before the hit); floor fit
+  alone, or more constants at depth 1, leave `t_line_len` at 3,817. The keep set
+  (TRANSFER-4 dev rows) did not cover string-length tasks, so the sandbox could not see
+  this cost.
+- Next step, not attempted here: widen the keep set (TEXT / BRIDGE dev rows) or charge
+  derived-constant targets only after the learned-scale ones, then a fresh sealed suite
+  with a corrected criterion 2.
