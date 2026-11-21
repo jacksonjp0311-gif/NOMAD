@@ -41,6 +41,7 @@ JUDGES = {
     "meaning": ["scripts/meaning_judge.py"],           # MEANING sealed suite (ROUTE_CUT addendum)
     "inflect": ["scripts/inflect_judge.py"],           # INFLECT sealed suite (INFLECT)
     "let": ["scripts/let_judge.py"],                   # LET sealed suite (this step)
+    "textpat": ["scripts/textpat_judge.py"],          # TEXT_ABSTRACT sealed suite (this step)
 }
 
 

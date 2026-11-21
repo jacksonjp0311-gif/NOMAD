@@ -1,0 +1,3622 @@
+{
+ "budget": 10000,
+ "domains": [
+  "bridge"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2111,
+   "cold_reason": null,
+   "domain": "bridge",
+   "family": "p_name_sep_word",
+   "formula": "name, separator, word",
+   "inputs": [
+    "va",
+    "vb",
+    "vk",
+    "vs"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "vapor",
+      "vb": "otto",
+      "vk": 3,
+      "vs": "|"
+     },
+     "otto|vapor"
+    ],
+    [
+     {
+      "va": "Grove",
+      "vb": "JO",
+      "vk": 3,
+      "vs": "|"
+     },
+     "JO|Grove"
+    ],
+    [
+     {
+      "va": "Wind",
+      "vb": "Wes",
+      "vk": 1,
+      "vs": "|"
+     },
+     "Wes|Wind"
+    ],
+    [
+     {
+      "va": "Cedar",
+      "vb": "Gus",
+      "vk": 2,
+      "vs": "|"
+     },
+     "Gus|Cedar"
+    ],
+    [
+     {
+      "va": "VaPor",
+      "vb": "nora",
+      "vk": 3,
+      "vs": "|"
+     },
+     "nora|VaPor"
+    ],
+    [
+     {
+      "va": "RIveR",
+      "vb": "ANNA",
+      "vk": 3,
+      "vs": "|"
+     },
+     "ANNA|RIveR"
+    ],
+    [
+     {
+      "va": "RIVER",
+      "vb": "nora",
+      "vk": 3,
+      "vs": "|"
+     },
+     "nora|RIVER"
+    ],
+    [
+     {
+      "va": "ORBIT",
+      "vb": "uma",
+      "vk": 2,
+      "vs": "|"
+     },
+     "uma|ORBIT"
+    ],
+    [
+     {
+      "va": "DESERT",
+      "vb": "Pia",
+      "vk": 3,
+      "vs": "|"
+     },
+     "Pia|DESERT"
+    ],
+    [
+     {
+      "va": "VAPOR",
+      "vb": "ANNa",
+      "vk": 3,
+      "vs": "|"
+     },
+     "ANNa|VAPOR"
+    ],
+    [
+     {
+      "va": "GROVE",
+      "vb": "VIC",
+      "vk": 3,
+      "vs": "|"
+     },
+     "VIC|GROVE"
+    ]
+   ],
+   "task_id": "p-00",
+   "tier": "easy",
+   "tree": [
+    "concat",
+    [
+     "var",
+     "vb"
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vs"
+     ],
+     [
+      "var",
+      "va"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 294,
+   "cold_reason": null,
+   "domain": "bridge",
+   "family": "p_word_then_k",
+   "formula": "word then k (two parts)",
+   "inputs": [
+    "va",
+    "vk",
+    "vs"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "orbit",
+      "vk": 3,
+      "vs": "|"
+     },
+     "orbit3"
+    ],
+    [
+     {
+      "va": "Stone",
+      "vk": 1,
+      "vs": "|"
+     },
+     "Stone1"
+    ],
+    [
+     {
+      "va": "Nomad",
+      "vk": 1,
+      "vs": "|"
+     },
+     "Nomad1"
+    ],
+    [
+     {
+      "va": "aTlAS",
+      "vk": 3,
+      "vs": "|"
+     },
+     "aTlAS3"
+    ],
+    [
+     {
+      "va": "TUnDrA",
+      "vk": 1,
+      "vs": "|"
+     },
+     "TUnDrA1"
+    ],
+    [
+     {
+      "va": "orbit",
+      "vk": 2,
+      "vs": "|"
+     },
+     "orbit2"
+    ],
+    [
+     {
+      "va": "signal",
+      "vk": 2,
+      "vs": "|"
+     },
+     "signal2"
+    ],
+    [
+     {
+      "va": "stone",
+      "vk": 2,
+      "vs": "|"
+     },
+     "stone2"
+    ],
+    [
+     {
+      "va": "PIXEl",
+      "vk": 1,
+      "vs": "|"
+     },
+     "PIXEl1"
+    ],
+    [
+     {
+      "va": "quartz",
+      "vk": 3,
+      "vs": "|"
+     },
+     "quartz3"
+    ],
+    [
+     {
+      "va": "signal",
+      "vk": 3,
+      "vs": "|"
+     },
+     "signal3"
+    ]
+   ],
+   "task_id": "p-20",
+   "tier": "easy",
+   "tree": [
+    "concat",
+    [
+     "var",
+     "va"
+    ],
+    [
+     "itos",
+     [
+      "var",
+      "vk"
+     ]
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_upper_name_sep_lower_word",
+   "formula": "name upper-case, separator, word lower-case",
+   "inputs": [
+    "va",
+    "vb",
+    "vk",
+    "vs",
+    "vt"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "Wind",
+      "vb": "Hana",
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "HANA#wind"
+    ],
+    [
+     {
+      "va": "wInD",
+      "vb": "BEN",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "BEN#wind"
+    ],
+    [
+     {
+      "va": "WinD",
+      "vb": "hana",
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "HANA#wind"
+    ],
+    [
+     {
+      "va": "lumeN",
+      "vb": "anna",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "ANNA#lumen"
+    ],
+    [
+     {
+      "va": "QUARTZ",
+      "vb": "FinN",
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "FINN#quartz"
+    ],
+    [
+     {
+      "va": "DESERT",
+      "vb": "Sam",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "SAM#desert"
+    ],
+    [
+     {
+      "va": "Nomad",
+      "vb": "vIC",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "VIC#nomad"
+    ],
+    [
+     {
+      "va": "RIVER",
+      "vb": "otto",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "OTTO#river"
+    ],
+    [
+     {
+      "va": "grove",
+      "vb": "quinn",
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "QUINN#grove"
+    ],
+    [
+     {
+      "va": "signal",
+      "vb": "FINN",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "FINN#signal"
+    ],
+    [
+     {
+      "va": "PIXEL",
+      "vb": "Carl",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "CARL#pixel"
+    ]
+   ],
+   "task_id": "p-01",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "upper",
+     [
+      "var",
+      "vb"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vt"
+     ],
+     [
+      "lower",
+      [
+       "var",
+       "va"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_first_sep_len",
+   "formula": "initial, separator, length",
+   "inputs": [
+    "va",
+    "vk",
+    "vs"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "lUMEN",
+      "vk": 2,
+      "vs": "|"
+     },
+     "l|5"
+    ],
+    [
+     {
+      "va": "HARBOR",
+      "vk": 1,
+      "vs": "|"
+     },
+     "H|6"
+    ],
+    [
+     {
+      "va": "nomad",
+      "vk": 2,
+      "vs": "|"
+     },
+     "n|5"
+    ],
+    [
+     {
+      "va": "STONE",
+      "vk": 2,
+      "vs": "|"
+     },
+     "S|5"
+    ],
+    [
+     {
+      "va": "Ember",
+      "vk": 1,
+      "vs": "|"
+     },
+     "E|5"
+    ],
+    [
+     {
+      "va": "ORbit",
+      "vk": 1,
+      "vs": "|"
+     },
+     "O|5"
+    ],
+    [
+     {
+      "va": "HARBOR",
+      "vk": 3,
+      "vs": "|"
+     },
+     "H|6"
+    ],
+    [
+     {
+      "va": "CEdAr",
+      "vk": 3,
+      "vs": "|"
+     },
+     "C|5"
+    ],
+    [
+     {
+      "va": "meadOw",
+      "vk": 3,
+      "vs": "|"
+     },
+     "m|6"
+    ],
+    [
+     {
+      "va": "atlas",
+      "vk": 2,
+      "vs": "|"
+     },
+     "a|5"
+    ],
+    [
+     {
+      "va": "VAPOR",
+      "vk": 3,
+      "vs": "|"
+     },
+     "V|5"
+    ]
+   ],
+   "task_id": "p-02",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "first",
+     [
+      "var",
+      "va"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vs"
+     ],
+     [
+      "itos",
+      [
+       "strlen",
+       [
+        "var",
+        "va"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_last_sep_len",
+   "formula": "last letter, separator, length",
+   "inputs": [
+    "va",
+    "vk",
+    "vs"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "WiND",
+      "vk": 1,
+      "vs": "|"
+     },
+     "D|4"
+    ],
+    [
+     {
+      "va": "Vapor",
+      "vk": 1,
+      "vs": "|"
+     },
+     "r|5"
+    ],
+    [
+     {
+      "va": "deSErT",
+      "vk": 2,
+      "vs": "|"
+     },
+     "T|6"
+    ],
+    [
+     {
+      "va": "Lumen",
+      "vk": 3,
+      "vs": "|"
+     },
+     "n|5"
+    ],
+    [
+     {
+      "va": "MEADOW",
+      "vk": 2,
+      "vs": "|"
+     },
+     "W|6"
+    ],
+    [
+     {
+      "va": "MeaDOw",
+      "vk": 1,
+      "vs": "|"
+     },
+     "w|6"
+    ],
+    [
+     {
+      "va": "Orbit",
+      "vk": 2,
+      "vs": "|"
+     },
+     "t|5"
+    ],
+    [
+     {
+      "va": "STONE",
+      "vk": 3,
+      "vs": "|"
+     },
+     "E|5"
+    ],
+    [
+     {
+      "va": "TUNDRA",
+      "vk": 3,
+      "vs": "|"
+     },
+     "A|6"
+    ],
+    [
+     {
+      "va": "tUNdrA",
+      "vk": 1,
+      "vs": "|"
+     },
+     "A|6"
+    ],
+    [
+     {
+      "va": "Ember",
+      "vk": 1,
+      "vs": "|"
+     },
+     "r|5"
+    ]
+   ],
+   "task_id": "p-03",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "last",
+     [
+      "var",
+      "va"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vs"
+     ],
+     [
+      "itos",
+      [
+       "strlen",
+       [
+        "var",
+        "va"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_take_sep_drop",
+   "formula": "first k letters, separator, the rest",
+   "inputs": [
+    "va",
+    "vk",
+    "vs"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "Cedar",
+      "vk": 3,
+      "vs": "|"
+     },
+     "Ced|ar"
+    ],
+    [
+     {
+      "va": "Ember",
+      "vk": 2,
+      "vs": "|"
+     },
+     "Em|ber"
+    ],
+    [
+     {
+      "va": "Pixel",
+      "vk": 2,
+      "vs": "|"
+     },
+     "Pi|xel"
+    ],
+    [
+     {
+      "va": "quartz",
+      "vk": 1,
+      "vs": "|"
+     },
+     "q|uartz"
+    ],
+    [
+     {
+      "va": "HarBOr",
+      "vk": 3,
+      "vs": "|"
+     },
+     "Har|BOr"
+    ],
+    [
+     {
+      "va": "Ember",
+      "vk": 3,
+      "vs": "|"
+     },
+     "Emb|er"
+    ],
+    [
+     {
+      "va": "cEdAr",
+      "vk": 2,
+      "vs": "|"
+     },
+     "cE|dAr"
+    ],
+    [
+     {
+      "va": "orBIt",
+      "vk": 1,
+      "vs": "|"
+     },
+     "o|rBIt"
+    ],
+    [
+     {
+      "va": "EMBER",
+      "vk": 1,
+      "vs": "|"
+     },
+     "E|MBER"
+    ],
+    [
+     {
+      "va": "Tundra",
+      "vk": 3,
+      "vs": "|"
+     },
+     "Tun|dra"
+    ],
+    [
+     {
+      "va": "ATLAS",
+      "vk": 1,
+      "vs": "|"
+     },
+     "A|TLAS"
+    ]
+   ],
+   "task_id": "p-04",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "take",
+     [
+      "var",
+      "va"
+     ],
+     [
+      "var",
+      "vk"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vs"
+     ],
+     [
+      "drop",
+      [
+       "var",
+       "va"
+      ],
+      [
+       "var",
+       "vk"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_drop_sep_take",
+   "formula": "all but the first k, separator, first k letters",
+   "inputs": [
+    "va",
+    "vk",
+    "vs"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "harbor",
+      "vk": 3,
+      "vs": "|"
+     },
+     "bor|har"
+    ],
+    [
+     {
+      "va": "atlas",
+      "vk": 3,
+      "vs": "|"
+     },
+     "as|atl"
+    ],
+    [
+     {
+      "va": "PIXEL",
+      "vk": 1,
+      "vs": "|"
+     },
+     "IXEL|P"
+    ],
+    [
+     {
+      "va": "LUMEN",
+      "vk": 3,
+      "vs": "|"
+     },
+     "EN|LUM"
+    ],
+    [
+     {
+      "va": "atlas",
+      "vk": 2,
+      "vs": "|"
+     },
+     "las|at"
+    ],
+    [
+     {
+      "va": "orbit",
+      "vk": 1,
+      "vs": "|"
+     },
+     "rbit|o"
+    ],
+    [
+     {
+      "va": "STONE",
+      "vk": 3,
+      "vs": "|"
+     },
+     "NE|STO"
+    ],
+    [
+     {
+      "va": "Tundra",
+      "vk": 1,
+      "vs": "|"
+     },
+     "undra|T"
+    ],
+    [
+     {
+      "va": "SignAL",
+      "vk": 2,
+      "vs": "|"
+     },
+     "gnAL|Si"
+    ],
+    [
+     {
+      "va": "RIVER",
+      "vk": 2,
+      "vs": "|"
+     },
+     "VER|RI"
+    ],
+    [
+     {
+      "va": "STONE",
+      "vk": 1,
+      "vs": "|"
+     },
+     "TONE|S"
+    ]
+   ],
+   "task_id": "p-05",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "drop",
+     [
+      "var",
+      "va"
+     ],
+     [
+      "var",
+      "vk"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vs"
+     ],
+     [
+      "take",
+      [
+       "var",
+       "va"
+      ],
+      [
+       "var",
+       "vk"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_head_sep_tail",
+   "formula": "first k letters, separator, last k letters",
+   "inputs": [
+    "va",
+    "vk",
+    "vs"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "Meadow",
+      "vk": 2,
+      "vs": "|"
+     },
+     "Me|ow"
+    ],
+    [
+     {
+      "va": "Nomad",
+      "vk": 3,
+      "vs": "|"
+     },
+     "Nom|mad"
+    ],
+    [
+     {
+      "va": "river",
+      "vk": 3,
+      "vs": "|"
+     },
+     "riv|ver"
+    ],
+    [
+     {
+      "va": "MEADOW",
+      "vk": 3,
+      "vs": "|"
+     },
+     "MEA|DOW"
+    ],
+    [
+     {
+      "va": "atlas",
+      "vk": 2,
+      "vs": "|"
+     },
+     "at|as"
+    ],
+    [
+     {
+      "va": "vapoR",
+      "vk": 1,
+      "vs": "|"
+     },
+     "v|R"
+    ],
+    [
+     {
+      "va": "signal",
+      "vk": 2,
+      "vs": "|"
+     },
+     "si|al"
+    ],
+    [
+     {
+      "va": "QUARTZ",
+      "vk": 3,
+      "vs": "|"
+     },
+     "QUA|RTZ"
+    ],
+    [
+     {
+      "va": "pixel",
+      "vk": 3,
+      "vs": "|"
+     },
+     "pix|xel"
+    ],
+    [
+     {
+      "va": "HARBOR",
+      "vk": 2,
+      "vs": "|"
+     },
+     "HA|OR"
+    ],
+    [
+     {
+      "va": "EmbER",
+      "vk": 3,
+      "vs": "|"
+     },
+     "Emb|bER"
+    ]
+   ],
+   "task_id": "p-06",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "take",
+     [
+      "var",
+      "va"
+     ],
+     [
+      "var",
+      "vk"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vs"
+     ],
+     [
+      "drop",
+      [
+       "var",
+       "va"
+      ],
+      [
+       "sub",
+       [
+        "strlen",
+        [
+         "var",
+         "va"
+        ]
+       ],
+       [
+        "var",
+        "vk"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_rep_last_sep_name",
+   "formula": "last letter k times, separator, name",
+   "inputs": [
+    "va",
+    "vb",
+    "vk",
+    "vs"
+   ],
+   "kind": "repeat",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "stONe",
+      "vb": "Zoe",
+      "vk": 3,
+      "vs": "|"
+     },
+     "eee|Zoe"
+    ],
+    [
+     {
+      "va": "NOMAD",
+      "vb": "NOrA",
+      "vk": 1,
+      "vs": "|"
+     },
+     "D|NOrA"
+    ],
+    [
+     {
+      "va": "groVE",
+      "vb": "hana",
+      "vk": 2,
+      "vs": "|"
+     },
+     "EE|hana"
+    ],
+    [
+     {
+      "va": "QUARTZ",
+      "vb": "Dana",
+      "vk": 2,
+      "vs": "|"
+     },
+     "ZZ|Dana"
+    ],
+    [
+     {
+      "va": "Signal",
+      "vb": "nora",
+      "vk": 1,
+      "vs": "|"
+     },
+     "l|nora"
+    ],
+    [
+     {
+      "va": "PIXEL",
+      "vb": "rOSa",
+      "vk": 1,
+      "vs": "|"
+     },
+     "L|rOSa"
+    ],
+    [
+     {
+      "va": "orbit",
+      "vb": "mo",
+      "vk": 1,
+      "vs": "|"
+     },
+     "t|mo"
+    ],
+    [
+     {
+      "va": "orbit",
+      "vb": "vIc",
+      "vk": 2,
+      "vs": "|"
+     },
+     "tt|vIc"
+    ],
+    [
+     {
+      "va": "EMBER",
+      "vb": "finn",
+      "vk": 3,
+      "vs": "|"
+     },
+     "RRR|finn"
+    ],
+    [
+     {
+      "va": "vapor",
+      "vb": "Otto",
+      "vk": 1,
+      "vs": "|"
+     },
+     "r|Otto"
+    ],
+    [
+     {
+      "va": "CEDAR",
+      "vb": "WES",
+      "vk": 2,
+      "vs": "|"
+     },
+     "RR|WES"
+    ]
+   ],
+   "task_id": "p-07",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "srep",
+     [
+      "last",
+      [
+       "var",
+       "va"
+      ]
+     ],
+     [
+      "var",
+      "vk"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vs"
+     ],
+     [
+      "var",
+      "vb"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_len_sum_sep_word",
+   "formula": "length plus k, separator, word",
+   "inputs": [
+    "va",
+    "vk",
+    "vs"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "EMBER",
+      "vk": 3,
+      "vs": "|"
+     },
+     "8|EMBER"
+    ],
+    [
+     {
+      "va": "desert",
+      "vk": 2,
+      "vs": "|"
+     },
+     "8|desert"
+    ],
+    [
+     {
+      "va": "nomad",
+      "vk": 2,
+      "vs": "|"
+     },
+     "7|nomad"
+    ],
+    [
+     {
+      "va": "stonE",
+      "vk": 1,
+      "vs": "|"
+     },
+     "6|stonE"
+    ],
+    [
+     {
+      "va": "cedar",
+      "vk": 3,
+      "vs": "|"
+     },
+     "8|cedar"
+    ],
+    [
+     {
+      "va": "Cedar",
+      "vk": 2,
+      "vs": "|"
+     },
+     "7|Cedar"
+    ],
+    [
+     {
+      "va": "stone",
+      "vk": 3,
+      "vs": "|"
+     },
+     "8|stone"
+    ],
+    [
+     {
+      "va": "atlas",
+      "vk": 2,
+      "vs": "|"
+     },
+     "7|atlas"
+    ],
+    [
+     {
+      "va": "quartz",
+      "vk": 2,
+      "vs": "|"
+     },
+     "8|quartz"
+    ],
+    [
+     {
+      "va": "EMBER",
+      "vk": 1,
+      "vs": "|"
+     },
+     "6|EMBER"
+    ],
+    [
+     {
+      "va": "ember",
+      "vk": 3,
+      "vs": "|"
+     },
+     "8|ember"
+    ]
+   ],
+   "task_id": "p-08",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "itos",
+     [
+      "add",
+      [
+       "strlen",
+       [
+        "var",
+        "va"
+       ]
+      ],
+      [
+       "var",
+       "vk"
+      ]
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vs"
+     ],
+     [
+      "var",
+      "va"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_rot_sep_initial",
+   "formula": "rotate by k, separator, initial",
+   "inputs": [
+    "va",
+    "vk",
+    "vs"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "pixel",
+      "vk": 3,
+      "vs": "|"
+     },
+     "elpix|p"
+    ],
+    [
+     {
+      "va": "Grove",
+      "vk": 1,
+      "vs": "|"
+     },
+     "roveG|G"
+    ],
+    [
+     {
+      "va": "cedar",
+      "vk": 3,
+      "vs": "|"
+     },
+     "arced|c"
+    ],
+    [
+     {
+      "va": "signal",
+      "vk": 2,
+      "vs": "|"
+     },
+     "gnalsi|s"
+    ],
+    [
+     {
+      "va": "HARBOR",
+      "vk": 2,
+      "vs": "|"
+     },
+     "RBORHA|H"
+    ],
+    [
+     {
+      "va": "nomad",
+      "vk": 2,
+      "vs": "|"
+     },
+     "madno|n"
+    ],
+    [
+     {
+      "va": "aTLAS",
+      "vk": 2,
+      "vs": "|"
+     },
+     "LASaT|a"
+    ],
+    [
+     {
+      "va": "eMBEr",
+      "vk": 3,
+      "vs": "|"
+     },
+     "EreMB|e"
+    ],
+    [
+     {
+      "va": "TUNDRA",
+      "vk": 3,
+      "vs": "|"
+     },
+     "DRATUN|T"
+    ],
+    [
+     {
+      "va": "nomad",
+      "vk": 1,
+      "vs": "|"
+     },
+     "omadn|n"
+    ],
+    [
+     {
+      "va": "Wind",
+      "vk": 2,
+      "vs": "|"
+     },
+     "ndWi|W"
+    ]
+   ],
+   "task_id": "p-09",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "concat",
+     [
+      "drop",
+      [
+       "var",
+       "va"
+      ],
+      [
+       "var",
+       "vk"
+      ]
+     ],
+     [
+      "take",
+      [
+       "var",
+       "va"
+      ],
+      [
+       "var",
+       "vk"
+      ]
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vs"
+     ],
+     [
+      "first",
+      [
+       "var",
+       "va"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_lower_initials_sep",
+   "formula": "both initials lower-case around a separator",
+   "inputs": [
+    "va",
+    "vb",
+    "vk",
+    "vs"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "wind",
+      "vb": "IVan",
+      "vk": 2,
+      "vs": "|"
+     },
+     "w|i"
+    ],
+    [
+     {
+      "va": "DESERT",
+      "vb": "ivan",
+      "vk": 3,
+      "vs": "|"
+     },
+     "d|i"
+    ],
+    [
+     {
+      "va": "Orbit",
+      "vb": "tESS",
+      "vk": 1,
+      "vs": "|"
+     },
+     "o|t"
+    ],
+    [
+     {
+      "va": "RIVER",
+      "vb": "Lena",
+      "vk": 3,
+      "vs": "|"
+     },
+     "r|l"
+    ],
+    [
+     {
+      "va": "Atlas",
+      "vb": "Vic",
+      "vk": 2,
+      "vs": "|"
+     },
+     "a|v"
+    ],
+    [
+     {
+      "va": "Cedar",
+      "vb": "gus",
+      "vk": 1,
+      "vs": "|"
+     },
+     "c|g"
+    ],
+    [
+     {
+      "va": "Vapor",
+      "vb": "nora",
+      "vk": 2,
+      "vs": "|"
+     },
+     "v|n"
+    ],
+    [
+     {
+      "va": "nomAd",
+      "vb": "nora",
+      "vk": 1,
+      "vs": "|"
+     },
+     "n|n"
+    ],
+    [
+     {
+      "va": "cedar",
+      "vb": "wes",
+      "vk": 2,
+      "vs": "|"
+     },
+     "c|w"
+    ],
+    [
+     {
+      "va": "Wind",
+      "vb": "carl",
+      "vk": 2,
+      "vs": "|"
+     },
+     "w|c"
+    ],
+    [
+     {
+      "va": "CEDAR",
+      "vb": "Zoe",
+      "vk": 3,
+      "vs": "|"
+     },
+     "c|z"
+    ]
+   ],
+   "task_id": "p-10",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "lower",
+     [
+      "first",
+      [
+       "var",
+       "va"
+      ]
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vs"
+     ],
+     [
+      "lower",
+      [
+       "first",
+       [
+        "var",
+        "vb"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_frame_sep",
+   "formula": "separator, first k letters, separator",
+   "inputs": [
+    "va",
+    "vk",
+    "vs"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "pixel",
+      "vk": 3,
+      "vs": "|"
+     },
+     "|pix|"
+    ],
+    [
+     {
+      "va": "SIGNAL",
+      "vk": 1,
+      "vs": "|"
+     },
+     "|S|"
+    ],
+    [
+     {
+      "va": "vapor",
+      "vk": 1,
+      "vs": "|"
+     },
+     "|v|"
+    ],
+    [
+     {
+      "va": "EMBER",
+      "vk": 2,
+      "vs": "|"
+     },
+     "|EM|"
+    ],
+    [
+     {
+      "va": "lumen",
+      "vk": 1,
+      "vs": "|"
+     },
+     "|l|"
+    ],
+    [
+     {
+      "va": "signal",
+      "vk": 2,
+      "vs": "|"
+     },
+     "|si|"
+    ],
+    [
+     {
+      "va": "meadow",
+      "vk": 1,
+      "vs": "|"
+     },
+     "|m|"
+    ],
+    [
+     {
+      "va": "STONe",
+      "vk": 3,
+      "vs": "|"
+     },
+     "|STO|"
+    ],
+    [
+     {
+      "va": "cEDAr",
+      "vk": 3,
+      "vs": "|"
+     },
+     "|cED|"
+    ],
+    [
+     {
+      "va": "CedaR",
+      "vk": 1,
+      "vs": "|"
+     },
+     "|C|"
+    ],
+    [
+     {
+      "va": "orbit",
+      "vk": 2,
+      "vs": "|"
+     },
+     "|or|"
+    ]
+   ],
+   "task_id": "p-11",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "var",
+     "vs"
+    ],
+    [
+     "concat",
+     [
+      "take",
+      [
+       "var",
+       "va"
+      ],
+      [
+       "var",
+       "vk"
+      ]
+     ],
+     [
+      "var",
+      "vs"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_word_sep_name_sep2_k",
+   "formula": "word, separator, name, other separator, k",
+   "inputs": [
+    "va",
+    "vb",
+    "vk",
+    "vs",
+    "vt"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "LUMEN",
+      "vb": "Nora",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "LUMEN|Nora#3"
+    ],
+    [
+     {
+      "va": "pixEl",
+      "vb": "rOSa",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "pixEl|rOSa#2"
+    ],
+    [
+     {
+      "va": "Harbor",
+      "vb": "mo",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "Harbor|mo#3"
+    ],
+    [
+     {
+      "va": "Wind",
+      "vb": "ANNA",
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "Wind|ANNA#1"
+    ],
+    [
+     {
+      "va": "ORBIT",
+      "vb": "TESS",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "ORBIT|TESS#2"
+    ],
+    [
+     {
+      "va": "sIgnAl",
+      "vb": "Lena",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "sIgnAl|Lena#2"
+    ],
+    [
+     {
+      "va": "NOMAD",
+      "vb": "hana",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "NOMAD|hana#3"
+    ],
+    [
+     {
+      "va": "Harbor",
+      "vb": "HANA",
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "Harbor|HANA#1"
+    ],
+    [
+     {
+      "va": "wind",
+      "vb": "Sam",
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "wind|Sam#1"
+    ],
+    [
+     {
+      "va": "cedar",
+      "vb": "Tess",
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "cedar|Tess#1"
+    ],
+    [
+     {
+      "va": "Nomad",
+      "vb": "WES",
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "Nomad|WES#1"
+    ]
+   ],
+   "task_id": "p-12",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "var",
+     "va"
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vs"
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "vb"
+      ],
+      [
+       "concat",
+       [
+        "var",
+        "vt"
+       ],
+       [
+        "itos",
+        [
+         "var",
+         "vk"
+        ]
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_name_sep_word_sep2_lens",
+   "formula": "name, separator, word, other separator, both lengths summed",
+   "inputs": [
+    "va",
+    "vb",
+    "vk",
+    "vs",
+    "vt"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "Atlas",
+      "vb": "Quinn",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "Quinn|Atlas#10"
+    ],
+    [
+     {
+      "va": "HARBOR",
+      "vb": "FINN",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "FINN|HARBOR#10"
+    ],
+    [
+     {
+      "va": "MEADOW",
+      "vb": "IVAN",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "IVAN|MEADOW#10"
+    ],
+    [
+     {
+      "va": "harBOR",
+      "vb": "ANNA",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "ANNA|harBOR#10"
+    ],
+    [
+     {
+      "va": "vapor",
+      "vb": "Carl",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "Carl|vapor#9"
+    ],
+    [
+     {
+      "va": "harbor",
+      "vb": "Jo",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "Jo|harbor#8"
+    ],
+    [
+     {
+      "va": "Lumen",
+      "vb": "hAnA",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "hAnA|Lumen#9"
+    ],
+    [
+     {
+      "va": "Orbit",
+      "vb": "hanA",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "hanA|Orbit#9"
+    ],
+    [
+     {
+      "va": "ORBIT",
+      "vb": "ivan",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "ivan|ORBIT#9"
+    ],
+    [
+     {
+      "va": "ORbit",
+      "vb": "aNNa",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "aNNa|ORbit#9"
+    ],
+    [
+     {
+      "va": "SIGNAL",
+      "vb": "jo",
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "jo|SIGNAL#8"
+    ]
+   ],
+   "task_id": "p-13",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "var",
+     "vb"
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vs"
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "va"
+      ],
+      [
+       "concat",
+       [
+        "var",
+        "vt"
+       ],
+       [
+        "itos",
+        [
+         "add",
+         [
+          "strlen",
+          [
+           "var",
+           "va"
+          ]
+         ],
+         [
+          "strlen",
+          [
+           "var",
+           "vb"
+          ]
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_k_sep2_name_sep2",
+   "formula": "k, other separator, name, other separator",
+   "inputs": [
+    "va",
+    "vb",
+    "vk",
+    "vs",
+    "vt"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "stOnE",
+      "vb": "dana",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "2#dana#"
+    ],
+    [
+     {
+      "va": "tundra",
+      "vb": "BEN",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "3#BEN#"
+    ],
+    [
+     {
+      "va": "Orbit",
+      "vb": "gus",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "2#gus#"
+    ],
+    [
+     {
+      "va": "CEDAR",
+      "vb": "uMa",
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "1#uMa#"
+    ],
+    [
+     {
+      "va": "atlas",
+      "vb": "Carl",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "2#Carl#"
+    ],
+    [
+     {
+      "va": "quartz",
+      "vb": "Ben",
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "1#Ben#"
+    ],
+    [
+     {
+      "va": "WInd",
+      "vb": "caRL",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "3#caRL#"
+    ],
+    [
+     {
+      "va": "RIVER",
+      "vb": "tess",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "3#tess#"
+    ],
+    [
+     {
+      "va": "meadow",
+      "vb": "Wes",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "3#Wes#"
+    ],
+    [
+     {
+      "va": "Meadow",
+      "vb": "KAI",
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "1#KAI#"
+    ],
+    [
+     {
+      "va": "Lumen",
+      "vb": "wes",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "2#wes#"
+    ]
+   ],
+   "task_id": "p-14",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "itos",
+     [
+      "var",
+      "vk"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vt"
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "vb"
+      ],
+      [
+       "var",
+       "vt"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_up_head_sep_rest_sep_k",
+   "formula": "first k upper-case, separator, the rest, separator, k",
+   "inputs": [
+    "va",
+    "vk",
+    "vs"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "Nomad",
+      "vk": 2,
+      "vs": "|"
+     },
+     "NO|mad|2"
+    ],
+    [
+     {
+      "va": "ember",
+      "vk": 1,
+      "vs": "|"
+     },
+     "E|mber|1"
+    ],
+    [
+     {
+      "va": "grove",
+      "vk": 3,
+      "vs": "|"
+     },
+     "GRO|ve|3"
+    ],
+    [
+     {
+      "va": "EmBer",
+      "vk": 2,
+      "vs": "|"
+     },
+     "EM|Ber|2"
+    ],
+    [
+     {
+      "va": "wINd",
+      "vk": 3,
+      "vs": "|"
+     },
+     "WIN|d|3"
+    ],
+    [
+     {
+      "va": "Desert",
+      "vk": 3,
+      "vs": "|"
+     },
+     "DES|ert|3"
+    ],
+    [
+     {
+      "va": "PIXEl",
+      "vk": 3,
+      "vs": "|"
+     },
+     "PIX|El|3"
+    ],
+    [
+     {
+      "va": "orbit",
+      "vk": 3,
+      "vs": "|"
+     },
+     "ORB|it|3"
+    ],
+    [
+     {
+      "va": "Signal",
+      "vk": 1,
+      "vs": "|"
+     },
+     "S|ignal|1"
+    ],
+    [
+     {
+      "va": "QUARTZ",
+      "vk": 3,
+      "vs": "|"
+     },
+     "QUA|RTZ|3"
+    ],
+    [
+     {
+      "va": "TUNDRA",
+      "vk": 2,
+      "vs": "|"
+     },
+     "TU|NDRA|2"
+    ]
+   ],
+   "task_id": "p-15",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "upper",
+     [
+      "take",
+      [
+       "var",
+       "va"
+      ],
+      [
+       "var",
+       "vk"
+      ]
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vs"
+     ],
+     [
+      "concat",
+      [
+       "drop",
+       [
+        "var",
+        "va"
+       ],
+       [
+        "var",
+        "vk"
+       ]
+      ],
+      [
+       "concat",
+       [
+        "var",
+        "vs"
+       ],
+       [
+        "itos",
+        [
+         "var",
+         "vk"
+        ]
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_initials_len",
+   "formula": "both initials, separator, total length",
+   "inputs": [
+    "va",
+    "vb",
+    "vk",
+    "vs"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "signal",
+      "vb": "BEN",
+      "vk": 2,
+      "vs": "|"
+     },
+     "sB|9"
+    ],
+    [
+     {
+      "va": "Ember",
+      "vb": "Dana",
+      "vk": 2,
+      "vs": "|"
+     },
+     "ED|9"
+    ],
+    [
+     {
+      "va": "RIVER",
+      "vb": "nora",
+      "vk": 3,
+      "vs": "|"
+     },
+     "Rn|9"
+    ],
+    [
+     {
+      "va": "grove",
+      "vb": "IVAN",
+      "vk": 2,
+      "vs": "|"
+     },
+     "gI|9"
+    ],
+    [
+     {
+      "va": "cedar",
+      "vb": "JO",
+      "vk": 2,
+      "vs": "|"
+     },
+     "cJ|7"
+    ],
+    [
+     {
+      "va": "ORbiT",
+      "vb": "Mo",
+      "vk": 2,
+      "vs": "|"
+     },
+     "OM|7"
+    ],
+    [
+     {
+      "va": "Desert",
+      "vb": "roSA",
+      "vk": 3,
+      "vs": "|"
+     },
+     "Dr|10"
+    ],
+    [
+     {
+      "va": "WINd",
+      "vb": "zoe",
+      "vk": 2,
+      "vs": "|"
+     },
+     "Wz|7"
+    ],
+    [
+     {
+      "va": "Signal",
+      "vb": "PIa",
+      "vk": 1,
+      "vs": "|"
+     },
+     "SP|9"
+    ],
+    [
+     {
+      "va": "Tundra",
+      "vb": "finn",
+      "vk": 1,
+      "vs": "|"
+     },
+     "Tf|10"
+    ],
+    [
+     {
+      "va": "orbit",
+      "vb": "SAM",
+      "vk": 3,
+      "vs": "|"
+     },
+     "oS|8"
+    ]
+   ],
+   "task_id": "p-16",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "first",
+     [
+      "var",
+      "va"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "first",
+      [
+       "var",
+       "vb"
+      ]
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "vs"
+      ],
+      [
+       "itos",
+       [
+        "add",
+        [
+         "strlen",
+         [
+          "var",
+          "va"
+         ]
+        ],
+        [
+         "strlen",
+         [
+          "var",
+          "vb"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_last_first_sep2_name_upper",
+   "formula": "last and first letter, other separator, name upper-case",
+   "inputs": [
+    "va",
+    "vb",
+    "vk",
+    "vs",
+    "vt"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "DESERT",
+      "vb": "DANA",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "TD#DANA"
+    ],
+    [
+     {
+      "va": "GROVE",
+      "vb": "TESS",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "EG#TESS"
+    ],
+    [
+     {
+      "va": "pIxEL",
+      "vb": "Vic",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "Lp#VIC"
+    ],
+    [
+     {
+      "va": "grove",
+      "vb": "Pia",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "eg#PIA"
+    ],
+    [
+     {
+      "va": "QUARTZ",
+      "vb": "ROSA",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "ZQ#ROSA"
+    ],
+    [
+     {
+      "va": "HARBOR",
+      "vb": "Zoe",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "RH#ZOE"
+    ],
+    [
+     {
+      "va": "pixel",
+      "vb": "QUINN",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "lp#QUINN"
+    ],
+    [
+     {
+      "va": "grOvE",
+      "vb": "LeNA",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "Eg#LENA"
+    ],
+    [
+     {
+      "va": "NOMAD",
+      "vb": "RosA",
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "DN#ROSA"
+    ],
+    [
+     {
+      "va": "RivER",
+      "vb": "Ben",
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "RR#BEN"
+    ],
+    [
+     {
+      "va": "grove",
+      "vb": "vIc",
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "eg#VIC"
+    ]
+   ],
+   "task_id": "p-17",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "last",
+     [
+      "var",
+      "va"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "first",
+      [
+       "var",
+       "va"
+      ]
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "vt"
+      ],
+      [
+       "upper",
+       [
+        "var",
+        "vb"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_take_take_mix",
+   "formula": "first k of the word, then of the name, then of the word",
+   "inputs": [
+    "va",
+    "vb",
+    "vk",
+    "vs"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "MEADOW",
+      "vb": "LENA",
+      "vk": 3,
+      "vs": "|"
+     },
+     "MEALENMEA"
+    ],
+    [
+     {
+      "va": "WIND",
+      "vb": "zoe",
+      "vk": 2,
+      "vs": "|"
+     },
+     "WIzoWI"
+    ],
+    [
+     {
+      "va": "Orbit",
+      "vb": "Ivan",
+      "vk": 2,
+      "vs": "|"
+     },
+     "OrIvOr"
+    ],
+    [
+     {
+      "va": "RivEr",
+      "vb": "dana",
+      "vk": 3,
+      "vs": "|"
+     },
+     "RivdanRiv"
+    ],
+    [
+     {
+      "va": "GROVE",
+      "vb": "TESS",
+      "vk": 2,
+      "vs": "|"
+     },
+     "GRTEGR"
+    ],
+    [
+     {
+      "va": "Orbit",
+      "vb": "RoSA",
+      "vk": 2,
+      "vs": "|"
+     },
+     "OrRoOr"
+    ],
+    [
+     {
+      "va": "Vapor",
+      "vb": "vic",
+      "vk": 2,
+      "vs": "|"
+     },
+     "VaviVa"
+    ],
+    [
+     {
+      "va": "DESERT",
+      "vb": "daNA",
+      "vk": 2,
+      "vs": "|"
+     },
+     "DEdaDE"
+    ],
+    [
+     {
+      "va": "ember",
+      "vb": "MO",
+      "vk": 1,
+      "vs": "|"
+     },
+     "eMe"
+    ],
+    [
+     {
+      "va": "quartz",
+      "vb": "UMA",
+      "vk": 2,
+      "vs": "|"
+     },
+     "quUMqu"
+    ],
+    [
+     {
+      "va": "atlas",
+      "vb": "Vic",
+      "vk": 2,
+      "vs": "|"
+     },
+     "atViat"
+    ]
+   ],
+   "task_id": "p-18",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "take",
+     [
+      "var",
+      "va"
+     ],
+     [
+      "var",
+      "vk"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "take",
+      [
+       "var",
+       "vb"
+      ],
+      [
+       "var",
+       "vk"
+      ]
+     ],
+     [
+      "take",
+      [
+       "var",
+       "va"
+      ],
+      [
+       "var",
+       "vk"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_rot_rot_sep2",
+   "formula": "word rotated by k, other separator, name rotated by j",
+   "inputs": [
+    "va",
+    "vb",
+    "vk",
+    "vj",
+    "vs",
+    "vt"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "nOMAd",
+      "vb": "finn",
+      "vj": 0,
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "MAdnO#finn"
+    ],
+    [
+     {
+      "va": "CEDAR",
+      "vb": "aNNA",
+      "vj": 1,
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "ARCED#NNAa"
+    ],
+    [
+     {
+      "va": "WIND",
+      "vb": "finn",
+      "vj": 3,
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "DWIN#nfin"
+    ],
+    [
+     {
+      "va": "NOMAD",
+      "vb": "quinn",
+      "vj": 0,
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "MADNO#quinn"
+    ],
+    [
+     {
+      "va": "pixel",
+      "vb": "ZOe",
+      "vj": 3,
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "elpix#ZOe"
+    ],
+    [
+     {
+      "va": "EmBER",
+      "vb": "ROSA",
+      "vj": 2,
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "BEREm#SARO"
+    ],
+    [
+     {
+      "va": "Tundra",
+      "vb": "Vic",
+      "vj": 1,
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "undraT#icV"
+    ],
+    [
+     {
+      "va": "QUARTZ",
+      "vb": "pIA",
+      "vj": 3,
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "RTZQUA#pIA"
+    ],
+    [
+     {
+      "va": "atlas",
+      "vb": "jo",
+      "vj": 1,
+      "vk": 1,
+      "vs": "|",
+      "vt": "#"
+     },
+     "tlasa#oj"
+    ],
+    [
+     {
+      "va": "HARboR",
+      "vb": "WES",
+      "vj": 3,
+      "vk": 3,
+      "vs": "|",
+      "vt": "#"
+     },
+     "boRHAR#WES"
+    ],
+    [
+     {
+      "va": "HARBOR",
+      "vb": "ben",
+      "vj": 3,
+      "vk": 2,
+      "vs": "|",
+      "vt": "#"
+     },
+     "RBORHA#ben"
+    ]
+   ],
+   "task_id": "p-19",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "concat",
+     [
+      "drop",
+      [
+       "var",
+       "va"
+      ],
+      [
+       "var",
+       "vk"
+      ]
+     ],
+     [
+      "take",
+      [
+       "var",
+       "va"
+      ],
+      [
+       "var",
+       "vk"
+      ]
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "vt"
+     ],
+     [
+      "concat",
+      [
+       "drop",
+       [
+        "var",
+        "vb"
+       ],
+       [
+        "var",
+        "vj"
+       ]
+      ],
+      [
+       "take",
+       [
+        "var",
+        "vb"
+       ],
+       [
+        "var",
+        "vj"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_lower_rot_ctrl",
+   "formula": "rotate by k, lower-case (not a chain at the top)",
+   "inputs": [
+    "va",
+    "vk",
+    "vs"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "va": "desert",
+      "vk": 1,
+      "vs": "|"
+     },
+     "esertd"
+    ],
+    [
+     {
+      "va": "nomad",
+      "vk": 2,
+      "vs": "|"
+     },
+     "madno"
+    ],
+    [
+     {
+      "va": "vapor",
+      "vk": 3,
+      "vs": "|"
+     },
+     "orvap"
+    ],
+    [
+     {
+      "va": "orBit",
+      "vk": 2,
+      "vs": "|"
+     },
+     "bitor"
+    ],
+    [
+     {
+      "va": "tundra",
+      "vk": 1,
+      "vs": "|"
+     },
+     "undrat"
+    ],
+    [
+     {
+      "va": "harbor",
+      "vk": 1,
+      "vs": "|"
+     },
+     "arborh"
+    ],
+    [
+     {
+      "va": "TunDRa",
+      "vk": 3,
+      "vs": "|"
+     },
+     "dratun"
+    ],
+    [
+     {
+      "va": "QUARTZ",
+      "vk": 1,
+      "vs": "|"
+     },
+     "uartzq"
+    ],
+    [
+     {
+      "va": "signal",
+      "vk": 3,
+      "vs": "|"
+     },
+     "nalsig"
+    ],
+    [
+     {
+      "va": "GROVE",
+      "vk": 2,
+      "vs": "|"
+     },
+     "ovegr"
+    ],
+    [
+     {
+      "va": "Lumen",
+      "vk": 1,
+      "vs": "|"
+     },
+     "umenl"
+    ]
+   ],
+   "task_id": "p-21",
+   "tier": "hard",
+   "tree": [
+    "lower",
+    [
+     "concat",
+     [
+      "drop",
+      [
+       "var",
+       "va"
+      ],
+      [
+       "var",
+       "vk"
+      ]
+     ],
+     [
+      "take",
+      [
+       "var",
+       "va"
+      ],
+      [
+       "var",
+       "vk"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_len_three_ctrl",
+   "formula": "length of word, separator, name (integer)",
+   "inputs": [
+    "va",
+    "vb",
+    "vk",
+    "vs"
+   ],
+   "kind": "count",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "va": "Nomad",
+      "vb": "QUINN",
+      "vk": 3,
+      "vs": "|"
+     },
+     11
+    ],
+    [
+     {
+      "va": "signAL",
+      "vb": "wes",
+      "vk": 2,
+      "vs": "|"
+     },
+     10
+    ],
+    [
+     {
+      "va": "Lumen",
+      "vb": "rosa",
+      "vk": 2,
+      "vs": "|"
+     },
+     10
+    ],
+    [
+     {
+      "va": "CEdaR",
+      "vb": "Rosa",
+      "vk": 3,
+      "vs": "|"
+     },
+     10
+    ],
+    [
+     {
+      "va": "Desert",
+      "vb": "Otto",
+      "vk": 1,
+      "vs": "|"
+     },
+     11
+    ],
+    [
+     {
+      "va": "Vapor",
+      "vb": "FINN",
+      "vk": 2,
+      "vs": "|"
+     },
+     10
+    ],
+    [
+     {
+      "va": "SignAL",
+      "vb": "ben",
+      "vk": 1,
+      "vs": "|"
+     },
+     10
+    ],
+    [
+     {
+      "va": "grovE",
+      "vb": "Sam",
+      "vk": 1,
+      "vs": "|"
+     },
+     9
+    ],
+    [
+     {
+      "va": "stOnE",
+      "vb": "dana",
+      "vk": 3,
+      "vs": "|"
+     },
+     10
+    ],
+    [
+     {
+      "va": "SIGNAL",
+      "vb": "ivAN",
+      "vk": 1,
+      "vs": "|"
+     },
+     11
+    ],
+    [
+     {
+      "va": "grove",
+      "vb": "ANNA",
+      "vk": 1,
+      "vs": "|"
+     },
+     10
+    ]
+   ],
+   "task_id": "p-22",
+   "tier": "hard",
+   "tree": [
+    "strlen",
+    [
+     "concat",
+     [
+      "var",
+      "va"
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "vs"
+      ],
+      [
+       "var",
+       "vb"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "p_len_k_ctrl",
+   "formula": "k times the word's length plus the name's (integer)",
+   "inputs": [
+    "va",
+    "vb",
+    "vk",
+    "vs"
+   ],
+   "kind": "count",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "va": "vapor",
+      "vb": "NORa",
+      "vk": 2,
+      "vs": "|"
+     },
+     14
+    ],
+    [
+     {
+      "va": "SIgNAL",
+      "vb": "fiNN",
+      "vk": 2,
+      "vs": "|"
+     },
+     16
+    ],
+    [
+     {
+      "va": "hArBOR",
+      "vb": "gus",
+      "vk": 1,
+      "vs": "|"
+     },
+     9
+    ],
+    [
+     {
+      "va": "gRovE",
+      "vb": "SAM",
+      "vk": 3,
+      "vs": "|"
+     },
+     18
+    ],
+    [
+     {
+      "va": "orbit",
+      "vb": "MO",
+      "vk": 1,
+      "vs": "|"
+     },
+     7
+    ],
+    [
+     {
+      "va": "Nomad",
+      "vb": "ANNA",
+      "vk": 2,
+      "vs": "|"
+     },
+     14
+    ],
+    [
+     {
+      "va": "MEADOW",
+      "vb": "Otto",
+      "vk": 2,
+      "vs": "|"
+     },
+     16
+    ],
+    [
+     {
+      "va": "vapor",
+      "vb": "Quinn",
+      "vk": 2,
+      "vs": "|"
+     },
+     15
+    ],
+    [
+     {
+      "va": "TUNDRA",
+      "vb": "Kai",
+      "vk": 2,
+      "vs": "|"
+     },
+     15
+    ],
+    [
+     {
+      "va": "tundra",
+      "vb": "OTTO",
+      "vk": 3,
+      "vs": "|"
+     },
+     22
+    ],
+    [
+     {
+      "va": "vapor",
+      "vb": "guS",
+      "vk": 1,
+      "vs": "|"
+     },
+     8
+    ]
+   ],
+   "task_id": "p-23",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "vk"
+     ],
+     [
+      "strlen",
+      [
+       "var",
+       "va"
+      ]
+     ]
+    ],
+    [
+     "strlen",
+     [
+      "var",
+      "vb"
+     ]
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "bridge",
+ "schema": "nomad.textpat-suite.v1",
+ "seed": 20270117,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 2,
+  "families": 24,
+  "hard": 22,
+  "lookup_dropped": []
+ },
+ "trained_on_by_any_arm": false
+}

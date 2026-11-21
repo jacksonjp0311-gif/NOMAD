@@ -998,10 +998,15 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
         from . import invent as _invent
         if _invent.enabled():
             inv = _invent.kit(prior, task, bank)   # used only by the INVENT phase (main's path unchanged)
+    pats = None
+    if bank:
+        from . import textpat as _TP
+        if _TP.enabled():
+            pats = _TP.prepare(prior, task)
     gate = _WitnessGate(task, library) if witness_continue_enabled() else None
     s = _drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split, aim,
                            probe_on, gate, bank, inv, rel or None,
-                           prior if (graph_enabled() and prior.graph_edges) else None))
+                           prior if (graph_enabled() and prior.graph_edges) else None, pats))
     return _with_sense(_witness_finish(s, gate), rec)
 
 
@@ -1451,7 +1456,8 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 max_size: int, max_eval: int, variation: list[tuple[str, list]] | None = None,
                 split: bool = False, aim: tuple[str, ...] | None = None, blockprobe: bool = False,
                 gate: "_WitnessGate | None" = None, bank: list | None = None, inv=None,
-                rel: dict | None = None, graph: "WorldPrior | None" = None):
+                rel: dict | None = None, graph: "WorldPrior | None" = None,
+                pats=None):
     """Staged transfer as one incremental search (a generator, like _search_gen).
 
     Stage 1 is exactly the cold search below ``max_size`` (same order, same
@@ -1643,6 +1649,11 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             hit = yield from text_anchors([z for z in ranked if all(type(x) is str for x in z[3])], table)
             if hit is not None:
                 return hit
+            if pats:
+                hit = yield from text_templates(P, [z for z in ranked if all(type(x) is str for x in z[3])],
+                                                paid=False)
+                if hit is not None:
+                    return hit
             if _I_chain():
                 hit = yield from text_chain(P, [z for z in ranked if all(type(x) is str for x in z[3])])
                 if hit is not None:
@@ -1935,6 +1946,67 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             yield evals
         return None
 
+    def text_templates(P, learned, *, paid: bool):
+        """TEXT_ABSTRACT (docs/TEXTPAT.md): instantiate anti-unified string templates.
+
+        paid=False: compose an instance from values already in the probe pool (plus free
+        case / itos / concat variants); a miss costs nothing; a public-row match costs 1
+        evaluation and is WITNESS-gated. paid=True: run length-matching instances as
+        whole programs (1 evaluation each, capped), after earlier passes missed.
+        """
+        nonlocal evals
+        if not pats or task.out != "str":
+            return None
+        from . import textpat as _TP
+        tried = istate.setdefault("textpat_tried", set())
+        cap = _TP.TEXTPAT_N if paid else _TP.TEXTPAT_FREE_N
+        offered = istate.setdefault("textpat_paid" if paid else "textpat_free", 0)
+        if offered >= cap or evals >= istate.get("ilimit", max_eval):
+            return None
+        memo = {} if paid else _TP.memo_from(P, learned, rows, task.inputs)
+        ops = set(opset_of(task))
+        for tree in pats:
+            k = json.dumps(tree)
+            if k in tried:
+                continue
+            if paid:
+                if not _TP.length_matches(tree, rows, goal):
+                    continue
+                if offered >= cap or evals >= istate.get("ilimit", max_eval):
+                    return None
+                tried.add(k)
+                evals += 1
+                offered += 1
+                istate["textpat_paid"] = offered
+                yield evals
+                try:
+                    v = tuple(run(tree, r) for r in rows)
+                except Invalid:
+                    continue
+                if v != goal:
+                    yield evals
+                    continue
+                if stop_on(tree):
+                    pinfo["port"] = "invent:text:template"
+                    return tree
+                yield evals
+            else:
+                v = _TP.free_eval(tree, rows, memo, ops)
+                if v != goal:
+                    continue
+                if offered >= cap or evals >= istate.get("ilimit", max_eval):
+                    return None
+                tried.add(k)
+                evals += 1     # assembled template is one candidate evaluation
+                offered += 1
+                istate["textpat_free"] = offered
+                yield evals
+                if stop_on(tree):
+                    pinfo["port"] = "invent:text:template"
+                    return tree
+                yield evals
+        return None
+
     def invent_phase(P, B, limit):
         """INVENT (docs/INVENT.md), one capped phase after PORT/GROW and the
         atoms: (1) the field's invented blocks instantiated over the task's
@@ -2036,11 +2108,16 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             # INVENT_TEXT (docs/INVENT_TEXT.md): concat residual anchors on string goals. A block value
             # v that is a proper prefix (suffix) of the goal on every public row leaves a remainder;
             # a pool / block value equal to the remainder completes concat(v, b) (concat(b, v)).
-            hit = yield from text_anchors(ri + [z for z in ranked if all(type(x) is str for x in z[3])], table)
+            learned_s = ri + [z for z in ranked if all(type(x) is str for x in z[3])]
+            hit = yield from text_anchors(learned_s, table)
             if hit is not None:
                 return hit
+            if pats:
+                hit = yield from text_templates(P, learned_s, paid=False)
+                if hit is not None:
+                    return hit
             if _I_chain():
-                hit = yield from text_chain(P, ri + [z for z in ranked if all(type(x) is str for x in z[3])])
+                hit = yield from text_chain(P, learned_s)
                 if hit is not None:
                     return hit
         for g2, wrap, tag, derived in targets:
@@ -2068,65 +2145,69 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                         return hit
                     yield evals
         # (2) invented primitives as single nodes
-        if not inv.ops:
-            return None
-        for sz in range(2, max_size + _I.INVENT_SIZE + 1):
-            for name, iop in inv.ops.items():
-                for split in _compositions(sz - 1, len(iop.args)):
-                    lists = [list((P.get(s_, {}).get(t) or [])) for s_, t in zip(split, iop.args)]
-                    if any(not l for l in lists):
-                        continue
-                    for combo in product(*lists):
-                        if any(_key(combo[i][1]) > _key(combo[j][1]) for i, j in iop.symmetric):
-                            continue   # the invention's own symmetry: one order is enough
-                        if not any(_var_names(c[0], []) for c in combo):
-                            continue   # constant arguments only: a constant, not a block
-                        if over():
-                            return None
-                        evals += 1
-                        yield evals
-                        try:
-                            vals = tuple(iop.fn(*args) for args in zip(*(c[1] for c in combo)))
-                        except (Invalid, ValueError, TypeError, IndexError, OverflowError):
+        if inv.ops:
+            for sz in range(2, max_size + _I.INVENT_SIZE + 1):
+                for name, iop in inv.ops.items():
+                    for split in _compositions(sz - 1, len(iop.args)):
+                        lists = [list((P.get(s_, {}).get(t) or [])) for s_, t in zip(split, iop.args)]
+                        if any(not l for l in lists):
                             continue
-                        if any(type_of(v) != iop.out for v in vals):
-                            continue
-                        if any(vals == c[1] for c in combo):
-                            continue   # the application just returns an argument: no new block
-                        tree = iop.build([c[0] for c in combo])
-                        k = (iop.out, _key(vals))
-                        if iop.out == task.out and _key(vals) in tset:
-                            wrap, tag = tset[_key(vals)]
-                            hit = fit(wrap(tree) if wrap else tree, tag, iop.round)
-                            if hit is not None:
-                                return hit
+                        for combo in product(*lists):
+                            if any(_key(combo[i][1]) > _key(combo[j][1]) for i, j in iop.symmetric):
+                                continue   # the invention's own symmetry: one order is enough
+                            if not any(_var_names(c[0], []) for c in combo):
+                                continue   # constant arguments only: a constant, not a block
+                            if over():
+                                return None
+                            evals += 1
                             yield evals
-                            continue
-                        if floors and iop.out == "int":
-                            hit = yield from floor_fit(tree, vals, iop.round)
-                            if hit is not None:
-                                return hit
-                        if k in B or k in istate["seen"]:
-                            continue
-                        istate["seen"].add(k)
-                        offer(sz, tree, vals, True, P, B)
-                        if iop.out != "int" or task.out != "int":
-                            continue
-                        for g2, wrap, tag, _d in ltargets:
-                            for op in ("add", "sub", "rsub", "mul"):
-                                if over():
-                                    return None
-                                evals += 1
-                                yield evals
-                                need = _residual(op, vals, g2)
-                                b = table.get(_key(need)) if need is not None else None
-                                if b is None:
-                                    continue
-                                hit = ["sub", b, tree] if op == "rsub" else [op, tree, b]
-                                hit = fit(wrap(hit) if wrap else hit, tag, iop.round)
+                            try:
+                                vals = tuple(iop.fn(*args) for args in zip(*(c[1] for c in combo)))
+                            except (Invalid, ValueError, TypeError, IndexError, OverflowError):
+                                continue
+                            if any(type_of(v) != iop.out for v in vals):
+                                continue
+                            if any(vals == c[1] for c in combo):
+                                continue   # the application just returns an argument: no new block
+                            tree = iop.build([c[0] for c in combo])
+                            k = (iop.out, _key(vals))
+                            if iop.out == task.out and _key(vals) in tset:
+                                wrap, tag = tset[_key(vals)]
+                                hit = fit(wrap(tree) if wrap else tree, tag, iop.round)
                                 if hit is not None:
                                     return hit
                                 yield evals
+                                continue
+                            if floors and iop.out == "int":
+                                hit = yield from floor_fit(tree, vals, iop.round)
+                                if hit is not None:
+                                    return hit
+                            if k in B or k in istate["seen"]:
+                                continue
+                            istate["seen"].add(k)
+                            offer(sz, tree, vals, True, P, B)
+                            if iop.out != "int" or task.out != "int":
+                                continue
+                            for g2, wrap, tag, _d in ltargets:
+                                for op in ("add", "sub", "rsub", "mul"):
+                                    if over():
+                                        return None
+                                    evals += 1
+                                    yield evals
+                                    need = _residual(op, vals, g2)
+                                    b = table.get(_key(need)) if need is not None else None
+                                    if b is None:
+                                        continue
+                                    hit = ["sub", b, tree] if op == "rsub" else [op, tree, b]
+                                    hit = fit(wrap(hit) if wrap else hit, tag, iop.round)
+                                    if hit is not None:
+                                        return hit
+                                    yield evals
+        if pats and task.out == "str":
+            learned_s = ri + [z for z in ranked if all(type(x) is str for x in z[3])]
+            hit = yield from text_templates(P, learned_s, paid=True)
+            if hit is not None:
+                return hit
         return None
 
     def anchor1(rk, table, limit, g, wrap):
@@ -2324,6 +2405,16 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             if pinfo.get("graph"):
                 via += "+graph"
         return Search(hit, evals, None, order, libs, via, tried, sinfo)
+
+    # TEXT_ABSTRACT (docs/TEXTPAT.md): try reusable string templates first, with
+    # only input values in the memo. A miss costs nothing, so stage 1 below stays
+    # the exact cold search; a public-row hit costs 1 evaluation and is WITNESS-gated.
+    if pats and task.out == "str":
+        istate["ilimit"] = max_eval
+        hit = yield from text_templates({}, [], paid=False)
+        if hit is not None:
+            pinfo["hit"] = True
+            return done(hit)
 
     # stage 1: the cold search below max_size
     for a in [["var", n] for n, _ in task.inputs] + [["const", c] for c in INT_CONSTANTS]:
