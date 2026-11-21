@@ -114,3 +114,50 @@ shuffled among groups, seeds 0-2); report only: math_route.
 
 All six pass: `NOMAD_ROUTE` defaults to on in a separate commit. Otherwise it
 stays off, and the code and the result are committed here as they are.
+
+## Sealed result (2026-11-21): FAIL. `NOMAD_ROUTE` stays **off**
+
+TRANSFER-5 sha256 `1db6039e7c4a495c6bb3cb9a28ca62cd0d955d19e213c5a5d16af866a8d86df4`,
+33 hard tasks (16 easy). Raw output: `results/route/`.
+
+| TRANSFER-5 arm | certified / 33 | evaluations |
+|---|---|---|
+| cold | 0 | 310,581 |
+| empty | 8 | 272,791 |
+| empty_route | 8 | 272,791 |
+| trained (ROUTE off) | 26 | 206,361 |
+| trained_route | 26 | 206,385 |
+| trained_route_perm0 / 1 / 2 | 26 / 26 / 26 | 206,357 / 206,377 / 206,313 |
+| math_route (report only) | 16 | 229,742 |
+
+Existing frozen suites (trained ROUTE off -> on; empty, cold): deep 27 -> 27
+of 40 (25, 0); science hard 12 -> **11** of 14 (0, 0), **lost
+sci_water_mol** (certified by trained at 9,890 of 10,000 evaluations; the
+re-ordered anchors push it over budget); TRANSFER-1 19 -> 19 of 20 (2, 0);
+TRANSFER-2 32 -> 32 of 35 (2, 0); TRANSFER-3 27 -> 27 of 40 (1, 0);
+TRANSFER-4 18 -> 18 of 35 (2, 0); TEXT 3 -> 3 of 24 (0, 0). The ROUTE-off
+arms reproduce every earlier baseline exactly (the bookkeeping changes no
+decision). LOFO: 5,883 with ROUTE on and off, worst 1.0x.
+
+| criterion | result |
+|---|---|
+| 1 ROUTE beats off (>= +1, no loss) | **fail** (+0) |
+| 2 gain vanishes with an empty field | pass (identical by construction) |
+| 3 no new worse-than-cold task | pass |
+| 4 gain needs the learned table (vs permuted mean) | **fail** (0.0) |
+| 5 zero per-task losses on frozen suites | **fail** (science hard: sci_water_mol) |
+| 6 LOFO <= 5,883, worst <= 1.0x | pass |
+
+**What this says.** A coarse routing prior (task shape x source shape)
+carries no information the fixed `block_score` does not already have: on
+sealed data the learned and three shuffled tables give the same 26, and on
+dev the learned table (162) is inside the shuffled spread (159-163). The
+small dev wins were tie-order luck, and the sealed loss is the same luck the
+other way. Two structural reasons: (1) the judge fields are tiny (math_sci:
+14 library blocks, 22 programs; banks <= 129, so `PORT_SCAN` never cuts and
+there is little to route between), and (2) a group-level prior can only
+re-order blocks that already tie on the goal-match score, while what decides
+a hit is the specific block's fit to this goal. The table, its persistence
+and the off switch stay in the code (learning is cheap and always on), so a
+later, finer interconnect (docs/INTERCONNECT.md) can use the evidence; the
+permuted-table control is now part of the protocol for any learned routing.
