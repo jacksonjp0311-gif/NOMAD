@@ -1,0 +1,614 @@
+{
+ "tasks": 14,
+ "certified": {
+  "cold": 0,
+  "trained": 12,
+  "trained_merge": 12,
+  "trained_rw0": 11,
+  "trained_rw1": 11,
+  "trained_rw2": 11
+ },
+ "evaluations": {
+  "cold": 140000,
+  "trained": 91987,
+  "trained_merge": 90929,
+  "trained_rw0": 91145,
+  "trained_rw1": 91154,
+  "trained_rw2": 91146
+ },
+ "by_domain": {
+  "cold": {
+   "science": [
+    0,
+    14
+   ]
+  },
+  "trained": {
+   "science": [
+    12,
+    14
+   ]
+  },
+  "trained_merge": {
+   "science": [
+    12,
+    14
+   ]
+  },
+  "trained_rw0": {
+   "science": [
+    11,
+    14
+   ]
+  },
+  "trained_rw1": {
+   "science": [
+    11,
+    14
+   ]
+  },
+  "trained_rw2": {
+   "science": [
+    11,
+    14
+   ]
+  }
+ },
+ "worse_than_cold": {
+  "cold": [],
+  "trained": [],
+  "trained_merge": [],
+  "trained_rw0": [],
+  "trained_rw1": [],
+  "trained_rw2": []
+ },
+ "per_task[certified, evals, via, candidate]": {
+  "sci_d_rest": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5683,
+    "port:scale:div2",
+    "div(add(mul(t, mul(t, a)), 0), 2)"
+   ],
+   "trained_merge": [
+    true,
+    5560,
+    "port:scale:div2",
+    "div(add(mul(t, mul(t, a)), 0), 2)"
+   ],
+   "trained_rw0": [
+    true,
+    5582,
+    "port:scale:div2",
+    "div(add(mul(t, mul(t, a)), 0), 2)"
+   ],
+   "trained_rw1": [
+    true,
+    5582,
+    "port:scale:div2",
+    "div(add(mul(t, mul(t, a)), 0), 2)"
+   ],
+   "trained_rw2": [
+    true,
+    5580,
+    "port:scale:div2",
+    "div(add(mul(t, mul(t, a)), 0), 2)"
+   ]
+  },
+  "sci_displacement": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5797,
+    "port:scale:div2",
+    "div(add(mul(t, mul(t, a)), mul(u, add(t, t))), 2)"
+   ],
+   "trained_merge": [
+    true,
+    5650,
+    "port:scale:div2",
+    "div(add(mul(t, mul(t, a)), mul(u, add(t, t))), 2)"
+   ],
+   "trained_rw0": [
+    true,
+    5679,
+    "port:scale:div2",
+    "div(add(mul(t, mul(t, a)), mul(u, add(t, t))), 2)"
+   ],
+   "trained_rw1": [
+    true,
+    5666,
+    "port:scale:div2",
+    "div(add(mul(t, mul(t, a)), mul(u, add(t, t))), 2)"
+   ],
+   "trained_rw2": [
+    true,
+    5667,
+    "port:scale:div2",
+    "div(add(mul(t, mul(t, a)), mul(u, add(t, t))), 2)"
+   ]
+  },
+  "sci_vmean_uat": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5135,
+    "port:anchor",
+    "sub(add(mul(a, t), u), div(mul(a, t), 2))"
+   ],
+   "trained_merge": [
+    true,
+    5108,
+    "port:anchor",
+    "sub(add(mul(a, t), u), div(mul(a, t), 2))"
+   ],
+   "trained_rw0": [
+    true,
+    5112,
+    "port:anchor",
+    "sub(add(u, mul(a, t)), div(mul(a, t), 2))"
+   ],
+   "trained_rw1": [
+    true,
+    5112,
+    "port:anchor",
+    "sub(add(u, mul(a, t)), div(mul(a, t), 2))"
+   ],
+   "trained_rw2": [
+    true,
+    5116,
+    "port:anchor",
+    "sub(add(u, mul(a, t)), div(mul(a, t), 2))"
+   ]
+  },
+  "sci_vsq": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5134,
+    "port:anchor",
+    "add(mul(add(d, d), a), mul(u, u))"
+   ],
+   "trained_merge": [
+    true,
+    5107,
+    "port:anchor",
+    "add(mul(add(d, d), a), mul(u, u))"
+   ],
+   "trained_rw0": [
+    true,
+    5111,
+    "port:anchor",
+    "add(mul(add(a, a), d), mul(u, u))"
+   ],
+   "trained_rw1": [
+    true,
+    5111,
+    "port:anchor",
+    "add(mul(add(a, a), d), mul(u, u))"
+   ],
+   "trained_rw2": [
+    true,
+    5111,
+    "port:anchor",
+    "add(mul(add(a, a), d), mul(u, u))"
+   ]
+  },
+  "sci_d_uvt": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    6130,
+    "port:scale:div2",
+    "div(add(add(mul(t, v), u), sub(mul(u, t), u)), 2)"
+   ],
+   "trained_merge": [
+    true,
+    5978,
+    "port:scale:div2",
+    "div(add(add(mul(t, v), u), sub(mul(u, t), u)), 2)"
+   ],
+   "trained_rw0": [
+    true,
+    6002,
+    "port:scale:div2",
+    "div(add(mul(v, t), mul(u, t)), 2)"
+   ],
+   "trained_rw1": [
+    true,
+    6008,
+    "port:scale:div2",
+    "div(add(mul(v, t), mul(u, t)), 2)"
+   ],
+   "trained_rw2": [
+    true,
+    6020,
+    "port:scale:div2",
+    "div(add(mul(v, t), mul(u, t)), 2)"
+   ]
+  },
+  "sci_ke_v": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    6354,
+    "port:scale:div2",
+    "div(add(mul(v, mul(v, m)), 0), 2)"
+   ],
+   "trained_merge": [
+    true,
+    6201,
+    "port:scale:div2",
+    "div(add(mul(v, mul(v, m)), 0), 2)"
+   ],
+   "trained_rw0": [
+    true,
+    6215,
+    "port:scale:div2",
+    "div(add(mul(v, mul(v, m)), 0), 2)"
+   ],
+   "trained_rw1": [
+    true,
+    6222,
+    "port:scale:div2",
+    "div(add(mul(v, mul(v, m)), 0), 2)"
+   ],
+   "trained_rw2": [
+    true,
+    6217,
+    "port:scale:div2",
+    "div(add(mul(v, mul(v, m)), 0), 2)"
+   ]
+  },
+  "sci_ke_u": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    6350,
+    "port:scale:div2",
+    "div(add(mul(u, mul(u, m)), 0), 2)"
+   ],
+   "trained_merge": [
+    true,
+    6227,
+    "port:scale:div2",
+    "div(add(mul(u, mul(u, m)), 0), 2)"
+   ],
+   "trained_rw0": [
+    true,
+    6235,
+    "port:scale:div2",
+    "div(add(mul(u, mul(u, m)), 0), 2)"
+   ],
+   "trained_rw1": [
+    true,
+    6238,
+    "port:scale:div2",
+    "div(add(mul(u, mul(u, m)), 0), 2)"
+   ],
+   "trained_rw2": [
+    true,
+    6239,
+    "port:scale:div2",
+    "div(add(mul(u, mul(u, m)), 0), 2)"
+   ]
+  },
+  "sci_dke": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5727,
+    "port:scale:div2",
+    "div(sub(mul(v, mul(v, m)), mul(m, mul(u, u))), 2)"
+   ],
+   "trained_merge": [
+    true,
+    5592,
+    "port:scale:div2",
+    "div(sub(mul(v, mul(v, m)), mul(m, mul(u, u))), 2)"
+   ],
+   "trained_rw0": [
+    true,
+    5592,
+    "port:scale:div2",
+    "div(sub(mul(v, mul(v, m)), mul(m, mul(u, u))), 2)"
+   ],
+   "trained_rw1": [
+    true,
+    5596,
+    "port:scale:div2",
+    "div(sub(mul(v, mul(v, m)), mul(m, mul(u, u))), 2)"
+   ],
+   "trained_rw2": [
+    true,
+    5580,
+    "port:scale:div2",
+    "div(sub(mul(v, mul(v, m)), mul(m, mul(u, u))), 2)"
+   ]
+  },
+  "sci_energy": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5133,
+    "port:anchor",
+    "mul(mul(I, mul(I, t)), R)"
+   ],
+   "trained_merge": [
+    true,
+    5106,
+    "port:anchor",
+    "mul(mul(I, mul(I, t)), R)"
+   ],
+   "trained_rw0": [
+    true,
+    5106,
+    "port:anchor",
+    "mul(mul(I, mul(I, t)), R)"
+   ],
+   "trained_rw1": [
+    true,
+    5106,
+    "port:anchor",
+    "mul(mul(I, mul(I, t)), R)"
+   ],
+   "trained_rw2": [
+    true,
+    5106,
+    "port:anchor",
+    "mul(mul(I, mul(I, t)), R)"
+   ]
+  },
+  "sci_hm_to_s": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5329,
+    "port:anchor",
+    "add(mul(k, m), mul(mul(k, h), k))"
+   ],
+   "trained_merge": [
+    true,
+    5257,
+    "port:anchor",
+    "add(mul(k, m), mul(mul(k, h), k))"
+   ],
+   "trained_rw0": [
+    true,
+    5253,
+    "port:anchor",
+    "add(mul(m, k), mul(mul(k, h), k))"
+   ],
+   "trained_rw1": [
+    true,
+    5260,
+    "port:anchor",
+    "add(mul(m, k), mul(mul(k, h), k))"
+   ],
+   "trained_rw2": [
+    true,
+    5257,
+    "port:anchor",
+    "add(mul(m, k), mul(mul(k, h), k))"
+   ]
+  },
+  "sci_hms_to_s": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5325,
+    "port:anchor",
+    "add(add(s, mul(k, m)), mul(mul(k, h), k))"
+   ],
+   "trained_merge": [
+    true,
+    5253,
+    "port:anchor",
+    "add(add(s, mul(k, m)), mul(mul(k, h), k))"
+   ],
+   "trained_rw0": [
+    true,
+    5258,
+    "port:anchor",
+    "add(add(s, mul(m, k)), mul(mul(k, h), k))"
+   ],
+   "trained_rw1": [
+    true,
+    5253,
+    "port:anchor",
+    "add(add(s, mul(m, k)), mul(mul(k, h), k))"
+   ],
+   "trained_rw2": [
+    true,
+    5253,
+    "port:anchor",
+    "add(add(s, mul(m, k)), mul(mul(k, h), k))"
+   ]
+  },
+  "sci_dist_m": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "trained_merge": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "trained_rw0": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "trained_rw1": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "trained_rw2": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ]
+  },
+  "sci_water_mol": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    9890,
+    "port:probe",
+    "min(mul(kH, div(gO, kO)), div(gH, kH))"
+   ],
+   "trained_merge": [
+    true,
+    9890,
+    "port:probe",
+    "min(mul(kH, div(gO, kO)), div(gH, kH))"
+   ],
+   "trained_rw0": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "trained_rw1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_rw2": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "sci_water_g": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_merge": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_rw0": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_rw1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_rw2": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  }
+ },
+ "sha256": "4517167f150ef9cfcff5ae947f82d4bd93b9b6ecf5843c2f2976f7b95d54868d",
+ "verdict": {
+  "merge_lost": [],
+  "rewired_lost": {
+   "0": [
+    "sci_water_mol"
+   ],
+   "1": [
+    "sci_water_mol"
+   ],
+   "2": [
+    "sci_water_mol"
+   ]
+  }
+ }
+}

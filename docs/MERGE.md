@@ -121,3 +121,26 @@ run here (running them off / on would measure their sealed suites first). Criter
 other judge in `scripts/switch_regress.py` except `merge` itself: learning, transfer1-4, secondary4,
 text, bridge, text_invent, route5, transfer6, selfedit2, text_chain, meaning, inflect, let, textpat,
 roles. Measured from a snapshot of `81063e0`.
+
+## Sealed result, part 1 (measured once from a snapshot of 81063e0; regressions pending)
+
+TRANSFER-8 (sha 1d5cd94d, 23 hard; `results/merge/transfer8_sealed.json`):
+
+| arm | certified | evaluations |
+|---|---|---|
+| cold | 0 | 230,000 |
+| empty / empty_merge | 6 / 6 (identical per task) | 201,430 / 201,430 |
+| trained (math_sci) off / merge | 14 / 14 | 171,182 / 170,252 |
+| trained rewired 0 / 1 / 2 | 14 / 14 / 14 | 170,339 / 170,354 / 170,329 |
+| practice off / merge | 14 / 14 | 172,254 / 171,501 |
+| practice rewired 0 / 1 / 2 | 14 / 14 / 14 | 171,698 / 171,686 / 172,476 |
+
+Science hard (`results/merge/science_hard.json`): trained 12, trained_merge 12 (0 lost); rewired 11 / 11 / 11
+(each loses `sci_water_mol`). LOFO (`results/merge/lofo.json`): 5,883 / 5,883, worst 1.0x.
+
+- Criterion 1 **FAIL** (merge = off on both fields, 14 = 14; the dev gain of +4 did not transfer).
+- Criterion 2 pass (merge loses 0; the rewired controls lose 3 in total).
+- Criterion 3 pass, criterion 4 pass, criterion 6 LOFO pass.
+- Criterion 5: running (adds COMBINE and CEIL, now measured by their owners, as extra judges).
+
+`NOMAD_MERGE` stays **off** whatever criterion 5 shows.
