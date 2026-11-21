@@ -77,3 +77,48 @@ Expectation stated before measuring (from dev seeds 7 / 11: lang 2 and 3,
 math_sci 0, all_sci = lang): a **weak or failing** transfer. The domain and
 judge are committed either way; nothing in it is switched on by default
 (the `text` opset is only used by text tasks).
+
+## Sealed result (measured once, 2026-11-21, after `1580629`)
+
+`python3 scripts/text_judge.py`, sha `08a826a3…4a02`, 24 hard:
+
+| Arm | Certified /24 | Evaluations | vs empty |
+|---|---|---|---|
+| cold | 0 | 240,000 | |
+| empty (no memory) | 0 | 240,000 | |
+| **lang** (8 WORLD language + coding families) | **3** | 225,995 (-5.8%) | **+3** |
+| math + science (report) | 0 | 240,000 | 0 |
+| all 16 WORLD + science ("everything") | 3 | 225,995 | +3 |
+| everything, PORT off | 0 | 240,000 | 0 |
+| everything, GROW off (report) | 3 | 225,995 | +3 |
+
+By kind (lang): initials 2/6, lengths 1/1, joining 0/4, casing 0/4,
+slicing 0/4, mixed string+integer 0/5.
+
+| Criterion | Bar | Result | Met? |
+|---|---|---|---|
+| 1. lang vs empty | >= +3 or 25% fewer | **+3** (3 vs 0), -5.8% | yes, exactly at the bar |
+| 2. everything vs empty | same | +3 | yes |
+| 3. Integer + string combine? | all_sci - lang > 0 | **0**; math_sci alone 0 | **no** |
+| 4. No arm worse than cold | 0 | 0 | yes |
+| 5. Suites, cold, LOFO, tests | | unchanged; 396 tests | yes |
+
+Decision: string transfer **passes narrowly**; integer and string skills
+**do not combine**. Nothing is switched on (the `text` opset is used only by
+text tasks; SPLICE stays off).
+
+What carries it (all `port:*`, so renamed memory; PORT off = empty):
+
+- `t_ends_both` and `t_ends_upper_both`: the WORLD `first_last` program
+  `concat(first(s), last(s))` renamed onto `fn` and `ln`, used as probe atoms;
+- `t_card_len` (characters in "Last, First"): the WORLD `len_plus_len`
+  block, an int anchor: `strlen(concat(cm, cm)) + strlen(concat(fn, ln))`.
+
+Honest reading: the language memory is four tiny programs; almost
+everything it holds is already in the cold pools, so it adds little. The 5
+mixed string+integer tasks get nothing from math or science memory: their
+int blocks need int inputs to rename onto, and these tasks have one
+(`rep`). GROW adds nothing here (scales and two-block anchors are int-only,
+and the language field holds no constant >= 2). The 4 slicing tasks need
+`rest` *combined* with casing at size 7+, beyond the cold budget, and no
+trained arm has ever certified a program using `rest`.
