@@ -8,14 +8,14 @@
         "evaluations": 10000
       },
       "field": {
-        "certified": false,
-        "evaluations": 10000,
-        "candidate": null,
+        "certified": true,
+        "evaluations": 4300,
+        "candidate": "ite(sub(x, y), sub(x, y), sub(y, x))",
         "library_used": [],
-        "via": null
+        "via": "casesplit:d1"
       },
-      "field_beats_control": false,
-      "kind": "none"
+      "field_beats_control": true,
+      "kind": "certified_correctness"
     },
     "quartic_sum": {
       "needs": "learned building blocks",
@@ -26,7 +26,7 @@
       },
       "field": {
         "certified": true,
-        "evaluations": 13495,
+        "evaluations": 15174,
         "candidate": "add(mul(mul(x, x), mul(x, x)), mul(mul(y, y), mul(y, y)))",
         "library_used": [
           "Lfd47622b",
@@ -74,8 +74,8 @@
       "kind": "none"
     }
   },
-  "field_witnessed": 2727,
+  "field_witnessed": 2754,
   "library_size": 5,
   "note": "Never-trained families, fixed budgets. Not a general capability claim.",
-  "ts": "2026-11-21T01:14:55Z"
+  "ts": "2026-11-21T06:31:08Z"
 }

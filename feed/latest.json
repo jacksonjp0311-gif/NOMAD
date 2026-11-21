@@ -28,7 +28,7 @@
     ]
    ],
    "tree_sha256": "38c83dccb9474914589294137aed5283870393402bb187e82d3254ac6449ead7",
-   "uses": 5.5776
+   "uses": 6.5361
   },
   {
    "block_id": "L915ba1af",
@@ -53,7 +53,7 @@
     ]
    ],
    "tree_sha256": "a47c202ae79fb40749db9ed656d9912cb6819ff6790e6cbad909a647703d9df9",
-   "uses": 6.4376
+   "uses": 6.3694
   },
   {
    "block_id": "Lda56c88a",
@@ -80,7 +80,7 @@
     ]
    ],
    "tree_sha256": "56030449b1887958364397ace9ab393d7dbfddc7b48557a1ff02062bbc679144",
-   "uses": 12.7838
+   "uses": 12.5277
   },
   {
    "block_id": "Le41f5b00",
@@ -111,7 +111,7 @@
     ]
    ],
    "tree_sha256": "1ef9aa7d777db2360b92d31c7eeedbfeea87b86cbbe3f616c40a1451dc742f52",
-   "uses": 12.6663
+   "uses": 12.5699
   },
   {
    "block_id": "Lfd47622b",
@@ -141,7 +141,7 @@
     ]
    ],
    "tree_sha256": "8f2e0e2ed308f492019fab9ffe14f676f17b4c65fbc98777c1834d7d53f125c7",
-   "uses": 6.5168
+   "uses": 6.4669
   }
  ],
  "boundaries": "Tiny typed programs (<= 7 nodes). Certified on frozen rows only; not general coding.",
@@ -186,6 +186,14 @@
     "world_epoch": 0
    },
    "rendered": "max(x, y)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "selection",
+    "schema": "nomad.sense.v1",
+    "sense_id": "de9d35316bc41cd9",
+    "shape": "bounded",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -332,6 +340,14 @@
     "world_epoch": 0
    },
    "rendered": "min(x, y)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "selection",
+    "schema": "nomad.sense.v1",
+    "sense_id": "ba3a29ed69e8bd8b",
+    "shape": "bounded",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -478,6 +494,14 @@
     "world_epoch": 0
    },
    "rendered": "mod(x, y)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "quotient",
+    "schema": "nomad.sense.v1",
+    "sense_id": "49248cc14768f182",
+    "shape": "bounded",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -624,6 +648,14 @@
     "world_epoch": 0
    },
    "rendered": "div(x, y)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "quotient",
+    "schema": "nomad.sense.v1",
+    "sense_id": "0e1b5fe48ffc2f2e",
+    "shape": "bounded",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -777,6 +809,14 @@
     "world_epoch": 0
    },
    "rendered": "max(sub(x, y), 0)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "piecewise",
+    "schema": "nomad.sense.v1",
+    "sense_id": "7719317e820072e3",
+    "shape": "bounded",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -936,6 +976,14 @@
     "world_epoch": 0
    },
    "rendered": "ite(sub(x, y), x, 0)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "piecewise",
+    "schema": "nomad.sense.v1",
+    "sense_id": "bf94526f68af7243",
+    "shape": "bounded",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -1091,6 +1139,14 @@
     "world_epoch": 0
    },
    "rendered": "add(mul(x, x), y)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "polynomial",
+    "schema": "nomad.sense.v1",
+    "sense_id": "b36205d450efb0bd",
+    "shape": "growth",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -1193,7 +1249,7 @@
    },
    "treatment": {
     "certified": true,
-    "evaluations": 40,
+    "evaluations": 44,
     "library_used": [
      "Lfd47622b"
     ]
@@ -1246,6 +1302,14 @@
     "world_epoch": 0
    },
    "rendered": "sub(mul(y, y), x)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "polynomial",
+    "schema": "nomad.sense.v1",
+    "sense_id": "3c23b20920672dd2",
+    "shape": "growth",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -1348,7 +1412,7 @@
    },
    "treatment": {
     "certified": true,
-    "evaluations": 67,
+    "evaluations": 60,
     "library_used": [
      "L78674ed3"
     ]
@@ -1393,6 +1457,14 @@
     "world_epoch": 0
    },
    "rendered": "upper(srev(s))",
+   "sense": {
+    "domain": "language",
+    "kind": "reorder",
+    "schema": "nomad.sense.v1",
+    "sense_id": "d54a3c7f6ff8b2de",
+    "shape": "n/a",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -1524,6 +1596,14 @@
     "world_epoch": 0
    },
    "rendered": "concat(first(s), last(s))",
+   "sense": {
+    "domain": "language",
+    "kind": "reorder",
+    "schema": "nomad.sense.v1",
+    "sense_id": "05be5a3ea7a2548a",
+    "shape": "n/a",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -1652,6 +1732,14 @@
     "world_epoch": 0
    },
    "rendered": "lower(concat(s, s))",
+   "sense": {
+    "domain": "language",
+    "kind": "text_shaping",
+    "schema": "nomad.sense.v1",
+    "sense_id": "2009f01a457c3433",
+    "shape": "n/a",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -1782,6 +1870,14 @@
     "world_epoch": 0
    },
    "rendered": "strlen(concat(s, s))",
+   "sense": {
+    "domain": "language",
+    "kind": "measure",
+    "schema": "nomad.sense.v1",
+    "sense_id": "7ff0666a935c816d",
+    "shape": "n/a",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -1915,6 +2011,14 @@
     "world_epoch": 0
    },
    "rendered": "sub(lmax(xs), lmin(xs))",
+   "sense": {
+    "domain": "coding",
+    "kind": "aggregation",
+    "schema": "nomad.sense.v1",
+    "sense_id": "56ed8ea1b14fb4f3",
+    "shape": "n/a",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -2079,6 +2183,14 @@
     "world_epoch": 0
    },
    "rendered": "sum(tail(xs))",
+   "sense": {
+    "domain": "coding",
+    "kind": "aggregation",
+    "schema": "nomad.sense.v1",
+    "sense_id": "56ed8ea1b14fb4f3",
+    "shape": "n/a",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -2246,6 +2358,14 @@
     "world_epoch": 0
    },
    "rendered": "lmin(tail(sort(xs)))",
+   "sense": {
+    "domain": "coding",
+    "kind": "aggregation",
+    "schema": "nomad.sense.v1",
+    "sense_id": "56ed8ea1b14fb4f3",
+    "shape": "n/a",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -2412,6 +2532,14 @@
     "world_epoch": 0
    },
    "rendered": "lrev(sort(xs))",
+   "sense": {
+    "domain": "coding",
+    "kind": "ordering",
+    "schema": "nomad.sense.v1",
+    "sense_id": "369800f2a2765422",
+    "shape": "n/a",
+    "source": "features"
+   },
    "task": {
     "challenge": [
      [
@@ -2578,33 +2706,33 @@
    }
   }
  ],
- "feed_version": 5,
+ "feed_version": 6,
  "language": {
   "ast": "nomad.world DSL v1: [op, *children] | ['var', name] | ['const', value]",
   "interpreter": "nomad.world.run",
   "witness": "nomad-witness-world-v1"
  },
- "packet_sha256": "a3bdffb89972cb2be1f70525db8de7e51d984490c887809b743a82cde705b8b3",
- "prev_sha256": "90566cca141de7f73f7599072dc5d31cb03b8381b33a66a654747ec9776ebb91",
- "published": "2026-11-20T22:08:48Z",
+ "packet_sha256": "ef04e897055a234e3d345f42f0b26e6b88ad9ee8ef46924e4c5c8343d79a8e07",
+ "prev_sha256": "a3bdffb89972cb2be1f70525db8de7e51d984490c887809b743a82cde705b8b3",
+ "published": "2026-11-21T06:31:30Z",
  "schema": "nomad.feed.packet.v1",
  "scores": {
   "genesis_twin": {
    "all_fail_rate": 0.0,
-   "all_pass_rate": 0.9995925020374898,
-   "both_certified_pairs_with_cost": 2450,
-   "control_evaluations": 117304,
+   "all_pass_rate": 0.9996374184191443,
+   "both_certified_pairs_with_cost": 2754,
+   "control_evaluations": 119736,
    "estimator": "rloo",
-   "groups": 2454,
+   "groups": 2758,
    "informative_pairs": 1,
-   "informative_rate": 0.00040749796251018743,
-   "mean_evaluations_saved": 39.78367346938776,
+   "informative_rate": 0.00036258158085569254,
+   "mean_evaluations_saved": 35.3921568627451,
    "mean_treatment_advantage": 1.0,
    "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage.",
-   "pairs_with_cost": 2450,
-   "pass_rate": 0.9997962510187449,
-   "treatment_evaluations": 19834,
-   "treatment_over_control": 0.1691
+   "pairs_with_cost": 2754,
+   "pass_rate": 0.9998187092095722,
+   "treatment_evaluations": 22266,
+   "treatment_over_control": 0.186
   },
   "heldout": {
    "absdiff": {
@@ -2613,11 +2741,11 @@
      "evaluations": 10000
     },
     "field": {
-     "candidate": null,
-     "certified": false,
-     "evaluations": 10000
+     "candidate": "ite(sub(x, y), sub(x, y), sub(y, x))",
+     "certified": true,
+     "evaluations": 4300
     },
-    "field_beats_control": false,
+    "field_beats_control": true,
     "max_eval": 10000
    },
    "last_first_upper": {
@@ -2641,7 +2769,7 @@
     "field": {
      "candidate": "add(mul(mul(x, x), mul(x, x)), mul(mul(y, y), mul(y, y)))",
      "certified": true,
-     "evaluations": 13360
+     "evaluations": 15174
     },
     "field_beats_control": true,
     "max_eval": 150000
@@ -2664,27 +2792,27 @@
   "world_twin": {
    "all_fail_rate": 0.0,
    "all_pass_rate": 1.0,
-   "both_certified_pairs_with_cost": 2450,
-   "control_evaluations": 1346064,
+   "both_certified_pairs_with_cost": 2754,
+   "control_evaluations": 1457853,
    "estimator": "rloo",
-   "groups": 2450,
+   "groups": 2754,
    "informative_pairs": 0,
    "informative_rate": 0.0,
-   "mean_evaluations_saved": 462.0448979591837,
+   "mean_evaluations_saved": 444.8740014524328,
    "mean_treatment_advantage": null,
    "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage.",
-   "pairs_with_cost": 2450,
+   "pairs_with_cost": 2754,
    "pass_rate": 1.0,
-   "treatment_evaluations": 214054,
-   "treatment_over_control": 0.159
+   "treatment_evaluations": 232670,
+   "treatment_over_control": 0.1596
   }
  },
  "source": {
-  "commit": "3c884e0bda3d3234b48db9eaa2202e545ca67075",
-  "field_version": 817,
+  "commit": "2809aa9f6b118d97f8682ca9ba05de2870301234",
+  "field_version": 919,
   "host": null,
   "repo": "jacksonjp0311-gif/NOMAD",
-  "world_witnessed": 2448
+  "world_witnessed": 2754
  },
  "verification": {
   "blocks": "each block must be a subtree of a program in certified_in",
