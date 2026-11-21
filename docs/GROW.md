@@ -93,3 +93,54 @@ formulas are structurally close to first-catalogue ones (`g2_kite` ~
 Decision: all met -> `NOMAD_ANCHOR2` and `NOMAD_SCALE` default **on**.
 Otherwise both stay **off** by default and the result is recorded here as a
 negative result. Nothing is re-tuned on a sealed suite.
+
+## Sealed result (measured once, 2026-11-21, after `19722ec`)
+
+TRANSFER-2 (`python3 scripts/grow_judge.py`, sha `d8de7508…f19b`, 35 hard):
+
+| Arm | Certified /35 | Geometry /21 | Finance /14 | Evaluations | vs empty |
+|---|---|---|---|---|---|
+| cold | 0 | 0 | 0 | 343,470 | |
+| empty (no memory) | 2 | 1 | 1 | 343,394 | |
+| math only | 12 | 5 | 7 | 287,217 (-16.4%) | +10 |
+| **math + science (GROW on)** | **30** | 17 | 13 | 214,873 (-37.4%) | **+28** |
+| all 16 WORLD + science | 30 | 17 | 13 | 214,873 | +28 |
+| math + science, GROW off (PORT only) | 22 | 10 | 12 | 247,124 (-28.0%) | +20 |
+| math + science, PORT off | 2 | 1 | 1 | 343,394 | 0 |
+
+| Criterion | Bar | Result | Met? |
+|---|---|---|---|
+| 1. math_sci vs empty | >= +3 or 25% fewer | **+28**, -37.4% | yes |
+| 2. GROW adds (math_sci on vs off) | >= +2 | **+8** (30 vs 22), no GROW-off win lost | yes |
+| 3. No arm worse than cold | 0 | 0 | yes |
+| 4a. Deep (learning_judge, GROW on) | trained >= 25/40 | **27/40** (empty 25, PORT-off 25, practice 28), none worse than cold, none lost | yes |
+| 4b. Science hard | trained >= 9/14 | **12/14** (empty 0, PORT-off 5), -11% evals vs before | yes |
+| 4c. First transfer suite (secondary, design was shaped by its failures) | math_sci >= 11/20 | 19/20 (GROW off 11, empty 2) | yes |
+| 4d. LOFO | 5,883, worst 1.0x | 5,883, 1.0x | yes |
+| 4e. Tests | all pass | 389 pass | yes |
+
+Decision: **GROW passes.** `NOMAD_ANCHOR2` and `NOMAD_SCALE` now default
+**on**; `NOMAD_CONST` stays off.
+
+What the 8 GROW wins on TRANSFER-2 are (all WITNESS-certified, final split
+included):
+
+- learned halving (`scale:div2`, the 2 learned from science's
+  `div(add(v, u), 2)`): `g2_handshakes` `(cnt*cnt - cnt)/2`,
+  `g2_triangular` `(cnt*cnt + cnt)/2`, `g2_tri_area_diff`, `g2_kite`,
+  `g2_trap_plus_rect` `(2J*Lz + J(A+D))/2`;
+- learned third (`scale:div3`): `g2_rect_pyramid` `min(F,E)*max(F,E)*G/3`;
+- two-block anchor: `g2_ribbon` `4G + 2(E+F)`, `f2_wage_ot`
+  `rate*hr + rate*ot + (rate*ot)/2`.
+
+Deep: for the first time the trained field beats the empty field on the
+sealed deep suite (27 vs 25): the probe now runs on 2-input tasks whose stage
+1 finishes early, so PORT's renamed blocks reach them.
+
+Honest caveats: a math-only field learns no scale (its memory holds no
+constant >= 2), so GROW's halving/third come from science memory; still
+unsolved on TRANSFER-2: `g2_box_minus_cube` (a cube), `g2_cuboid_edges_diff`
+(4(E+F-2G)), `g2_hex_number`, `g2_square_pyr_number` (/6 of a cubic),
+`f2_split_bill` (two nested divisions). Several certified programs are exact
+on the stated input ranges rather than symbolic identities (e.g.
+`(rate*ot)/2` is exact because `rate*ot*3/2` is an integer on every row).

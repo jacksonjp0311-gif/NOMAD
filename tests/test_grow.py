@@ -48,6 +48,17 @@ class Scales(unittest.TestCase):
         self.assertEqual(dict(bank_scales(bank))[9], ["mul", ["const", 3], ["const", 3]])
 
 
+class Defaults(unittest.TestCase):
+    def test_defaults_after_sealed_pass(self):
+        from nomad.world import anchor2_enabled, const_enabled, scale_enabled
+        _env()
+        self.assertTrue(anchor2_enabled() and scale_enabled())   # docs/GROW.md: passed on TRANSFER-2
+        self.assertFalse(const_enabled())                        # no dev gain: stays off
+        _env(NOMAD_ANCHOR2="off", NOMAD_SCALE="off")
+        self.assertFalse(anchor2_enabled() or scale_enabled())
+        _env()
+
+
 class GrowSearch(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

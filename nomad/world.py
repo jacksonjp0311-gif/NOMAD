@@ -760,7 +760,7 @@ def _flag(name: str, default: str) -> bool:
 
 def anchor2_enabled() -> bool:
     """NOMAD_ANCHOR2: sums of two learned blocks plus a residual (sum-of-products)."""
-    return _flag("NOMAD_ANCHOR2", "off")
+    return _flag("NOMAD_ANCHOR2", "on")
 
 
 GROW_CAP = 0.25         # fraction of max_eval the two-block and rescaled anchors may spend, in total
@@ -769,7 +769,7 @@ GROW_REJECTS = 8         # two-block and rescaled anchor fits WITNESS may reject
 
 def scale_enabled() -> bool:
     """NOMAD_SCALE: constants learned memory divides or multiplies by rescale the goal."""
-    return _flag("NOMAD_SCALE", "off")
+    return _flag("NOMAD_SCALE", "on")
 
 
 def bank_scales(bank: list) -> list[tuple[int, list]]:
