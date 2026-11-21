@@ -1,0 +1,3585 @@
+{
+ "budget": 10000,
+ "domains": [
+  "farm",
+  "school",
+  "kitchen"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 594,
+   "cold_reason": null,
+   "domain": "farm",
+   "family": "l_ctl_one_step",
+   "formula": "control: xa xb + xc",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 2,
+      "xb": 12,
+      "xc": 30
+     },
+     54
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 7,
+      "xc": 26
+     },
+     103
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 11,
+      "xc": 8
+     },
+     41
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 8,
+      "xc": 27
+     },
+     51
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 4,
+      "xc": 12
+     },
+     44
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 8,
+      "xc": 26
+     },
+     74
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 11,
+      "xc": 5
+     },
+     115
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 2,
+      "xc": 14
+     },
+     26
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 6,
+      "xc": 3
+     },
+     39
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 6,
+      "xc": 6
+     },
+     72
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 1,
+      "xc": 28
+     },
+     29
+    ]
+   ],
+   "task_id": "t-22",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "xa"
+     ],
+     [
+      "var",
+      "xb"
+     ]
+    ],
+    [
+     "var",
+     "xc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 593,
+   "cold_reason": null,
+   "domain": "school",
+   "family": "l_ctl_one_step2",
+   "formula": "control: xa + xb xc",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 5,
+      "xb": 6,
+      "xc": 28
+     },
+     173
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 12,
+      "xc": 25
+     },
+     302
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 4,
+      "xc": 5
+     },
+     27
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 11,
+      "xc": 15
+     },
+     177
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 3,
+      "xc": 11
+     },
+     36
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 11,
+      "xc": 30
+     },
+     336
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 2,
+      "xc": 1
+     },
+     3
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 2,
+      "xc": 25
+     },
+     61
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 11,
+      "xc": 9
+     },
+     111
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 9,
+      "xc": 15
+     },
+     137
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 2,
+      "xc": 4
+     },
+     11
+    ]
+   ],
+   "task_id": "t-23",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "var",
+     "xa"
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "xb"
+     ],
+     [
+      "var",
+      "xc"
+     ]
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "l_feed_third_more",
+   "formula": "sheep t = xa pens x xb; feed = t + t // 3",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 10,
+      "xb": 6,
+      "xc": 21
+     },
+     80
+    ],
+    [
+     {
+      "xa": 9,
+      "xb": 1,
+      "xc": 26
+     },
+     12
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 9,
+      "xc": 21
+     },
+     84
+    ],
+    [
+     {
+      "xa": 9,
+      "xb": 10,
+      "xc": 24
+     },
+     120
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 10,
+      "xc": 22
+     },
+     93
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 3,
+      "xc": 24
+     },
+     28
+    ],
+    [
+     {
+      "xa": 9,
+      "xb": 10,
+      "xc": 23
+     },
+     120
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 6,
+      "xc": 19
+     },
+     80
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 4,
+      "xc": 4
+     },
+     5
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 11,
+      "xc": 2
+     },
+     176
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 4,
+      "xc": 20
+     },
+     26
+    ]
+   ],
+   "task_id": "t-00",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "xa"
+     ],
+     [
+      "var",
+      "xb"
+     ]
+    ],
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "school",
+   "family": "l_class_pairs",
+   "formula": "students t = xa rows x xb; pairs among them = t (t - 1) // 2",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 5,
+      "xb": 5,
+      "xc": 4
+     },
+     300
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 2,
+      "xc": 12
+     },
+     15
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 9,
+      "xc": 9
+     },
+     1431
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 4,
+      "xc": 6
+     },
+     120
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 3,
+      "xc": 8
+     },
+     15
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 3,
+      "xc": 18
+     },
+     15
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 8,
+      "xc": 2
+     },
+     3828
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 9,
+      "xc": 10
+     },
+     153
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 2,
+      "xc": 15
+     },
+     28
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 11,
+      "xc": 13
+     },
+     1485
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 7,
+      "xc": 24
+     },
+     21
+    ]
+   ],
+   "task_id": "t-01",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "var",
+        "xa"
+       ],
+       [
+        "var",
+        "xb"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "school",
+   "family": "l_gap_to_goal",
+   "formula": "points t = xa x xb; distance to the goal xc = |t - xc|",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 7,
+      "xb": 8,
+      "xc": 21
+     },
+     35
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 10,
+      "xc": 10
+     },
+     50
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 1,
+      "xc": 14
+     },
+     10
+    ],
+    [
+     {
+      "xa": 9,
+      "xb": 9,
+      "xc": 23
+     },
+     58
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 3,
+      "xc": 23
+     },
+     20
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 2,
+      "xc": 2
+     },
+     8
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 1,
+      "xc": 29
+     },
+     27
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 5,
+      "xc": 25
+     },
+     0
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 11,
+      "xc": 29
+     },
+     4
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 7,
+      "xc": 30
+     },
+     19
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 3,
+      "xc": 17
+     },
+     5
+    ]
+   ],
+   "task_id": "t-02",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "max",
+     [
+      "mul",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ],
+     [
+      "var",
+      "xc"
+     ]
+    ],
+    [
+     "min",
+     [
+      "mul",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ],
+     [
+      "var",
+      "xc"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "l_items_after_buy",
+   "formula": "money left t = xc xd - xa xb; then items at price xb = t // xb",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc",
+    "xd"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 1,
+      "xb": 11,
+      "xc": 21,
+      "xd": 7
+     },
+     12
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 7,
+      "xc": 11,
+      "xd": 6
+     },
+     1
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 2,
+      "xc": 27,
+      "xd": 2
+     },
+     15
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 6,
+      "xc": 25,
+      "xd": 7
+     },
+     24
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 3,
+      "xc": 20,
+      "xd": 5
+     },
+     31
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 3,
+      "xc": 16,
+      "xd": 7
+     },
+     31
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 4,
+      "xc": 13,
+      "xd": 6
+     },
+     8
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 5,
+      "xc": 18,
+      "xd": 3
+     },
+     8
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 1,
+      "xc": 12,
+      "xd": 8
+     },
+     95
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 2,
+      "xc": 22,
+      "xd": 6
+     },
+     63
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 7,
+      "xc": 9,
+      "xd": 9
+     },
+     4
+    ]
+   ],
+   "task_id": "t-03",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "sub",
+     [
+      "mul",
+      [
+       "var",
+       "xc"
+      ],
+      [
+       "var",
+       "xd"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "xb"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "l_square_of_total",
+   "formula": "animals t = xa + xb; t squared minus xc sold",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 10,
+      "xb": 5,
+      "xc": 6
+     },
+     219
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 7,
+      "xc": 11
+     },
+     89
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 9,
+      "xc": 21
+     },
+     175
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 5,
+      "xc": 21
+     },
+     15
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 12,
+      "xc": 14
+     },
+     182
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 4,
+      "xc": 22
+     },
+     203
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 11,
+      "xc": 14
+     },
+     242
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 2,
+      "xc": 5
+     },
+     20
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 4,
+      "xc": 13
+     },
+     51
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 8,
+      "xc": 19
+     },
+     342
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 5,
+      "xc": 27
+     },
+     198
+    ]
+   ],
+   "task_id": "t-04",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "xc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "l_double_and_half",
+   "formula": "eggs t = xa xb + xc; twice t plus half of t",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 4,
+      "xb": 4,
+      "xc": 29
+     },
+     112
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 8,
+      "xc": 10
+     },
+     165
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 4,
+      "xc": 18
+     },
+     125
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 9,
+      "xc": 2
+     },
+     140
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 6,
+      "xc": 9
+     },
+     82
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 2,
+      "xc": 1
+     },
+     52
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 4,
+      "xc": 30
+     },
+     195
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 6,
+      "xc": 5
+     },
+     162
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 8,
+      "xc": 5
+     },
+     112
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 10,
+      "xc": 11
+     },
+     327
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 4,
+      "xc": 17
+     },
+     82
+    ]
+   ],
+   "task_id": "t-05",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "xa"
+       ],
+       [
+        "var",
+        "xb"
+       ]
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "xa"
+       ],
+       [
+        "var",
+        "xb"
+       ]
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "l_boxes_and_loose",
+   "formula": "cookies t = xa xb + xc; boxes of 4 plus loose = t // 4 + t mod 4",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 9,
+      "xb": 1,
+      "xc": 25
+     },
+     10
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 2,
+      "xc": 10
+     },
+     6
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 5,
+      "xc": 25
+     },
+     21
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 9,
+      "xc": 11
+     },
+     26
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 6,
+      "xc": 5
+     },
+     20
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 9,
+      "xc": 26
+     },
+     11
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 3,
+      "xc": 1
+     },
+     10
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 4,
+      "xc": 25
+     },
+     9
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 6,
+      "xc": 1
+     },
+     16
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 6,
+      "xc": 3
+     },
+     12
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 11,
+      "xc": 24
+     },
+     17
+    ]
+   ],
+   "task_id": "t-06",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "div",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "xa"
+       ],
+       [
+        "var",
+        "xb"
+       ]
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "mod",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "xa"
+       ],
+       [
+        "var",
+        "xb"
+       ]
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "school",
+   "family": "l_trip_two_legs",
+   "formula": "pupils t = xa + xb; cost t xc + t xd",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc",
+    "xd"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 6,
+      "xb": 6,
+      "xc": 26,
+      "xd": 5
+     },
+     372
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 5,
+      "xc": 24,
+      "xd": 9
+     },
+     363
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 11,
+      "xc": 26,
+      "xd": 9
+     },
+     420
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 6,
+      "xc": 25,
+      "xd": 3
+     },
+     364
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 7,
+      "xc": 30,
+      "xd": 5
+     },
+     350
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 2,
+      "xc": 10,
+      "xd": 1
+     },
+     143
+    ],
+    [
+     {
+      "xa": 9,
+      "xb": 1,
+      "xc": 28,
+      "xd": 1
+     },
+     290
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 5,
+      "xc": 9,
+      "xd": 3
+     },
+     204
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 8,
+      "xc": 21,
+      "xd": 3
+     },
+     432
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 5,
+      "xc": 6,
+      "xd": 4
+     },
+     120
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 12,
+      "xc": 3,
+      "xd": 3
+     },
+     108
+    ]
+   ],
+   "task_id": "t-07",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ],
+     [
+      "var",
+      "xc"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ],
+     [
+      "var",
+      "xd"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "l_tiles_minus_rug",
+   "formula": "t = xa xb; t squared minus t xc",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 6,
+      "xb": 8,
+      "xc": 15
+     },
+     1584
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 8,
+      "xc": 27
+     },
+     6624
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 11,
+      "xc": 7
+     },
+     7128
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 8,
+      "xc": 15
+     },
+     1000
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 3,
+      "xc": 7
+     },
+     120
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 8,
+      "xc": 2
+     },
+     960
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 12,
+      "xc": 13
+     },
+     -12
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 3,
+      "xc": 20
+     },
+     96
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 10,
+      "xc": 29
+     },
+     8910
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 5,
+      "xc": 22
+     },
+     -105
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 1,
+      "xc": 6
+     },
+     -5
+    ]
+   ],
+   "task_id": "t-08",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ],
+     [
+      "var",
+      "xc"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "l_cap_plus_t",
+   "formula": "milk t = xa xc; min(t, xb xd) + t",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc",
+    "xd"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 6,
+      "xb": 9,
+      "xc": 19,
+      "xd": 3
+     },
+     141
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 9,
+      "xc": 7,
+      "xd": 6
+     },
+     110
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 4,
+      "xc": 3,
+      "xd": 3
+     },
+     12
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 2,
+      "xc": 23,
+      "xd": 1
+     },
+     71
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 3,
+      "xc": 30,
+      "xd": 6
+     },
+     258
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 10,
+      "xc": 26,
+      "xd": 3
+     },
+     52
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 1,
+      "xc": 29,
+      "xd": 4
+     },
+     178
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 10,
+      "xc": 2,
+      "xd": 6
+     },
+     12
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 5,
+      "xc": 1,
+      "xd": 2
+     },
+     8
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 6,
+      "xc": 28,
+      "xd": 1
+     },
+     90
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 9,
+      "xc": 21,
+      "xd": 2
+     },
+     165
+    ]
+   ],
+   "task_id": "t-09",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "min",
+     [
+      "mul",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "xb"
+      ],
+      [
+       "var",
+       "xd"
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "xa"
+     ],
+     [
+      "var",
+      "xc"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "school",
+   "family": "l_thirds_and_rest",
+   "formula": "t = xa + xb + xc; t // 3 + t mod 3",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 6,
+      "xb": 4,
+      "xc": 23
+     },
+     11
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 4,
+      "xc": 28
+     },
+     13
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 9,
+      "xc": 18
+     },
+     10
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 3,
+      "xc": 30
+     },
+     13
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 4,
+      "xc": 12
+     },
+     10
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 3,
+      "xc": 4
+     },
+     4
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 10,
+      "xc": 4
+     },
+     6
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 7,
+      "xc": 12
+     },
+     9
+    ],
+    [
+     {
+      "xa": 9,
+      "xb": 5,
+      "xc": 17
+     },
+     11
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 1,
+      "xc": 6
+     },
+     4
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 9,
+      "xc": 20
+     },
+     15
+    ]
+   ],
+   "task_id": "t-10",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "div",
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "xa"
+       ],
+       [
+        "var",
+        "xb"
+       ]
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ],
+    [
+     "mod",
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "xa"
+       ],
+       [
+        "var",
+        "xb"
+       ]
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "school",
+   "family": "l_diff_sq_plus",
+   "formula": "lead t = xa - xb; t t + t",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 4,
+      "xb": 1,
+      "xc": 5
+     },
+     12
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 11,
+      "xc": 7
+     },
+     0
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 8,
+      "xc": 11
+     },
+     12
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 10,
+      "xc": 25
+     },
+     0
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 7,
+      "xc": 25
+     },
+     0
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 11,
+      "xc": 9
+     },
+     6
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 6,
+      "xc": 24
+     },
+     20
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 11,
+      "xc": 12
+     },
+     2
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 1,
+      "xc": 27
+     },
+     110
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 1,
+      "xc": 5
+     },
+     2
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 4,
+      "xc": 5
+     },
+     2
+    ]
+   ],
+   "task_id": "t-11",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "xa"
+     ],
+     [
+      "var",
+      "xb"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "l_overflow_half",
+   "formula": "t = xa xb; overflow over xc plus half of t",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 3,
+      "xb": 7,
+      "xc": 8
+     },
+     23
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 12,
+      "xc": 16
+     },
+     6
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 7,
+      "xc": 29
+     },
+     76
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 8,
+      "xc": 10
+     },
+     50
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 2,
+      "xc": 23
+     },
+     2
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 11,
+      "xc": 7
+     },
+     174
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 7,
+      "xc": 2
+     },
+     29
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 12,
+      "xc": 9
+     },
+     9
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 11,
+      "xc": 8
+     },
+     8
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 9,
+      "xc": 24
+     },
+     84
+    ],
+    [
+     {
+      "xa": 9,
+      "xb": 11,
+      "xc": 30
+     },
+     118
+    ]
+   ],
+   "task_id": "t-12",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "max",
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "var",
+        "xa"
+       ],
+       [
+        "var",
+        "xb"
+       ]
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ],
+     [
+      "const",
+      0
+     ]
+    ],
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "l_border_tiles",
+   "formula": "half perimeter t = xa + xb; border 2 t + 4",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 10,
+      "xb": 3,
+      "xc": 8
+     },
+     30
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 6,
+      "xc": 19
+     },
+     24
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 3,
+      "xc": 24
+     },
+     26
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 12,
+      "xc": 30
+     },
+     48
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 1,
+      "xc": 25
+     },
+     16
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 4,
+      "xc": 8
+     },
+     28
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 3,
+      "xc": 19
+     },
+     24
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 9,
+      "xc": 15
+     },
+     46
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 6,
+      "xc": 5
+     },
+     22
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 9,
+      "xc": 7
+     },
+     34
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 10,
+      "xc": 24
+     },
+     36
+    ]
+   ],
+   "task_id": "t-13",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "add",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "l_square_times",
+   "formula": "t = xa + xc; t t xb",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 5,
+      "xb": 5,
+      "xc": 30
+     },
+     6125
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 10,
+      "xc": 17
+     },
+     4000
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 11,
+      "xc": 23
+     },
+     13475
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 3,
+      "xc": 3
+     },
+     363
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 2,
+      "xc": 8
+     },
+     242
+    ],
+    [
+     {
+      "xa": 9,
+      "xb": 4,
+      "xc": 15
+     },
+     2304
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 11,
+      "xc": 15
+     },
+     8019
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 7,
+      "xc": 22
+     },
+     3703
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 2,
+      "xc": 2
+     },
+     98
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 11,
+      "xc": 4
+     },
+     2156
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 2,
+      "xc": 19
+     },
+     1800
+    ]
+   ],
+   "task_id": "t-14",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "xb"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "l_crates_and_rest",
+   "formula": "t = xa xb xc; full crates of xd plus the rest = t // xd + t mod xd",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc",
+    "xd"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 7,
+      "xb": 1,
+      "xc": 13,
+      "xd": 3
+     },
+     31
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 9,
+      "xc": 12,
+      "xd": 7
+     },
+     48
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 12,
+      "xc": 18,
+      "xd": 7
+     },
+     36
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 1,
+      "xc": 17,
+      "xd": 7
+     },
+     13
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 6,
+      "xc": 15,
+      "xd": 4
+     },
+     45
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 7,
+      "xc": 25,
+      "xd": 6
+     },
+     120
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 1,
+      "xc": 17,
+      "xd": 4
+     },
+     32
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 4,
+      "xc": 28,
+      "xd": 7
+     },
+     112
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 1,
+      "xc": 24,
+      "xd": 6
+     },
+     44
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 3,
+      "xc": 9,
+      "xd": 7
+     },
+     15
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 1,
+      "xc": 29,
+      "xd": 8
+     },
+     17
+    ]
+   ],
+   "task_id": "t-15",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "div",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "xa"
+       ],
+       [
+        "var",
+        "xb"
+       ]
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ],
+     [
+      "var",
+      "xd"
+     ]
+    ],
+    [
+     "mod",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "xa"
+       ],
+       [
+        "var",
+        "xb"
+       ]
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ],
+     [
+      "var",
+      "xd"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "school",
+   "family": "l_mean_pay",
+   "formula": "t = xa xc; mean of t and xb xc = (t + xb xc) // 2",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 6,
+      "xb": 8,
+      "xc": 20
+     },
+     140
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 11,
+      "xc": 26
+     },
+     156
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 3,
+      "xc": 5
+     },
+     10
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 11,
+      "xc": 26
+     },
+     247
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 4,
+      "xc": 7
+     },
+     31
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 7,
+      "xc": 16
+     },
+     64
+    ],
+    [
+     {
+      "xa": 9,
+      "xb": 11,
+      "xc": 2
+     },
+     20
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 9,
+      "xc": 4
+     },
+     26
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 2,
+      "xc": 14
+     },
+     42
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 7,
+      "xc": 22
+     },
+     121
+    ],
+    [
+     {
+      "xa": 9,
+      "xb": 12,
+      "xc": 2
+     },
+     21
+    ]
+   ],
+   "task_id": "t-16",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "xb"
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "l_extra_needed",
+   "formula": "t = xa xc; max(t, xb xd) - t",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc",
+    "xd"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 5,
+      "xb": 7,
+      "xc": 1,
+      "xd": 8
+     },
+     51
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 10,
+      "xc": 20,
+      "xd": 2
+     },
+     0
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 9,
+      "xc": 13,
+      "xd": 4
+     },
+     23
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 6,
+      "xc": 29,
+      "xd": 2
+     },
+     0
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 9,
+      "xc": 3,
+      "xd": 8
+     },
+     69
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 4,
+      "xc": 15,
+      "xd": 7
+     },
+     13
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 4,
+      "xc": 11,
+      "xd": 1
+     },
+     0
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 2,
+      "xc": 17,
+      "xd": 1
+     },
+     0
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 2,
+      "xc": 11,
+      "xd": 4
+     },
+     0
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 4,
+      "xc": 15,
+      "xd": 8
+     },
+     2
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 1,
+      "xc": 21,
+      "xd": 7
+     },
+     0
+    ]
+   ],
+   "task_id": "t-17",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "max",
+     [
+      "mul",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "xb"
+      ],
+      [
+       "var",
+       "xd"
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "xa"
+     ],
+     [
+      "var",
+      "xc"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "school",
+   "family": "l_triangle_total",
+   "formula": "t = xa + xb; 1 + 2 + ... + t = t (t + 1) // 2",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 11,
+      "xb": 4,
+      "xc": 28
+     },
+     120
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 2,
+      "xc": 13
+     },
+     36
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 11,
+      "xc": 26
+     },
+     276
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 3,
+      "xc": 8
+     },
+     105
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 11,
+      "xc": 14
+     },
+     276
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 7,
+      "xc": 28
+     },
+     36
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 8,
+      "xc": 13
+     },
+     136
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 5,
+      "xc": 16
+     },
+     21
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 9,
+      "xc": 21
+     },
+     153
+    ],
+    [
+     {
+      "xa": 10,
+      "xb": 8,
+      "xc": 5
+     },
+     171
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 1,
+      "xc": 5
+     },
+     15
+    ]
+   ],
+   "task_id": "t-18",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ],
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "xa"
+       ],
+       [
+        "var",
+        "xb"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "l_rounds_needed",
+   "formula": "t = xa xb; trays of xd needed = ceil(t / xd)",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc",
+    "xd"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 1,
+      "xb": 4,
+      "xc": 8,
+      "xd": 3
+     },
+     2
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 3,
+      "xc": 11,
+      "xd": 2
+     },
+     11
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 6,
+      "xc": 11,
+      "xd": 1
+     },
+     72
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 12,
+      "xc": 21,
+      "xd": 1
+     },
+     12
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 12,
+      "xc": 13,
+      "xd": 1
+     },
+     36
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 1,
+      "xc": 22,
+      "xd": 9
+     },
+     1
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 4,
+      "xc": 30,
+      "xd": 6
+     },
+     4
+    ],
+    [
+     {
+      "xa": 9,
+      "xb": 1,
+      "xc": 10,
+      "xd": 7
+     },
+     2
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 10,
+      "xc": 16,
+      "xd": 2
+     },
+     55
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 8,
+      "xc": 22,
+      "xd": 6
+     },
+     2
+    ],
+    [
+     {
+      "xa": 7,
+      "xb": 3,
+      "xc": 30,
+      "xd": 6
+     },
+     4
+    ]
+   ],
+   "task_id": "t-19",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "xd"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "xd"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "l_leftover_jars",
+   "formula": "t = xa xb; jars left when xc xd are packed t at a time = (xc xd) mod t",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc",
+    "xd"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 12,
+      "xb": 8,
+      "xc": 1,
+      "xd": 9
+     },
+     9
+    ],
+    [
+     {
+      "xa": 12,
+      "xb": 6,
+      "xc": 20,
+      "xd": 2
+     },
+     40
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 4,
+      "xc": 28,
+      "xd": 1
+     },
+     4
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 8,
+      "xc": 23,
+      "xd": 2
+     },
+     14
+    ],
+    [
+     {
+      "xa": 9,
+      "xb": 2,
+      "xc": 13,
+      "xd": 3
+     },
+     3
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 8,
+      "xc": 27,
+      "xd": 7
+     },
+     29
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 3,
+      "xc": 30,
+      "xd": 9
+     },
+     0
+    ],
+    [
+     {
+      "xa": 2,
+      "xb": 1,
+      "xc": 16,
+      "xd": 4
+     },
+     0
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 10,
+      "xc": 6,
+      "xd": 7
+     },
+     12
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 3,
+      "xc": 3,
+      "xd": 7
+     },
+     21
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 5,
+      "xc": 2,
+      "xd": 6
+     },
+     12
+    ]
+   ],
+   "task_id": "t-20",
+   "tier": "hard",
+   "tree": [
+    "mod",
+    [
+     "mul",
+     [
+      "var",
+      "xc"
+     ],
+     [
+      "var",
+      "xd"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "xa"
+     ],
+     [
+      "var",
+      "xb"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "l_t_plus_quarter",
+   "formula": "t = xa xb + xc; t + t // 4",
+   "inputs": [
+    "xa",
+    "xb",
+    "xc"
+   ],
+   "kind": "chain",
+   "rows": [
+    [
+     {
+      "xa": 5,
+      "xb": 8,
+      "xc": 1
+     },
+     51
+    ],
+    [
+     {
+      "xa": 1,
+      "xb": 6,
+      "xc": 27
+     },
+     41
+    ],
+    [
+     {
+      "xa": 8,
+      "xb": 12,
+      "xc": 1
+     },
+     121
+    ],
+    [
+     {
+      "xa": 5,
+      "xb": 5,
+      "xc": 11
+     },
+     45
+    ],
+    [
+     {
+      "xa": 9,
+      "xb": 8,
+      "xc": 9
+     },
+     101
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 2,
+      "xc": 27
+     },
+     43
+    ],
+    [
+     {
+      "xa": 6,
+      "xb": 4,
+      "xc": 1
+     },
+     31
+    ],
+    [
+     {
+      "xa": 11,
+      "xb": 7,
+      "xc": 3
+     },
+     100
+    ],
+    [
+     {
+      "xa": 4,
+      "xb": 5,
+      "xc": 24
+     },
+     55
+    ],
+    [
+     {
+      "xa": 3,
+      "xb": 6,
+      "xc": 1
+     },
+     23
+    ],
+    [
+     {
+      "xa": 9,
+      "xb": 1,
+      "xc": 12
+     },
+     26
+    ]
+   ],
+   "task_id": "t-21",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "xa"
+      ],
+      [
+       "var",
+       "xb"
+      ]
+     ],
+     [
+      "var",
+      "xc"
+     ]
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "xa"
+       ],
+       [
+        "var",
+        "xb"
+       ]
+      ],
+      [
+       "var",
+       "xc"
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "int",
+ "schema": "nomad.let-suite.v1",
+ "seed": 20261231,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 2,
+  "families": 24,
+  "hard": 22,
+  "lookup_dropped": []
+ },
+ "trained_on_by_any_arm": false
+}

@@ -1196,6 +1196,42 @@ def _I_chain() -> bool:
     return _I.chain_enabled()
 
 
+def let_enabled() -> bool:
+    """NOMAD_LET: let-bindings over a learned block (docs/LET.md); default off until the sealed judge passes."""
+    return _flag("NOMAD_LET", "off")
+
+
+LET_N = 64           # bank blocks bound as an intermediate ``t`` (distinct values; smallest first, then block_score)
+LET_CAP = 0.35       # fraction of max_eval the let stage may spend (new terms + assembled programs), in total
+LET_REJECTS = 2      # WITNESS rejections of let fits after which the stage stops (never spends the task's cap)
+LET_OPS = ("add", "sub", "rsub", "mul", "div", "rdiv", "mod", "max", "min")
+
+
+def let_terms(t: list, tv: tuple, rows: list, atoms: list) -> list[tuple[list, tuple]]:
+    """The one-step terms over a bound intermediate ``t``: t itself and ``op(t, x)`` / ``op(x, t)`` for
+    every atom x (the task's int inputs, the constants 1-3 and t itself), deduplicated by public values.
+    The first entry is t itself. The caller charges 1 evaluation per term not already computed."""
+    out, seen = [(t, tv)], {_key(tv)}
+    for xt in atoms + [t]:
+        for op in LET_OPS:
+            if op in ("rsub", "rdiv"):
+                tree = [op[1:], xt, t]
+            else:
+                tree = [op, t, xt]
+            try:
+                v = tuple(run(tree, r) for r in rows)
+            except Invalid:
+                continue
+            if not v or type_of(v[0]) != "int" or any(abs(x) > MAX_INT for x in v):
+                continue
+            k = _key(v)
+            if k in seen:
+                continue
+            seen.add(k)
+            out.append((tree, v))
+    return out
+
+
 def splice_enabled() -> bool:
     """NOMAD_SPLICE: cut a string goal into learned blocks and pool values (docs/TEXT.md)."""
     return _flag("NOMAD_SPLICE", "off")
@@ -1573,6 +1609,11 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 hit = yield from scaled(ranked, table, glimit)
                 if hit is not None:
                     return hit
+            if let_enabled():
+                hit = yield from let_stage(ranked, P, table, min(limit, evals + int(LET_CAP * max_eval)))
+                if hit is not None:
+                    pinfo["port"] = "let"
+                    return hit
         if task.out == "str" and splice_enabled():
             hit = yield from splice(ranked, P, limit)
             if hit is not None:
@@ -1640,6 +1681,78 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 if hit is not None:
                     pinfo["port"] = "scale2:" + tag
                     return hit
+        return None
+
+    def let_stage(ranked, P, table, limit):
+        """LET (docs/LET.md): reasoning with an intermediate result ``t`` used twice.
+
+        For each bank block ``t`` (a certified program of the field, already run by PORT; distinct public
+        values, smallest tree first, then block_score; at most LET_N), the one-step terms over t
+        (``let_terms``: t, op(t, x), op(x, t), op(t, t)) are formed; a term whose public values are already
+        in the probe's table is free (the regular levels paid for it), every other term costs 1 evaluation.
+        A kept term equal to the goal, or a pair of kept terms over the same t whose add / sub / reversed
+        sub / mul gives the goal (residual lookup), or a kept term // a learned scale, is assembled
+        (``let t = .. in f(t) op g(t)``, t written out twice); every assembled program costs 1
+        evaluation and is WITNESS-gated. The stage stops after LET_REJECTS rejections and is skipped
+        when the task's rejection cap could be spent. An empty field has no bank and never gets here."""
+        nonlocal evals
+        if gate is not None and len(gate.rejected) + LET_REJECTS > gate.max_rejects:
+            return None     # never let a let fit through on a spent rejection cap
+        rej0 = len(gate.rejected) if gate is not None else 0
+        atoms = [["var", n] for n, ty in task.inputs if ty == "int"] + [["const", c] for c in (1, 2, 3)]
+        scales = bank_scales(bank)
+        src = ranked
+        if __import__("os").environ.get("NOMAD_LET_SOURCE", "bank").strip().lower() == "pool":
+            # judge-only control (docs/LET.md): bind the probe's own (unlearned) pool values of size >= 2
+            # instead of the field's certified blocks; same ranking, same caps
+            src = [(block_score(vs_, goal, task.out), "", tr, vs_) for sz_ in sorted(P) if sz_ >= 2
+                   for tr, vs_, _f in P[sz_].get("int", [])]
+        cands, seenv = [], set()
+        for sc, _n, t, v in src:
+            if sc[0] < 0 or not v or type_of(v[0]) != "int" or _key(v) in seenv:
+                continue
+            seenv.add(_key(v))
+            cands.append((size(t), tuple(-x for x in sc), t, v))
+        cands.sort(key=lambda z: z[:2])
+        tried: set = set()
+        for _sz, _sc, t, v in cands[:LET_N]:
+            if gate is not None and len(gate.rejected) - rej0 >= LET_REJECTS:
+                return None
+            terms = let_terms(t, v, rows, atoms)
+            for i, (tr, tv) in enumerate(terms):
+                if i == 0 or _key(tv) in table:
+                    continue        # already computed (t by PORT, the rest by the regular levels)
+                if evals >= limit:
+                    return None
+                evals += 1          # a new term is one evaluation
+                yield evals
+            ut = {}
+            for tr, tv in terms:
+                ut.setdefault(_key(tv), tr)
+            fits = []
+            for tr, tv in terms:
+                if tv == goal and tr is not t:
+                    fits.append(tr)
+                for op in ("add", "sub", "rsub", "mul"):
+                    need = _residual(op, tv, goal)
+                    b = ut.get(_key(need)) if need is not None else None
+                    if b is not None:
+                        fits.append(["sub", b, tr] if op == "rsub" else [op, tr, b])
+                for k, kt in scales:
+                    if all(x // k == g for x, g in zip(tv, goal)):
+                        fits.append(["div", tr, kt])
+            for hit in fits:
+                if evals >= limit or (gate is not None and len(gate.rejected) - rej0 >= LET_REJECTS):
+                    return None
+                key = json.dumps(hit)
+                if key in tried:
+                    continue
+                tried.add(key)
+                evals += 1      # an assembled program is one candidate evaluation
+                yield evals
+                if stop_on(hit):
+                    return hit
+                yield evals
         return None
 
     grow_rej = [None]
