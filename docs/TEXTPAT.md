@@ -126,6 +126,43 @@ PORT / TEXT_CHAIN path; 3-7 pass. The free pass is counted as free (comparisons
 and input-derived variants on values already known); only an assembled template
 is charged, which is the TEXT_CHAIN convention, stated before measuring.
 
-## Sealed result
+## Sealed result (measured once, 2026-11-21, code `e54e29b`; `results/textpat/`): **FAIL -> stays OFF**
 
-*Not yet measured.*
+Suite sha `c7e5e253bb1e50da97ce3e5e47af1e2cd4d137b926c6a21cdec50e55ad835306`, 22 hard tasks (2 easy never scored). Measured once from the pre-registration snapshot; not re-run after later ROLES / COMBINE commits (those switches stay off).
+
+| arm | certified | evaluations |
+|---|---|---|
+| cold | 0 | 220,000 |
+| empty_off | 0 | 220,000 |
+| empty_on | 0 | 220,000 |
+| trained_off | 22 | 115,698 |
+| **trained_on** | **22** | **89,321** |
+| shuffled_1 | 22 | 115,698 |
+| shuffled_2 | 22 | 115,698 |
+| shuffled_3 | 22 | 115,698 |
+| world_only_on (report) | 19 | 125,345 |
+| bridge_only_on (report) | 22 | 111,303 |
+| patterns_only_on (report) | 1 | 215,085 |
+| trained_on_chain_off (report) | 22 | 89,317 |
+
+| criterion | result |
+|---|---|
+| 1 it helps (vs off) | **FAIL**: 22 = 22 certified, **22.8% fewer** evaluations (bar was +3 certifications or 25% fewer) |
+| 2 learned shapes matter (vs best shuffled) | **FAIL**: 22 = 22, **22.8% fewer** than every shuffled-template control (all 22 / 115,698, identical to off); the bar was 25% |
+| 3 empty field gains nothing | **pass**: empty_on = empty_off = 0, 220,000 = 220,000 |
+| 4 no sealed task worse | **pass**: no per-task loss vs off; nothing worse than cold (cold certified 0) |
+| 5 existing suites, every arm, default genome and G* | **pass**: 16 judges listed above, 0 losses, 0 gains; on / off output **byte-identical** on both genomes (learning incl. `sci_water_mol`, T1-T4, secondary, text, bridge, INVENT_TEXT, TRANSFER-5, TRANSFER-6, SELFEDIT2, TEXT_CHAIN 22, MEANING, INFLECT, LET). Certified totals unchanged. |
+| 6 LOFO, tests | **pass**: LOFO 5,883, worst 1.0x, on and off, default and G*; 540 passed, 6 skipped |
+| 7 off arms reproduce current headlines | **pass**: learning 94, T1 50, T2 107, T3 58, T4 61, secondary 275, text 56, bridge 60, INVENT_TEXT 51, route5 162, transfer6 242, SELFEDIT2 44, TEXT_CHAIN 89, MEANING 158, INFLECT 31, LET 51 |
+
+Honest reading. The composition path works where the free pass can fire. Five structured tasks hit a certified template in 1 evaluation (`port:invent:text:template`) and saved 26,377 evaluations against both off and every shuffled control:
+
+- `p_upper_name_sep_lower_word` 5,401 → 1 (off via TEXT_CHAIN)
+- `p_first_sep_len` 5,127 → 1 (off via PORT block)
+- `p_last_sep_len` 5,127 → 1 (off via PORT block)
+- `p_lower_initials_sep` 5,326 → 1 (off via PORT block)
+- `p_word_sep_name_sep2_k` 5,401 → 1 (off via TEXT_CHAIN pre)
+
+The other 17 hard tasks tied on PORT / TEXT_CHAIN / probe / anchor, including take / drop / rotation / `srep` (not in the free pass) and the integer / two-part / top-level `lower` controls. Shuffled templates are rewired, so they miss the free pass and fall through to the same search as off, which is why the three shuffled arms are byte-identical to `trained_off` on every task. `patterns_only_on` certified 1 of 22: templates come from certified chains already in the field; pattern-family training alone is not enough. `trained_on_chain_off` (89,317) matches `trained_on`, so the savings do not depend on TEXT_CHAIN during scoring.
+
+The miss is the pre-registered 25% evaluation bar, missed by 2.2 points, with equal certifications. That is an honest fail, not a near-pass to retune. A fair retry needs a new sealed suite, not a re-run: either a heavier share of structured case / `itos` / multi-part shapes that PORT buries, or free / paid coverage of take / drop / `srep` / rotation, with the bar set to what that suite can actually distinguish. `NOMAD_TEXT_ABSTRACT` stays **OFF**.

@@ -1,0 +1,1691 @@
+{
+ "tasks": 22,
+ "certified": {
+  "cold": 0,
+  "empty_off": 0,
+  "empty_on": 0,
+  "trained_off": 22,
+  "trained_on": 22,
+  "shuffled_1": 22,
+  "shuffled_2": 22,
+  "shuffled_3": 22,
+  "world_only_on": 19,
+  "bridge_only_on": 22,
+  "patterns_only_on": 1,
+  "trained_on_chain_off": 22
+ },
+ "evaluations": {
+  "cold": 220000,
+  "empty_off": 220000,
+  "empty_on": 220000,
+  "trained_off": 115698,
+  "trained_on": 89321,
+  "shuffled_1": 115698,
+  "shuffled_2": 115698,
+  "shuffled_3": 115698,
+  "world_only_on": 125345,
+  "bridge_only_on": 111303,
+  "patterns_only_on": 215085,
+  "trained_on_chain_off": 89317
+ },
+ "worse_than_cold": {
+  "cold": [],
+  "empty_off": [],
+  "empty_on": [],
+  "trained_off": [],
+  "trained_on": [],
+  "shuffled_1": [],
+  "shuffled_2": [],
+  "shuffled_3": [],
+  "world_only_on": [],
+  "bridge_only_on": [],
+  "patterns_only_on": [],
+  "trained_on_chain_off": []
+ },
+ "per_task[certified, evals, via, candidate]": {
+  "p_upper_name_sep_lower_word": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5401,
+    "port:invent:text:chain",
+    "concat(upper(first(vb)), concat(upper(rest(vb)), lower(concat(vt, va))))"
+   ],
+   "trained_on": [
+    true,
+    1,
+    "port:invent:text:template",
+    "concat(upper(first(vb)), concat(upper(rest(vb)), lower(concat(vt, va))))"
+   ],
+   "shuffled_1": [
+    true,
+    5401,
+    "port:invent:text:chain",
+    "concat(upper(first(vb)), concat(upper(rest(vb)), lower(concat(vt, va))))"
+   ],
+   "shuffled_2": [
+    true,
+    5401,
+    "port:invent:text:chain",
+    "concat(upper(first(vb)), concat(upper(rest(vb)), lower(concat(vt, va))))"
+   ],
+   "shuffled_3": [
+    true,
+    5401,
+    "port:invent:text:chain",
+    "concat(upper(first(vb)), concat(upper(rest(vb)), lower(concat(vt, va))))"
+   ],
+   "world_only_on": [
+    true,
+    5024,
+    "port:invent:text:chain",
+    "concat(upper(first(vb)), concat(upper(rest(vb)), lower(concat(vt, va))))"
+   ],
+   "bridge_only_on": [
+    true,
+    5075,
+    "port:invent:text:chain",
+    "concat(upper(first(vb)), concat(upper(rest(vb)), lower(concat(vt, va))))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    1,
+    "port:invent:text:template",
+    "concat(upper(first(vb)), concat(upper(rest(vb)), lower(concat(vt, va))))"
+   ]
+  },
+  "p_first_sep_len": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(first(va), vs), itos(strlen(va)))"
+   ],
+   "trained_on": [
+    true,
+    1,
+    "port:invent:text:template",
+    "concat(concat(first(va), vs), itos(strlen(va)))"
+   ],
+   "shuffled_1": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(first(va), vs), itos(strlen(va)))"
+   ],
+   "shuffled_2": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(first(va), vs), itos(strlen(va)))"
+   ],
+   "shuffled_3": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(first(va), vs), itos(strlen(va)))"
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(first(va), concat(vs, itos(strlen(va))))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:suf",
+    "concat(concat(first(va), vs), itos(strlen(va)))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    1,
+    "port:invent:text:template",
+    "concat(concat(first(va), vs), itos(strlen(va)))"
+   ]
+  },
+  "p_last_sep_len": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(last(va), vs), itos(strlen(va)))"
+   ],
+   "trained_on": [
+    true,
+    1,
+    "port:invent:text:template",
+    "concat(concat(last(va), vs), itos(strlen(va)))"
+   ],
+   "shuffled_1": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(last(va), vs), itos(strlen(va)))"
+   ],
+   "shuffled_2": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(last(va), vs), itos(strlen(va)))"
+   ],
+   "shuffled_3": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(last(va), vs), itos(strlen(va)))"
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(last(va), concat(vs, itos(strlen(va))))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:suf",
+    "concat(concat(last(va), vs), itos(strlen(va)))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    1,
+    "port:invent:text:template",
+    "concat(concat(last(va), vs), itos(strlen(va)))"
+   ]
+  },
+  "p_take_sep_drop": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(take(va, vk), vs), drop(va, vk))"
+   ],
+   "trained_on": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(take(va, vk), vs), drop(va, vk))"
+   ],
+   "shuffled_1": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(take(va, vk), vs), drop(va, vk))"
+   ],
+   "shuffled_2": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(take(va, vk), vs), drop(va, vk))"
+   ],
+   "shuffled_3": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(take(va, vk), vs), drop(va, vk))"
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(take(va, vk), concat(vs, drop(va, vk)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:suf",
+    "concat(concat(take(va, vk), vs), drop(va, vk))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(take(va, vk), vs), drop(va, vk))"
+   ]
+  },
+  "p_drop_sep_take": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(drop(va, vk), concat(vs, take(va, vk)))"
+   ],
+   "trained_on": [
+    true,
+    5127,
+    "port:block",
+    "concat(drop(va, vk), concat(vs, take(va, vk)))"
+   ],
+   "shuffled_1": [
+    true,
+    5127,
+    "port:block",
+    "concat(drop(va, vk), concat(vs, take(va, vk)))"
+   ],
+   "shuffled_2": [
+    true,
+    5127,
+    "port:block",
+    "concat(drop(va, vk), concat(vs, take(va, vk)))"
+   ],
+   "shuffled_3": [
+    true,
+    5127,
+    "port:block",
+    "concat(drop(va, vk), concat(vs, take(va, vk)))"
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(at(va, vk), concat(rest(drop(va, vk)), concat(vs, take(va, vk))))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:pre",
+    "concat(drop(va, vk), concat(vs, take(va, vk)))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(drop(va, vk), concat(vs, take(va, vk)))"
+   ]
+  },
+  "p_head_sep_tail": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(take(va, vk), vs), srev(take(srev(va), vk)))"
+   ],
+   "trained_on": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(take(va, vk), vs), srev(take(srev(va), vk)))"
+   ],
+   "shuffled_1": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(take(va, vk), vs), srev(take(srev(va), vk)))"
+   ],
+   "shuffled_2": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(take(va, vk), vs), srev(take(srev(va), vk)))"
+   ],
+   "shuffled_3": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(take(va, vk), vs), srev(take(srev(va), vk)))"
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(concat(take(va, vk), vs), concat(srev(rest(take(srev(va), vk))), last(va)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:suf",
+    "concat(concat(take(va, vk), vs), srev(take(srev(va), vk)))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(take(va, vk), vs), srev(take(srev(va), vk)))"
+   ]
+  },
+  "p_rep_last_sep_name": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5326,
+    "port:block",
+    "concat(srep(last(va), vk), concat(first(vs), vb))"
+   ],
+   "trained_on": [
+    true,
+    5326,
+    "port:block",
+    "concat(srep(last(va), vk), concat(first(vs), vb))"
+   ],
+   "shuffled_1": [
+    true,
+    5326,
+    "port:block",
+    "concat(srep(last(va), vk), concat(first(vs), vb))"
+   ],
+   "shuffled_2": [
+    true,
+    5326,
+    "port:block",
+    "concat(srep(last(va), vk), concat(first(vs), vb))"
+   ],
+   "shuffled_3": [
+    true,
+    5326,
+    "port:block",
+    "concat(srep(last(va), vk), concat(first(vs), vb))"
+   ],
+   "world_only_on": [
+    true,
+    5019,
+    "port:invent:text:chain",
+    "concat(srep(last(va), vk), concat(vs, vb))"
+   ],
+   "bridge_only_on": [
+    true,
+    5057,
+    "port:invent:text:chain",
+    "concat(srep(last(va), vk), concat(vs, vb))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5326,
+    "port:block",
+    "concat(srep(last(va), vk), concat(first(vs), vb))"
+   ]
+  },
+  "p_len_sum_sep_word": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(itos(add(vk, strlen(va))), concat(take(vs, vk), va))"
+   ],
+   "trained_on": [
+    true,
+    5127,
+    "port:block",
+    "concat(itos(add(vk, strlen(va))), concat(take(vs, vk), va))"
+   ],
+   "shuffled_1": [
+    true,
+    5127,
+    "port:block",
+    "concat(itos(add(vk, strlen(va))), concat(take(vs, vk), va))"
+   ],
+   "shuffled_2": [
+    true,
+    5127,
+    "port:block",
+    "concat(itos(add(vk, strlen(va))), concat(take(vs, vk), va))"
+   ],
+   "shuffled_3": [
+    true,
+    5127,
+    "port:block",
+    "concat(itos(add(vk, strlen(va))), concat(take(vs, vk), va))"
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(itos(add(vk, strlen(va))), concat(vs, va))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:pre",
+    "concat(itos(add(vk, strlen(va))), concat(vs, va))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(itos(add(vk, strlen(va))), concat(take(vs, vk), va))"
+   ]
+  },
+  "p_rot_sep_initial": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(drop(va, vk), take(va, vk)), take(concat(vs, take(va, vk)), 2))"
+   ],
+   "trained_on": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(drop(va, vk), take(va, vk)), take(concat(vs, take(va, vk)), 2))"
+   ],
+   "shuffled_1": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(drop(va, vk), take(va, vk)), take(concat(vs, take(va, vk)), 2))"
+   ],
+   "shuffled_2": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(drop(va, vk), take(va, vk)), take(concat(vs, take(va, vk)), 2))"
+   ],
+   "shuffled_3": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(drop(va, vk), take(va, vk)), take(concat(vs, take(va, vk)), 2))"
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(drop(va, vk), concat(concat(take(va, vk), vs), first(va)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:pre",
+    "concat(concat(drop(va, vk), take(va, vk)), concat(vs, first(va)))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(concat(drop(va, vk), take(va, vk)), take(concat(vs, take(va, vk)), 2))"
+   ]
+  },
+  "p_lower_initials_sep": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5326,
+    "port:block",
+    "concat(lower(first(va)), concat(vs, lower(first(vb))))"
+   ],
+   "trained_on": [
+    true,
+    1,
+    "port:invent:text:template",
+    "concat(lower(first(va)), concat(vs, lower(first(vb))))"
+   ],
+   "shuffled_1": [
+    true,
+    5326,
+    "port:block",
+    "concat(lower(first(va)), concat(vs, lower(first(vb))))"
+   ],
+   "shuffled_2": [
+    true,
+    5326,
+    "port:block",
+    "concat(lower(first(va)), concat(vs, lower(first(vb))))"
+   ],
+   "shuffled_3": [
+    true,
+    5326,
+    "port:block",
+    "concat(lower(first(va)), concat(vs, lower(first(vb))))"
+   ],
+   "world_only_on": [
+    true,
+    5019,
+    "port:invent:text:chain",
+    "concat(lower(first(va)), concat(vs, lower(first(vb))))"
+   ],
+   "bridge_only_on": [
+    true,
+    5057,
+    "port:invent:text:chain",
+    "concat(lower(first(va)), concat(vs, lower(first(vb))))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    1,
+    "port:invent:text:template",
+    "concat(lower(first(va)), concat(vs, lower(first(vb))))"
+   ]
+  },
+  "p_frame_sep": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(vs, concat(take(va, vk), vs))"
+   ],
+   "trained_on": [
+    true,
+    5127,
+    "port:block",
+    "concat(vs, concat(take(va, vk), vs))"
+   ],
+   "shuffled_1": [
+    true,
+    5127,
+    "port:block",
+    "concat(vs, concat(take(va, vk), vs))"
+   ],
+   "shuffled_2": [
+    true,
+    5127,
+    "port:block",
+    "concat(vs, concat(take(va, vk), vs))"
+   ],
+   "shuffled_3": [
+    true,
+    5127,
+    "port:block",
+    "concat(vs, concat(take(va, vk), vs))"
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:pre",
+    "concat(upper(srev(vs)), concat(take(va, vk), vs))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:pre",
+    "concat(take(srev(vs), vk), concat(take(va, vk), vs))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(vs, concat(take(va, vk), vs))"
+   ]
+  },
+  "p_word_sep_name_sep2_k": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5401,
+    "port:invent:text:pre",
+    "concat(concat(va, concat(vs, vb)), concat(vt, itos(vk)))"
+   ],
+   "trained_on": [
+    true,
+    1,
+    "port:invent:text:template",
+    "concat(concat(va, concat(vs, vb)), concat(vt, itos(vk)))"
+   ],
+   "shuffled_1": [
+    true,
+    5401,
+    "port:invent:text:pre",
+    "concat(concat(va, concat(vs, vb)), concat(vt, itos(vk)))"
+   ],
+   "shuffled_2": [
+    true,
+    5401,
+    "port:invent:text:pre",
+    "concat(concat(va, concat(vs, vb)), concat(vt, itos(vk)))"
+   ],
+   "shuffled_3": [
+    true,
+    5401,
+    "port:invent:text:pre",
+    "concat(concat(va, concat(vs, vb)), concat(vt, itos(vk)))"
+   ],
+   "world_only_on": [
+    true,
+    5024,
+    "port:invent:text:chain",
+    "concat(concat(va, concat(vs, vb)), concat(vt, itos(vk)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5075,
+    "port:invent:text:chain",
+    "concat(concat(va, concat(vs, vb)), concat(vt, itos(vk)))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    1,
+    "port:invent:text:template",
+    "concat(concat(va, concat(vs, vb)), concat(vt, itos(vk)))"
+   ]
+  },
+  "p_name_sep_word_sep2_lens": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(vb, concat(vs, va)), concat(vt, itos(strlen(concat(va, vb)))))"
+   ],
+   "trained_on": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(vb, concat(vs, va)), concat(vt, itos(strlen(concat(va, vb)))))"
+   ],
+   "shuffled_1": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(vb, concat(vs, va)), concat(vt, itos(strlen(concat(va, vb)))))"
+   ],
+   "shuffled_2": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(vb, concat(vs, va)), concat(vt, itos(strlen(concat(va, vb)))))"
+   ],
+   "shuffled_3": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(vb, concat(vs, va)), concat(vt, itos(strlen(concat(va, vb)))))"
+   ],
+   "world_only_on": [
+    true,
+    5024,
+    "port:invent:text:chain",
+    "concat(concat(vb, concat(vs, va)), concat(vt, itos(strlen(concat(va, vb)))))"
+   ],
+   "bridge_only_on": [
+    true,
+    5075,
+    "port:invent:text:chain",
+    "concat(concat(vb, concat(vs, va)), concat(vt, itos(strlen(concat(va, vb)))))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(vb, concat(vs, va)), concat(vt, itos(strlen(concat(va, vb)))))"
+   ]
+  },
+  "p_k_sep2_name_sep2": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5400,
+    "port:block",
+    "concat(itos(vk), concat(concat(take(vt, vk), vb), srev(take(srev(vt), vk))))"
+   ],
+   "trained_on": [
+    true,
+    5400,
+    "port:block",
+    "concat(itos(vk), concat(concat(take(vt, vk), vb), srev(take(srev(vt), vk))))"
+   ],
+   "shuffled_1": [
+    true,
+    5400,
+    "port:block",
+    "concat(itos(vk), concat(concat(take(vt, vk), vb), srev(take(srev(vt), vk))))"
+   ],
+   "shuffled_2": [
+    true,
+    5400,
+    "port:block",
+    "concat(itos(vk), concat(concat(take(vt, vk), vb), srev(take(srev(vt), vk))))"
+   ],
+   "shuffled_3": [
+    true,
+    5400,
+    "port:block",
+    "concat(itos(vk), concat(concat(take(vt, vk), vb), srev(take(srev(vt), vk))))"
+   ],
+   "world_only_on": [
+    true,
+    5024,
+    "port:invent:text:chain",
+    "concat(itos(vk), concat(vt, concat(vb, vt)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5075,
+    "port:invent:text:pre",
+    "concat(concat(itos(vk), vt), concat(vb, vt))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5400,
+    "port:block",
+    "concat(itos(vk), concat(concat(take(vt, vk), vb), srev(take(srev(vt), vk))))"
+   ]
+  },
+  "p_up_head_sep_rest_sep_k": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(upper(concat(take(va, vk), vs)), concat(concat(drop(va, vk), vs), itos(vk)))"
+   ],
+   "trained_on": [
+    true,
+    5127,
+    "port:block",
+    "concat(upper(concat(take(va, vk), vs)), concat(concat(drop(va, vk), vs), itos(vk)))"
+   ],
+   "shuffled_1": [
+    true,
+    5127,
+    "port:block",
+    "concat(upper(concat(take(va, vk), vs)), concat(concat(drop(va, vk), vs), itos(vk)))"
+   ],
+   "shuffled_2": [
+    true,
+    5127,
+    "port:block",
+    "concat(upper(concat(take(va, vk), vs)), concat(concat(drop(va, vk), vs), itos(vk)))"
+   ],
+   "shuffled_3": [
+    true,
+    5127,
+    "port:block",
+    "concat(upper(concat(take(va, vk), vs)), concat(concat(drop(va, vk), vs), itos(vk)))"
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(upper(concat(take(va, vk), vs)), concat(concat(drop(va, vk), vs), itos(vk)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:chain",
+    "concat(upper(concat(take(va, vk), vs)), concat(concat(drop(va, vk), vs), itos(vk)))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5127,
+    "port:block",
+    "concat(upper(concat(take(va, vk), vs)), concat(concat(drop(va, vk), vs), itos(vk)))"
+   ]
+  },
+  "p_initials_len": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5326,
+    "port:block",
+    "concat(concat(first(va), first(vb)), concat(vs, itos(strlen(concat(vb, va)))))"
+   ],
+   "trained_on": [
+    true,
+    5326,
+    "port:block",
+    "concat(concat(first(va), first(vb)), concat(vs, itos(strlen(concat(vb, va)))))"
+   ],
+   "shuffled_1": [
+    true,
+    5326,
+    "port:block",
+    "concat(concat(first(va), first(vb)), concat(vs, itos(strlen(concat(vb, va)))))"
+   ],
+   "shuffled_2": [
+    true,
+    5326,
+    "port:block",
+    "concat(concat(first(va), first(vb)), concat(vs, itos(strlen(concat(vb, va)))))"
+   ],
+   "shuffled_3": [
+    true,
+    5326,
+    "port:block",
+    "concat(concat(first(va), first(vb)), concat(vs, itos(strlen(concat(vb, va)))))"
+   ],
+   "world_only_on": [
+    true,
+    5019,
+    "port:invent:text:chain",
+    "concat(concat(first(va), first(vb)), concat(vs, itos(strlen(concat(va, vb)))))"
+   ],
+   "bridge_only_on": [
+    true,
+    5057,
+    "port:invent:text:chain",
+    "concat(concat(first(va), first(vb)), concat(vs, itos(strlen(concat(va, vb)))))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5326,
+    "port:block",
+    "concat(concat(first(va), first(vb)), concat(vs, itos(strlen(concat(vb, va)))))"
+   ]
+  },
+  "p_last_first_sep2_name_upper": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(last(va), first(va)), upper(concat(take(vt, vk), vb)))"
+   ],
+   "trained_on": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(last(va), first(va)), upper(concat(take(vt, vk), vb)))"
+   ],
+   "shuffled_1": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(last(va), first(va)), upper(concat(take(vt, vk), vb)))"
+   ],
+   "shuffled_2": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(last(va), first(va)), upper(concat(take(vt, vk), vb)))"
+   ],
+   "shuffled_3": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(last(va), first(va)), upper(concat(take(vt, vk), vb)))"
+   ],
+   "world_only_on": [
+    true,
+    5024,
+    "port:invent:text:chain",
+    "concat(last(va), concat(first(va), upper(concat(vt, vb))))"
+   ],
+   "bridge_only_on": [
+    true,
+    5075,
+    "port:invent:text:chain",
+    "concat(last(va), concat(first(va), upper(concat(vt, vb))))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(last(va), first(va)), upper(concat(take(vt, vk), vb)))"
+   ]
+  },
+  "p_take_take_mix": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5326,
+    "port:block",
+    "concat(take(va, vk), concat(take(vb, vk), take(va, vk)))"
+   ],
+   "trained_on": [
+    true,
+    5326,
+    "port:block",
+    "concat(take(va, vk), concat(take(vb, vk), take(va, vk)))"
+   ],
+   "shuffled_1": [
+    true,
+    5326,
+    "port:block",
+    "concat(take(va, vk), concat(take(vb, vk), take(va, vk)))"
+   ],
+   "shuffled_2": [
+    true,
+    5326,
+    "port:block",
+    "concat(take(va, vk), concat(take(vb, vk), take(va, vk)))"
+   ],
+   "shuffled_3": [
+    true,
+    5326,
+    "port:block",
+    "concat(take(va, vk), concat(take(vb, vk), take(va, vk)))"
+   ],
+   "world_only_on": [
+    true,
+    5019,
+    "port:invent:text:chain",
+    "concat(take(va, vk), concat(take(vb, vk), take(va, vk)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5057,
+    "port:invent:text:chain",
+    "concat(take(va, vk), concat(take(vb, vk), take(va, vk)))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5326,
+    "port:block",
+    "concat(take(va, vk), concat(take(vb, vk), take(va, vk)))"
+   ]
+  },
+  "p_rot_rot_sep2": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(drop(va, vk), take(va, vk)), concat(vt, concat(drop(vb, vj), take(vb, vj))))"
+   ],
+   "trained_on": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(drop(va, vk), take(va, vk)), concat(vt, concat(drop(vb, vj), take(vb, vj))))"
+   ],
+   "shuffled_1": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(drop(va, vk), take(va, vk)), concat(vt, concat(drop(vb, vj), take(vb, vj))))"
+   ],
+   "shuffled_2": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(drop(va, vk), take(va, vk)), concat(vt, concat(drop(vb, vj), take(vb, vj))))"
+   ],
+   "shuffled_3": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(drop(va, vk), take(va, vk)), concat(vt, concat(drop(vb, vj), take(vb, vj))))"
+   ],
+   "world_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5141,
+    "port:invent:text:chain",
+    "concat(concat(drop(va, vk), take(va, vk)), concat(vt, concat(drop(vb, vj), take(vb, vj))))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5400,
+    "port:block",
+    "concat(concat(drop(va, vk), take(va, vk)), concat(vt, concat(drop(vb, vj), take(vb, vj))))"
+   ]
+  },
+  "p_lower_rot_ctrl": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5155,
+    "port:probe",
+    "lower(concat(drop(va, vk), take(va, vk)))"
+   ],
+   "trained_on": [
+    true,
+    5155,
+    "port:probe",
+    "lower(concat(drop(va, vk), take(va, vk)))"
+   ],
+   "shuffled_1": [
+    true,
+    5155,
+    "port:probe",
+    "lower(concat(drop(va, vk), take(va, vk)))"
+   ],
+   "shuffled_2": [
+    true,
+    5155,
+    "port:probe",
+    "lower(concat(drop(va, vk), take(va, vk)))"
+   ],
+   "shuffled_3": [
+    true,
+    5155,
+    "port:probe",
+    "lower(concat(drop(va, vk), take(va, vk)))"
+   ],
+   "world_only_on": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5064,
+    "port:probe",
+    "lower(concat(drop(va, vk), take(va, vk)))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5151,
+    "port:probe",
+    "lower(concat(drop(va, vk), take(va, vk)))"
+   ]
+  },
+  "p_len_three_ctrl": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5331,
+    "port:anchor",
+    "add(strlen(concat(va, vb)), 1)"
+   ],
+   "trained_on": [
+    true,
+    5331,
+    "port:anchor",
+    "add(strlen(concat(va, vb)), 1)"
+   ],
+   "shuffled_1": [
+    true,
+    5331,
+    "port:anchor",
+    "add(strlen(concat(va, vb)), 1)"
+   ],
+   "shuffled_2": [
+    true,
+    5331,
+    "port:anchor",
+    "add(strlen(concat(va, vb)), 1)"
+   ],
+   "shuffled_3": [
+    true,
+    5331,
+    "port:anchor",
+    "add(strlen(concat(va, vb)), 1)"
+   ],
+   "world_only_on": [
+    true,
+    5023,
+    "port:anchor",
+    "add(strlen(concat(vs, vs)), strlen(concat(va, rest(vb))))"
+   ],
+   "bridge_only_on": [
+    true,
+    5079,
+    "port:anchor2",
+    "add(add(div(1, vk), sub(2, div(1, vk))), strlen(concat(va, rest(vb))))"
+   ],
+   "patterns_only_on": [
+    true,
+    5085,
+    "port:probe",
+    "strlen(concat(va, concat(vs, vb)))"
+   ],
+   "trained_on_chain_off": [
+    true,
+    5331,
+    "port:anchor",
+    "add(strlen(concat(va, vb)), 1)"
+   ]
+  },
+  "p_len_k_ctrl": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5363,
+    "port:anchor",
+    "add(add(vk, strlen(vb)), strlen(srep(rest(va), vk)))"
+   ],
+   "trained_on": [
+    true,
+    5363,
+    "port:anchor",
+    "add(add(vk, strlen(vb)), strlen(srep(rest(va), vk)))"
+   ],
+   "shuffled_1": [
+    true,
+    5363,
+    "port:anchor",
+    "add(add(vk, strlen(vb)), strlen(srep(rest(va), vk)))"
+   ],
+   "shuffled_2": [
+    true,
+    5363,
+    "port:anchor",
+    "add(add(vk, strlen(vb)), strlen(srep(rest(va), vk)))"
+   ],
+   "shuffled_3": [
+    true,
+    5363,
+    "port:anchor",
+    "add(add(vk, strlen(vb)), strlen(srep(rest(va), vk)))"
+   ],
+   "world_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5065,
+    "port:anchor",
+    "add(add(vk, strlen(vb)), strlen(srep(rest(va), vk)))"
+   ],
+   "patterns_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on_chain_off": [
+    true,
+    5363,
+    "port:anchor",
+    "add(add(vk, strlen(vb)), strlen(srep(rest(va), vk)))"
+   ]
+  }
+ },
+ "sha256": "c7e5e253bb1e50da97ce3e5e47af1e2cd4d137b926c6a21cdec50e55ad835306",
+ "verdict": {
+  "on_minus_off": 0,
+  "fewer_evals_vs_off": 0.228,
+  "c1_on_beats_off": false,
+  "best_shuffled": 22,
+  "on_minus_best_shuffled": 0,
+  "fewer_evals_vs_best_shuffled": 0.228,
+  "c2_on_beats_shuffled": false,
+  "empty_on_minus_empty_off": 0,
+  "report_empty_on_minus_cold": 0,
+  "c3_gain_vanishes_with_empty_field": true,
+  "trained_on_losses_vs_off": [],
+  "c4_no_task_worse": true,
+  "pass_1_to_4": false
+ }
+}
