@@ -1,0 +1,728 @@
+{
+ "tasks": 12,
+ "certified": {
+  "cold": 0,
+  "cold_off": 1,
+  "empty_off": 1,
+  "empty_on": 0,
+  "trained_off": 1,
+  "trained_on": 8,
+  "bridge_on": 6,
+  "shuffled_on": 6,
+  "inflect_only_on": 8
+ },
+ "evaluations": {
+  "cold": 120000,
+  "cold_off": 119504,
+  "empty_off": 119504,
+  "empty_on": 120000,
+  "trained_off": 115027,
+  "trained_on": 72142,
+  "bridge_on": 75590,
+  "shuffled_on": 76240,
+  "inflect_only_on": 76358
+ },
+ "worse_than_cold": {
+  "cold": [],
+  "cold_off": [],
+  "empty_off": [],
+  "empty_on": [],
+  "trained_off": [],
+  "trained_on": [],
+  "bridge_on": [],
+  "shuffled_on": [],
+  "inflect_only_on": []
+ },
+ "per_task[certified, evals, via, candidate]": {
+  "q_plural_full": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "cold_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5213,
+    "port:invent:text:chain",
+    "concat(srev(drop(srev(qw), cy(qw))), sel(sib(qw), qe, sel(cy(qw), qi, qs)))"
+   ],
+   "bridge_on": [
+    true,
+    5029,
+    "port:invent:text:chain",
+    "concat(init(qw), sel(sib(qw), concat(last(qw), qe), sel(cy(qw), qi, concat(last(qw), qs))))"
+   ],
+   "shuffled_on": [
+    true,
+    5113,
+    "port:invent:text:chain",
+    "concat(init(qw), sel(sib(qw), concat(last(qw), qe), sel(cy(qw), qi, concat(last(qw), qs))))"
+   ],
+   "inflect_only_on": [
+    true,
+    5185,
+    "port:invent:text:chain",
+    "concat(srev(drop(srev(qw), cy(qw))), sel(sib(qw), qe, sel(cy(qw), qi, qs)))"
+   ]
+  },
+  "q_past_full": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "cold_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5213,
+    "port:invent:text:chain",
+    "concat(srev(drop(srev(qw), cy(qw))), sel(add(cy(qw), ve(qw)), sel(cy(qw), qi, qd), concat(gem(qw), qe)))"
+   ],
+   "bridge_on": [
+    true,
+    5029,
+    "port:invent:text:chain",
+    "concat(concat(init(qw), gem(qw)), sel(add(cy(qw), ve(qw)), drop(qi, ve(qw)), concat(last(qw), qe)))"
+   ],
+   "shuffled_on": [
+    true,
+    5113,
+    "port:invent:text:chain",
+    "concat(concat(init(qw), gem(qw)), sel(add(cy(qw), ve(qw)), drop(qi, ve(qw)), concat(last(qw), qe)))"
+   ],
+   "inflect_only_on": [
+    true,
+    5185,
+    "port:invent:text:chain",
+    "concat(srev(drop(srev(qw), cy(qw))), sel(add(cy(qw), ve(qw)), sel(cy(qw), qi, qd), concat(gem(qw), qe)))"
+   ]
+  },
+  "q_ing_form": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "cold_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5031,
+    "port:invent:text:pre",
+    "concat(srev(drop(srev(qw), ve(qw))), qg)"
+   ],
+   "bridge_on": [
+    false,
+    5015,
+    "port:invent:text:chain",
+    null
+   ],
+   "shuffled_on": [
+    false,
+    5025,
+    "port:invent:text:chain",
+    null
+   ],
+   "inflect_only_on": [
+    true,
+    5017,
+    "port:invent:text:pre",
+    "concat(srev(drop(srev(qw), ve(qw))), qg)"
+   ]
+  },
+  "q_third_person": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "cold_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5213,
+    "port:invent:text:chain",
+    "concat(srev(drop(srev(qw), cy(qw))), sel(sib(qw), qe, sel(cy(qw), qi, qs)))"
+   ],
+   "bridge_on": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "shuffled_on": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "inflect_only_on": [
+    true,
+    5185,
+    "port:invent:text:chain",
+    "concat(srev(drop(srev(qw), cy(qw))), sel(sib(qw), qe, sel(cy(qw), qi, qs)))"
+   ]
+  },
+  "q_count_simple": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "cold_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5162,
+    "port:invent:text:suf",
+    "concat(concat(itos(qn), qz), concat(qw, drop(qs, one(qn))))"
+   ],
+   "bridge_on": [
+    true,
+    5075,
+    "port:invent:text:chain",
+    "concat(concat(itos(qn), qz), sel(one(qn), qw, concat(qw, qs)))"
+   ],
+   "shuffled_on": [
+    true,
+    5117,
+    "port:invent:text:chain",
+    "concat(concat(itos(qn), qz), sel(one(qn), qw, concat(qw, concat(gem(qw), qs))))"
+   ],
+   "inflect_only_on": [
+    true,
+    5088,
+    "port:invent:text:suf",
+    "concat(concat(itos(qn), qz), concat(qw, drop(qs, one(qn))))"
+   ]
+  },
+  "q_count_noun": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "cold_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "bridge_on": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "shuffled_on": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "inflect_only_on": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ]
+  },
+  "q_count_computed": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "cold_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5264,
+    "port:invent:text:chain",
+    "concat(itos(mul(qk, qn)), sel(sub(qn, one(qk)), concat(qz, concat(qw, qs)), concat(qz, qw)))"
+   ],
+   "bridge_on": [
+    true,
+    5156,
+    "port:invent:text:chain",
+    "concat(itos(mul(qk, qn)), sel(sub(qn, one(qk)), concat(qz, concat(qw, qs)), concat(qz, qw)))"
+   ],
+   "shuffled_on": [
+    true,
+    5204,
+    "port:invent:text:chain",
+    "concat(itos(mul(qk, qn)), sel(sub(qn, one(qk)), concat(qz, concat(qw, qs)), concat(qz, qw)))"
+   ],
+   "inflect_only_on": [
+    true,
+    5109,
+    "port:invent:text:chain",
+    "concat(itos(mul(qk, qn)), sel(sub(qn, one(qk)), concat(qz, concat(qw, qs)), concat(qz, qw)))"
+   ]
+  },
+  "q_sentence_be": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "cold_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5401,
+    "port:invent:text:chain",
+    "concat(concat(itos(qn), concat(qz, qw)), sel(one(qn), concat(qz, qa), concat(qs, concat(qz, qb))))"
+   ],
+   "bridge_on": [
+    true,
+    5121,
+    "port:invent:text:chain",
+    "concat(concat(itos(qn), qz), concat(concat(qw, drop(qs, qn)), sel(qn, sel(one(qn), concat(qz, qa), concat(qs, concat(qz, qb))), concat(qz, qb))))"
+   ],
+   "shuffled_on": [
+    true,
+    5265,
+    "port:invent:text:chain",
+    "concat(concat(itos(qn), qz), concat(sel(one(qn), concat(qw, qz), concat(qw, concat(qs, qz))), sel(one(qn), qa, qb)))"
+   ],
+   "inflect_only_on": [
+    true,
+    5286,
+    "port:invent:text:chain",
+    "concat(concat(itos(qn), concat(qz, qw)), sel(one(qn), concat(qz, qa), concat(qs, concat(qz, qb))))"
+   ]
+  },
+  "q_possessive_count": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "cold_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    false,
+    5401,
+    "port:invent:text:chain",
+    null
+   ],
+   "bridge_on": [
+    false,
+    5121,
+    "port:invent:text:chain",
+    null
+   ],
+   "shuffled_on": [
+    false,
+    5265,
+    "port:invent:text:chain",
+    null
+   ],
+   "inflect_only_on": [
+    false,
+    5286,
+    "port:invent:text:chain",
+    null
+   ]
+  },
+  "q_plural_len": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "cold_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shuffled_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "inflect_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "q_past_len": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "cold_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    false,
+    5213,
+    "port:anchor",
+    null
+   ],
+   "bridge_on": [
+    false,
+    5029,
+    "port:anchor",
+    null
+   ],
+   "shuffled_on": [
+    false,
+    5113,
+    "port:anchor",
+    null
+   ],
+   "inflect_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "q_ctl_pair": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "cold_off": [
+    true,
+    9504,
+    null,
+    "concat(qw, concat(qz, itos(strlen(qw))))"
+   ],
+   "empty_off": [
+    true,
+    9504,
+    null,
+    "concat(qw, concat(qz, itos(strlen(qw))))"
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5027,
+    "port:invent:text:pre",
+    "concat(concat(qw, qz), itos(strlen(qw)))"
+   ],
+   "trained_on": [
+    true,
+    5031,
+    "port:invent:text:pre",
+    "concat(concat(qw, qz), itos(strlen(qw)))"
+   ],
+   "bridge_on": [
+    true,
+    5015,
+    "port:invent:text:suf",
+    "concat(concat(qw, qz), itos(strlen(qw)))"
+   ],
+   "shuffled_on": [
+    true,
+    5025,
+    "port:invent:text:pre",
+    "concat(concat(qw, concat(gem(qw), qz)), itos(strlen(qw)))"
+   ],
+   "inflect_only_on": [
+    true,
+    5017,
+    "port:invent:text:pre",
+    "concat(concat(qw, qz), itos(strlen(qw)))"
+   ]
+  }
+ },
+ "sha256": "6e324b069beb6c5e2acbf01cf838cb6f7fc0fe32bcc3c93de1a7c507320291d5",
+ "verdict": {
+  "on_minus_off": 7,
+  "fewer_evals_vs_off": 0.3728,
+  "c1_on_beats_off": true,
+  "empty_on_minus_empty_off": -1,
+  "report_empty_on_minus_cold": 0,
+  "c2_gain_vanishes_with_empty_field": true,
+  "trained_on_losses_vs_off": [
+   "q_ctl_pair"
+  ],
+  "c3_no_task_worse": false,
+  "pass_1_to_3": false,
+  "learned_matters_on_minus_bridge_on": 2,
+  "learned_matters_on_minus_shuffled": 2,
+  "c4_learned_matters": false,
+  "pass_1_to_4": false
+ }
+}

@@ -1,0 +1,1731 @@
+{
+ "tasks": 40,
+ "certified": {
+  "cold": 0,
+  "empty": 1,
+  "empty_invent": 1,
+  "trained": 20,
+  "trained_invent": 27,
+  "math_invent": 9
+ },
+ "evaluations": {
+  "cold": 392886,
+  "empty": 395311,
+  "empty_invent": 395311,
+  "trained": 309010,
+  "trained_invent": 276269,
+  "math_invent": 343440
+ },
+ "by_domain": {
+  "cold": {
+   "building": [
+    0,
+    15
+   ],
+   "games": [
+    0,
+    11
+   ],
+   "travel": [
+    0,
+    14
+   ]
+  },
+  "empty": {
+   "building": [
+    0,
+    15
+   ],
+   "games": [
+    0,
+    11
+   ],
+   "travel": [
+    1,
+    14
+   ]
+  },
+  "empty_invent": {
+   "building": [
+    0,
+    15
+   ],
+   "games": [
+    0,
+    11
+   ],
+   "travel": [
+    1,
+    14
+   ]
+  },
+  "trained": {
+   "building": [
+    8,
+    15
+   ],
+   "games": [
+    4,
+    11
+   ],
+   "travel": [
+    8,
+    14
+   ]
+  },
+  "trained_invent": {
+   "building": [
+    11,
+    15
+   ],
+   "games": [
+    8,
+    11
+   ],
+   "travel": [
+    8,
+    14
+   ]
+  },
+  "math_invent": {
+   "building": [
+    3,
+    15
+   ],
+   "games": [
+    3,
+    11
+   ],
+   "travel": [
+    3,
+    14
+   ]
+  }
+ },
+ "worse_than_cold": {
+  "cold": [],
+  "empty": [],
+  "empty_invent": [],
+  "trained": [],
+  "trained_invent": [],
+  "math_invent": []
+ },
+ "trained_wins_lost": {
+  "cold": [
+   "b3_walls",
+   "b3_walls_ceiling",
+   "b3_box_surface_open",
+   "b3_diag_sq",
+   "b3_sq_pyramid",
+   "b3_frame_edges",
+   "b3_square_room_tiles",
+   "b3_fence_border",
+   "g3_round_robin",
+   "g3_cross_handshakes",
+   "g3_league_points_max",
+   "g3_points_behind",
+   "t3_fuel_return",
+   "t3_family_fare",
+   "t3_group_discount",
+   "t3_return_family",
+   "t3_fare_third_off_kids",
+   "t3_round_trip_minutes",
+   "t3_hire_cost",
+   "t3_last_vehicle"
+  ],
+  "empty": [
+   "b3_walls",
+   "b3_walls_ceiling",
+   "b3_box_surface_open",
+   "b3_diag_sq",
+   "b3_sq_pyramid",
+   "b3_frame_edges",
+   "b3_square_room_tiles",
+   "b3_fence_border",
+   "g3_round_robin",
+   "g3_cross_handshakes",
+   "g3_league_points_max",
+   "g3_points_behind",
+   "t3_fuel_return",
+   "t3_family_fare",
+   "t3_group_discount",
+   "t3_return_family",
+   "t3_fare_third_off_kids",
+   "t3_round_trip_minutes",
+   "t3_hire_cost"
+  ],
+  "empty_invent": [
+   "b3_walls",
+   "b3_walls_ceiling",
+   "b3_box_surface_open",
+   "b3_diag_sq",
+   "b3_sq_pyramid",
+   "b3_frame_edges",
+   "b3_square_room_tiles",
+   "b3_fence_border",
+   "g3_round_robin",
+   "g3_cross_handshakes",
+   "g3_league_points_max",
+   "g3_points_behind",
+   "t3_fuel_return",
+   "t3_family_fare",
+   "t3_group_discount",
+   "t3_return_family",
+   "t3_fare_third_off_kids",
+   "t3_round_trip_minutes",
+   "t3_hire_cost"
+  ],
+  "trained": [],
+  "trained_invent": [],
+  "math_invent": [
+   "b3_walls",
+   "b3_walls_ceiling",
+   "b3_box_surface_open",
+   "b3_sq_pyramid",
+   "b3_frame_edges",
+   "b3_square_room_tiles",
+   "b3_fence_border",
+   "g3_round_robin",
+   "g3_cross_handshakes",
+   "t3_fuel_return",
+   "t3_family_fare",
+   "t3_group_discount",
+   "t3_fare_third_off_kids",
+   "t3_round_trip_minutes"
+  ]
+ },
+ "per_task[certified, evals, via, candidate]": {
+  "b3_walls": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5178,
+    "port:anchor",
+    "add(mul(add(ht, ht), ln), mul(ht, add(wd, wd)))"
+   ],
+   "trained_invent": [
+    true,
+    5178,
+    "port:anchor",
+    "add(mul(add(ht, ht), ln), mul(ht, add(wd, wd)))"
+   ],
+   "math_invent": [
+    false,
+    5089,
+    "port:anchor",
+    null
+   ]
+  },
+  "b3_walls_ceiling": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5615,
+    "port:anchor2",
+    "add(add(mul(ln, wd), mul(add(wd, wd), ht)), mul(ln, add(ht, ht)))"
+   ],
+   "trained_invent": [
+    true,
+    5615,
+    "port:anchor2",
+    "add(add(mul(ln, wd), mul(add(wd, wd), ht)), mul(ln, add(ht, ht)))"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "b3_box_surface_open": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    6000,
+    "port:anchor2",
+    "add(add(mul(add(wd, wd), ht), mul(ln, wd)), mul(ln, add(ht, ht)))"
+   ],
+   "trained_invent": [
+    true,
+    6000,
+    "port:anchor2",
+    "add(add(mul(add(wd, wd), ht), mul(ln, wd)), mul(ln, add(ht, ht)))"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "b3_diag_sq": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5746,
+    "port:anchor2",
+    "add(add(add(mul(ln, ln), wd), mul(wd, wd)), sub(mul(ht, ht), wd))"
+   ],
+   "trained_invent": [
+    true,
+    5746,
+    "port:anchor2",
+    "add(add(add(mul(ln, ln), wd), mul(wd, wd)), sub(mul(ht, ht), wd))"
+   ],
+   "math_invent": [
+    true,
+    5380,
+    "port:anchor2",
+    "add(add(add(mul(ln, ln), wd), mul(wd, wd)), sub(mul(ht, ht), wd))"
+   ]
+  },
+  "b3_two_cubes": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    true,
+    9178,
+    "port:invent:r1",
+    "add(mul(wd, mul(wd, wd)), mul(mul(ht, ht), ht))"
+   ],
+   "math_invent": [
+    true,
+    6742,
+    "port:invent:r2",
+    "add(mul(wd, mul(wd, wd)), mul(mul(ht, ht), ht))"
+   ]
+  },
+  "b3_room_minus_cube": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    true,
+    9221,
+    "port:invent:r1",
+    "sub(mul(ht, mul(ln, wd)), mul(mul(ht, ht), ht))"
+   ],
+   "math_invent": [
+    true,
+    6105,
+    "port:invent:r2",
+    "sub(mul(wd, mul(ln, ht)), mul(ht, mul(ht, ht)))"
+   ]
+  },
+  "b3_sq_pyramid": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    6397,
+    "port:scale:div2",
+    "div(mul(add(wd, wd), div(mul(ht, wd), 3)), 2)"
+   ],
+   "trained_invent": [
+    true,
+    6397,
+    "port:scale:div2",
+    "div(mul(add(wd, wd), div(mul(ht, wd), 3)), 2)"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "b3_wedge": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    5329,
+    "port:anchor",
+    null
+   ],
+   "trained_invent": [
+    false,
+    5329,
+    "port:anchor",
+    null
+   ],
+   "math_invent": [
+    false,
+    5113,
+    "port:anchor",
+    null
+   ]
+  },
+  "b3_frame_edges": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    6770,
+    "port:scale:mul2",
+    "mul(add(add(ht, ht), mul(2, add(wd, ln))), 2)"
+   ],
+   "trained_invent": [
+    true,
+    6770,
+    "port:scale:mul2",
+    "mul(add(add(ht, ht), mul(2, add(wd, ln))), 2)"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "b3_square_room_tiles": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    6424,
+    "port:scale:div2",
+    "div(mul(add(wd, ht), div(wd, 2)), 2)"
+   ],
+   "trained_invent": [
+    true,
+    6424,
+    "port:scale:div2",
+    "div(mul(add(wd, ht), div(wd, 2)), 2)"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "b3_path_around": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "b3_fence_border": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5858,
+    "port:anchor2",
+    "add(add(add(pb, pb), mul(pc, mul(3, 3))), add(sub(pa, pc), pa))"
+   ],
+   "trained_invent": [
+    true,
+    5858,
+    "port:anchor2",
+    "add(add(add(pb, pb), mul(pc, mul(3, 3))), add(sub(pa, pc), pa))"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "b3_slab": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "trained_invent": [
+    true,
+    9087,
+    "port:invent:r1:div4",
+    "div(mul(pa, mul(pb, pc)), mul(2, 2))"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "b3_two_beds": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "b3_cube_shell": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g3_tetra_stack": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    true,
+    2471,
+    "port:invent:r2:div3",
+    "div(mul(div(add(nl, mul(nl, nl)), 2), add(2, nl)), 3)"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g3_pentagonal": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    true,
+    2373,
+    "port:invent:r2",
+    "add(div(add(nl, mul(nl, nl)), 2), sub(mul(nl, nl), nl))"
+   ],
+   "math_invent": [
+    true,
+    6134,
+    "port:probe",
+    "add(mul(nl, nl), div(sub(mul(nl, nl), nl), 2))"
+   ]
+  },
+  "g3_star_number": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    true,
+    2563,
+    "port:invent:r2",
+    "add(add(1, mul(add(nl, nl), add(nl, nl))), mul(nl, mul(2, sub(nl, 3))))"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g3_squares_on_board": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    true,
+    2366,
+    "port:invent:r2:div3",
+    "div(add(div(add(nl, mul(nl, nl)), 2), mul(mul(nl, nl), sub(nl, 2))), 3)"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g3_round_robin": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    7151,
+    "port:scale:div2",
+    "div(mul(max(rd, nt), sub(mul(nt, rd), rd)), 2)"
+   ],
+   "trained_invent": [
+    true,
+    7151,
+    "port:scale:div2",
+    "div(mul(max(rd, nt), sub(mul(nt, rd), rd)), 2)"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g3_cross_handshakes": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    9118,
+    "port:scale:div2",
+    "div(mul(mul(rd, nt), sub(mul(nt, rd), rd)), 2)"
+   ],
+   "trained_invent": [
+    true,
+    9118,
+    "port:scale:div2",
+    "div(mul(mul(rd, nt), sub(mul(nt, rd), rd)), 2)"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g3_league_points_max": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    7723,
+    "port:anchor",
+    "mul(mul(rd, nt), sub(mul(nt, 3), 3))"
+   ],
+   "trained_invent": [
+    true,
+    7723,
+    "port:anchor",
+    "mul(mul(rd, nt), sub(mul(nt, 3), 3))"
+   ],
+   "math_invent": [
+    true,
+    7912,
+    "port:invent:r2",
+    "mul(sub(mul(nt, nt), nt), mul(rd, 3))"
+   ]
+  },
+  "g3_groups_then_final": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g3_points_pct": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g3_win_pct": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g3_points_behind": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5409,
+    "port:anchor",
+    "add(add(dr, dr), mul(ls, 3))"
+   ],
+   "trained_invent": [
+    true,
+    5409,
+    "port:anchor",
+    "add(add(dr, dr), mul(ls, 3))"
+   ],
+   "math_invent": [
+    true,
+    5201,
+    "port:anchor",
+    "add(min(ls, hc), mul(add(ls, dr), 2))"
+   ]
+  },
+  "t3_fuel_cost": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    5336,
+    "port:anchor",
+    null
+   ],
+   "trained_invent": [
+    false,
+    5336,
+    "port:anchor",
+    null
+   ],
+   "math_invent": [
+    false,
+    5116,
+    "port:anchor",
+    null
+   ]
+  },
+  "t3_fuel_return": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5356,
+    "port:anchor",
+    "mul(mul(lp, pl), div(km, div(hc, 2)))"
+   ],
+   "trained_invent": [
+    true,
+    5356,
+    "port:anchor",
+    "mul(mul(lp, pl), div(km, div(hc, 2)))"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "t3_fuel_plus_toll": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "t3_litres_two_legs": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "t3_family_fare": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5174,
+    "port:anchor",
+    "add(mul(fr, ad), mul(div(fr, 2), ch))"
+   ],
+   "trained_invent": [
+    true,
+    5174,
+    "port:anchor",
+    "add(mul(fr, ad), mul(div(fr, 2), ch))"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "t3_group_discount": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    6385,
+    "port:scale:div2",
+    "div(mul(add(ch, ad), add(div(fr, 2), fr)), 2)"
+   ],
+   "trained_invent": [
+    true,
+    6385,
+    "port:scale:div2",
+    "div(mul(add(ch, ad), add(div(fr, 2), fr)), 2)"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "t3_return_family": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5130,
+    "port:anchor",
+    "add(mul(add(ad, ad), fr), mul(fr, ch))"
+   ],
+   "trained_invent": [
+    true,
+    5130,
+    "port:anchor",
+    "add(mul(add(ad, ad), fr), mul(fr, ch))"
+   ],
+   "math_invent": [
+    true,
+    5173,
+    "port:anchor",
+    "mul(max(ad, fr), add(add(ad, ad), ch))"
+   ]
+  },
+  "t3_fare_third_off_kids": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    7378,
+    "port:scale:div3",
+    "div(add(mul(add(ch, ch), fr), mul(ad, mul(fr, 3))), 3)"
+   ],
+   "trained_invent": [
+    true,
+    7378,
+    "port:scale:div3",
+    "div(add(mul(add(ch, ch), fr), mul(ad, mul(fr, 3))), 3)"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "t3_distance": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ]
+  },
+  "t3_round_trip_minutes": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5916,
+    "port:anchor2",
+    "add(add(mul(hh, sx), add(mul(hh, sx), mm)), add(div(sx, 2), mm))"
+   ],
+   "trained_invent": [
+    true,
+    5916,
+    "port:anchor2",
+    "add(add(mul(hh, sx), add(mul(hh, sx), mm)), add(div(sx, 2), mm))"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "t3_arrival_hour": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    5325,
+    "port:anchor",
+    null
+   ],
+   "trained_invent": [
+    false,
+    5325,
+    "port:anchor",
+    null
+   ],
+   "math_invent": [
+    false,
+    5113,
+    "port:anchor",
+    null
+   ]
+  },
+  "t3_hire_cost": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5162,
+    "port:anchor",
+    "add(mul(hire, div(pax, cap)), hire)"
+   ],
+   "trained_invent": [
+    true,
+    5162,
+    "port:anchor",
+    "add(mul(hire, div(pax, cap)), hire)"
+   ],
+   "math_invent": [
+    true,
+    5304,
+    "port:anchor2",
+    "add(add(min(pax, hire), sub(hire, min(hire, pax))), mul(div(pax, cap), hire))"
+   ]
+  },
+  "t3_last_vehicle": {
+   "cold": [
+    false,
+    2886,
+    null,
+    null
+   ],
+   "empty": [
+    true,
+    5311,
+    "casesplit:d1",
+    "ite(mod(pax, cap), mod(pax, cap), cap)"
+   ],
+   "empty_invent": [
+    true,
+    5311,
+    "casesplit:d1",
+    "ite(mod(pax, cap), mod(pax, cap), cap)"
+   ],
+   "trained": [
+    true,
+    5130,
+    "port:anchor",
+    "add(mod(pax, cap), ite(mod(pax, cap), 0, cap))"
+   ],
+   "trained_invent": [
+    true,
+    5130,
+    "port:anchor",
+    "add(mod(pax, cap), ite(mod(pax, cap), 0, cap))"
+   ],
+   "math_invent": [
+    true,
+    5058,
+    "port:anchor",
+    "add(mod(pax, cap), ite(mod(pax, cap), 0, cap))"
+   ]
+  },
+  "t3_cost_per_head": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    "casesplit:d1",
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    "casesplit:d1",
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ]
+  }
+ },
+ "sha256": "5a8dab572468551d557558bea6ba2c004b90b254aa68c2878f3e91a9bb4f10e9",
+ "verdict": {
+  "invent_gain": 7,
+  "invent_fewer_evals": 0.106,
+  "1_invent_adds": true,
+  "empty_invent_gain": 0,
+  "empty_invent_fewer_evals": 0.0,
+  "2_gain_vanishes_with_empty_field": true,
+  "3_no_arm_worse_than_cold": true,
+  "trained_invent_lost": [],
+  "primary_pass": true
+ }
+}
