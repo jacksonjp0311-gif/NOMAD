@@ -363,6 +363,7 @@ class Search:
     variation: list[dict] = field(default_factory=list)     # mutants tried (kind, tree, fitness)
     casesplit: dict = field(default_factory=dict)           # case-split charges/outcome when it ran
     sense: dict | None = None                               # SENSE record (field arm, NOMAD_SENSE on)
+    witness: dict = field(default_factory=dict)             # WITNESS_CONTINUE consults (field arm)
 
 
 def _key(vals: tuple) -> str:
@@ -569,8 +570,10 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     if not library and not split and aim is None:
         s = _drive(_search_gen(task, cold_order, {}, max_size, max_eval))
         return _with_sense(_variation_fallback(task, s, mut, max_eval), rec)
-    return _with_sense(_drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split, aim,
-                                             blockprobe_enabled())), rec)
+    gate = _WitnessGate(task, library) if witness_continue_enabled() else None
+    s = _drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split, aim,
+                           blockprobe_enabled(), gate))
+    return _with_sense(_witness_finish(s, gate), rec)
 
 
 def _with_sense(s: Search, rec: dict | None) -> Search:
@@ -589,7 +592,8 @@ def _variation_candidates(task: WorldTask, prior: WorldPrior, variation: Any,
     return variation.candidates(task, srcs, SEARCH_TRIES)
 
 
-def _variation_stage(task: WorldTask, mut: list[tuple[str, list]], evals: int, max_eval: int):
+def _variation_stage(task: WorldTask, mut: list[tuple[str, list]], evals: int, max_eval: int,
+                     accept=None):
     """Try mutants as whole programs on the public rows; 1 evaluation each.
 
     Generator like the searches. Returns (hit tree, kind, evals, tried rows).
@@ -610,7 +614,12 @@ def _variation_stage(task: WorldTask, mut: list[tuple[str, list]], evals: int, m
         fit = sum(1 for v, g in zip(vals, goal) if v == g and type_of(v) == task.out) / max(1, len(goal))
         tried.append({"kind": kind, "tree": t, "fitness": round(fit, 4)})
         if fit == 1.0:
-            return t, kind, evals, tried
+            if accept is not None:
+                accept.stage = f"variation:{kind}"
+            if accept is None or evals >= max_eval or accept(t):
+                return t, kind, evals, tried
+            evals += 1   # WITNESS rejected this mutant: charge, try the next
+            yield evals
     return None, None, evals, tried
 
 
@@ -634,6 +643,58 @@ def _variation_fallback(task: WorldTask, s: Search, mut: list[tuple[str, list]],
     return Search(None, evals, s.reason, s.order, s.library_used, None, tried)
 
 
+# WITNESS_CONTINUE settings, chosen on uncommitted dev suites only (docs/WITNESS_CONTINUE.md):
+WITNESS_MAX_REJECTS = 32     # rejected WITNESS consults per task (dev plateau: 16 -> 19+19, 32 -> 19+20, 64 same)
+WITNESS_GATE_STAGE1 = True   # also continue past a rejected stage-1 fit (dev: 8+8 -> 19+20 vs 8+8 without)
+
+
+def witness_continue_enabled() -> bool:
+    import os
+    return os.environ.get("NOMAD_WITNESS_CONTINUE", "on").strip().lower() not in ("off", "0", "false", "no")
+
+
+class _WitnessGate:
+    """WITNESS_CONTINUE (docs/WITNESS_CONTINUE.md): field arm only.
+
+    Called on a public-row fit inside the staged search. Returns True when
+    search should stop on this fit (WITNESS supports it, or the per-task
+    rejection cap is spent) and False when WITNESS rejected it and search
+    should go on. Reads only ``receipt.supported``; the final split is never
+    consulted here. The caller charges 1 evaluation per rejection.
+    """
+
+    def __init__(self, task: WorldTask, library: dict[str, list], max_rejects: int | None = None):
+        self.task, self.library = task, library
+        self.max_rejects = WITNESS_MAX_REJECTS if max_rejects is None else max_rejects
+        self.rejected: list[list] = []
+        self.vias: list[str | None] = []
+        self.stage: str | None = None   # set by the staged search: where fits come from
+
+    def __call__(self, tree: list) -> bool:
+        if len(self.rejected) >= self.max_rejects:
+            return True
+        receipt, _pub, _fin = certify(self.task, expand(tree, self.library))
+        if receipt is not None and receipt.supported:
+            return True
+        self.rejected.append(tree)
+        self.vias.append(self.stage)
+        return False
+
+
+def _witness_finish(s: Search, gate: "_WitnessGate | None") -> Search:
+    """Record consults; when every fit was rejected, return the first one, so
+    the outcome reads as before (public fit, WITNESS rejected)."""
+    if gate is None:
+        return s
+    s.witness = {"rejected": len(gate.rejected)}
+    if s.tree is None and gate.rejected:
+        t = gate.rejected[0]
+        libs = [x[1] for x in subtrees(t) if x[0] == "lib"]
+        return Search(t, s.evaluations, None, s.order, libs, gate.vias[0], s.variation, s.casesplit, s.sense,
+                      {"rejected": len(gate.rejected), "returned": "first_rejected"})
+    return s
+
+
 BLOCKPROBE_TRIGGER = 0.5   # fraction of max_eval stage 1 may spend before the block probe
 BLOCKPROBE_CAP = 0.5       # fraction of max_eval the block probe may spend
 
@@ -645,7 +706,8 @@ def blockprobe_enabled() -> bool:
 
 def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list],
                 max_size: int, max_eval: int, variation: list[tuple[str, list]] | None = None,
-                split: bool = False, aim: tuple[str, ...] | None = None, blockprobe: bool = False):
+                split: bool = False, aim: tuple[str, ...] | None = None, blockprobe: bool = False,
+                gate: "_WitnessGate | None" = None):
     """Staged transfer as one incremental search (a generator, like _search_gen).
 
     Stage 1 is exactly the cold search below ``max_size`` (same order, same
@@ -667,6 +729,12 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
     pools, only combinations that contain a library block, up to max_size.
     Then stage 1 resumes unchanged. A task stage 1 solves before the trigger
     is untouched, so cheap tasks can never cost more than the control.
+
+    ``gate`` (WITNESS_CONTINUE, docs/WITNESS_CONTINUE.md): a public-row fit
+    from the lead block, the block probe, the case split, a mutant or the
+    library stage is shown to WITNESS; a rejection costs 1 evaluation and
+    search goes on to the next candidate and the later stages. Stage 1 fits
+    are gated only when ``WITNESS_GATE_STAGE1``.
     """
     rows = [r for r, _ in task.public]
     goal = tuple(e for _, e in task.public)
@@ -684,6 +752,10 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             return None
         k = (t, _key(vals))
         if k in B and B[k] <= sz:
+            # After a WITNESS rejection another program with the goal's
+            # public values is a new candidate (not re-added to the pools).
+            if gate is not None and gate.rejected and t == task.out and vals == goal:
+                return tree
             return None
         B[k] = sz
         P.setdefault(sz, {}).setdefault(t, []).append((tree, vals, fresh))
@@ -700,6 +772,14 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             return None
         return offer(1, a, vals, fresh)
 
+    def stop_on(hit: list, gated: bool = True) -> bool:
+        """True: return this fit. False: WITNESS rejected it (charge 1, go on)."""
+        nonlocal evals
+        if gate is None or not gated or evals >= max_eval or gate(hit):
+            return True
+        evals += 1
+        return False
+
     probe_at = [int(BLOCKPROBE_TRIGGER * max_eval)] if (blockprobe and library) else []
     pinfo: dict = {}
 
@@ -710,6 +790,17 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         B = dict(best)
         limit = min(max_eval, evals + int(BLOCKPROBE_CAP * max_eval))
         start = evals
+        prev = gate.stage if gate is not None else None
+        if gate is not None:
+            gate.stage = "blockprobe"
+        try:
+            return (yield from probe_body(P, B, limit, start))
+        finally:
+            if gate is not None:
+                gate.stage = prev
+
+    def probe_body(P, B, limit, start):
+        nonlocal evals
         for n in library:
             if evals >= limit:
                 break
@@ -721,6 +812,9 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 continue
             hit = offer(1, ["lib", n], vals, True, P, B)
             if hit is not None:
+                if not stop_on(hit):
+                    yield evals
+                    continue
                 pinfo.update(spent=evals - start, hit=True)
                 return hit
         for sz_ in range(2, max_size + 1):
@@ -734,7 +828,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         return None
 
     def level(sz: int, fresh_only: bool, ops: tuple[str, ...] = order, fresh_ops: tuple[str, ...] = (),
-              cap: int | None = None, P=None, B=None):
+              cap: int | None = None, P=None, B=None, gated: bool = True):
         """Enumerate one size level; yields per evaluation, returns a hit or None.
 
         ``fresh_ops``: operators whose stage-1-only combinations at this size
@@ -778,7 +872,9 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                         continue
                     hit = offer(sz, [name] + [c[0] for c in combo], vals, need_fresh or any(c[2] for c in combo), P, B)
                     if hit is not None:
-                        return hit
+                        if stop_on(hit, gated):
+                            return hit
+                        yield evals
         return None
 
     tried: list[dict] = []
@@ -797,9 +893,11 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         hit = atom(a, False)
         yield evals
         if hit is not None:
-            return done(hit)
+            if stop_on(hit, WITNESS_GATE_STAGE1):
+                return done(hit)
+            yield evals
     for sz in range(2, stage1 + 1):
-        hit = yield from level(sz, fresh_only=False)
+        hit = yield from level(sz, fresh_only=False, gated=WITNESS_GATE_STAGE1)
         if hit == "budget":
             return Search(None, evals, "candidate_budget", order)
         if hit is not None:
@@ -815,6 +913,8 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
     lead = tuple(o for o in (aim or ()) if o in order)
     lead_done = False
     if lead and max_size > stage1:
+        if gate is not None:
+            gate.stage = "sense:" + "+".join(lead)
         from .sense import SPLIT_RESERVE
         cap = max_eval - int(SPLIT_RESERVE * max_eval) if split else None
         hit = yield from level(max_size, fresh_only=False, ops=lead, cap=cap)
@@ -829,8 +929,10 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
     # Reuses the values stage 1 computed; charges 1 per term/condition tested.
     if split:
         from .casesplit import split_gen
+        if gate is not None:
+            gate.stage = "casesplit:d1"
         ents = [(sz, tr, vs) for sz in sorted(pools) for (tr, vs, _f) in pools[sz].get("int", [])]
-        shit, evals, sinfo = yield from split_gen(ents, goal, rows, evals, max_eval)
+        shit, evals, sinfo = yield from split_gen(ents, goal, rows, evals, max_eval, accept=gate)
         if shit is not None:
             return Search(shit, evals, None, order, [], f"casesplit:d{sinfo['depth']}", tried, sinfo)
         if sinfo.get("reason") == "candidate_budget":
@@ -838,17 +940,21 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
     # stage 1.5: mutants of certified patterns (bounded, memory-ordered).
     # Only reached when the cold search below max_size has missed.
     if variation:
-        vhit, vkind, evals, tried = yield from _variation_stage(task, variation, evals, max_eval)
+        vhit, vkind, evals, tried = yield from _variation_stage(task, variation, evals, max_eval, accept=gate)
         if vhit is not None:
             return Search(vhit, evals, None, order, [], f"variation:{vkind}", tried, sinfo)
     # stage 2: library atoms, resume
+    if gate is not None:
+        gate.stage = None
     for n in library:
         if evals >= max_eval:
             return Search(None, evals, "candidate_budget", order, [], None, tried, sinfo)
         hit = atom(["lib", n], True)
         yield evals
         if hit is not None:
-            return done(hit)
+            if stop_on(hit):
+                return done(hit)
+            yield evals
     for sz in range(2, max_size + 1):
         hit = yield from level(sz, fresh_only=sz <= stage1,
                                fresh_ops=lead if (lead_done and sz == max_size and max_size > stage1) else ())

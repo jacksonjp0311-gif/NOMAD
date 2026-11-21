@@ -188,3 +188,11 @@ science numbers are identical (SENSE labels science tasks `domain=science`,
 `kind` from the tag, and does not aim them). `casesplit_probe.py` with
 BLOCKPROBE on and with `NOMAD_BLOCKPROBE=off` gives byte-identical output:
 LOFO 5,883 every arm (worst 1.0x), deep field 14/40, 0 worse than cold.
+
+## Iteration 3: WITNESS_CONTINUE (2026-11-20, `python3 scripts/witness_continue_probe.py`)
+
+Pre-registered in `docs/WITNESS_CONTINUE.md`. After WITNESS rejects a probe
+fit the search continues: the rejected `(u+v)t/2` fit is followed by the
+right one, `div(mul(add(v, u), t), 2)`. Science-trained field **5 of 14**
+hard tasks (switch off 4, cold 0, empty field + continue 0), none lost, none
+worse than cold.

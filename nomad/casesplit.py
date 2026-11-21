@@ -79,8 +79,13 @@ def _popcount(m: int) -> int:
 
 def split_gen(entries: Sequence[tuple[int, list, tuple]], goal: tuple, rows: Sequence[dict],
               evals: int, max_eval: int, *, term_max: int = TERM_MAX, pred_max: int = PRED_MAX,
-              depth2: bool | None = None):
+              depth2: bool | None = None, accept=None):
     """Generator: yields once per charged evaluation, like the searches.
+
+    ``accept`` (WITNESS_CONTINUE, field arm): a function called on each
+    assembled public-row fit; when it returns False (WITNESS rejected the
+    fit, charged 1 evaluation here) the scan continues with the next-best depth-1 candidate and the
+    later term levels instead of stopping. ``None`` keeps the old behaviour.
 
     ``entries``: (size, tree, public-row values) of int-typed programs from
     the cold stage, in enumeration order (sizes ascending). Returns
@@ -144,6 +149,12 @@ def split_gen(entries: Sequence[tuple[int, list, tuple]], goal: tuple, rows: Seq
             return False
         return vals == tuple(goal)
 
+    rejected: set[str] = set()
+
+    def _k(tree) -> str:
+        import json
+        return json.dumps(tree, separators=(",", ":"))
+
     def cands_depth1():
         out = []
         for p, (ps, pt) in preds.items():
@@ -153,7 +164,10 @@ def split_gen(entries: Sequence[tuple[int, list, tuple]], goal: tuple, rows: Seq
             supp = min(_popcount(p), _popcount(full & ~p))
             if supp < MIN_SUPPORT:
                 continue
-            out.append(((1 + ps + a[0] + b[0], -supp), p, ["ite", pt, a[1], b[1]]))
+            tree = ["ite", pt, a[1], b[1]]
+            if rejected and _k(tree) in rejected:
+                continue
+            out.append(((1 + ps + a[0] + b[0], -supp), p, tree))
         out.sort(key=lambda c: c[0])
         return out
 
@@ -177,20 +191,28 @@ def split_gen(entries: Sequence[tuple[int, list, tuple]], goal: tuple, rows: Seq
             m = _mask(a == g for a, g in zip(v, goal))
             if m and m != full:
                 add_term(sz, t, m)
-        best = best_depth1()
-        if best is None:
-            continue
         nxt = levels[li + 1] if li + 1 < len(levels) else None
-        # Any candidate using a not-yet-seen term has total >= 1 + min_pred + 1 + nxt.
-        if nxt is None or best[0][0] <= 1 + min_pred + 1 + nxt:
+        while True:
+            best = best_depth1()
+            if best is None:
+                break
+            # Any candidate using a not-yet-seen term has total >= 1 + min_pred + 1 + nxt.
+            if not (nxt is None or best[0][0] <= 1 + min_pred + 1 + nxt):
+                break
             if evals >= max_eval:
                 return finish(None, "candidate_budget")
             evals += 1
             yield evals
-            if check(best[1]):
+            if not check(best[1]):
+                return finish(None, "assembled_mismatch")  # defensive; cannot happen by construction
+            if accept is None or evals >= max_eval or accept(best[1]):
                 info["depth"] = 1
                 return finish(best[1])
-            return finish(None, "assembled_mismatch")  # defensive; cannot happen by construction
+            # WITNESS rejected the fit: 1 evaluation, then the next candidate.
+            evals += 1
+            yield evals
+            rejected.add(_k(best[1]))
+            info["rejected"] = info.get("rejected", 0) + 1
 
     if not depth2:
         return finish(None, "no_split")
@@ -232,6 +254,11 @@ def split_gen(entries: Sequence[tuple[int, list, tuple]], goal: tuple, rows: Seq
     evals += 1
     yield evals
     if check(best[1]):
-        info["depth"] = 2
-        return finish(best[1])
+        if accept is None or evals >= max_eval or accept(best[1]):
+            info["depth"] = 2
+            return finish(best[1])
+        evals += 1
+        yield evals
+        info["rejected"] = info.get("rejected", 0) + 1
+        return finish(None, "witness_rejected")
     return finish(None, "assembled_mismatch")
