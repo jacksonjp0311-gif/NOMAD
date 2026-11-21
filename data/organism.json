@@ -1,16 +1,17 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-21T22:50:51Z",
+  "ts": "2026-11-21T23:01:28Z",
   "sense": {
-    "last_pair": "2026-11-21T22:48:27Z",
-    "last_world_pair": "2026-11-21T22:48:27Z",
-    "last_sleep": "2026-11-21T22:50:51Z"
+    "last_pair": "2026-11-21T23:01:21Z",
+    "last_world_pair": "2026-11-21T23:01:21Z",
+    "last_sleep": "2026-11-21T23:00:50Z"
   },
   "think": {
     "curriculum_open_levels": {
       "mathematics": 2,
       "language": 2,
-      "coding": 2
+      "coding": 2,
+      "bridge": 3
     }
   },
   "act_verify": {
@@ -30,22 +31,22 @@
     "world_twin": {
       "estimator": "rloo",
       "groups": 128,
-      "pass_rate": 1.0,
-      "all_pass_rate": 1.0,
-      "all_fail_rate": 0.0,
+      "pass_rate": 0.984375,
+      "all_pass_rate": 0.984375,
+      "all_fail_rate": 0.015625,
       "informative_rate": 0.0,
       "informative_pairs": 0,
       "mean_treatment_advantage": null,
-      "both_certified_pairs_with_cost": 128,
-      "mean_evaluations_saved": 306.515625,
+      "both_certified_pairs_with_cost": 126,
+      "mean_evaluations_saved": 337.015873015873,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     }
   },
   "remember": {
-    "queued": 0,
+    "queued": 4,
     "inflight": 0,
-    "certified_queued": 0,
-    "field_version": 1540,
+    "certified_queued": 4,
+    "field_version": 1545,
     "genesis_heldout": {
       "field_certified": false,
       "cold_certified": false
@@ -56,55 +57,10 @@
       "last_first_upper": "none",
       "sum_minus_max": "none"
     },
-    "world_library_size": 5
+    "world_library_size": 12
   },
   "evolve": {
     "recent": [
-      {
-        "ts": "2026-11-21T12:43:27Z",
-        "seed": 3768805102,
-        "gene": "decay",
-        "before": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2
-        },
-        "after": {
-          "decay": 0.99,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2
-        },
-        "benchmark_before": {
-          "heldout_wins": 2,
-          "train_evaluations": 4538,
-          "train_certified": 16,
-          "probe_evaluations": 7539,
-          "total_evaluations": 12077,
-          "probes": {
-            "absdiff": "certified_correctness",
-            "quartic_sum": "certified_correctness",
-            "last_first_upper": "none",
-            "sum_minus_max": "none"
-          }
-        },
-        "benchmark_after": {
-          "heldout_wins": 2,
-          "train_evaluations": 4538,
-          "train_certified": 16,
-          "probe_evaluations": 7539,
-          "total_evaluations": 12077,
-          "probes": {
-            "absdiff": "certified_correctness",
-            "quartic_sum": "certified_correctness",
-            "last_first_upper": "none",
-            "sum_minus_max": "none"
-          }
-        },
-        "accepted": false,
-        "reason": "not_better"
-      },
       {
         "ts": "2026-11-21T14:49:35Z",
         "seed": 3327765515,
@@ -300,6 +256,46 @@
         },
         "accepted": false,
         "reason": "not_better"
+      },
+      {
+        "organ": "selfedit",
+        "seed": 3950938278,
+        "gene": "inv_rounds",
+        "before": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "after": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 3,
+          "inv_floor_fit": 0
+        },
+        "dev_before": {
+          "certified": 6,
+          "evaluations": 145260,
+          "tasks": 16
+        },
+        "dev_after": {
+          "certified": 6,
+          "evaluations": 145260,
+          "tasks": 16
+        },
+        "dev_losses": [],
+        "accepted": false,
+        "reason": "dev_not_better",
+        "ts": "2026-11-21T23:01:28Z",
+        "sandbox_clean": true
       }
     ]
   },
@@ -326,13 +322,13 @@
       }
     ],
     "body_lease": {
-      "host": "gh-44901000359",
-      "heartbeat": "2026-11-21T22:50:51Z",
-      "age_min": 0.007955666666666666,
-      "alive": false,
-      "cycles": 537,
-      "cycles_per_hour": 97.7,
-      "released": true
+      "host": "gh-44929562598",
+      "heartbeat": "2026-11-21T23:01:28Z",
+      "age_min": 0.011942783333333333,
+      "alive": true,
+      "cycles": 17,
+      "cycles_per_hour": 101.6,
+      "released": false
     }
   },
   "boundaries": "No transformers. WITNESS certifies; search and memory never do. Bounded programs only."
