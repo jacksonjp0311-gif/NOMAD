@@ -140,3 +140,54 @@ By domain: trained clinic 5/9, print 6/12, harbour 4/10; practice 6/9, 7/12,
 either field; nothing worse than cold; empty_cut identical to empty.
 Criteria 3 and 4 pass; 1 and 2 fail (19 = 19 = 19/19/19).
 The secondary regression and LOFO follow below.
+
+## Sealed result, regression and LOFO: criterion 5 FAIL, criterion 6 pass
+
+`SWITCH=NOMAD_ROUTE_CUT scripts/switch_regress.py` (each judge with the
+switch off and on, every arm); raw output in `results/route_cut/regress/`,
+comparison in `results/route_cut/regress_compare_20261121.json`.
+
+| suite | certified records off -> on | lost certification (task, arm) |
+|---|---|---|
+| learning (deep, science hard) | 94 -> 93 | **sci_water_mol, trained** |
+| secondary (invent2 --secondary) | 275 -> 273 | **sci_water_mol, trained and trained_invent** |
+| MEANING | 158 -> 161 | **ms_nurse_weeks (trained_off, shuffled_1, shuffled_3); ms_cake_split2 (words_only_on)**; trained_on 19 unchanged |
+| TRANSFER-6 | 242 -> 247 | none (w6_floor_tiles gained on every practice arm) |
+| TRANSFER-1..5, TEXT, BRIDGE, INVENT_TEXT, SELFEDIT-2, TEXT_CHAIN | unchanged (50, 107, 58, 61, 162, 56, 60, 51, 44, 89) | none, no evaluation changes |
+
+The switch acts wherever a field's bank overflows PORT_SCAN: besides the
+practice field, that is the science-hard field (math + science easy) and
+the MEANING fields, which the dev tuning never saw. There it costs
+sci_water_mol (the task ROUTE also lost, docs/ROUTE.md) and four MEANING arm
+records, while gaining others (MEANING 7 records, TRANSFER-6 5).
+
+LOFO (`route_cut_judge.py --lofo`): cold 5,883, trained 5,883, trained_cut
+5,883; worst ratio 1.0x for both (also 5,883 / 1.0x in the learning judge).
+
+## Verdict: FAIL (criteria 1, 2 and 5)
+
+| criterion | result |
+|---|---|
+| 1. cut beats off | **FAIL**: practice 19 = 19, trained 15 = 15 |
+| 2. cut beats every shuffled table | **FAIL**: 19 = 19 / 19 / 19 |
+| 3. empty gain 0 | pass (7 = 7, identical evaluations) |
+| 4. no TRANSFER-7 losses | pass |
+| 5. zero losses on existing suites | **FAIL**: sci_water_mol (science hard, 3 arm records), MEANING 4 arm records |
+| 6. LOFO | pass: 5,883, worst 1.0x |
+
+`NOMAD_ROUTE_CUT` stays **off**; the code stays behind the switch.
+
+**Reading.** At large memory, which 50 blocks fill the tail of the cut
+matters (dev: any tail change moved 2-6 tasks, and on TRANSFER-6 / MEANING
+it moves records both ways), but the learned ROUTE relevance is no better a
+chooser than a shuffled table on a new catalogue (19 = 19/19/19), and it is
+not loss-free. Three experiments (ROUTE, GRAPH, ROUTE_CUT) now agree that
+the SENSE-key-level relevance learned so far does not carry to new domains.
+
+**Most promising next step.** Stop re-ordering the cut and make the cut
+unnecessary: deduplicate the portable bank by behaviour (blocks whose public
+values coincide on this task's rows are one scan, so 400 evaluations cover
+more distinct blocks), or let the practice-scale memory consolidate (merge
+equivalent library blocks in sleep) so the bank fits within PORT_SCAN; both
+are measurable on the same practice field against the 149 -> 159 memory-size
+gap, with sci_water_mol and MEANING in the dev guard from the start.
