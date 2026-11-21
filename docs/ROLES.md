@@ -133,8 +133,8 @@ with role tables.
 | 6 LOFO, tests | **pass**: LOFO 5,883, worst 1.0x; 529 passed, 6 skipped |
 
 Honest reading. Inside the MEANING stage the learned roles do what was claimed: where the right
-concept was retrieved, ROLES put the right renaming first or nearly first (1-14 trials on 22 tasks,
-against 4-197 blind), and `rs_wine_savings` went 5,630 -> 1 (blind MEANING ran out of budget at 7
+concept was retrieved, ROLES put the right renaming first or nearly first (1-14 trials on each of the 22 tasks it retrieved correctly,
+against 1-197 blind, plus 5,630 on `rs_wine_savings`), and `rs_wine_savings` went 5,630 -> 1 (blind MEANING ran out of budget at 7
 inputs). Against the shuffled-role controls the per-task wins are real but smaller (shuffled_3 also
 reached `rs_wine_savings` in 103 and `rs_ore_pool` in 7). Two things sank the totals: (a) the
 first-pass interleave (best 6 renamings of each retrieved concept first) is a search change that the
