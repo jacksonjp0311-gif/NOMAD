@@ -108,7 +108,7 @@ Suite sha `d76ef187...57d8`, 16 hard (cold certifies none).
 
 The one new certification: `cs_jar_left` (leftover of a volume) in 323 evaluations, composed as
 `mod(volume, d)`; `cs_cup_left` (same composite) stayed uncertified: COMBINE returned a wrong
-composition that fit the public rows (`mod(v, boxes_needed(..))`), which then failed the final rows
+composition (`M4fe2034ac6[_v1:=Mf6f283f804]`) that fit the public rows and then failed the final rows
 (1,143 evaluations in all vs 8,328 off). The five `port:anchor` certifications are the same in every
 field arm (PORT finds them without words); COMBINE's miss adds 768 evaluations to each.
 
