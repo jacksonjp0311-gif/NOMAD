@@ -2,8 +2,8 @@ name: nomad-body
 # Primary runtime on GitHub: one long-lived body (~5.5 h) running the whole
 # organism loop in process (python -m nomad.body). GitHub is only one host;
 # the same command runs on a desktop or any CPU host. A single-body lease in
-# data/lease.json keeps two hosts from writing. Before exiting, the body
-# dispatches its successor; the nomad-body concurrency group keeps exactly
+# data/lease.json keeps two hosts from writing. At the START of each run the body
+# queues its successor (and again at exit if none is pending); the nomad-body concurrency group keeps exactly
 # one body running (the successor waits as pending). Short awake/sleep
 # workflows are fallbacks and no-op while the lease is fresh. nomad-watch
 # restarts the body if its heartbeat is older than 30 minutes.
@@ -30,6 +30,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Queue successor first (so a crash or cancel cannot break the chain)
+        if: ${{ vars.NOMAD_BODY != 'off' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          pending=$(gh run list -R "$GITHUB_REPOSITORY" -w nomad-body.yml -s queued -L 5 --json databaseId -q length)
+          pending=$((pending + $(gh run list -R "$GITHUB_REPOSITORY" -w nomad-body.yml -s pending -L 5 --json databaseId -q length)))
+          if [ "$pending" -gt 0 ]; then echo "successor already pending"; exit 0; fi
+          gh workflow run nomad-body.yml -R "$GITHUB_REPOSITORY" --ref main
+          echo "successor queued at start"
       - name: Live
         id: body
         run: |
