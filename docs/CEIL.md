@@ -84,3 +84,56 @@ in-reach ceilings over products of two inputs), the rewired controls pick up a f
 5 / 7 / 8 / 10 / 12 ceilings, criterion 2 passes with a smaller margin, criteria 3-6 pass
 (existing suites have few top-level ceilings by learned constants: TRANSFER-6 / SELFEDIT round 1-2
 and TRANSFER-7 rows may gain, not lose).
+
+## Sealed result (measured once, 2026-11-21, code `c7cc8d0`; `results/ceil/`): **FAIL (criterion 5, strict) -> stays OFF**
+
+Suite sha `79d7d98c...b711`, 23 hard (cold certifies none).
+
+| arm | certified | evaluations |
+|---|---|---|
+| cold | 0 | 230,000 |
+| empty_off | 0 | 230,000 |
+| empty_on | 0 | 230,000 (identical per task) |
+| trained_off | 3 | 215,616 |
+| **trained_on** | **12** | **197,512 (-8.4%)** |
+| rewired_1 | 6 | 209,925 |
+| rewired_2 | 6 | 209,925 |
+| rewired_3 (best control) | 8 | 206,107 |
+
+The 9 new solves are all ceiling fits (`port:invent:...:ceil{k}`): `cl_m_booklets` (ceil4),
+`cl_m_lockers` (ceil3), `cl_h_rafts` (ceil6), `cl_h_moorings` (ceil3), `cl_h_fuel` (ceil9),
+`cl_b_cases` (ceil6), `cl_b_kegs` (ceil6), `cl_b_pallets` (ceil4), `cl_b_tanks` (ceil4); each cost
+7,389-8,127 evaluations (the INVENT phase sits late in the budget). The rewired controls certify 3-5
+more than off: the shared `cl_m_audio` (// 12) and `cl_h_crates` (// 8, rewired_3), which the
+learned constants cannot reach, and `cl_h_rafts` / `cl_b_cases` / `cl_m_booklets`, where that task's
+bank lacked 6 (or 4) and the control drew it. Still missed: `cl_m_guides`, `cl_h_lifeboats`,
+`cl_b_squares` (in-reach constants, no matching block in the phase), the // 5 / 7 / 10 ceilings and the
+two composites.
+
+| criterion | result |
+|---|---|
+| 1 CEIL helps (>= +3) | **pass**: +9 certified (3 -> 12), 8.4% fewer evaluations |
+| 2 learned constants carry it (vs best rewired) | **pass**: +4 over rewired_3 (12 vs 8), 4.2% fewer evaluations |
+| 3 empty field gains nothing | **pass**: empty_on = empty_off on every task (0, 230,000) |
+| 4 no sealed task lost, nothing worse than cold | **pass**: none lost, no evaluation increase on vs off, nothing worse than cold |
+| 5 existing suites, every arm | **FAIL (strict)**: 19 judges, 0 certified-count changes and 0 gains anywhere, but **2 per-task losses**: ROLES `rs_shaft_trips`, arms `shuffled_1` and `shuffled_2` (report-only controls of the ROLES judge), evaluations 69 -> 71. Every other record of all 19 judges identical (learning incl. `sci_water_mol`, T1-T4, secondary, text, bridge, INVENT_TEXT, TRANSFER-5, TRANSFER-6, SELFEDIT2, TEXT_CHAIN, MEANING, INFLECT, LET, TEXT_ABSTRACT, ROLES, COMBINE) |
+| 6 LOFO, tests | **pass**: LOFO 5,883 (cold / trained / trained_port_off), worst 1.0x; 542 passed, 6 skipped |
+
+**Decision (pre-registered rule): criterion 5 fails, so `NOMAD_CEIL` stays OFF.**
+
+Honest reading. On its own suite the fit does what was claimed, and beats the rewired controls by the
+bar. The ROLES trained field is byte-identical with the switch on or off (library, programs,
+concepts and lexicon hashes checked after the run), and ROLES `trained_off` / `trained_on` are
+unchanged. So the +2 is the search itself. The likely cause, not yet confirmed: in the shuffled arms
+the MEANING stage is reached later, after an INVENT phase in which two ceiling offers matched the
+public rows and WITNESS rejected them (1 evaluation each, by design). That is the cost the
+"1 evaluation per offer" design pays on any task where a computed block happens to round up to the
+goal. The existing suites gained nothing: their ceilings divide by constants this field lacks (10, 12,
+18, 25, 60), by inputs, or sit inside composites (`n ceil(a / k)`, products of ceilings), which the
+top-level fit does not reach.
+
+Best next step for a fair retry, on a new sealed suite: make a rejected ceiling offer free when it is
+the same block / constant pair a floor or rescaled lookup already paid for, or gate the offer on a
+challenge row read for free from WITNESS's cache, so a miss costs nothing. Then check the ROLES
+controls again. Also: the composites (`n ceil(a / k)`, `ceil(a / k) + b`) need ceiling blocks in the
+residual table, not only top-level offers.
