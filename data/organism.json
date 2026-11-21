@@ -1,10 +1,10 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-21T16:42:38Z",
+  "ts": "2026-11-21T16:53:09Z",
   "sense": {
-    "last_pair": "2026-11-21T16:41:39Z",
-    "last_world_pair": "2026-11-21T16:41:39Z",
-    "last_sleep": "2026-11-21T16:42:38Z"
+    "last_pair": "2026-11-21T16:52:05Z",
+    "last_world_pair": "2026-11-21T16:52:05Z",
+    "last_sleep": "2026-11-21T16:53:08Z"
   },
   "think": {
     "curriculum_open_levels": {
@@ -37,7 +37,7 @@
       "informative_pairs": 0,
       "mean_treatment_advantage": null,
       "both_certified_pairs_with_cost": 128,
-      "mean_evaluations_saved": 310.3671875,
+      "mean_evaluations_saved": 309.796875,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     }
   },
@@ -45,7 +45,7 @@
     "queued": 0,
     "inflight": 0,
     "certified_queued": 0,
-    "field_version": 1340,
+    "field_version": 1346,
     "genesis_heldout": {
       "field_certified": false,
       "cold_certified": false
@@ -60,51 +60,6 @@
   },
   "evolve": {
     "recent": [
-      {
-        "ts": "2026-11-21T06:31:30Z",
-        "seed": 1169914256,
-        "gene": "library_k",
-        "before": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2
-        },
-        "after": {
-          "decay": 0.97,
-          "library_k": 5,
-          "patience": 4,
-          "max_lag": 2
-        },
-        "benchmark_before": {
-          "heldout_wins": 2,
-          "train_evaluations": 4538,
-          "train_certified": 16,
-          "probe_evaluations": 27857,
-          "total_evaluations": 32395,
-          "probes": {
-            "absdiff": "certified_correctness",
-            "quartic_sum": "certified_correctness",
-            "last_first_upper": "none",
-            "sum_minus_max": "none"
-          }
-        },
-        "benchmark_after": {
-          "heldout_wins": 2,
-          "train_evaluations": 4538,
-          "train_certified": 16,
-          "probe_evaluations": 27857,
-          "total_evaluations": 32395,
-          "probes": {
-            "absdiff": "certified_correctness",
-            "quartic_sum": "certified_correctness",
-            "last_first_upper": "none",
-            "sum_minus_max": "none"
-          }
-        },
-        "accepted": false,
-        "reason": "not_better"
-      },
       {
         "ts": "2026-11-21T08:34:23Z",
         "seed": 3968454675,
@@ -284,6 +239,51 @@
         },
         "accepted": false,
         "reason": "not_better"
+      },
+      {
+        "ts": "2026-11-21T16:53:09Z",
+        "seed": 82497262,
+        "gene": "decay",
+        "before": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2
+        },
+        "after": {
+          "decay": 0.98,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2
+        },
+        "benchmark_before": {
+          "heldout_wins": 2,
+          "train_evaluations": 4538,
+          "train_certified": 16,
+          "probe_evaluations": 7539,
+          "total_evaluations": 12077,
+          "probes": {
+            "absdiff": "certified_correctness",
+            "quartic_sum": "certified_correctness",
+            "last_first_upper": "none",
+            "sum_minus_max": "none"
+          }
+        },
+        "benchmark_after": {
+          "heldout_wins": 2,
+          "train_evaluations": 4538,
+          "train_certified": 16,
+          "probe_evaluations": 7539,
+          "total_evaluations": 12077,
+          "probes": {
+            "absdiff": "certified_correctness",
+            "quartic_sum": "certified_correctness",
+            "last_first_upper": "none",
+            "sum_minus_max": "none"
+          }
+        },
+        "accepted": false,
+        "reason": "not_better"
       }
     ]
   },
@@ -311,11 +311,11 @@
     ],
     "body_lease": {
       "host": "gh-44875106788",
-      "heartbeat": "2026-11-21T16:42:38Z",
-      "age_min": 0.008637883333333334,
+      "heartbeat": "2026-11-21T16:53:09Z",
+      "age_min": 0.016632383333333334,
       "alive": true,
-      "cycles": 543,
-      "cycles_per_hour": 111.5,
+      "cycles": 561,
+      "cycles_per_hour": 111.2,
       "released": false
     }
   },
