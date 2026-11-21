@@ -154,7 +154,10 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
             try:
                 wprior.add_witnessed(extra["tree"], receipt, family=extra.get("family"),
                                      opset=OPSETS[extra["opset"]], inputs=extra["inputs"],
-                                     sense_key=task_route_key(_t) if _t is not None else None)
+                                     sense_key=task_route_key(_t) if _t is not None else None,
+                                     # MEANING (docs/MEANING.md): a packet whose task carried words
+                                     words=extra.get("words") if isinstance(extra.get("words"), str) else None,
+                                     out=extra.get("out"), kind=extra.get("sense_kind"))
             except (ValueError, KeyError, TypeError):
                 dropped["bad_receipt"] += 1
                 continue

@@ -506,6 +506,15 @@ class WorldPrior:
         # receipts), decays with the genome; read only when NOMAD_GRAPH is on.
         self.graph_nodes: dict[str, float] = {}
         self.graph_edges: dict[str, float] = {}
+        # MEANING (docs/MEANING.md, nomad/meaning.py): words grounded in certified
+        # structure. lexicon[token][concept] = evidence that a task described with
+        # that token was solved by that concept (a certified program up to variable
+        # renaming, kept in concepts[concept]). Learned only in add_witnessed from a
+        # verified receipt whose task carried words, and only while NOMAD_MEANING is
+        # on; read only by meaning.stage (field arm, NOMAD_MEANING on). An empty
+        # field has an empty lexicon; the cold control never reads one.
+        self.lexicon: dict[str, dict[str, float]] = {}
+        self.concepts: dict[str, dict] = {}
 
     # ---- ordering
     def order(self, opset: Sequence[str], family: str | None = None) -> tuple[str, ...]:
@@ -522,9 +531,14 @@ class WorldPrior:
     # ---- learning (only from a verified receipt)
     def add_witnessed(self, tree: list, receipt: WitnessReceipt, *, family: str | None,
                       opset: Sequence[str], inputs: Sequence[Sequence[str]], harvest: bool = True,
-                      sense_key: str | None = None) -> None:
+                      sense_key: str | None = None, words: str | None = None,
+                      out: str | None = None, kind: str | None = None) -> None:
         if not receipt.supported or not receipt.verify_checksum():
             raise ValueError("Cannot learn from an unverified or failed WITNESS receipt")
+        if words:
+            from . import meaning as _meaning
+            if _meaning.enabled():
+                _meaning.learn(self, tree, inputs, words, out=out, kind=kind)
         if sense_key:
             self._route_learn(tree, sense_key)
         if harvest:
@@ -656,6 +670,9 @@ class WorldPrior:
                 d[k] *= gamma
                 if d[k] < GRAPH_PRUNE:
                     del d[k]
+        if self.lexicon:
+            from . import meaning as _meaning
+            _meaning.decay(self, gamma)
 
     # ---- persistence
     def snapshot(self) -> dict:
@@ -666,7 +683,9 @@ class WorldPrior:
                 "programs": self.programs, "programs_sig": self.programs_sig,
                 "programs_uses": self.programs_uses,
                 "route": self.route, "library_src": self.library_src, "programs_src": self.programs_src,
-                "graph_nodes": self.graph_nodes, "graph_edges": self.graph_edges}
+                "graph_nodes": self.graph_nodes, "graph_edges": self.graph_edges,
+                # MEANING: present only once a lexicon exists (snapshots without words are unchanged)
+                **({"lexicon": self.lexicon, "concepts": self.concepts} if self.lexicon else {})}
 
     @classmethod
     def from_snapshot(cls, snap: dict) -> "WorldPrior":
@@ -688,6 +707,8 @@ class WorldPrior:
         p.programs_src = dict(snap.get("programs_src") or {})
         p.graph_nodes = {k: float(v) for k, v in (snap.get("graph_nodes") or {}).items()}
         p.graph_edges = {k: float(v) for k, v in (snap.get("graph_edges") or {}).items()}
+        p.lexicon = {t: {c: float(v) for c, v in row.items()} for t, row in (snap.get("lexicon") or {}).items()}
+        p.concepts = {k: dict(v) for k, v in (snap.get("concepts") or {}).items()}
         return p
 
 
@@ -2217,13 +2238,29 @@ class WorldEvaluation:
 def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bool = True,
              use_library: bool = True, max_size: int = 7, max_eval: int = 20000,
              variation: Any = None, casesplit: bool | None = None,
-             sense: dict | bool | None = None) -> tuple[WorldEvaluation, WitnessReceipt | None]:
+             sense: dict | bool | None = None,
+             words: str | None = None) -> tuple[WorldEvaluation, WitnessReceipt | None]:
+    """``words`` (MEANING, docs/MEANING.md): the task's natural-language description.
+    Read only when NOMAD_MEANING is on, by a field (``prior``) holding a lexicon:
+    concepts the words retrieve are tried first within ``meaning.MEANING_BUDGET``
+    evaluations (WITNESS-gated); on a miss the normal search runs unchanged on the
+    remaining budget. Without words, with the switch off, for an empty field and for
+    the cold control this is exactly the search below."""
     library = (prior.primitives_for(task.inputs)
                if (prior is not None and use_library and prior.wants_library(task.family if use_family else None))
                else {})
-    s = synthesize(task, prior=prior, use_family=use_family, use_library=use_library,
-                   max_size=max_size, max_eval=max_eval, variation=variation, casesplit=casesplit,
-                   sense=sense)
+    spent, hit = 0, None
+    if words and prior is not None and prior.lexicon:
+        from . import meaning as _meaning
+        if _meaning.enabled():
+            hit, spent, _info = _meaning.stage(task, prior, words, max_eval=max_eval)
+    if hit is not None:
+        s = Search(hit[1], spent, None, (), [], "meaning:" + hit[0])
+    else:
+        s = synthesize(task, prior=prior, use_family=use_family, use_library=use_library,
+                       max_size=max_size, max_eval=max_eval - spent, variation=variation, casesplit=casesplit,
+                       sense=sense)
+        s.evaluations += spent
     vt = tuple(s.variation)
     sr = s.sense
     if s.tree is None:
