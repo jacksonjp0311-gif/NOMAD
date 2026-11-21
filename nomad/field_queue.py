@@ -92,10 +92,14 @@ def field_version() -> int:
         return 0
 
 
+def version_text(version: int, note: str = "") -> str:
+    return json.dumps({"version": int(version), "ts": _now(), "note": note}, indent=2)
+
+
 def bump_version(note: str = "") -> int:
     v = field_version() + 1
     version_path().parent.mkdir(parents=True, exist_ok=True)
-    version_path().write_text(json.dumps({"version": v, "ts": _now(), "note": note}, indent=2))
+    version_path().write_text(version_text(v, note))
     return v
 
 

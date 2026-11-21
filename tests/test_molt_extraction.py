@@ -20,7 +20,7 @@ def _certified_packet(field_version: int = 0, pair_id: str | None = "p1"):
 
     rows = TRAIN_MULTIPLY[0]
     task = SynthesisTask(
-        task_id="t-mult",
+        task_id="continuous-domain:mathematics",   # INTEGRITY: the receipt is bound to the packet task
         source="def solve(x, y):\n    return 0\n",
         public=tuple(rows["public"]),
         challenge=tuple(rows["challenge"]),

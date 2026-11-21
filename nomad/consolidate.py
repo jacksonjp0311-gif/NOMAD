@@ -87,29 +87,156 @@ def _receipt(packet: dict[str, Any]) -> WitnessReceipt | None:
     return r
 
 
+# ---------------------------------------------------------------- INTEGRITY: atomic commit
+#
+# docs/INTEGRITY.md. A sleep used to save each state file and only then acknowledge the
+# in-flight queue, with duplicate detection per call only: a crash between the two replayed
+# an applied packet on the next sleep (witnessed 1 -> 2). Now every file a sleep changes is
+# staged first, a commit manifest naming them is written atomically (the commit point), the
+# staged files are moved into place, and only then is the queue acknowledged. The set of
+# applied packet ids is one of the committed files, so it lands atomically with the state.
+# A sleep first rolls forward any committed-but-unfinished manifest, then drops replayed
+# packets whose id is already in the ledger (reason ``already_applied``).
+
+LEDGER_MAX = 4096
+BINDING_REFUSALS = ("receipt_mismatch", "reattest_mismatch", "unbound_task")
+
+
+def ledger_path() -> Path:
+    return data_root() / "continuous" / "applied_packets.json"
+
+
+def commit_path() -> Path:
+    return data_root() / "continuous" / "consolidate.commit.json"
+
+
+def refusals_path() -> Path:
+    return data_root() / "continuous" / "refusals.jsonl"
+
+
+def load_ledger() -> list[str]:
+    for path in (ledger_path(), ledger_path().with_suffix(".prev.json")):
+        if path.exists():
+            try:
+                ids = json.loads(path.read_text()).get("ids")
+            except (json.JSONDecodeError, AttributeError):
+                continue
+            if isinstance(ids, list):
+                return [str(i) for i in ids]
+    return []
+
+
+def _ledger_text(ids: list[str]) -> str:
+    return json.dumps({"schema": "nomad.applied-packets.v1", "ids": ids[-LEDGER_MAX:]}, indent=0)
+
+
+def recover() -> bool:
+    """Finish a committed sleep whose files were not all moved into place. Idempotent."""
+    cp = commit_path()
+    if not cp.exists():
+        return False
+    try:
+        manifest = json.loads(cp.read_text())
+        files = manifest["files"]
+    except (json.JSONDecodeError, KeyError, TypeError):
+        cp.unlink()   # written by os.replace, so never torn; unreadable means not ours
+        return False
+    root = data_root()
+    for staged, final, keep_prev in files:
+        st, fi = root / staged, root / final
+        if st.exists():
+            if keep_prev and fi.exists():
+                shutil.copyfile(fi, fi.with_suffix(".prev.json"))
+            os.replace(st, fi)
+    cp.unlink()
+    return True
+
+
+def _commit(writes: list[tuple[Path, str, bool]]) -> None:
+    """Stage every (final path, text, keep_prev) write, commit the manifest, move files into place."""
+    root = data_root()
+    files = []
+    for final, text, keep_prev in writes:
+        final.parent.mkdir(parents=True, exist_ok=True)
+        st = final.with_name(final.name + ".staged")
+        st.write_text(text)
+        files.append([str(st.relative_to(root)), str(final.relative_to(root)), keep_prev])
+    cp = commit_path()
+    tmp = cp.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps({"schema": "nomad.consolidate-commit.v1", "files": files}))
+    os.replace(tmp, cp)   # commit point
+    recover()
+
+
+def _refuse(pid: Any, packet: dict[str, Any], reason: str, detail: str = "") -> None:
+    """Log a binding refusal (append-only; a log, not state)."""
+    path = refusals_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    row = {"ts": field_queue._now(), "packet_id": pid, "task": packet.get("task"),
+           "family": (packet.get("extra") or {}).get("family"), "reason": reason, "detail": detail}
+    with path.open("a") as f:
+        f.write(json.dumps(row, separators=(",", ":")) + "\n")
+
+
+def _bind_world(packet: dict[str, Any], receipt: WitnessReceipt) -> tuple[Any, str | None, str]:
+    """INTEGRITY: resolve the packet's task from trusted task data, bind the receipt to the exact
+    program and task, and re-attest the program on that task. Returns (task, refusal, detail)."""
+    from .world import certify, check_binding
+    from .world_tasks import by_family
+    from .witness import ReceiptMismatch
+    extra = packet.get("extra") or {}
+    fam = extra.get("family")
+    task = by_family(fam) if isinstance(fam, str) else None
+    if task is None:
+        return None, "unbound_task", f"unknown family {fam!r}"
+    tree = extra.get("tree")
+    try:
+        check_binding(tree, receipt, task.task_id)
+    except ReceiptMismatch as e:
+        return task, "receipt_mismatch", str(e)
+    try:
+        again, _pub, final_ok = certify(task, tree)
+    except Exception as e:   # noqa: BLE001 - a malformed tree is a refusal, not a crash
+        return task, "reattest_mismatch", f"re-attestation raised {type(e).__name__}"
+    if again is None or again.receipt_hash != receipt.receipt_hash or not final_ok:
+        return task, "reattest_mismatch", "re-attestation on trusted task rows differs"
+    return task, None, ""
+
+
 def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
     """Drain the queue and apply every packet that survives the checks."""
-    from .weights import accumulate, reinforce
+    from .weights import accumulate_list, load_packets, packets_path, reinforce_list, serialize
 
     policy = policy or policy_from_env()
+    recovered = recover()
     packets = field_queue.claim()
     current = field_queue.field_version()
     prior, prior_source = load_prior_safe()
-    from .world_loop import load_world_prior, save_world_prior
+    from .world_loop import load_world_prior, world_prior_path
     wprior = load_world_prior()
     from . import variation as _var
     vstate = _var.load_state()
+    ledger = load_ledger()
+    done = set(ledger)
+    wpk: list | None = None   # weight packets, loaded on first genesis packet
     var_applied = 0
     world_applied = 0
     dropped: dict[str, int] = defaultdict(int)
     applied: list[dict[str, Any]] = []
+    refused: list[dict[str, Any]] = []
     seen: set[str] = set()
+    processed: list[str] = []
     for p in packets:
         pid = p.get("packet_id")
         if pid in seen:
             dropped["duplicate"] += 1
             continue
         seen.add(pid)
+        if pid is not None and str(pid) in done:
+            dropped["already_applied"] += 1
+            continue
+        if pid is not None:
+            processed.append(str(pid))
         if p.get("arm") != "treatment":
             dropped["not_treatment"] += 1
             continue
@@ -148,16 +275,20 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
         extra = p.get("extra") or {}
         if extra.get("world") == "typed":
             from .world import OPSETS, task_route_key
-            from .world_tasks import by_family as _by_family
-            _fam = extra.get("family")
-            _t = _by_family(_fam) if isinstance(_fam, str) else None
+            _t, why, detail = _bind_world(p, receipt)
+            if why is not None:
+                dropped[why] += 1
+                refused.append({"packet_id": pid, "reason": why})
+                _refuse(pid, p, why, detail)
+                continue
             try:
                 wprior.add_witnessed(extra["tree"], receipt, family=extra.get("family"),
                                      opset=OPSETS[extra["opset"]], inputs=extra["inputs"],
-                                     sense_key=task_route_key(_t) if _t is not None else None,
+                                     sense_key=task_route_key(_t),
                                      # MEANING (docs/MEANING.md): a packet whose task carried words
                                      words=extra.get("words") if isinstance(extra.get("words"), str) else None,
-                                     out=extra.get("out"), kind=extra.get("sense_kind"))
+                                     out=extra.get("out"), kind=extra.get("sense_kind"),
+                                     task_id=_t.task_id)
             except (ValueError, KeyError, TypeError):
                 dropped["bad_receipt"] += 1
                 continue
@@ -167,21 +298,32 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
             # trace updates payoff memory and the novelty archive.
             fam = extra.get("family")
             trace = extra.get("variation") if isinstance(extra.get("variation"), dict) else {}
-            from .world_tasks import by_family
-            t = by_family(fam) if isinstance(fam, str) else None
-            if t is not None:
-                res = _var.apply_trace(vstate, {**trace, "family": fam}, certified_tree=extra["tree"],
-                                       library=_var.library_trees(wprior, t.inputs))
-                if not res.get("refused"):
-                    var_applied += 1
+            res = _var.apply_trace(vstate, {**trace, "family": fam}, certified_tree=extra["tree"],
+                                   library=_var.library_trees(wprior, _t.inputs))
+            if not res.get("refused"):
+                var_applied += 1
+            continue
+        # GENESIS packet: the receipt must be the one attested on this packet's task.
+        if receipt.task_id != f"continuous-{p.get('task')}":
+            dropped["receipt_mismatch"] += 1
+            refused.append({"packet_id": pid, "reason": "receipt_mismatch"})
+            _refuse(pid, p, "receipt_mismatch", "receipt was attested on a different task")
             continue
         try:
             prior.add_witnessed(int(p.get("context_sig", 0)), p.get("candidate") or "", receipt,
                                 family=p.get("domain"))
-        except (ValueError, SyntaxError):
-            dropped["bad_receipt"] += 1
+        except (ValueError, SyntaxError) as e:
+            from .witness import ReceiptMismatch
+            why = "receipt_mismatch" if isinstance(e, ReceiptMismatch) else "bad_receipt"
+            dropped[why] += 1
+            if why == "receipt_mismatch":
+                refused.append({"packet_id": pid, "reason": why})
+                _refuse(pid, p, why, str(e))
             continue
-        accumulate(
+        if wpk is None:
+            wpk = load_packets()
+        wpk = accumulate_list(
+            wpk,
             set(p.get("query_bits") or []),
             True,
             label=p.get("task") or "",
@@ -199,30 +341,40 @@ def consolidate(policy: StalenessPolicy | None = None) -> dict[str, Any]:
             },
         )
         if p.get("domain"):
-            reinforce(f"domain:{p['domain']}", 1)
+            reinforce_list(wpk, f"domain:{p['domain']}", 1)
         applied.append({"packet_id": pid, "task": p.get("task"), "lag": lag, "weight": weight})
     new_version = current
     from . import genome
     gamma = float(os.environ.get("NOMAD_DECAY", str(genome.get("decay"))))
     genesis_applied = len(applied) - world_applied
+    writes: list[tuple[Path, str, bool]] = []
     if genesis_applied:
         # Unlearning: old evidence fades a little each time new evidence lands,
         # so the order follows what is still being re-earned.
         prior.decay(gamma)
-        save_prior_atomic(prior)
+        writes.append((prior_path(), json.dumps(prior.snapshot(), indent=2), True))
+        writes.append((packets_path(), serialize(wpk or []), False))
     if world_applied:
         wprior.decay(gamma)
-        save_world_prior(wprior)
+        writes.append((world_prior_path(), json.dumps(wprior.snapshot(), indent=1, sort_keys=True), True))
     if var_applied:
         vstate.decay(gamma)
-        _var.save_state(vstate)
+        writes.append((_var.state_path(), json.dumps(vstate.snapshot(), indent=1, sort_keys=True), True))
+    if writes:
+        writes.append((ledger_path(), _ledger_text(ledger + processed), True))
     if applied:
-        new_version = field_queue.bump_version(f"consolidated {len(applied)} packet(s)")
+        new_version = current + 1
+        writes.append((field_queue.version_path(), field_queue.version_text(
+            new_version, f"consolidated {len(applied)} packet(s)"), False))
+    if writes:
+        _commit(writes)
     field_queue.ack()
     return {
         "claimed": len(packets),
         "applied": applied,
         "dropped": dict(dropped),
+        "refused": refused,
+        "recovered": recovered,
         "field_version_before": current,
         "field_version_after": new_version,
         "prior_source": prior_source,

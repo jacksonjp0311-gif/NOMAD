@@ -100,11 +100,10 @@ def split_packet(packet: Packet, parts: int = 2) -> list[Packet]:
             out.append(Packet(chunk, packet.count, packet.label, packet.receipt))
     return out
 
-def merge_similar(threshold: int = 32) -> int:
-    """Merge packets that share high overlap. Returns number of merges."""
-    packets = load_packets()
+def merge_list(packets: list[Packet], threshold: int = 32) -> tuple[list[Packet], int]:
+    """merge_similar's rule on an in-memory list: (new list, number of merges). Pure."""
     if len(packets) < 2:
-        return 0
+        return packets, 0
     merged = 0
     used = [False] * len(packets)
     new_packets = []
@@ -129,9 +128,19 @@ def merge_similar(threshold: int = 32) -> int:
             merged += len(group) - 1
         else:
             new_packets.append(p)
+    return new_packets, merged
+
+
+def merge_similar(threshold: int = 32) -> int:
+    """Merge packets that share high overlap. Returns number of merges."""
+    packets = load_packets()
+    if len(packets) < 2:
+        return 0
+    new_packets, merged = merge_list(packets, threshold)
     if merged:
         _write(new_packets)
     return merged
+
 
 def reinforce(label: str, amount: int = 1) -> int:
     """Increase the count of packets matching label. Returns new count or 0."""
@@ -163,3 +172,32 @@ def accumulate(
     }
     append_packet(Packet(query_bits, 1, label, receipt))
     merge_similar()
+
+
+def accumulate_list(packets: list[Packet], query_bits: set[int], success: bool, label: str = "",
+                    predicted: str = "public success", measured: str = "",
+                    context: dict[str, Any] | None = None) -> list[Packet]:
+    """accumulate() on an in-memory list (append, then merge_similar's rule); for the sleep learner's
+    single atomic commit (docs/INTEGRITY.md). Same result as accumulate() on the file."""
+    if not success:
+        return packets
+    receipt = {"predicted": predicted, "measured": measured or "public_correct", "context": context or {}}
+    return merge_list(packets + [Packet(query_bits, 1, label, receipt)])[0]
+
+
+def reinforce_list(packets: list[Packet], label: str, amount: int = 1) -> int:
+    """reinforce() on an in-memory list. Returns new count or 0."""
+    found = 0
+    for p in packets:
+        if p.label == label:
+            p.count += amount
+            found = p.count
+    return found
+
+
+def serialize(packets: list[Packet]) -> str:
+    return "".join(json.dumps(p.as_dict(), separators=(",", ":")) + "\n" for p in packets)
+
+
+def packets_path() -> Path:
+    return _packets_path()

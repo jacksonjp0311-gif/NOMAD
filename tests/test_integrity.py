@@ -74,3 +74,136 @@ class ReceiptBinding(unittest.TestCase):
         self.assertEqual(prior.witnessed, 0)
         prior.add_witnessed(ev.learned_context, ev.candidate, receipt)
         self.assertEqual(prior.witnessed, 1)
+
+
+class _LoopBase(unittest.TestCase):
+    def setUp(self) -> None:
+        self._tmp = tempfile.TemporaryDirectory(prefix="nomad-integrity-")
+        self.data = Path(self._tmp.name)
+        os.environ["NOMAD_DATA"] = str(self.data)
+        for d in ("weights", "continuous", "society"):
+            (self.data / d).mkdir(parents=True)
+
+    def tearDown(self) -> None:
+        os.environ.pop("NOMAD_DATA", None)
+        self._tmp.cleanup()
+
+    def _enqueue_world(self) -> dict:
+        from nomad import field_queue
+        from nomad.world_loop import world_pair
+        out = world_pair()
+        self.assertIn("enqueued", out)
+        rows = field_queue.peek()
+        self.assertTrue(rows and rows[-1]["certified"])
+        return rows[-1]
+
+
+class ConsolidateBinding(_LoopBase):
+    def test_swapped_tree_is_refused_and_logged(self) -> None:
+        from nomad import field_queue
+        from nomad.consolidate import consolidate
+        from nomad.world_loop import load_world_prior
+        pkt = self._enqueue_world()
+        tree = pkt["extra"]["tree"]
+        pkt["extra"]["tree"] = ["add", tree, ["const", 0]]       # a different program, same receipt
+        field_queue.queue_path().write_text(json.dumps(pkt) + "\n")
+        report = consolidate()
+        self.assertEqual(report["world_applied"], 0)
+        self.assertEqual(report["dropped"], {"receipt_mismatch": 1})
+        self.assertEqual(load_world_prior().witnessed, 0)
+        log = self.data / "continuous" / "refusals.jsonl"
+        self.assertTrue(log.exists())
+        row = json.loads(log.read_text().splitlines()[-1])
+        self.assertEqual((row["packet_id"], row["reason"]), (pkt["packet_id"], "receipt_mismatch"))
+
+    def test_wrong_task_family_is_refused(self) -> None:
+        from nomad import field_queue
+        from nomad.consolidate import consolidate
+        from nomad.world_tasks import all_training
+        pkt = self._enqueue_world()
+        other = next(t.family for t in all_training() if t.family != pkt["extra"]["family"])
+        pkt["extra"]["family"] = other
+        field_queue.queue_path().write_text(json.dumps(pkt) + "\n")
+        report = consolidate()
+        self.assertEqual(report["world_applied"], 0)
+        self.assertEqual(report["dropped"], {"receipt_mismatch": 1})
+
+
+class CrashReplay(_LoopBase):
+    def test_crash_between_save_and_ack_does_not_double_count(self) -> None:
+        from nomad import consolidate as C, field_queue
+        from nomad.world_loop import load_world_prior
+        self._enqueue_world()
+        with mock.patch.object(field_queue, "ack", side_effect=RuntimeError("crash")):
+            with self.assertRaises(RuntimeError):
+                C.consolidate()
+        self.assertEqual(load_world_prior().witnessed, 1)
+        self.assertTrue(field_queue.inflight_path().exists())        # the packet is replayed ...
+        report = C.consolidate()
+        self.assertEqual(load_world_prior().witnessed, 1)            # ... but not applied twice
+        self.assertEqual(report["world_applied"], 0)
+        self.assertEqual(report["dropped"], {"already_applied": 1})
+        self.assertFalse(field_queue.inflight_path().exists())
+
+    def test_crash_mid_commit_rolls_forward_once(self) -> None:
+        from nomad import consolidate as C, field_queue
+        from nomad.world_loop import load_world_prior
+        self._enqueue_world()
+        real = os.replace
+        calls = {"n": 0}
+
+        def flaky(src, dst):
+            if str(src).endswith(".staged"):
+                calls["n"] += 1
+                if calls["n"] == 2:          # first staged file landed, second did not
+                    raise RuntimeError("crash")
+            return real(src, dst)
+        with mock.patch.object(C.os, "replace", side_effect=flaky):
+            with self.assertRaises(RuntimeError):
+                C.consolidate()
+        report = C.consolidate()
+        self.assertEqual(load_world_prior().witnessed, 1)
+        self.assertEqual(report["world_applied"], 0)
+        self.assertEqual(field_queue.field_version(), 1)
+
+    def test_new_packet_after_replay_still_learns(self) -> None:
+        from nomad import consolidate as C, field_queue
+        from nomad.world_loop import load_world_prior
+        self._enqueue_world()
+        C.consolidate()
+        self._enqueue_world()
+        report = C.consolidate()
+        self.assertEqual(report["world_applied"], 1)
+        self.assertEqual(load_world_prior().witnessed, 2)
+
+    def test_legacy_world_prior_loads(self) -> None:
+        from nomad.world_loop import load_world_prior, world_prior_path
+        live = Path(__file__).resolve().parents[1] / "data" / "continuous" / "world_prior.json"
+        if not live.exists():
+            self.skipTest("no live world prior")
+        world_prior_path().write_text(live.read_text())
+        p = load_world_prior()
+        self.assertEqual(p.witnessed, json.loads(live.read_text())["witnessed"])
+        self.assertEqual(json.dumps(p.snapshot(), sort_keys=True),
+                         json.dumps({**json.loads(live.read_text())}, sort_keys=True))
+
+
+class WeightsInMemory(_LoopBase):
+    def test_accumulate_list_matches_file_accumulate(self) -> None:
+        import random
+        from nomad import weights as Wt
+        rng = random.Random(3)
+        ops = []
+        for i in range(40):
+            bits = set(rng.sample(range(Wt.BITS), rng.randint(20, 60)) + list(range(i % 3 * 40, i % 3 * 40 + 35)))
+            ops.append((bits, f"task{i % 5}", f"domain:d{i % 2}" if i % 4 == 0 else None))
+        Wt._ensure()
+        Wt.append_packet(Wt.Packet({1, 2, 3}, 1, "domain:d0", {}))
+        mem = Wt.load_packets()
+        for bits, label, dom in ops:
+            Wt.accumulate(bits, True, label=label, context={"i": label})
+            mem = Wt.accumulate_list(mem, bits, True, label=label, context={"i": label})
+            if dom:
+                Wt.reinforce(dom, 1)
+                Wt.reinforce_list(mem, dom, 1)
+        self.assertEqual(Wt.packets_path().read_text(), Wt.serialize(mem))
