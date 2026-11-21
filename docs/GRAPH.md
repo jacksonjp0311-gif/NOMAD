@@ -121,3 +121,58 @@ F_graph_rw0..2.
 
 All six pass: `NOMAD_GRAPH` defaults to on in a separate commit. Otherwise it
 stays off, and the code and the result are committed here as they are.
+
+## Sealed result (TRANSFER-6, sha256 07561e10...c6158fa2, 33 hard): FAIL
+
+Judged 2026-11-21 against the suite committed in e1f05c3; raw output in
+`results/graph/graph_sealed_{primary,secondary,lofo}_20261121.json`.
+
+| arm | certified / 33 | evaluations |
+|---|---|---|
+| cold | 0 | 310,961 |
+| empty | 6 | 295,206 |
+| empty_graph | 6 | 295,206 |
+| trained (GRAPH off) | 23 | 228,059 |
+| trained_graph | 23 | 228,272 |
+| trained_graph_rw0 / rw1 / rw2 | 23 / 23 / 23 | 228,294 / 228,280 / 228,295 |
+| practice (GRAPH off) | 23 | 240,802 |
+| practice_graph | 23 | 241,047 |
+| practice_graph_rw0 / rw1 / rw2 | 23 / 23 / 23 | 241,102 / 241,088 / 241,089 |
+
+By domain, trained arms: music 10/11, farm 6/12, warehouse 7/10 (identical
+for off, graph and every rewired graph); practice arms: 9/11, 7/12, 7/10.
+The same 23 tasks are certified by every trained-field arm; the graph changes
+only which block pairs are tried first (+213 evaluations on trained, +245 on
+practice, within noise of the rewired controls).
+
+| criterion | result |
+|---|---|
+| 1. graph beats off (either field) | **FAIL** (23 = 23 on both) |
+| 2. graph beats every rewired control | **FAIL** (23 = 23 / 23 / 23 on both) |
+| 3. empty_graph == empty | pass (6 = 6, identical evaluations) |
+| 4. no TRANSFER-6 losses, no new worse-than-cold | pass |
+| 5. zero losses on existing suites | pass: deep 27->27 (empty 25, cold 0, of 40); science hard 12->12 (sci_water_mol kept, of 14); TRANSFER-1 19->19 /20; TRANSFER-2 32->32 /35; TRANSFER-3 27->**28** /40; TRANSFER-4 18->18 /35; TRANSFER-5 26->26 (empty 8, cold 0, of 33); TEXT lang 7->7 /24; BRIDGE trained 13->13 /22 |
+| 6. LOFO | pass: cold 5,883, trained 5,883, trained_graph 5,883; worst 1.0x |
+
+Verdict: **FAIL** on criteria 1-2, as expected before measuring.
+`NOMAD_GRAPH` stays **off**; the code stays in tree behind the switch.
+
+**Memory-size note.** The 1,000-task practice field again does not help on
+its own (23 vs 23, and it loses m6_choir_risers and w6_top_and_rest that the
+math_sci field certifies, gaining one farm and one warehouse task): a bigger, uncurated memory
+is not better under the fixed `PORT_SCAN = 400` cut.
+
+**Honest reading.** A co-occurrence graph learned from WITNESS-certified
+programs encodes "which blocks were used together before". On held-out
+domains the missing programs need relations that never co-occurred in
+training (dev oracle: 18 of 57 practice misses are bank-pair sums), so the
+graph's proposals are no better than a randomly rewired graph's. Proposal
+order is not the bottleneck; selection of *which* blocks survive the 400-cut
+at large memory is.
+
+**Most promising next step.** ROUTE-style learned selection *before* the
+`PORT_SCAN` cut at large memory (dev on the practice field: learned 154 vs
+off 149 vs shuffled 148 / 149 / 138), with loss protection (e.g. learned
+order fills only the tail of the 400 after the usage-order head, or a
+two-pass fallback) to remove its 7 dev losses, pre-registered on a fresh
+sealed suite.
