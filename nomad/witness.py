@@ -26,6 +26,14 @@ def _matches(a: tuple[float, ...], b: tuple[float, ...], tol: float) -> bool:
     return len(a) == len(b) and bool(a) and all(abs(x - y) <= tol for x, y in zip(a, b))
 
 
+class ReceiptMismatch(ValueError):
+    """A valid, supported receipt presented for a different program or task than it attests.
+
+    INTEGRITY (docs/INTEGRITY.md): admission is bound to the receipt's exact
+    transmission (program hash) and task identity; a mismatch is refused.
+    """
+
+
 @dataclass(frozen=True)
 class ConsequenceClaim:
     """A falsifiable claim about a transmission's externally observable consequence.

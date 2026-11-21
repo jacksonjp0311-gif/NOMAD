@@ -29,14 +29,17 @@ def _vsq():
                      rows(5), rows(3), rows(3))
 
 
+TREE = ["add", ["mul", ["var", "x"], ["var", "y"]], ["mul", ["var", "x"], ["add", ["var", "y"], ["const", 1]]]]
+
+
 class _Receipt:
     supported = True
+    witness_id = W.WORLD_WITNESS_ID              # INTEGRITY: a receipt is bound to the program it attests
+    transmission_id = W.program_hash(TREE)
+    task_id = "t-graph"
 
     def verify_checksum(self):
         return True
-
-
-TREE = ["add", ["mul", ["var", "x"], ["var", "y"]], ["mul", ["var", "x"], ["add", ["var", "y"], ["const", 1]]]]
 
 
 class Graph(unittest.TestCase):

@@ -23,7 +23,7 @@ from dataclasses import dataclass, field
 from itertools import product
 from typing import Any, Callable, Iterable, Sequence
 
-from .witness import Witness, WitnessReceipt
+from .witness import ReceiptMismatch, Witness, WitnessReceipt
 
 MAX_INT = 10**6
 MAX_STR = 64
@@ -577,9 +577,14 @@ class WorldPrior:
     def add_witnessed(self, tree: list, receipt: WitnessReceipt, *, family: str | None,
                       opset: Sequence[str], inputs: Sequence[Sequence[str]], harvest: bool = True,
                       sense_key: str | None = None, words: str | None = None,
-                      out: str | None = None, kind: str | None = None, row: dict | None = None) -> None:
+                      out: str | None = None, kind: str | None = None, row: dict | None = None,
+                      task_id: str | None = None) -> None:
         if not receipt.supported or not receipt.verify_checksum():
             raise ValueError("Cannot learn from an unverified or failed WITNESS receipt")
+        # INTEGRITY (docs/INTEGRITY.md): the receipt admits only the exact program it attests
+        # (transmission_id = program_hash of the standalone tree certify() saw) and, when the
+        # caller names it, only for the task it was attested on. Checked before anything is learned.
+        check_binding(tree, receipt, task_id)
         if words:
             from . import meaning as _meaning
             if _meaning.enabled():
@@ -2876,6 +2881,24 @@ def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bo
                            tuple(s.library_used), s.via, vt, sr), receipt
 
 
+WORLD_WITNESS_ID = "nomad-witness-world-v1"
+
+
+def program_hash(tree: list) -> str:
+    """The transmission id certify() stamps on a receipt: sha256 of the standalone tree's JSON."""
+    return hashlib.sha256(json.dumps(tree).encode()).hexdigest()
+
+
+def check_binding(tree: list, receipt: WitnessReceipt, task_id: str | None = None) -> None:
+    """INTEGRITY: raise ReceiptMismatch unless ``receipt`` attests exactly ``tree`` (and ``task_id``)."""
+    if getattr(receipt, "witness_id", None) != WORLD_WITNESS_ID:
+        raise ReceiptMismatch("receipt is not a WORLD WITNESS receipt")
+    if getattr(receipt, "transmission_id", None) != program_hash(tree):
+        raise ReceiptMismatch("submitted program does not match the receipt's program hash")
+    if task_id is not None and getattr(receipt, "task_id", None) != task_id:
+        raise ReceiptMismatch("receipt was attested on a different task")
+
+
 def certify(task: WorldTask, tree: list) -> tuple[WitnessReceipt | None, bool, bool]:
     """WITNESS-attest a standalone program on a task's rows.
 
@@ -2897,9 +2920,9 @@ def certify(task: WorldTask, tree: list) -> tuple[WitnessReceipt | None, bool, b
     if any(v is None for v in pub + cha):
         return None, False, False
     d = _DEFAULT[task.out]
-    receipt = Witness(witness_id="nomad-witness-world-v1").attest(
+    receipt = Witness(witness_id=WORLD_WITNESS_ID).attest(
         task_id=task.task_id,
-        transmission_id=hashlib.sha256(json.dumps(tree).encode()).hexdigest(),
+        transmission_id=program_hash(tree),
         world_epoch=0,
         current_public=tuple(_wv(d) for _ in task.public),
         target_public=tuple(_wv(e) for _, e in task.public),

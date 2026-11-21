@@ -151,6 +151,11 @@ class GrammarPrior:
                       family: str | None = None) -> None:
         if not receipt.supported or not receipt.verify_checksum():
             raise ValueError("Cannot learn from an unverified or failed WITNESS receipt")
+        # INTEGRITY (docs/INTEGRITY.md): the receipt admits only the exact candidate it attests
+        # (_witness stamps transmission_id = sha256 of the rendered solution source).
+        if getattr(receipt, "transmission_id", None) != hashlib.sha256(_render(expr).encode()).hexdigest():
+            from .witness import ReceiptMismatch
+            raise ReceiptMismatch("submitted candidate does not match the receipt's program hash")
         tree = ast.parse(expr, mode="eval")
         if not isinstance(tree.body, ast.BinOp):
             return
