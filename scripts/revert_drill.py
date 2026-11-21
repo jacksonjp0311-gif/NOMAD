@@ -55,6 +55,11 @@ def scenario(root: Path, regress: bool) -> dict:
 
     env = {k: v for k, v in os.environ.items() if k not in ("NOMAD_DATA", "NOMAD_FEED", "GITHUB_TOKEN", "GH_TOKEN")}
     env["PYTHONPATH"] = str(clone)
+    # The drill verifies the guard -> revert -> push path only. A mutation attempt after the guard
+    # (SELFEDIT sandbox or evolve) runs the dev benchmark plus the full test suite (~10+ min) and is
+    # covered by its own tests (tests/test_selfedit.py, tests/test_body.py). Keep it out of the drill:
+    # SELFEDIT off here, and the fresh attempt row below throttles evolve. Checked in step 4.
+    env["NOMAD_SELFEDIT"] = "off"
     py = [sys.executable, "-B"]
     genome_before = (clone / "data" / "genome.json").read_text() if (clone / "data" / "genome.json").exists() else None
 
@@ -107,6 +112,7 @@ def scenario(root: Path, regress: bool) -> dict:
         "pushed_to_origin": any(s.startswith(f"nomad-evolve-log: guard {want} {gid}") for s in remote_log)
                             and (any(s.startswith(f"nomad-revert: {gid}") for s in remote_log) == regress),
         "evolve_commit_kept_in_history": evolve_sha in sh("git", "rev-list", "HEAD", cwd=clone),
+        "no_mutation_attempt_in_drill": "selfedit" not in step and "evolve" not in step,
     }
     return {"scenario": "regressed" if regress else "healthy", "id": gid,
             "live_ratio_before": round(before, 4), "guard": step["guard"], "reverted": step.get("reverted"),

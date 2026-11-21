@@ -38,7 +38,9 @@ class OrganismTests(unittest.TestCase):
 
     def test_heartbeat_gap_event(self) -> None:
         from nomad.organism import main
-        main(["event", "heartbeat_gap", "--minutes", "120", "--action", "redispatched_awake"])
+        import contextlib, io
+        with contextlib.redirect_stdout(io.StringIO()):   # synthetic fixture event: keep it out of CI logs
+            main(["event", "heartbeat_gap", "--minutes", "120", "--action", "redispatched_awake"])
         rows = [json.loads(l) for l in (self.data / "organism_events.jsonl").read_text().splitlines()]
         self.assertEqual(rows[-1]["kind"], "heartbeat_gap")
         self.assertEqual(rows[-1]["minutes"], 120.0)

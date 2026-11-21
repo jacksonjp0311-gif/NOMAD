@@ -204,5 +204,59 @@ class GenomeEvolveTests(Isolated):
         self.assertTrue(evolve.should_evolve() in (True, False))
 
 
+class EvolveStepDispatchTests(Isolated):
+    """body.evolve_step routing after the guard, with the slow organs mocked (the revert drill
+    covers the real guard -> git revert -> push path; selfedit/evolve have their own tests)."""
+
+    def _run(self, *, guard, se_should, ev_should, push=True):
+        from unittest import mock
+        from nomad import body, evolve, hostgit, selfedit
+        se_res = {"accepted": True, "reason": None, "gene": "inv_k", "id": "se1",
+                  "before": {"inv_k": 4}, "after": {"inv_k": 6},
+                  "dev_before": {"certified": 1}, "dev_after": {"certified": 2}, "sandbox_clean": True}
+        ev_res = {"accepted": True, "gene": "decay", "id": "ev1", "before": {}, "after": {}}
+        with mock.patch.object(evolve, "guard", return_value=guard), \
+             mock.patch.object(selfedit, "should", return_value=se_should), \
+             mock.patch.object(selfedit, "attempt", return_value=se_res) as se_att, \
+             mock.patch.object(evolve, "should_evolve", return_value=ev_should), \
+             mock.patch.object(evolve, "evolve", return_value=ev_res) as ev_att, \
+             mock.patch.object(hostgit, "commit") as commit, \
+             mock.patch.object(hostgit, "find_commit", return_value="deadbeef00") as find, \
+             mock.patch.object(hostgit, "revert", return_value=True) as rev:
+            out = body.evolve_step(push=push)
+        return out, se_att, ev_att, commit, find, rev
+
+    def test_due_selfedit_runs_instead_of_evolve_and_commits_genome(self) -> None:
+        out, se, ev, commit, _, _ = self._run(guard={"decision": "none"}, se_should=True, ev_should=True)
+        se.assert_called_once()
+        ev.assert_not_called()
+        self.assertTrue(out["selfedit"]["accepted"])
+        msgs = [c.args[0] for c in commit.call_args_list]
+        self.assertTrue(any(m.startswith("nomad-evolve-log: selfedit inv_k accepted=True") for m in msgs), msgs)
+        self.assertTrue(any(m.startswith("nomad-evolve: se1 selfedit inv_k 4 -> 6") for m in msgs), msgs)
+
+    def test_evolve_runs_when_selfedit_not_due(self) -> None:
+        out, se, ev, commit, _, _ = self._run(guard={"decision": "none"}, se_should=False, ev_should=True)
+        se.assert_not_called()
+        ev.assert_called_once()
+        msgs = [c.args[0] for c in commit.call_args_list]
+        self.assertTrue(any(m.startswith("nomad-evolve: ev1 decay") for m in msgs), msgs)
+
+    def test_revert_decision_reverts_then_nothing_due_means_no_mutation(self) -> None:
+        out, se, ev, commit, find, rev = self._run(guard={"decision": "revert", "id": "g1"},
+                                                    se_should=False, ev_should=False)
+        find.assert_called_once_with("^nomad-evolve: g1")
+        rev.assert_called_once()
+        self.assertIn("nomad-revert: g1", rev.call_args.args[1])
+        se.assert_not_called(); ev.assert_not_called()
+        self.assertNotIn("selfedit", out); self.assertNotIn("evolve", out)
+
+    def test_no_push_never_touches_git(self) -> None:
+        out, se, ev, commit, find, rev = self._run(guard={"decision": "keep", "id": "g2"},
+                                                    se_should=True, ev_should=False, push=False)
+        se.assert_called_once()
+        commit.assert_not_called(); rev.assert_not_called()
+
+
 if __name__ == "__main__":
     unittest.main()
