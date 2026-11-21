@@ -74,3 +74,21 @@ are **added** to criterion 4: learning, transfer1-4, secondary4, text, bridge, t
 transfer6, selfedit2, text_chain, meaning, inflect, let, textpat, roles, combine, ceil, merge. This only
 makes the criterion stricter. Per-task evaluation increases on certified tasks are also listed (as CEIL
 did) and are reported next to the certification verdict. Measured from the snapshot of `0f97201`.
+
+## Sealed result, part 1: LET2 suite (measured once from the 0f97201 snapshot; regressions and LOFO pending)
+
+sha d045282f, 22 hard (`results/let2/let2_sealed.json`):
+
+| arm | off | on | pool control |
+|---|---|---|---|
+| cold | 0 | | |
+| empty | 0 | 0 (identical per task) | |
+| trained (all_sci) | 9 (181,421 evals) | **13** (169,282) | 12 |
+| math_sci | 9 | 13 | 12 |
+| practice | 8 (186,747) | 10 (180,665) | 11 |
+
+- Criterion 1 pass (+4, bar +2).
+- Criterion 2 pass.
+- Criterion 3 pass: 0 lost on any field; nothing newly worse than cold.
+- Report: as expected before measuring, the pool control is close (12 / 12 / 11). The gain comes from the
+  let operator reached safely, not from the field's blocks as intermediates.
