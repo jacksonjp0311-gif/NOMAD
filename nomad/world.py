@@ -748,6 +748,57 @@ def port_enabled() -> bool:
     return os.environ.get("NOMAD_PORT", "on").strip().lower() not in ("off", "0", "false", "no")
 
 
+# GROW (docs/GROW.md): program-language growth for PORT. Settings chosen on
+# uncommitted dev suites only.
+ANCHOR2_M = 40           # best-scoring int bank blocks paired by the two-block anchor
+
+
+def _flag(name: str, default: str) -> bool:
+    import os
+    return os.environ.get(name, default).strip().lower() not in ("off", "0", "false", "no")
+
+
+def anchor2_enabled() -> bool:
+    """NOMAD_ANCHOR2: sums of two learned blocks plus a residual (sum-of-products)."""
+    return _flag("NOMAD_ANCHOR2", "off")
+
+
+GROW_CAP = 0.25         # fraction of max_eval the two-block and rescaled anchors may spend, in total
+GROW_REJECTS = 8         # two-block and rescaled anchor fits WITNESS may reject per task, in total
+
+
+def scale_enabled() -> bool:
+    """NOMAD_SCALE: constants learned memory divides or multiplies by rescale the goal."""
+    return _flag("NOMAD_SCALE", "off")
+
+
+def bank_scales(bank: list) -> list[tuple[int, list]]:
+    """Learned scales: each constant k >= 2 a bank tree divides by, or
+    multiplies by (a var-free factor), with its smallest tree. Memory only:
+    an empty bank has none."""
+    best: dict[int, list] = {}
+    for _n, t in bank or ():
+        for sub in subtrees(t):
+            if sub[0] not in ("div", "mul") or len(sub) != 3:
+                continue
+            cands = [sub[2]] if sub[0] == "div" else [sub[1], sub[2]]
+            for kt in cands:
+                if _var_names(kt, []) or any(x[0] == "lib" for x in subtrees(kt)):
+                    continue
+                try:
+                    k = run(kt, {})
+                except Invalid:
+                    continue
+                if type_of(k) == "int" and 2 <= k <= 1000 and (k not in best or size(kt) < size(best[k])):
+                    best[k] = kt
+    return sorted(best.items())
+
+
+def const_enabled() -> bool:
+    """NOMAD_CONST: learned constants (var-free certified sub-programs, value outside 0-3) enter the bank."""
+    return _flag("NOMAD_CONST", "off")
+
+
 def _rename(tree: list, m: dict) -> list:
     if tree[0] == "var":
         return ["var", m[tree[1]]]
@@ -781,9 +832,22 @@ def port_bank(prior: "WorldPrior", task: WorldTask) -> list[tuple[str, list]]:
         by_type.setdefault(ty, []).append(nm)
     out: list[tuple[str, list]] = []
     seen: set[str] = set()
+    consts = const_enabled()
     for _u, _n, t, bsig in srcs:
         types = {a: b for a, b in (bsig or [])}
         vs = _var_names(t, [])
+        if not vs and consts and size(t) >= 3 and not any(x[0] == "lib" for x in subtrees(t)):
+            try:
+                c = run(t, {})
+            except Invalid:
+                continue
+            k = json.dumps(t)
+            if type_of(c) == "int" and c not in INT_CONSTANTS and k not in seen:
+                seen.add(k)
+                out.append(("K" + hashlib.sha256(k.encode()).hexdigest()[:8], t))
+                if len(out) >= PORT_SCAN:
+                    return out
+            continue
         if not vs or any(v not in types for v in vs) or any(x[0] == "lib" for x in subtrees(t)):
             continue
         groups: dict[str, list[str]] = {}
@@ -998,6 +1062,16 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                         pinfo["port"] = "anchor"
                         return hit
                     yield evals
+            glimit = min(limit, evals + int(GROW_CAP * max_eval))
+            if anchor2_enabled():
+                hit = yield from anchor2(ranked, table, glimit, goal, None)
+                if hit is not None:
+                    pinfo["port"] = "anchor2"
+                    return hit
+            if scale_enabled():
+                hit = yield from scaled(ranked, table, glimit)
+                if hit is not None:
+                    return hit
         # the field's own atoms for this signature first (the plain probe's),
         # then the best-scoring bank blocks
         own = {json.dumps(t) for t in library.values()}
@@ -1011,6 +1085,110 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     continue
                 pinfo["port"] = "block"
                 return hit
+        return None
+
+    def scaled(ranked, table, limit):
+        """GROW learned scales (docs/GROW.md): a constant k >= 2 that learned
+        memory uses as a divisor or a factor (``bank_scales``) rescales the
+        goal: goal*k is anchored and wrapped in div(., k); goal/k (where exact)
+        is anchored and wrapped in mul(., k). Rescaling costs no evaluation;
+        every lookup costs 1 and every fit is WITNESS-gated."""
+        targets = []
+        for k, kt in bank_scales(bank):
+            targets.append((tuple(g * k for g in goal), (lambda h, kt=kt: ["div", h, kt]), f"div{k}"))
+            if all(g % k == 0 for g in goal):
+                targets.append((tuple(g // k for g in goal), (lambda h, kt=kt: ["mul", h, kt]), f"mul{k}"))
+        for g2, wrap, tag in targets:
+            if any(abs(x) > MAX_INT for x in g2):
+                continue
+            rk = sorted(((block_score(z[3], g2, task.out),) + z[1:] for z in ranked),
+                        key=lambda z: (z[0], z[1]), reverse=True)
+            hit = yield from anchor1(rk, table, limit, g2, wrap)
+            if hit is not None:
+                pinfo["port"] = "scale:" + tag
+                return hit
+        if anchor2_enabled():
+            for g2, wrap, tag in targets:
+                if any(abs(x) > MAX_INT for x in g2):
+                    continue
+                hit = yield from anchor2(ranked, table, limit, g2, wrap)
+                if hit is not None:
+                    pinfo["port"] = "scale2:" + tag
+                    return hit
+        return None
+
+    grow_rej = [None]
+
+    def grow_spent() -> bool:
+        """True once GROW_REJECTS WITNESS rejections came from GROW anchors."""
+        if gate is None:
+            return False
+        if grow_rej[0] is None:
+            grow_rej[0] = len(gate.rejected)
+        return len(gate.rejected) - grow_rej[0] >= GROW_REJECTS
+
+    def anchor1(rk, table, limit, g, wrap):
+        """Depth-1 anchor on target g (the PORT anchor's loop, generalised)."""
+        nonlocal evals
+        for sc, _n, t, v in rk[:PORT_ANCHOR_N]:
+            if sc[0] < 0:
+                break
+            if grow_spent():
+                return None
+            for op in ("add", "sub", "rsub", "mul"):
+                if evals >= limit:
+                    return None
+                evals += 1
+                yield evals
+                need = _residual(op, v, g)
+                b = table.get(_key(need)) if need is not None else None
+                if b is None:
+                    continue
+                hit = ["sub", b, t] if op == "rsub" else [op, t, b]
+                hit = wrap(hit) if wrap else hit
+                if stop_on(hit):
+                    return hit
+                yield evals
+        return None
+
+    def anchor2(ranked, table, limit, goal, wrap):
+        """GROW two-block anchor (docs/GROW.md): goal = a + b + c, where a and
+        b are two of the ANCHOR2_M most goal-like int bank blocks that fit under the goal and c is looked
+        up among the probe's values (1 evaluation per lookup; a hit is a
+        WITNESS-gated fit). Reaches sums of three products that no single
+        block plus one pool value can."""
+        nonlocal evals
+        # one block per distinct value; a part of a sum of non-negative parts
+        # lies between 0 and the goal on every row; most goal-like order first
+        top, seenv = [], set()
+        for z in ranked:
+            v = z[3]
+            if type_of(v[0]) != "int" or _key(v) in seenv:
+                continue
+            seenv.add(_key(v))
+            if all(0 <= x <= g for x, g in zip(v, goal)) and any(x > 0 for x in v):
+                top.append(z)
+        top.sort(key=lambda z: (-z[0][2], z[0][1], z[1]))
+        top = top[:ANCHOR2_M]
+        for i in range(len(top)):
+            for j in range(i, len(top)):
+                a, va = top[i][2], top[i][3]
+                b, vb = top[j][2], top[j][3]
+                if grow_spent():
+                    return None
+                if evals >= limit:
+                    return None
+                evals += 1
+                yield evals
+                need = tuple(g - x - y for g, x, y in zip(goal, va, vb))
+                c = table.get(_key(need))
+                if c is None:
+                    continue
+                hit = ["add", ["add", a, b], c]
+                hit = wrap(hit) if wrap else hit
+                if stop_on(hit):
+                    return hit
+                yield evals
         return None
 
     def probe_body(P, B, limit, start):
@@ -1164,6 +1342,14 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         vhit, vkind, evals, tried = yield from _variation_stage(task, variation, evals, max_eval, accept=gate)
         if vhit is not None:
             return Search(vhit, evals, None, order, [], f"variation:{vkind}", tried, sinfo)
+    # GROW (docs/GROW.md): stage 1 exhausted before the probe trigger (few
+    # inputs), so the probe has not run; run it now, after the lead block,
+    # case split and mutants (which keep their order) and before stage 2.
+    if probe_at and bank and (anchor2_enabled() or scale_enabled()):
+        probe_at.clear()
+        ph = yield from probe()
+        if ph is not None:
+            return done(ph)
     # stage 2: library atoms, resume
     if gate is not None:
         gate.stage = None
