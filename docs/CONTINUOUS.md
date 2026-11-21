@@ -73,8 +73,18 @@ GitHub throttles scheduled runs, so NOMAD keeps its own pulse (`scripts/heartbea
 `python3 scripts/revert_drill.py` exercises the self-revert path end to end without touching live main. It clones the repo and the current live `data/` into a temp directory, with a throwaway bare repo as `origin`. Then it writes an accepted genome change exactly as the body does (`nomad-evolve: <id>` commit), appends 8 world twin rows, and runs the real `python -m nomad.body evolve-step --push`. It runs two scenarios. With regressed rows (3x the pre-change treatment/control cost ratio) the guard must revert: `nomad-revert: <id>` commit, genome restored, evolution log resolved, both pushed to the throwaway origin. With healthy rows it must keep. The script exits non-zero if any check fails.
 
 
-Standby guard (Nov 21 2026): the start-of-run queue step first reads the lease
-(python -m nomad.body lease). If another live body holds it, this run stands by
-and does not queue a successor; otherwise standby runs chained every ~30 s while
-a cancelled run's lease aged out. nomad-watch restarts the body after a 30-minute
-heartbeat gap, as before.
+Standby guard (Nov 21 2026): a "Lease gate" step runs before anything is queued
+(`python -m nomad.body gate --holder-status <status>`, writes `standby=yes|no` to
+GITHUB_OUTPUT). The start-of-run successor is queued only when `standby == 'no'`,
+so a standby run never queues another run (before this, standby runs chained
+every ~30 s while a cancelled run's lease aged out). A body that holds the lease
+still queues its successor first, so the chain survives a mid-run crash.
+
+Takeover rule (`lease.must_stand_by`, shared by the gate and `nomad.body run`):
+a released lease or a stale one (heartbeat older than `stale_after_min`) is taken
+over. A fresh-looking lease is also taken over when its holder is a `gh-<run id>`
+host whose run GitHub reports as `completed` (cancelled, crashed or timed out
+without releasing; `lease.orphaned`). Any other status (in_progress, queued,
+unknown, or a gh lookup failure) keeps the holder; non-GitHub hosts are judged by
+heartbeat age only. nomad-watch already re-dispatches a body for an orphaned
+lease; with this rule that body now takes over instead of standing by.

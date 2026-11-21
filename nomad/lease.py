@@ -91,6 +91,20 @@ def held_by_other(me: str, stale_min: float = STALE_MIN) -> bool:
     return alive(lease, stale_min) and lease.get("host") != me
 
 
+def must_stand_by(me: str, stale_min: float = STALE_MIN, holder_status: str | None = None) -> bool:
+    """True when another live host holds the lease and this host must not run.
+
+    A released or stale lease (heartbeat older than ``stale_min``) is taken
+    over. So is a fresh-looking lease whose GitHub run is known to be
+    ``completed`` (crashed, cancelled or timed out before releasing); the
+    caller passes that run's status, judged by ``orphaned``. Any other status
+    (in_progress, queued, unknown, None) keeps the holder.
+    """
+    if not held_by_other(me, stale_min):
+        return False
+    return not orphaned(read(), holder_status)
+
+
 def write(me: str, *, started: str | None = None, released: bool = False, **extra: Any) -> dict[str, Any]:
     prev = read() or {}
     row = {"schema": "nomad.lease.v1", "host": me,

@@ -64,7 +64,7 @@ def evolve_step(*, push: bool) -> dict[str, Any]:
 
 def run(hours: float, *, push: bool = False, checkpoint_min: float = 10.0, cycle_gap_s: float = 15.0,
         sleep_every: int = 3, stale_min: float = lease.STALE_MIN, max_cycles: int | None = None,
-        evolve: bool = True, feed_on: bool = True) -> dict[str, Any]:
+        evolve: bool = True, feed_on: bool = True, holder_status: str | None = None) -> dict[str, Any]:
     from .continuous import pair, sleep
     from .organism import log_event, status
 
@@ -72,7 +72,7 @@ def run(hours: float, *, push: bool = False, checkpoint_min: float = 10.0, cycle
     use_git = push and hostgit.available()
     if use_git:
         hostgit.pull()
-    if lease.held_by_other(me, stale_min):
+    if lease.must_stand_by(me, stale_min, holder_status):
         held = lease.read()
         print(json.dumps({"body": "standby", "reason": "lease held", "holder": held}), flush=True)
         _out("successor", "no")
@@ -80,7 +80,8 @@ def run(hours: float, *, push: bool = False, checkpoint_min: float = 10.0, cycle
     started = _now()
     prev = lease.read()
     if prev and not prev.get("released") and prev.get("host") != me:
-        log_event("lease_takeover", previous=prev.get("host"), age_min=lease.age_min(prev))
+        log_event("lease_takeover", previous=prev.get("host"), age_min=lease.age_min(prev),
+                  holder_status=holder_status)
     lease.write(me, started=started, cycles=0)
     if use_git:
         hostgit.commit(f"nomad-body: lease acquired by {me}", ["data/"])
@@ -164,6 +165,21 @@ def run(hours: float, *, push: bool = False, checkpoint_min: float = 10.0, cycle
     return summary
 
 
+def gate(stale_min: float = lease.STALE_MIN, holder_status: str | None = None) -> dict[str, Any]:
+    """Decide before the run whether this host will stand by.
+
+    The workflow queues its successor only when ``standby`` is false, so a
+    standby run never chains another run (Nov 21 2026 restart storm). Same
+    rule as ``run``: a released, stale or orphaned lease is taken over.
+    """
+    me = lease.host_id()
+    standby = lease.must_stand_by(me, stale_min, holder_status)
+    cur = lease.read()
+    _out("standby", "yes" if standby else "no")
+    return {"standby": standby, "me": me, "holder_status": holder_status,
+            "age_min": lease.age_min(cur), "lease": cur}
+
+
 def main(argv: list[str] | None = None) -> int:
     import argparse
     ap = argparse.ArgumentParser(description="NOMAD long-lived body (runs on any CPU host)")
@@ -178,8 +194,13 @@ def main(argv: list[str] | None = None) -> int:
         p.add_argument("--stale-min", type=float, default=lease.STALE_MIN)
         p.add_argument("--max-cycles", type=int, default=None)
         p.add_argument("--no-evolve", action="store_true")
+        p.add_argument("--holder-status", default=None,
+                       help="GitHub run status of the lease holder (completed => take over)")
     l = sub.add_parser("lease", help="print lease status; exit 0 either way")
     l.add_argument("--stale-min", type=float, default=lease.STALE_MIN)
+    g = sub.add_parser("gate", help="will this host stand by? sets GITHUB_OUTPUT standby=yes|no")
+    g.add_argument("--stale-min", type=float, default=lease.STALE_MIN)
+    g.add_argument("--holder-status", default=None)
     e = sub.add_parser("evolve-step", help="guard + maybe evolve, for fallback sleep runs")
     e.add_argument("--push", action="store_true")
     a = ap.parse_args(argv)
@@ -189,6 +210,9 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({"alive": alive, "age_min": lease.age_min(cur), "lease": cur}))
         _out("alive", "true" if alive else "false")
         return 0
+    if a.cmd == "gate":
+        print(json.dumps(gate(a.stale_min, a.holder_status or None)))
+        return 0
     if a.cmd == "evolve-step":
         print(json.dumps(evolve_step(push=a.push), default=str))
         if a.push:
@@ -196,7 +220,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     res = run(a.hours, push=a.push, checkpoint_min=a.checkpoint_min, cycle_gap_s=a.cycle_gap_s,
               sleep_every=a.sleep_every, stale_min=a.stale_min, max_cycles=a.max_cycles,
-              evolve=not a.no_evolve)
+              evolve=not a.no_evolve, holder_status=a.holder_status or None)
     return 0 if res.get("status") in ("done", "standby") else 1
 
 

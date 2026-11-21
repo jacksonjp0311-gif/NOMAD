@@ -30,15 +30,28 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Queue successor first (so a crash or cancel cannot break the chain)
-        if: ${{ vars.NOMAD_BODY != 'off' }}
+      - name: Lease gate (stand by, or take over a released/stale/orphaned lease)
+        id: gate
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # A body that will stand by (lease held by another live host) must not
-          # queue a successor, or standby runs chain every ~30 s (Nov 21 2026).
-          held=$(python -m nomad.body lease | python -c "import json,sys; d=json.load(sys.stdin); l=d.get('lease') or {}; print('yes' if d.get('alive') and l.get('host') != 'gh-' + '$GITHUB_RUN_ID' else 'no')")
-          if [ "$held" = "yes" ]; then echo "lease held by another live body; standby, not queuing"; exit 0; fi
+          # The holder's GitHub run status lets a body take over a fresh-looking
+          # lease left by a cancelled/crashed run (lease.orphaned); otherwise it
+          # would stand by until the 30-minute stale window.
+          rid=$(python -c "from nomad import lease; print(lease.gh_run_id(lease.read()) or '')")
+          status=""
+          if [ -n "$rid" ] && [ "$rid" != "$GITHUB_RUN_ID" ]; then
+            status=$(gh run view "$rid" -R "$GITHUB_REPOSITORY" --json status -q .status 2>/dev/null || echo unknown)
+          fi
+          echo "holder_status=$status" >> "$GITHUB_OUTPUT"
+          python -m nomad.body gate --holder-status "$status"
+      - name: Queue successor first (so a crash or cancel cannot break the chain)
+        # Only a body that will hold the lease queues a successor. A standby run
+        # queues nothing, so standby runs cannot chain (Nov 21 2026 restart storm).
+        if: ${{ vars.NOMAD_BODY != 'off' && steps.gate.outputs.standby == 'no' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
           pending=$(gh run list -R "$GITHUB_REPOSITORY" -w nomad-body.yml -s queued -L 5 --json databaseId -q length)
           pending=$((pending + $(gh run list -R "$GITHUB_REPOSITORY" -w nomad-body.yml -s pending -L 5 --json databaseId -q length)))
           if [ "$pending" -gt 0 ]; then echo "successor already pending"; exit 0; fi
@@ -51,7 +64,8 @@ jobs:
           git config user.email "nomad@users.noreply.github.com"
           python -m nomad.body --hours "${{ inputs.hours || '5.5' }}" --push \
             --cycle-gap-s "${{ vars.NOMAD_CYCLE_GAP_S || '15' }}" \
-            --checkpoint-min "${{ vars.NOMAD_CHECKPOINT_MIN || '10' }}"
+            --checkpoint-min "${{ vars.NOMAD_CHECKPOINT_MIN || '10' }}" \
+            --holder-status "${{ steps.gate.outputs.holder_status }}"
       - name: Dispatch successor
         if: ${{ always() && steps.body.outputs.successor == 'yes' && vars.NOMAD_BODY != 'off' }}
         env:

@@ -60,6 +60,81 @@ class LeaseTests(Isolated):
         self.assertFalse((self.data / "continuous" / "log.jsonl").exists())
 
 
+class GateTests(Isolated):
+    """Nov 21 2026 restart storm: standby runs each queued a successor."""
+
+    def setUp(self) -> None:
+        super().setUp()
+        self.out = self.data / "gh_output"
+        self.out.write_text("")
+        os.environ["GITHUB_OUTPUT"] = str(self.out)
+        os.environ["NOMAD_HOST_ID"] = "gh-200"
+
+    def tearDown(self) -> None:
+        os.environ.pop("GITHUB_OUTPUT", None)
+        super().tearDown()
+
+    def _outputs(self) -> dict:
+        return dict(l.split("=", 1) for l in self.out.read_text().splitlines() if "=" in l)
+
+    def test_standby_when_live_holder_and_no_successor(self) -> None:
+        from nomad import lease
+        from nomad.body import gate, run
+        lease.write("gh-100")  # fresh, unreleased, 0 cycles
+        for status in (None, "in_progress", "queued", "unknown"):
+            self.out.write_text("")
+            g = gate(holder_status=status)
+            self.assertTrue(g["standby"], status)
+            self.assertEqual(self._outputs()["standby"], "yes")
+        res = run(0.01, push=False, max_cycles=2, cycle_gap_s=0, evolve=False, holder_status="in_progress")
+        self.assertEqual(res["status"], "standby")
+        self.assertEqual(self._outputs().get("successor"), "no")
+        self.assertEqual(lease.read()["host"], "gh-100")
+
+    def test_workflow_queues_successor_only_after_gate_says_no(self) -> None:
+        wf = (Path(__file__).resolve().parents[1] / ".github" / "workflows" / "nomad-body.yml").read_text()
+        gate_at = wf.index("python -m nomad.body gate")
+        queue_at = wf.index("name: Queue successor first")
+        live_at = wf.index("name: Live")
+        self.assertLess(gate_at, queue_at)
+        self.assertLess(queue_at, live_at)
+        queue_step = wf[queue_at:live_at]
+        self.assertIn("steps.gate.outputs.standby == 'no'", queue_step)
+        self.assertIn("--holder-status", wf[live_at:])
+
+    def test_stale_lease_is_taken_over(self) -> None:
+        from nomad import lease
+        from nomad.body import gate, run
+        lease.write("gh-100", cycles=0)
+        row = lease.read()
+        row["heartbeat"] = "2026-01-01T00:00:00Z"
+        lease.path().write_text(json.dumps(row))
+        g = gate(holder_status="in_progress")  # stale wins even if the run looks alive
+        self.assertFalse(g["standby"])
+        self.assertEqual(self._outputs()["standby"], "no")
+        res = run(0.01, push=False, max_cycles=1, cycle_gap_s=0, evolve=False)
+        self.assertEqual(res["status"], "done")
+        self.assertEqual(lease.read()["host"], "gh-200")
+
+    def test_orphaned_fresh_lease_is_taken_over_only_for_completed_gh_run(self) -> None:
+        from nomad import lease
+        from nomad.body import gate, run
+        lease.write("gh-100", cycles=0)  # cancelled run left a fresh lease
+        self.assertFalse(gate(holder_status="completed")["standby"])
+        res = run(0.01, push=False, max_cycles=1, cycle_gap_s=0, evolve=False, holder_status="completed")
+        self.assertEqual(res["status"], "done")
+        self.assertEqual(lease.read()["host"], "gh-200")
+        lease.write("james-pc-1")  # non-GitHub hosts are judged by heartbeat only
+        self.assertTrue(gate(holder_status="completed")["standby"])
+
+    def test_gate_cli_empty_status_means_unknown(self) -> None:
+        from nomad import lease
+        from nomad.body import main
+        lease.write("gh-100")
+        self.assertEqual(main(["gate", "--holder-status", ""]), 0)
+        self.assertEqual(self._outputs()["standby"], "yes")
+
+
 class BodyLoopTests(Isolated):
     def test_local_body_cycles_learns_and_releases(self) -> None:
         from nomad import lease
