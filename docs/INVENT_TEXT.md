@@ -8,7 +8,7 @@ regular levels leave, which on a hard task is none; (2) INVENT's residual anchor
 gets the "half of it is a block I know" move. The field *does* hold string
 inventions (rotate = `concat(drop(a, b), take(a, b))`, `itos(strlen(a))`, composed
 rotations); they had no way in. Everything below is behind **`NOMAD_INVENT_TEXT`,
-default OFF until the sealed judge passes**. No transformers, no neural weights;
+default ON since the sealed judge below passed** (off switch: `NOMAD_INVENT_TEXT=off`). No transformers, no neural weights;
 WITNESS certifies every program; the cold control is untouched.
 
 ## What is built (`nomad/world.py`, `nomad/invent.py`)
@@ -79,3 +79,36 @@ in the early pass. Expectation for the sealed suite: criterion 1 passes with a s
 margin (15 hard tasks, several are not concatenations or need three parts); 2-5 pass.
 Honest framing: this is *composition of remembered and invented blocks on strings*,
 not new string abstractions -- the abstraction step itself is unchanged.
+
+## Sealed result (measured once, 2026-11-21, code `38f434d`; `results/invent_text/`): **PASS -> default ON**
+
+Sealed suite sha `cef71e02...e5a4`, 15 hard:
+
+| arm | certified | evaluations |
+|---|---|---|
+| cold | 0 | 150,000 |
+| empty_off | 0 | 150,000 |
+| empty_on | 0 | 150,000 |
+| trained_off | 6 | 134,722 |
+| **trained_on** | **13** | **85,724** |
+| world_only_on (report) | 1 | 145,024 |
+| bridge_only_on (report) | 13 | 88,208 |
+| trained_on_invent_off (report) | 6 | 134,722 |
+
+7 new certifications (`x_word_sep_len`, `x_stutter_initial`, `x_rev_head`, `x_double_kth`,
+`x_cross_tail`, `x_len_pair`, `x_rest_stutter`), 3 cheaper (~9,500-9,980 -> ~5,030), all via
+`port:invent:text:pre|suf`; not reached: `x_last_sep_first` (three parts), `x_digits_then_word`.
+
+| criterion | result |
+|---|---|
+| 1 helps (>= +3) | **pass**: +7 certified, 36.4% fewer evaluations |
+| 2 empty field gains nothing | **pass**: empty_on - empty_off = 0 (empty_on - cold = 0) |
+| 3 no sealed task worse | **pass**: no loss vs trained_off; nothing worse than cold |
+| 4 existing suites, every arm | **pass**: 0 losses. Gains: TEXT all_sci 6 -> **10**, lang 3 -> 7, all_grow_off 3 -> 7; BRIDGE trained 6 -> **13**, bridge_only 9 -> 12; INVENT secondary text trained_invent 3 -> 7; deep, science, transfer 1-4 byte-identical |
+| 5 LOFO, tests | **pass**: LOFO 5,883, worst 1.0x; 444 passed, 6 skipped |
+
+Honest reading: the gain is real and memory-borne (empty field 0; world_only 1 -- it needs the
+bridge-trained blocks), but it is *composition* of remembered / invented blocks by concatenation,
+not new string abstractions. Two-part concatenations only; three-part strings still fail. The free
+remainder lookup is an accounting choice (see above); every certified program is WITNESS-checked
+and final-split-correct like any other.

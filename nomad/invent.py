@@ -88,8 +88,8 @@ def floor_fit() -> bool:
 
 def text_enabled() -> bool:
     """NOMAD_INVENT_TEXT (docs/INVENT_TEXT.md): concat residual anchors and an evidence-gated early
-    INVENT phase on string goals. Default off until its sealed judge passes."""
-    return W._flag("NOMAD_INVENT_TEXT", "off")
+    INVENT phase on string goals. Default on since its sealed judge passed (docs/INVENT_TEXT.md)."""
+    return W._flag("NOMAD_INVENT_TEXT", "on")
 
 
 TEXT_ANCHOR_N = 24    # string blocks tried as concat anchors per task (1 evaluation each)
