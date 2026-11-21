@@ -105,3 +105,47 @@ by local word context, over templated English the same agent wrote for training 
 Relational words overlap by design; nouns, domains, names and distractors do not. Value collisions
 on the first row make a mention ambiguous (skipped in learning, shared in use). It does not parse
 sentence structure, and it can only fill roles of concepts the field already certified.
+
+## Sealed result (measured once, 2026-11-21, code `fae6431`; `results/roles/`): **FAIL -> stays OFF**
+
+Suite sha `4ea19334...76de`, 24 tasks (cold certifies 13). Field: 813 tokens, 41 concepts, all 41
+with role tables.
+
+| arm | certified | evaluations | via MEANING stage |
+|---|---|---|---|
+| cold | 13 | 159,698 | 0 |
+| empty_off | 13 | 159,698 | 0 |
+| empty_on | 13 | 159,698 | 0 |
+| meaning_off (report) | 19 | 119,873 | 0 |
+| trained_off (MEANING, blind renamings) | 24 | 12,559 | 21 |
+| **trained_on** (ROLES) | **24** | **5,890** | 22 |
+| shuffled_1 | 24 | 6,732 | 22 |
+| shuffled_2 | 24 | 12,204 | 21 |
+| shuffled_3 | 24 | 6,557 | 22 |
+
+| criterion | result |
+|---|---|
+| 1 reading roles helps | **pass**: 24 = 24 certified, **53.1% fewer** evaluations than trained_off |
+| 2 learned roles carry it (vs best shuffled) | **FAIL**: 24 = 24, only **10.2% fewer** than shuffled_3 (6,557); the bar was 25% |
+| 3 empty field gains nothing | **pass**: empty_on = empty_off = 13, 159,698 = 159,698 |
+| 4 no sealed task lost, nothing worse than cold | **FAIL (strict)**: no task lost vs off, but `rs_star_plates` costs 141 vs cold 99 in trained_on, *identically* in trained_off and every shuffled arm (a MEANING retrieval miss, then the normal search; not a ROLES effect) |
+| 5 existing suites, every arm | **pass**: 17 judges, off / on output **byte-identical**, 0 losses, 0 gains (learning incl. `sci_water_mol`, T1-T4, secondary, text, bridge, INVENT_TEXT, TRANSFER-5, TRANSFER-6, SELFEDIT2, TEXT_CHAIN, MEANING, INFLECT, LET, TEXT_ABSTRACT) |
+| 6 LOFO, tests | **pass**: LOFO 5,883, worst 1.0x; 529 passed, 6 skipped |
+
+Honest reading. Inside the MEANING stage the learned roles do what was claimed: where the right
+concept was retrieved, ROLES put the right renaming first or nearly first (1-14 trials on 22 tasks,
+against 4-197 blind), and `rs_wine_savings` went 5,630 -> 1 (blind MEANING ran out of budget at 7
+inputs). Against the shuffled-role controls the per-task wins are real but smaller (shuffled_3 also
+reached `rs_wine_savings` in 103 and `rs_ore_pool` in 7). Two things sank the totals: (a) the
+first-pass interleave (best 6 renamings of each retrieved concept first) is a search change that the
+shuffled controls get too; it saves trials whenever the right concept is ranked 2nd-4th, so part of
+the gain over blind MEANING is ordering, not words; (b) `rs_barrel_cellar` (5,653 in every field
+arm) and `rs_star_plates` (141) are MEANING *retrieval* misses (the right concept was not in the top
+4), which no role reading can fix, and together they are 98% of trained_on's evaluations. On the 22
+tasks MEANING retrieved correctly, trained_on spent 96 evaluations against shuffled_3's 763 and
+trained_off's 6,765; that subset was not a pre-registered criterion and does not change the verdict.
+
+Best next step: the bottleneck is now retrieval, not roles. A fair retry needs a new sealed suite and
+criteria scored on the stage's own trials (or with the retrieval miss excluded by rule, pre-registered),
+and a control that keeps the interleave so only the role words differ. COMBINE (docs/COMBINE.md)
+does not depend on ROLES.
