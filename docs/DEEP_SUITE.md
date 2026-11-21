@@ -41,3 +41,11 @@ WITNESS rejection no longer ends the field arm's search: field certifies
 **25 of 40** (62.5%; switch-off field 14, cold 0), no win lost, none worse
 than cold, LOFO 5,883 (worst 1.0x). An empty field with the switch on also
 certifies 25: this is a search mechanism, not learning. Details there.
+
+## PORT and the 3-arm learning judge (2026-11-21, `python3 scripts/learning_judge.py`)
+
+Pre-registered in `docs/PORT.md`. Arms cold / empty field (all search on, no
+memory) / trained field. Deep: cold 0, empty **25**, trained **25** (same
+evaluations): PORT does not fire on `(x, y)` tasks and memory still does not
+count on this suite. Science hard: cold 0, empty 0, trained (PORT off) 5,
+trained **9**. LOFO 5,883 (worst 1.0x). Details: `docs/PORT.md`.

@@ -31,8 +31,10 @@ class BlockProbe(unittest.TestCase):
 
     def tearDown(self):
         os.environ.pop("NOMAD_BLOCKPROBE", None)
+        os.environ.pop("NOMAD_PORT", None)
 
     def test_probe_finds_block_program_and_witness_certifies(self):
+        os.environ["NOMAD_PORT"] = "off"   # the plain probe (PORT: tests/test_port.py)
         p = _prior_with(self.task, [["mul", ["var", "a"], ["var", "t"]]])
         ev, _ = evaluate(self.task, prior=p, max_eval=10000, casesplit=False)
         self.assertTrue(ev.certified)
@@ -43,7 +45,7 @@ class BlockProbe(unittest.TestCase):
 
     def test_off_switch_restores_previous_path(self):
         p = _prior_with(self.task, [["mul", ["var", "a"], ["var", "t"]]])
-        os.environ["NOMAD_BLOCKPROBE"] = "off"
+        os.environ["NOMAD_BLOCKPROBE"] = "off"   # also turns PORT off (it lives in the probe)
         s = synthesize(self.task, prior=p, max_eval=10000, casesplit=False)
         self.assertIsNone(s.tree)
         self.assertEqual(s.evaluations, 10000)

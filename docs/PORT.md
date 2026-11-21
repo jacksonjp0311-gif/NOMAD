@@ -116,3 +116,55 @@ Negative results on the way (dev only, not committed):
   are small, and stage 1 already enumerates every program up to size 6.
 
 Results are recorded below once measured; nothing is re-tuned after.
+
+## Sealed result (measured once, 2026-11-21, `python3 scripts/learning_judge.py`)
+
+| Criterion | Bar | Cold | Empty | Trained, PORT off (main) | Trained (PORT on) | Met? |
+|---|---|---|---|---|---|---|
+| Science hard (`4517167f…868d`): certified of 14 @10k | | 0 | 0 | 5 | **9 (64%)** | |
+| Science hard evaluations | | 140,000 | 140,000 | 122,365 | **103,397 (-15.5%)** | |
+| Deep (`da3ae9bf…6fbd`): certified of 40 @10k | | 0 | 25 | 25 | 25 | |
+| Deep evaluations | | 284,839 | 240,553 | 240,553 | 240,553 | |
+| 1. Learning counts: trained - empty on a sealed suite | >= 3 | | | science +5, deep 0 | **science +9**, deep 0 | yes |
+| 2. PORT adds memory value (science hard vs PORT off) | >= +2 | | | | **+4** | yes |
+| 3. No drop: deep >= 25, science >= 5 | | | | | 25, 9 | yes |
+| 4. Tasks worse than cold | 0 | | 0 | 0 | 0 | yes |
+| 5. LOFO total (16 families), worst | 5,883, 1.0x | 5,883 | | 5,883, 1.0x | 5,883, 1.0x | yes |
+| 6. Off switch exact, all tests pass | | | | | 370 tests (+7) | yes |
+| Deep, trained + 1,000 practice tasks (report) | | | | | 26 (236,902 evals) | |
+
+Decision: **default on** (`NOMAD_PORT=off` restores main).
+
+New science certifications (5), every one built from a block learned on an
+easy family under a different signature or a whole remembered program:
+
+- `sci_vsq` u^2 + 2ad: anchor = the easy `2*a*d` program, renamed;
+  residual `u*u` from stage 1 (`port:anchor`).
+- `sci_hms_to_s` h:m:s -> s: anchor = the easy `h:m -> minutes` / `m:s -> s`
+  programs, renamed (`port:anchor`).
+- `sci_ke_v`, `sci_ke_u` m v^2 / 2: probe atoms from the easy `P = I^2 R`
+  program renamed to `m, v` / `m, u` (`port:probe`).
+- `sci_water_mol` min(gH/2, 2gO/32): `min` of the two easy stoichiometry
+  programs (`port:probe`).
+
+Lost (1), as dev predicted: `sci_d_uvt` (u+v)t/2. Main certified it at 9,067
+of 10,000 evaluations; PORT's bank costs push the plain probe's hit past the
+budget. Faster on four main wins (`sci_energy` 6,172 -> 5,133,
+`sci_hm_to_s` 5,443 -> 5,329, `sci_vmean_uat`), slower on one
+(`sci_d_rest` 6,544 -> 6,820).
+
+Deep: trained = empty = 25, identical evaluations. PORT does not fire there:
+for `(x, y)` tasks the cold stage finishes (about 4,150 evaluations) below the
+block-probe trigger (5,000), so the probe never runs. 1,000 extra
+same-distribution practice tasks move the deep suite by one task (26). On the
+deep suite **memory still does not count**; on science it now does, by 9
+tasks over an empty field.
+
+Honest reading: the science dev suites share their formulas with the sealed
+suite (only the rows differ), so dev tuning on science is closer to the sealed
+suite than the deep dev suites are to theirs. Tuning was three global knobs on
+a plateau (12-32 atoms, 50-all anchors gave 22-26 of 42 on dev), never a
+per-formula choice, and the sealed result (+4) is in line with dev (+4 per
+suite on average). The transfer shown here is within one domain (easy
+science -> hard science, renamed variables); cross-domain transfer is not yet
+tested.

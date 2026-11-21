@@ -241,6 +241,9 @@ def make_task(task_id: str, family: str, opset: str, inputs: dict[str, str], out
 
 # ----------------------------------------------------------------- prior (field)
 
+PROGRAMS_CAP = 512   # whole certified programs kept (least-used evicted)
+
+
 class WorldPrior:
     """Operator preference and library of certified sub-programs.
 
@@ -260,6 +263,10 @@ class WorldPrior:
         # per family: [certified solutions that reused a library sub-program, ones that did not]
         self.family_lib: dict[str, list[float]] = {}
         self.library_k = 6  # set from the genome by the loop; not persisted
+        # PORT (docs/PORT.md): whole certified programs, any signature
+        self.programs: dict[str, list] = {}
+        self.programs_sig: dict[str, list[list[str]]] = {}
+        self.programs_uses: dict[str, float] = {}
 
     # ---- ordering
     def order(self, opset: Sequence[str], family: str | None = None) -> tuple[str, ...]:
@@ -293,7 +300,21 @@ class WorldPrior:
             pair[0 if hit else 1] += 1.0
         if harvest:
             self._harvest(tree, [list(i) for i in inputs])
+            self._keep_program(tree, [list(i) for i in inputs])
         self.witnessed += 1
+
+    def _keep_program(self, tree: list, inputs: list[list[str]]) -> None:
+        """Remember a whole certified program (PORT reuses it on other tasks)."""
+        if size(tree) < 3:
+            return
+        name = "W" + hashlib.sha256(json.dumps(tree).encode()).hexdigest()[:8]
+        self.programs.setdefault(name, tree)
+        self.programs_sig.setdefault(name, inputs)
+        self.programs_uses[name] = self.programs_uses.get(name, 0.0) + 1.0
+        if len(self.programs) > PROGRAMS_CAP:
+            drop = min(self.programs, key=lambda n: (self.programs_uses.get(n, 0.0), n))
+            for d in (self.programs, self.programs_sig, self.programs_uses):
+                d.pop(drop, None)
 
     def _harvest(self, tree: list, inputs: list[list[str]]) -> None:
         for sub in subtrees(tree):
@@ -328,13 +349,17 @@ class WorldPrior:
                 pair[1] *= gamma
         for n in list(self.library_uses):
             self.library_uses[n] *= gamma
+        for n in list(self.programs_uses):
+            self.programs_uses[n] *= gamma
 
     # ---- persistence
     def snapshot(self) -> dict:
         return {"schema": "nomad.world-prior.v1", "witnessed": self.witnessed,
                 "global": self.global_counts, "families": self.families,
                 "library": self.library, "library_uses": self.library_uses,
-                "library_sig": self.library_sig, "family_lib": self.family_lib}
+                "library_sig": self.library_sig, "family_lib": self.family_lib,
+                "programs": self.programs, "programs_sig": self.programs_sig,
+                "programs_uses": self.programs_uses}
 
     @classmethod
     def from_snapshot(cls, snap: dict) -> "WorldPrior":
@@ -347,6 +372,9 @@ class WorldPrior:
         p.library_uses = {k: float(v) for k, v in (snap.get("library_uses") or {}).items()}
         p.library_sig = dict(snap.get("library_sig") or {})
         p.family_lib = {k: [float(a), float(b)] for k, (a, b) in (snap.get("family_lib") or {}).items()}
+        p.programs = dict(snap.get("programs") or {})
+        p.programs_sig = dict(snap.get("programs_sig") or {})
+        p.programs_uses = {k: float(v) for k, v in (snap.get("programs_uses") or {}).items()}
         return p
 
 
@@ -541,6 +569,12 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     orders the operators of the levels after stage 1 and gates the case
     split; stage 1 stays the exact cold search. Familiar families and the
     cold control are untouched. SENSE never certifies.
+
+    ``NOMAD_PORT`` (default on; docs/PORT.md): the block probe also draws on
+    the portable bank (``port_bank``: learned blocks and whole certified
+    programs from any input signature, renamed onto this task's inputs),
+    scored by task features, as anchors and extra atoms. An empty field has
+    no bank; the cold control never reads one.
     """
     opset = OPSETS[task.opset]
     cold_order = tuple(opset)
@@ -567,12 +601,14 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     aim = None
     if rec is not None:
         aim = _sense.lead_ops(rec, cold_order) or None
-    if not library and not split and aim is None:
+    probe_on = blockprobe_enabled()
+    bank = port_bank(prior, task) if (lib_ok and probe_on and port_enabled()) else []
+    if not library and not split and aim is None and not bank:
         s = _drive(_search_gen(task, cold_order, {}, max_size, max_eval))
         return _with_sense(_variation_fallback(task, s, mut, max_eval), rec)
     gate = _WitnessGate(task, library) if witness_continue_enabled() else None
     s = _drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split, aim,
-                           blockprobe_enabled(), gate))
+                           probe_on, gate, bank))
     return _with_sense(_witness_finish(s, gate), rec)
 
 
@@ -699,6 +735,117 @@ BLOCKPROBE_TRIGGER = 0.5   # fraction of max_eval stage 1 may spend before the b
 BLOCKPROBE_CAP = 0.5       # fraction of max_eval the block probe may spend
 
 
+# PORT settings, chosen on uncommitted dev suites only (docs/PORT.md)
+PORT_K = 24              # extra bank blocks the probe adds as atoms (dev: 12 -> 23, 24 -> 26 of 42)
+PORT_ANCHOR_N = 100      # best-scoring bank blocks used as anchors (dev: all -> 25, 100 -> 26)
+PORT_ANCHOR_REJECTS = 16 # anchor fits WITNESS may reject per task (inside WITNESS_MAX_REJECTS)
+PORT_SCAN = 400          # most bank blocks run per task (1 evaluation each)
+PORT_MAPS = 24           # most renamings of one block
+
+
+def port_enabled() -> bool:
+    import os
+    return os.environ.get("NOMAD_PORT", "on").strip().lower() not in ("off", "0", "false", "no")
+
+
+def _rename(tree: list, m: dict) -> list:
+    if tree[0] == "var":
+        return ["var", m[tree[1]]]
+    if tree[0] in ("const", "lib"):
+        return tree
+    return [tree[0]] + [_rename(c, m) for c in tree[1:]]
+
+
+def _var_names(tree: list, out: list) -> list:
+    if tree[0] == "var":
+        if tree[1] not in out:
+            out.append(tree[1])
+    elif tree[0] not in ("const", "lib"):
+        for c in tree[1:]:
+            _var_names(c, out)
+    return out
+
+
+def port_bank(prior: "WorldPrior", task: WorldTask) -> list[tuple[str, list]]:
+    """The portable bank: learned blocks and whole certified programs from any
+    input signature, instantiated over this task's inputs by type-preserving
+    renaming of their variables. Most-used first; within a source, the
+    identity renaming first. Only learned memory enters: an empty field has
+    an empty bank. Library references are never in a bank tree."""
+    from itertools import permutations
+    srcs = [(-prior.library_uses.get(n, 0.0), n, t, prior.library_sig.get(n)) for n, t in prior.library.items()]
+    srcs += [(-prior.programs_uses.get(n, 0.0), n, t, prior.programs_sig.get(n)) for n, t in prior.programs.items()]
+    srcs.sort(key=lambda z: (z[0], z[1]))
+    by_type: dict[str, list[str]] = {}
+    for nm, ty in task.inputs:
+        by_type.setdefault(ty, []).append(nm)
+    out: list[tuple[str, list]] = []
+    seen: set[str] = set()
+    for _u, _n, t, bsig in srcs:
+        types = {a: b for a, b in (bsig or [])}
+        vs = _var_names(t, [])
+        if not vs or any(v not in types for v in vs) or any(x[0] == "lib" for x in subtrees(t)):
+            continue
+        groups: dict[str, list[str]] = {}
+        for v in vs:
+            groups.setdefault(types[v], []).append(v)
+        if any(len(g) > len(by_type.get(ty, [])) for ty, g in groups.items()):
+            continue
+        maps: list[dict] = [{}]
+        for ty, g in groups.items():
+            maps = [dict(m, **dict(zip(g, perm))) for m in maps for perm in permutations(by_type[ty], len(g))]
+            maps = maps[:PORT_MAPS * 4]
+        ident = {v: v for v in vs}
+        maps.sort(key=lambda m: m != ident)
+        for m in maps[:PORT_MAPS]:
+            inst = _rename(t, m)
+            k = json.dumps(inst)
+            if k in seen:
+                continue
+            seen.add(k)
+            out.append(("P" + hashlib.sha256(k.encode()).hexdigest()[:8], inst))
+            if len(out) >= PORT_SCAN:
+                return out
+    return out
+
+
+def block_score(v: tuple, goal: tuple, out: str) -> tuple:
+    """Task-feature relevance of a block's public values to the goal.
+
+    No search: rows already equal, then how few distinct offsets separate
+    block and goal, then how often the two order row pairs alike."""
+    if type_of(v[0]) != out:
+        return (-1, 0, 0)
+    eq = sum(1 for a, b in zip(v, goal) if a == b)
+    if out != "int":
+        return (eq, 0, 0)
+    d = len({b - a for a, b in zip(v, goal)})
+    agree = 0
+    for i in range(len(v)):
+        for j in range(i + 1, len(v)):
+            agree += ((v[i] > v[j]) - (v[i] < v[j])) == ((goal[i] > goal[j]) - (goal[i] < goal[j]))
+    return (eq, -d, agree)
+
+
+def _residual(op: str, a: tuple, goal: tuple) -> tuple | None:
+    """The values b must take so that op(a, b) == goal on every row (rsub: b - a)."""
+    if op == "add":
+        out = tuple(g - x for x, g in zip(a, goal))
+    elif op == "sub":
+        out = tuple(x - g for x, g in zip(a, goal))
+    elif op == "rsub":
+        out = tuple(g + x for x, g in zip(a, goal))
+    elif op == "mul":
+        if any(x == 0 or g % x for x, g in zip(a, goal)):
+            return None
+        out = tuple(g // x for x, g in zip(a, goal))
+    else:
+        return None
+    if any(abs(x) > MAX_INT for x in out):
+        return None
+    return out
+
+
 def blockprobe_enabled() -> bool:
     import os
     return os.environ.get("NOMAD_BLOCKPROBE", "on").strip().lower() not in ("off", "0", "false", "no")
@@ -707,7 +854,7 @@ def blockprobe_enabled() -> bool:
 def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list],
                 max_size: int, max_eval: int, variation: list[tuple[str, list]] | None = None,
                 split: bool = False, aim: tuple[str, ...] | None = None, blockprobe: bool = False,
-                gate: "_WitnessGate | None" = None):
+                gate: "_WitnessGate | None" = None, bank: list | None = None):
     """Staged transfer as one incremental search (a generator, like _search_gen).
 
     Stage 1 is exactly the cold search below ``max_size`` (same order, same
@@ -780,7 +927,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         evals += 1
         return False
 
-    probe_at = [int(BLOCKPROBE_TRIGGER * max_eval)] if (blockprobe and library) else []
+    probe_at = [int(BLOCKPROBE_TRIGGER * max_eval)] if (blockprobe and (library or bank)) else []
     pinfo: dict = {}
 
     def probe():
@@ -799,9 +946,81 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             if gate is not None:
                 gate.stage = prev
 
+    def port_body(P, B, limit, start):
+        """PORT (docs/PORT.md): the probe's atoms come from the portable bank.
+
+        Each bank block is run once on the public rows (1 evaluation). Then
+        (a) anchor: for each block, best-scoring first, the residual the goal
+        leaves for add / sub / reversed sub / mul is looked up among the
+        probe's values (1 evaluation per lookup; a hit is a WITNESS-gated
+        fit), and (b) the PORT_K best-scoring blocks enter the probe as atoms.
+        Returns a hit, or None after offering the atoms.
+        """
+        nonlocal evals
+        table: dict[str, list] = {}
+        for sz_ in sorted(P):
+            for tr, vs_, _f in P[sz_].get(task.out, []):
+                table.setdefault(_key(vs_), tr)
+        ranked = []
+        for n, t in bank:
+            if evals >= limit:
+                return None
+            evals += 1
+            yield evals
+            try:
+                v = tuple(run(t, r) for r in rows)
+            except Invalid:
+                continue
+            if not v or any(type_of(x) != type_of(v[0]) for x in v):
+                continue
+            if type_of(v[0]) == task.out:
+                table.setdefault(_key(v), t)
+            ranked.append((block_score(v, goal, task.out), n, t, v))
+        ranked.sort(key=lambda z: (z[0], z[1]), reverse=True)
+        if task.out == "int":
+            rej0 = len(gate.rejected) if gate is not None else 0
+            for sc, _n, t, v in ranked[:PORT_ANCHOR_N]:
+                if sc[0] < 0:
+                    break
+                if gate is not None and len(gate.rejected) - rej0 >= PORT_ANCHOR_REJECTS:
+                    break
+                for op in ("add", "sub", "rsub", "mul"):
+                    if evals >= limit:
+                        return None
+                    evals += 1
+                    yield evals
+                    need = _residual(op, v, goal)
+                    b = table.get(_key(need)) if need is not None else None
+                    if b is None:
+                        continue
+                    hit = ["sub", b, t] if op == "rsub" else [op, t, b]
+                    if stop_on(hit):
+                        pinfo["port"] = "anchor"
+                        return hit
+                    yield evals
+        # the field's own atoms for this signature first (the plain probe's),
+        # then the best-scoring bank blocks
+        own = {json.dumps(t) for t in library.values()}
+        keep = [z for z in ranked if json.dumps(z[2]) in own]
+        keep += [z for z in ranked if json.dumps(z[2]) not in own][:PORT_K]
+        for _sc, _n, t, v in keep:
+            hit = offer(1, t, v, True, P, B)
+            if hit is not None:
+                if not stop_on(hit):
+                    yield evals
+                    continue
+                pinfo["port"] = "block"
+                return hit
+        return None
+
     def probe_body(P, B, limit, start):
         nonlocal evals
-        for n in library:
+        if bank:
+            hit = yield from port_body(P, B, limit, start)
+            if hit is not None:
+                pinfo.update(spent=evals - start, hit=True)
+                return hit
+        for n in ({} if bank else library):
             if evals >= limit:
                 break
             evals += 1
@@ -883,7 +1102,9 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
 
     def done(hit):
         libs = [s[1] for s in subtrees(hit) if s[0] == "lib"]
-        via = "blockprobe" if pinfo.get("hit") else None
+        via = None
+        if pinfo.get("hit"):
+            via = ("port:" + pinfo.get("port", "probe")) if bank else "blockprobe"
         return Search(hit, evals, None, order, libs, via, tried, sinfo)
 
     # stage 1: the cold search below max_size

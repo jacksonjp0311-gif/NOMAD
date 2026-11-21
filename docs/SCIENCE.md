@@ -196,3 +196,11 @@ fit the search continues: the rejected `(u+v)t/2` fit is followed by the
 right one, `div(mul(add(v, u), t), 2)`. Science-trained field **5 of 14**
 hard tasks (switch off 4, cold 0, empty field + continue 0), none lost, none
 worse than cold.
+
+## PORT (2026-11-21)
+
+Learned blocks and whole programs now travel between input signatures by
+renaming, inside the block probe (`docs/PORT.md`). Sealed hard tier: trained
+field **9 of 14** (main 5, empty field 0, cold 0), 15.5% fewer evaluations;
+`sci_d_uvt` lost (budget), five new (`vsq`, `hms_to_s`, `ke_v`, `ke_u`,
+`water_mol`). `NOMAD_PORT=off` restores main.
