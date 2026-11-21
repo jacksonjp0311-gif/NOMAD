@@ -133,10 +133,25 @@ class LearningTests(unittest.TestCase):
         self.assertEqual(cold.reason, "frontier")  # whole size-7 space exhausted
         nolib, _ = evaluate(h["task"], prior=self.field, use_family=False, use_library=False, max_eval=h["max_eval"])
         self.assertFalse(nolib.certified)
-        f, _ = evaluate(h["task"], prior=self.field, use_family=False, max_eval=h["max_eval"])
+        # the library mechanism itself, pinned with INVENT off (docs/INVENT.md)
+        old = os.environ.get("NOMAD_INVENT")
+        os.environ["NOMAD_INVENT"] = "off"
+        try:
+            f, _ = evaluate(h["task"], prior=self.field, use_family=False, max_eval=h["max_eval"])
+        finally:
+            if old is None:
+                os.environ.pop("NOMAD_INVENT", None)
+            else:
+                os.environ["NOMAD_INVENT"] = old
         self.assertTrue(f.certified)
         self.assertTrue(f.library_used)
         self.assertEqual(f.candidate, "add(mul(mul(x, x), mul(x, x)), mul(mul(y, y), mul(y, y)))")
+        # INVENT on (default): the composed primitive a·a·a·a (square of the
+        # invented square) reaches the same program with far fewer evaluations
+        g, _ = evaluate(h["task"], prior=self.field, use_family=False, max_eval=h["max_eval"])
+        self.assertTrue(g.certified)
+        self.assertEqual(g.candidate, f.candidate)
+        self.assertLess(g.evaluations, f.evaluations)
 
     def test_snapshot_roundtrip(self) -> None:
         from nomad.world import WorldPrior

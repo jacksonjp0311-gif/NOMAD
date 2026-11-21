@@ -144,15 +144,20 @@ class Fields(unittest.TestCase):
         for x in got:
             self.assertLessEqual(len(x.args), I.MAX_HOLES)
 
-    def test_default_off_and_off_switch_exact(self):
+    def test_default_on_and_off_switch(self):
         _env()
-        self.assertFalse(I.enabled())   # docs/INVENT.md: sealed criterion 4 failed (science per-task loss)
+        self.assertTrue(I.enabled())    # docs/INVENT.md round 2: every pre-registered criterion passed
         t = _dev_task("g2_box_minus_cube")
         p, vs = self.fields["math_sci"]
         a = evaluate(t, prior=p, variation=vs, casesplit=True, max_eval=10000)[0]
-        _env("off")
+        _env("on")
         b = evaluate(t, prior=p, variation=vs, casesplit=True, max_eval=10000)[0]
         self.assertEqual((a.certified, a.evaluations, a.candidate), (b.certified, b.evaluations, b.candidate))
+        _env("off")
+        self.assertFalse(I.enabled())
+        c = evaluate(t, prior=p, variation=vs, casesplit=True, max_eval=10000)[0]
+        self.assertTrue(a.certified)
+        self.assertFalse(c.certified)
 
     def test_empty_and_cold_untouched(self):
         for fam in ("g2_box_minus_cube", "g2_square_pyr_number", "g2_hex_number"):

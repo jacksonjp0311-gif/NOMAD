@@ -7,8 +7,8 @@ constants. Both only *reuse* what was certified. INVENT makes **new
 primitives** out of certified experience: lambda-abstractions with holes
 that recur across certified programs, and constants derived from the
 constants memory uses, and lets the field arm's enumerator use each one as
-a single node. Off switch `NOMAD_INVENT` (default **off** until a sealed
-judge below passes). No transformers, no neural weights, no LLM.
+a single node. Off switch `NOMAD_INVENT` (default **on** since the round-2 sealed
+judge passed; see the end). No transformers, no neural weights, no LLM.
 
 ## Mechanism (`nomad/invent.py`, hooks in `nomad/world.py`)
 
@@ -337,3 +337,62 @@ TEXT and TRANSFER-3, each with its own trained field.
 
 If every criterion passes, `NOMAD_INVENT` defaults to on. Otherwise INVENT
 stays off and the result is committed as measured.
+
+## Round 2 sealed result (measured once, 2026-11-21, after `3d32714`)
+
+Primary, TRANSFER-4 hard (35 tasks, sha `756c725c...b5078`):
+
+| Arm | Certified | Evaluations | kitchen / garden / workshop |
+|---|---|---|---|
+| cold | 0 | 350,000 | 0 / 0 / 0 |
+| empty | 2 | 341,774 | 1 / 0 / 1 |
+| empty_invent | 2 | 341,774 (identical) | 1 / 0 / 1 |
+| trained (INVENT off) | 13 | 295,004 | 6 / 4 / 3 |
+| **trained_invent** | **18** | **270,736 (-8.2%)** | 9 / 4 / 5 |
+| trained_invent_r1 (report) | 16 | 284,338 | 7 / 4 / 5 |
+| math_invent (report) | 10 | 295,587 | 4 / 2 / 4 |
+
+New solves (trained_invent; certified programs are plain operators):
+- `k4_cake_layers_sq` ck(ck+1)(2ck+1)/6, round 2 `(a + b·c) // 2` under the
+  derived scale 3: `div(add(div(add(ck, mul(ck, ck)), 2), mul(ck, add(ck, mul(ck, ck)))), 3)` (2,716 evals);
+- `k4_sum_cubes` (ck(ck+1)/2)^2, round 2: `mul(div(add(ck, mul(ck, ck)), 2), div(add(ck, mul(ck, ck)), 2))` (2,734);
+- `k4_cut_pieces` (tw+1)(tl+1)tk, round 1 fma: `mul(add(tk, mul(tk, tw)), add(1, tl))`;
+- `w4_pegboard` (wa+1)(wb+1)wc, round 1 fma: `mul(add(wc, mul(wa, wc)), add(1, wb))`;
+- `w4_lattice_nodes` (cb+1)^3, round 1 a·b·c as a cube: `add(add(1, mul(cb, mul(cb, cb))), mul(cb, add(3, mul(cb, 3))))`.
+Round 2 adds exactly the two kitchen sums (trained_invent 18 vs round-1-only 16).
+No trained win lost; no decision arm worse than cold on any task.
+Misses include the plain shifted cubes `(cb - 2)^3`, `6(cb - 2)^2`, the
+inner / wall box volumes and the ceiling double division (`g4_crates_needed`).
+
+Secondary (every earlier frozen suite; trained -> trained_invent, per-task losses):
+
+| Suite | trained | trained_invent | evals trained -> invent | lost | worse than cold |
+|---|---|---|---|---|---|
+| deep | 27 | 27 | 235,421 -> 235,421 | none | none |
+| science hard | 12 | 12 | 91,987 -> 91,987 | none (water_mol kept) | none |
+| TRANSFER(-1) | 19 | 19 | 113,467 -> 113,467 | none | none |
+| TRANSFER-2 | 30 | **32** | 214,873 -> 209,252 | none | none |
+| TEXT | 3 | 3 | 225,995 -> 225,995 | none | none |
+| TRANSFER-3 | 20 | **27** | 309,010 -> 273,063 | none | none |
+
+(TRANSFER-2: +`g2_box_minus_cube`, +`g2_square_pyr_number`. TRANSFER-3,
+which shaped the design and is not proof: +`b3_two_cubes`,
++`b3_room_minus_cube`, +`b3_slab`, and round 2 +`g3_tetra_stack`,
++`g3_pentagonal`, +`g3_star_number`, +`g3_squares_on_board`.)
+
+LOFO (INVENT on): 5,883 / worst 1.0x. Tests: 410 passed, 6 skipped.
+
+| Criterion | Result |
+|---|---|
+| 1 INVENT adds (>= +3) | **pass** (+5, and -8.2% evaluations) |
+| 2 gain vanishes with an empty field | **pass** (identical) |
+| 3 no decision arm worse than cold | **pass** |
+| 4 no per-task loss on any existing sealed suite | **pass** (6 suites) |
+| 5 LOFO 5,883 / 1.0x | **pass** |
+| 6 tests | **pass** |
+
+**Decision: every pre-registered criterion passed; `NOMAD_INVENT` now
+defaults to on** (`NOMAD_INVENT=off` restores main's path exactly). With it on,
+`tests/test_world.py` pins the library-mechanism assertion for `quartic_sum`
+with INVENT off; with INVENT on the composed `λa. a·a·a·a` reaches the same
+program in 2,704 evaluations instead of 98,022.

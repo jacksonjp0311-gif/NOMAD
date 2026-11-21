@@ -57,8 +57,9 @@ DREAM_ROWS = 12       # synthetic rows for behavioural dedup (seeded; never task
 
 
 def enabled() -> bool:
-    """NOMAD_INVENT: invented primitives in the field arm's block probe."""
-    return W._flag("NOMAD_INVENT", "off")
+    """NOMAD_INVENT: invented primitives in the field arm's block probe.
+    Default on since the round-2 sealed judge passed (docs/INVENT.md)."""
+    return W._flag("NOMAD_INVENT", "on")
 
 
 @dataclass(frozen=True)
