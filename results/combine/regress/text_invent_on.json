@@ -1,0 +1,797 @@
+{
+ "tasks": 15,
+ "certified": {
+  "cold": 0,
+  "empty_off": 0,
+  "empty_on": 0,
+  "trained_off": 6,
+  "trained_on": 15,
+  "world_only_on": 9,
+  "bridge_only_on": 15,
+  "trained_on_invent_off": 6
+ },
+ "evaluations": {
+  "cold": 150000,
+  "empty_off": 150000,
+  "empty_on": 150000,
+  "trained_off": 134722,
+  "trained_on": 75775,
+  "world_only_on": 105113,
+  "bridge_only_on": 78243,
+  "trained_on_invent_off": 134722
+ },
+ "worse_than_cold": {
+  "cold": [],
+  "empty_off": [],
+  "empty_on": [],
+  "trained_off": [],
+  "trained_on": [],
+  "world_only_on": [],
+  "bridge_only_on": [],
+  "trained_on_invent_off": []
+ },
+ "per_task[certified, evals, via, candidate]": {
+  "x_word_sep_len": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5052,
+    "port:invent:text:suf",
+    "concat(concat(xw, xq), itos(strlen(xw)))"
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(xw, concat(xq, itos(strlen(xw))))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:suf",
+    "concat(concat(xw, xq), itos(strlen(xw)))"
+   ],
+   "trained_on_invent_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "x_upper_head_lower_tail": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    9561,
+    "port:probe",
+    "concat(upper(take(xw, xk)), lower(drop(xw, xk)))"
+   ],
+   "trained_on": [
+    true,
+    5029,
+    "port:invent:text:pre",
+    "concat(upper(take(xw, xk)), lower(drop(xw, xk)))"
+   ],
+   "world_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5021,
+    "port:invent:text:pre",
+    "concat(upper(take(xw, xk)), lower(drop(xw, xk)))"
+   ],
+   "trained_on_invent_off": [
+    true,
+    9561,
+    "port:probe",
+    "concat(upper(take(xw, xk)), lower(drop(xw, xk)))"
+   ]
+  },
+  "x_tail_then_initial": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    9983,
+    "port:probe",
+    "concat(srev(take(srev(xw), xk)), first(xw))"
+   ],
+   "trained_on": [
+    true,
+    5029,
+    "port:invent:text:pre",
+    "concat(srev(take(srev(xw), xk)), first(xw))"
+   ],
+   "world_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5021,
+    "port:invent:text:pre",
+    "concat(srev(take(srev(xw), xk)), first(xw))"
+   ],
+   "trained_on_invent_off": [
+    true,
+    9983,
+    "port:probe",
+    "concat(srev(take(srev(xw), xk)), first(xw))"
+   ]
+  },
+  "x_stutter_initial": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5117,
+    "port:invent:text:pre",
+    "concat(srep(first(xw), xk), first(xv))"
+   ],
+   "world_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5073,
+    "port:invent:text:pre",
+    "concat(srep(first(xw), xk), first(xv))"
+   ],
+   "trained_on_invent_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "x_rev_head": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5029,
+    "port:invent:text:suf",
+    "concat(srev(take(xw, xk)), drop(xw, xk))"
+   ],
+   "world_only_on": [
+    true,
+    5009,
+    "port:invent:text:chain",
+    "concat(srev(take(xw, xk)), concat(at(xw, xk), rest(drop(xw, xk))))"
+   ],
+   "bridge_only_on": [
+    true,
+    5021,
+    "port:invent:text:suf",
+    "concat(srev(take(xw, xk)), drop(xw, xk))"
+   ],
+   "trained_on_invent_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "x_delete_kth": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    9936,
+    "port:probe",
+    "concat(take(xw, xk), rest(drop(xw, xk)))"
+   ],
+   "trained_on": [
+    true,
+    5029,
+    "port:invent:text:pre",
+    "concat(take(xw, xk), rest(drop(xw, xk)))"
+   ],
+   "world_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5021,
+    "port:invent:text:pre",
+    "concat(take(xw, xk), rest(drop(xw, xk)))"
+   ],
+   "trained_on_invent_off": [
+    true,
+    9936,
+    "port:probe",
+    "concat(take(xw, xk), rest(drop(xw, xk)))"
+   ]
+  },
+  "x_double_kth": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5029,
+    "port:invent:text:suf",
+    "concat(take(xw, add(1, xk)), drop(xw, xk))"
+   ],
+   "world_only_on": [
+    true,
+    5009,
+    "port:invent:text:chain",
+    "concat(take(xw, xk), concat(at(xw, xk), drop(xw, xk)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5021,
+    "port:invent:text:suf",
+    "concat(take(xw, add(1, xk)), drop(xw, xk))"
+   ],
+   "trained_on_invent_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "x_cross_tail": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5117,
+    "port:invent:text:suf",
+    "concat(take(xw, xk), drop(xv, xj))"
+   ],
+   "world_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5073,
+    "port:invent:text:suf",
+    "concat(take(xw, xk), drop(xv, xj))"
+   ],
+   "trained_on_invent_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "x_len_pair": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5022,
+    "port:invent:text:suf",
+    "concat(concat(itos(strlen(xw)), xq), itos(strlen(xv)))"
+   ],
+   "world_only_on": [
+    true,
+    5016,
+    "port:invent:text:chain",
+    "concat(itos(strlen(xw)), concat(xq, itos(strlen(xv))))"
+   ],
+   "bridge_only_on": [
+    true,
+    5007,
+    "port:invent:text:suf",
+    "concat(concat(itos(strlen(xw)), xq), itos(strlen(xv)))"
+   ],
+   "trained_on_invent_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "x_rest_stutter": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5029,
+    "port:invent:text:suf",
+    "concat(rest(xw), srep(first(xw), xk))"
+   ],
+   "world_only_on": [
+    true,
+    5009,
+    "port:invent:text:chain",
+    "concat(srev(rest(srev(rest(xw)))), concat(last(xw), srep(first(xw), xk)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5021,
+    "port:invent:text:suf",
+    "concat(rest(xw), srep(first(xw), xk))"
+   ],
+   "trained_on_invent_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "x_last_sep_first": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5052,
+    "port:invent:text:chain",
+    "concat(last(xw), concat(xq, first(xw)))"
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(last(xw), concat(xq, first(xw)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:chain",
+    "concat(last(xw), concat(xq, first(xw)))"
+   ],
+   "trained_on_invent_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "x_digits_then_word": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5029,
+    "port:invent:text:chain",
+    "concat(itos(strlen(srep(xw, xk))), concat(first(xw), rest(xw)))"
+   ],
+   "world_only_on": [
+    true,
+    5009,
+    "port:invent:text:chain",
+    "concat(itos(strlen(srep(xw, xk))), concat(first(xw), rest(xw)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5021,
+    "port:invent:text:chain",
+    "concat(itos(strlen(srep(xw, xk))), concat(first(xw), rest(xw)))"
+   ],
+   "trained_on_invent_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "x_lower_rot": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5059,
+    "port:probe",
+    "lower(upper(concat(drop(xw, xk), take(xw, xk))))"
+   ],
+   "trained_on": [
+    true,
+    5029,
+    "port:invent:text:chain",
+    "concat(lower(at(xw, xk)), concat(lower(rest(drop(xw, xk))), lower(upper(take(xw, xk)))))"
+   ],
+   "world_only_on": [
+    true,
+    5009,
+    "port:invent:text:chain",
+    "concat(lower(at(xw, xk)), concat(lower(rest(drop(xw, xk))), lower(take(xw, xk))))"
+   ],
+   "bridge_only_on": [
+    true,
+    5021,
+    "port:invent:text:chain",
+    "concat(lower(at(xw, xk)), concat(lower(rest(drop(xw, xk))), lower(upper(take(xw, xk)))))"
+   ],
+   "trained_on_invent_off": [
+    true,
+    5059,
+    "port:probe",
+    "lower(upper(concat(drop(xw, xk), take(xw, xk))))"
+   ]
+  },
+  "x_len_pair_k": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5153,
+    "port:anchor",
+    "add(add(xk, strlen(xw)), strlen(srep(rest(xv), xk)))"
+   ],
+   "trained_on": [
+    true,
+    5153,
+    "port:anchor",
+    "add(add(xk, strlen(xw)), strlen(srep(rest(xv), xk)))"
+   ],
+   "world_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5073,
+    "port:anchor",
+    "add(add(xk, strlen(xw)), strlen(srep(rest(xv), xk)))"
+   ],
+   "trained_on_invent_off": [
+    true,
+    5153,
+    "port:anchor",
+    "add(add(xk, strlen(xw)), strlen(srep(rest(xv), xk)))"
+   ]
+  },
+  "x_len_joined": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5030,
+    "port:anchor",
+    "add(strlen(concat(xq, xq)), strlen(concat(xw, rest(xv))))"
+   ],
+   "trained_on": [
+    true,
+    5030,
+    "port:anchor",
+    "add(strlen(concat(xq, xq)), strlen(concat(xw, rest(xv))))"
+   ],
+   "world_only_on": [
+    true,
+    5024,
+    "port:anchor",
+    "add(strlen(concat(xq, xq)), strlen(concat(xw, rest(xv))))"
+   ],
+   "bridge_only_on": [
+    true,
+    7771,
+    "port:probe",
+    "strlen(concat(xw, concat(xv, itos(strlen(xv)))))"
+   ],
+   "trained_on_invent_off": [
+    true,
+    5030,
+    "port:anchor",
+    "add(strlen(concat(xq, xq)), strlen(concat(xw, rest(xv))))"
+   ]
+  }
+ },
+ "sha256": "cef71e021555c8897e352a240c735a9e3f4feff3e31542de72747e0d5f46e5a4",
+ "verdict": {
+  "on_minus_off": 9,
+  "fewer_evals_vs_off": 0.4375,
+  "c1_on_beats_off": true,
+  "empty_on_minus_empty_off": 0,
+  "report_empty_on_minus_cold": 0,
+  "c2_gain_vanishes_with_empty_field": true,
+  "trained_on_losses_vs_off": [],
+  "c3_no_task_worse": true,
+  "pass_1_to_3": true
+ }
+}

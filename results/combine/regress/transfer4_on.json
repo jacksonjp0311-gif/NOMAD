@@ -1,0 +1,1741 @@
+{
+ "tasks": 35,
+ "certified": {
+  "cold": 0,
+  "empty": 2,
+  "empty_invent": 2,
+  "trained": 13,
+  "trained_invent": 18,
+  "trained_invent_r1": 16,
+  "math_invent": 10
+ },
+ "evaluations": {
+  "cold": 350000,
+  "empty": 341774,
+  "empty_invent": 341774,
+  "trained": 295004,
+  "trained_invent": 270736,
+  "trained_invent_r1": 284338,
+  "math_invent": 295587
+ },
+ "by_domain": {
+  "cold": {
+   "kitchen": [
+    0,
+    12
+   ],
+   "garden": [
+    0,
+    11
+   ],
+   "workshop": [
+    0,
+    12
+   ]
+  },
+  "empty": {
+   "kitchen": [
+    1,
+    12
+   ],
+   "garden": [
+    0,
+    11
+   ],
+   "workshop": [
+    1,
+    12
+   ]
+  },
+  "empty_invent": {
+   "kitchen": [
+    1,
+    12
+   ],
+   "garden": [
+    0,
+    11
+   ],
+   "workshop": [
+    1,
+    12
+   ]
+  },
+  "trained": {
+   "kitchen": [
+    6,
+    12
+   ],
+   "garden": [
+    4,
+    11
+   ],
+   "workshop": [
+    3,
+    12
+   ]
+  },
+  "trained_invent": {
+   "kitchen": [
+    9,
+    12
+   ],
+   "garden": [
+    4,
+    11
+   ],
+   "workshop": [
+    5,
+    12
+   ]
+  },
+  "trained_invent_r1": {
+   "kitchen": [
+    7,
+    12
+   ],
+   "garden": [
+    4,
+    11
+   ],
+   "workshop": [
+    5,
+    12
+   ]
+  },
+  "math_invent": {
+   "kitchen": [
+    4,
+    12
+   ],
+   "garden": [
+    2,
+    11
+   ],
+   "workshop": [
+    4,
+    12
+   ]
+  }
+ },
+ "worse_than_cold": {
+  "cold": [],
+  "empty": [],
+  "empty_invent": [],
+  "trained": [],
+  "trained_invent": [],
+  "trained_invent_r1": [],
+  "math_invent": []
+ },
+ "trained_wins_lost": {
+  "cold": [
+   "k4_tray_rim",
+   "k4_candy_box",
+   "k4_frosting",
+   "k4_plates",
+   "k4_toasts",
+   "k4_dough_spare",
+   "g4_fence_posts",
+   "g4_soil_half",
+   "g4_cross_path",
+   "g4_triangle_beds",
+   "w4_lattice_rods",
+   "w4_stripe_stitches",
+   "w4_tri_shawl"
+  ],
+  "empty": [
+   "k4_tray_rim",
+   "k4_candy_box",
+   "k4_frosting",
+   "k4_toasts",
+   "k4_dough_spare",
+   "g4_fence_posts",
+   "g4_soil_half",
+   "g4_cross_path",
+   "g4_triangle_beds",
+   "w4_lattice_rods",
+   "w4_tri_shawl"
+  ],
+  "empty_invent": [
+   "k4_tray_rim",
+   "k4_candy_box",
+   "k4_frosting",
+   "k4_toasts",
+   "k4_dough_spare",
+   "g4_fence_posts",
+   "g4_soil_half",
+   "g4_cross_path",
+   "g4_triangle_beds",
+   "w4_lattice_rods",
+   "w4_tri_shawl"
+  ],
+  "trained": [],
+  "trained_invent": [],
+  "trained_invent_r1": [],
+  "math_invent": [
+   "k4_tray_rim",
+   "k4_toasts",
+   "g4_soil_half",
+   "g4_triangle_beds",
+   "w4_tri_shawl"
+  ]
+ },
+ "per_task[certified, evals, via, candidate]": {
+  "k4_tray_rim": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5353,
+    "port:anchor",
+    "mul(add(tk, tk), add(sub(tw, 2), tl))"
+   ],
+   "trained_invent": [
+    true,
+    5353,
+    "port:anchor",
+    "mul(add(tk, tk), add(sub(tw, 2), tl))"
+   ],
+   "trained_invent_r1": [
+    true,
+    5353,
+    "port:anchor",
+    "mul(add(tk, tk), add(sub(tw, 2), tl))"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "k4_tray_inner": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "k4_cut_pieces": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    true,
+    8359,
+    "port:invent:r1",
+    "mul(add(tk, mul(tk, tw)), add(1, tl))"
+   ],
+   "trained_invent_r1": [
+    true,
+    8136,
+    "port:invent:r1",
+    "mul(add(tk, mul(tk, tw)), add(1, tl))"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "k4_cake_layers_sq": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    true,
+    2716,
+    "port:invent:r2:div3",
+    "div(add(div(add(ck, mul(ck, ck)), 2), mul(ck, add(ck, mul(ck, ck)))), 3)"
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "k4_candy_box": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    3116,
+    "port:anchor",
+    "add(add(ck, ck), mul(ck, mul(ck, add(ck, 3))))"
+   ],
+   "trained_invent": [
+    true,
+    3116,
+    "port:anchor",
+    "add(add(ck, ck), mul(ck, mul(ck, add(ck, 3))))"
+   ],
+   "trained_invent_r1": [
+    true,
+    3116,
+    "port:anchor",
+    "add(add(ck, ck), mul(ck, mul(ck, add(ck, 3))))"
+   ],
+   "math_invent": [
+    true,
+    3130,
+    "port:invent:r2",
+    "add(mul(ck, mul(ck, ck)), mul(ck, add(2, mul(ck, 3))))"
+   ]
+  },
+  "k4_candy_pyramid_base": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "k4_sum_cubes": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    true,
+    2734,
+    "port:invent:r2",
+    "mul(div(add(ck, mul(ck, ck)), 2), div(add(ck, mul(ck, ck)), 2))"
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "k4_frosting": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    6943,
+    "port:anchor",
+    "add(mul(add(ck, ck), tk), mul(ck, add(ck, add(tk, tk))))"
+   ],
+   "trained_invent": [
+    true,
+    6943,
+    "port:anchor",
+    "add(mul(add(ck, ck), tk), mul(ck, add(ck, add(tk, tk))))"
+   ],
+   "trained_invent_r1": [
+    true,
+    6943,
+    "port:anchor",
+    "add(mul(add(ck, ck), tk), mul(ck, add(ck, add(tk, tk))))"
+   ],
+   "math_invent": [
+    true,
+    6921,
+    "port:anchor",
+    "add(mul(ck, ck), mul(ck, add(mul(3, tk), tk)))"
+   ]
+  },
+  "k4_three_tiers": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "k4_plates": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    true,
+    4511,
+    "sense:mul",
+    "mul(add(2, gs), add(1, cr))"
+   ],
+   "empty_invent": [
+    true,
+    4511,
+    "sense:mul",
+    "mul(add(2, gs), add(1, cr))"
+   ],
+   "trained": [
+    true,
+    4511,
+    "sense:mul",
+    "mul(add(2, gs), add(1, cr))"
+   ],
+   "trained_invent": [
+    true,
+    4511,
+    "sense:mul",
+    "mul(add(2, gs), add(1, cr))"
+   ],
+   "trained_invent_r1": [
+    true,
+    4511,
+    "sense:mul",
+    "mul(add(2, gs), add(1, cr))"
+   ],
+   "math_invent": [
+    true,
+    4511,
+    "sense:mul",
+    "mul(add(2, gs), add(1, cr))"
+   ]
+  },
+  "k4_toasts": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    9327,
+    "port:scale:div2",
+    "div(add(mul(gs, mul(gs, cr)), mul(cr, add(2, mul(3, gs)))), 2)"
+   ],
+   "trained_invent": [
+    true,
+    9327,
+    "port:scale:div2",
+    "div(add(mul(gs, mul(gs, cr)), mul(cr, add(2, mul(3, gs)))), 2)"
+   ],
+   "trained_invent_r1": [
+    true,
+    9327,
+    "port:scale:div2",
+    "div(add(mul(gs, mul(gs, cr)), mul(cr, add(2, mul(3, gs)))), 2)"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "k4_dough_spare": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5265,
+    "port:anchor",
+    "mul(mul(gpp, bat), add(2, gs))"
+   ],
+   "trained_invent": [
+    true,
+    5265,
+    "port:anchor",
+    "mul(mul(gpp, bat), add(2, gs))"
+   ],
+   "trained_invent_r1": [
+    true,
+    5265,
+    "port:anchor",
+    "mul(mul(gpp, bat), add(2, gs))"
+   ],
+   "math_invent": [
+    true,
+    5113,
+    "port:anchor",
+    "mul(min(bat, gpp), mul(gpp, add(2, gs)))"
+   ]
+  },
+  "g4_grid_plants": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g4_inner_plants": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g4_border_area": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g4_inner_bed": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g4_fence_posts": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5530,
+    "port:anchor2",
+    "add(add(div(bln, bsp), div(bln, bsp)), mul(2, div(bw, bsp)))"
+   ],
+   "trained_invent": [
+    true,
+    5530,
+    "port:anchor2",
+    "add(add(div(bln, bsp), div(bln, bsp)), mul(2, div(bw, bsp)))"
+   ],
+   "trained_invent_r1": [
+    true,
+    5530,
+    "port:anchor2",
+    "add(add(div(bln, bsp), div(bln, bsp)), mul(2, div(bw, bsp)))"
+   ],
+   "math_invent": [
+    true,
+    5286,
+    "port:anchor2",
+    "add(add(div(bln, bsp), div(bln, bsp)), mul(2, div(bw, bsp)))"
+   ]
+  },
+  "g4_soil_half": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    "sense:mul",
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    "sense:mul",
+    null
+   ],
+   "trained": [
+    true,
+    6368,
+    "port:scale:div2",
+    "div(mul(mul(bw, bln), bsp), 2)"
+   ],
+   "trained_invent": [
+    true,
+    6368,
+    "port:scale:div2",
+    "div(mul(mul(bw, bln), bsp), 2)"
+   ],
+   "trained_invent_r1": [
+    true,
+    6368,
+    "port:scale:div2",
+    "div(mul(mul(bw, bln), bsp), 2)"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ]
+  },
+  "g4_cross_path": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    5162,
+    "port:anchor",
+    "add(mul(bln, bsp), mul(bsp, sub(bw, bsp)))"
+   ],
+   "trained_invent": [
+    true,
+    5162,
+    "port:anchor",
+    "add(mul(bln, bsp), mul(bsp, sub(bw, bsp)))"
+   ],
+   "trained_invent_r1": [
+    true,
+    5162,
+    "port:anchor",
+    "add(mul(bln, bsp), mul(bsp, sub(bw, bsp)))"
+   ],
+   "math_invent": [
+    true,
+    5141,
+    "port:anchor",
+    "mul(min(bsp, bw), add(bln, sub(bw, bsp)))"
+   ]
+  },
+  "g4_pot_pyramids": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g4_square_pyramids": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g4_triangle_beds": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    9538,
+    "port:scale:div2",
+    "div(add(mul(tier, mul(tier, nbx)), mul(tier, nbx)), 2)"
+   ],
+   "trained_invent": [
+    true,
+    9538,
+    "port:scale:div2",
+    "div(add(mul(tier, mul(tier, nbx)), mul(tier, nbx)), 2)"
+   ],
+   "trained_invent_r1": [
+    true,
+    9538,
+    "port:scale:div2",
+    "div(add(mul(tier, mul(tier, nbx)), mul(tier, nbx)), 2)"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "g4_crates_needed": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "w4_hidden_cubes": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "w4_one_face": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    true,
+    3421,
+    "port:invent:r2",
+    "mul(mul(2, mul(sub(cb, 2), sub(cb, 2))), 3)"
+   ]
+  },
+  "w4_painted_any": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "w4_lattice_nodes": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    true,
+    3696,
+    "port:invent:r1",
+    "add(add(1, mul(cb, mul(cb, cb))), mul(cb, add(3, mul(cb, 3))))"
+   ],
+   "trained_invent_r1": [
+    true,
+    3098,
+    "port:invent:r1",
+    "add(add(1, mul(cb, mul(cb, cb))), mul(cb, add(3, mul(cb, 3))))"
+   ],
+   "math_invent": [
+    true,
+    3617,
+    "port:invent:r2",
+    "add(mul(cb, mul(add(1, cb), add(1, cb))), mul(add(1, cb), add(1, cb)))"
+   ]
+  },
+  "w4_lattice_rods": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    2394,
+    "port:scale:div3",
+    "div(mul(mul(cb, mul(3, 3)), mul(add(1, cb), add(1, cb))), 3)"
+   ],
+   "trained_invent": [
+    true,
+    2394,
+    "port:scale:div3",
+    "div(mul(mul(cb, mul(3, 3)), mul(add(1, cb), add(1, cb))), 3)"
+   ],
+   "trained_invent_r1": [
+    true,
+    2394,
+    "port:scale:div3",
+    "div(mul(mul(cb, mul(3, 3)), mul(add(1, cb), add(1, cb))), 3)"
+   ],
+   "math_invent": [
+    true,
+    3334,
+    "port:invent:r2",
+    "mul(mul(cb, mul(add(1, cb), add(1, cb))), 3)"
+   ]
+  },
+  "w4_inner_box": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "w4_box_wood": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "w4_pegboard": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    true,
+    8227,
+    "port:invent:r1",
+    "mul(add(wc, mul(wa, wc)), add(1, wb))"
+   ],
+   "trained_invent_r1": [
+    true,
+    8100,
+    "port:invent:r1",
+    "mul(add(wc, mul(wa, wc)), add(1, wb))"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "w4_picture_frame": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "w4_dowel_grid": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_invent_r1": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "w4_stripe_stitches": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    true,
+    7263,
+    "sense:mul",
+    "mul(kst, sub(kr, mod(kr, kc)))"
+   ],
+   "empty_invent": [
+    true,
+    7263,
+    "sense:mul",
+    "mul(kst, sub(kr, mod(kr, kc)))"
+   ],
+   "trained": [
+    true,
+    5131,
+    "port:anchor",
+    "sub(mul(kst, kr), mul(kst, mod(kr, kc)))"
+   ],
+   "trained_invent": [
+    true,
+    5131,
+    "port:anchor",
+    "sub(mul(kst, kr), mul(kst, mod(kr, kc)))"
+   ],
+   "trained_invent_r1": [
+    true,
+    5131,
+    "port:anchor",
+    "sub(mul(kst, kr), mul(kst, mod(kr, kc)))"
+   ],
+   "math_invent": [
+    true,
+    5113,
+    "port:anchor",
+    "mul(div(kr, kc), mul(kst, kc))"
+   ]
+  },
+  "w4_tri_shawl": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_invent": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained": [
+    true,
+    6366,
+    "port:scale:div2",
+    "div(add(mul(add(kr, kr), kst), sub(mul(kr, kr), kr)), 2)"
+   ],
+   "trained_invent": [
+    true,
+    6366,
+    "port:scale:div2",
+    "div(add(mul(add(kr, kr), kst), sub(mul(kr, kr), kr)), 2)"
+   ],
+   "trained_invent_r1": [
+    true,
+    6366,
+    "port:scale:div2",
+    "div(add(mul(add(kr, kr), kst), sub(mul(kr, kr), kr)), 2)"
+   ],
+   "math_invent": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  }
+ },
+ "sha256": "756c725c1c1957742974060635aec40cbf935ff2da00ccc63130a1de049b5078",
+ "verdict": {
+  "invent_gain": 5,
+  "invent_fewer_evals": 0.0823,
+  "1_invent_adds": true,
+  "empty_invent_gain": 0,
+  "empty_invent_fewer_evals": 0.0,
+  "2_gain_vanishes_with_empty_field": true,
+  "3_no_arm_worse_than_cold": true,
+  "trained_invent_lost": [],
+  "primary_pass": true,
+  "report_only_worse_than_cold": {
+   "trained_invent_r1": [],
+   "math_invent": []
+  }
+ }
+}

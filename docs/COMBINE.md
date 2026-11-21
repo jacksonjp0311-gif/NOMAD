@@ -81,3 +81,47 @@ Honest framing, written before measuring: this is search over pairs of verified 
 words retrieve, with an exact arithmetic filter; not language understanding of how the two ideas
 connect (the story's structure is not parsed; the pairing is found by trying). Composites are
 templated English by the same agent; relational words overlap with training by design.
+
+## Sealed result (measured once, 2026-11-21, code `8ae25e1`; `results/combine/`): **FAIL -> stays OFF**
+
+Suite sha `d76ef187...57d8`, 16 hard (cold certifies none).
+
+| arm | certified | evaluations |
+|---|---|---|
+| cold | 0 | 145,922 |
+| empty_off | 0 | 158,537 |
+| empty_on | 0 | 158,537 |
+| trained_off | 5 | 131,940 |
+| **trained_on** | **6** | **123,432** |
+| shuffled_1 | 5 | 137,395 |
+| shuffled_2 | 5 | 137,417 |
+| shuffled_3 | 5 | 131,171 |
+
+| criterion | result |
+|---|---|
+| 1 composition helps (>= +3) | **FAIL**: +1 (5 -> 6) |
+| 2 retrieved concepts carry it (>= best shuffled + 3) | **FAIL**: +1 over 5 |
+| 3 empty field gains nothing | **pass**: 0 = 0, 158,537 = 158,537 |
+| 4 no sealed task lost | **pass**: none lost; cold certifies nothing |
+| 5 existing suites | **FAIL**, as foreseen in the pre-registration: 15 judges byte-identical (learning incl. `sci_water_mol`, T1-T4, secondary, text, bridge, INVENT_TEXT, TRANSFER-5/6, SELFEDIT2, TEXT_CHAIN, INFLECT, LET, TEXT_ABSTRACT), 0 certification losses anywhere; but MEANING has 54 and ROLES 14 per-task evaluation increases (COMBINE misses after MEANING misses, +768 / +510 each, e.g. `ms_pitch_goal` 5,532 -> 6,300 in trained_on, `rs_star_plates` 141 -> 651) and 2 gains (`ms_cart_trips` 5,431 -> 1,022, `ms_porter_trips` 5,428 -> 435 in a shuffled arm) |
+| 6 LOFO, tests | **pass**: LOFO 5,883 worst 1.0x; full suite passed before the pre-registration push |
+
+The one new certification: `cs_jar_left` (leftover of a volume) in 323 evaluations, composed as
+`mod(volume, d)`; `cs_cup_left` (same composite) reached the stage but lost to the budget (1,143
+spent, the normal search then failed). The four `port:anchor` certifications are the same in every
+field arm (PORT finds them without words); COMBINE's miss adds 768 evaluations to each.
+
+Honest reading (diagnosis after the single measurement; nothing re-run on the sealed suite). Dev
+gave 9 vs 2; sealed gave 6 vs 5. The sealed composites are bigger (4-5 roles, up to 7 inputs) and
+two failure modes dominate: (a) **budget**: for `cs_lamp_boxes` the words did retrieve both parts
+(two areas at rank 1, boxes-needed at rank 6), but 254 compositions are formed from 10 concepts and
+the rank-sum order spends the 1,536 evaluations before it reaches pair (1, 6); (b) **retrieval of
+the generic "times" idea**: `cs_avg_lanes` / `cs_avg_oxygen` need mean-of-two then times n, and the
+plain product concept is not among the top 10 for those stories (its training words are "rows of /
+in each row"). Composition is not the bottleneck where the right pair is reached; ordering the
+pairs and retrieving each clause's concept are.
+
+Best next steps: retrieve per clause (the inner idea from the first clause, the outer from the
+question) instead of ranking pairs from the whole story; order compositions by how well their
+inverted bounds are met rather than by rank sum; and gate the stage so a single-concept story (no
+spare quantities to compose) never pays for it, which would also remove the criterion-5 cost.
