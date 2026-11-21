@@ -1,5 +1,13 @@
 # NOMAD — Change History
 
+## Dream journal (2026-11-21)
+
+- `nomad/dreamlog.py`: an observational organ (`NOMAD_DREAMLOG`, default on) that, in sleep and at body checkpoints (at most once per 30 minutes), writes an evidence-grounded entry to `data/dreams/journal.jsonl` and a human-readable board at `feed/DREAMS.md` (newest first, last 100). The board is composed by a deterministic generative grammar seeded by a hash of the entry's evidence: observation, reflection, an open question, and an optional reply to an earlier question. It is not a language model, and the page is reflection, not a certified claim. Size-capped (1.5 MB / 1,500 entries). Wrapped in `try/except` so it cannot crash the body; checkpoint commits already include `data/` and `feed/`.
+- Grounding: attempts and certifications, twin control-vs-field deltas, library blocks and programs, genome / SELFEDIT accepted or reverted, held-out misses, heartbeat and lease events, domains touched. Every number comes from the logs.
+- Verified: journal on vs off leaves WORLD `evaluate` results byte-identical (trees, certification, evaluation counts). Switch off writes nothing. See `docs/DREAMLOG.md`.
+- Tests: `tests/test_dreamlog.py`.
+
+
 ## Case split + frozen deep suite (2026-11-20)
 
 - `scripts/deep_suite.py` + `data/deep/deep_suite.json` (`7dde50b`, committed with SHA-256 `da3ae9bf...6fbd` before any field measurement): 40 seeded int tasks of size 8-12 that cold does not certify at 10,000 evaluations; held-out look-alikes excluded; pre-registered metric in `docs/DEEP_SUITE.md`.

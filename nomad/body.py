@@ -8,6 +8,7 @@ with a clone of the repository. One loop, in process:
     proposer -> awake pair (control vs field) + WORLD pair -> packet queue
     -> WITNESS receipts -> sleep learner (every few cycles) -> field
     -> checkpoint: retention, organism health, lease heartbeat,
+       dream journal (observational; NOMAD_DREAMLOG),
        evolve guard (git revert on live regression) and, when due, one
        test-gated genome mutation; commit data/ and push (rebase-retry).
 
@@ -131,11 +132,19 @@ def run(hours: float, *, push: bool = False, checkpoint_min: float = 10.0, cycle
                     fd = feed.publish()
             except Exception as exc:  # the body must not die on a feed failure
                 fd = {"error": repr(exc)[:300]}
+        dl = None
+        try:
+            from . import dreamlog
+            if dreamlog.due():
+                dl = dreamlog.safe_publish(source="checkpoint")
+        except Exception as exc:  # the body must not die on a journal failure
+            dl = {"error": repr(exc)[:300]}
         lease.write(me, started=started, released=final, cycles=cycles,
                     cycles_per_hour=round(cycles / elapsed_h, 1), checkpoints=checkpoints)
         rep = status()
         print(json.dumps({"checkpoint": checkpoints, "cycles": cycles, "sleeps": sleeps,
                           "cycles_per_hour": round(cycles / elapsed_h, 1), "evolve": ev, "feed": fd,
+                          "dreamlog": dl,
                           "world_heldout": rep["remember"]["world_heldout"],
                           "field_version": rep["remember"]["field_version"], "ts": _now()}, default=str), flush=True)
         last_ckpt = time.time()

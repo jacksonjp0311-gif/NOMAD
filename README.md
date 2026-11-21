@@ -42,6 +42,10 @@ python -m nomad.body --hours 2 --push      # Windows: py -3.12 -m nomad.body --h
 
 `feed/` publishes versioned, hash-chained packets of WITNESS-certified building blocks and scores (field vs cold control), so other agents can pull them and test them against their own controls. To verify a packet, run `python -m nomad.feed verify feed/latest.json`. Details are in [docs/FEED.md](docs/FEED.md).
 
+## Dream journal
+
+In sleep, NOMAD writes a short, evidence-grounded entry to a message board — observation, reflection, and an open question — composed by its own deterministic grammar, not by a language model. The entries are reflection, not certified claims. Read the board at [feed/DREAMS.md](feed/DREAMS.md). The organ is observational (`NOMAD_DREAMLOG`, default on) and does not affect search or learning. Details are in [docs/DREAMLOG.md](docs/DREAMLOG.md).
+
 ## Boundaries
 
 Architecture is recursive field intelligence. Current capability is bounded program synthesis (GENESIS integer expressions plus the WORLD typed table of integer, string, and list operators, at most 7 nodes, with learned library primitives) and field query. Not unrestricted coding. Not free-form generation. Not AGI.

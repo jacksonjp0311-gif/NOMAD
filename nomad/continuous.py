@@ -315,6 +315,11 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
     _log(row)
     post("spark", row)
     write_snapshot()
+    try:
+        from .dreamlog import safe_publish
+        safe_publish(source="sleep")
+    except Exception:
+        pass  # the body must not die on a journal failure
     return row
 
 
