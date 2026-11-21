@@ -1205,6 +1205,15 @@ def _I_chain() -> bool:
     return _I.chain_enabled()
 
 
+def let2_enabled() -> bool:
+    """NOMAD_LET2 (docs/LET2.md): LET's stage as a zero-cost fallback, paid only from the evaluations
+    MERGE's skips saved after main's int stages missed; default off until its sealed judge passes."""
+    return _flag("NOMAD_LET2", "off")
+
+
+LET2_RESTORE = True  # LET2: forget the stage's WITNESS rejections on a miss (later stages see main's gate)
+
+
 def let_enabled() -> bool:
     """NOMAD_LET: let-bindings over a learned block (docs/LET.md); default off until the sealed judge passes."""
     return _flag("NOMAD_LET", "off")
@@ -1433,7 +1442,7 @@ def port_bank(prior: "WorldPrior", task: WorldTask, key: str | None = None,
     element, annotated for the probe with which blocks are probe-equivalent
     to an earlier one."""
     out = _port_bank_main(prior, task, key, rel, cut_key)
-    if not out or not merge_enabled() or task.out != "int":
+    if not out or not (merge_enabled() or let2_enabled()) or task.out != "int":
         return out
     if rel is not None and key and route_enabled() and prior.route.get(key):
         return out
@@ -1779,9 +1788,23 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     pinfo["port"] = "let"
                     return hit
             if mstate["on"]:
-                hit = yield from merge_extra(ranked, table, limit)
-                if hit is not None:
-                    return hit
+                if let2_enabled() and mstate["skips"] > mstate["spent"]:
+                    # LET2 (docs/LET2.md): LET's stage paid only from the unspent skips; on a miss
+                    # the gate's rejection record is restored, so later stages see main's gate
+                    e0 = evals
+                    g0 = (len(gate.rejected), len(gate.vias)) if gate is not None else None
+                    hit = yield from let_stage(ranked, P, table, min(limit, evals + mstate["skips"] - mstate["spent"]), real=True)
+                    mstate["spent"] += evals - e0
+                    if hit is not None:
+                        pinfo["port"] = "let2"
+                        return hit
+                    if g0 is not None and LET2_RESTORE:
+                        del gate.rejected[g0[0]:]
+                        del gate.vias[g0[1]:]
+                if merge_enabled():
+                    hit = yield from merge_extra(ranked, table, limit)
+                    if hit is not None:
+                        return hit
                 yield from merge_settle()
         if task.out == "str" and splice_enabled():
             hit = yield from splice(ranked, P, limit)
@@ -1910,7 +1933,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     return hit
         return None
 
-    def let_stage(ranked, P, table, limit):
+    def let_stage(ranked, P, table, limit, real=False):
         """LET (docs/LET.md): reasoning with an intermediate result ``t`` used twice.
 
         For each bank block ``t`` (a certified program of the field, already run by PORT; distinct public
@@ -1949,7 +1972,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             for i, (tr, tv) in enumerate(terms):
                 if i == 0 or _key(tv) in table:
                     continue        # already computed (t by PORT, the rest by the regular levels)
-                if vev() >= limit:
+                if (evals if real else vev()) >= limit:
                     return None
                 evals += 1          # a new term is one evaluation
                 yield evals
@@ -1969,7 +1992,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     if all(x // k == g for x, g in zip(tv, goal)):
                         fits.append(["div", tr, kt])
             for hit in fits:
-                if vev() >= limit or (gate is not None and len(gate.rejected) - rej0 >= LET_REJECTS):
+                if (evals if real else vev()) >= limit or (gate is not None and len(gate.rejected) - rej0 >= LET_REJECTS):
                     return None
                 key = json.dumps(hit)
                 if key in tried:
