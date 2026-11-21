@@ -1,10 +1,10 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-21T18:44:16Z",
+  "ts": "2026-11-21T18:54:59Z",
   "sense": {
-    "last_pair": "2026-11-21T18:43:16Z",
-    "last_world_pair": "2026-11-21T18:43:16Z",
-    "last_sleep": "2026-11-21T18:44:16Z"
+    "last_pair": "2026-11-21T18:53:57Z",
+    "last_world_pair": "2026-11-21T18:53:57Z",
+    "last_sleep": "2026-11-21T18:54:56Z"
   },
   "think": {
     "curriculum_open_levels": {
@@ -37,7 +37,7 @@
       "informative_pairs": 0,
       "mean_treatment_advantage": null,
       "both_certified_pairs_with_cost": 128,
-      "mean_evaluations_saved": 306.3828125,
+      "mean_evaluations_saved": 306.765625,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     }
   },
@@ -45,7 +45,7 @@
     "queued": 0,
     "inflight": 0,
     "certified_queued": 0,
-    "field_version": 1409,
+    "field_version": 1415,
     "genesis_heldout": {
       "field_certified": false,
       "cold_certified": false
@@ -60,51 +60,6 @@
   },
   "evolve": {
     "recent": [
-      {
-        "ts": "2026-11-21T08:34:23Z",
-        "seed": 3968454675,
-        "gene": "library_k",
-        "before": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2
-        },
-        "after": {
-          "decay": 0.97,
-          "library_k": 4,
-          "patience": 4,
-          "max_lag": 2
-        },
-        "benchmark_before": {
-          "heldout_wins": 2,
-          "train_evaluations": 4538,
-          "train_certified": 16,
-          "probe_evaluations": 27857,
-          "total_evaluations": 32395,
-          "probes": {
-            "absdiff": "certified_correctness",
-            "quartic_sum": "certified_correctness",
-            "last_first_upper": "none",
-            "sum_minus_max": "none"
-          }
-        },
-        "benchmark_after": {
-          "heldout_wins": 2,
-          "train_evaluations": 4538,
-          "train_certified": 16,
-          "probe_evaluations": 27857,
-          "total_evaluations": 32395,
-          "probes": {
-            "absdiff": "certified_correctness",
-            "quartic_sum": "certified_correctness",
-            "last_first_upper": "none",
-            "sum_minus_max": "none"
-          }
-        },
-        "accepted": false,
-        "reason": "not_better"
-      },
       {
         "ts": "2026-11-21T10:40:02Z",
         "seed": 2457342070,
@@ -284,6 +239,59 @@
         },
         "accepted": false,
         "reason": "not_better"
+      },
+      {
+        "ts": "2026-11-21T18:54:58Z",
+        "seed": 3780881146,
+        "gene": "library_k",
+        "before": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "after": {
+          "decay": 0.97,
+          "library_k": 7,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "benchmark_before": {
+          "heldout_wins": 2,
+          "train_evaluations": 4538,
+          "train_certified": 16,
+          "probe_evaluations": 7539,
+          "total_evaluations": 12077,
+          "probes": {
+            "absdiff": "certified_correctness",
+            "quartic_sum": "certified_correctness",
+            "last_first_upper": "none",
+            "sum_minus_max": "none"
+          }
+        },
+        "benchmark_after": {
+          "heldout_wins": 2,
+          "train_evaluations": 4538,
+          "train_certified": 16,
+          "probe_evaluations": 7539,
+          "total_evaluations": 12077,
+          "probes": {
+            "absdiff": "certified_correctness",
+            "quartic_sum": "certified_correctness",
+            "last_first_upper": "none",
+            "sum_minus_max": "none"
+          }
+        },
+        "accepted": false,
+        "reason": "not_better"
       }
     ]
   },
@@ -311,11 +319,11 @@
     ],
     "body_lease": {
       "host": "gh-44901000359",
-      "heartbeat": "2026-11-21T18:44:16Z",
-      "age_min": 0.015878049999999998,
+      "heartbeat": "2026-11-21T18:54:59Z",
+      "age_min": 0.0027837333333333336,
       "alive": true,
-      "cycles": 144,
-      "cycles_per_hour": 103.9,
+      "cycles": 162,
+      "cycles_per_hour": 103.6,
       "released": false
     }
   },
