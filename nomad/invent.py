@@ -95,6 +95,122 @@ def text_enabled() -> bool:
 TEXT_ANCHOR_N = 24    # string blocks tried as concat anchors per task (1 evaluation each)
 
 
+# ---------------------------------------------------------------- TEXT_CHAIN (docs/TEXT_CHAIN.md)
+TEXT_CHAIN_PARTS = 4      # most parts in one concat chain (3 peels + the middle)
+TEXT_CHAIN_N = 16         # assembled chain candidates per task (1 evaluation each)
+TEXT_CHAIN_NODES = 600    # peel states explored per task (lookups on computed values, no evaluation)
+TEXT_CHAIN_POOL = 400     # most part values indexed per task
+TEXT_CHAIN_LEARNED = False  # require a part whose value only a learned (bank / invented) block adds
+
+
+def chain_enabled() -> bool:
+    """NOMAD_TEXT_CHAIN (docs/TEXT_CHAIN.md): multi-part concat chains on string goals, built by
+    recursive prefix / suffix peeling over computed values. Default off until its sealed judge passes."""
+    return W._flag("NOMAD_TEXT_CHAIN", "off")
+
+
+def chain_parts(goal, pool_str, learned_str, pool_int, ops) -> list:
+    """Part entries (tree, per-row strings, learned) for ``text_chain``.
+
+    pool_str / learned_str: (tree, values) with string values (probe pools; bank blocks and invented
+    blocks); pool_int: (tree, values) with int values (``itos`` parts when the opset has itos). Case
+    variants ``upper(t)`` / ``lower(t)`` when the opset has them. Kept only when every row's value is a
+    non-empty proper substring of that row's goal. Same value twice: the first (pool before learned,
+    smaller before larger) wins, so a learned block counts as learned only when it adds a new value."""
+    goal = tuple(goal)
+    out, seen = [], set()
+
+    def consider(tree, vals, learned):
+        if len(vals) != len(goal):
+            return
+        for x, g in zip(vals, goal):
+            if type(x) is not str or not x or len(x) >= len(g) or x not in g:
+                return
+        if vals in seen:
+            return
+        seen.add(vals)
+        out.append((tree, vals, learned))
+
+    def variants(tree, vals, learned):
+        if any(type(x) is not str for x in vals):
+            return
+        consider(tree, vals, learned)
+        if "upper" in ops:
+            consider(["upper", tree], tuple(x.upper() for x in vals), learned)
+        if "lower" in ops:
+            consider(["lower", tree], tuple(x.lower() for x in vals), learned)
+
+    for t, v in pool_str:
+        variants(t, tuple(v), False)
+    if "itos" in ops:
+        for t, v in pool_int:
+            if all(type(x) is int for x in v):
+                consider(["itos", t], tuple(str(x) for x in v), False)
+    for t, v in learned_str:
+        variants(t, tuple(v), True)
+    out.sort(key=lambda e: (not e[2], -sum(len(x) for x in e[1])))
+    learned = [e for e in out if e[2]]
+    plain = [e for e in out if not e[2]]
+    keep = learned[:TEXT_CHAIN_POOL // 2]
+    keep += plain[:TEXT_CHAIN_POOL - len(keep)]
+    keep.sort(key=lambda e: -sum(len(x) for x in e[1]))
+    return keep
+
+
+def text_chain(goal, parts, *, max_parts: int = TEXT_CHAIN_PARTS, max_nodes: int = TEXT_CHAIN_NODES):
+    """Yield concat chains of >= 3 parts that reproduce ``goal`` on every public row, fewest parts
+    first (iterative deepening over the number of peels), at least one part learned.
+
+    Recursive peeling: a part whose value is a proper prefix (suffix) of the remaining segment on every
+    row is peeled off; the segment left after the peels must equal a part's values exactly. Everything
+    is a comparison on values already computed (no evaluation); the caller charges 1 evaluation per
+    yielded candidate and WITNESS-gates it. Two-part chains are INVENT_TEXT's concat anchors and are
+    not repeated here."""
+    goal = tuple(goal)
+    n = len(goal)
+    index = {e[1]: e for e in parts}
+    nodes = [0]
+
+    def assemble(pre, mid, suf):
+        seq = [e[0] for e in pre] + [mid[0]] + [e[0] for e in reversed(suf)]
+        tree = seq[-1]
+        for x in reversed(seq[:-1]):
+            tree = ["concat", x, tree]
+        return tree
+
+    def dfs(lo, hi, pre, suf, used, peels_left, seen):
+        key = (lo, hi, used, peels_left)
+        if key in seen or nodes[0] >= max_nodes:
+            return
+        seen.add(key)
+        nodes[0] += 1
+        seg = tuple(goal[r][lo[r]:hi[r]] for r in range(n))
+        if peels_left == 0:
+            e = index.get(seg)
+            if e is not None and (used or e[2] or not TEXT_CHAIN_LEARNED):
+                yield assemble(pre, e, suf)
+            return
+        for e in parts:
+            v = e[1]
+            if all(len(v[r]) < hi[r] - lo[r] and goal[r].startswith(v[r], lo[r]) for r in range(n)):
+                yield from dfs(tuple(lo[r] + len(v[r]) for r in range(n)), hi, pre + [e], suf,
+                               used or e[2], peels_left - 1, seen)
+            if all(len(v[r]) < hi[r] - lo[r] and goal[r].endswith(v[r], 0, hi[r]) for r in range(n)):
+                yield from dfs(lo, tuple(hi[r] - len(v[r]) for r in range(n)), pre, suf + [e],
+                               used or e[2], peels_left - 1, seen)
+            if nodes[0] >= max_nodes:
+                return
+
+    lo0, hi0 = tuple(0 for _ in goal), tuple(len(g) for g in goal)
+    emitted = set()
+    for peels in range(2, max_parts):
+        for tree in dfs(lo0, hi0, [], [], False, peels, set()):
+            k = repr(tree)
+            if k not in emitted:
+                emitted.add(k)
+                yield tree
+
+
 def enabled() -> bool:
     """NOMAD_INVENT: invented primitives in the field arm's block probe.
     Default on since the round-2 sealed judge passed (docs/INVENT.md)."""

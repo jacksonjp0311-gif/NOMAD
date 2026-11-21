@@ -1121,6 +1121,12 @@ def bank_scales(bank: list) -> list[tuple[int, list]]:
 SPLICE_PIECES = 4        # most pieces a string goal is cut into
 
 
+def _I_chain() -> bool:
+    """NOMAD_TEXT_CHAIN (nomad/invent.chain_enabled; docs/TEXT_CHAIN.md)."""
+    from . import invent as _I
+    return _I.chain_enabled()
+
+
 def splice_enabled() -> bool:
     """NOMAD_SPLICE: cut a string goal into learned blocks and pool values (docs/TEXT.md)."""
     return _flag("NOMAD_SPLICE", "off")
@@ -1468,6 +1474,10 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             hit = yield from text_anchors([z for z in ranked if all(type(x) is str for x in z[3])], table)
             if hit is not None:
                 return hit
+            if _I_chain():
+                hit = yield from text_chain(P, [z for z in ranked if all(type(x) is str for x in z[3])])
+                if hit is not None:
+                    return hit
         if inv is not None and invent_applies() and not invent_deferred(ranked):
             hit = yield from invent_phase(P, B, limit)
             if hit is not None:
@@ -1648,6 +1658,39 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             yield evals
         return None
 
+    def text_chain(P, learned):
+        """TEXT_CHAIN (docs/TEXT_CHAIN.md): concat chains of >= 3 parts by recursive prefix / suffix
+        peeling over computed values (probe pools, case / itos variants, bank and invented blocks; at
+        least one learned part). Peeling is a lookup (no evaluation); each assembled chain costs 1
+        evaluation and is WITNESS-gated; at most TEXT_CHAIN_N chains per task."""
+        nonlocal evals
+        from . import invent as _I
+        tried = istate.setdefault("chain_tried", set())
+        if len(tried) >= _I.TEXT_CHAIN_N:
+            return None
+        ops = opset_of(task)
+        pool_s, pool_i = [], []
+        for sz_ in sorted(P):
+            pool_s += [(tr, vs_) for tr, vs_, _f in P[sz_].get("str", [])]
+            pool_i += [(tr, vs_) for tr, vs_, _f in P[sz_].get("int", [])]
+        parts = _I.chain_parts(goal, pool_s, [(z[2], z[3]) for z in learned], pool_i, ops)
+        if _I.TEXT_CHAIN_LEARNED and not any(e[2] for e in parts):
+            return None
+        for tree in _I.text_chain(goal, parts):
+            k = json.dumps(tree)
+            if k in tried:
+                continue
+            if len(tried) >= _I.TEXT_CHAIN_N or evals >= istate.get("ilimit", max_eval):
+                return None
+            tried.add(k)
+            evals += 1     # the assembled chain is one candidate evaluation
+            yield evals
+            if stop_on(tree):
+                pinfo["port"] = "invent:text:chain"
+                return tree
+            yield evals
+        return None
+
     def invent_phase(P, B, limit):
         """INVENT (docs/INVENT.md), one capped phase after PORT/GROW and the
         atoms: (1) the field's invented blocks instantiated over the task's
@@ -1752,6 +1795,10 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             hit = yield from text_anchors(ri + [z for z in ranked if all(type(x) is str for x in z[3])], table)
             if hit is not None:
                 return hit
+            if _I_chain():
+                hit = yield from text_chain(P, ri + [z for z in ranked if all(type(x) is str for x in z[3])])
+                if hit is not None:
+                    return hit
         for g2, wrap, tag, derived in targets:
             cand = ri + (ranked if derived else [])
             if task.out != "int":
