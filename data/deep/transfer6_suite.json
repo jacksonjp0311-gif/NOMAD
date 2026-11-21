@@ -1,0 +1,6304 @@
+{
+ "budget": 10000,
+ "domains": [
+  "music",
+  "farm",
+  "warehouse"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 322,
+   "cold_reason": null,
+   "domain": "music",
+   "family": "m6_cables",
+   "formula": "cables: one per instrument plus one per player = plr ins + plr",
+   "inputs": [
+    "plr",
+    "ins"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "ins": 4,
+      "plr": 6
+     },
+     30
+    ],
+    [
+     {
+      "ins": 3,
+      "plr": 7
+     },
+     28
+    ],
+    [
+     {
+      "ins": 1,
+      "plr": 40
+     },
+     80
+    ],
+    [
+     {
+      "ins": 1,
+      "plr": 13
+     },
+     26
+    ],
+    [
+     {
+      "ins": 2,
+      "plr": 26
+     },
+     78
+    ],
+    [
+     {
+      "ins": 3,
+      "plr": 6
+     },
+     24
+    ],
+    [
+     {
+      "ins": 2,
+      "plr": 7
+     },
+     21
+    ],
+    [
+     {
+      "ins": 3,
+      "plr": 8
+     },
+     32
+    ],
+    [
+     {
+      "ins": 1,
+      "plr": 9
+     },
+     18
+    ],
+    [
+     {
+      "ins": 4,
+      "plr": 3
+     },
+     15
+    ],
+    [
+     {
+      "ins": 2,
+      "plr": 33
+     },
+     99
+    ]
+   ],
+   "task_id": "t-06",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "plr"
+     ],
+     [
+      "var",
+      "ins"
+     ]
+    ],
+    [
+     "var",
+     "plr"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3201,
+   "cold_reason": null,
+   "domain": "music",
+   "family": "m6_choir_ends",
+   "formula": "singers at the row ends plus the front row = 2 vrow + vps - 2",
+   "inputs": [
+    "vrow",
+    "vps"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "vps": 12,
+      "vrow": 17
+     },
+     44
+    ],
+    [
+     {
+      "vps": 24,
+      "vrow": 19
+     },
+     60
+    ],
+    [
+     {
+      "vps": 16,
+      "vrow": 18
+     },
+     50
+    ],
+    [
+     {
+      "vps": 9,
+      "vrow": 6
+     },
+     19
+    ],
+    [
+     {
+      "vps": 24,
+      "vrow": 3
+     },
+     28
+    ],
+    [
+     {
+      "vps": 14,
+      "vrow": 19
+     },
+     50
+    ],
+    [
+     {
+      "vps": 6,
+      "vrow": 4
+     },
+     12
+    ],
+    [
+     {
+      "vps": 29,
+      "vrow": 20
+     },
+     67
+    ],
+    [
+     {
+      "vps": 30,
+      "vrow": 12
+     },
+     52
+    ],
+    [
+     {
+      "vps": 30,
+      "vrow": 8
+     },
+     44
+    ],
+    [
+     {
+      "vps": 16,
+      "vrow": 11
+     },
+     36
+    ]
+   ],
+   "task_id": "t-11",
+   "tier": "easy",
+   "tree": [
+    "sub",
+    [
+     "add",
+     [
+      "add",
+      [
+       "var",
+       "vrow"
+      ],
+      [
+       "var",
+       "vrow"
+      ]
+     ],
+     [
+      "var",
+      "vps"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1968,
+   "cold_reason": null,
+   "domain": "music",
+   "family": "m6_tour_seats",
+   "formula": "seats sold with 2 guest seats a show = shw (tkt + 2)",
+   "inputs": [
+    "shw",
+    "tkt",
+    "vnu"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "shw": 16,
+      "tkt": 377,
+      "vnu": 2
+     },
+     6064
+    ],
+    [
+     {
+      "shw": 1,
+      "tkt": 414,
+      "vnu": 26
+     },
+     416
+    ],
+    [
+     {
+      "shw": 28,
+      "tkt": 466,
+      "vnu": 10
+     },
+     13104
+    ],
+    [
+     {
+      "shw": 27,
+      "tkt": 398,
+      "vnu": 44
+     },
+     10800
+    ],
+    [
+     {
+      "shw": 6,
+      "tkt": 60,
+      "vnu": 12
+     },
+     372
+    ],
+    [
+     {
+      "shw": 7,
+      "tkt": 412,
+      "vnu": 46
+     },
+     2898
+    ],
+    [
+     {
+      "shw": 28,
+      "tkt": 458,
+      "vnu": 19
+     },
+     12880
+    ],
+    [
+     {
+      "shw": 1,
+      "tkt": 60,
+      "vnu": 8
+     },
+     62
+    ],
+    [
+     {
+      "shw": 6,
+      "tkt": 79,
+      "vnu": 2
+     },
+     486
+    ],
+    [
+     {
+      "shw": 21,
+      "tkt": 91,
+      "vnu": 41
+     },
+     1953
+    ],
+    [
+     {
+      "shw": 17,
+      "tkt": 127,
+      "vnu": 35
+     },
+     2193
+    ]
+   ],
+   "task_id": "t-12",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "shw"
+    ],
+    [
+     "add",
+     [
+      "var",
+      "tkt"
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2094,
+   "cold_reason": null,
+   "domain": "music",
+   "family": "m6_tour_net",
+   "formula": "ticket units minus venue fees = shw tkt - shw vnu",
+   "inputs": [
+    "shw",
+    "tkt",
+    "vnu"
+   ],
+   "kind": "money",
+   "rows": [
+    [
+     {
+      "shw": 9,
+      "tkt": 152,
+      "vnu": 37
+     },
+     1035
+    ],
+    [
+     {
+      "shw": 20,
+      "tkt": 262,
+      "vnu": 2
+     },
+     5200
+    ],
+    [
+     {
+      "shw": 18,
+      "tkt": 344,
+      "vnu": 8
+     },
+     6048
+    ],
+    [
+     {
+      "shw": 18,
+      "tkt": 269,
+      "vnu": 1
+     },
+     4824
+    ],
+    [
+     {
+      "shw": 4,
+      "tkt": 206,
+      "vnu": 26
+     },
+     720
+    ],
+    [
+     {
+      "shw": 23,
+      "tkt": 381,
+      "vnu": 18
+     },
+     8349
+    ],
+    [
+     {
+      "shw": 12,
+      "tkt": 296,
+      "vnu": 9
+     },
+     3444
+    ],
+    [
+     {
+      "shw": 2,
+      "tkt": 176,
+      "vnu": 44
+     },
+     264
+    ],
+    [
+     {
+      "shw": 30,
+      "tkt": 139,
+      "vnu": 47
+     },
+     2760
+    ],
+    [
+     {
+      "shw": 21,
+      "tkt": 79,
+      "vnu": 41
+     },
+     798
+    ],
+    [
+     {
+      "shw": 27,
+      "tkt": 51,
+      "vnu": 35
+     },
+     432
+    ]
+   ],
+   "task_id": "t-13",
+   "tier": "easy",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "shw"
+     ],
+     [
+      "var",
+      "tkt"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "shw"
+     ],
+     [
+      "var",
+      "vnu"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 7488,
+   "cold_reason": null,
+   "domain": "farm",
+   "family": "f6_trays",
+   "formula": "trays for those cartons = ceil(ceil(egg / epc) / cpt)",
+   "inputs": [
+    "egg",
+    "epc",
+    "cpt"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "cpt": 6,
+      "egg": 407,
+      "epc": 11
+     },
+     7
+    ],
+    [
+     {
+      "cpt": 4,
+      "egg": 812,
+      "epc": 18
+     },
+     12
+    ],
+    [
+     {
+      "cpt": 2,
+      "egg": 2459,
+      "epc": 18
+     },
+     69
+    ],
+    [
+     {
+      "cpt": 8,
+      "egg": 2299,
+      "epc": 17
+     },
+     17
+    ],
+    [
+     {
+      "cpt": 12,
+      "egg": 1476,
+      "epc": 14
+     },
+     9
+    ],
+    [
+     {
+      "cpt": 5,
+      "egg": 959,
+      "epc": 9
+     },
+     22
+    ],
+    [
+     {
+      "cpt": 4,
+      "egg": 2992,
+      "epc": 12
+     },
+     63
+    ],
+    [
+     {
+      "cpt": 9,
+      "egg": 2014,
+      "epc": 29
+     },
+     8
+    ],
+    [
+     {
+      "cpt": 12,
+      "egg": 1146,
+      "epc": 27
+     },
+     4
+    ],
+    [
+     {
+      "cpt": 4,
+      "egg": 1558,
+      "epc": 12
+     },
+     33
+    ],
+    [
+     {
+      "cpt": 9,
+      "egg": 2686,
+      "epc": 13
+     },
+     23
+    ]
+   ],
+   "task_id": "t-27",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "egg"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "epc"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "epc"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "cpt"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "cpt"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2131,
+   "cold_reason": null,
+   "domain": "farm",
+   "family": "f6_full_trays",
+   "formula": "trays filled by full cartons = (egg // epc) // cpt",
+   "inputs": [
+    "egg",
+    "epc",
+    "cpt"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "cpt": 8,
+      "egg": 614,
+      "epc": 8
+     },
+     9
+    ],
+    [
+     {
+      "cpt": 9,
+      "egg": 74,
+      "epc": 14
+     },
+     0
+    ],
+    [
+     {
+      "cpt": 11,
+      "egg": 1999,
+      "epc": 22
+     },
+     8
+    ],
+    [
+     {
+      "cpt": 3,
+      "egg": 579,
+      "epc": 17
+     },
+     11
+    ],
+    [
+     {
+      "cpt": 6,
+      "egg": 360,
+      "epc": 23
+     },
+     2
+    ],
+    [
+     {
+      "cpt": 6,
+      "egg": 2076,
+      "epc": 11
+     },
+     31
+    ],
+    [
+     {
+      "cpt": 5,
+      "egg": 1062,
+      "epc": 17
+     },
+     12
+    ],
+    [
+     {
+      "cpt": 9,
+      "egg": 40,
+      "epc": 21
+     },
+     0
+    ],
+    [
+     {
+      "cpt": 12,
+      "egg": 1213,
+      "epc": 25
+     },
+     4
+    ],
+    [
+     {
+      "cpt": 6,
+      "egg": 719,
+      "epc": 8
+     },
+     14
+    ],
+    [
+     {
+      "cpt": 7,
+      "egg": 431,
+      "epc": 21
+     },
+     2
+    ]
+   ],
+   "task_id": "t-28",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "div",
+     [
+      "var",
+      "egg"
+     ],
+     [
+      "var",
+      "epc"
+     ]
+    ],
+    [
+     "var",
+     "cpt"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3963,
+   "cold_reason": null,
+   "domain": "farm",
+   "family": "f6_loose_cartons",
+   "formula": "full cartons outside full trays = (egg // epc) mod cpt",
+   "inputs": [
+    "egg",
+    "epc",
+    "cpt"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "cpt": 7,
+      "egg": 1955,
+      "epc": 20
+     },
+     6
+    ],
+    [
+     {
+      "cpt": 2,
+      "egg": 2971,
+      "epc": 11
+     },
+     0
+    ],
+    [
+     {
+      "cpt": 12,
+      "egg": 129,
+      "epc": 7
+     },
+     6
+    ],
+    [
+     {
+      "cpt": 6,
+      "egg": 1330,
+      "epc": 26
+     },
+     3
+    ],
+    [
+     {
+      "cpt": 3,
+      "egg": 1238,
+      "epc": 29
+     },
+     0
+    ],
+    [
+     {
+      "cpt": 10,
+      "egg": 2439,
+      "epc": 23
+     },
+     6
+    ],
+    [
+     {
+      "cpt": 2,
+      "egg": 1839,
+      "epc": 22
+     },
+     1
+    ],
+    [
+     {
+      "cpt": 4,
+      "egg": 789,
+      "epc": 9
+     },
+     3
+    ],
+    [
+     {
+      "cpt": 12,
+      "egg": 882,
+      "epc": 13
+     },
+     7
+    ],
+    [
+     {
+      "cpt": 11,
+      "egg": 2127,
+      "epc": 17
+     },
+     4
+    ],
+    [
+     {
+      "cpt": 11,
+      "egg": 2205,
+      "epc": 23
+     },
+     7
+    ]
+   ],
+   "task_id": "t-29",
+   "tier": "easy",
+   "tree": [
+    "mod",
+    [
+     "div",
+     [
+      "var",
+      "egg"
+     ],
+     [
+      "var",
+      "epc"
+     ]
+    ],
+    [
+     "var",
+     "cpt"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2998,
+   "cold_reason": null,
+   "domain": "farm",
+   "family": "f6_loose_eggs",
+   "formula": "eggs left after full trays = egg - epc cpt ((egg // epc) // cpt)",
+   "inputs": [
+    "egg",
+    "epc",
+    "cpt"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "cpt": 9,
+      "egg": 548,
+      "epc": 7
+     },
+     44
+    ],
+    [
+     {
+      "cpt": 11,
+      "egg": 2171,
+      "epc": 26
+     },
+     169
+    ],
+    [
+     {
+      "cpt": 6,
+      "egg": 1484,
+      "epc": 28
+     },
+     140
+    ],
+    [
+     {
+      "cpt": 11,
+      "egg": 188,
+      "epc": 10
+     },
+     78
+    ],
+    [
+     {
+      "cpt": 4,
+      "egg": 1622,
+      "epc": 29
+     },
+     114
+    ],
+    [
+     {
+      "cpt": 6,
+      "egg": 159,
+      "epc": 22
+     },
+     27
+    ],
+    [
+     {
+      "cpt": 10,
+      "egg": 2841,
+      "epc": 13
+     },
+     111
+    ],
+    [
+     {
+      "cpt": 3,
+      "egg": 851,
+      "epc": 15
+     },
+     41
+    ],
+    [
+     {
+      "cpt": 3,
+      "egg": 1743,
+      "epc": 28
+     },
+     63
+    ],
+    [
+     {
+      "cpt": 6,
+      "egg": 349,
+      "epc": 28
+     },
+     13
+    ],
+    [
+     {
+      "cpt": 11,
+      "egg": 1583,
+      "epc": 16
+     },
+     175
+    ]
+   ],
+   "task_id": "t-30",
+   "tier": "easy",
+   "tree": [
+    "sub",
+    [
+     "var",
+     "egg"
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "epc"
+      ],
+      [
+       "var",
+       "cpt"
+      ]
+     ],
+     [
+      "div",
+      [
+       "div",
+       [
+        "var",
+        "egg"
+       ],
+       [
+        "var",
+        "epc"
+       ]
+      ],
+      [
+       "var",
+       "cpt"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 321,
+   "cold_reason": null,
+   "domain": "warehouse",
+   "family": "w6_boxes_needed",
+   "formula": "boxes for every item = ceil(itm / ipb)",
+   "inputs": [
+    "itm",
+    "ipb",
+    "bpp"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bpp": 11,
+      "ipb": 23,
+      "itm": 649
+     },
+     29
+    ],
+    [
+     {
+      "bpp": 6,
+      "ipb": 13,
+      "itm": 698
+     },
+     54
+    ],
+    [
+     {
+      "bpp": 15,
+      "ipb": 38,
+      "itm": 2148
+     },
+     57
+    ],
+    [
+     {
+      "bpp": 13,
+      "ipb": 28,
+      "itm": 1350
+     },
+     49
+    ],
+    [
+     {
+      "bpp": 23,
+      "ipb": 44,
+      "itm": 2469
+     },
+     57
+    ],
+    [
+     {
+      "bpp": 19,
+      "ipb": 23,
+      "itm": 3829
+     },
+     167
+    ],
+    [
+     {
+      "bpp": 6,
+      "ipb": 4,
+      "itm": 2318
+     },
+     580
+    ],
+    [
+     {
+      "bpp": 24,
+      "ipb": 22,
+      "itm": 2302
+     },
+     105
+    ],
+    [
+     {
+      "bpp": 38,
+      "ipb": 16,
+      "itm": 558
+     },
+     35
+    ],
+    [
+     {
+      "bpp": 14,
+      "ipb": 14,
+      "itm": 4613
+     },
+     330
+    ],
+    [
+     {
+      "bpp": 22,
+      "ipb": 30,
+      "itm": 4539
+     },
+     152
+    ]
+   ],
+   "task_id": "t-35",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "itm"
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "ipb"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "ipb"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 8390,
+   "cold_reason": null,
+   "domain": "warehouse",
+   "family": "w6_pallets",
+   "formula": "pallets for every box = ceil(ceil(itm / ipb) / bpp)",
+   "inputs": [
+    "itm",
+    "ipb",
+    "bpp"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bpp": 38,
+      "ipb": 10,
+      "itm": 3100
+     },
+     9
+    ],
+    [
+     {
+      "bpp": 36,
+      "ipb": 46,
+      "itm": 4044
+     },
+     3
+    ],
+    [
+     {
+      "bpp": 40,
+      "ipb": 15,
+      "itm": 3412
+     },
+     6
+    ],
+    [
+     {
+      "bpp": 30,
+      "ipb": 46,
+      "itm": 4711
+     },
+     4
+    ],
+    [
+     {
+      "bpp": 2,
+      "ipb": 38,
+      "itm": 4438
+     },
+     59
+    ],
+    [
+     {
+      "bpp": 5,
+      "ipb": 39,
+      "itm": 2931
+     },
+     16
+    ],
+    [
+     {
+      "bpp": 38,
+      "ipb": 18,
+      "itm": 4091
+     },
+     6
+    ],
+    [
+     {
+      "bpp": 15,
+      "ipb": 36,
+      "itm": 615
+     },
+     2
+    ],
+    [
+     {
+      "bpp": 21,
+      "ipb": 17,
+      "itm": 3238
+     },
+     10
+    ],
+    [
+     {
+      "bpp": 26,
+      "ipb": 36,
+      "itm": 1656
+     },
+     2
+    ],
+    [
+     {
+      "bpp": 30,
+      "ipb": 11,
+      "itm": 1633
+     },
+     5
+    ]
+   ],
+   "task_id": "t-36",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "itm"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "ipb"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "ipb"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "bpp"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "bpp"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2087,
+   "cold_reason": null,
+   "domain": "warehouse",
+   "family": "w6_full_pallets",
+   "formula": "pallets of full boxes = (itm // ipb) // bpp",
+   "inputs": [
+    "itm",
+    "ipb",
+    "bpp"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bpp": 15,
+      "ipb": 25,
+      "itm": 1617
+     },
+     4
+    ],
+    [
+     {
+      "bpp": 34,
+      "ipb": 34,
+      "itm": 2273
+     },
+     1
+    ],
+    [
+     {
+      "bpp": 4,
+      "ipb": 16,
+      "itm": 4041
+     },
+     63
+    ],
+    [
+     {
+      "bpp": 16,
+      "ipb": 17,
+      "itm": 1587
+     },
+     5
+    ],
+    [
+     {
+      "bpp": 5,
+      "ipb": 13,
+      "itm": 1102
+     },
+     16
+    ],
+    [
+     {
+      "bpp": 27,
+      "ipb": 27,
+      "itm": 3141
+     },
+     4
+    ],
+    [
+     {
+      "bpp": 31,
+      "ipb": 33,
+      "itm": 4922
+     },
+     4
+    ],
+    [
+     {
+      "bpp": 32,
+      "ipb": 25,
+      "itm": 952
+     },
+     1
+    ],
+    [
+     {
+      "bpp": 5,
+      "ipb": 48,
+      "itm": 1323
+     },
+     5
+    ],
+    [
+     {
+      "bpp": 10,
+      "ipb": 41,
+      "itm": 1488
+     },
+     3
+    ],
+    [
+     {
+      "bpp": 4,
+      "ipb": 34,
+      "itm": 2579
+     },
+     18
+    ]
+   ],
+   "task_id": "t-37",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "div",
+     [
+      "var",
+      "itm"
+     ],
+     [
+      "var",
+      "ipb"
+     ]
+    ],
+    [
+     "var",
+     "bpp"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 808,
+   "cold_reason": null,
+   "domain": "warehouse",
+   "family": "w6_box_gap",
+   "formula": "items to add to fill the last box = ipb ceil(itm / ipb) - itm",
+   "inputs": [
+    "itm",
+    "ipb",
+    "bpp"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bpp": 4,
+      "ipb": 39,
+      "itm": 2855
+     },
+     31
+    ],
+    [
+     {
+      "bpp": 28,
+      "ipb": 32,
+      "itm": 3378
+     },
+     14
+    ],
+    [
+     {
+      "bpp": 24,
+      "ipb": 48,
+      "itm": 3839
+     },
+     1
+    ],
+    [
+     {
+      "bpp": 39,
+      "ipb": 4,
+      "itm": 1166
+     },
+     2
+    ],
+    [
+     {
+      "bpp": 19,
+      "ipb": 17,
+      "itm": 3011
+     },
+     15
+    ],
+    [
+     {
+      "bpp": 27,
+      "ipb": 30,
+      "itm": 3451
+     },
+     29
+    ],
+    [
+     {
+      "bpp": 2,
+      "ipb": 9,
+      "itm": 329
+     },
+     4
+    ],
+    [
+     {
+      "bpp": 24,
+      "ipb": 39,
+      "itm": 1538
+     },
+     22
+    ],
+    [
+     {
+      "bpp": 37,
+      "ipb": 27,
+      "itm": 4550
+     },
+     13
+    ],
+    [
+     {
+      "bpp": 16,
+      "ipb": 35,
+      "itm": 353
+     },
+     32
+    ],
+    [
+     {
+      "bpp": 16,
+      "ipb": 33,
+      "itm": 863
+     },
+     28
+    ]
+   ],
+   "task_id": "t-38",
+   "tier": "easy",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "ipb"
+     ],
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "itm"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "ipb"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "ipb"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "itm"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1053,
+   "cold_reason": null,
+   "domain": "warehouse",
+   "family": "w6_sockets",
+   "formula": "sockets: 2 per desk and 1 per chair = 2 dsk + dsk chr",
+   "inputs": [
+    "dsk",
+    "chr"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "chr": 3,
+      "dsk": 29
+     },
+     145
+    ],
+    [
+     {
+      "chr": 3,
+      "dsk": 7
+     },
+     35
+    ],
+    [
+     {
+      "chr": 1,
+      "dsk": 25
+     },
+     75
+    ],
+    [
+     {
+      "chr": 4,
+      "dsk": 4
+     },
+     24
+    ],
+    [
+     {
+      "chr": 4,
+      "dsk": 34
+     },
+     204
+    ],
+    [
+     {
+      "chr": 2,
+      "dsk": 33
+     },
+     132
+    ],
+    [
+     {
+      "chr": 1,
+      "dsk": 77
+     },
+     231
+    ],
+    [
+     {
+      "chr": 1,
+      "dsk": 51
+     },
+     153
+    ],
+    [
+     {
+      "chr": 2,
+      "dsk": 26
+     },
+     104
+    ],
+    [
+     {
+      "chr": 2,
+      "dsk": 69
+     },
+     276
+    ],
+    [
+     {
+      "chr": 1,
+      "dsk": 53
+     },
+     159
+    ]
+   ],
+   "task_id": "t-40",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "add",
+     [
+      "var",
+      "dsk"
+     ],
+     [
+      "var",
+      "dsk"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "dsk"
+     ],
+     [
+      "var",
+      "chr"
+     ]
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "music",
+   "family": "m6_set_minutes",
+   "formula": "minutes of music plus a 2-minute gap between songs = sng mnu + 2(sng - 1)",
+   "inputs": [
+    "sng",
+    "mnu"
+   ],
+   "kind": "time",
+   "rows": [
+    [
+     {
+      "mnu": 2,
+      "sng": 23
+     },
+     90
+    ],
+    [
+     {
+      "mnu": 2,
+      "sng": 24
+     },
+     94
+    ],
+    [
+     {
+      "mnu": 9,
+      "sng": 19
+     },
+     207
+    ],
+    [
+     {
+      "mnu": 4,
+      "sng": 26
+     },
+     154
+    ],
+    [
+     {
+      "mnu": 8,
+      "sng": 24
+     },
+     238
+    ],
+    [
+     {
+      "mnu": 4,
+      "sng": 9
+     },
+     52
+    ],
+    [
+     {
+      "mnu": 9,
+      "sng": 30
+     },
+     328
+    ],
+    [
+     {
+      "mnu": 9,
+      "sng": 3
+     },
+     31
+    ],
+    [
+     {
+      "mnu": 6,
+      "sng": 25
+     },
+     198
+    ],
+    [
+     {
+      "mnu": 3,
+      "sng": 13
+     },
+     63
+    ],
+    [
+     {
+      "mnu": 8,
+      "sng": 29
+     },
+     288
+    ]
+   ],
+   "task_id": "t-00",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "sng"
+     ],
+     [
+      "var",
+      "mnu"
+     ]
+    ],
+    [
+     "add",
+     [
+      "sub",
+      [
+       "var",
+       "sng"
+      ],
+      [
+       "const",
+       1
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "sng"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "music",
+   "family": "m6_setlist_orders",
+   "formula": "opener-closer choices from sng songs, mnu nights = mnu sng (sng - 1)",
+   "inputs": [
+    "sng",
+    "mnu"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "mnu": 8,
+      "sng": 28
+     },
+     6048
+    ],
+    [
+     {
+      "mnu": 9,
+      "sng": 21
+     },
+     3780
+    ],
+    [
+     {
+      "mnu": 2,
+      "sng": 21
+     },
+     840
+    ],
+    [
+     {
+      "mnu": 2,
+      "sng": 16
+     },
+     480
+    ],
+    [
+     {
+      "mnu": 6,
+      "sng": 21
+     },
+     2520
+    ],
+    [
+     {
+      "mnu": 8,
+      "sng": 15
+     },
+     1680
+    ],
+    [
+     {
+      "mnu": 5,
+      "sng": 18
+     },
+     1530
+    ],
+    [
+     {
+      "mnu": 2,
+      "sng": 5
+     },
+     40
+    ],
+    [
+     {
+      "mnu": 8,
+      "sng": 22
+     },
+     3696
+    ],
+    [
+     {
+      "mnu": 2,
+      "sng": 26
+     },
+     1300
+    ],
+    [
+     {
+      "mnu": 9,
+      "sng": 27
+     },
+     6318
+    ]
+   ],
+   "task_id": "t-01",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "mnu"
+     ],
+     [
+      "var",
+      "sng"
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "sng"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "music",
+   "family": "m6_medley_pairs",
+   "formula": "two-song medleys from sng songs, mnu shows = mnu sng (sng - 1)/2",
+   "inputs": [
+    "sng",
+    "mnu"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "mnu": 9,
+      "sng": 22
+     },
+     2079
+    ],
+    [
+     {
+      "mnu": 2,
+      "sng": 4
+     },
+     12
+    ],
+    [
+     {
+      "mnu": 9,
+      "sng": 18
+     },
+     1377
+    ],
+    [
+     {
+      "mnu": 7,
+      "sng": 10
+     },
+     315
+    ],
+    [
+     {
+      "mnu": 7,
+      "sng": 5
+     },
+     70
+    ],
+    [
+     {
+      "mnu": 9,
+      "sng": 29
+     },
+     3654
+    ],
+    [
+     {
+      "mnu": 2,
+      "sng": 14
+     },
+     182
+    ],
+    [
+     {
+      "mnu": 5,
+      "sng": 19
+     },
+     855
+    ],
+    [
+     {
+      "mnu": 6,
+      "sng": 8
+     },
+     168
+    ],
+    [
+     {
+      "mnu": 9,
+      "sng": 7
+     },
+     189
+    ],
+    [
+     {
+      "mnu": 2,
+      "sng": 27
+     },
+     702
+    ]
+   ],
+   "task_id": "t-02",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "mnu"
+      ],
+      [
+       "var",
+       "sng"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "sng"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "music",
+   "family": "m6_gig_length",
+   "formula": "two sets of sng songs and one break = 2 sng mnu + brk",
+   "inputs": [
+    "sng",
+    "mnu",
+    "brk"
+   ],
+   "kind": "time",
+   "rows": [
+    [
+     {
+      "brk": 7,
+      "mnu": 3,
+      "sng": 2
+     },
+     19
+    ],
+    [
+     {
+      "brk": 20,
+      "mnu": 2,
+      "sng": 18
+     },
+     92
+    ],
+    [
+     {
+      "brk": 19,
+      "mnu": 2,
+      "sng": 8
+     },
+     51
+    ],
+    [
+     {
+      "brk": 11,
+      "mnu": 8,
+      "sng": 5
+     },
+     91
+    ],
+    [
+     {
+      "brk": 3,
+      "mnu": 3,
+      "sng": 10
+     },
+     63
+    ],
+    [
+     {
+      "brk": 3,
+      "mnu": 6,
+      "sng": 11
+     },
+     135
+    ],
+    [
+     {
+      "brk": 2,
+      "mnu": 8,
+      "sng": 24
+     },
+     386
+    ],
+    [
+     {
+      "brk": 7,
+      "mnu": 2,
+      "sng": 2
+     },
+     15
+    ],
+    [
+     {
+      "brk": 1,
+      "mnu": 5,
+      "sng": 26
+     },
+     261
+    ],
+    [
+     {
+      "brk": 2,
+      "mnu": 8,
+      "sng": 2
+     },
+     34
+    ],
+    [
+     {
+      "brk": 20,
+      "mnu": 9,
+      "sng": 25
+     },
+     470
+    ]
+   ],
+   "task_id": "t-03",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "sng"
+      ],
+      [
+       "var",
+       "sng"
+      ]
+     ],
+     [
+      "var",
+      "mnu"
+     ]
+    ],
+    [
+     "var",
+     "brk"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "music",
+   "family": "m6_gig_breaks",
+   "formula": "a break after every song but the last = sng mnu + (sng - 1) brk",
+   "inputs": [
+    "sng",
+    "mnu",
+    "brk"
+   ],
+   "kind": "time",
+   "rows": [
+    [
+     {
+      "brk": 17,
+      "mnu": 6,
+      "sng": 16
+     },
+     351
+    ],
+    [
+     {
+      "brk": 18,
+      "mnu": 7,
+      "sng": 6
+     },
+     132
+    ],
+    [
+     {
+      "brk": 15,
+      "mnu": 8,
+      "sng": 13
+     },
+     284
+    ],
+    [
+     {
+      "brk": 6,
+      "mnu": 5,
+      "sng": 13
+     },
+     137
+    ],
+    [
+     {
+      "brk": 6,
+      "mnu": 5,
+      "sng": 15
+     },
+     159
+    ],
+    [
+     {
+      "brk": 6,
+      "mnu": 7,
+      "sng": 17
+     },
+     215
+    ],
+    [
+     {
+      "brk": 10,
+      "mnu": 3,
+      "sng": 28
+     },
+     354
+    ],
+    [
+     {
+      "brk": 2,
+      "mnu": 6,
+      "sng": 22
+     },
+     174
+    ],
+    [
+     {
+      "brk": 12,
+      "mnu": 4,
+      "sng": 15
+     },
+     228
+    ],
+    [
+     {
+      "brk": 6,
+      "mnu": 2,
+      "sng": 3
+     },
+     18
+    ],
+    [
+     {
+      "brk": 16,
+      "mnu": 2,
+      "sng": 2
+     },
+     20
+    ]
+   ],
+   "task_id": "t-04",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "sng"
+     ],
+     [
+      "var",
+      "mnu"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "sng"
+      ],
+      [
+       "const",
+       1
+      ]
+     ],
+     [
+      "var",
+      "brk"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 631,
+   "cold_reason": null,
+   "domain": "music",
+   "family": "m6_hour_blocks",
+   "formula": "hour-long slots the gig needs = ceil((sng mnu + brk) / 60)",
+   "inputs": [
+    "sng",
+    "mnu",
+    "brk"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "brk": 11,
+      "mnu": 2,
+      "sng": 9
+     },
+     1
+    ],
+    [
+     {
+      "brk": 14,
+      "mnu": 3,
+      "sng": 7
+     },
+     1
+    ],
+    [
+     {
+      "brk": 20,
+      "mnu": 4,
+      "sng": 20
+     },
+     2
+    ],
+    [
+     {
+      "brk": 3,
+      "mnu": 6,
+      "sng": 2
+     },
+     1
+    ],
+    [
+     {
+      "brk": 14,
+      "mnu": 7,
+      "sng": 2
+     },
+     1
+    ],
+    [
+     {
+      "brk": 11,
+      "mnu": 5,
+      "sng": 26
+     },
+     3
+    ],
+    [
+     {
+      "brk": 4,
+      "mnu": 2,
+      "sng": 17
+     },
+     1
+    ],
+    [
+     {
+      "brk": 17,
+      "mnu": 8,
+      "sng": 16
+     },
+     3
+    ],
+    [
+     {
+      "brk": 7,
+      "mnu": 6,
+      "sng": 12
+     },
+     2
+    ],
+    [
+     {
+      "brk": 10,
+      "mnu": 7,
+      "sng": 27
+     },
+     4
+    ],
+    [
+     {
+      "brk": 9,
+      "mnu": 5,
+      "sng": 22
+     },
+     2
+    ]
+   ],
+   "task_id": "t-05",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "sng"
+       ],
+       [
+        "var",
+        "mnu"
+       ]
+      ],
+      [
+       "var",
+       "brk"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "mul",
+        [
+         "const",
+         3
+        ],
+        [
+         "add",
+         [
+          "const",
+          2
+         ],
+         [
+          "const",
+          2
+         ]
+        ]
+       ],
+       [
+        "add",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         3
+        ]
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "const",
+       3
+      ],
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "music",
+   "family": "m6_duets",
+   "formula": "duets between players of different instruments, ins each = ins^2 plr(plr-1)/2",
+   "inputs": [
+    "plr",
+    "ins"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "ins": 2,
+      "plr": 20
+     },
+     760
+    ],
+    [
+     {
+      "ins": 2,
+      "plr": 38
+     },
+     2812
+    ],
+    [
+     {
+      "ins": 3,
+      "plr": 17
+     },
+     1224
+    ],
+    [
+     {
+      "ins": 2,
+      "plr": 12
+     },
+     264
+    ],
+    [
+     {
+      "ins": 2,
+      "plr": 29
+     },
+     1624
+    ],
+    [
+     {
+      "ins": 3,
+      "plr": 10
+     },
+     405
+    ],
+    [
+     {
+      "ins": 3,
+      "plr": 4
+     },
+     54
+    ],
+    [
+     {
+      "ins": 3,
+      "plr": 13
+     },
+     702
+    ],
+    [
+     {
+      "ins": 4,
+      "plr": 15
+     },
+     1680
+    ],
+    [
+     {
+      "ins": 4,
+      "plr": 11
+     },
+     880
+    ],
+    [
+     {
+      "ins": 1,
+      "plr": 36
+     },
+     630
+    ]
+   ],
+   "task_id": "t-07",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "ins"
+       ],
+       [
+        "var",
+        "ins"
+       ]
+      ],
+      [
+       "var",
+       "plr"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "plr"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "music",
+   "family": "m6_stands",
+   "formula": "music stands, one per two players rounded up, per instrument = ins ceil(plr / 2)",
+   "inputs": [
+    "plr",
+    "ins"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "ins": 4,
+      "plr": 24
+     },
+     48
+    ],
+    [
+     {
+      "ins": 2,
+      "plr": 40
+     },
+     40
+    ],
+    [
+     {
+      "ins": 2,
+      "plr": 2
+     },
+     2
+    ],
+    [
+     {
+      "ins": 3,
+      "plr": 31
+     },
+     48
+    ],
+    [
+     {
+      "ins": 2,
+      "plr": 39
+     },
+     40
+    ],
+    [
+     {
+      "ins": 4,
+      "plr": 28
+     },
+     56
+    ],
+    [
+     {
+      "ins": 1,
+      "plr": 19
+     },
+     10
+    ],
+    [
+     {
+      "ins": 3,
+      "plr": 34
+     },
+     51
+    ],
+    [
+     {
+      "ins": 1,
+      "plr": 2
+     },
+     1
+    ],
+    [
+     {
+      "ins": 3,
+      "plr": 33
+     },
+     51
+    ],
+    [
+     {
+      "ins": 2,
+      "plr": 36
+     },
+     36
+    ]
+   ],
+   "task_id": "t-08",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "ins"
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "plr"
+      ],
+      [
+       "sub",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "music",
+   "family": "m6_choir_size",
+   "formula": "vrow rows, vps in front, 2 more each row = vrow vps + vrow(vrow-1)",
+   "inputs": [
+    "vrow",
+    "vps"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "vps": 22,
+      "vrow": 2
+     },
+     46
+    ],
+    [
+     {
+      "vps": 13,
+      "vrow": 6
+     },
+     108
+    ],
+    [
+     {
+      "vps": 8,
+      "vrow": 16
+     },
+     368
+    ],
+    [
+     {
+      "vps": 16,
+      "vrow": 20
+     },
+     700
+    ],
+    [
+     {
+      "vps": 7,
+      "vrow": 20
+     },
+     520
+    ],
+    [
+     {
+      "vps": 4,
+      "vrow": 6
+     },
+     54
+    ],
+    [
+     {
+      "vps": 29,
+      "vrow": 13
+     },
+     533
+    ],
+    [
+     {
+      "vps": 13,
+      "vrow": 3
+     },
+     45
+    ],
+    [
+     {
+      "vps": 22,
+      "vrow": 12
+     },
+     396
+    ],
+    [
+     {
+      "vps": 17,
+      "vrow": 10
+     },
+     260
+    ],
+    [
+     {
+      "vps": 18,
+      "vrow": 3
+     },
+     60
+    ]
+   ],
+   "task_id": "t-09",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "vrow"
+     ],
+     [
+      "var",
+      "vps"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "vrow"
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "vrow"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "music",
+   "family": "m6_choir_risers",
+   "formula": "riser steps: row k needs k steps = vps vrow(vrow+1)/2",
+   "inputs": [
+    "vrow",
+    "vps"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "vps": 13,
+      "vrow": 3
+     },
+     78
+    ],
+    [
+     {
+      "vps": 26,
+      "vrow": 7
+     },
+     728
+    ],
+    [
+     {
+      "vps": 17,
+      "vrow": 1
+     },
+     17
+    ],
+    [
+     {
+      "vps": 27,
+      "vrow": 8
+     },
+     972
+    ],
+    [
+     {
+      "vps": 10,
+      "vrow": 20
+     },
+     2100
+    ],
+    [
+     {
+      "vps": 5,
+      "vrow": 18
+     },
+     855
+    ],
+    [
+     {
+      "vps": 6,
+      "vrow": 10
+     },
+     330
+    ],
+    [
+     {
+      "vps": 9,
+      "vrow": 6
+     },
+     189
+    ],
+    [
+     {
+      "vps": 21,
+      "vrow": 2
+     },
+     63
+    ],
+    [
+     {
+      "vps": 25,
+      "vrow": 17
+     },
+     3825
+    ],
+    [
+     {
+      "vps": 19,
+      "vrow": 4
+     },
+     190
+    ]
+   ],
+   "task_id": "t-10",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "vps"
+      ],
+      [
+       "var",
+       "vrow"
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "vrow"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "music",
+   "family": "m6_tour_split",
+   "formula": "net per show split 3 ways = (tkt - vnu) // 3, over shw shows",
+   "inputs": [
+    "shw",
+    "tkt",
+    "vnu"
+   ],
+   "kind": "money",
+   "rows": [
+    [
+     {
+      "shw": 28,
+      "tkt": 355,
+      "vnu": 19
+     },
+     3136
+    ],
+    [
+     {
+      "shw": 14,
+      "tkt": 116,
+      "vnu": 48
+     },
+     308
+    ],
+    [
+     {
+      "shw": 25,
+      "tkt": 302,
+      "vnu": 27
+     },
+     2275
+    ],
+    [
+     {
+      "shw": 7,
+      "tkt": 366,
+      "vnu": 41
+     },
+     756
+    ],
+    [
+     {
+      "shw": 24,
+      "tkt": 113,
+      "vnu": 13
+     },
+     792
+    ],
+    [
+     {
+      "shw": 15,
+      "tkt": 67,
+      "vnu": 38
+     },
+     135
+    ],
+    [
+     {
+      "shw": 17,
+      "tkt": 102,
+      "vnu": 33
+     },
+     391
+    ],
+    [
+     {
+      "shw": 10,
+      "tkt": 75,
+      "vnu": 2
+     },
+     240
+    ],
+    [
+     {
+      "shw": 18,
+      "tkt": 107,
+      "vnu": 9
+     },
+     576
+    ],
+    [
+     {
+      "shw": 20,
+      "tkt": 231,
+      "vnu": 6
+     },
+     1500
+    ],
+    [
+     {
+      "shw": 10,
+      "tkt": 431,
+      "vnu": 2
+     },
+     1430
+    ]
+   ],
+   "task_id": "t-14",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "shw"
+    ],
+    [
+     "div",
+     [
+      "sub",
+      [
+       "var",
+       "tkt"
+      ],
+      [
+       "var",
+       "vnu"
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "f6_legs",
+   "formula": "legs = 4 cow + 2 hen",
+   "inputs": [
+    "cow",
+    "hen"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cow": 35,
+      "hen": 179
+     },
+     498
+    ],
+    [
+     {
+      "cow": 28,
+      "hen": 197
+     },
+     506
+    ],
+    [
+     {
+      "cow": 28,
+      "hen": 20
+     },
+     152
+    ],
+    [
+     {
+      "cow": 51,
+      "hen": 165
+     },
+     534
+    ],
+    [
+     {
+      "cow": 15,
+      "hen": 51
+     },
+     162
+    ],
+    [
+     {
+      "cow": 11,
+      "hen": 79
+     },
+     202
+    ],
+    [
+     {
+      "cow": 38,
+      "hen": 18
+     },
+     188
+    ],
+    [
+     {
+      "cow": 31,
+      "hen": 158
+     },
+     440
+    ],
+    [
+     {
+      "cow": 2,
+      "hen": 155
+     },
+     318
+    ],
+    [
+     {
+      "cow": 1,
+      "hen": 66
+     },
+     136
+    ],
+    [
+     {
+      "cow": 35,
+      "hen": 76
+     },
+     292
+    ]
+   ],
+   "task_id": "t-15",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "var",
+      "cow"
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "hen"
+     ],
+     [
+      "var",
+      "hen"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "f6_heads_legs",
+   "formula": "heads plus legs = 5 cow + 3 hen",
+   "inputs": [
+    "cow",
+    "hen"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cow": 1,
+      "hen": 188
+     },
+     569
+    ],
+    [
+     {
+      "cow": 27,
+      "hen": 106
+     },
+     453
+    ],
+    [
+     {
+      "cow": 12,
+      "hen": 190
+     },
+     630
+    ],
+    [
+     {
+      "cow": 35,
+      "hen": 47
+     },
+     316
+    ],
+    [
+     {
+      "cow": 40,
+      "hen": 56
+     },
+     368
+    ],
+    [
+     {
+      "cow": 41,
+      "hen": 126
+     },
+     583
+    ],
+    [
+     {
+      "cow": 40,
+      "hen": 70
+     },
+     410
+    ],
+    [
+     {
+      "cow": 34,
+      "hen": 115
+     },
+     515
+    ],
+    [
+     {
+      "cow": 40,
+      "hen": 54
+     },
+     362
+    ],
+    [
+     {
+      "cow": 31,
+      "hen": 184
+     },
+     707
+    ],
+    [
+     {
+      "cow": 57,
+      "hen": 79
+     },
+     522
+    ]
+   ],
+   "task_id": "t-16",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "var",
+      "cow"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      3
+     ],
+     [
+      "var",
+      "hen"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "f6_feed_buckets",
+   "formula": "buckets: 3 per cow, 1 per 10 hens rounded up = 3 cow + ceil(hen / 10)",
+   "inputs": [
+    "cow",
+    "hen"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cow": 33,
+      "hen": 176
+     },
+     117
+    ],
+    [
+     {
+      "cow": 14,
+      "hen": 129
+     },
+     55
+    ],
+    [
+     {
+      "cow": 0,
+      "hen": 1
+     },
+     1
+    ],
+    [
+     {
+      "cow": 15,
+      "hen": 64
+     },
+     52
+    ],
+    [
+     {
+      "cow": 38,
+      "hen": 83
+     },
+     123
+    ],
+    [
+     {
+      "cow": 55,
+      "hen": 107
+     },
+     176
+    ],
+    [
+     {
+      "cow": 44,
+      "hen": 93
+     },
+     142
+    ],
+    [
+     {
+      "cow": 32,
+      "hen": 89
+     },
+     105
+    ],
+    [
+     {
+      "cow": 14,
+      "hen": 171
+     },
+     60
+    ],
+    [
+     {
+      "cow": 38,
+      "hen": 89
+     },
+     123
+    ],
+    [
+     {
+      "cow": 46,
+      "hen": 35
+     },
+     142
+    ]
+   ],
+   "task_id": "t-17",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "const",
+      3
+     ],
+     [
+      "var",
+      "cow"
+     ]
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "hen"
+      ],
+      [
+       "sub",
+       [
+        "mul",
+        [
+         "const",
+         2
+        ],
+        [
+         "add",
+         [
+          "const",
+          2
+         ],
+         [
+          "const",
+          3
+         ]
+        ]
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "f6_pairs",
+   "formula": "cow-hen pairs plus cow pairs = cow hen + cow(cow-1)/2",
+   "inputs": [
+    "cow",
+    "hen"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cow": 34,
+      "hen": 132
+     },
+     5049
+    ],
+    [
+     {
+      "cow": 37,
+      "hen": 68
+     },
+     3182
+    ],
+    [
+     {
+      "cow": 28,
+      "hen": 86
+     },
+     2786
+    ],
+    [
+     {
+      "cow": 47,
+      "hen": 175
+     },
+     9306
+    ],
+    [
+     {
+      "cow": 37,
+      "hen": 119
+     },
+     5069
+    ],
+    [
+     {
+      "cow": 34,
+      "hen": 151
+     },
+     5695
+    ],
+    [
+     {
+      "cow": 1,
+      "hen": 3
+     },
+     3
+    ],
+    [
+     {
+      "cow": 37,
+      "hen": 175
+     },
+     7141
+    ],
+    [
+     {
+      "cow": 4,
+      "hen": 109
+     },
+     442
+    ],
+    [
+     {
+      "cow": 26,
+      "hen": 69
+     },
+     2119
+    ],
+    [
+     {
+      "cow": 50,
+      "hen": 195
+     },
+     10975
+    ]
+   ],
+   "task_id": "t-18",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "cow"
+     ],
+     [
+      "var",
+      "hen"
+     ]
+    ],
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "cow"
+      ],
+      [
+       "sub",
+       [
+        "var",
+        "cow"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "f6_pen_posts",
+   "formula": "fence posts every pns round the pen = 2 (pnw // pns + pnl // pns)",
+   "inputs": [
+    "pnw",
+    "pnl",
+    "pns"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "pnl": 20,
+      "pns": 6,
+      "pnw": 37
+     },
+     18
+    ],
+    [
+     {
+      "pnl": 26,
+      "pns": 3,
+      "pnw": 37
+     },
+     40
+    ],
+    [
+     {
+      "pnl": 51,
+      "pns": 1,
+      "pnw": 5
+     },
+     112
+    ],
+    [
+     {
+      "pnl": 17,
+      "pns": 6,
+      "pnw": 31
+     },
+     14
+    ],
+    [
+     {
+      "pnl": 48,
+      "pns": 6,
+      "pnw": 7
+     },
+     18
+    ],
+    [
+     {
+      "pnl": 47,
+      "pns": 3,
+      "pnw": 26
+     },
+     46
+    ],
+    [
+     {
+      "pnl": 60,
+      "pns": 5,
+      "pnw": 33
+     },
+     36
+    ],
+    [
+     {
+      "pnl": 40,
+      "pns": 6,
+      "pnw": 4
+     },
+     12
+    ],
+    [
+     {
+      "pnl": 36,
+      "pns": 6,
+      "pnw": 33
+     },
+     22
+    ],
+    [
+     {
+      "pnl": 50,
+      "pns": 1,
+      "pnw": 27
+     },
+     154
+    ],
+    [
+     {
+      "pnl": 19,
+      "pns": 2,
+      "pnw": 25
+     },
+     42
+    ]
+   ],
+   "task_id": "t-19",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "const",
+     2
+    ],
+    [
+     "add",
+     [
+      "div",
+      [
+       "var",
+       "pnw"
+      ],
+      [
+       "var",
+       "pns"
+      ]
+     ],
+     [
+      "div",
+      [
+       "var",
+       "pnl"
+      ],
+      [
+       "var",
+       "pns"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "f6_pen_split",
+   "formula": "fence for a pen split into pns strips = 2 pnl + (pns + 1) pnw",
+   "inputs": [
+    "pnw",
+    "pnl",
+    "pns"
+   ],
+   "kind": "length",
+   "rows": [
+    [
+     {
+      "pnl": 48,
+      "pns": 2,
+      "pnw": 26
+     },
+     174
+    ],
+    [
+     {
+      "pnl": 9,
+      "pns": 6,
+      "pnw": 24
+     },
+     186
+    ],
+    [
+     {
+      "pnl": 7,
+      "pns": 2,
+      "pnw": 6
+     },
+     32
+    ],
+    [
+     {
+      "pnl": 17,
+      "pns": 4,
+      "pnw": 19
+     },
+     129
+    ],
+    [
+     {
+      "pnl": 60,
+      "pns": 3,
+      "pnw": 10
+     },
+     160
+    ],
+    [
+     {
+      "pnl": 31,
+      "pns": 3,
+      "pnw": 39
+     },
+     218
+    ],
+    [
+     {
+      "pnl": 43,
+      "pns": 4,
+      "pnw": 31
+     },
+     241
+    ],
+    [
+     {
+      "pnl": 6,
+      "pns": 4,
+      "pnw": 22
+     },
+     122
+    ],
+    [
+     {
+      "pnl": 52,
+      "pns": 2,
+      "pnw": 23
+     },
+     173
+    ],
+    [
+     {
+      "pnl": 14,
+      "pns": 4,
+      "pnw": 38
+     },
+     218
+    ],
+    [
+     {
+      "pnl": 47,
+      "pns": 1,
+      "pnw": 9
+     },
+     112
+    ]
+   ],
+   "task_id": "t-20",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "add",
+     [
+      "var",
+      "pnl"
+     ],
+     [
+      "var",
+      "pnl"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "pns"
+      ],
+      [
+       "const",
+       1
+      ]
+     ],
+     [
+      "var",
+      "pnw"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "f6_pen_grass",
+   "formula": "grass left inside a path of width pns = (pnw - 2pns)(pnl - 2pns)",
+   "inputs": [
+    "pnw",
+    "pnl",
+    "pns"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "pnl": 60,
+      "pns": 5,
+      "pnw": 20
+     },
+     500
+    ],
+    [
+     {
+      "pnl": 15,
+      "pns": 3,
+      "pnw": 26
+     },
+     180
+    ],
+    [
+     {
+      "pnl": 19,
+      "pns": 6,
+      "pnw": 40
+     },
+     196
+    ],
+    [
+     {
+      "pnl": 36,
+      "pns": 1,
+      "pnw": 30
+     },
+     952
+    ],
+    [
+     {
+      "pnl": 20,
+      "pns": 5,
+      "pnw": 21
+     },
+     110
+    ],
+    [
+     {
+      "pnl": 54,
+      "pns": 4,
+      "pnw": 40
+     },
+     1472
+    ],
+    [
+     {
+      "pnl": 38,
+      "pns": 2,
+      "pnw": 18
+     },
+     476
+    ],
+    [
+     {
+      "pnl": 60,
+      "pns": 5,
+      "pnw": 12
+     },
+     100
+    ],
+    [
+     {
+      "pnl": 22,
+      "pns": 4,
+      "pnw": 31
+     },
+     322
+    ],
+    [
+     {
+      "pnl": 19,
+      "pns": 6,
+      "pnw": 32
+     },
+     140
+    ],
+    [
+     {
+      "pnl": 52,
+      "pns": 1,
+      "pnw": 6
+     },
+     200
+    ]
+   ],
+   "task_id": "t-21",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "var",
+      "pnw"
+     ],
+     [
+      "add",
+      [
+       "var",
+       "pns"
+      ],
+      [
+       "var",
+       "pns"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "pnl"
+     ],
+     [
+      "add",
+      [
+       "var",
+       "pns"
+      ],
+      [
+       "var",
+       "pns"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "f6_pen_rows",
+   "formula": "pns pens in a row sharing walls, area plus wall length = pns pnw pnl + (pns + 1) pnl",
+   "inputs": [
+    "pnw",
+    "pnl",
+    "pns"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "pnl": 8,
+      "pns": 4,
+      "pnw": 6
+     },
+     232
+    ],
+    [
+     {
+      "pnl": 51,
+      "pns": 1,
+      "pnw": 34
+     },
+     1836
+    ],
+    [
+     {
+      "pnl": 3,
+      "pns": 6,
+      "pnw": 25
+     },
+     471
+    ],
+    [
+     {
+      "pnl": 19,
+      "pns": 6,
+      "pnw": 39
+     },
+     4579
+    ],
+    [
+     {
+      "pnl": 46,
+      "pns": 3,
+      "pnw": 21
+     },
+     3082
+    ],
+    [
+     {
+      "pnl": 37,
+      "pns": 6,
+      "pnw": 34
+     },
+     7807
+    ],
+    [
+     {
+      "pnl": 3,
+      "pns": 6,
+      "pnw": 34
+     },
+     633
+    ],
+    [
+     {
+      "pnl": 22,
+      "pns": 3,
+      "pnw": 29
+     },
+     2002
+    ],
+    [
+     {
+      "pnl": 37,
+      "pns": 6,
+      "pnw": 10
+     },
+     2479
+    ],
+    [
+     {
+      "pnl": 11,
+      "pns": 2,
+      "pnw": 11
+     },
+     275
+    ],
+    [
+     {
+      "pnl": 33,
+      "pns": 4,
+      "pnw": 9
+     },
+     1353
+    ]
+   ],
+   "task_id": "t-22",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "pns"
+      ],
+      [
+       "var",
+       "pnw"
+      ]
+     ],
+     [
+      "var",
+      "pnl"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "pns"
+      ],
+      [
+       "const",
+       1
+      ]
+     ],
+     [
+      "var",
+      "pnl"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "f6_feed_total",
+   "formula": "feed with a 2-day reserve = hd kgh (dys + 2)",
+   "inputs": [
+    "hd",
+    "kgh",
+    "dys"
+   ],
+   "kind": "mass",
+   "rows": [
+    [
+     {
+      "dys": 13,
+      "hd": 9,
+      "kgh": 3
+     },
+     405
+    ],
+    [
+     {
+      "dys": 14,
+      "hd": 24,
+      "kgh": 12
+     },
+     4608
+    ],
+    [
+     {
+      "dys": 13,
+      "hd": 27,
+      "kgh": 9
+     },
+     3645
+    ],
+    [
+     {
+      "dys": 1,
+      "hd": 47,
+      "kgh": 1
+     },
+     141
+    ],
+    [
+     {
+      "dys": 16,
+      "hd": 53,
+      "kgh": 10
+     },
+     9540
+    ],
+    [
+     {
+      "dys": 30,
+      "hd": 21,
+      "kgh": 7
+     },
+     4704
+    ],
+    [
+     {
+      "dys": 26,
+      "hd": 21,
+      "kgh": 10
+     },
+     5880
+    ],
+    [
+     {
+      "dys": 9,
+      "hd": 6,
+      "kgh": 5
+     },
+     330
+    ],
+    [
+     {
+      "dys": 11,
+      "hd": 11,
+      "kgh": 2
+     },
+     286
+    ],
+    [
+     {
+      "dys": 7,
+      "hd": 43,
+      "kgh": 10
+     },
+     3870
+    ],
+    [
+     {
+      "dys": 1,
+      "hd": 7,
+      "kgh": 10
+     },
+     210
+    ]
+   ],
+   "task_id": "t-23",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "hd"
+     ],
+     [
+      "var",
+      "kgh"
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "dys"
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "f6_feed_sacks",
+   "formula": "25-kg sacks for the period = ceil(hd kgh dys / 25)",
+   "inputs": [
+    "hd",
+    "kgh",
+    "dys"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "dys": 14,
+      "hd": 44,
+      "kgh": 8
+     },
+     198
+    ],
+    [
+     {
+      "dys": 25,
+      "hd": 49,
+      "kgh": 10
+     },
+     490
+    ],
+    [
+     {
+      "dys": 22,
+      "hd": 25,
+      "kgh": 10
+     },
+     220
+    ],
+    [
+     {
+      "dys": 13,
+      "hd": 26,
+      "kgh": 5
+     },
+     68
+    ],
+    [
+     {
+      "dys": 5,
+      "hd": 28,
+      "kgh": 5
+     },
+     28
+    ],
+    [
+     {
+      "dys": 16,
+      "hd": 53,
+      "kgh": 6
+     },
+     204
+    ],
+    [
+     {
+      "dys": 2,
+      "hd": 61,
+      "kgh": 4
+     },
+     20
+    ],
+    [
+     {
+      "dys": 4,
+      "hd": 3,
+      "kgh": 10
+     },
+     5
+    ],
+    [
+     {
+      "dys": 24,
+      "hd": 67,
+      "kgh": 3
+     },
+     193
+    ],
+    [
+     {
+      "dys": 10,
+      "hd": 74,
+      "kgh": 11
+     },
+     326
+    ],
+    [
+     {
+      "dys": 2,
+      "hd": 22,
+      "kgh": 3
+     },
+     6
+    ]
+   ],
+   "task_id": "t-24",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "hd"
+       ],
+       [
+        "var",
+        "kgh"
+       ]
+      ],
+      [
+       "var",
+       "dys"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "add",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         3
+        ]
+       ],
+       [
+        "add",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         3
+        ]
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "farm",
+   "family": "f6_feed_growth",
+   "formula": "herd grows by one head a day: kgh (hd dys + dys(dys-1)/2)",
+   "inputs": [
+    "hd",
+    "kgh",
+    "dys"
+   ],
+   "kind": "mass",
+   "rows": [
+    [
+     {
+      "dys": 6,
+      "hd": 34,
+      "kgh": 11
+     },
+     2409
+    ],
+    [
+     {
+      "dys": 27,
+      "hd": 5,
+      "kgh": 6
+     },
+     2916
+    ],
+    [
+     {
+      "dys": 2,
+      "hd": 12,
+      "kgh": 7
+     },
+     175
+    ],
+    [
+     {
+      "dys": 22,
+      "hd": 63,
+      "kgh": 11
+     },
+     17787
+    ],
+    [
+     {
+      "dys": 24,
+      "hd": 67,
+      "kgh": 7
+     },
+     13188
+    ],
+    [
+     {
+      "dys": 20,
+      "hd": 27,
+      "kgh": 9
+     },
+     6570
+    ],
+    [
+     {
+      "dys": 26,
+      "hd": 35,
+      "kgh": 12
+     },
+     14820
+    ],
+    [
+     {
+      "dys": 17,
+      "hd": 41,
+      "kgh": 7
+     },
+     5831
+    ],
+    [
+     {
+      "dys": 5,
+      "hd": 49,
+      "kgh": 5
+     },
+     1275
+    ],
+    [
+     {
+      "dys": 10,
+      "hd": 72,
+      "kgh": 10
+     },
+     7650
+    ],
+    [
+     {
+      "dys": 11,
+      "hd": 73,
+      "kgh": 3
+     },
+     2574
+    ]
+   ],
+   "task_id": "t-25",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "kgh"
+    ],
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "hd"
+      ],
+      [
+       "var",
+       "dys"
+      ]
+     ],
+     [
+      "div",
+      [
+       "mul",
+       [
+        "var",
+        "dys"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "dys"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 330,
+   "cold_reason": null,
+   "domain": "farm",
+   "family": "f6_cartons",
+   "formula": "cartons for every egg = ceil(egg / epc)",
+   "inputs": [
+    "egg",
+    "epc",
+    "cpt"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "cpt": 10,
+      "egg": 619,
+      "epc": 19
+     },
+     33
+    ],
+    [
+     {
+      "cpt": 6,
+      "egg": 2319,
+      "epc": 24
+     },
+     97
+    ],
+    [
+     {
+      "cpt": 11,
+      "egg": 935,
+      "epc": 15
+     },
+     63
+    ],
+    [
+     {
+      "cpt": 6,
+      "egg": 2677,
+      "epc": 11
+     },
+     244
+    ],
+    [
+     {
+      "cpt": 6,
+      "egg": 1659,
+      "epc": 29
+     },
+     58
+    ],
+    [
+     {
+      "cpt": 7,
+      "egg": 1680,
+      "epc": 13
+     },
+     130
+    ],
+    [
+     {
+      "cpt": 11,
+      "egg": 63,
+      "epc": 18
+     },
+     4
+    ],
+    [
+     {
+      "cpt": 3,
+      "egg": 132,
+      "epc": 6
+     },
+     22
+    ],
+    [
+     {
+      "cpt": 10,
+      "egg": 2893,
+      "epc": 28
+     },
+     104
+    ],
+    [
+     {
+      "cpt": 7,
+      "egg": 2575,
+      "epc": 19
+     },
+     136
+    ],
+    [
+     {
+      "cpt": 12,
+      "egg": 1860,
+      "epc": 11
+     },
+     170
+    ]
+   ],
+   "task_id": "t-26",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "egg"
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "epc"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "epc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "warehouse",
+   "family": "w6_boxes",
+   "formula": "boxes plus one spare per shelf = shf (bxs lyr + 1)",
+   "inputs": [
+    "shf",
+    "bxs",
+    "lyr"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "bxs": 7,
+      "lyr": 2,
+      "shf": 9
+     },
+     135
+    ],
+    [
+     {
+      "bxs": 13,
+      "lyr": 1,
+      "shf": 16
+     },
+     224
+    ],
+    [
+     {
+      "bxs": 7,
+      "lyr": 1,
+      "shf": 9
+     },
+     72
+    ],
+    [
+     {
+      "bxs": 18,
+      "lyr": 6,
+      "shf": 7
+     },
+     763
+    ],
+    [
+     {
+      "bxs": 17,
+      "lyr": 2,
+      "shf": 6
+     },
+     210
+    ],
+    [
+     {
+      "bxs": 3,
+      "lyr": 4,
+      "shf": 2
+     },
+     26
+    ],
+    [
+     {
+      "bxs": 11,
+      "lyr": 6,
+      "shf": 16
+     },
+     1072
+    ],
+    [
+     {
+      "bxs": 13,
+      "lyr": 2,
+      "shf": 14
+     },
+     378
+    ],
+    [
+     {
+      "bxs": 19,
+      "lyr": 4,
+      "shf": 4
+     },
+     308
+    ],
+    [
+     {
+      "bxs": 8,
+      "lyr": 4,
+      "shf": 5
+     },
+     165
+    ],
+    [
+     {
+      "bxs": 6,
+      "lyr": 2,
+      "shf": 21
+     },
+     273
+    ]
+   ],
+   "task_id": "t-31",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "shf"
+    ],
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "bxs"
+      ],
+      [
+       "var",
+       "lyr"
+      ]
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "warehouse",
+   "family": "w6_top_and_rest",
+   "formula": "boxes when the top layer holds 2 fewer = shf (bxs lyr - 2)",
+   "inputs": [
+    "shf",
+    "bxs",
+    "lyr"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "bxs": 9,
+      "lyr": 5,
+      "shf": 25
+     },
+     1075
+    ],
+    [
+     {
+      "bxs": 20,
+      "lyr": 4,
+      "shf": 9
+     },
+     702
+    ],
+    [
+     {
+      "bxs": 8,
+      "lyr": 4,
+      "shf": 19
+     },
+     570
+    ],
+    [
+     {
+      "bxs": 19,
+      "lyr": 3,
+      "shf": 19
+     },
+     1045
+    ],
+    [
+     {
+      "bxs": 14,
+      "lyr": 5,
+      "shf": 22
+     },
+     1496
+    ],
+    [
+     {
+      "bxs": 15,
+      "lyr": 2,
+      "shf": 4
+     },
+     112
+    ],
+    [
+     {
+      "bxs": 12,
+      "lyr": 6,
+      "shf": 7
+     },
+     490
+    ],
+    [
+     {
+      "bxs": 16,
+      "lyr": 2,
+      "shf": 23
+     },
+     690
+    ],
+    [
+     {
+      "bxs": 16,
+      "lyr": 4,
+      "shf": 29
+     },
+     1798
+    ],
+    [
+     {
+      "bxs": 19,
+      "lyr": 3,
+      "shf": 27
+     },
+     1485
+    ],
+    [
+     {
+      "bxs": 19,
+      "lyr": 1,
+      "shf": 21
+     },
+     357
+    ]
+   ],
+   "task_id": "t-32",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "shf"
+    ],
+    [
+     "sub",
+     [
+      "mul",
+      [
+       "var",
+       "bxs"
+      ],
+      [
+       "var",
+       "lyr"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "warehouse",
+   "family": "w6_labels",
+   "formula": "labels: one per box, one per shelf, one per layer = shf bxs lyr + shf + shf lyr",
+   "inputs": [
+    "shf",
+    "bxs",
+    "lyr"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "bxs": 7,
+      "lyr": 6,
+      "shf": 19
+     },
+     931
+    ],
+    [
+     {
+      "bxs": 3,
+      "lyr": 2,
+      "shf": 6
+     },
+     54
+    ],
+    [
+     {
+      "bxs": 12,
+      "lyr": 6,
+      "shf": 23
+     },
+     1817
+    ],
+    [
+     {
+      "bxs": 8,
+      "lyr": 1,
+      "shf": 12
+     },
+     120
+    ],
+    [
+     {
+      "bxs": 4,
+      "lyr": 4,
+      "shf": 13
+     },
+     273
+    ],
+    [
+     {
+      "bxs": 20,
+      "lyr": 5,
+      "shf": 21
+     },
+     2226
+    ],
+    [
+     {
+      "bxs": 3,
+      "lyr": 5,
+      "shf": 4
+     },
+     84
+    ],
+    [
+     {
+      "bxs": 7,
+      "lyr": 6,
+      "shf": 21
+     },
+     1029
+    ],
+    [
+     {
+      "bxs": 15,
+      "lyr": 4,
+      "shf": 2
+     },
+     130
+    ],
+    [
+     {
+      "bxs": 8,
+      "lyr": 4,
+      "shf": 2
+     },
+     74
+    ],
+    [
+     {
+      "bxs": 7,
+      "lyr": 5,
+      "shf": 26
+     },
+     1066
+    ]
+   ],
+   "task_id": "t-33",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "shf"
+       ],
+       [
+        "var",
+        "bxs"
+       ]
+      ],
+      [
+       "var",
+       "lyr"
+      ]
+     ],
+     [
+      "var",
+      "shf"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "shf"
+     ],
+     [
+      "var",
+      "lyr"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "warehouse",
+   "family": "w6_brackets",
+   "formula": "brackets: 4 per layer and 2 per shelf = 4 shf lyr + 2 shf",
+   "inputs": [
+    "shf",
+    "bxs",
+    "lyr"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "bxs": 5,
+      "lyr": 5,
+      "shf": 24
+     },
+     528
+    ],
+    [
+     {
+      "bxs": 19,
+      "lyr": 5,
+      "shf": 4
+     },
+     88
+    ],
+    [
+     {
+      "bxs": 2,
+      "lyr": 5,
+      "shf": 24
+     },
+     528
+    ],
+    [
+     {
+      "bxs": 20,
+      "lyr": 3,
+      "shf": 23
+     },
+     322
+    ],
+    [
+     {
+      "bxs": 17,
+      "lyr": 1,
+      "shf": 22
+     },
+     132
+    ],
+    [
+     {
+      "bxs": 12,
+      "lyr": 6,
+      "shf": 26
+     },
+     676
+    ],
+    [
+     {
+      "bxs": 12,
+      "lyr": 3,
+      "shf": 18
+     },
+     252
+    ],
+    [
+     {
+      "bxs": 14,
+      "lyr": 4,
+      "shf": 6
+     },
+     108
+    ],
+    [
+     {
+      "bxs": 3,
+      "lyr": 2,
+      "shf": 4
+     },
+     40
+    ],
+    [
+     {
+      "bxs": 18,
+      "lyr": 1,
+      "shf": 22
+     },
+     132
+    ],
+    [
+     {
+      "bxs": 11,
+      "lyr": 3,
+      "shf": 3
+     },
+     42
+    ]
+   ],
+   "task_id": "t-34",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "var",
+       "shf"
+      ]
+     ],
+     [
+      "var",
+      "lyr"
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "shf"
+     ],
+     [
+      "var",
+      "shf"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "warehouse",
+   "family": "w6_seats",
+   "formula": "seats: chr per desk plus 2 per 4 desks rounded up = dsk chr + 2 ceil(dsk / 4)",
+   "inputs": [
+    "dsk",
+    "chr"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "chr": 2,
+      "dsk": 55
+     },
+     138
+    ],
+    [
+     {
+      "chr": 1,
+      "dsk": 47
+     },
+     71
+    ],
+    [
+     {
+      "chr": 3,
+      "dsk": 36
+     },
+     126
+    ],
+    [
+     {
+      "chr": 3,
+      "dsk": 42
+     },
+     148
+    ],
+    [
+     {
+      "chr": 4,
+      "dsk": 50
+     },
+     226
+    ],
+    [
+     {
+      "chr": 4,
+      "dsk": 15
+     },
+     68
+    ],
+    [
+     {
+      "chr": 3,
+      "dsk": 55
+     },
+     193
+    ],
+    [
+     {
+      "chr": 2,
+      "dsk": 21
+     },
+     54
+    ],
+    [
+     {
+      "chr": 3,
+      "dsk": 66
+     },
+     232
+    ],
+    [
+     {
+      "chr": 3,
+      "dsk": 30
+     },
+     106
+    ],
+    [
+     {
+      "chr": 2,
+      "dsk": 17
+     },
+     44
+    ]
+   ],
+   "task_id": "t-39",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "dsk"
+     ],
+     [
+      "var",
+      "chr"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "dsk"
+       ],
+       [
+        "sub",
+        [
+         "add",
+         [
+          "const",
+          2
+         ],
+         [
+          "const",
+          2
+         ]
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "warehouse",
+   "family": "w6_meetings",
+   "formula": "one-to-ones among everyone seated = dsk chr (dsk chr - 1)/2",
+   "inputs": [
+    "dsk",
+    "chr"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "chr": 4,
+      "dsk": 49
+     },
+     19110
+    ],
+    [
+     {
+      "chr": 4,
+      "dsk": 68
+     },
+     36856
+    ],
+    [
+     {
+      "chr": 1,
+      "dsk": 71
+     },
+     2485
+    ],
+    [
+     {
+      "chr": 1,
+      "dsk": 38
+     },
+     703
+    ],
+    [
+     {
+      "chr": 2,
+      "dsk": 28
+     },
+     1540
+    ],
+    [
+     {
+      "chr": 1,
+      "dsk": 66
+     },
+     2145
+    ],
+    [
+     {
+      "chr": 2,
+      "dsk": 49
+     },
+     4753
+    ],
+    [
+     {
+      "chr": 1,
+      "dsk": 32
+     },
+     496
+    ],
+    [
+     {
+      "chr": 3,
+      "dsk": 42
+     },
+     7875
+    ],
+    [
+     {
+      "chr": 1,
+      "dsk": 7
+     },
+     21
+    ],
+    [
+     {
+      "chr": 2,
+      "dsk": 11
+     },
+     231
+    ]
+   ],
+   "task_id": "t-41",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "dsk"
+      ],
+      [
+       "var",
+       "chr"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "var",
+        "dsk"
+       ],
+       [
+        "var",
+        "chr"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "warehouse",
+   "family": "w6_floor_border",
+   "formula": "1-unit walkway round the floor = flw fll - (flw - 2)(fll - 2)",
+   "inputs": [
+    "flw",
+    "fll"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "fll": 34,
+      "flw": 44
+     },
+     152
+    ],
+    [
+     {
+      "fll": 20,
+      "flw": 37
+     },
+     110
+    ],
+    [
+     {
+      "fll": 62,
+      "flw": 5
+     },
+     130
+    ],
+    [
+     {
+      "fll": 23,
+      "flw": 54
+     },
+     150
+    ],
+    [
+     {
+      "fll": 4,
+      "flw": 22
+     },
+     48
+    ],
+    [
+     {
+      "fll": 22,
+      "flw": 54
+     },
+     148
+    ],
+    [
+     {
+      "fll": 35,
+      "flw": 11
+     },
+     88
+    ],
+    [
+     {
+      "fll": 13,
+      "flw": 37
+     },
+     96
+    ],
+    [
+     {
+      "fll": 51,
+      "flw": 37
+     },
+     172
+    ],
+    [
+     {
+      "fll": 27,
+      "flw": 24
+     },
+     98
+    ],
+    [
+     {
+      "fll": 30,
+      "flw": 18
+     },
+     92
+    ]
+   ],
+   "task_id": "t-42",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "flw"
+     ],
+     [
+      "var",
+      "fll"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "flw"
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "fll"
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "warehouse",
+   "family": "w6_floor_tiles",
+   "formula": "2x2 tiles over the floor, rounded up = ceil(flw / 2) ceil(fll / 2)",
+   "inputs": [
+    "flw",
+    "fll"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "fll": 55,
+      "flw": 46
+     },
+     644
+    ],
+    [
+     {
+      "fll": 52,
+      "flw": 32
+     },
+     416
+    ],
+    [
+     {
+      "fll": 60,
+      "flw": 17
+     },
+     270
+    ],
+    [
+     {
+      "fll": 17,
+      "flw": 17
+     },
+     81
+    ],
+    [
+     {
+      "fll": 18,
+      "flw": 14
+     },
+     63
+    ],
+    [
+     {
+      "fll": 24,
+      "flw": 31
+     },
+     192
+    ],
+    [
+     {
+      "fll": 14,
+      "flw": 58
+     },
+     203
+    ],
+    [
+     {
+      "fll": 77,
+      "flw": 28
+     },
+     546
+    ],
+    [
+     {
+      "fll": 77,
+      "flw": 14
+     },
+     273
+    ],
+    [
+     {
+      "fll": 6,
+      "flw": 36
+     },
+     54
+    ],
+    [
+     {
+      "fll": 54,
+      "flw": 8
+     },
+     108
+    ]
+   ],
+   "task_id": "t-43",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "flw"
+      ],
+      [
+       "sub",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "fll"
+      ],
+      [
+       "sub",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "warehouse",
+   "family": "w6_floor_and_walls",
+   "formula": "floor plus walls 3 high = flw fll + 6 (flw + fll)",
+   "inputs": [
+    "flw",
+    "fll"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "fll": 62,
+      "flw": 40
+     },
+     3092
+    ],
+    [
+     {
+      "fll": 17,
+      "flw": 26
+     },
+     700
+    ],
+    [
+     {
+      "fll": 61,
+      "flw": 7
+     },
+     835
+    ],
+    [
+     {
+      "fll": 16,
+      "flw": 44
+     },
+     1064
+    ],
+    [
+     {
+      "fll": 53,
+      "flw": 58
+     },
+     3740
+    ],
+    [
+     {
+      "fll": 67,
+      "flw": 4
+     },
+     694
+    ],
+    [
+     {
+      "fll": 67,
+      "flw": 37
+     },
+     3103
+    ],
+    [
+     {
+      "fll": 42,
+      "flw": 53
+     },
+     2796
+    ],
+    [
+     {
+      "fll": 15,
+      "flw": 51
+     },
+     1161
+    ],
+    [
+     {
+      "fll": 15,
+      "flw": 6
+     },
+     216
+    ],
+    [
+     {
+      "fll": 10,
+      "flw": 6
+     },
+     156
+    ]
+   ],
+   "task_id": "t-44",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "flw"
+     ],
+     [
+      "var",
+      "fll"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "flw"
+      ],
+      [
+       "var",
+       "fll"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "warehouse",
+   "family": "w6_grid_points",
+   "formula": "column grid points every unit = (flw + 1)(fll + 1)",
+   "inputs": [
+    "flw",
+    "fll"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "fll": 31,
+      "flw": 25
+     },
+     832
+    ],
+    [
+     {
+      "fll": 23,
+      "flw": 55
+     },
+     1344
+    ],
+    [
+     {
+      "fll": 18,
+      "flw": 28
+     },
+     551
+    ],
+    [
+     {
+      "fll": 63,
+      "flw": 20
+     },
+     1344
+    ],
+    [
+     {
+      "fll": 78,
+      "flw": 44
+     },
+     3555
+    ],
+    [
+     {
+      "fll": 75,
+      "flw": 34
+     },
+     2660
+    ],
+    [
+     {
+      "fll": 6,
+      "flw": 28
+     },
+     203
+    ],
+    [
+     {
+      "fll": 22,
+      "flw": 28
+     },
+     667
+    ],
+    [
+     {
+      "fll": 10,
+      "flw": 47
+     },
+     528
+    ],
+    [
+     {
+      "fll": 9,
+      "flw": 41
+     },
+     420
+    ],
+    [
+     {
+      "fll": 54,
+      "flw": 35
+     },
+     1980
+    ]
+   ],
+   "task_id": "t-45",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "var",
+      "flw"
+     ],
+     [
+      "const",
+      1
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "fll"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "int",
+ "schema": "nomad.transfer6-suite.v1",
+ "seed": 20261129,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 13,
+  "families": 46,
+  "hard": 33,
+  "lookup_dropped": []
+ },
+ "trained_on_by_any_arm": false
+}
