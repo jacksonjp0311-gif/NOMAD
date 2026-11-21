@@ -72,3 +72,9 @@ GitHub throttles scheduled runs, so NOMAD keeps its own pulse (`scripts/heartbea
 
 `python3 scripts/revert_drill.py` exercises the self-revert path end to end without touching live main. It clones the repo and the current live `data/` into a temp directory, with a throwaway bare repo as `origin`. Then it writes an accepted genome change exactly as the body does (`nomad-evolve: <id>` commit), appends 8 world twin rows, and runs the real `python -m nomad.body evolve-step --push`. It runs two scenarios. With regressed rows (3x the pre-change treatment/control cost ratio) the guard must revert: `nomad-revert: <id>` commit, genome restored, evolution log resolved, both pushed to the throwaway origin. With healthy rows it must keep. The script exits non-zero if any check fails.
 
+
+Standby guard (Nov 21 2026): the start-of-run queue step first reads the lease
+(python -m nomad.body lease). If another live body holds it, this run stands by
+and does not queue a successor; otherwise standby runs chained every ~30 s while
+a cancelled run's lease aged out. nomad-watch restarts the body after a 30-minute
+heartbeat gap, as before.

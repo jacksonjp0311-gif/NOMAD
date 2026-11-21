@@ -35,6 +35,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          # A body that will stand by (lease held by another live host) must not
+          # queue a successor, or standby runs chain every ~30 s (Nov 21 2026).
+          held=$(python -m nomad.body lease | python -c "import json,sys; d=json.load(sys.stdin); l=d.get('lease') or {}; print('yes' if d.get('alive') and l.get('host') != 'gh-' + '$GITHUB_RUN_ID' else 'no')")
+          if [ "$held" = "yes" ]; then echo "lease held by another live body; standby, not queuing"; exit 0; fi
           pending=$(gh run list -R "$GITHUB_REPOSITORY" -w nomad-body.yml -s queued -L 5 --json databaseId -q length)
           pending=$((pending + $(gh run list -R "$GITHUB_REPOSITORY" -w nomad-body.yml -s pending -L 5 --json databaseId -q length)))
           if [ "$pending" -gt 0 ]; then echo "successor already pending"; exit 0; fi
