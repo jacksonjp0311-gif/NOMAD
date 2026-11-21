@@ -18,6 +18,7 @@ from nomad import invent as I  # noqa: E402
 from nomad import transfer2 as T2  # noqa: E402
 from nomad.world import WorldPrior, evaluate, port_bank, run, subtrees  # noqa: E402
 
+SHA4 = "756c725c1c1957742974060635aec40cbf935ff2da00ccc63130a1de049b5078"
 SHA3 = "5a8dab572468551d557558bea6ba2c004b90b254aa68c2878f3e91a9bb4f10e9"
 V = lambda n: ["var", n]  # noqa: E731
 H = lambda i: ["hole", i]  # noqa: E731
@@ -244,6 +245,16 @@ class Transfer3Suite(unittest.TestCase):
 
 
 class Transfer4Catalogue(unittest.TestCase):
+    def test_frozen_suite_hash_and_shape(self):
+        import invent2_suite as IS2
+        suite, easy, hard = IS2.load(IS2.OUT, check=True)
+        self.assertEqual(IS2.suite_hash(suite), SHA4)
+        self.assertEqual(suite["seed"], 20261126)
+        self.assertEqual((len(easy), len(hard)), (12, 35))
+        self.assertTrue(all(not e["cold_certified"] for e in suite["hard"]))
+        for t in hard:
+            self.assertEqual((len(t.public), len(t.challenge), len(t.final)), (5, 3, 3))
+
     def test_catalogue_is_new(self):
         from nomad import science as S
         from nomad import transfer as T1

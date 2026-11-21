@@ -1,0 +1,6489 @@
+{
+ "budget": 10000,
+ "domains": [
+  "kitchen",
+  "garden",
+  "workshop"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1987,
+   "cold_reason": null,
+   "domain": "kitchen",
+   "family": "k4_tray_total",
+   "formula": "cookies on tk trays of tw x tl = tw tl tk",
+   "inputs": [
+    "tw",
+    "tl",
+    "tk"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "tk": 6,
+      "tl": 3,
+      "tw": 3
+     },
+     54
+    ],
+    [
+     {
+      "tk": 4,
+      "tl": 3,
+      "tw": 5
+     },
+     60
+    ],
+    [
+     {
+      "tk": 4,
+      "tl": 9,
+      "tw": 5
+     },
+     180
+    ],
+    [
+     {
+      "tk": 6,
+      "tl": 5,
+      "tw": 10
+     },
+     300
+    ],
+    [
+     {
+      "tk": 4,
+      "tl": 10,
+      "tw": 9
+     },
+     360
+    ],
+    [
+     {
+      "tk": 2,
+      "tl": 5,
+      "tw": 5
+     },
+     50
+    ],
+    [
+     {
+      "tk": 3,
+      "tl": 4,
+      "tw": 8
+     },
+     96
+    ],
+    [
+     {
+      "tk": 6,
+      "tl": 9,
+      "tw": 10
+     },
+     540
+    ],
+    [
+     {
+      "tk": 6,
+      "tl": 12,
+      "tw": 1
+     },
+     72
+    ],
+    [
+     {
+      "tk": 5,
+      "tl": 9,
+      "tw": 9
+     },
+     405
+    ],
+    [
+     {
+      "tk": 1,
+      "tl": 10,
+      "tw": 10
+     },
+     100
+    ]
+   ],
+   "task_id": "t-00",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "tw"
+     ],
+     [
+      "var",
+      "tl"
+     ]
+    ],
+    [
+     "var",
+     "tk"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2253,
+   "cold_reason": null,
+   "domain": "kitchen",
+   "family": "k4_full_boxes",
+   "formula": "full boxes = (cq // cpb) // cbb",
+   "inputs": [
+    "cq",
+    "cpb",
+    "cbb"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "cbb": 12,
+      "cpb": 3,
+      "cq": 397
+     },
+     11
+    ],
+    [
+     {
+      "cbb": 3,
+      "cpb": 15,
+      "cq": 41
+     },
+     0
+    ],
+    [
+     {
+      "cbb": 11,
+      "cpb": 18,
+      "cq": 520
+     },
+     2
+    ],
+    [
+     {
+      "cbb": 10,
+      "cpb": 9,
+      "cq": 602
+     },
+     6
+    ],
+    [
+     {
+      "cbb": 8,
+      "cpb": 7,
+      "cq": 206
+     },
+     3
+    ],
+    [
+     {
+      "cbb": 4,
+      "cpb": 22,
+      "cq": 183
+     },
+     2
+    ],
+    [
+     {
+      "cbb": 8,
+      "cpb": 5,
+      "cq": 879
+     },
+     21
+    ],
+    [
+     {
+      "cbb": 5,
+      "cpb": 3,
+      "cq": 165
+     },
+     11
+    ],
+    [
+     {
+      "cbb": 3,
+      "cpb": 12,
+      "cq": 21
+     },
+     0
+    ],
+    [
+     {
+      "cbb": 11,
+      "cpb": 16,
+      "cq": 782
+     },
+     4
+    ],
+    [
+     {
+      "cbb": 10,
+      "cpb": 17,
+      "cq": 895
+     },
+     5
+    ]
+   ],
+   "task_id": "t-12",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "div",
+     [
+      "var",
+      "cq"
+     ],
+     [
+      "var",
+      "cpb"
+     ]
+    ],
+    [
+     "var",
+     "cbb"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 4011,
+   "cold_reason": null,
+   "domain": "kitchen",
+   "family": "k4_loose_bags",
+   "formula": "full bags not in a full box = (cq // cpb) mod cbb",
+   "inputs": [
+    "cq",
+    "cpb",
+    "cbb"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "cbb": 10,
+      "cpb": 24,
+      "cq": 786
+     },
+     2
+    ],
+    [
+     {
+      "cbb": 8,
+      "cpb": 6,
+      "cq": 797
+     },
+     4
+    ],
+    [
+     {
+      "cbb": 5,
+      "cpb": 19,
+      "cq": 847
+     },
+     4
+    ],
+    [
+     {
+      "cbb": 2,
+      "cpb": 5,
+      "cq": 809
+     },
+     1
+    ],
+    [
+     {
+      "cbb": 10,
+      "cpb": 18,
+      "cq": 420
+     },
+     3
+    ],
+    [
+     {
+      "cbb": 6,
+      "cpb": 14,
+      "cq": 14
+     },
+     1
+    ],
+    [
+     {
+      "cbb": 4,
+      "cpb": 8,
+      "cq": 25
+     },
+     3
+    ],
+    [
+     {
+      "cbb": 9,
+      "cpb": 8,
+      "cq": 217
+     },
+     0
+    ],
+    [
+     {
+      "cbb": 12,
+      "cpb": 21,
+      "cq": 14
+     },
+     0
+    ],
+    [
+     {
+      "cbb": 11,
+      "cpb": 17,
+      "cq": 391
+     },
+     1
+    ],
+    [
+     {
+      "cbb": 11,
+      "cpb": 8,
+      "cq": 722
+     },
+     2
+    ]
+   ],
+   "task_id": "t-13",
+   "tier": "easy",
+   "tree": [
+    "mod",
+    [
+     "div",
+     [
+      "var",
+      "cq"
+     ],
+     [
+      "var",
+      "cpb"
+     ]
+    ],
+    [
+     "var",
+     "cbb"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 6043,
+   "cold_reason": null,
+   "domain": "kitchen",
+   "family": "k4_boxes_needed",
+   "formula": "boxes to pack every cookie = ceil(ceil(cq / cpb) / cbb)",
+   "inputs": [
+    "cq",
+    "cpb",
+    "cbb"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "cbb": 6,
+      "cpb": 9,
+      "cq": 878
+     },
+     17
+    ],
+    [
+     {
+      "cbb": 4,
+      "cpb": 22,
+      "cq": 26
+     },
+     1
+    ],
+    [
+     {
+      "cbb": 8,
+      "cpb": 15,
+      "cq": 747
+     },
+     7
+    ],
+    [
+     {
+      "cbb": 12,
+      "cpb": 20,
+      "cq": 102
+     },
+     1
+    ],
+    [
+     {
+      "cbb": 6,
+      "cpb": 22,
+      "cq": 801
+     },
+     7
+    ],
+    [
+     {
+      "cbb": 6,
+      "cpb": 14,
+      "cq": 835
+     },
+     10
+    ],
+    [
+     {
+      "cbb": 9,
+      "cpb": 15,
+      "cq": 891
+     },
+     7
+    ],
+    [
+     {
+      "cbb": 11,
+      "cpb": 21,
+      "cq": 585
+     },
+     3
+    ],
+    [
+     {
+      "cbb": 9,
+      "cpb": 14,
+      "cq": 60
+     },
+     1
+    ],
+    [
+     {
+      "cbb": 2,
+      "cpb": 5,
+      "cq": 877
+     },
+     88
+    ],
+    [
+     {
+      "cbb": 11,
+      "cpb": 20,
+      "cq": 575
+     },
+     3
+    ]
+   ],
+   "task_id": "t-14",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "cq"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "cpb"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "cpb"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "cbb"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "cbb"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3641,
+   "cold_reason": null,
+   "domain": "kitchen",
+   "family": "k4_bag_shortfall",
+   "formula": "cookies to bake to fill the last bag = cpb ceil(cq / cpb) - cq",
+   "inputs": [
+    "cq",
+    "cpb",
+    "cbb"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "cbb": 5,
+      "cpb": 4,
+      "cq": 278
+     },
+     2
+    ],
+    [
+     {
+      "cbb": 11,
+      "cpb": 12,
+      "cq": 450
+     },
+     6
+    ],
+    [
+     {
+      "cbb": 6,
+      "cpb": 11,
+      "cq": 520
+     },
+     8
+    ],
+    [
+     {
+      "cbb": 9,
+      "cpb": 5,
+      "cq": 85
+     },
+     0
+    ],
+    [
+     {
+      "cbb": 8,
+      "cpb": 15,
+      "cq": 884
+     },
+     1
+    ],
+    [
+     {
+      "cbb": 5,
+      "cpb": 2,
+      "cq": 119
+     },
+     1
+    ],
+    [
+     {
+      "cbb": 2,
+      "cpb": 7,
+      "cq": 305
+     },
+     3
+    ],
+    [
+     {
+      "cbb": 6,
+      "cpb": 16,
+      "cq": 437
+     },
+     11
+    ],
+    [
+     {
+      "cbb": 11,
+      "cpb": 5,
+      "cq": 4
+     },
+     1
+    ],
+    [
+     {
+      "cbb": 4,
+      "cpb": 22,
+      "cq": 827
+     },
+     9
+    ],
+    [
+     {
+      "cbb": 3,
+      "cpb": 17,
+      "cq": 268
+     },
+     4
+    ]
+   ],
+   "task_id": "t-15",
+   "tier": "easy",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "cpb"
+     ],
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "cq"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "cpb"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "cpb"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "cq"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2923,
+   "cold_reason": null,
+   "domain": "kitchen",
+   "family": "k4_grams_per_batch",
+   "formula": "grams per batch = gs gpp / bat",
+   "inputs": [
+    "gs",
+    "gpp",
+    "bat"
+   ],
+   "kind": "mass",
+   "rows": [
+    [
+     {
+      "bat": 5,
+      "gpp": 120,
+      "gs": 18
+     },
+     432
+    ],
+    [
+     {
+      "bat": 1,
+      "gpp": 105,
+      "gs": 36
+     },
+     3780
+    ],
+    [
+     {
+      "bat": 3,
+      "gpp": 185,
+      "gs": 18
+     },
+     1110
+    ],
+    [
+     {
+      "bat": 3,
+      "gpp": 100,
+      "gs": 27
+     },
+     900
+    ],
+    [
+     {
+      "bat": 7,
+      "gpp": 70,
+      "gs": 15
+     },
+     150
+    ],
+    [
+     {
+      "bat": 7,
+      "gpp": 40,
+      "gs": 7
+     },
+     40
+    ],
+    [
+     {
+      "bat": 2,
+      "gpp": 25,
+      "gs": 40
+     },
+     500
+    ],
+    [
+     {
+      "bat": 5,
+      "gpp": 150,
+      "gs": 16
+     },
+     480
+    ],
+    [
+     {
+      "bat": 1,
+      "gpp": 100,
+      "gs": 7
+     },
+     700
+    ],
+    [
+     {
+      "bat": 1,
+      "gpp": 200,
+      "gs": 37
+     },
+     7400
+    ],
+    [
+     {
+      "bat": 3,
+      "gpp": 115,
+      "gs": 27
+     },
+     1035
+    ]
+   ],
+   "task_id": "t-16",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "var",
+      "gs"
+     ],
+     [
+      "var",
+      "gpp"
+     ]
+    ],
+    [
+     "var",
+     "bat"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 47,
+   "cold_reason": null,
+   "domain": "garden",
+   "family": "g4_pyramid_shell",
+   "formula": "visible pots of a triangular pyramid = T(tier) - T(tier - 2), T(n) = n(n+1)(n+2)/6",
+   "inputs": [
+    "tier",
+    "nbx"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "nbx": 3,
+      "tier": 8
+     },
+     64
+    ],
+    [
+     {
+      "nbx": 4,
+      "tier": 19
+     },
+     361
+    ],
+    [
+     {
+      "nbx": 3,
+      "tier": 5
+     },
+     25
+    ],
+    [
+     {
+      "nbx": 5,
+      "tier": 10
+     },
+     100
+    ],
+    [
+     {
+      "nbx": 4,
+      "tier": 25
+     },
+     625
+    ],
+    [
+     {
+      "nbx": 2,
+      "tier": 3
+     },
+     9
+    ],
+    [
+     {
+      "nbx": 7,
+      "tier": 10
+     },
+     100
+    ],
+    [
+     {
+      "nbx": 2,
+      "tier": 26
+     },
+     676
+    ],
+    [
+     {
+      "nbx": 4,
+      "tier": 7
+     },
+     49
+    ],
+    [
+     {
+      "nbx": 7,
+      "tier": 20
+     },
+     400
+    ],
+    [
+     {
+      "nbx": 3,
+      "tier": 11
+     },
+     121
+    ]
+   ],
+   "task_id": "t-28",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "sub",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "tier"
+       ],
+       [
+        "add",
+        [
+         "var",
+         "tier"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "add",
+       [
+        "var",
+        "tier"
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ],
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "sub",
+        [
+         "var",
+         "tier"
+        ],
+        [
+         "const",
+         2
+        ]
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "tier"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "tier"
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 8273,
+   "cold_reason": null,
+   "domain": "garden",
+   "family": "g4_packets",
+   "formula": "packets to hold every seed = ceil(sd / spk)",
+   "inputs": [
+    "sd",
+    "spk",
+    "pkc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "pkc": 12,
+      "sd": 3780,
+      "spk": 22
+     },
+     172
+    ],
+    [
+     {
+      "pkc": 4,
+      "sd": 2720,
+      "spk": 2
+     },
+     1360
+    ],
+    [
+     {
+      "pkc": 8,
+      "sd": 900,
+      "spk": 16
+     },
+     57
+    ],
+    [
+     {
+      "pkc": 10,
+      "sd": 1250,
+      "spk": 25
+     },
+     50
+    ],
+    [
+     {
+      "pkc": 12,
+      "sd": 1490,
+      "spk": 23
+     },
+     65
+    ],
+    [
+     {
+      "pkc": 2,
+      "sd": 1990,
+      "spk": 12
+     },
+     166
+    ],
+    [
+     {
+      "pkc": 9,
+      "sd": 2900,
+      "spk": 2
+     },
+     1450
+    ],
+    [
+     {
+      "pkc": 3,
+      "sd": 40,
+      "spk": 3
+     },
+     14
+    ],
+    [
+     {
+      "pkc": 2,
+      "sd": 1980,
+      "spk": 16
+     },
+     124
+    ],
+    [
+     {
+      "pkc": 9,
+      "sd": 1810,
+      "spk": 40
+     },
+     46
+    ],
+    [
+     {
+      "pkc": 4,
+      "sd": 2540,
+      "spk": 26
+     },
+     98
+    ]
+   ],
+   "task_id": "t-29",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "sd"
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "spk"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "spk"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2061,
+   "cold_reason": null,
+   "domain": "garden",
+   "family": "g4_full_crates",
+   "formula": "full crates = (sd // spk) // pkc",
+   "inputs": [
+    "sd",
+    "spk",
+    "pkc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "pkc": 3,
+      "sd": 3280,
+      "spk": 40
+     },
+     27
+    ],
+    [
+     {
+      "pkc": 9,
+      "sd": 2210,
+      "spk": 20
+     },
+     12
+    ],
+    [
+     {
+      "pkc": 10,
+      "sd": 1990,
+      "spk": 31
+     },
+     6
+    ],
+    [
+     {
+      "pkc": 8,
+      "sd": 3370,
+      "spk": 37
+     },
+     11
+    ],
+    [
+     {
+      "pkc": 9,
+      "sd": 1990,
+      "spk": 24
+     },
+     9
+    ],
+    [
+     {
+      "pkc": 9,
+      "sd": 2910,
+      "spk": 31
+     },
+     10
+    ],
+    [
+     {
+      "pkc": 10,
+      "sd": 2070,
+      "spk": 6
+     },
+     34
+    ],
+    [
+     {
+      "pkc": 2,
+      "sd": 3220,
+      "spk": 40
+     },
+     40
+    ],
+    [
+     {
+      "pkc": 6,
+      "sd": 1250,
+      "spk": 8
+     },
+     26
+    ],
+    [
+     {
+      "pkc": 2,
+      "sd": 710,
+      "spk": 18
+     },
+     19
+    ],
+    [
+     {
+      "pkc": 10,
+      "sd": 2420,
+      "spk": 24
+     },
+     10
+    ]
+   ],
+   "task_id": "t-30",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "div",
+     [
+      "var",
+      "sd"
+     ],
+     [
+      "var",
+      "spk"
+     ]
+    ],
+    [
+     "var",
+     "pkc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3904,
+   "cold_reason": null,
+   "domain": "garden",
+   "family": "g4_spare_packets",
+   "formula": "full packets outside full crates = (sd // spk) mod pkc",
+   "inputs": [
+    "sd",
+    "spk",
+    "pkc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "pkc": 8,
+      "sd": 3270,
+      "spk": 7
+     },
+     3
+    ],
+    [
+     {
+      "pkc": 12,
+      "sd": 2830,
+      "spk": 19
+     },
+     4
+    ],
+    [
+     {
+      "pkc": 11,
+      "sd": 3310,
+      "spk": 25
+     },
+     0
+    ],
+    [
+     {
+      "pkc": 2,
+      "sd": 3340,
+      "spk": 23
+     },
+     1
+    ],
+    [
+     {
+      "pkc": 7,
+      "sd": 2470,
+      "spk": 31
+     },
+     2
+    ],
+    [
+     {
+      "pkc": 12,
+      "sd": 2980,
+      "spk": 31
+     },
+     0
+    ],
+    [
+     {
+      "pkc": 12,
+      "sd": 880,
+      "spk": 19
+     },
+     10
+    ],
+    [
+     {
+      "pkc": 9,
+      "sd": 3490,
+      "spk": 2
+     },
+     8
+    ],
+    [
+     {
+      "pkc": 5,
+      "sd": 3920,
+      "spk": 26
+     },
+     0
+    ],
+    [
+     {
+      "pkc": 3,
+      "sd": 3580,
+      "spk": 11
+     },
+     1
+    ],
+    [
+     {
+      "pkc": 12,
+      "sd": 920,
+      "spk": 5
+     },
+     4
+    ]
+   ],
+   "task_id": "t-31",
+   "tier": "easy",
+   "tree": [
+    "mod",
+    [
+     "div",
+     [
+      "var",
+      "sd"
+     ],
+     [
+      "var",
+      "spk"
+     ]
+    ],
+    [
+     "var",
+     "pkc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2181,
+   "cold_reason": null,
+   "domain": "workshop",
+   "family": "w4_shelves",
+   "formula": "shelves from a wa-long board: pieces of wb, wc pieces a shelf = (wa // wb) // wc",
+   "inputs": [
+    "wa",
+    "wb",
+    "wc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "wa": 231,
+      "wb": 6,
+      "wc": 4
+     },
+     9
+    ],
+    [
+     {
+      "wa": 114,
+      "wb": 3,
+      "wc": 5
+     },
+     7
+    ],
+    [
+     {
+      "wa": 216,
+      "wb": 11,
+      "wc": 3
+     },
+     6
+    ],
+    [
+     {
+      "wa": 344,
+      "wb": 6,
+      "wc": 4
+     },
+     14
+    ],
+    [
+     {
+      "wa": 199,
+      "wb": 8,
+      "wc": 3
+     },
+     8
+    ],
+    [
+     {
+      "wa": 274,
+      "wb": 5,
+      "wc": 2
+     },
+     27
+    ],
+    [
+     {
+      "wa": 208,
+      "wb": 5,
+      "wc": 5
+     },
+     8
+    ],
+    [
+     {
+      "wa": 56,
+      "wb": 11,
+      "wc": 5
+     },
+     1
+    ],
+    [
+     {
+      "wa": 97,
+      "wb": 5,
+      "wc": 6
+     },
+     3
+    ],
+    [
+     {
+      "wa": 106,
+      "wb": 12,
+      "wc": 2
+     },
+     4
+    ],
+    [
+     {
+      "wa": 119,
+      "wb": 3,
+      "wc": 4
+     },
+     9
+    ]
+   ],
+   "task_id": "t-42",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "div",
+     [
+      "var",
+      "wa"
+     ],
+     [
+      "var",
+      "wb"
+     ]
+    ],
+    [
+     "var",
+     "wc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 8348,
+   "cold_reason": null,
+   "domain": "workshop",
+   "family": "w4_colour_rows",
+   "formula": "rows of the last colour = kr - kc ((kr - 1) // kc)",
+   "inputs": [
+    "kr",
+    "kst",
+    "kc"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "kc": 6,
+      "kr": 48,
+      "kst": 63
+     },
+     6
+    ],
+    [
+     {
+      "kc": 6,
+      "kr": 16,
+      "kst": 68
+     },
+     4
+    ],
+    [
+     {
+      "kc": 4,
+      "kr": 43,
+      "kst": 11
+     },
+     3
+    ],
+    [
+     {
+      "kc": 1,
+      "kr": 27,
+      "kst": 43
+     },
+     1
+    ],
+    [
+     {
+      "kc": 5,
+      "kr": 31,
+      "kst": 76
+     },
+     1
+    ],
+    [
+     {
+      "kc": 6,
+      "kr": 20,
+      "kst": 48
+     },
+     2
+    ],
+    [
+     {
+      "kc": 4,
+      "kr": 13,
+      "kst": 58
+     },
+     1
+    ],
+    [
+     {
+      "kc": 3,
+      "kr": 57,
+      "kst": 1
+     },
+     3
+    ],
+    [
+     {
+      "kc": 3,
+      "kr": 2,
+      "kst": 18
+     },
+     2
+    ],
+    [
+     {
+      "kc": 2,
+      "kr": 2,
+      "kst": 51
+     },
+     2
+    ],
+    [
+     {
+      "kc": 3,
+      "kr": 9,
+      "kst": 67
+     },
+     3
+    ]
+   ],
+   "task_id": "t-46",
+   "tier": "easy",
+   "tree": [
+    "sub",
+    [
+     "var",
+     "kr"
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "kc"
+     ],
+     [
+      "div",
+      [
+       "sub",
+       [
+        "var",
+        "kr"
+       ],
+       [
+        "const",
+        1
+       ]
+      ],
+      [
+       "var",
+       "kc"
+      ]
+     ]
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "k4_tray_rim",
+   "formula": "cookies on the rim of tk trays = (2tw + 2tl - 4) tk",
+   "inputs": [
+    "tw",
+    "tl",
+    "tk"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "tk": 5,
+      "tl": 4,
+      "tw": 4
+     },
+     60
+    ],
+    [
+     {
+      "tk": 6,
+      "tl": 8,
+      "tw": 10
+     },
+     192
+    ],
+    [
+     {
+      "tk": 3,
+      "tl": 12,
+      "tw": 2
+     },
+     72
+    ],
+    [
+     {
+      "tk": 6,
+      "tl": 3,
+      "tw": 5
+     },
+     72
+    ],
+    [
+     {
+      "tk": 1,
+      "tl": 11,
+      "tw": 2
+     },
+     22
+    ],
+    [
+     {
+      "tk": 2,
+      "tl": 9,
+      "tw": 5
+     },
+     48
+    ],
+    [
+     {
+      "tk": 4,
+      "tl": 12,
+      "tw": 7
+     },
+     136
+    ],
+    [
+     {
+      "tk": 3,
+      "tl": 3,
+      "tw": 4
+     },
+     30
+    ],
+    [
+     {
+      "tk": 4,
+      "tl": 2,
+      "tw": 9
+     },
+     72
+    ],
+    [
+     {
+      "tk": 4,
+      "tl": 6,
+      "tw": 9
+     },
+     104
+    ],
+    [
+     {
+      "tk": 4,
+      "tl": 12,
+      "tw": 9
+     },
+     152
+    ]
+   ],
+   "task_id": "t-01",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "tw"
+       ],
+       [
+        "var",
+        "tw"
+       ]
+      ],
+      [
+       "add",
+       [
+        "var",
+        "tl"
+       ],
+       [
+        "var",
+        "tl"
+       ]
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "var",
+     "tk"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "k4_tray_inner",
+   "formula": "cookies off the rim of tk trays = (tw - 2)(tl - 2) tk",
+   "inputs": [
+    "tw",
+    "tl",
+    "tk"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "tk": 2,
+      "tl": 4,
+      "tw": 12
+     },
+     40
+    ],
+    [
+     {
+      "tk": 1,
+      "tl": 3,
+      "tw": 12
+     },
+     10
+    ],
+    [
+     {
+      "tk": 4,
+      "tl": 5,
+      "tw": 5
+     },
+     36
+    ],
+    [
+     {
+      "tk": 6,
+      "tl": 7,
+      "tw": 12
+     },
+     300
+    ],
+    [
+     {
+      "tk": 1,
+      "tl": 4,
+      "tw": 11
+     },
+     18
+    ],
+    [
+     {
+      "tk": 4,
+      "tl": 7,
+      "tw": 11
+     },
+     180
+    ],
+    [
+     {
+      "tk": 4,
+      "tl": 3,
+      "tw": 9
+     },
+     28
+    ],
+    [
+     {
+      "tk": 3,
+      "tl": 7,
+      "tw": 10
+     },
+     120
+    ],
+    [
+     {
+      "tk": 6,
+      "tl": 9,
+      "tw": 4
+     },
+     84
+    ],
+    [
+     {
+      "tk": 3,
+      "tl": 8,
+      "tw": 12
+     },
+     180
+    ],
+    [
+     {
+      "tk": 2,
+      "tl": 10,
+      "tw": 11
+     },
+     144
+    ]
+   ],
+   "task_id": "t-02",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "tw"
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "tl"
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "var",
+     "tk"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "k4_cut_pieces",
+   "formula": "pieces after tw cuts across and tl along, tk layers = (tw+1)(tl+1)tk",
+   "inputs": [
+    "tw",
+    "tl",
+    "tk"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "tk": 3,
+      "tl": 12,
+      "tw": 8
+     },
+     351
+    ],
+    [
+     {
+      "tk": 6,
+      "tl": 10,
+      "tw": 9
+     },
+     660
+    ],
+    [
+     {
+      "tk": 5,
+      "tl": 11,
+      "tw": 3
+     },
+     240
+    ],
+    [
+     {
+      "tk": 6,
+      "tl": 5,
+      "tw": 3
+     },
+     144
+    ],
+    [
+     {
+      "tk": 5,
+      "tl": 12,
+      "tw": 10
+     },
+     715
+    ],
+    [
+     {
+      "tk": 2,
+      "tl": 10,
+      "tw": 11
+     },
+     264
+    ],
+    [
+     {
+      "tk": 5,
+      "tl": 5,
+      "tw": 10
+     },
+     330
+    ],
+    [
+     {
+      "tk": 2,
+      "tl": 10,
+      "tw": 6
+     },
+     154
+    ],
+    [
+     {
+      "tk": 6,
+      "tl": 2,
+      "tw": 2
+     },
+     54
+    ],
+    [
+     {
+      "tk": 5,
+      "tl": 1,
+      "tw": 8
+     },
+     90
+    ],
+    [
+     {
+      "tk": 2,
+      "tl": 1,
+      "tw": 10
+     },
+     44
+    ]
+   ],
+   "task_id": "t-03",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "tw"
+      ],
+      [
+       "const",
+       1
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "tl"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "tk"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "k4_cake_layers_sq",
+   "formula": "square tiers 1^2 + ... + ck^2 = ck(ck+1)(2ck+1)/6",
+   "inputs": [
+    "ck"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "ck": 23
+     },
+     4324
+    ],
+    [
+     {
+      "ck": 3
+     },
+     14
+    ],
+    [
+     {
+      "ck": 22
+     },
+     3795
+    ],
+    [
+     {
+      "ck": 14
+     },
+     1015
+    ],
+    [
+     {
+      "ck": 19
+     },
+     2470
+    ],
+    [
+     {
+      "ck": 8
+     },
+     204
+    ],
+    [
+     {
+      "ck": 10
+     },
+     385
+    ],
+    [
+     {
+      "ck": 20
+     },
+     2870
+    ],
+    [
+     {
+      "ck": 21
+     },
+     3311
+    ],
+    [
+     {
+      "ck": 11
+     },
+     506
+    ],
+    [
+     {
+      "ck": 7
+     },
+     140
+    ]
+   ],
+   "task_id": "t-04",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "ck"
+      ],
+      [
+       "add",
+       [
+        "var",
+        "ck"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "ck"
+       ],
+       [
+        "var",
+        "ck"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "k4_candy_box",
+   "formula": "candy box ck x (ck+1) x (ck+2) = ck(ck+1)(ck+2)",
+   "inputs": [
+    "ck"
+   ],
+   "kind": "volume",
+   "rows": [
+    [
+     {
+      "ck": 24
+     },
+     15600
+    ],
+    [
+     {
+      "ck": 4
+     },
+     120
+    ],
+    [
+     {
+      "ck": 5
+     },
+     210
+    ],
+    [
+     {
+      "ck": 2
+     },
+     24
+    ],
+    [
+     {
+      "ck": 11
+     },
+     1716
+    ],
+    [
+     {
+      "ck": 20
+     },
+     9240
+    ],
+    [
+     {
+      "ck": 7
+     },
+     504
+    ],
+    [
+     {
+      "ck": 30
+     },
+     29760
+    ],
+    [
+     {
+      "ck": 22
+     },
+     12144
+    ],
+    [
+     {
+      "ck": 8
+     },
+     720
+    ],
+    [
+     {
+      "ck": 19
+     },
+     7980
+    ]
+   ],
+   "task_id": "t-05",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "ck"
+     ],
+     [
+      "add",
+      [
+       "var",
+       "ck"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "ck"
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "k4_candy_pyramid_base",
+   "formula": "triangular candy pyramid on a base of side ck+1 = (ck+1)(ck+2)(ck+3)/6",
+   "inputs": [
+    "ck"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "ck": 7
+     },
+     120
+    ],
+    [
+     {
+      "ck": 22
+     },
+     2300
+    ],
+    [
+     {
+      "ck": 25
+     },
+     3276
+    ],
+    [
+     {
+      "ck": 5
+     },
+     56
+    ],
+    [
+     {
+      "ck": 18
+     },
+     1330
+    ],
+    [
+     {
+      "ck": 17
+     },
+     1140
+    ],
+    [
+     {
+      "ck": 27
+     },
+     4060
+    ],
+    [
+     {
+      "ck": 12
+     },
+     455
+    ],
+    [
+     {
+      "ck": 19
+     },
+     1540
+    ],
+    [
+     {
+      "ck": 11
+     },
+     364
+    ],
+    [
+     {
+      "ck": 21
+     },
+     2024
+    ]
+   ],
+   "task_id": "t-06",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "add",
+       [
+        "var",
+        "ck"
+       ],
+       [
+        "const",
+        1
+       ]
+      ],
+      [
+       "add",
+       [
+        "var",
+        "ck"
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "ck"
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "k4_sum_cubes",
+   "formula": "cubes of sugar 1^3 + ... + ck^3 = (ck(ck+1)/2)^2",
+   "inputs": [
+    "ck"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "ck": 29
+     },
+     189225
+    ],
+    [
+     {
+      "ck": 27
+     },
+     142884
+    ],
+    [
+     {
+      "ck": 8
+     },
+     1296
+    ],
+    [
+     {
+      "ck": 25
+     },
+     105625
+    ],
+    [
+     {
+      "ck": 3
+     },
+     36
+    ],
+    [
+     {
+      "ck": 17
+     },
+     23409
+    ],
+    [
+     {
+      "ck": 19
+     },
+     36100
+    ],
+    [
+     {
+      "ck": 30
+     },
+     216225
+    ],
+    [
+     {
+      "ck": 28
+     },
+     164836
+    ],
+    [
+     {
+      "ck": 15
+     },
+     14400
+    ],
+    [
+     {
+      "ck": 24
+     },
+     90000
+    ]
+   ],
+   "task_id": "t-07",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "ck"
+      ],
+      [
+       "add",
+       [
+        "var",
+        "ck"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "ck"
+      ],
+      [
+       "add",
+       [
+        "var",
+        "ck"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "k4_frosting",
+   "formula": "frosting a square cake = ck^2 + 4 ck tk",
+   "inputs": [
+    "ck",
+    "tk"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "ck": 12,
+      "tk": 6
+     },
+     432
+    ],
+    [
+     {
+      "ck": 13,
+      "tk": 4
+     },
+     377
+    ],
+    [
+     {
+      "ck": 23,
+      "tk": 5
+     },
+     989
+    ],
+    [
+     {
+      "ck": 28,
+      "tk": 5
+     },
+     1344
+    ],
+    [
+     {
+      "ck": 30,
+      "tk": 5
+     },
+     1500
+    ],
+    [
+     {
+      "ck": 5,
+      "tk": 7
+     },
+     165
+    ],
+    [
+     {
+      "ck": 2,
+      "tk": 6
+     },
+     52
+    ],
+    [
+     {
+      "ck": 26,
+      "tk": 4
+     },
+     1092
+    ],
+    [
+     {
+      "ck": 11,
+      "tk": 6
+     },
+     385
+    ],
+    [
+     {
+      "ck": 18,
+      "tk": 6
+     },
+     756
+    ],
+    [
+     {
+      "ck": 11,
+      "tk": 1
+     },
+     165
+    ]
+   ],
+   "task_id": "t-08",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "ck"
+     ],
+     [
+      "var",
+      "ck"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "var",
+       "ck"
+      ]
+     ],
+     [
+      "var",
+      "tk"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "k4_three_tiers",
+   "formula": "three square tiers ck, ck-1, ck-2 of height tk = tk(ck^2 + (ck-1)^2 + (ck-2)^2)",
+   "inputs": [
+    "ck",
+    "tk"
+   ],
+   "kind": "volume",
+   "rows": [
+    [
+     {
+      "ck": 12,
+      "tk": 2
+     },
+     730
+    ],
+    [
+     {
+      "ck": 29,
+      "tk": 3
+     },
+     7062
+    ],
+    [
+     {
+      "ck": 11,
+      "tk": 2
+     },
+     604
+    ],
+    [
+     {
+      "ck": 7,
+      "tk": 1
+     },
+     110
+    ],
+    [
+     {
+      "ck": 28,
+      "tk": 8
+     },
+     17512
+    ],
+    [
+     {
+      "ck": 13,
+      "tk": 8
+     },
+     3472
+    ],
+    [
+     {
+      "ck": 22,
+      "tk": 5
+     },
+     6625
+    ],
+    [
+     {
+      "ck": 24,
+      "tk": 3
+     },
+     4767
+    ],
+    [
+     {
+      "ck": 10,
+      "tk": 6
+     },
+     1470
+    ],
+    [
+     {
+      "ck": 12,
+      "tk": 7
+     },
+     2555
+    ],
+    [
+     {
+      "ck": 29,
+      "tk": 5
+     },
+     11770
+    ]
+   ],
+   "task_id": "t-09",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "tk"
+    ],
+    [
+     "add",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "ck"
+       ],
+       [
+        "var",
+        "ck"
+       ]
+      ],
+      [
+       "mul",
+       [
+        "sub",
+        [
+         "var",
+         "ck"
+        ],
+        [
+         "const",
+         1
+        ]
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "ck"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ]
+     ],
+     [
+      "mul",
+      [
+       "sub",
+       [
+        "var",
+        "ck"
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "sub",
+       [
+        "var",
+        "ck"
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "k4_plates",
+   "formula": "plates for gs guests and 2 hosts over cr courses plus a bread plate = (gs + 2)(cr + 1)",
+   "inputs": [
+    "gs",
+    "cr"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cr": 7,
+      "gs": 21
+     },
+     184
+    ],
+    [
+     {
+      "cr": 3,
+      "gs": 16
+     },
+     72
+    ],
+    [
+     {
+      "cr": 4,
+      "gs": 36
+     },
+     190
+    ],
+    [
+     {
+      "cr": 1,
+      "gs": 21
+     },
+     46
+    ],
+    [
+     {
+      "cr": 7,
+      "gs": 38
+     },
+     320
+    ],
+    [
+     {
+      "cr": 1,
+      "gs": 32
+     },
+     68
+    ],
+    [
+     {
+      "cr": 3,
+      "gs": 1
+     },
+     12
+    ],
+    [
+     {
+      "cr": 3,
+      "gs": 22
+     },
+     96
+    ],
+    [
+     {
+      "cr": 2,
+      "gs": 21
+     },
+     69
+    ],
+    [
+     {
+      "cr": 5,
+      "gs": 2
+     },
+     24
+    ],
+    [
+     {
+      "cr": 3,
+      "gs": 30
+     },
+     128
+    ]
+   ],
+   "task_id": "t-10",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "var",
+      "gs"
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "cr"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "k4_toasts",
+   "formula": "glass clinks among gs guests and 2 hosts, each course = cr (gs+2)(gs+1)/2",
+   "inputs": [
+    "gs",
+    "cr"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cr": 1,
+      "gs": 32
+     },
+     561
+    ],
+    [
+     {
+      "cr": 5,
+      "gs": 11
+     },
+     390
+    ],
+    [
+     {
+      "cr": 5,
+      "gs": 9
+     },
+     275
+    ],
+    [
+     {
+      "cr": 3,
+      "gs": 36
+     },
+     2109
+    ],
+    [
+     {
+      "cr": 2,
+      "gs": 25
+     },
+     702
+    ],
+    [
+     {
+      "cr": 8,
+      "gs": 9
+     },
+     440
+    ],
+    [
+     {
+      "cr": 4,
+      "gs": 10
+     },
+     264
+    ],
+    [
+     {
+      "cr": 4,
+      "gs": 32
+     },
+     2244
+    ],
+    [
+     {
+      "cr": 3,
+      "gs": 18
+     },
+     570
+    ],
+    [
+     {
+      "cr": 1,
+      "gs": 30
+     },
+     496
+    ],
+    [
+     {
+      "cr": 1,
+      "gs": 11
+     },
+     78
+    ]
+   ],
+   "task_id": "t-11",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "cr"
+      ],
+      [
+       "add",
+       [
+        "var",
+        "gs"
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "gs"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kitchen",
+   "family": "k4_dough_spare",
+   "formula": "dough for gs + 2 servings per batch, bat batches = (gs + 2) gpp bat",
+   "inputs": [
+    "gs",
+    "gpp",
+    "bat"
+   ],
+   "kind": "mass",
+   "rows": [
+    [
+     {
+      "bat": 3,
+      "gpp": 10,
+      "gs": 27
+     },
+     870
+    ],
+    [
+     {
+      "bat": 4,
+      "gpp": 155,
+      "gs": 24
+     },
+     16120
+    ],
+    [
+     {
+      "bat": 3,
+      "gpp": 105,
+      "gs": 15
+     },
+     5355
+    ],
+    [
+     {
+      "bat": 8,
+      "gpp": 160,
+      "gs": 1
+     },
+     3840
+    ],
+    [
+     {
+      "bat": 7,
+      "gpp": 125,
+      "gs": 23
+     },
+     21875
+    ],
+    [
+     {
+      "bat": 6,
+      "gpp": 150,
+      "gs": 28
+     },
+     27000
+    ],
+    [
+     {
+      "bat": 8,
+      "gpp": 120,
+      "gs": 33
+     },
+     33600
+    ],
+    [
+     {
+      "bat": 5,
+      "gpp": 195,
+      "gs": 4
+     },
+     5850
+    ],
+    [
+     {
+      "bat": 8,
+      "gpp": 15,
+      "gs": 27
+     },
+     3480
+    ],
+    [
+     {
+      "bat": 4,
+      "gpp": 105,
+      "gs": 26
+     },
+     11760
+    ],
+    [
+     {
+      "bat": 8,
+      "gpp": 160,
+      "gs": 11
+     },
+     16640
+    ]
+   ],
+   "task_id": "t-17",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "gs"
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "var",
+      "gpp"
+     ]
+    ],
+    [
+     "var",
+     "bat"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "g4_grid_plants",
+   "formula": "plants every bsp along both sides = (bw // bsp + 1)(bln // bsp + 1)",
+   "inputs": [
+    "bw",
+    "bln",
+    "bsp"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "bln": 16,
+      "bsp": 4,
+      "bw": 14
+     },
+     20
+    ],
+    [
+     {
+      "bln": 6,
+      "bsp": 4,
+      "bw": 15
+     },
+     8
+    ],
+    [
+     {
+      "bln": 23,
+      "bsp": 5,
+      "bw": 24
+     },
+     25
+    ],
+    [
+     {
+      "bln": 6,
+      "bsp": 2,
+      "bw": 6
+     },
+     16
+    ],
+    [
+     {
+      "bln": 15,
+      "bsp": 5,
+      "bw": 12
+     },
+     12
+    ],
+    [
+     {
+      "bln": 12,
+      "bsp": 2,
+      "bw": 16
+     },
+     63
+    ],
+    [
+     {
+      "bln": 26,
+      "bsp": 5,
+      "bw": 11
+     },
+     18
+    ],
+    [
+     {
+      "bln": 7,
+      "bsp": 5,
+      "bw": 12
+     },
+     6
+    ],
+    [
+     {
+      "bln": 30,
+      "bsp": 3,
+      "bw": 21
+     },
+     88
+    ],
+    [
+     {
+      "bln": 3,
+      "bsp": 4,
+      "bw": 10
+     },
+     3
+    ],
+    [
+     {
+      "bln": 19,
+      "bsp": 2,
+      "bw": 24
+     },
+     130
+    ]
+   ],
+   "task_id": "t-18",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "div",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "var",
+       "bsp"
+      ]
+     ],
+     [
+      "const",
+      1
+     ]
+    ],
+    [
+     "add",
+     [
+      "div",
+      [
+       "var",
+       "bln"
+      ],
+      [
+       "var",
+       "bsp"
+      ]
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "g4_inner_plants",
+   "formula": "plants on the inner grid points, bsp beds = (bw - 1)(bln - 1) bsp",
+   "inputs": [
+    "bw",
+    "bln",
+    "bsp"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "bln": 15,
+      "bsp": 2,
+      "bw": 19
+     },
+     504
+    ],
+    [
+     {
+      "bln": 2,
+      "bsp": 1,
+      "bw": 16
+     },
+     15
+    ],
+    [
+     {
+      "bln": 9,
+      "bsp": 4,
+      "bw": 8
+     },
+     224
+    ],
+    [
+     {
+      "bln": 25,
+      "bsp": 3,
+      "bw": 14
+     },
+     936
+    ],
+    [
+     {
+      "bln": 7,
+      "bsp": 2,
+      "bw": 4
+     },
+     36
+    ],
+    [
+     {
+      "bln": 2,
+      "bsp": 2,
+      "bw": 5
+     },
+     8
+    ],
+    [
+     {
+      "bln": 14,
+      "bsp": 4,
+      "bw": 2
+     },
+     52
+    ],
+    [
+     {
+      "bln": 10,
+      "bsp": 4,
+      "bw": 12
+     },
+     396
+    ],
+    [
+     {
+      "bln": 4,
+      "bsp": 4,
+      "bw": 15
+     },
+     168
+    ],
+    [
+     {
+      "bln": 12,
+      "bsp": 2,
+      "bw": 12
+     },
+     242
+    ],
+    [
+     {
+      "bln": 23,
+      "bsp": 2,
+      "bw": 13
+     },
+     528
+    ]
+   ],
+   "task_id": "t-19",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "const",
+       1
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "bln"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "bsp"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "g4_border_area",
+   "formula": "border of width bsp inside the bed = bw bln - (bw - 2bsp)(bln - 2bsp)",
+   "inputs": [
+    "bw",
+    "bln",
+    "bsp"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "bln": 30,
+      "bsp": 3,
+      "bw": 12
+     },
+     216
+    ],
+    [
+     {
+      "bln": 28,
+      "bsp": 4,
+      "bw": 12
+     },
+     256
+    ],
+    [
+     {
+      "bln": 27,
+      "bsp": 3,
+      "bw": 19
+     },
+     240
+    ],
+    [
+     {
+      "bln": 19,
+      "bsp": 5,
+      "bw": 16
+     },
+     250
+    ],
+    [
+     {
+      "bln": 4,
+      "bsp": 1,
+      "bw": 15
+     },
+     34
+    ],
+    [
+     {
+      "bln": 30,
+      "bsp": 1,
+      "bw": 21
+     },
+     98
+    ],
+    [
+     {
+      "bln": 16,
+      "bsp": 2,
+      "bw": 16
+     },
+     112
+    ],
+    [
+     {
+      "bln": 9,
+      "bsp": 3,
+      "bw": 21
+     },
+     144
+    ],
+    [
+     {
+      "bln": 7,
+      "bsp": 1,
+      "bw": 18
+     },
+     46
+    ],
+    [
+     {
+      "bln": 23,
+      "bsp": 4,
+      "bw": 12
+     },
+     216
+    ],
+    [
+     {
+      "bln": 7,
+      "bsp": 3,
+      "bw": 8
+     },
+     54
+    ]
+   ],
+   "task_id": "t-20",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "bw"
+     ],
+     [
+      "var",
+      "bln"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "add",
+       [
+        "var",
+        "bsp"
+       ],
+       [
+        "var",
+        "bsp"
+       ]
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "bln"
+      ],
+      [
+       "add",
+       [
+        "var",
+        "bsp"
+       ],
+       [
+        "var",
+        "bsp"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "g4_inner_bed",
+   "formula": "bed left inside a border of width bsp = (bw - 2bsp)(bln - 2bsp)",
+   "inputs": [
+    "bw",
+    "bln",
+    "bsp"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "bln": 28,
+      "bsp": 5,
+      "bw": 18
+     },
+     144
+    ],
+    [
+     {
+      "bln": 12,
+      "bsp": 4,
+      "bw": 22
+     },
+     56
+    ],
+    [
+     {
+      "bln": 28,
+      "bsp": 5,
+      "bw": 21
+     },
+     198
+    ],
+    [
+     {
+      "bln": 23,
+      "bsp": 1,
+      "bw": 13
+     },
+     231
+    ],
+    [
+     {
+      "bln": 23,
+      "bsp": 3,
+      "bw": 8
+     },
+     34
+    ],
+    [
+     {
+      "bln": 16,
+      "bsp": 2,
+      "bw": 14
+     },
+     120
+    ],
+    [
+     {
+      "bln": 7,
+      "bsp": 2,
+      "bw": 17
+     },
+     39
+    ],
+    [
+     {
+      "bln": 16,
+      "bsp": 2,
+      "bw": 6
+     },
+     24
+    ],
+    [
+     {
+      "bln": 20,
+      "bsp": 3,
+      "bw": 11
+     },
+     70
+    ],
+    [
+     {
+      "bln": 19,
+      "bsp": 2,
+      "bw": 16
+     },
+     180
+    ],
+    [
+     {
+      "bln": 21,
+      "bsp": 2,
+      "bw": 6
+     },
+     34
+    ]
+   ],
+   "task_id": "t-21",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "var",
+      "bw"
+     ],
+     [
+      "add",
+      [
+       "var",
+       "bsp"
+      ],
+      [
+       "var",
+       "bsp"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "bln"
+     ],
+     [
+      "add",
+      [
+       "var",
+       "bsp"
+      ],
+      [
+       "var",
+       "bsp"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "g4_fence_posts",
+   "formula": "posts every bsp round the bed = 2(bw // bsp + bln // bsp)",
+   "inputs": [
+    "bw",
+    "bln",
+    "bsp"
+   ],
+   "kind": "length",
+   "rows": [
+    [
+     {
+      "bln": 5,
+      "bsp": 3,
+      "bw": 10
+     },
+     8
+    ],
+    [
+     {
+      "bln": 25,
+      "bsp": 4,
+      "bw": 18
+     },
+     20
+    ],
+    [
+     {
+      "bln": 20,
+      "bsp": 3,
+      "bw": 12
+     },
+     20
+    ],
+    [
+     {
+      "bln": 20,
+      "bsp": 4,
+      "bw": 11
+     },
+     14
+    ],
+    [
+     {
+      "bln": 19,
+      "bsp": 5,
+      "bw": 8
+     },
+     8
+    ],
+    [
+     {
+      "bln": 9,
+      "bsp": 5,
+      "bw": 14
+     },
+     6
+    ],
+    [
+     {
+      "bln": 16,
+      "bsp": 2,
+      "bw": 4
+     },
+     20
+    ],
+    [
+     {
+      "bln": 15,
+      "bsp": 4,
+      "bw": 2
+     },
+     6
+    ],
+    [
+     {
+      "bln": 24,
+      "bsp": 4,
+      "bw": 4
+     },
+     14
+    ],
+    [
+     {
+      "bln": 3,
+      "bsp": 5,
+      "bw": 20
+     },
+     8
+    ],
+    [
+     {
+      "bln": 3,
+      "bsp": 2,
+      "bw": 9
+     },
+     10
+    ]
+   ],
+   "task_id": "t-22",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "const",
+     2
+    ],
+    [
+     "add",
+     [
+      "div",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "var",
+       "bsp"
+      ]
+     ],
+     [
+      "div",
+      [
+       "var",
+       "bln"
+      ],
+      [
+       "var",
+       "bsp"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "g4_soil_half",
+   "formula": "half-depth soil = bw bln bsp / 2",
+   "inputs": [
+    "bw",
+    "bln",
+    "bsp"
+   ],
+   "kind": "volume",
+   "rows": [
+    [
+     {
+      "bln": 15,
+      "bsp": 4,
+      "bw": 22
+     },
+     660
+    ],
+    [
+     {
+      "bln": 20,
+      "bsp": 1,
+      "bw": 17
+     },
+     170
+    ],
+    [
+     {
+      "bln": 23,
+      "bsp": 4,
+      "bw": 15
+     },
+     690
+    ],
+    [
+     {
+      "bln": 16,
+      "bsp": 4,
+      "bw": 11
+     },
+     352
+    ],
+    [
+     {
+      "bln": 16,
+      "bsp": 2,
+      "bw": 16
+     },
+     256
+    ],
+    [
+     {
+      "bln": 9,
+      "bsp": 5,
+      "bw": 8
+     },
+     180
+    ],
+    [
+     {
+      "bln": 2,
+      "bsp": 3,
+      "bw": 10
+     },
+     30
+    ],
+    [
+     {
+      "bln": 5,
+      "bsp": 2,
+      "bw": 5
+     },
+     25
+    ],
+    [
+     {
+      "bln": 16,
+      "bsp": 1,
+      "bw": 11
+     },
+     88
+    ],
+    [
+     {
+      "bln": 16,
+      "bsp": 1,
+      "bw": 2
+     },
+     16
+    ],
+    [
+     {
+      "bln": 24,
+      "bsp": 5,
+      "bw": 12
+     },
+     720
+    ]
+   ],
+   "task_id": "t-23",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "var",
+       "bln"
+      ]
+     ],
+     [
+      "var",
+      "bsp"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "g4_cross_path",
+   "formula": "cross-shaped path of width bsp = bsp(bw + bln - bsp)",
+   "inputs": [
+    "bw",
+    "bln",
+    "bsp"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "bln": 23,
+      "bsp": 3,
+      "bw": 7
+     },
+     81
+    ],
+    [
+     {
+      "bln": 17,
+      "bsp": 2,
+      "bw": 6
+     },
+     42
+    ],
+    [
+     {
+      "bln": 3,
+      "bsp": 2,
+      "bw": 22
+     },
+     46
+    ],
+    [
+     {
+      "bln": 4,
+      "bsp": 1,
+      "bw": 24
+     },
+     27
+    ],
+    [
+     {
+      "bln": 28,
+      "bsp": 2,
+      "bw": 24
+     },
+     100
+    ],
+    [
+     {
+      "bln": 8,
+      "bsp": 1,
+      "bw": 8
+     },
+     15
+    ],
+    [
+     {
+      "bln": 29,
+      "bsp": 5,
+      "bw": 7
+     },
+     155
+    ],
+    [
+     {
+      "bln": 10,
+      "bsp": 4,
+      "bw": 19
+     },
+     100
+    ],
+    [
+     {
+      "bln": 21,
+      "bsp": 5,
+      "bw": 16
+     },
+     160
+    ],
+    [
+     {
+      "bln": 29,
+      "bsp": 3,
+      "bw": 18
+     },
+     132
+    ],
+    [
+     {
+      "bln": 18,
+      "bsp": 2,
+      "bw": 7
+     },
+     46
+    ]
+   ],
+   "task_id": "t-24",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "bsp"
+    ],
+    [
+     "sub",
+     [
+      "add",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "var",
+       "bln"
+      ]
+     ],
+     [
+      "var",
+      "bsp"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "g4_pot_pyramids",
+   "formula": "pots in nbx triangular pyramids = nbx tier(tier+1)(tier+2)/6",
+   "inputs": [
+    "tier",
+    "nbx"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "nbx": 7,
+      "tier": 3
+     },
+     70
+    ],
+    [
+     {
+      "nbx": 4,
+      "tier": 12
+     },
+     1456
+    ],
+    [
+     {
+      "nbx": 8,
+      "tier": 29
+     },
+     35960
+    ],
+    [
+     {
+      "nbx": 7,
+      "tier": 2
+     },
+     28
+    ],
+    [
+     {
+      "nbx": 8,
+      "tier": 16
+     },
+     6528
+    ],
+    [
+     {
+      "nbx": 6,
+      "tier": 6
+     },
+     336
+    ],
+    [
+     {
+      "nbx": 4,
+      "tier": 7
+     },
+     336
+    ],
+    [
+     {
+      "nbx": 2,
+      "tier": 19
+     },
+     2660
+    ],
+    [
+     {
+      "nbx": 8,
+      "tier": 7
+     },
+     672
+    ],
+    [
+     {
+      "nbx": 6,
+      "tier": 25
+     },
+     17550
+    ],
+    [
+     {
+      "nbx": 3,
+      "tier": 15
+     },
+     2040
+    ]
+   ],
+   "task_id": "t-25",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "nbx"
+       ],
+       [
+        "var",
+        "tier"
+       ]
+      ],
+      [
+       "add",
+       [
+        "var",
+        "tier"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "tier"
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "g4_square_pyramids",
+   "formula": "pots in nbx square pyramids = nbx tier(tier+1)(2tier+1)/6",
+   "inputs": [
+    "tier",
+    "nbx"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "nbx": 7,
+      "tier": 9
+     },
+     1995
+    ],
+    [
+     {
+      "nbx": 2,
+      "tier": 25
+     },
+     11050
+    ],
+    [
+     {
+      "nbx": 4,
+      "tier": 23
+     },
+     17296
+    ],
+    [
+     {
+      "nbx": 5,
+      "tier": 8
+     },
+     1020
+    ],
+    [
+     {
+      "nbx": 7,
+      "tier": 5
+     },
+     385
+    ],
+    [
+     {
+      "nbx": 4,
+      "tier": 21
+     },
+     13244
+    ],
+    [
+     {
+      "nbx": 1,
+      "tier": 11
+     },
+     506
+    ],
+    [
+     {
+      "nbx": 2,
+      "tier": 21
+     },
+     6622
+    ],
+    [
+     {
+      "nbx": 8,
+      "tier": 12
+     },
+     5200
+    ],
+    [
+     {
+      "nbx": 5,
+      "tier": 10
+     },
+     1925
+    ],
+    [
+     {
+      "nbx": 6,
+      "tier": 14
+     },
+     6090
+    ]
+   ],
+   "task_id": "t-26",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "nbx"
+       ],
+       [
+        "var",
+        "tier"
+       ]
+      ],
+      [
+       "add",
+       [
+        "var",
+        "tier"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "tier"
+       ],
+       [
+        "var",
+        "tier"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "g4_triangle_beds",
+   "formula": "plants in nbx triangular beds = nbx tier(tier+1)/2",
+   "inputs": [
+    "tier",
+    "nbx"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "nbx": 5,
+      "tier": 11
+     },
+     330
+    ],
+    [
+     {
+      "nbx": 8,
+      "tier": 4
+     },
+     80
+    ],
+    [
+     {
+      "nbx": 4,
+      "tier": 18
+     },
+     684
+    ],
+    [
+     {
+      "nbx": 3,
+      "tier": 13
+     },
+     273
+    ],
+    [
+     {
+      "nbx": 2,
+      "tier": 12
+     },
+     156
+    ],
+    [
+     {
+      "nbx": 2,
+      "tier": 23
+     },
+     552
+    ],
+    [
+     {
+      "nbx": 4,
+      "tier": 5
+     },
+     60
+    ],
+    [
+     {
+      "nbx": 7,
+      "tier": 9
+     },
+     315
+    ],
+    [
+     {
+      "nbx": 2,
+      "tier": 4
+     },
+     20
+    ],
+    [
+     {
+      "nbx": 3,
+      "tier": 5
+     },
+     45
+    ],
+    [
+     {
+      "nbx": 2,
+      "tier": 6
+     },
+     42
+    ]
+   ],
+   "task_id": "t-27",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "nbx"
+      ],
+      [
+       "var",
+       "tier"
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "tier"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "g4_crates_needed",
+   "formula": "crates for every seed = ceil(ceil(sd / spk) / pkc)",
+   "inputs": [
+    "sd",
+    "spk",
+    "pkc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "pkc": 2,
+      "sd": 1010,
+      "spk": 37
+     },
+     14
+    ],
+    [
+     {
+      "pkc": 3,
+      "sd": 720,
+      "spk": 6
+     },
+     40
+    ],
+    [
+     {
+      "pkc": 9,
+      "sd": 200,
+      "spk": 9
+     },
+     3
+    ],
+    [
+     {
+      "pkc": 7,
+      "sd": 1730,
+      "spk": 35
+     },
+     8
+    ],
+    [
+     {
+      "pkc": 3,
+      "sd": 2110,
+      "spk": 25
+     },
+     29
+    ],
+    [
+     {
+      "pkc": 6,
+      "sd": 1600,
+      "spk": 23
+     },
+     12
+    ],
+    [
+     {
+      "pkc": 12,
+      "sd": 1930,
+      "spk": 3
+     },
+     54
+    ],
+    [
+     {
+      "pkc": 8,
+      "sd": 230,
+      "spk": 39
+     },
+     1
+    ],
+    [
+     {
+      "pkc": 6,
+      "sd": 1140,
+      "spk": 17
+     },
+     12
+    ],
+    [
+     {
+      "pkc": 6,
+      "sd": 3510,
+      "spk": 35
+     },
+     17
+    ],
+    [
+     {
+      "pkc": 11,
+      "sd": 280,
+      "spk": 26
+     },
+     1
+    ]
+   ],
+   "task_id": "t-32",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "sd"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "spk"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "spk"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "pkc"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "pkc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "workshop",
+   "family": "w4_hidden_cubes",
+   "formula": "unpainted unit cubes of a painted cb-cube = (cb - 2)^3",
+   "inputs": [
+    "cb"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cb": 16
+     },
+     2744
+    ],
+    [
+     {
+      "cb": 15
+     },
+     2197
+    ],
+    [
+     {
+      "cb": 14
+     },
+     1728
+    ],
+    [
+     {
+      "cb": 3
+     },
+     1
+    ],
+    [
+     {
+      "cb": 18
+     },
+     4096
+    ],
+    [
+     {
+      "cb": 11
+     },
+     729
+    ],
+    [
+     {
+      "cb": 12
+     },
+     1000
+    ],
+    [
+     {
+      "cb": 6
+     },
+     64
+    ],
+    [
+     {
+      "cb": 13
+     },
+     1331
+    ],
+    [
+     {
+      "cb": 10
+     },
+     512
+    ],
+    [
+     {
+      "cb": 20
+     },
+     5832
+    ]
+   ],
+   "task_id": "t-33",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "var",
+      "cb"
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "cb"
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "cb"
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "workshop",
+   "family": "w4_one_face",
+   "formula": "unit cubes with one painted face = 6 (cb - 2)^2",
+   "inputs": [
+    "cb"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cb": 17
+     },
+     1350
+    ],
+    [
+     {
+      "cb": 10
+     },
+     384
+    ],
+    [
+     {
+      "cb": 8
+     },
+     216
+    ],
+    [
+     {
+      "cb": 20
+     },
+     1944
+    ],
+    [
+     {
+      "cb": 9
+     },
+     294
+    ],
+    [
+     {
+      "cb": 13
+     },
+     726
+    ],
+    [
+     {
+      "cb": 11
+     },
+     486
+    ],
+    [
+     {
+      "cb": 19
+     },
+     1734
+    ],
+    [
+     {
+      "cb": 12
+     },
+     600
+    ],
+    [
+     {
+      "cb": 7
+     },
+     150
+    ],
+    [
+     {
+      "cb": 3
+     },
+     6
+    ]
+   ],
+   "task_id": "t-34",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ],
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "cb"
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "cb"
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "workshop",
+   "family": "w4_painted_any",
+   "formula": "unit cubes with paint = cb^3 - (cb - 2)^3",
+   "inputs": [
+    "cb"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cb": 8
+     },
+     296
+    ],
+    [
+     {
+      "cb": 14
+     },
+     1016
+    ],
+    [
+     {
+      "cb": 9
+     },
+     386
+    ],
+    [
+     {
+      "cb": 5
+     },
+     98
+    ],
+    [
+     {
+      "cb": 19
+     },
+     1946
+    ],
+    [
+     {
+      "cb": 18
+     },
+     1736
+    ],
+    [
+     {
+      "cb": 7
+     },
+     218
+    ],
+    [
+     {
+      "cb": 12
+     },
+     728
+    ],
+    [
+     {
+      "cb": 16
+     },
+     1352
+    ],
+    [
+     {
+      "cb": 4
+     },
+     56
+    ],
+    [
+     {
+      "cb": 20
+     },
+     2168
+    ]
+   ],
+   "task_id": "t-35",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "cb"
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "cb"
+      ],
+      [
+       "var",
+       "cb"
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "cb"
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "mul",
+      [
+       "sub",
+       [
+        "var",
+        "cb"
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "sub",
+       [
+        "var",
+        "cb"
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "workshop",
+   "family": "w4_lattice_nodes",
+   "formula": "joints of a cb-cube lattice = (cb + 1)^3",
+   "inputs": [
+    "cb"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cb": 19
+     },
+     8000
+    ],
+    [
+     {
+      "cb": 16
+     },
+     4913
+    ],
+    [
+     {
+      "cb": 3
+     },
+     64
+    ],
+    [
+     {
+      "cb": 17
+     },
+     5832
+    ],
+    [
+     {
+      "cb": 13
+     },
+     2744
+    ],
+    [
+     {
+      "cb": 20
+     },
+     9261
+    ],
+    [
+     {
+      "cb": 9
+     },
+     1000
+    ],
+    [
+     {
+      "cb": 10
+     },
+     1331
+    ],
+    [
+     {
+      "cb": 7
+     },
+     512
+    ],
+    [
+     {
+      "cb": 5
+     },
+     216
+    ],
+    [
+     {
+      "cb": 12
+     },
+     2197
+    ]
+   ],
+   "task_id": "t-36",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "var",
+      "cb"
+     ],
+     [
+      "const",
+      1
+     ]
+    ],
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "cb"
+      ],
+      [
+       "const",
+       1
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "cb"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "workshop",
+   "family": "w4_lattice_rods",
+   "formula": "unit rods of a cb-cube lattice = 3 cb (cb + 1)^2",
+   "inputs": [
+    "cb"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cb": 10
+     },
+     3630
+    ],
+    [
+     {
+      "cb": 13
+     },
+     7644
+    ],
+    [
+     {
+      "cb": 5
+     },
+     540
+    ],
+    [
+     {
+      "cb": 11
+     },
+     4752
+    ],
+    [
+     {
+      "cb": 18
+     },
+     19494
+    ],
+    [
+     {
+      "cb": 4
+     },
+     300
+    ],
+    [
+     {
+      "cb": 6
+     },
+     882
+    ],
+    [
+     {
+      "cb": 17
+     },
+     16524
+    ],
+    [
+     {
+      "cb": 15
+     },
+     11520
+    ],
+    [
+     {
+      "cb": 7
+     },
+     1344
+    ],
+    [
+     {
+      "cb": 20
+     },
+     26460
+    ]
+   ],
+   "task_id": "t-37",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "const",
+      3
+     ],
+     [
+      "var",
+      "cb"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "cb"
+      ],
+      [
+       "const",
+       1
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "cb"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "workshop",
+   "family": "w4_inner_box",
+   "formula": "inside of a box with walls 1 = (wa - 2)(wb - 2)(wc - 2)",
+   "inputs": [
+    "wa",
+    "wb",
+    "wc"
+   ],
+   "kind": "volume",
+   "rows": [
+    [
+     {
+      "wa": 12,
+      "wb": 6,
+      "wc": 8
+     },
+     240
+    ],
+    [
+     {
+      "wa": 11,
+      "wb": 4,
+      "wc": 7
+     },
+     90
+    ],
+    [
+     {
+      "wa": 21,
+      "wb": 6,
+      "wc": 3
+     },
+     76
+    ],
+    [
+     {
+      "wa": 3,
+      "wb": 20,
+      "wc": 3
+     },
+     18
+    ],
+    [
+     {
+      "wa": 12,
+      "wb": 19,
+      "wc": 4
+     },
+     340
+    ],
+    [
+     {
+      "wa": 20,
+      "wb": 22,
+      "wc": 4
+     },
+     720
+    ],
+    [
+     {
+      "wa": 4,
+      "wb": 21,
+      "wc": 4
+     },
+     76
+    ],
+    [
+     {
+      "wa": 15,
+      "wb": 19,
+      "wc": 3
+     },
+     221
+    ],
+    [
+     {
+      "wa": 10,
+      "wb": 10,
+      "wc": 3
+     },
+     64
+    ],
+    [
+     {
+      "wa": 9,
+      "wb": 23,
+      "wc": 6
+     },
+     588
+    ],
+    [
+     {
+      "wa": 20,
+      "wb": 19,
+      "wc": 5
+     },
+     918
+    ]
+   ],
+   "task_id": "t-38",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "wa"
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "wb"
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "wc"
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "workshop",
+   "family": "w4_box_wood",
+   "formula": "wood in a closed box with walls 1 = wa wb wc - (wa - 2)(wb - 2)(wc - 2)",
+   "inputs": [
+    "wa",
+    "wb",
+    "wc"
+   ],
+   "kind": "volume",
+   "rows": [
+    [
+     {
+      "wa": 13,
+      "wb": 9,
+      "wc": 6
+     },
+     394
+    ],
+    [
+     {
+      "wa": 12,
+      "wb": 19,
+      "wc": 7
+     },
+     746
+    ],
+    [
+     {
+      "wa": 8,
+      "wb": 5,
+      "wc": 7
+     },
+     190
+    ],
+    [
+     {
+      "wa": 24,
+      "wb": 19,
+      "wc": 6
+     },
+     1240
+    ],
+    [
+     {
+      "wa": 14,
+      "wb": 17,
+      "wc": 5
+     },
+     650
+    ],
+    [
+     {
+      "wa": 3,
+      "wb": 7,
+      "wc": 4
+     },
+     74
+    ],
+    [
+     {
+      "wa": 16,
+      "wb": 19,
+      "wc": 5
+     },
+     806
+    ],
+    [
+     {
+      "wa": 3,
+      "wb": 21,
+      "wc": 3
+     },
+     170
+    ],
+    [
+     {
+      "wa": 15,
+      "wb": 20,
+      "wc": 3
+     },
+     666
+    ],
+    [
+     {
+      "wa": 10,
+      "wb": 23,
+      "wc": 7
+     },
+     770
+    ],
+    [
+     {
+      "wa": 9,
+      "wb": 9,
+      "wc": 5
+     },
+     258
+    ]
+   ],
+   "task_id": "t-39",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "wa"
+      ],
+      [
+       "var",
+       "wb"
+      ]
+     ],
+     [
+      "var",
+      "wc"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "sub",
+       [
+        "var",
+        "wa"
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "sub",
+       [
+        "var",
+        "wb"
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "wc"
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "workshop",
+   "family": "w4_pegboard",
+   "formula": "pegs on a wa x wb board, one per unit corner, wc boards = (wa + 1)(wb + 1) wc",
+   "inputs": [
+    "wa",
+    "wb",
+    "wc"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "wa": 14,
+      "wb": 9,
+      "wc": 6
+     },
+     900
+    ],
+    [
+     {
+      "wa": 10,
+      "wb": 19,
+      "wc": 4
+     },
+     880
+    ],
+    [
+     {
+      "wa": 18,
+      "wb": 10,
+      "wc": 5
+     },
+     1045
+    ],
+    [
+     {
+      "wa": 14,
+      "wb": 17,
+      "wc": 1
+     },
+     270
+    ],
+    [
+     {
+      "wa": 10,
+      "wb": 3,
+      "wc": 6
+     },
+     264
+    ],
+    [
+     {
+      "wa": 16,
+      "wb": 10,
+      "wc": 2
+     },
+     374
+    ],
+    [
+     {
+      "wa": 17,
+      "wb": 10,
+      "wc": 5
+     },
+     990
+    ],
+    [
+     {
+      "wa": 21,
+      "wb": 19,
+      "wc": 4
+     },
+     1760
+    ],
+    [
+     {
+      "wa": 20,
+      "wb": 18,
+      "wc": 8
+     },
+     3192
+    ],
+    [
+     {
+      "wa": 3,
+      "wb": 13,
+      "wc": 8
+     },
+     448
+    ],
+    [
+     {
+      "wa": 15,
+      "wb": 3,
+      "wc": 6
+     },
+     384
+    ]
+   ],
+   "task_id": "t-40",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "wa"
+      ],
+      [
+       "const",
+       1
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "wb"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "wc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "workshop",
+   "family": "w4_picture_frame",
+   "formula": "frame of width wc round a wa x wb picture = (wa + 2wc)(wb + 2wc) - wa wb",
+   "inputs": [
+    "wa",
+    "wb",
+    "wc"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "wa": 8,
+      "wb": 13,
+      "wc": 7
+     },
+     490
+    ],
+    [
+     {
+      "wa": 14,
+      "wb": 16,
+      "wc": 6
+     },
+     504
+    ],
+    [
+     {
+      "wa": 7,
+      "wb": 9,
+      "wc": 4
+     },
+     192
+    ],
+    [
+     {
+      "wa": 23,
+      "wb": 6,
+      "wc": 6
+     },
+     492
+    ],
+    [
+     {
+      "wa": 20,
+      "wb": 17,
+      "wc": 5
+     },
+     470
+    ],
+    [
+     {
+      "wa": 17,
+      "wb": 8,
+      "wc": 8
+     },
+     656
+    ],
+    [
+     {
+      "wa": 16,
+      "wb": 14,
+      "wc": 5
+     },
+     400
+    ],
+    [
+     {
+      "wa": 4,
+      "wb": 13,
+      "wc": 6
+     },
+     348
+    ],
+    [
+     {
+      "wa": 8,
+      "wb": 7,
+      "wc": 3
+     },
+     126
+    ],
+    [
+     {
+      "wa": 10,
+      "wb": 12,
+      "wc": 2
+     },
+     104
+    ],
+    [
+     {
+      "wa": 6,
+      "wb": 6,
+      "wc": 6
+     },
+     288
+    ]
+   ],
+   "task_id": "t-41",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "wa"
+      ],
+      [
+       "add",
+       [
+        "var",
+        "wc"
+       ],
+       [
+        "var",
+        "wc"
+       ]
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "wb"
+      ],
+      [
+       "add",
+       [
+        "var",
+        "wc"
+       ],
+       [
+        "var",
+        "wc"
+       ]
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "wa"
+     ],
+     [
+      "var",
+      "wb"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "workshop",
+   "family": "w4_dowel_grid",
+   "formula": "dowels every wc on a wa x wb panel = (wa // wc + 1)(wb // wc + 1)",
+   "inputs": [
+    "wa",
+    "wb",
+    "wc"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "wa": 10,
+      "wb": 3,
+      "wc": 1
+     },
+     44
+    ],
+    [
+     {
+      "wa": 15,
+      "wb": 21,
+      "wc": 6
+     },
+     12
+    ],
+    [
+     {
+      "wa": 17,
+      "wb": 24,
+      "wc": 3
+     },
+     54
+    ],
+    [
+     {
+      "wa": 14,
+      "wb": 7,
+      "wc": 4
+     },
+     8
+    ],
+    [
+     {
+      "wa": 24,
+      "wb": 12,
+      "wc": 1
+     },
+     325
+    ],
+    [
+     {
+      "wa": 22,
+      "wb": 15,
+      "wc": 6
+     },
+     12
+    ],
+    [
+     {
+      "wa": 7,
+      "wb": 5,
+      "wc": 6
+     },
+     2
+    ],
+    [
+     {
+      "wa": 16,
+      "wb": 17,
+      "wc": 6
+     },
+     9
+    ],
+    [
+     {
+      "wa": 20,
+      "wb": 24,
+      "wc": 6
+     },
+     20
+    ],
+    [
+     {
+      "wa": 12,
+      "wb": 14,
+      "wc": 6
+     },
+     9
+    ],
+    [
+     {
+      "wa": 18,
+      "wb": 3,
+      "wc": 2
+     },
+     20
+    ]
+   ],
+   "task_id": "t-43",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "div",
+      [
+       "var",
+       "wa"
+      ],
+      [
+       "var",
+       "wc"
+      ]
+     ],
+     [
+      "const",
+      1
+     ]
+    ],
+    [
+     "add",
+     [
+      "div",
+      [
+       "var",
+       "wb"
+      ],
+      [
+       "var",
+       "wc"
+      ]
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "workshop",
+   "family": "w4_stripe_stitches",
+   "formula": "stitches in full kc-row stripes = (kr // kc) kc kst",
+   "inputs": [
+    "kr",
+    "kst",
+    "kc"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "kc": 6,
+      "kr": 34,
+      "kst": 16
+     },
+     480
+    ],
+    [
+     {
+      "kc": 5,
+      "kr": 48,
+      "kst": 28
+     },
+     1260
+    ],
+    [
+     {
+      "kc": 4,
+      "kr": 6,
+      "kst": 49
+     },
+     196
+    ],
+    [
+     {
+      "kc": 3,
+      "kr": 54,
+      "kst": 54
+     },
+     2916
+    ],
+    [
+     {
+      "kc": 1,
+      "kr": 48,
+      "kst": 23
+     },
+     1104
+    ],
+    [
+     {
+      "kc": 6,
+      "kr": 10,
+      "kst": 61
+     },
+     366
+    ],
+    [
+     {
+      "kc": 2,
+      "kr": 44,
+      "kst": 79
+     },
+     3476
+    ],
+    [
+     {
+      "kc": 5,
+      "kr": 12,
+      "kst": 37
+     },
+     370
+    ],
+    [
+     {
+      "kc": 2,
+      "kr": 34,
+      "kst": 77
+     },
+     2618
+    ],
+    [
+     {
+      "kc": 6,
+      "kr": 30,
+      "kst": 65
+     },
+     1950
+    ],
+    [
+     {
+      "kc": 2,
+      "kr": 51,
+      "kst": 80
+     },
+     4000
+    ]
+   ],
+   "task_id": "t-44",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "div",
+      [
+       "var",
+       "kr"
+      ],
+      [
+       "var",
+       "kc"
+      ]
+     ],
+     [
+      "var",
+      "kc"
+     ]
+    ],
+    [
+     "var",
+     "kst"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "workshop",
+   "family": "w4_tri_shawl",
+   "formula": "triangular shawl of kr rows on a kst cast-on = kr kst + kr(kr - 1)/2",
+   "inputs": [
+    "kr",
+    "kst",
+    "kc"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "kc": 6,
+      "kr": 5,
+      "kst": 37
+     },
+     195
+    ],
+    [
+     {
+      "kc": 5,
+      "kr": 48,
+      "kst": 51
+     },
+     3576
+    ],
+    [
+     {
+      "kc": 4,
+      "kr": 55,
+      "kst": 55
+     },
+     4510
+    ],
+    [
+     {
+      "kc": 6,
+      "kr": 57,
+      "kst": 2
+     },
+     1710
+    ],
+    [
+     {
+      "kc": 4,
+      "kr": 31,
+      "kst": 72
+     },
+     2697
+    ],
+    [
+     {
+      "kc": 4,
+      "kr": 53,
+      "kst": 62
+     },
+     4664
+    ],
+    [
+     {
+      "kc": 4,
+      "kr": 1,
+      "kst": 28
+     },
+     28
+    ],
+    [
+     {
+      "kc": 1,
+      "kr": 27,
+      "kst": 33
+     },
+     1242
+    ],
+    [
+     {
+      "kc": 4,
+      "kr": 53,
+      "kst": 65
+     },
+     4823
+    ],
+    [
+     {
+      "kc": 1,
+      "kr": 7,
+      "kst": 43
+     },
+     322
+    ],
+    [
+     {
+      "kc": 4,
+      "kr": 33,
+      "kst": 11
+     },
+     891
+    ]
+   ],
+   "task_id": "t-45",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "kr"
+     ],
+     [
+      "var",
+      "kst"
+     ]
+    ],
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "kr"
+      ],
+      [
+       "sub",
+       [
+        "var",
+        "kr"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "int",
+ "schema": "nomad.transfer4-suite.v1",
+ "seed": 20261126,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 12,
+  "families": 47,
+  "hard": 35,
+  "lookup_dropped": []
+ },
+ "trained_on_by_any_arm": false
+}

@@ -306,6 +306,12 @@ only) and committed with its sha256 **after** this pre-registration and
 with the INVENT code frozen; no field arm, and no INVENT run, ever touched
 the TRANSFER-4 catalogue before the single sealed measurement.
 
+Generated suite: `data/deep/transfer4_suite.json`, sha256
+`756c725c1c1957742974060635aec40cbf935ff2da00ccc63130a1de049b5078`;
+12 easy (cold solves them: most nested floor divisions, e.g.
+`k4_full_boxes`, `g4_full_crates`, `w4_shelves`), **35 hard** (kitchen 12,
+garden 11, workshop 12), lookup guard dropped none.
+
 ## Arms (`python3 scripts/invent2_judge.py`, budget 10,000, max_size 7)
 
 cold / empty / empty_invent / trained (math_sci, INVENT off) /
