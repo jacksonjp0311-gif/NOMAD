@@ -1,0 +1,2207 @@
+{
+ "budget": 10000,
+ "domains": [
+  "inflect"
+ ],
+ "easy": [],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "inflect",
+   "family": "q_plural_full",
+   "formula": "plural: -ies after consonant+y, -es after a sibilant, else -s",
+   "inputs": [
+    "qw",
+    "qs",
+    "qe",
+    "qi"
+   ],
+   "kind": "plural",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "tax"
+     },
+     "taxes"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "basket"
+     },
+     "baskets"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "bunny"
+     },
+     "bunnies"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "fly"
+     },
+     "flies"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "garden"
+     },
+     "gardens"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "lunch"
+     },
+     "lunches"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "planet"
+     },
+     "planets"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "valley"
+     },
+     "valleys"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "crash"
+     },
+     "crashes"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "brush"
+     },
+     "brushes"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "ticket"
+     },
+     "tickets"
+    ]
+   ],
+   "task_id": "i-00",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "sel",
+     [
+      "cy",
+      [
+       "var",
+       "qw"
+      ]
+     ],
+     [
+      "init",
+      [
+       "var",
+       "qw"
+      ]
+     ],
+     [
+      "var",
+      "qw"
+     ]
+    ],
+    [
+     "sel",
+     [
+      "cy",
+      [
+       "var",
+       "qw"
+      ]
+     ],
+     [
+      "var",
+      "qi"
+     ],
+     [
+      "sel",
+      [
+       "sib",
+       [
+        "var",
+        "qw"
+       ]
+      ],
+      [
+       "var",
+       "qe"
+      ],
+      [
+       "var",
+       "qs"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "inflect",
+   "family": "q_past_full",
+   "formula": "past tense: -ied after consonant+y, -d after e, doubled consonant, else -ed",
+   "inputs": [
+    "qw",
+    "qe",
+    "qd",
+    "qi"
+   ],
+   "kind": "past",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "move"
+     },
+     "moved"
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "paint"
+     },
+     "painted"
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "empty"
+     },
+     "emptied"
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "rain"
+     },
+     "rained"
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "drop"
+     },
+     "dropped"
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "wash"
+     },
+     "washed"
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "listen"
+     },
+     "listened"
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "pass"
+     },
+     "passed"
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "hurry"
+     },
+     "hurried"
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "pull"
+     },
+     "pulled"
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "visit"
+     },
+     "visited"
+    ]
+   ],
+   "task_id": "i-01",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "sel",
+     [
+      "cy",
+      [
+       "var",
+       "qw"
+      ]
+     ],
+     [
+      "init",
+      [
+       "var",
+       "qw"
+      ]
+     ],
+     [
+      "var",
+      "qw"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "gem",
+      [
+       "var",
+       "qw"
+      ]
+     ],
+     [
+      "sel",
+      [
+       "cy",
+       [
+        "var",
+        "qw"
+       ]
+      ],
+      [
+       "var",
+       "qi"
+      ],
+      [
+       "sel",
+       [
+        "ve",
+        [
+         "var",
+         "qw"
+        ]
+       ],
+       [
+        "var",
+        "qd"
+       ],
+       [
+        "var",
+        "qe"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "inflect",
+   "family": "q_ing_form",
+   "formula": "-ing: drop a silent e, double a final consonant when it doubles",
+   "inputs": [
+    "qw",
+    "qg"
+   ],
+   "kind": "progressive",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "qg": "ing",
+      "qw": "hurry"
+     },
+     "hurrying"
+    ],
+    [
+     {
+      "qg": "ing",
+      "qw": "enjoy"
+     },
+     "enjoying"
+    ],
+    [
+     {
+      "qg": "ing",
+      "qw": "share"
+     },
+     "sharing"
+    ],
+    [
+     {
+      "qg": "ing",
+      "qw": "smile"
+     },
+     "smiling"
+    ],
+    [
+     {
+      "qg": "ing",
+      "qw": "wait"
+     },
+     "waiting"
+    ],
+    [
+     {
+      "qg": "ing",
+      "qw": "wash"
+     },
+     "washing"
+    ],
+    [
+     {
+      "qg": "ing",
+      "qw": "pull"
+     },
+     "pulling"
+    ],
+    [
+     {
+      "qg": "ing",
+      "qw": "pass"
+     },
+     "passing"
+    ],
+    [
+     {
+      "qg": "ing",
+      "qw": "listen"
+     },
+     "listening"
+    ],
+    [
+     {
+      "qg": "ing",
+      "qw": "visit"
+     },
+     "visiting"
+    ],
+    [
+     {
+      "qg": "ing",
+      "qw": "paint"
+     },
+     "painting"
+    ]
+   ],
+   "task_id": "i-02",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "sel",
+     [
+      "ve",
+      [
+       "var",
+       "qw"
+      ]
+     ],
+     [
+      "init",
+      [
+       "var",
+       "qw"
+      ]
+     ],
+     [
+      "var",
+      "qw"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "gem",
+      [
+       "var",
+       "qw"
+      ]
+     ],
+     [
+      "var",
+      "qg"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "inflect",
+   "family": "q_third_person",
+   "formula": "third person singular of a verb (-ies / -es / -s)",
+   "inputs": [
+    "qw",
+    "qs",
+    "qe",
+    "qi"
+   ],
+   "kind": "agreement",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "cry"
+     },
+     "cries"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "annoy"
+     },
+     "annoys"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "cook"
+     },
+     "cooks"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "move"
+     },
+     "moves"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "pass"
+     },
+     "passes"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "wash"
+     },
+     "washes"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "hurry"
+     },
+     "hurries"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "push"
+     },
+     "pushes"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "share"
+     },
+     "shares"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "jog"
+     },
+     "jogs"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "drop"
+     },
+     "drops"
+    ]
+   ],
+   "task_id": "i-03",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "sel",
+     [
+      "cy",
+      [
+       "var",
+       "qw"
+      ]
+     ],
+     [
+      "init",
+      [
+       "var",
+       "qw"
+      ]
+     ],
+     [
+      "var",
+      "qw"
+     ]
+    ],
+    [
+     "sel",
+     [
+      "cy",
+      [
+       "var",
+       "qw"
+      ]
+     ],
+     [
+      "var",
+      "qi"
+     ],
+     [
+      "sel",
+      [
+       "sib",
+       [
+        "var",
+        "qw"
+       ]
+      ],
+      [
+       "var",
+       "qe"
+      ],
+      [
+       "var",
+       "qs"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "inflect",
+   "family": "q_count_simple",
+   "formula": "number agreement with a regular -s noun: '1 pencil' / '3 pencils'",
+   "inputs": [
+    "qw",
+    "qn",
+    "qs",
+    "qz"
+   ],
+   "kind": "agreement",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "qn": 0,
+      "qs": "s",
+      "qw": "monkey",
+      "qz": " "
+     },
+     "0 monkeys"
+    ],
+    [
+     {
+      "qn": 1,
+      "qs": "s",
+      "qw": "ticket",
+      "qz": " "
+     },
+     "1 ticket"
+    ],
+    [
+     {
+      "qn": 4,
+      "qs": "s",
+      "qw": "basket",
+      "qz": " "
+     },
+     "4 baskets"
+    ],
+    [
+     {
+      "qn": 3,
+      "qs": "s",
+      "qw": "turkey",
+      "qz": " "
+     },
+     "3 turkeys"
+    ],
+    [
+     {
+      "qn": 0,
+      "qs": "s",
+      "qw": "window",
+      "qz": " "
+     },
+     "0 windows"
+    ],
+    [
+     {
+      "qn": 2,
+      "qs": "s",
+      "qw": "pillow",
+      "qz": " "
+     },
+     "2 pillows"
+    ],
+    [
+     {
+      "qn": 5,
+      "qs": "s",
+      "qw": "valley",
+      "qz": " "
+     },
+     "5 valleys"
+    ],
+    [
+     {
+      "qn": 5,
+      "qs": "s",
+      "qw": "pillow",
+      "qz": " "
+     },
+     "5 pillows"
+    ],
+    [
+     {
+      "qn": 1,
+      "qs": "s",
+      "qw": "garden",
+      "qz": " "
+     },
+     "1 garden"
+    ],
+    [
+     {
+      "qn": 2,
+      "qs": "s",
+      "qw": "tray",
+      "qz": " "
+     },
+     "2 trays"
+    ],
+    [
+     {
+      "qn": 0,
+      "qs": "s",
+      "qw": "basket",
+      "qz": " "
+     },
+     "0 baskets"
+    ]
+   ],
+   "task_id": "i-04",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "itos",
+     [
+      "var",
+      "qn"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "qz"
+     ],
+     [
+      "sel",
+      [
+       "one",
+       [
+        "var",
+        "qn"
+       ]
+      ],
+      [
+       "var",
+       "qw"
+      ],
+      [
+       "concat",
+       [
+        "var",
+        "qw"
+       ],
+       [
+        "var",
+        "qs"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "inflect",
+   "family": "q_count_noun",
+   "formula": "'<n> <noun>' with the full plural rule: '1 cherry' / '4 cherries'",
+   "inputs": [
+    "qw",
+    "qn",
+    "qs",
+    "qe",
+    "qi",
+    "qz"
+   ],
+   "kind": "agreement",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qn": 2,
+      "qs": "s",
+      "qw": "cherry",
+      "qz": " "
+     },
+     "2 cherries"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qn": 1,
+      "qs": "s",
+      "qw": "class",
+      "qz": " "
+     },
+     "1 class"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qn": 0,
+      "qs": "s",
+      "qw": "lens",
+      "qz": " "
+     },
+     "0 lenses"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qn": 1,
+      "qs": "s",
+      "qw": "planet",
+      "qz": " "
+     },
+     "1 planet"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qn": 1,
+      "qs": "s",
+      "qw": "tray",
+      "qz": " "
+     },
+     "1 tray"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qn": 2,
+      "qs": "s",
+      "qw": "pencil",
+      "qz": " "
+     },
+     "2 pencils"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qn": 5,
+      "qs": "s",
+      "qw": "turkey",
+      "qz": " "
+     },
+     "5 turkeys"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qn": 5,
+      "qs": "s",
+      "qw": "jelly",
+      "qz": " "
+     },
+     "5 jellies"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qn": 2,
+      "qs": "s",
+      "qw": "pillow",
+      "qz": " "
+     },
+     "2 pillows"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qn": 0,
+      "qs": "s",
+      "qw": "cherry",
+      "qz": " "
+     },
+     "0 cherries"
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qn": 3,
+      "qs": "s",
+      "qw": "ticket",
+      "qz": " "
+     },
+     "3 tickets"
+    ]
+   ],
+   "task_id": "i-05",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "itos",
+     [
+      "var",
+      "qn"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "qz"
+     ],
+     [
+      "sel",
+      [
+       "one",
+       [
+        "var",
+        "qn"
+       ]
+      ],
+      [
+       "var",
+       "qw"
+      ],
+      [
+       "concat",
+       [
+        "sel",
+        [
+         "cy",
+         [
+          "var",
+          "qw"
+         ]
+        ],
+        [
+         "init",
+         [
+          "var",
+          "qw"
+         ]
+        ],
+        [
+         "var",
+         "qw"
+        ]
+       ],
+       [
+        "sel",
+        [
+         "cy",
+         [
+          "var",
+          "qw"
+         ]
+        ],
+        [
+         "var",
+         "qi"
+        ],
+        [
+         "sel",
+         [
+          "sib",
+          [
+           "var",
+           "qw"
+          ]
+         ],
+         [
+          "var",
+          "qe"
+         ],
+         [
+          "var",
+          "qs"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "inflect",
+   "family": "q_count_computed",
+   "formula": "compute k boxes of n and say the total: '6 pencils' (1 -> '1 pencil')",
+   "inputs": [
+    "qw",
+    "qn",
+    "qk",
+    "qs",
+    "qz"
+   ],
+   "kind": "express",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "qk": 1,
+      "qn": 3,
+      "qs": "s",
+      "qw": "pencil",
+      "qz": " "
+     },
+     "3 pencils"
+    ],
+    [
+     {
+      "qk": 1,
+      "qn": 1,
+      "qs": "s",
+      "qw": "pillow",
+      "qz": " "
+     },
+     "1 pillow"
+    ],
+    [
+     {
+      "qk": 2,
+      "qn": 3,
+      "qs": "s",
+      "qw": "ticket",
+      "qz": " "
+     },
+     "6 tickets"
+    ],
+    [
+     {
+      "qk": 2,
+      "qn": 1,
+      "qs": "s",
+      "qw": "pillow",
+      "qz": " "
+     },
+     "2 pillows"
+    ],
+    [
+     {
+      "qk": 1,
+      "qn": 2,
+      "qs": "s",
+      "qw": "basket",
+      "qz": " "
+     },
+     "2 baskets"
+    ],
+    [
+     {
+      "qk": 1,
+      "qn": 1,
+      "qs": "s",
+      "qw": "garden",
+      "qz": " "
+     },
+     "1 garden"
+    ],
+    [
+     {
+      "qk": 2,
+      "qn": 3,
+      "qs": "s",
+      "qw": "basket",
+      "qz": " "
+     },
+     "6 baskets"
+    ],
+    [
+     {
+      "qk": 3,
+      "qn": 2,
+      "qs": "s",
+      "qw": "pencil",
+      "qz": " "
+     },
+     "6 pencils"
+    ],
+    [
+     {
+      "qk": 1,
+      "qn": 3,
+      "qs": "s",
+      "qw": "ticket",
+      "qz": " "
+     },
+     "3 tickets"
+    ],
+    [
+     {
+      "qk": 3,
+      "qn": 1,
+      "qs": "s",
+      "qw": "pencil",
+      "qz": " "
+     },
+     "3 pencils"
+    ],
+    [
+     {
+      "qk": 3,
+      "qn": 1,
+      "qs": "s",
+      "qw": "rocket",
+      "qz": " "
+     },
+     "3 rockets"
+    ]
+   ],
+   "task_id": "i-06",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "itos",
+     [
+      "mul",
+      [
+       "var",
+       "qn"
+      ],
+      [
+       "var",
+       "qk"
+      ]
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "qz"
+     ],
+     [
+      "sel",
+      [
+       "one",
+       [
+        "mul",
+        [
+         "var",
+         "qn"
+        ],
+        [
+         "var",
+         "qk"
+        ]
+       ]
+      ],
+      [
+       "var",
+       "qw"
+      ],
+      [
+       "concat",
+       [
+        "var",
+        "qw"
+       ],
+       [
+        "var",
+        "qs"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "inflect",
+   "family": "q_sentence_be",
+   "formula": "'<n> <noun> is/are': agreement of the count word and the verb",
+   "inputs": [
+    "qw",
+    "qn",
+    "qs",
+    "qa",
+    "qb",
+    "qz"
+   ],
+   "kind": "express",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "qa": "is",
+      "qb": "are",
+      "qn": 0,
+      "qs": "s",
+      "qw": "window",
+      "qz": " "
+     },
+     "0 windows are"
+    ],
+    [
+     {
+      "qa": "is",
+      "qb": "are",
+      "qn": 5,
+      "qs": "s",
+      "qw": "pencil",
+      "qz": " "
+     },
+     "5 pencils are"
+    ],
+    [
+     {
+      "qa": "is",
+      "qb": "are",
+      "qn": 1,
+      "qs": "s",
+      "qw": "window",
+      "qz": " "
+     },
+     "1 window is"
+    ],
+    [
+     {
+      "qa": "is",
+      "qb": "are",
+      "qn": 2,
+      "qs": "s",
+      "qw": "garden",
+      "qz": " "
+     },
+     "2 gardens are"
+    ],
+    [
+     {
+      "qa": "is",
+      "qb": "are",
+      "qn": 5,
+      "qs": "s",
+      "qw": "basket",
+      "qz": " "
+     },
+     "5 baskets are"
+    ],
+    [
+     {
+      "qa": "is",
+      "qb": "are",
+      "qn": 0,
+      "qs": "s",
+      "qw": "pillow",
+      "qz": " "
+     },
+     "0 pillows are"
+    ],
+    [
+     {
+      "qa": "is",
+      "qb": "are",
+      "qn": 2,
+      "qs": "s",
+      "qw": "pillow",
+      "qz": " "
+     },
+     "2 pillows are"
+    ],
+    [
+     {
+      "qa": "is",
+      "qb": "are",
+      "qn": 1,
+      "qs": "s",
+      "qw": "basket",
+      "qz": " "
+     },
+     "1 basket is"
+    ],
+    [
+     {
+      "qa": "is",
+      "qb": "are",
+      "qn": 0,
+      "qs": "s",
+      "qw": "ticket",
+      "qz": " "
+     },
+     "0 tickets are"
+    ],
+    [
+     {
+      "qa": "is",
+      "qb": "are",
+      "qn": 1,
+      "qs": "s",
+      "qw": "pillow",
+      "qz": " "
+     },
+     "1 pillow is"
+    ],
+    [
+     {
+      "qa": "is",
+      "qb": "are",
+      "qn": 0,
+      "qs": "s",
+      "qw": "garden",
+      "qz": " "
+     },
+     "0 gardens are"
+    ]
+   ],
+   "task_id": "i-07",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "itos",
+     [
+      "var",
+      "qn"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "qz"
+     ],
+     [
+      "concat",
+      [
+       "sel",
+       [
+        "one",
+        [
+         "var",
+         "qn"
+        ]
+       ],
+       [
+        "var",
+        "qw"
+       ],
+       [
+        "concat",
+        [
+         "var",
+         "qw"
+        ],
+        [
+         "var",
+         "qs"
+        ]
+       ]
+      ],
+      [
+       "concat",
+       [
+        "var",
+        "qz"
+       ],
+       [
+        "sel",
+        [
+         "one",
+         [
+          "var",
+          "qn"
+         ]
+        ],
+        [
+         "var",
+         "qa"
+        ],
+        [
+         "var",
+         "qb"
+        ]
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "inflect",
+   "family": "q_possessive_count",
+   "formula": "possessive of the count form: '1 brush' -> \"brush's\", 3 -> \"brushes'\"",
+   "inputs": [
+    "qw",
+    "qn",
+    "qs",
+    "qe",
+    "qa",
+    "qb"
+   ],
+   "kind": "possessive",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "qa": "'",
+      "qb": "'s",
+      "qe": "es",
+      "qn": 1,
+      "qs": "s",
+      "qw": "pencil"
+     },
+     "pencil's"
+    ],
+    [
+     {
+      "qa": "'",
+      "qb": "'s",
+      "qe": "es",
+      "qn": 4,
+      "qs": "s",
+      "qw": "basket"
+     },
+     "baskets'"
+    ],
+    [
+     {
+      "qa": "'",
+      "qb": "'s",
+      "qe": "es",
+      "qn": 1,
+      "qs": "s",
+      "qw": "tax"
+     },
+     "tax's"
+    ],
+    [
+     {
+      "qa": "'",
+      "qb": "'s",
+      "qe": "es",
+      "qn": 3,
+      "qs": "s",
+      "qw": "window"
+     },
+     "windows'"
+    ],
+    [
+     {
+      "qa": "'",
+      "qb": "'s",
+      "qe": "es",
+      "qn": 2,
+      "qs": "s",
+      "qw": "dress"
+     },
+     "dresses'"
+    ],
+    [
+     {
+      "qa": "'",
+      "qb": "'s",
+      "qe": "es",
+      "qn": 4,
+      "qs": "s",
+      "qw": "class"
+     },
+     "classes'"
+    ],
+    [
+     {
+      "qa": "'",
+      "qb": "'s",
+      "qe": "es",
+      "qn": 0,
+      "qs": "s",
+      "qw": "window"
+     },
+     "windows'"
+    ],
+    [
+     {
+      "qa": "'",
+      "qb": "'s",
+      "qe": "es",
+      "qn": 1,
+      "qs": "s",
+      "qw": "ticket"
+     },
+     "ticket's"
+    ],
+    [
+     {
+      "qa": "'",
+      "qb": "'s",
+      "qe": "es",
+      "qn": 2,
+      "qs": "s",
+      "qw": "lunch"
+     },
+     "lunches'"
+    ],
+    [
+     {
+      "qa": "'",
+      "qb": "'s",
+      "qe": "es",
+      "qn": 1,
+      "qs": "s",
+      "qw": "crash"
+     },
+     "crash's"
+    ],
+    [
+     {
+      "qa": "'",
+      "qb": "'s",
+      "qe": "es",
+      "qn": 2,
+      "qs": "s",
+      "qw": "ticket"
+     },
+     "tickets'"
+    ]
+   ],
+   "task_id": "i-08",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "sel",
+     [
+      "one",
+      [
+       "var",
+       "qn"
+      ]
+     ],
+     [
+      "var",
+      "qw"
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "qw"
+      ],
+      [
+       "sel",
+       [
+        "sib",
+        [
+         "var",
+         "qw"
+        ]
+       ],
+       [
+        "var",
+        "qe"
+       ],
+       [
+        "var",
+        "qs"
+       ]
+      ]
+     ]
+    ],
+    [
+     "sel",
+     [
+      "ens",
+      [
+       "sel",
+       [
+        "one",
+        [
+         "var",
+         "qn"
+        ]
+       ],
+       [
+        "var",
+        "qw"
+       ],
+       [
+        "concat",
+        [
+         "var",
+         "qw"
+        ],
+        [
+         "sel",
+         [
+          "sib",
+          [
+           "var",
+           "qw"
+          ]
+         ],
+         [
+          "var",
+          "qe"
+         ],
+         [
+          "var",
+          "qs"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "var",
+      "qa"
+     ],
+     [
+      "var",
+      "qb"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "inflect",
+   "family": "q_plural_len",
+   "formula": "letters in the plural form (integer output)",
+   "inputs": [
+    "qw",
+    "qs",
+    "qe",
+    "qi"
+   ],
+   "kind": "length",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "watch"
+     },
+     7
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "basket"
+     },
+     7
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "class"
+     },
+     7
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "fly"
+     },
+     5
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "window"
+     },
+     7
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "pencil"
+     },
+     7
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "dress"
+     },
+     7
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "ticket"
+     },
+     7
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "cherry"
+     },
+     8
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "bunny"
+     },
+     7
+    ],
+    [
+     {
+      "qe": "es",
+      "qi": "ies",
+      "qs": "s",
+      "qw": "pony"
+     },
+     6
+    ]
+   ],
+   "task_id": "i-09",
+   "tier": "hard",
+   "tree": [
+    "strlen",
+    [
+     "concat",
+     [
+      "sel",
+      [
+       "cy",
+       [
+        "var",
+        "qw"
+       ]
+      ],
+      [
+       "init",
+       [
+        "var",
+        "qw"
+       ]
+      ],
+      [
+       "var",
+       "qw"
+      ]
+     ],
+     [
+      "sel",
+      [
+       "cy",
+       [
+        "var",
+        "qw"
+       ]
+      ],
+      [
+       "var",
+       "qi"
+      ],
+      [
+       "sel",
+       [
+        "sib",
+        [
+         "var",
+         "qw"
+        ]
+       ],
+       [
+        "var",
+        "qe"
+       ],
+       [
+        "var",
+        "qs"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "inflect",
+   "family": "q_past_len",
+   "formula": "letters in the past form (integer output)",
+   "inputs": [
+    "qw",
+    "qe",
+    "qd",
+    "qi"
+   ],
+   "kind": "length",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "empty"
+     },
+     7
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "pass"
+     },
+     6
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "dance"
+     },
+     6
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "push"
+     },
+     6
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "share"
+     },
+     6
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "rub"
+     },
+     6
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "cook"
+     },
+     6
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "open"
+     },
+     6
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "hurry"
+     },
+     7
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "grab"
+     },
+     7
+    ],
+    [
+     {
+      "qd": "d",
+      "qe": "ed",
+      "qi": "ied",
+      "qw": "smile"
+     },
+     6
+    ]
+   ],
+   "task_id": "i-10",
+   "tier": "hard",
+   "tree": [
+    "strlen",
+    [
+     "concat",
+     [
+      "sel",
+      [
+       "cy",
+       [
+        "var",
+        "qw"
+       ]
+      ],
+      [
+       "init",
+       [
+        "var",
+        "qw"
+       ]
+      ],
+      [
+       "var",
+       "qw"
+      ]
+     ],
+     [
+      "concat",
+      [
+       "gem",
+       [
+        "var",
+        "qw"
+       ]
+      ],
+      [
+       "sel",
+       [
+        "cy",
+        [
+         "var",
+         "qw"
+        ]
+       ],
+       [
+        "var",
+        "qi"
+       ],
+       [
+        "sel",
+        [
+         "ve",
+         [
+          "var",
+          "qw"
+         ]
+        ],
+        [
+         "var",
+         "qd"
+        ],
+        [
+         "var",
+         "qe"
+        ]
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "inflect",
+   "family": "q_ctl_pair",
+   "formula": "word, separator, word length",
+   "inputs": [
+    "qw",
+    "qz"
+   ],
+   "kind": "control",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "qw": "fly",
+      "qz": " "
+     },
+     "fly 3"
+    ],
+    [
+     {
+      "qw": "tax",
+      "qz": " "
+     },
+     "tax 3"
+    ],
+    [
+     {
+      "qw": "lens",
+      "qz": " "
+     },
+     "lens 4"
+    ],
+    [
+     {
+      "qw": "dress",
+      "qz": " "
+     },
+     "dress 5"
+    ],
+    [
+     {
+      "qw": "candy",
+      "qz": " "
+     },
+     "candy 5"
+    ],
+    [
+     {
+      "qw": "brush",
+      "qz": " "
+     },
+     "brush 5"
+    ],
+    [
+     {
+      "qw": "rocket",
+      "qz": " "
+     },
+     "rocket 6"
+    ],
+    [
+     {
+      "qw": "crash",
+      "qz": " "
+     },
+     "crash 5"
+    ],
+    [
+     {
+      "qw": "basket",
+      "qz": " "
+     },
+     "basket 6"
+    ],
+    [
+     {
+      "qw": "watch",
+      "qz": " "
+     },
+     "watch 5"
+    ],
+    [
+     {
+      "qw": "class",
+      "qz": " "
+     },
+     "class 5"
+    ]
+   ],
+   "task_id": "i-11",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "var",
+     "qw"
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "qz"
+     ],
+     [
+      "itos",
+      [
+       "strlen",
+       [
+        "var",
+        "qw"
+       ]
+      ]
+     ]
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "inflect",
+ "schema": "nomad.inflect-suite.v1",
+ "seed": 20261221,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 0,
+  "families": 12,
+  "hard": 12,
+  "lookup_dropped": []
+ },
+ "trained_on_by_any_arm": false
+}

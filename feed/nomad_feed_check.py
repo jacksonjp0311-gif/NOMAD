@@ -74,6 +74,18 @@ def _at(s, i):
     return s[i]
 
 
+def _gem(s):
+    v = "aeiou"
+    if len(s) < 3 or s[-1] in v + "wxy" or s[-2] not in v or s[-3] in v:
+        return ""
+    groups, prev = 0, False
+    for ch in s:
+        x = ch in v
+        groups += x and not prev
+        prev = x
+    return s[-1] if groups == 1 else ""
+
+
 # name: (argument types, output type, function). Lists are int lists (tuples here).
 OPS = {
     "add": (("int", "int"), "int", lambda a, b: _int(a + b)),
@@ -97,6 +109,14 @@ OPS = {
     "drop": (("str", "int"), "str", lambda s, i: s[_nn(i):]),
     "srep": (("str", "int"), "str", lambda s, i: _str(s * _nn(i, MAX_STR))),
     "itos": (("int",), "str", lambda i: str(_nn(i))),
+    "init": (("str",), "str", lambda s: s[:-1]),
+    "sib": (("str",), "int", lambda s: int(s.endswith(("s", "x", "z", "ch", "sh")))),
+    "cy": (("str",), "int", lambda s: int(len(s) >= 2 and s[-1] == "y" and s[-2] not in "aeiou")),
+    "ve": (("str",), "int", lambda s: int(s.endswith("e"))),
+    "ens": (("str",), "int", lambda s: int(s.endswith("s"))),
+    "gem": (("str",), "str", lambda s: _gem(s)),
+    "one": (("int",), "int", lambda n: int(n == 1)),
+    "sel": (("int", "str", "str"), "str", lambda c, a, b: a if c > 0 else b),
     "sort": (("list",), "list", lambda xs: tuple(sorted(xs))),
     "lrev": (("list",), "list", lambda xs: xs[::-1]),
     "tail": (("list",), "list", lambda xs: xs[1:]),

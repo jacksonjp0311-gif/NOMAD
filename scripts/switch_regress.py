@@ -39,6 +39,7 @@ JUDGES = {
     "selfedit2": ["scripts/selfedit_judge.py", "--round", "2"],   # SELFEDIT round-2 sealed suite (TEXT_CHAIN)
     "text_chain": ["scripts/text_chain_judge.py"],     # TEXT_CHAIN sealed suite (ROUTE_CUT)
     "meaning": ["scripts/meaning_judge.py"],           # MEANING sealed suite (ROUTE_CUT addendum)
+    "inflect": ["scripts/inflect_judge.py"],           # INFLECT sealed suite (this step)
 }
 
 

@@ -157,7 +157,94 @@ def chain_parts(goal, pool_str, learned_str, pool_int, ops) -> list:
     return keep
 
 
-def text_chain(goal, parts, *, max_parts: int = TEXT_CHAIN_PARTS, max_nodes: int = TEXT_CHAIN_NODES):
+SEL_PREDS = 48            # most distinct row-partitions (int pool values) tried as a selector condition
+SEL_DEPTH2_N = 24         # most nested selectors proposed per segment
+
+
+def sel_complete(seg, preds, branches, *, depth2: bool = True):
+    """INFLECT (docs/INFLECT.md): complete a per-row segment with a *selector*, the string twin of
+    CASESPLIT: ``sel(c, A, B)`` (``sel(c1, A, sel(c2, B, C))``), where the condition is an int pool value
+    (``c > 0`` picks A) that partitions the rows and every branch is a pool / bank value equal to the
+    segment on its rows. Pure lookups on values already computed (no evaluation); the caller charges 1
+    evaluation per assembled candidate and WITNESS-gates it. Smaller programs first.
+
+    seg: per-row strings. preds / branches: (tree, values) lists. Yields trees."""
+    n = len(seg)
+    full = (1 << n) - 1
+    masks: dict[int, list] = {}
+    for t, v in preds:
+        if len(v) != n or any(type(x) is not int for x in v):
+            continue
+        m = 0
+        for i, x in enumerate(v):
+            if x > 0:
+                m |= 1 << i
+        if m in (0, full) or m in masks:
+            continue
+        masks[m] = t
+        if len(masks) >= SEL_PREDS:
+            break
+    if not masks:
+        return
+    cover: dict[int, list] = {}
+    for t, v in branches:
+        if len(v) != n or any(type(x) is not str for x in v):
+            continue
+        m = 0
+        for i, (x, g) in enumerate(zip(v, seg)):
+            if x == g:
+                m |= 1 << i
+        if m and m not in cover:
+            cover[m] = t
+
+    def find(sub):
+        best = None
+        for m, t in cover.items():
+            if m & sub == sub:
+                sz = W.size(t)
+                if best is None or sz < best[0]:
+                    best = (sz, t)
+        return None if best is None else best[1]
+
+    out = []
+    for p, pt in masks.items():
+        a, b = find(p), find(full & ~p)
+        if a is not None and b is not None:
+            out.append((W.size(pt) + W.size(a) + W.size(b), ["sel", pt, a, b]))
+    out.sort(key=lambda z: z[0])
+    for _sz, t in out:
+        yield t
+    if not depth2:
+        return
+    nested = []
+    for p, pt in masks.items():
+        for keep, rest in ((p, full & ~p), (full & ~p, p)):
+            k = find(keep)
+            if k is None:
+                continue
+            for q, qt in masks.items():
+                r1, r2 = rest & q, rest & ~q & full
+                if not r1 or not r2:
+                    continue
+                a, b = find(r1), find(r2)
+                if a is None or b is None:
+                    continue
+                inner = ["sel", qt, a, b]
+                tree = ["sel", pt, k, inner] if keep == p else ["sel", pt, inner, k]
+                nested.append((W.size(tree), tree))
+    nested.sort(key=lambda z: z[0])
+    seen = set()
+    for _sz, t in nested[:SEL_DEPTH2_N * 4]:
+        k = repr(t)
+        if k not in seen:
+            seen.add(k)
+            yield t
+            if len(seen) >= SEL_DEPTH2_N:
+                return
+
+
+def text_chain(goal, parts, *, max_parts: int = TEXT_CHAIN_PARTS, max_nodes: int = TEXT_CHAIN_NODES,
+               selpool=None):
     """Yield concat chains of >= 3 parts that reproduce ``goal`` on every public row, fewest parts
     first (iterative deepening over the number of peels), at least one part learned.
 
@@ -187,8 +274,11 @@ def text_chain(goal, parts, *, max_parts: int = TEXT_CHAIN_PARTS, max_nodes: int
         seg = tuple(goal[r][lo[r]:hi[r]] for r in range(n))
         if peels_left == 0:
             e = index.get(seg)
-            if e is not None and (used or e[2] or not TEXT_CHAIN_LEARNED):
+            if e is not None and (used or e[2] or not TEXT_CHAIN_LEARNED) and len(pre) + len(suf) >= 2:
                 yield assemble(pre, e, suf)
+            if selpool is not None and (pre or suf):
+                for sel_t in sel_complete(seg, selpool[1], selpool[0]):
+                    yield assemble(pre, (sel_t,), suf)
             return
         for e in parts:
             v = e[1]
@@ -203,7 +293,7 @@ def text_chain(goal, parts, *, max_parts: int = TEXT_CHAIN_PARTS, max_nodes: int
 
     lo0, hi0 = tuple(0 for _ in goal), tuple(len(g) for g in goal)
     emitted = set()
-    for peels in range(2, max_parts):
+    for peels in range(1 if selpool is not None else 2, max_parts):
         for tree in dfs(lo0, hi0, [], [], False, peels, set()):
             k = repr(tree)
             if k not in emitted:

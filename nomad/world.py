@@ -79,6 +79,29 @@ def _at(s: str, i: int) -> str:
     return s[i]
 
 
+_VOW = "aeiou"
+
+
+def _sib(s: str) -> int:
+    return int(s.endswith(("s", "x", "z", "ch", "sh")))
+
+
+def _cy(s: str) -> int:
+    return int(len(s) >= 2 and s[-1] == "y" and s[-2] not in _VOW)
+
+
+def _gem(s: str) -> str:
+    """The doubled final consonant of a one-syllable consonant-vowel-consonant word (stop -> p, plan -> n)."""
+    if len(s) < 3 or s[-1] in _VOW + "wxy" or s[-2] not in _VOW or s[-3] in _VOW:
+        return ""
+    groups, prev = 0, False
+    for ch in s:
+        v = ch in _VOW
+        groups += v and not prev
+        prev = v
+    return s[-1] if groups == 1 else ""
+
+
 def _nonneg(i: int) -> bool:
     """True for an index i >= 0 (the callers slice only then); Invalid otherwise."""
     if not isinstance(i, int) or i < 0:
@@ -135,6 +158,17 @@ OPS: dict[str, Op] = {o.name: o for o in (
     Op("drop", ("str", "int"), "str", lambda s, i: _nonneg(i) and s[i:]),   # all but the first i
     Op("srep", ("str", "int"), "str", lambda s, i: _str(s * _nonneg_n(i))),  # i copies
     Op("itos", ("int",), "str", lambda i: str(_nonneg_i(i))),       # decimal digits of i >= 0
+    # INFLECT (docs/INFLECT.md): word-shape predicates and a choice, reachable only through the
+    # "inflect" opset (resolved only when NOMAD_INFLECT is on). Total on every string; the suffixes
+    # themselves are never DSL constants (they are input columns, like separators).
+    Op("init", ("str",), "str", lambda s: s[:-1]),                      # all but the last character
+    Op("sib", ("str",), "int", lambda s: _sib(s)),                      # 1: ends s x z ch sh (takes -es)
+    Op("cy", ("str",), "int", lambda s: _cy(s)),                        # 1: ends consonant + y (y -> ies / ied)
+    Op("ve", ("str",), "int", lambda s: int(s.endswith("e"))),          # 1: ends silent e
+    Op("ens", ("str",), "int", lambda s: int(s.endswith("s"))),         # 1: ends in s
+    Op("gem", ("str",), "str", lambda s: _gem(s)),                      # last letter again if the word doubles it, else ""
+    Op("one", ("int",), "int", lambda n: int(n == 1)),                  # 1 when the count is exactly one
+    Op("sel", ("int", "str", "str"), "str", lambda c, a, b: a if c > 0 else b),   # the string twin of ite
     # int lists
     Op("sort", ("list",), "list", lambda xs: tuple(sorted(xs))),
     Op("lrev", ("list",), "list", lambda xs: xs[::-1]),
@@ -164,7 +198,16 @@ OPSETS: dict[str, tuple[str, ...]] = {
     # when NOMAD_BRIDGE is on (otherwise such a task runs the "text" opset).
     "bridge": ("upper", "lower", "srev", "concat", "first", "last", "rest", "strlen", "add", "sub", "mul", "div",
                "at", "take", "drop", "srep", "itos"),
+    # INFLECT (docs/INFLECT.md): the bridge world plus word-shape predicates and a string choice.
+    # Resolved only when NOMAD_INFLECT is on (otherwise such a task runs the "bridge" opset).
+    "inflect": ("upper", "lower", "srev", "concat", "first", "last", "rest", "strlen", "add", "sub", "mul", "div",
+                "at", "take", "drop", "srep", "itos", "init", "sib", "cy", "ve", "ens", "gem", "one", "sel"),
 }
+
+
+def inflect_enabled() -> bool:
+    """NOMAD_INFLECT (default off until the sealed judge passes, docs/INFLECT.md)."""
+    return _flag("NOMAD_INFLECT", "off")
 
 
 def bridge_enabled() -> bool:
@@ -175,7 +218,9 @@ def bridge_enabled() -> bool:
 def opset_of(task: "WorldTask") -> tuple[str, ...]:
     """The operators a task searches: OPSETS[task.opset], except that the
     bridge world collapses to the text world while NOMAD_BRIDGE is off."""
-    if task.opset == "bridge" and not bridge_enabled():
+    if task.opset == "inflect" and not inflect_enabled():
+        return OPSETS["bridge"] if bridge_enabled() else OPSETS["text"]
+    if task.opset in ("bridge", "inflect") and not bridge_enabled():
         return OPSETS["text"]
     return OPSETS[task.opset]
 
@@ -1331,6 +1376,17 @@ def block_score(v: tuple, goal: tuple, out: str) -> tuple:
     return (eq, -d, agree)
 
 
+def affix_score(v: tuple, goal: tuple) -> tuple:
+    """INFLECT (docs/INFLECT.md): string blocks, ranked by how many rows the block's value is a non-empty
+    proper prefix (a stem) or suffix (an ending) of the goal -- the shape of every morphological piece.
+    Ties on rows already equal; replaces block_score's all-zero string tie only for ``inflect`` tasks."""
+    if not v or type_of(v[0]) != "str":
+        return block_score(v, goal, "str")
+    eq = sum(1 for a, b in zip(v, goal) if a == b)
+    aff = sum(1 for a, b in zip(v, goal) if a and a != b and (b.startswith(a) or b.endswith(a)))
+    return (eq, aff, 0)
+
+
 def _residual(op: str, a: tuple, goal: tuple) -> tuple | None:
     """The values b must take so that op(a, b) == goal on every row (rsub: b - a)."""
     if op == "add":
@@ -1480,7 +1536,8 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 continue
             if type_of(v[0]) == task.out:
                 table.setdefault(_key(v), t)
-            ranked.append((block_score(v, goal, task.out), n, t, v))
+            ranked.append(((affix_score(v, goal) if (task.opset == "inflect" and inflect_enabled() and task.out == "str")
+                            else block_score(v, goal, task.out)), n, t, v))
         if rel:
             ranked.sort(key=lambda z: route_sort_key(z, rel), reverse=True)
         else:
@@ -1747,7 +1804,10 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         parts = _I.chain_parts(goal, pool_s, [(z[2], z[3]) for z in learned], pool_i, ops)
         if _I.TEXT_CHAIN_LEARNED and not any(e[2] for e in parts):
             return None
-        for tree in _I.text_chain(goal, parts):
+        selpool = None
+        if "sel" in ops:    # INFLECT: selector completion of a chain's last segment (docs/INFLECT.md)
+            selpool = (pool_s + [(z[2], z[3]) for z in learned], pool_i)
+        for tree in _I.text_chain(goal, parts, selpool=selpool):
             k = json.dumps(tree)
             if k in tried:
                 continue
