@@ -50,7 +50,7 @@ import os
 from pathlib import Path
 from typing import Any, Iterable, Sequence
 
-from .world import (INT_CONSTANTS, OPS, OPSETS, Invalid, WorldTask, certify, run, size, type_of)
+from .world import (INT_CONSTANTS, OPS, OPSETS, Invalid, WorldTask, certify, opset_of, run, size, type_of)
 
 KINDS: tuple[str, ...] = ("op_swap", "const_flip", "var_swap", "reorder")
 
@@ -285,7 +285,7 @@ class VariationState:
         """Mutants of ``sources`` ordered by payoff memory for this situation."""
         sit = situation(task)
         rank = {k: i for i, k in enumerate(self.memory.order(sit, seed))}
-        opset = OPSETS[task.opset]
+        opset = opset_of(task)
         pool: list[tuple[tuple, str, list]] = []
         seen = {_tkey(s) for s in sources}
         for si, src in enumerate(sources):

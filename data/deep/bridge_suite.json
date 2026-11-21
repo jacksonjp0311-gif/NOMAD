@@ -1,0 +1,3782 @@
+{
+ "budget": 10000,
+ "domains": [
+  "bridge"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 7159,
+   "cold_reason": null,
+   "domain": "bridge",
+   "family": "s_rep_prefix",
+   "formula": "the first k letters, j times",
+   "inputs": [
+    "bw",
+    "bw2",
+    "bk",
+    "bj"
+   ],
+   "kind": "repeat",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bj": 0,
+      "bk": 2,
+      "bw": "lUMEN",
+      "bw2": "WIND"
+     },
+     ""
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 2,
+      "bw": "Lumen",
+      "bw2": "ATLAS"
+     },
+     "LuLu"
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 1,
+      "bw": "Nomad",
+      "bw2": "Quartz"
+     },
+     ""
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 2,
+      "bw": "ORBIT",
+      "bw2": "deSERt"
+     },
+     "OR"
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 1,
+      "bw": "wiND",
+      "bw2": "Pixel"
+     },
+     "ww"
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 1,
+      "bw": "Vapor",
+      "bw2": "GrOVe"
+     },
+     ""
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 1,
+      "bw": "tundra",
+      "bw2": "vapor"
+     },
+     "tt"
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bw": "MEADOW",
+      "bw2": "Anna"
+     },
+     "MMM"
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 1,
+      "bw": "MEADOW",
+      "bw2": "cedar"
+     },
+     "M"
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 3,
+      "bw": "ATLAS",
+      "bw2": "ATLAS"
+     },
+     "ATL"
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 3,
+      "bw": "PIxel",
+      "bw2": "GRoVE"
+     },
+     "PIxPIxPIx"
+    ]
+   ],
+   "task_id": "b-11",
+   "tier": "easy",
+   "tree": [
+    "srep",
+    [
+     "take",
+     [
+      "var",
+      "bw"
+     ],
+     [
+      "var",
+      "bk"
+     ]
+    ],
+    [
+     "var",
+     "bj"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 4959,
+   "cold_reason": null,
+   "domain": "bridge",
+   "family": "s_underline",
+   "formula": "the word, then a dash for every letter",
+   "inputs": [
+    "bw",
+    "bk",
+    "bs"
+   ],
+   "kind": "repeat",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bk": 1,
+      "bs": "-",
+      "bw": "ATLaS"
+     },
+     "ATLaS-----"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "stone"
+     },
+     "stone-----"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "quartz"
+     },
+     "quartz------"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "Harbor"
+     },
+     "Harbor------"
+    ],
+    [
+     {
+      "bk": 1,
+      "bs": "-",
+      "bw": "RIVER"
+     },
+     "RIVER-----"
+    ],
+    [
+     {
+      "bk": 3,
+      "bs": "-",
+      "bw": "wind"
+     },
+     "wind----"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "TUNDRA"
+     },
+     "TUNDRA------"
+    ],
+    [
+     {
+      "bk": 3,
+      "bs": "-",
+      "bw": "rivER"
+     },
+     "rivER-----"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "Stone"
+     },
+     "Stone-----"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "nomad"
+     },
+     "nomad-----"
+    ],
+    [
+     {
+      "bk": 1,
+      "bs": "-",
+      "bw": "Harbor"
+     },
+     "Harbor------"
+    ]
+   ],
+   "task_id": "b-12",
+   "tier": "easy",
+   "tree": [
+    "concat",
+    [
+     "var",
+     "bw"
+    ],
+    [
+     "srep",
+     [
+      "var",
+      "bs"
+     ],
+     [
+      "strlen",
+      [
+       "var",
+       "bw"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 662,
+   "cold_reason": null,
+   "domain": "bridge",
+   "family": "s_bar_len",
+   "formula": "a dash for every letter of the word",
+   "inputs": [
+    "bw",
+    "bk",
+    "bs"
+   ],
+   "kind": "repeat",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bk": 3,
+      "bs": "-",
+      "bw": "ORBIT"
+     },
+     "-----"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "grove"
+     },
+     "-----"
+    ],
+    [
+     {
+      "bk": 1,
+      "bs": "-",
+      "bw": "harbor"
+     },
+     "------"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "cedaR"
+     },
+     "-----"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "desert"
+     },
+     "------"
+    ],
+    [
+     {
+      "bk": 1,
+      "bs": "-",
+      "bw": "ATLAS"
+     },
+     "-----"
+    ],
+    [
+     {
+      "bk": 1,
+      "bs": "-",
+      "bw": "MEADoW"
+     },
+     "------"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "EMBER"
+     },
+     "-----"
+    ],
+    [
+     {
+      "bk": 1,
+      "bs": "-",
+      "bw": "grove"
+     },
+     "-----"
+    ],
+    [
+     {
+      "bk": 1,
+      "bs": "-",
+      "bw": "orbit"
+     },
+     "-----"
+    ],
+    [
+     {
+      "bk": 1,
+      "bs": "-",
+      "bw": "PiXel"
+     },
+     "-----"
+    ]
+   ],
+   "task_id": "b-14",
+   "tier": "easy",
+   "tree": [
+    "srep",
+    [
+     "var",
+     "bs"
+    ],
+    [
+     "strlen",
+     [
+      "var",
+      "bw"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 160,
+   "cold_reason": null,
+   "domain": "bridge",
+   "family": "s_len_of_edit",
+   "formula": "length after keeping the first k and the last j letters",
+   "inputs": [
+    "bw",
+    "bw2",
+    "bk",
+    "bj"
+   ],
+   "kind": "length",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bw": "ATLAS",
+      "bw2": "meadow"
+     },
+     4
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 3,
+      "bw": "Cedar",
+      "bw2": "ANNA"
+     },
+     4
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 1,
+      "bw": "LumeN",
+      "bw2": "meadow"
+     },
+     1
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 2,
+      "bw": "Harbor",
+      "bw2": "GROVE"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 2,
+      "bw": "RIVER",
+      "bw2": "CEDAR"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 1,
+      "bw": "nomad",
+      "bw2": "dana"
+     },
+     1
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 1,
+      "bw": "VAPOR",
+      "bw2": "grOvE"
+     },
+     3
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bw": "Orbit",
+      "bw2": "FINN"
+     },
+     4
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bw": "Orbit",
+      "bw2": "Ember"
+     },
+     4
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 1,
+      "bw": "river",
+      "bw2": "dAnA"
+     },
+     1
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 3,
+      "bw": "HARBOR",
+      "bw2": "meadow"
+     },
+     4
+    ]
+   ],
+   "task_id": "b-20",
+   "tier": "easy",
+   "tree": [
+    "strlen",
+    [
+     "concat",
+     [
+      "take",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "var",
+       "bk"
+      ]
+     ],
+     [
+      "drop",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "sub",
+       [
+        "strlen",
+        [
+         "var",
+         "bw"
+        ]
+       ],
+       [
+        "var",
+        "bj"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 4339,
+   "cold_reason": null,
+   "domain": "bridge",
+   "family": "s_cross_len_digits",
+   "formula": "digits in (len(w)+j) * (len(w2)+k) * k",
+   "inputs": [
+    "bw",
+    "bw2",
+    "bk",
+    "bj"
+   ],
+   "kind": "length",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bw": "wind",
+      "bw2": "River"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 3,
+      "bw": "RIver",
+      "bw2": "MEADOW"
+     },
+     3
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 2,
+      "bw": "ember",
+      "bw2": "FiNN"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 2,
+      "bw": "oRbit",
+      "bw2": "Vapor"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 1,
+      "bw": "Cedar",
+      "bw2": "SIGNAL"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 1,
+      "bw": "lumen",
+      "bw2": "River"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 2,
+      "bw": "quartz",
+      "bw2": "Meadow"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 3,
+      "bw": "desert",
+      "bw2": "NomaD"
+     },
+     3
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 3,
+      "bw": "tundra",
+      "bw2": "ANNA"
+     },
+     3
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bw": "wind",
+      "bw2": "Ember"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 3,
+      "bw": "ember",
+      "bw2": "vapOR"
+     },
+     3
+    ]
+   ],
+   "task_id": "b-26",
+   "tier": "easy",
+   "tree": [
+    "strlen",
+    [
+     "itos",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "add",
+        [
+         "strlen",
+         [
+          "var",
+          "bw"
+         ]
+        ],
+        [
+         "var",
+         "bj"
+        ]
+       ],
+       [
+        "add",
+        [
+         "strlen",
+         [
+          "var",
+          "bw2"
+         ]
+        ],
+        [
+         "var",
+         "bk"
+        ]
+       ]
+      ],
+      [
+       "var",
+       "bk"
+      ]
+     ]
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_rot_tag",
+   "formula": "rotate left by k then append k",
+   "inputs": [
+    "bw",
+    "bk"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bk": 2,
+      "bw": "stonE"
+     },
+     "onEst2"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "EMBER"
+     },
+     "MBERE1"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "Atlas"
+     },
+     "asAtl3"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "Pixel"
+     },
+     "ixelP1"
+    ],
+    [
+     {
+      "bk": 2,
+      "bw": "CedAr"
+     },
+     "dArCe2"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "orbit"
+     },
+     "rbito1"
+    ],
+    [
+     {
+      "bk": 2,
+      "bw": "quartz"
+     },
+     "artzqu2"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "CEDAR"
+     },
+     "EDARC1"
+    ],
+    [
+     {
+      "bk": 2,
+      "bw": "Lumen"
+     },
+     "menLu2"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "VAPOR"
+     },
+     "ORVAP3"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "STONE"
+     },
+     "TONES1"
+    ]
+   ],
+   "task_id": "b-00",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "drop",
+     [
+      "var",
+      "bw"
+     ],
+     [
+      "var",
+      "bk"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "take",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "var",
+       "bk"
+      ]
+     ],
+     [
+      "itos",
+      [
+       "var",
+       "bk"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_rot_lower_sep",
+   "formula": "lower-case: the rest, a dash, the first k",
+   "inputs": [
+    "bw",
+    "bk",
+    "bs"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "SIgNAL"
+     },
+     "gnal-si"
+    ],
+    [
+     {
+      "bk": 3,
+      "bs": "-",
+      "bw": "vApOr"
+     },
+     "or-vap"
+    ],
+    [
+     {
+      "bk": 1,
+      "bs": "-",
+      "bw": "StOne"
+     },
+     "tone-s"
+    ],
+    [
+     {
+      "bk": 3,
+      "bs": "-",
+      "bw": "signAL"
+     },
+     "nal-sig"
+    ],
+    [
+     {
+      "bk": 1,
+      "bs": "-",
+      "bw": "Grove"
+     },
+     "rove-g"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "desert"
+     },
+     "sert-de"
+    ],
+    [
+     {
+      "bk": 1,
+      "bs": "-",
+      "bw": "Cedar"
+     },
+     "edar-c"
+    ],
+    [
+     {
+      "bk": 3,
+      "bs": "-",
+      "bw": "tundra"
+     },
+     "dra-tun"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "atlas"
+     },
+     "las-at"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "Cedar"
+     },
+     "dar-ce"
+    ],
+    [
+     {
+      "bk": 3,
+      "bs": "-",
+      "bw": "VAPOR"
+     },
+     "or-vap"
+    ]
+   ],
+   "task_id": "b-01",
+   "tier": "hard",
+   "tree": [
+    "lower",
+    [
+     "concat",
+     [
+      "drop",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "var",
+       "bk"
+      ]
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "bs"
+      ],
+      [
+       "take",
+       [
+        "var",
+        "bw"
+       ],
+       [
+        "var",
+        "bk"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_cap_prefix",
+   "formula": "upper-case the first k letters",
+   "inputs": [
+    "bw",
+    "bk"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bk": 3,
+      "bw": "Lumen"
+     },
+     "LUMen"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "meadow"
+     },
+     "Meadow"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "Ember"
+     },
+     "Ember"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "WInD"
+     },
+     "WIND"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "ATlAS"
+     },
+     "ATlAS"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "Lumen"
+     },
+     "Lumen"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "MEADOW"
+     },
+     "MEADOW"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "PIXEl"
+     },
+     "PIXEl"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "LumEN"
+     },
+     "LUMEN"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "cedaR"
+     },
+     "CEDaR"
+    ],
+    [
+     {
+      "bk": 2,
+      "bw": "RIver"
+     },
+     "RIver"
+    ]
+   ],
+   "task_id": "b-02",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "upper",
+     [
+      "take",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "var",
+       "bk"
+      ]
+     ]
+    ],
+    [
+     "drop",
+     [
+      "var",
+      "bw"
+     ],
+     [
+      "var",
+      "bk"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_rot_right",
+   "formula": "rotate right by k",
+   "inputs": [
+    "bw",
+    "bk"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bk": 2,
+      "bw": "orbit"
+     },
+     "itorb"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "tundra"
+     },
+     "atundr"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "desErt"
+     },
+     "tdesEr"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "grOVe"
+     },
+     "OVegr"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "Pixel"
+     },
+     "xelPi"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "Ember"
+     },
+     "rEmbe"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "River"
+     },
+     "verRi"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "grove"
+     },
+     "egrov"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "stone"
+     },
+     "onest"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "atLAs"
+     },
+     "satLA"
+    ],
+    [
+     {
+      "bk": 2,
+      "bw": "MEADOW"
+     },
+     "OWMEAD"
+    ]
+   ],
+   "task_id": "b-03",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "drop",
+     [
+      "var",
+      "bw"
+     ],
+     [
+      "sub",
+      [
+       "strlen",
+       [
+        "var",
+        "bw"
+       ]
+      ],
+      [
+       "var",
+       "bk"
+      ]
+     ]
+    ],
+    [
+     "take",
+     [
+      "var",
+      "bw"
+     ],
+     [
+      "sub",
+      [
+       "strlen",
+       [
+        "var",
+        "bw"
+       ]
+      ],
+      [
+       "var",
+       "bk"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_cut_gap",
+   "formula": "delete the j letters after the first k",
+   "inputs": [
+    "bw",
+    "bw2",
+    "bk",
+    "bj"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bj": 1,
+      "bk": 2,
+      "bw": "SIGNAL",
+      "bw2": "finn"
+     },
+     "SINAL"
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 1,
+      "bw": "EMBER",
+      "bw2": "Nomad"
+     },
+     "EMBER"
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bw": "WIND",
+      "bw2": "Carl"
+     },
+     "W"
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 2,
+      "bw": "tUndra",
+      "bw2": "GROVE"
+     },
+     "tUndra"
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 2,
+      "bw": "river",
+      "bw2": "Harbor"
+     },
+     "rir"
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 3,
+      "bw": "SIGNAL",
+      "bw2": "sIgnAL"
+     },
+     "SIGAL"
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 1,
+      "bw": "LUmen",
+      "bw2": "SIGNAL"
+     },
+     "Lmen"
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bw": "river",
+      "bw2": "VAPoR"
+     },
+     "rr"
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 1,
+      "bw": "eMbeR",
+      "bw2": "Pixel"
+     },
+     "eMbeR"
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bw": "HARBOR",
+      "bw2": "NOMad"
+     },
+     "HOR"
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 2,
+      "bw": "TUNDRA",
+      "bw2": "QUARTZ"
+     },
+     "TURA"
+    ]
+   ],
+   "task_id": "b-04",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "take",
+     [
+      "var",
+      "bw"
+     ],
+     [
+      "var",
+      "bk"
+     ]
+    ],
+    [
+     "drop",
+     [
+      "var",
+      "bw"
+     ],
+     [
+      "add",
+      [
+       "var",
+       "bk"
+      ],
+      [
+       "var",
+       "bj"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 327,
+   "cold_reason": null,
+   "domain": "bridge",
+   "family": "s_from_end",
+   "formula": "the k-th letter from the end",
+   "inputs": [
+    "bw",
+    "bk"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bk": 3,
+      "bw": "Nomad"
+     },
+     "m"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "gROve"
+     },
+     "O"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "SIGNAL"
+     },
+     "N"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "atlas"
+     },
+     "l"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "wind"
+     },
+     "i"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "PIXEL"
+     },
+     "L"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "Grove"
+     },
+     "e"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "signal"
+     },
+     "l"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "Desert"
+     },
+     "t"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "Ember"
+     },
+     "r"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "TUNDRA"
+     },
+     "A"
+    ]
+   ],
+   "task_id": "b-05",
+   "tier": "hard",
+   "tree": [
+    "at",
+    [
+     "var",
+     "bw"
+    ],
+    [
+     "sub",
+     [
+      "strlen",
+      [
+       "var",
+       "bw"
+      ]
+     ],
+     [
+      "var",
+      "bk"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_pick_cross",
+   "formula": "letter k of one word, letter j of another",
+   "inputs": [
+    "bw",
+    "bw2",
+    "bk",
+    "bj"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bj": 3,
+      "bk": 3,
+      "bw": "tundra",
+      "bw2": "CEDAR"
+     },
+     "dA"
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 2,
+      "bw": "Cedar",
+      "bw2": "ceDaR"
+     },
+     "de"
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 2,
+      "bw": "Ember",
+      "bw2": "desert"
+     },
+     "bs"
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 3,
+      "bw": "Meadow",
+      "bw2": "carl"
+     },
+     "dr"
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 2,
+      "bw": "RIVER",
+      "bw2": "BEN"
+     },
+     "VB"
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 1,
+      "bw": "Atlas",
+      "bw2": "Cedar"
+     },
+     "td"
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bw": "ORBIT",
+      "bw2": "meadow"
+     },
+     "Rd"
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 2,
+      "bw": "EMBeR",
+      "bw2": "nomad"
+     },
+     "Bo"
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 2,
+      "bw": "nOmaD",
+      "bw2": "eMbEr"
+     },
+     "mb"
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 1,
+      "bw": "ember",
+      "bw2": "CEDAR"
+     },
+     "mE"
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 2,
+      "bw": "tuNdRA",
+      "bw2": "harbOr"
+     },
+     "Nb"
+    ]
+   ],
+   "task_id": "b-06",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "at",
+     [
+      "var",
+      "bw"
+     ],
+     [
+      "var",
+      "bk"
+     ]
+    ],
+    [
+     "at",
+     [
+      "var",
+      "bw2"
+     ],
+     [
+      "var",
+      "bj"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_rev_prefix",
+   "formula": "reverse the first k letters",
+   "inputs": [
+    "bw",
+    "bk"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bk": 1,
+      "bw": "luMeN"
+     },
+     "luMeN"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "HARBOR"
+     },
+     "RAHBOR"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "quartz"
+     },
+     "auqrtz"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "RIVER"
+     },
+     "VIRER"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "Tundra"
+     },
+     "nuTdra"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "ORBIT"
+     },
+     "BROIT"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "Stone"
+     },
+     "Stone"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "ATlas"
+     },
+     "ATlas"
+    ],
+    [
+     {
+      "bk": 2,
+      "bw": "tUNdRa"
+     },
+     "UtNdRa"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "tundra"
+     },
+     "tundra"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "MEADOW"
+     },
+     "AEMDOW"
+    ]
+   ],
+   "task_id": "b-07",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "srev",
+     [
+      "take",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "var",
+       "bk"
+      ]
+     ]
+    ],
+    [
+     "drop",
+     [
+      "var",
+      "bw"
+     ],
+     [
+      "var",
+      "bk"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_rev_suffix",
+   "formula": "reverse the last k letters",
+   "inputs": [
+    "bw",
+    "bk"
+   ],
+   "kind": "slice",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bk": 1,
+      "bw": "lumen"
+     },
+     "lumen"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "vapor"
+     },
+     "varop"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "desErT"
+     },
+     "desTrE"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "nomad"
+     },
+     "nodam"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "SIGNAL"
+     },
+     "SIGLAN"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "rIVeR"
+     },
+     "rIVeR"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "nomad"
+     },
+     "nomad"
+    ],
+    [
+     {
+      "bk": 2,
+      "bw": "Nomad"
+     },
+     "Nomda"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "TUNDRA"
+     },
+     "TUNARD"
+    ],
+    [
+     {
+      "bk": 2,
+      "bw": "VAPOR"
+     },
+     "VAPRO"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "river"
+     },
+     "rirev"
+    ]
+   ],
+   "task_id": "b-08",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "take",
+     [
+      "var",
+      "bw"
+     ],
+     [
+      "sub",
+      [
+       "strlen",
+       [
+        "var",
+        "bw"
+       ]
+      ],
+      [
+       "var",
+       "bk"
+      ]
+     ]
+    ],
+    [
+     "srev",
+     [
+      "drop",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "sub",
+       [
+        "strlen",
+        [
+         "var",
+         "bw"
+        ]
+       ],
+       [
+        "var",
+        "bk"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_first_last_rep",
+   "formula": "first letter, then the last letter k times",
+   "inputs": [
+    "bw",
+    "bk"
+   ],
+   "kind": "repeat",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bk": 3,
+      "bw": "river"
+     },
+     "rrrr"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "atlas"
+     },
+     "as"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "LUMEN"
+     },
+     "LN"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "Harbor"
+     },
+     "Hrrr"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "desert"
+     },
+     "dt"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "ATLAS"
+     },
+     "ASSS"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "Lumen"
+     },
+     "Lnnn"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "EmBER"
+     },
+     "ER"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "harbor"
+     },
+     "hrrr"
+    ],
+    [
+     {
+      "bk": 2,
+      "bw": "Stone"
+     },
+     "See"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "Atlas"
+     },
+     "As"
+    ]
+   ],
+   "task_id": "b-09",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "first",
+     [
+      "var",
+      "bw"
+     ]
+    ],
+    [
+     "srep",
+     [
+      "last",
+      [
+       "var",
+       "bw"
+      ]
+     ],
+     [
+      "var",
+      "bk"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_rep_pair",
+   "formula": "first letter k times then last letter j times",
+   "inputs": [
+    "bw",
+    "bw2",
+    "bk",
+    "bj"
+   ],
+   "kind": "repeat",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bj": 2,
+      "bk": 1,
+      "bw": "riVeR",
+      "bw2": "Meadow"
+     },
+     "rRR"
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 3,
+      "bw": "Meadow",
+      "bw2": "meadow"
+     },
+     "MMMw"
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 3,
+      "bw": "CEdAR",
+      "bw2": "HARBOR"
+     },
+     "CCCR"
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 3,
+      "bw": "mEadOw",
+      "bw2": "HARBOR"
+     },
+     "mmmw"
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bw": "stone",
+      "bw2": "desert"
+     },
+     "seee"
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 3,
+      "bw": "vApOr",
+      "bw2": "GROVE"
+     },
+     "vvvrrr"
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 1,
+      "bw": "ember",
+      "bw2": "qUarTz"
+     },
+     "er"
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bw": "Atlas",
+      "bw2": "OrbIt"
+     },
+     "Asss"
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 3,
+      "bw": "Lumen",
+      "bw2": "QUARTZ"
+     },
+     "LLLnn"
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 2,
+      "bw": "Desert",
+      "bw2": "meadow"
+     },
+     "DD"
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 2,
+      "bw": "Atlas",
+      "bw2": "ORBIT"
+     },
+     "AA"
+    ]
+   ],
+   "task_id": "b-10",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "srep",
+     [
+      "first",
+      [
+       "var",
+       "bw"
+      ]
+     ],
+     [
+      "var",
+      "bk"
+     ]
+    ],
+    [
+     "srep",
+     [
+      "last",
+      [
+       "var",
+       "bw"
+      ]
+     ],
+     [
+      "var",
+      "bj"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_frame",
+   "formula": "the word framed by k dashes each side",
+   "inputs": [
+    "bw",
+    "bk",
+    "bs"
+   ],
+   "kind": "repeat",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bk": 1,
+      "bs": "-",
+      "bw": "QUARTZ"
+     },
+     "-QUARTZ-"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "Grove"
+     },
+     "--Grove--"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "wInD"
+     },
+     "--wInD--"
+    ],
+    [
+     {
+      "bk": 3,
+      "bs": "-",
+      "bw": "STONE"
+     },
+     "---STONE---"
+    ],
+    [
+     {
+      "bk": 3,
+      "bs": "-",
+      "bw": "HARBOR"
+     },
+     "---HARBOR---"
+    ],
+    [
+     {
+      "bk": 1,
+      "bs": "-",
+      "bw": "CEDAR"
+     },
+     "-CEDAR-"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "atlas"
+     },
+     "--atlas--"
+    ],
+    [
+     {
+      "bk": 2,
+      "bs": "-",
+      "bw": "orbit"
+     },
+     "--orbit--"
+    ],
+    [
+     {
+      "bk": 3,
+      "bs": "-",
+      "bw": "nomad"
+     },
+     "---nomad---"
+    ],
+    [
+     {
+      "bk": 3,
+      "bs": "-",
+      "bw": "TUNDRA"
+     },
+     "---TUNDRA---"
+    ],
+    [
+     {
+      "bk": 3,
+      "bs": "-",
+      "bw": "Nomad"
+     },
+     "---Nomad---"
+    ]
+   ],
+   "task_id": "b-13",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "srep",
+     [
+      "var",
+      "bs"
+     ],
+     [
+      "var",
+      "bk"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "bw"
+     ],
+     [
+      "srep",
+      [
+       "var",
+       "bs"
+      ],
+      [
+       "var",
+       "bk"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_len_pair",
+   "formula": "length of one word, dash, length of another",
+   "inputs": [
+    "bw",
+    "bw2",
+    "bs"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bs": "-",
+      "bw": "GROVE",
+      "bw2": "EMBER"
+     },
+     "5-5"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "pIxEL",
+      "bw2": "FiNN"
+     },
+     "5-4"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "VAPOR",
+      "bw2": "Carl"
+     },
+     "5-4"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "River",
+      "bw2": "ben"
+     },
+     "5-3"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "STONE",
+      "bw2": "PIXEL"
+     },
+     "5-5"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "EMBER",
+      "bw2": "PIXEL"
+     },
+     "5-5"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "EMBER",
+      "bw2": "NOMAD"
+     },
+     "5-5"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "stone",
+      "bw2": "Pixel"
+     },
+     "5-5"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "Cedar",
+      "bw2": "TUNDRA"
+     },
+     "5-6"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "sTOnE",
+      "bw2": "VAPOR"
+     },
+     "5-5"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "MEADOW",
+      "bw2": "River"
+     },
+     "6-5"
+    ]
+   ],
+   "task_id": "b-15",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "itos",
+     [
+      "strlen",
+      [
+       "var",
+       "bw"
+      ]
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "bs"
+     ],
+     [
+      "itos",
+      [
+       "strlen",
+       [
+        "var",
+        "bw2"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_upper_len",
+   "formula": "upper-case word, dash, its length",
+   "inputs": [
+    "bw",
+    "bs"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bs": "-",
+      "bw": "Orbit"
+     },
+     "ORBIT-5"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "pIXEl"
+     },
+     "PIXEL-5"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "VAPor"
+     },
+     "VAPOR-5"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "Stone"
+     },
+     "STONE-5"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "hArboR"
+     },
+     "HARBOR-6"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "lumen"
+     },
+     "LUMEN-5"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "RivEr"
+     },
+     "RIVER-5"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "HARBOR"
+     },
+     "HARBOR-6"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "orbit"
+     },
+     "ORBIT-5"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "river"
+     },
+     "RIVER-5"
+    ],
+    [
+     {
+      "bs": "-",
+      "bw": "EMber"
+     },
+     "EMBER-5"
+    ]
+   ],
+   "task_id": "b-16",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "upper",
+     [
+      "var",
+      "bw"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "bs"
+     ],
+     [
+      "itos",
+      [
+       "strlen",
+       [
+        "var",
+        "bw"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_affine_label",
+   "formula": "len*k + j as digits",
+   "inputs": [
+    "bw",
+    "bw2",
+    "bk",
+    "bj"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bj": 1,
+      "bk": 1,
+      "bw": "WIND",
+      "bw2": "eve"
+     },
+     "5"
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 1,
+      "bw": "Pixel",
+      "bw2": "grove"
+     },
+     "7"
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 3,
+      "bw": "Orbit",
+      "bw2": "Carl"
+     },
+     "16"
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 2,
+      "bw": "LUMEN",
+      "bw2": "Lumen"
+     },
+     "12"
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 2,
+      "bw": "Quartz",
+      "bw2": "HArBOr"
+     },
+     "13"
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 2,
+      "bw": "CEDAR",
+      "bw2": "DANA"
+     },
+     "13"
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 2,
+      "bw": "CEDAR",
+      "bw2": "GROve"
+     },
+     "11"
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 2,
+      "bw": "GROVE",
+      "bw2": "CARL"
+     },
+     "10"
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 1,
+      "bw": "Orbit",
+      "bw2": "Orbit"
+     },
+     "7"
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 2,
+      "bw": "atlAs",
+      "bw2": "Orbit"
+     },
+     "10"
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 2,
+      "bw": "PiXel",
+      "bw2": "Lumen"
+     },
+     "10"
+    ]
+   ],
+   "task_id": "b-17",
+   "tier": "hard",
+   "tree": [
+    "itos",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "strlen",
+       [
+        "var",
+        "bw"
+       ]
+      ],
+      [
+       "var",
+       "bk"
+      ]
+     ],
+     [
+      "var",
+      "bj"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_last_square",
+   "formula": "last letter then len + k*k",
+   "inputs": [
+    "bw",
+    "bk"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bk": 2,
+      "bw": "grove"
+     },
+     "e9"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "HARBOR"
+     },
+     "R7"
+    ],
+    [
+     {
+      "bk": 2,
+      "bw": "sigNAl"
+     },
+     "l10"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "tundra"
+     },
+     "a15"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "nomad"
+     },
+     "d14"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "HARBOR"
+     },
+     "R15"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "Signal"
+     },
+     "l15"
+    ],
+    [
+     {
+      "bk": 2,
+      "bw": "tundra"
+     },
+     "a10"
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "qUArtz"
+     },
+     "z7"
+    ],
+    [
+     {
+      "bk": 2,
+      "bw": "HarBOr"
+     },
+     "r10"
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "PiXeL"
+     },
+     "L14"
+    ]
+   ],
+   "task_id": "b-18",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "last",
+     [
+      "var",
+      "bw"
+     ]
+    ],
+    [
+     "itos",
+     [
+      "add",
+      [
+       "strlen",
+       [
+        "var",
+        "bw"
+       ]
+      ],
+      [
+       "mul",
+       [
+        "var",
+        "bk"
+       ],
+       [
+        "var",
+        "bk"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_two_labels",
+   "formula": "k, dash, j, dash, word",
+   "inputs": [
+    "bw",
+    "bk",
+    "bj",
+    "bs"
+   ],
+   "kind": "label",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "bj": 0,
+      "bk": 3,
+      "bs": "-",
+      "bw": "Ember"
+     },
+     "3-0-Ember"
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 1,
+      "bs": "-",
+      "bw": "QUARTZ"
+     },
+     "1-0-QUARTZ"
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 1,
+      "bs": "-",
+      "bw": "PIXEL"
+     },
+     "1-1-PIXEL"
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 1,
+      "bs": "-",
+      "bw": "mEaDoW"
+     },
+     "1-2-mEaDoW"
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 3,
+      "bs": "-",
+      "bw": "EmBER"
+     },
+     "3-2-EmBER"
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 3,
+      "bs": "-",
+      "bw": "EMBER"
+     },
+     "3-3-EMBER"
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 1,
+      "bs": "-",
+      "bw": "vapor"
+     },
+     "1-0-vapor"
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 2,
+      "bs": "-",
+      "bw": "cedar"
+     },
+     "2-2-cedar"
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 1,
+      "bs": "-",
+      "bw": "DESERT"
+     },
+     "1-0-DESERT"
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bs": "-",
+      "bw": "Cedar"
+     },
+     "1-3-Cedar"
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 2,
+      "bs": "-",
+      "bw": "atlas"
+     },
+     "2-3-atlas"
+    ]
+   ],
+   "task_id": "b-19",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "itos",
+     [
+      "var",
+      "bk"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "bs"
+     ],
+     [
+      "concat",
+      [
+       "itos",
+       [
+        "var",
+        "bj"
+       ]
+      ],
+      [
+       "concat",
+       [
+        "var",
+        "bs"
+       ],
+       [
+        "var",
+        "bw"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 724,
+   "cold_reason": null,
+   "domain": "bridge",
+   "family": "s_digit_count",
+   "formula": "digits in (len(w)*len(w2)+k)*k",
+   "inputs": [
+    "bw",
+    "bw2",
+    "bk",
+    "bj"
+   ],
+   "kind": "length",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "bj": 1,
+      "bk": 2,
+      "bw": "grove",
+      "bw2": "RIVER"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 1,
+      "bw": "Lumen",
+      "bw2": "EVE"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 2,
+      "bw": "cedar",
+      "bw2": "ORbIT"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bw": "Pixel",
+      "bw2": "SIGNAL"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 3,
+      "bw": "tundra",
+      "bw2": "Harbor"
+     },
+     3
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 2,
+      "bw": "Desert",
+      "bw2": "ATLAS"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 1,
+      "bw": "NOMAD",
+      "bw2": "wind"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 2,
+      "bw": "stone",
+      "bw2": "QUARTZ"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 2,
+      "bw": "Vapor",
+      "bw2": "Wind"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 3,
+      "bw": "stONe",
+      "bw2": "Tundra"
+     },
+     2
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 1,
+      "bw": "Orbit",
+      "bw2": "FINN"
+     },
+     2
+    ]
+   ],
+   "task_id": "b-21",
+   "tier": "hard",
+   "tree": [
+    "strlen",
+    [
+     "itos",
+     [
+      "mul",
+      [
+       "add",
+       [
+        "mul",
+        [
+         "strlen",
+         [
+          "var",
+          "bw"
+         ]
+        ],
+        [
+         "strlen",
+         [
+          "var",
+          "bw2"
+         ]
+        ]
+       ],
+       [
+        "var",
+        "bk"
+       ]
+      ],
+      [
+       "var",
+       "bk"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_rep_total",
+   "formula": "total letters in k copies of one word and j of another",
+   "inputs": [
+    "bw",
+    "bw2",
+    "bk",
+    "bj"
+   ],
+   "kind": "length",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "bj": 1,
+      "bk": 1,
+      "bw": "ORBIT",
+      "bw2": "desert"
+     },
+     11
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 2,
+      "bw": "STONE",
+      "bw2": "cARL"
+     },
+     10
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 1,
+      "bw": "harbor",
+      "bw2": "stone"
+     },
+     11
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 2,
+      "bw": "Signal",
+      "bw2": "Signal"
+     },
+     12
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 1,
+      "bw": "Signal",
+      "bw2": "SIGNAL"
+     },
+     12
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 1,
+      "bw": "PIXEL",
+      "bw2": "pIxeL"
+     },
+     15
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 2,
+      "bw": "Ember",
+      "bw2": "Signal"
+     },
+     22
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 3,
+      "bw": "TUNDRA",
+      "bw2": "dana"
+     },
+     26
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 1,
+      "bw": "atlAS",
+      "bw2": "RiVeR"
+     },
+     15
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 2,
+      "bw": "RiVeR",
+      "bw2": "grove"
+     },
+     25
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 1,
+      "bw": "meadow",
+      "bw2": "wind"
+     },
+     14
+    ]
+   ],
+   "task_id": "b-22",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "strlen",
+     [
+      "srep",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "var",
+       "bk"
+      ]
+     ]
+    ],
+    [
+     "strlen",
+     [
+      "srep",
+      [
+       "var",
+       "bw2"
+      ],
+      [
+       "var",
+       "bj"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_kept_after_cut",
+   "formula": "k times the letters kept after cutting the last j",
+   "inputs": [
+    "bw",
+    "bw2",
+    "bk",
+    "bj"
+   ],
+   "kind": "length",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "bj": 2,
+      "bk": 2,
+      "bw": "StonE",
+      "bw2": "ATLAS"
+     },
+     6
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 3,
+      "bw": "tUNDRA",
+      "bw2": "ANNA"
+     },
+     15
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 3,
+      "bw": "MEADOW",
+      "bw2": "HARBOr"
+     },
+     18
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 3,
+      "bw": "WIND",
+      "bw2": "dana"
+     },
+     6
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 3,
+      "bw": "PIXEL",
+      "bw2": "River"
+     },
+     15
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 2,
+      "bw": "Quartz",
+      "bw2": "orBIT"
+     },
+     8
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bw": "desert",
+      "bw2": "SigNAL"
+     },
+     3
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 3,
+      "bw": "vapor",
+      "bw2": "Nomad"
+     },
+     9
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 1,
+      "bw": "Nomad",
+      "bw2": "eMbEr"
+     },
+     3
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 2,
+      "bw": "Quartz",
+      "bw2": "Atlas"
+     },
+     8
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bw": "QUARTZ",
+      "bw2": "oRBiT"
+     },
+     3
+    ]
+   ],
+   "task_id": "b-23",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "bk"
+    ],
+    [
+     "strlen",
+     [
+      "take",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "sub",
+       [
+        "strlen",
+        [
+         "var",
+         "bw"
+        ]
+       ],
+       [
+        "var",
+        "bj"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_tail_len_sq",
+   "formula": "(letters after the first k) squared",
+   "inputs": [
+    "bw",
+    "bk"
+   ],
+   "kind": "length",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "bk": 1,
+      "bw": "STONE"
+     },
+     16
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "lumen"
+     },
+     4
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "RIVER"
+     },
+     4
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "Ember"
+     },
+     16
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "orbit"
+     },
+     4
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "AtLas"
+     },
+     16
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "Grove"
+     },
+     16
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "emBER"
+     },
+     16
+    ],
+    [
+     {
+      "bk": 3,
+      "bw": "meAdoW"
+     },
+     9
+    ],
+    [
+     {
+      "bk": 2,
+      "bw": "RIVER"
+     },
+     9
+    ],
+    [
+     {
+      "bk": 1,
+      "bw": "Tundra"
+     },
+     25
+    ]
+   ],
+   "task_id": "b-24",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "strlen",
+     [
+      "drop",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "var",
+       "bk"
+      ]
+     ]
+    ],
+    [
+     "strlen",
+     [
+      "drop",
+      [
+       "var",
+       "bw"
+      ],
+      [
+       "var",
+       "bk"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "bridge",
+   "family": "s_label_width",
+   "formula": "width of 'k-word-j'",
+   "inputs": [
+    "bw",
+    "bk",
+    "bj",
+    "bs"
+   ],
+   "kind": "length",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "bj": 3,
+      "bk": 2,
+      "bs": "-",
+      "bw": "tundra"
+     },
+     10
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 1,
+      "bs": "-",
+      "bw": "MEADOW"
+     },
+     10
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 3,
+      "bs": "-",
+      "bw": "Atlas"
+     },
+     9
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 2,
+      "bs": "-",
+      "bw": "WIND"
+     },
+     8
+    ],
+    [
+     {
+      "bj": 3,
+      "bk": 1,
+      "bs": "-",
+      "bw": "Vapor"
+     },
+     9
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 3,
+      "bs": "-",
+      "bw": "SiGnaL"
+     },
+     10
+    ],
+    [
+     {
+      "bj": 0,
+      "bk": 3,
+      "bs": "-",
+      "bw": "ATLAS"
+     },
+     9
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 1,
+      "bs": "-",
+      "bw": "Grove"
+     },
+     9
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 1,
+      "bs": "-",
+      "bw": "eMBer"
+     },
+     9
+    ],
+    [
+     {
+      "bj": 1,
+      "bk": 3,
+      "bs": "-",
+      "bw": "qUaRTZ"
+     },
+     10
+    ],
+    [
+     {
+      "bj": 2,
+      "bk": 3,
+      "bs": "-",
+      "bw": "Cedar"
+     },
+     9
+    ]
+   ],
+   "task_id": "b-25",
+   "tier": "hard",
+   "tree": [
+    "strlen",
+    [
+     "concat",
+     [
+      "itos",
+      [
+       "var",
+       "bk"
+      ]
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "bs"
+      ],
+      [
+       "concat",
+       [
+        "var",
+        "bw"
+       ],
+       [
+        "concat",
+        [
+         "var",
+         "bs"
+        ],
+        [
+         "itos",
+         [
+          "var",
+          "bj"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "bridge",
+ "schema": "nomad.bridge-suite.v1",
+ "seed": 20261121,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 5,
+  "families": 27,
+  "hard": 22,
+  "lookup_dropped": []
+ },
+ "trained_on_by_any_arm": false
+}

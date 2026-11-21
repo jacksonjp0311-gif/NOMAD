@@ -250,6 +250,12 @@ def _ok_body(b: list) -> bool:
 def _rows(types: tuple, seed: str) -> list[list]:
     rng = random.Random(f"invent:{seed}")
     out = []
+    if "str" in types and "int" in types:
+        # mixed int/str holes (BRIDGE ops only): indices must be small to be valid
+        for _ in range(DREAM_ROWS):
+            out.append([rng.randint(0, 6) if ty == "int" else "".join(rng.choice("abcXYZ ") for _ in range(rng.randint(1, 6)))
+                        for ty in types])
+        return out
     for _ in range(DREAM_ROWS):
         out.append([int(round(math.exp(rng.uniform(0, math.log(DREAM_MAX))))) if ty == "int" else "".join(rng.choice("abcXYZ ")
                     for _ in range(rng.randint(1, 6))) for ty in types])

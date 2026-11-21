@@ -73,6 +73,31 @@ def _nonempty(xs: tuple[int, ...]) -> tuple[int, ...]:
     return xs
 
 
+def _at(s: str, i: int) -> str:
+    if not isinstance(i, int) or i < 0 or i >= len(s):
+        raise Invalid
+    return s[i]
+
+
+def _nonneg(i: int) -> bool:
+    """True for an index i >= 0 (the callers slice only then); Invalid otherwise."""
+    if not isinstance(i, int) or i < 0:
+        raise Invalid
+    return True
+
+
+def _nonneg_i(i: int) -> int:
+    if not isinstance(i, int) or i < 0:
+        raise Invalid
+    return i
+
+
+def _nonneg_n(i: int) -> int:
+    if not isinstance(i, int) or i < 0 or i > MAX_STR:
+        raise Invalid
+    return i
+
+
 @dataclass(frozen=True)
 class Op:
     name: str
@@ -102,6 +127,14 @@ OPS: dict[str, Op] = {o.name: o for o in (
     Op("last", ("str",), "str", lambda s: s[-1:]),
     Op("strlen", ("str",), "int", lambda s: len(s)),
     Op("rest", ("str",), "str", lambda s: s[1:]),   # TEXT only (docs/TEXT.md): drop the first character
+    # BRIDGE (docs/BRIDGE.md): int <-> str bridges. Present in the op table so every
+    # interpreter and the standalone checker agree; reachable only through the
+    # "bridge" opset, which synthesize resolves only when NOMAD_BRIDGE is on.
+    Op("at", ("str", "int"), "str", lambda s, i: _at(s, i)),        # s[i] (0 <= i < len)
+    Op("take", ("str", "int"), "str", lambda s, i: _nonneg(i) and s[:i]),   # first i characters
+    Op("drop", ("str", "int"), "str", lambda s, i: _nonneg(i) and s[i:]),   # all but the first i
+    Op("srep", ("str", "int"), "str", lambda s, i: _str(s * _nonneg_n(i))),  # i copies
+    Op("itos", ("int",), "str", lambda i: str(_nonneg_i(i))),       # decimal digits of i >= 0
     # int lists
     Op("sort", ("list",), "list", lambda xs: tuple(sorted(xs))),
     Op("lrev", ("list",), "list", lambda xs: xs[::-1]),
@@ -126,7 +159,25 @@ OPSETS: dict[str, tuple[str, ...]] = {
     # need "all but the first character") and mul / div for mixed
     # string+integer tasks. Used only by text tasks; "str" is unchanged.
     "text": ("upper", "lower", "srev", "concat", "first", "last", "rest", "strlen", "add", "sub", "mul", "div"),
+    # BRIDGE (docs/BRIDGE.md): the text world plus index / length / repeat / digit
+    # bridges between int and str. Used only by bridge tasks, and only resolved
+    # when NOMAD_BRIDGE is on (otherwise such a task runs the "text" opset).
+    "bridge": ("upper", "lower", "srev", "concat", "first", "last", "rest", "strlen", "add", "sub", "mul", "div",
+               "at", "take", "drop", "srep", "itos"),
 }
+
+
+def bridge_enabled() -> bool:
+    """NOMAD_BRIDGE (default off until proven; docs/BRIDGE.md)."""
+    return _flag("NOMAD_BRIDGE", "off")
+
+
+def opset_of(task: "WorldTask") -> tuple[str, ...]:
+    """The operators a task searches: OPSETS[task.opset], except that the
+    bridge world collapses to the text world while NOMAD_BRIDGE is off."""
+    if task.opset == "bridge" and not bridge_enabled():
+        return OPSETS["text"]
+    return OPSETS[task.opset]
 
 # ----------------------------------------------------------------- programs
 # A tree is JSON-safe: ["var", name] | ["const", k] | ["lib", name] | [op, child, ...]
@@ -582,7 +633,7 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     scored by task features, as anchors and extra atoms. An empty field has
     no bank; the cold control never reads one.
     """
-    opset = OPSETS[task.opset]
+    opset = opset_of(task)
     cold_order = tuple(opset)
     if prior is None:
         # The twin cold control: never reads variation state.
@@ -1110,7 +1161,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 pinfo["port"] = "block"
                 return hit
         istate.update(table=table, ranked=ranked)
-        if inv is not None and task.out == "int" and not invent_deferred(ranked):
+        if inv is not None and invent_applies() and not invent_deferred(ranked):
             hit = yield from invent_phase(P, B, limit)
             if hit is not None:
                 return hit
@@ -1226,14 +1277,19 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
 
     istate: dict = {"seen": set(), "done": False}
 
+    def invent_applies() -> bool:
+        """INVENT runs for int goals; with NOMAD_BRIDGE on also for str goals
+        (the text side invents its own primitives; docs/BRIDGE.md)."""
+        return task.out == "int" or (task.out == "str" and bridge_enabled() and _flag("NOMAD_BRIDGE_INVENT", "on"))
+
     def invent_deferred(ranked) -> bool:
         """INVENT runs after the probe's regular levels (not before them)
         when the after-levels mode is set, or when a bank block already
         equals the goal on >= INVENT_EQ_GATE public rows (the regular
         levels are then likely to finish the task; docs/INVENT.md)."""
         from . import invent as _I
-        if _I.INVENT_AT == "after":
-            return True
+        if _I.INVENT_AT == "after" or task.out == "str":
+            return True   # str goals (NOMAD_BRIDGE): only the budget the regular levels left
         if _I.INVENT_EQ_GATE and ranked and ranked[0][0][0] >= _I.INVENT_EQ_GATE:
             return True
         return False
@@ -1263,14 +1319,14 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 return True
             return gate is not None and len(gate.rejected) - rej0 >= PORT_ANCHOR_REJECTS
 
-        learned = bank_scales(bank)
+        learned = bank_scales(bank) if task.out == "int" else []   # str goals: no scales (docs/BRIDGE.md)
         targets = [(goal, None, "", False)]
         for k, kt in learned + list(inv.consts):
             derived = k not in {a for a, _ in learned}
             targets.append((tuple(g * k for g in goal), (lambda h, kt=kt: ["div", h, kt]), f"div{k}", derived))
             if all(g % k == 0 for g in goal):
                 targets.append((tuple(g // k for g in goal), (lambda h, kt=kt: ["mul", h, kt]), f"mul{k}", derived))
-        targets = [z for z in targets if not any(abs(x) > MAX_INT for x in z[0])]
+        targets = [z for z in targets if task.out != "int" or not any(abs(x) > MAX_INT for x in z[0])]
         if _I.LEVEL_TARGETS == "goal":
             ltargets = targets[:1]
         else:
@@ -1294,7 +1350,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 v = tuple(run(t, r) for r in rows)
             except Invalid:
                 continue
-            if not v or any(type_of(x) != "int" for x in v):
+            if not v or any(type_of(x) != task.out for x in v):
                 continue
             if len(set(v)) == 1 or any(v == tuple(r[nm] for r in rows) for nm, _ty in task.inputs):
                 continue   # a constant or just an input (e.g. min(a, a·a) = a): no new block
@@ -1309,6 +1365,8 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         inst_names = {n for n, _t in inv.instances}
         for g2, wrap, tag, derived in targets:
             cand = ri + (ranked if derived else [])
+            if task.out != "int":
+                break   # residual anchors (add / sub / mul) are integer-only
             rk = sorted(((block_score(z[3], g2, task.out),) + z[1:] for z in cand),
                         key=lambda z: (z[0], z[1]), reverse=True)
             for sc, _n, t, v in rk[:PORT_ANCHOR_N]:
@@ -1357,7 +1415,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                             continue   # the application just returns an argument: no new block
                         tree = iop.build([c[0] for c in combo])
                         k = (iop.out, _key(vals))
-                        if iop.out == "int" and _key(vals) in tset:
+                        if iop.out == task.out and _key(vals) in tset:
                             wrap, tag = tset[_key(vals)]
                             hit = fit(wrap(tree) if wrap else tree, tag, iop.round)
                             if hit is not None:
@@ -1368,7 +1426,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                             continue
                         istate["seen"].add(k)
                         offer(sz, tree, vals, True, P, B)
-                        if iop.out != "int":
+                        if iop.out != "int" or task.out != "int":
                             continue
                         for g2, wrap, tag, _d in ltargets:
                             for op in ("add", "sub", "rsub", "mul"):
@@ -1481,7 +1539,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             if hit is not None:
                 pinfo.update(spent=evals - start, hit=True)
                 return hit
-        if inv is not None and task.out == "int" and "table" in istate and not istate["done"]:
+        if inv is not None and invent_applies() and "table" in istate and not istate["done"]:
             # deferred INVENT: only the budget the regular levels left
             hit = yield from invent_phase(P, B, limit)
             if hit is not None:

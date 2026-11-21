@@ -62,6 +62,18 @@ def _mod(a, b):
     return _int(a % b)  # result takes the divisor's sign (Python semantics)
 
 
+def _nn(i, cap=None):
+    if not isinstance(i, int) or i < 0 or (cap is not None and i > cap):
+        raise Invalid
+    return i
+
+
+def _at(s, i):
+    if not isinstance(i, int) or i < 0 or i >= len(s):
+        raise Invalid
+    return s[i]
+
+
 # name: (argument types, output type, function). Lists are int lists (tuples here).
 OPS = {
     "add": (("int", "int"), "int", lambda a, b: _int(a + b)),
@@ -80,6 +92,11 @@ OPS = {
     "last": (("str",), "str", lambda s: s[-1:]),
     "strlen": (("str",), "int", lambda s: len(s)),
     "rest": (("str",), "str", lambda s: s[1:]),
+    "at": (("str", "int"), "str", lambda s, i: _at(s, i)),
+    "take": (("str", "int"), "str", lambda s, i: s[:_nn(i)]),
+    "drop": (("str", "int"), "str", lambda s, i: s[_nn(i):]),
+    "srep": (("str", "int"), "str", lambda s, i: _str(s * _nn(i, MAX_STR))),
+    "itos": (("int",), "str", lambda i: str(_nn(i))),
     "sort": (("list",), "list", lambda xs: tuple(sorted(xs))),
     "lrev": (("list",), "list", lambda xs: xs[::-1]),
     "tail": (("list",), "list", lambda xs: xs[1:]),
