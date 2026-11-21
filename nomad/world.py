@@ -1334,8 +1334,128 @@ def _port_instances(srcs: list, by_type: dict, seen: set, consts: bool):
             yield ("P" + hashlib.sha256(k.encode()).hexdigest()[:8], inst, _n)
 
 
+def merge_enabled() -> bool:
+    """NOMAD_MERGE (docs/MERGE.md): observationally equivalent portable-bank
+    blocks are one idea; the evaluations duplicates cost buy distinct ideas."""
+    return _flag("NOMAD_MERGE", "off")
+
+
+MERGE_PROBES = 16        # fixed synthetic probe rows per input signature (never a task's rows)
+MERGE_REJECTS = 4        # WITNESS rejections the merged anchors may cause per task
+
+_PROBE_INTS = (0, 1, 2, 3, 5, 7, -1, -4, 10, 12, 25, 36, 64, 99, 128, 1000)
+_PROBE_STRS = ("", "a", "ab", "ba", "abc", "xyz", "aaa", "hello", "Zq", "k", "mm", "abcab", "q r", "1", "ZZ", "nomad")
+
+
+def _probe_rows(inputs: Sequence[tuple[str, str]], n: int | None = None) -> list[dict]:
+    """Deterministic synthetic rows for an input signature: fixed value pools,
+    a seeded shuffle per input position. Never a task's data."""
+    import random
+    n = MERGE_PROBES if n is None else n
+    rows: list[dict] = [{} for _ in range(n)]
+    for i, (nm, ty) in enumerate(inputs):
+        pool = list(_PROBE_STRS if ty == "str" else _PROBE_INTS)
+        random.Random(f"nomad-merge-{i}-{ty}").shuffle(pool)
+        for r in range(n):
+            rows[r][nm] = pool[r % len(pool)]
+    return rows
+
+
+def probe_fingerprint(tree: list, rows: list[dict]) -> tuple:
+    """A block's behaviour on the probe rows ('!' where it is invalid)."""
+    out = []
+    for r in rows:
+        try:
+            out.append(repr(run(tree, r)))
+        except Invalid:
+            out.append("!")
+    return tuple(out)
+
+
+class MergedBank(list):
+    """MERGE: main's bank, element for element, plus ``dup_of`` (index ->
+    index of the earlier probe-equivalent block)."""
+    merged = True
+
+    def __init__(self, items, dup_of: dict):
+        super().__init__(items)
+        self.dup_of = dup_of
+
+
+def _merge_bank(prior: "WorldPrior", task: WorldTask, out: list) -> list:
+    srcs = [(-prior.library_uses.get(n, 0.0), n, t, prior.library_sig.get(n)) for n, t in prior.library.items()]
+    srcs += [(-prior.programs_uses.get(n, 0.0), n, t, prior.programs_sig.get(n)) for n, t in prior.programs.items()]
+    srcs.sort(key=lambda z: (z[0], z[1]))
+    by_type: dict[str, list[str]] = {}
+    for nm, ty in task.inputs:
+        by_type.setdefault(ty, []).append(nm)
+    rows = _probe_rows(task.inputs)
+    first: dict[tuple, int] = {}
+    dup_of: dict[int, int] = {}
+    for i, (nm, t, _src) in enumerate(_port_instances(srcs, by_type, set(), const_enabled())):
+        if i >= len(out):
+            break
+        if out[i][0] != nm:
+            return out          # not main's plain order (cannot happen without ROUTE / ROUTE_CUT): leave main's bank
+        f = probe_fingerprint(t, rows)
+        if f in first:
+            dup_of[i] = first[f]
+        else:
+            first[f] = i
+    ctl = merge_control()
+    if ctl is not None and dup_of:
+        # judge-only control: every duplicate re-pointed to a random earlier
+        # block that is NOT probe-equivalent (same number of skips, wrong merges)
+        import random
+        rng = random.Random(f"merge-rewired-{ctl}-{task.task_id}")
+        cls = {i: f for f, i in first.items()}
+        heads = sorted(cls)
+        for i in sorted(dup_of):
+            cand = [j for j in heads if j < i and j != dup_of[i]]
+            if cand:
+                dup_of[i] = rng.choice(cand)
+    return MergedBank(out, dup_of)
+
+
+def merge_control() -> int | None:
+    """NOMAD_MERGE_CONTROL=rewired:<seed> (judge only): wrong merges, same skip count."""
+    import os
+    v = os.environ.get("NOMAD_MERGE_CONTROL", "").strip().lower()
+    if v.startswith("rewired:"):
+        return int(v.split(":", 1)[1])
+    return None
+
+
 def port_bank(prior: "WorldPrior", task: WorldTask, key: str | None = None,
               rel: dict | None = None, cut_key: str | None = None) -> list[tuple[str, list]]:
+    """The portable bank (``_port_bank_main``). With NOMAD_MERGE on (and
+    neither ROUTE nor ROUTE_CUT re-ordering it) the same bank, element for
+    element, annotated for the probe with which blocks are probe-equivalent
+    to an earlier one."""
+    out = _port_bank_main(prior, task, key, rel, cut_key)
+    if not out or not merge_enabled() or task.out != "int":
+        return out
+    if rel is not None and key and route_enabled() and prior.route.get(key):
+        return out
+    if cut_key and route_cut_enabled() and prior.route.get(cut_key):
+        return out
+    return _merge_bank(prior, task, out)
+
+
+def merge_ranked(ranked: list) -> list:
+    """One representative per public-value class (the first in ranked order)."""
+    seen: set = set()
+    out = []
+    for z in ranked:
+        k = _key(z[3])
+        if k not in seen:
+            seen.add(k)
+            out.append(z)
+    return out
+
+
+def _port_bank_main(prior: "WorldPrior", task: WorldTask, key: str | None = None,
+                    rel: dict | None = None, cut_key: str | None = None) -> list[tuple[str, list]]:
     """The portable bank: learned blocks and whole certified programs from any
     input signature, instantiated over this task's inputs by type-preserving
     renaming of their variables. Most-used first; within a source, the
@@ -1536,6 +1656,22 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
 
     probe_at = [int(BLOCKPROBE_TRIGGER * max_eval)] if (blockprobe and (library or bank)) else []
     pinfo: dict = {}
+    # MERGE (docs/MERGE.md): evaluations saved on equivalent blocks, lookups known to miss
+    mstate: dict = {"on": bool(getattr(bank, "merged", False)), "skips": 0, "spent": 0, "miss": set()}
+
+    def vev() -> int:
+        """Main's evaluation count: real evaluations plus MERGE's unspent skips (= evals when MERGE is off)."""
+        return evals + mstate["skips"] - mstate["spent"]
+
+    def merge_settle():
+        """MERGE: charge the skips the merged anchors did not spend, so every
+        later stage starts at main's count and runs exactly main's search."""
+        nonlocal evals
+        left = mstate["skips"] - mstate["spent"]
+        if left > 0:
+            mstate["spent"] = mstate["skips"]
+            evals += left
+            yield evals
 
     def probe():
         """The block probe: library-containing combinations on a copy of the pools."""
@@ -1569,15 +1705,26 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             for tr, vs_, _f in P[sz_].get(task.out, []):
                 table.setdefault(_key(vs_), tr)
         ranked = []
-        for n, t in bank:
-            if evals >= limit:
+        dup_of = getattr(bank, "dup_of", None) if getattr(bank, "merged", False) else None
+        vals_at: dict[int, tuple | None] = {}
+        for i, (n, t) in enumerate(bank):
+            if vev() >= limit:
                 return None
-            evals += 1
-            yield evals
-            try:
-                v = tuple(run(t, r) for r in rows)
-            except Invalid:
-                continue
+            if dup_of is not None and dup_of.get(i) in vals_at:
+                # MERGE: probe-equivalent to an earlier block: its values, no evaluation
+                v = vals_at[dup_of[i]]
+                mstate["skips"] += 1
+                if v is None:
+                    continue
+            else:
+                evals += 1
+                yield evals
+                try:
+                    v = tuple(run(t, r) for r in rows)
+                except Invalid:
+                    vals_at[i] = None
+                    continue
+                vals_at[i] = v
             if not v or any(type_of(x) != type_of(v[0]) for x in v):
                 continue
             if type_of(v[0]) == task.out:
@@ -1590,26 +1737,33 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             ranked.sort(key=lambda z: (z[0], z[1]), reverse=True)
         if task.out == "int":
             rej0 = len(gate.rejected) if gate is not None else 0
+            gkey = _key(goal)
             for sc, _n, t, v in ranked[:PORT_ANCHOR_N]:
                 if sc[0] < 0:
                     break
                 if gate is not None and len(gate.rejected) - rej0 >= PORT_ANCHOR_REJECTS:
                     break
                 for op in ("add", "sub", "rsub", "mul"):
-                    if evals >= limit:
+                    if vev() >= limit:
                         return None
+                    mk = (gkey, op, _key(v))
+                    if mk in mstate["miss"]:
+                        mstate["skips"] += 1    # MERGE: the same lookup already missed (no candidate)
+                        continue
                     evals += 1
                     yield evals
                     need = _residual(op, v, goal)
                     b = table.get(_key(need)) if need is not None else None
                     if b is None:
+                        if mstate["on"]:
+                            mstate["miss"].add(mk)
                         continue
                     hit = ["sub", b, t] if op == "rsub" else [op, t, b]
                     if stop_on(hit):
                         pinfo["port"] = "anchor"
                         return hit
                     yield evals
-            glimit = min(limit, evals + int(GROW_CAP * max_eval))
+            glimit = min(limit, vev() + int(GROW_CAP * max_eval))
             if anchor2_enabled():
                 hit = yield from anchor2(ranked, table, glimit, goal, None)
                 if hit is not None:
@@ -1620,10 +1774,15 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 if hit is not None:
                     return hit
             if let_enabled():
-                hit = yield from let_stage(ranked, P, table, min(limit, evals + int(LET_CAP * max_eval)))
+                hit = yield from let_stage(ranked, P, table, min(limit, vev() + int(LET_CAP * max_eval)))
                 if hit is not None:
                     pinfo["port"] = "let"
                     return hit
+            if mstate["on"]:
+                hit = yield from merge_extra(ranked, table, limit)
+                if hit is not None:
+                    return hit
+                yield from merge_settle()
         if task.out == "str" and splice_enabled():
             hit = yield from splice(ranked, P, limit)
             if hit is not None:
@@ -1666,6 +1825,59 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             hit = yield from invent_phase(P, B, limit)
             if hit is not None:
                 return hit
+        return None
+
+    def merge_extra(ranked, table, limit):
+        """MERGE (docs/MERGE.md), after every one of main's int anchors missed.
+
+        The bank merged by public values (one block per value class) is anchored on the goal and on each learned scale target; only
+        anchors main's top-PORT_ANCHOR_N cut never reached are tried, and only
+        with the evaluations MERGE saved (duplicates not scanned, lookups that
+        already missed not repeated). Main's stages before this one see the
+        virtual count ``vev()`` (as if every skip had cost its evaluation), so
+        they try exactly main's candidates and stop where main stops; this
+        stage then spends at most the skips, so every later stage starts no
+        later than in main. 1 evaluation per lookup, WITNESS-gated, capped."""
+        nonlocal evals
+        if gate is not None and len(gate.rejected) + MERGE_REJECTS > gate.max_rejects:
+            return None
+        rej0 = len(gate.rejected) if gate is not None else 0
+        skey = (lambda z: route_sort_key(z, rel)) if rel else (lambda z: (z[0], z[1]))
+        targets = [(goal, None, "anchor")]
+        if scale_enabled():
+            for k, kt in bank_scales(bank):
+                targets.append((tuple(g * k for g in goal), (lambda h, kt=kt: ["div", h, kt]), f"div{k}"))
+                if all(g % k == 0 for g in goal):
+                    targets.append((tuple(g // k for g in goal), (lambda h, kt=kt: ["mul", h, kt]), f"mul{k}"))
+        for g2, wrap, tag in targets:
+            if any(abs(x) > MAX_INT for x in g2):
+                continue
+            rm = ranked if wrap is None else sorted(((block_score(z[3], g2, task.out),) + z[1:] for z in ranked),
+                                                    key=skey, reverse=True)
+            done = {z[1] for z in rm[:PORT_ANCHOR_N]}
+            for sc, n, t, v in merge_ranked(rm)[:PORT_ANCHOR_N]:
+                if sc[0] < 0:
+                    break
+                if n in done:
+                    continue
+                for op in ("add", "sub", "rsub", "mul"):
+                    if mstate["spent"] >= mstate["skips"] or evals >= limit:
+                        return None
+                    if gate is not None and len(gate.rejected) - rej0 >= MERGE_REJECTS:
+                        return None
+                    mstate["spent"] += 1
+                    evals += 1
+                    yield evals
+                    need = _residual(op, v, g2)
+                    b = table.get(_key(need)) if need is not None else None
+                    if b is None:
+                        continue
+                    hit = ["sub", b, t] if op == "rsub" else [op, t, b]
+                    hit = wrap(hit) if wrap else hit
+                    if stop_on(hit):
+                        pinfo["port"] = "merge:" + tag
+                        return hit
+                    yield evals
         return None
 
     def scaled(ranked, table, limit):
@@ -1737,7 +1949,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             for i, (tr, tv) in enumerate(terms):
                 if i == 0 or _key(tv) in table:
                     continue        # already computed (t by PORT, the rest by the regular levels)
-                if evals >= limit:
+                if vev() >= limit:
                     return None
                 evals += 1          # a new term is one evaluation
                 yield evals
@@ -1757,7 +1969,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     if all(x // k == g for x, g in zip(tv, goal)):
                         fits.append(["div", tr, kt])
             for hit in fits:
-                if evals >= limit or (gate is not None and len(gate.rejected) - rej0 >= LET_REJECTS):
+                if vev() >= limit or (gate is not None and len(gate.rejected) - rej0 >= LET_REJECTS):
                     return None
                 key = json.dumps(hit)
                 if key in tried:
@@ -2247,19 +2459,26 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
     def anchor1(rk, table, limit, g, wrap):
         """Depth-1 anchor on target g (the PORT anchor's loop, generalised)."""
         nonlocal evals
+        gk = _key(g)
         for sc, _n, t, v in rk[:PORT_ANCHOR_N]:
             if sc[0] < 0:
                 break
             if grow_spent():
                 return None
             for op in ("add", "sub", "rsub", "mul"):
-                if evals >= limit:
+                if vev() >= limit:
                     return None
+                mk = (gk, op, _key(v))
+                if mk in mstate["miss"]:
+                    mstate["skips"] += 1        # MERGE: the same lookup already missed (no candidate)
+                    continue
                 evals += 1
                 yield evals
                 need = _residual(op, v, g)
                 b = table.get(_key(need)) if need is not None else None
                 if b is None:
+                    if mstate["on"]:
+                        mstate["miss"].add(mk)
                     continue
                 hit = ["sub", b, t] if op == "rsub" else [op, t, b]
                 hit = wrap(hit) if wrap else hit
@@ -2301,7 +2520,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 tried.add(frozenset((_key(va), _key(vb))) if _key(va) != _key(vb) else (_key(va),))
                 if grow_spent():
                     return None
-                if evals >= limit:
+                if vev() >= limit:
                     return None
                 evals += 1
                 yield evals
@@ -2323,7 +2542,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     continue
                 if grow_spent():
                     return None
-                if evals >= limit:
+                if vev() >= limit:
                     return None
                 evals += 1
                 yield evals
@@ -2345,6 +2564,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             if hit is not None:
                 pinfo.update(spent=evals - start, hit=True)
                 return hit
+            yield from merge_settle()
         for n in ({} if bank else library):
             if evals >= limit:
                 break

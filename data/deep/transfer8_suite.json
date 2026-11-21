@@ -1,0 +1,6541 @@
+{
+ "budget": 10000,
+ "domains": [
+  "brewery",
+  "railway",
+  "laundry"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 214,
+   "cold_reason": null,
+   "domain": "brewery",
+   "family": "b8_tank_days",
+   "formula": "tank-days with one cleaning day per batch = bch fmd + bch",
+   "inputs": [
+    "bch",
+    "lbt",
+    "fmd"
+   ],
+   "kind": "time",
+   "rows": [
+    [
+     {
+      "bch": 20,
+      "fmd": 11,
+      "lbt": 408
+     },
+     240
+    ],
+    [
+     {
+      "bch": 27,
+      "fmd": 4,
+      "lbt": 135
+     },
+     135
+    ],
+    [
+     {
+      "bch": 15,
+      "fmd": 10,
+      "lbt": 214
+     },
+     165
+    ],
+    [
+     {
+      "bch": 5,
+      "fmd": 16,
+      "lbt": 353
+     },
+     85
+    ],
+    [
+     {
+      "bch": 10,
+      "fmd": 19,
+      "lbt": 379
+     },
+     200
+    ],
+    [
+     {
+      "bch": 27,
+      "fmd": 10,
+      "lbt": 140
+     },
+     297
+    ],
+    [
+     {
+      "bch": 21,
+      "fmd": 8,
+      "lbt": 101
+     },
+     189
+    ],
+    [
+     {
+      "bch": 7,
+      "fmd": 3,
+      "lbt": 262
+     },
+     28
+    ],
+    [
+     {
+      "bch": 6,
+      "fmd": 21,
+      "lbt": 386
+     },
+     132
+    ],
+    [
+     {
+      "bch": 18,
+      "fmd": 13,
+      "lbt": 395
+     },
+     252
+    ],
+    [
+     {
+      "bch": 30,
+      "fmd": 7,
+      "lbt": 495
+     },
+     240
+    ]
+   ],
+   "task_id": "t-01",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "bch"
+     ],
+     [
+      "var",
+      "fmd"
+     ]
+    ],
+    [
+     "var",
+     "bch"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1906,
+   "cold_reason": null,
+   "domain": "brewery",
+   "family": "b8_samples",
+   "formula": "gravity samples: one a day plus 2 per batch = bch (fmd + 2)",
+   "inputs": [
+    "bch",
+    "lbt",
+    "fmd"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "bch": 1,
+      "fmd": 11,
+      "lbt": 364
+     },
+     13
+    ],
+    [
+     {
+      "bch": 14,
+      "fmd": 8,
+      "lbt": 319
+     },
+     140
+    ],
+    [
+     {
+      "bch": 12,
+      "fmd": 17,
+      "lbt": 200
+     },
+     228
+    ],
+    [
+     {
+      "bch": 15,
+      "fmd": 21,
+      "lbt": 354
+     },
+     345
+    ],
+    [
+     {
+      "bch": 29,
+      "fmd": 19,
+      "lbt": 38
+     },
+     609
+    ],
+    [
+     {
+      "bch": 20,
+      "fmd": 16,
+      "lbt": 312
+     },
+     360
+    ],
+    [
+     {
+      "bch": 12,
+      "fmd": 15,
+      "lbt": 276
+     },
+     204
+    ],
+    [
+     {
+      "bch": 15,
+      "fmd": 18,
+      "lbt": 80
+     },
+     300
+    ],
+    [
+     {
+      "bch": 20,
+      "fmd": 9,
+      "lbt": 269
+     },
+     220
+    ],
+    [
+     {
+      "bch": 20,
+      "fmd": 17,
+      "lbt": 344
+     },
+     380
+    ],
+    [
+     {
+      "bch": 30,
+      "fmd": 15,
+      "lbt": 307
+     },
+     510
+    ]
+   ],
+   "task_id": "t-02",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "bch"
+    ],
+    [
+     "add",
+     [
+      "var",
+      "fmd"
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 283,
+   "cold_reason": null,
+   "domain": "brewery",
+   "family": "b8_kegs",
+   "formula": "kegs for every litre = ceil(lit / lpk)",
+   "inputs": [
+    "lit",
+    "lpk",
+    "kpp"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "kpp": 4,
+      "lit": 353,
+      "lpk": 55
+     },
+     7
+    ],
+    [
+     {
+      "kpp": 12,
+      "lit": 159,
+      "lpk": 45
+     },
+     4
+    ],
+    [
+     {
+      "kpp": 9,
+      "lit": 855,
+      "lpk": 30
+     },
+     29
+    ],
+    [
+     {
+      "kpp": 8,
+      "lit": 3256,
+      "lpk": 18
+     },
+     181
+    ],
+    [
+     {
+      "kpp": 11,
+      "lit": 3081,
+      "lpk": 17
+     },
+     182
+    ],
+    [
+     {
+      "kpp": 6,
+      "lit": 5671,
+      "lpk": 28
+     },
+     203
+    ],
+    [
+     {
+      "kpp": 9,
+      "lit": 1162,
+      "lpk": 32
+     },
+     37
+    ],
+    [
+     {
+      "kpp": 6,
+      "lit": 2837,
+      "lpk": 16
+     },
+     178
+    ],
+    [
+     {
+      "kpp": 5,
+      "lit": 4973,
+      "lpk": 29
+     },
+     172
+    ],
+    [
+     {
+      "kpp": 2,
+      "lit": 1940,
+      "lpk": 44
+     },
+     45
+    ],
+    [
+     {
+      "kpp": 3,
+      "lit": 5164,
+      "lpk": 56
+     },
+     93
+    ]
+   ],
+   "task_id": "t-06",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "lit"
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "lpk"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "lpk"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 6531,
+   "cold_reason": null,
+   "domain": "brewery",
+   "family": "b8_pallets",
+   "formula": "pallets for those kegs = ceil(ceil(lit / lpk) / kpp)",
+   "inputs": [
+    "lit",
+    "lpk",
+    "kpp"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "kpp": 5,
+      "lit": 5962,
+      "lpk": 18
+     },
+     67
+    ],
+    [
+     {
+      "kpp": 12,
+      "lit": 4399,
+      "lpk": 21
+     },
+     18
+    ],
+    [
+     {
+      "kpp": 4,
+      "lit": 2895,
+      "lpk": 25
+     },
+     29
+    ],
+    [
+     {
+      "kpp": 7,
+      "lit": 4162,
+      "lpk": 30
+     },
+     20
+    ],
+    [
+     {
+      "kpp": 4,
+      "lit": 5834,
+      "lpk": 34
+     },
+     43
+    ],
+    [
+     {
+      "kpp": 12,
+      "lit": 824,
+      "lpk": 56
+     },
+     2
+    ],
+    [
+     {
+      "kpp": 2,
+      "lit": 3055,
+      "lpk": 45
+     },
+     34
+    ],
+    [
+     {
+      "kpp": 12,
+      "lit": 4200,
+      "lpk": 44
+     },
+     8
+    ],
+    [
+     {
+      "kpp": 3,
+      "lit": 945,
+      "lpk": 47
+     },
+     7
+    ],
+    [
+     {
+      "kpp": 9,
+      "lit": 5186,
+      "lpk": 30
+     },
+     20
+    ],
+    [
+     {
+      "kpp": 6,
+      "lit": 3459,
+      "lpk": 43
+     },
+     14
+    ]
+   ],
+   "task_id": "t-07",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "lit"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "lpk"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "lpk"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "kpp"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "kpp"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2086,
+   "cold_reason": null,
+   "domain": "brewery",
+   "family": "b8_full_pallets",
+   "formula": "pallets of full kegs = (lit // lpk) // kpp",
+   "inputs": [
+    "lit",
+    "lpk",
+    "kpp"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "kpp": 12,
+      "lit": 538,
+      "lpk": 15
+     },
+     2
+    ],
+    [
+     {
+      "kpp": 5,
+      "lit": 515,
+      "lpk": 23
+     },
+     4
+    ],
+    [
+     {
+      "kpp": 3,
+      "lit": 4884,
+      "lpk": 18
+     },
+     90
+    ],
+    [
+     {
+      "kpp": 4,
+      "lit": 846,
+      "lpk": 17
+     },
+     12
+    ],
+    [
+     {
+      "kpp": 7,
+      "lit": 1981,
+      "lpk": 57
+     },
+     4
+    ],
+    [
+     {
+      "kpp": 9,
+      "lit": 2395,
+      "lpk": 39
+     },
+     6
+    ],
+    [
+     {
+      "kpp": 11,
+      "lit": 309,
+      "lpk": 16
+     },
+     1
+    ],
+    [
+     {
+      "kpp": 6,
+      "lit": 3790,
+      "lpk": 56
+     },
+     11
+    ],
+    [
+     {
+      "kpp": 9,
+      "lit": 2971,
+      "lpk": 31
+     },
+     10
+    ],
+    [
+     {
+      "kpp": 6,
+      "lit": 492,
+      "lpk": 41
+     },
+     2
+    ],
+    [
+     {
+      "kpp": 2,
+      "lit": 644,
+      "lpk": 50
+     },
+     6
+    ]
+   ],
+   "task_id": "t-08",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "div",
+     [
+      "var",
+      "lit"
+     ],
+     [
+      "var",
+      "lpk"
+     ]
+    ],
+    [
+     "var",
+     "kpp"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 110,
+   "cold_reason": null,
+   "domain": "brewery",
+   "family": "b8_dregs",
+   "formula": "litres left after the full kegs = lit mod lpk",
+   "inputs": [
+    "lit",
+    "lpk",
+    "kpp"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "kpp": 3,
+      "lit": 1229,
+      "lpk": 44
+     },
+     41
+    ],
+    [
+     {
+      "kpp": 3,
+      "lit": 3654,
+      "lpk": 53
+     },
+     50
+    ],
+    [
+     {
+      "kpp": 2,
+      "lit": 2672,
+      "lpk": 35
+     },
+     12
+    ],
+    [
+     {
+      "kpp": 12,
+      "lit": 2106,
+      "lpk": 49
+     },
+     48
+    ],
+    [
+     {
+      "kpp": 9,
+      "lit": 4903,
+      "lpk": 47
+     },
+     15
+    ],
+    [
+     {
+      "kpp": 11,
+      "lit": 5385,
+      "lpk": 26
+     },
+     3
+    ],
+    [
+     {
+      "kpp": 2,
+      "lit": 4434,
+      "lpk": 50
+     },
+     34
+    ],
+    [
+     {
+      "kpp": 6,
+      "lit": 2758,
+      "lpk": 56
+     },
+     14
+    ],
+    [
+     {
+      "kpp": 3,
+      "lit": 3844,
+      "lpk": 24
+     },
+     4
+    ],
+    [
+     {
+      "kpp": 7,
+      "lit": 3891,
+      "lpk": 21
+     },
+     6
+    ],
+    [
+     {
+      "kpp": 6,
+      "lit": 1463,
+      "lpk": 29
+     },
+     13
+    ]
+   ],
+   "task_id": "t-09",
+   "tier": "easy",
+   "tree": [
+    "mod",
+    [
+     "var",
+     "lit"
+    ],
+    [
+     "var",
+     "lpk"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 830,
+   "cold_reason": null,
+   "domain": "brewery",
+   "family": "b8_keg_room",
+   "formula": "empty litres in the last keg = lpk ceil(lit / lpk) - lit",
+   "inputs": [
+    "lit",
+    "lpk",
+    "kpp"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "kpp": 9,
+      "lit": 5870,
+      "lpk": 59
+     },
+     30
+    ],
+    [
+     {
+      "kpp": 7,
+      "lit": 14,
+      "lpk": 22
+     },
+     8
+    ],
+    [
+     {
+      "kpp": 5,
+      "lit": 2816,
+      "lpk": 51
+     },
+     40
+    ],
+    [
+     {
+      "kpp": 7,
+      "lit": 5660,
+      "lpk": 16
+     },
+     4
+    ],
+    [
+     {
+      "kpp": 2,
+      "lit": 4199,
+      "lpk": 28
+     },
+     1
+    ],
+    [
+     {
+      "kpp": 11,
+      "lit": 1881,
+      "lpk": 34
+     },
+     23
+    ],
+    [
+     {
+      "kpp": 8,
+      "lit": 2921,
+      "lpk": 52
+     },
+     43
+    ],
+    [
+     {
+      "kpp": 9,
+      "lit": 5091,
+      "lpk": 40
+     },
+     29
+    ],
+    [
+     {
+      "kpp": 3,
+      "lit": 4969,
+      "lpk": 22
+     },
+     3
+    ],
+    [
+     {
+      "kpp": 9,
+      "lit": 5022,
+      "lpk": 45
+     },
+     18
+    ],
+    [
+     {
+      "kpp": 7,
+      "lit": 3290,
+      "lpk": 13
+     },
+     12
+    ]
+   ],
+   "task_id": "t-10",
+   "tier": "easy",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "lpk"
+     ],
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "lit"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "lpk"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "lpk"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "lit"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3645,
+   "cold_reason": null,
+   "domain": "brewery",
+   "family": "b8_loose_kegs",
+   "formula": "full kegs left off the full pallets = (lit // lpk) mod kpp",
+   "inputs": [
+    "lit",
+    "lpk",
+    "kpp"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "kpp": 11,
+      "lit": 1466,
+      "lpk": 47
+     },
+     9
+    ],
+    [
+     {
+      "kpp": 7,
+      "lit": 1245,
+      "lpk": 28
+     },
+     2
+    ],
+    [
+     {
+      "kpp": 7,
+      "lit": 412,
+      "lpk": 18
+     },
+     1
+    ],
+    [
+     {
+      "kpp": 4,
+      "lit": 3648,
+      "lpk": 23
+     },
+     2
+    ],
+    [
+     {
+      "kpp": 6,
+      "lit": 3350,
+      "lpk": 17
+     },
+     5
+    ],
+    [
+     {
+      "kpp": 12,
+      "lit": 5640,
+      "lpk": 40
+     },
+     9
+    ],
+    [
+     {
+      "kpp": 3,
+      "lit": 5912,
+      "lpk": 49
+     },
+     0
+    ],
+    [
+     {
+      "kpp": 7,
+      "lit": 1984,
+      "lpk": 42
+     },
+     5
+    ],
+    [
+     {
+      "kpp": 6,
+      "lit": 2731,
+      "lpk": 34
+     },
+     2
+    ],
+    [
+     {
+      "kpp": 2,
+      "lit": 3350,
+      "lpk": 30
+     },
+     1
+    ],
+    [
+     {
+      "kpp": 9,
+      "lit": 4242,
+      "lpk": 11
+     },
+     7
+    ]
+   ],
+   "task_id": "t-11",
+   "tier": "easy",
+   "tree": [
+    "mod",
+    [
+     "div",
+     [
+      "var",
+      "lit"
+     ],
+     [
+      "var",
+      "lpk"
+     ]
+    ],
+    [
+     "var",
+     "kpp"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 903,
+   "cold_reason": null,
+   "domain": "brewery",
+   "family": "b8_tap_pairs",
+   "formula": "ordered side-by-side comparisons of two taps = tpx (tpx - 1)",
+   "inputs": [
+    "tpx",
+    "opn"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "opn": 2,
+      "tpx": 6
+     },
+     30
+    ],
+    [
+     {
+      "opn": 4,
+      "tpx": 6
+     },
+     30
+    ],
+    [
+     {
+      "opn": 7,
+      "tpx": 19
+     },
+     342
+    ],
+    [
+     {
+      "opn": 15,
+      "tpx": 14
+     },
+     182
+    ],
+    [
+     {
+      "opn": 10,
+      "tpx": 16
+     },
+     240
+    ],
+    [
+     {
+      "opn": 5,
+      "tpx": 3
+     },
+     6
+    ],
+    [
+     {
+      "opn": 6,
+      "tpx": 1
+     },
+     0
+    ],
+    [
+     {
+      "opn": 15,
+      "tpx": 16
+     },
+     240
+    ],
+    [
+     {
+      "opn": 13,
+      "tpx": 1
+     },
+     0
+    ],
+    [
+     {
+      "opn": 2,
+      "tpx": 20
+     },
+     380
+    ],
+    [
+     {
+      "opn": 1,
+      "tpx": 12
+     },
+     132
+    ]
+   ],
+   "task_id": "t-14",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "tpx"
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "tpx"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1846,
+   "cold_reason": null,
+   "domain": "railway",
+   "family": "r8_seats",
+   "formula": "seats = trn cgt spc",
+   "inputs": [
+    "trn",
+    "cgt",
+    "spc"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cgt": 11,
+      "spc": 22,
+      "trn": 2
+     },
+     484
+    ],
+    [
+     {
+      "cgt": 3,
+      "spc": 51,
+      "trn": 7
+     },
+     1071
+    ],
+    [
+     {
+      "cgt": 10,
+      "spc": 60,
+      "trn": 16
+     },
+     9600
+    ],
+    [
+     {
+      "cgt": 8,
+      "spc": 36,
+      "trn": 9
+     },
+     2592
+    ],
+    [
+     {
+      "cgt": 5,
+      "spc": 75,
+      "trn": 20
+     },
+     7500
+    ],
+    [
+     {
+      "cgt": 6,
+      "spc": 41,
+      "trn": 19
+     },
+     4674
+    ],
+    [
+     {
+      "cgt": 12,
+      "spc": 42,
+      "trn": 18
+     },
+     9072
+    ],
+    [
+     {
+      "cgt": 2,
+      "spc": 64,
+      "trn": 12
+     },
+     1536
+    ],
+    [
+     {
+      "cgt": 12,
+      "spc": 34,
+      "trn": 8
+     },
+     3264
+    ],
+    [
+     {
+      "cgt": 6,
+      "spc": 32,
+      "trn": 11
+     },
+     2112
+    ],
+    [
+     {
+      "cgt": 8,
+      "spc": 38,
+      "trn": 12
+     },
+     3648
+    ]
+   ],
+   "task_id": "t-17",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "trn"
+     ],
+     [
+      "var",
+      "cgt"
+     ]
+    ],
+    [
+     "var",
+     "spc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1664,
+   "cold_reason": null,
+   "domain": "railway",
+   "family": "r8_couplings",
+   "formula": "couplings between carriages = trn (cgt - 1)",
+   "inputs": [
+    "trn",
+    "cgt",
+    "spc"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cgt": 10,
+      "spc": 59,
+      "trn": 17
+     },
+     153
+    ],
+    [
+     {
+      "cgt": 5,
+      "spc": 61,
+      "trn": 20
+     },
+     80
+    ],
+    [
+     {
+      "cgt": 4,
+      "spc": 39,
+      "trn": 2
+     },
+     6
+    ],
+    [
+     {
+      "cgt": 2,
+      "spc": 65,
+      "trn": 3
+     },
+     3
+    ],
+    [
+     {
+      "cgt": 12,
+      "spc": 77,
+      "trn": 6
+     },
+     66
+    ],
+    [
+     {
+      "cgt": 11,
+      "spc": 57,
+      "trn": 14
+     },
+     140
+    ],
+    [
+     {
+      "cgt": 5,
+      "spc": 65,
+      "trn": 19
+     },
+     76
+    ],
+    [
+     {
+      "cgt": 11,
+      "spc": 39,
+      "trn": 6
+     },
+     60
+    ],
+    [
+     {
+      "cgt": 5,
+      "spc": 39,
+      "trn": 16
+     },
+     64
+    ],
+    [
+     {
+      "cgt": 7,
+      "spc": 58,
+      "trn": 7
+     },
+     42
+    ],
+    [
+     {
+      "cgt": 9,
+      "spc": 65,
+      "trn": 8
+     },
+     64
+    ]
+   ],
+   "task_id": "t-20",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "trn"
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "cgt"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 963,
+   "cold_reason": null,
+   "domain": "railway",
+   "family": "r8_corridor",
+   "formula": "corridor area with a 1-unit drain each side = tkl (tkw + 2)",
+   "inputs": [
+    "tkl",
+    "tkw"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "tkl": 80,
+      "tkw": 32
+     },
+     2720
+    ],
+    [
+     {
+      "tkl": 131,
+      "tkw": 18
+     },
+     2620
+    ],
+    [
+     {
+      "tkl": 74,
+      "tkw": 25
+     },
+     1998
+    ],
+    [
+     {
+      "tkl": 129,
+      "tkw": 20
+     },
+     2838
+    ],
+    [
+     {
+      "tkl": 200,
+      "tkw": 30
+     },
+     6400
+    ],
+    [
+     {
+      "tkl": 210,
+      "tkw": 10
+     },
+     2520
+    ],
+    [
+     {
+      "tkl": 244,
+      "tkw": 10
+     },
+     2928
+    ],
+    [
+     {
+      "tkl": 14,
+      "tkw": 5
+     },
+     98
+    ],
+    [
+     {
+      "tkl": 183,
+      "tkw": 28
+     },
+     5490
+    ],
+    [
+     {
+      "tkl": 193,
+      "tkw": 4
+     },
+     1158
+    ],
+    [
+     {
+      "tkl": 102,
+      "tkw": 24
+     },
+     2652
+    ]
+   ],
+   "task_id": "t-22",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "tkl"
+    ],
+    [
+     "add",
+     [
+      "var",
+      "tkw"
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 5270,
+   "cold_reason": null,
+   "domain": "railway",
+   "family": "r8_squares",
+   "formula": "sum of the squared sides = tkl^2 + tkw^2",
+   "inputs": [
+    "tkl",
+    "tkw"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "tkl": 71,
+      "tkw": 30
+     },
+     5941
+    ],
+    [
+     {
+      "tkl": 218,
+      "tkw": 33
+     },
+     48613
+    ],
+    [
+     {
+      "tkl": 87,
+      "tkw": 37
+     },
+     8938
+    ],
+    [
+     {
+      "tkl": 264,
+      "tkw": 27
+     },
+     70425
+    ],
+    [
+     {
+      "tkl": 7,
+      "tkw": 20
+     },
+     449
+    ],
+    [
+     {
+      "tkl": 285,
+      "tkw": 32
+     },
+     82249
+    ],
+    [
+     {
+      "tkl": 239,
+      "tkw": 5
+     },
+     57146
+    ],
+    [
+     {
+      "tkl": 288,
+      "tkw": 23
+     },
+     83473
+    ],
+    [
+     {
+      "tkl": 63,
+      "tkw": 19
+     },
+     4330
+    ],
+    [
+     {
+      "tkl": 228,
+      "tkw": 23
+     },
+     52513
+    ],
+    [
+     {
+      "tkl": 49,
+      "tkw": 9
+     },
+     2482
+    ]
+   ],
+   "task_id": "t-27",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "tkl"
+     ],
+     [
+      "var",
+      "tkl"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "tkw"
+     ],
+     [
+      "var",
+      "tkw"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 303,
+   "cold_reason": null,
+   "domain": "railway",
+   "family": "r8_wagons",
+   "formula": "wagons for every tonne = ceil(frt / wpt)",
+   "inputs": [
+    "frt",
+    "wpt",
+    "wgc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "frt": 3232,
+      "wgc": 18,
+      "wpt": 64
+     },
+     51
+    ],
+    [
+     {
+      "frt": 5247,
+      "wgc": 5,
+      "wpt": 35
+     },
+     150
+    ],
+    [
+     {
+      "frt": 2773,
+      "wgc": 28,
+      "wpt": 48
+     },
+     58
+    ],
+    [
+     {
+      "frt": 4403,
+      "wgc": 35,
+      "wpt": 56
+     },
+     79
+    ],
+    [
+     {
+      "frt": 1535,
+      "wgc": 5,
+      "wpt": 43
+     },
+     36
+    ],
+    [
+     {
+      "frt": 1698,
+      "wgc": 17,
+      "wpt": 73
+     },
+     24
+    ],
+    [
+     {
+      "frt": 3872,
+      "wgc": 11,
+      "wpt": 52
+     },
+     75
+    ],
+    [
+     {
+      "frt": 5561,
+      "wgc": 38,
+      "wpt": 84
+     },
+     67
+    ],
+    [
+     {
+      "frt": 4515,
+      "wgc": 30,
+      "wpt": 82
+     },
+     56
+    ],
+    [
+     {
+      "frt": 1681,
+      "wgc": 9,
+      "wpt": 39
+     },
+     44
+    ],
+    [
+     {
+      "frt": 2456,
+      "wgc": 28,
+      "wpt": 75
+     },
+     33
+    ]
+   ],
+   "task_id": "t-28",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "frt"
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "wpt"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "wpt"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 7327,
+   "cold_reason": null,
+   "domain": "railway",
+   "family": "r8_freight_trains",
+   "formula": "trains for those wagons = ceil(ceil(frt / wpt) / wgc)",
+   "inputs": [
+    "frt",
+    "wpt",
+    "wgc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "frt": 5276,
+      "wgc": 16,
+      "wpt": 59
+     },
+     6
+    ],
+    [
+     {
+      "frt": 5003,
+      "wgc": 13,
+      "wpt": 37
+     },
+     11
+    ],
+    [
+     {
+      "frt": 2939,
+      "wgc": 18,
+      "wpt": 45
+     },
+     4
+    ],
+    [
+     {
+      "frt": 1178,
+      "wgc": 39,
+      "wpt": 73
+     },
+     1
+    ],
+    [
+     {
+      "frt": 3126,
+      "wgc": 40,
+      "wpt": 28
+     },
+     3
+    ],
+    [
+     {
+      "frt": 4702,
+      "wgc": 36,
+      "wpt": 39
+     },
+     4
+    ],
+    [
+     {
+      "frt": 3054,
+      "wgc": 18,
+      "wpt": 82
+     },
+     3
+    ],
+    [
+     {
+      "frt": 2629,
+      "wgc": 6,
+      "wpt": 58
+     },
+     8
+    ],
+    [
+     {
+      "frt": 2138,
+      "wgc": 19,
+      "wpt": 20
+     },
+     6
+    ],
+    [
+     {
+      "frt": 2515,
+      "wgc": 7,
+      "wpt": 46
+     },
+     8
+    ],
+    [
+     {
+      "frt": 2086,
+      "wgc": 39,
+      "wpt": 31
+     },
+     2
+    ]
+   ],
+   "task_id": "t-29",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "frt"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "wpt"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "wpt"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "wgc"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "wgc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2039,
+   "cold_reason": null,
+   "domain": "railway",
+   "family": "r8_full_trains",
+   "formula": "trains of full wagons = (frt // wpt) // wgc",
+   "inputs": [
+    "frt",
+    "wpt",
+    "wgc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "frt": 3273,
+      "wgc": 14,
+      "wpt": 58
+     },
+     4
+    ],
+    [
+     {
+      "frt": 3145,
+      "wgc": 28,
+      "wpt": 49
+     },
+     2
+    ],
+    [
+     {
+      "frt": 2163,
+      "wgc": 24,
+      "wpt": 76
+     },
+     1
+    ],
+    [
+     {
+      "frt": 4424,
+      "wgc": 23,
+      "wpt": 77
+     },
+     2
+    ],
+    [
+     {
+      "frt": 1274,
+      "wgc": 11,
+      "wpt": 30
+     },
+     3
+    ],
+    [
+     {
+      "frt": 2112,
+      "wgc": 8,
+      "wpt": 82
+     },
+     3
+    ],
+    [
+     {
+      "frt": 355,
+      "wgc": 29,
+      "wpt": 44
+     },
+     0
+    ],
+    [
+     {
+      "frt": 5883,
+      "wgc": 27,
+      "wpt": 68
+     },
+     3
+    ],
+    [
+     {
+      "frt": 5470,
+      "wgc": 36,
+      "wpt": 75
+     },
+     2
+    ],
+    [
+     {
+      "frt": 1900,
+      "wgc": 11,
+      "wpt": 32
+     },
+     5
+    ],
+    [
+     {
+      "frt": 757,
+      "wgc": 26,
+      "wpt": 64
+     },
+     0
+    ]
+   ],
+   "task_id": "t-30",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "div",
+     [
+      "var",
+      "frt"
+     ],
+     [
+      "var",
+      "wpt"
+     ]
+    ],
+    [
+     "var",
+     "wgc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3687,
+   "cold_reason": null,
+   "domain": "railway",
+   "family": "r8_spare_wagons",
+   "formula": "full wagons left off the full trains = (frt // wpt) mod wgc",
+   "inputs": [
+    "frt",
+    "wpt",
+    "wgc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "frt": 162,
+      "wgc": 26,
+      "wpt": 77
+     },
+     2
+    ],
+    [
+     {
+      "frt": 3632,
+      "wgc": 18,
+      "wpt": 55
+     },
+     12
+    ],
+    [
+     {
+      "frt": 1694,
+      "wgc": 6,
+      "wpt": 52
+     },
+     2
+    ],
+    [
+     {
+      "frt": 2375,
+      "wgc": 14,
+      "wpt": 35
+     },
+     11
+    ],
+    [
+     {
+      "frt": 1206,
+      "wgc": 29,
+      "wpt": 44
+     },
+     27
+    ],
+    [
+     {
+      "frt": 5015,
+      "wgc": 21,
+      "wpt": 45
+     },
+     6
+    ],
+    [
+     {
+      "frt": 4728,
+      "wgc": 36,
+      "wpt": 55
+     },
+     13
+    ],
+    [
+     {
+      "frt": 3589,
+      "wgc": 13,
+      "wpt": 52
+     },
+     4
+    ],
+    [
+     {
+      "frt": 4713,
+      "wgc": 30,
+      "wpt": 41
+     },
+     24
+    ],
+    [
+     {
+      "frt": 5972,
+      "wgc": 7,
+      "wpt": 31
+     },
+     3
+    ],
+    [
+     {
+      "frt": 4087,
+      "wgc": 14,
+      "wpt": 31
+     },
+     5
+    ]
+   ],
+   "task_id": "t-31",
+   "tier": "easy",
+   "tree": [
+    "mod",
+    [
+     "div",
+     [
+      "var",
+      "frt"
+     ],
+     [
+      "var",
+      "wpt"
+     ]
+    ],
+    [
+     "var",
+     "wgc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 808,
+   "cold_reason": null,
+   "domain": "railway",
+   "family": "r8_tonne_room",
+   "formula": "spare tonnes in the last wagon = wpt ceil(frt / wpt) - frt",
+   "inputs": [
+    "frt",
+    "wpt",
+    "wgc"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "frt": 4390,
+      "wgc": 10,
+      "wpt": 60
+     },
+     50
+    ],
+    [
+     {
+      "frt": 4876,
+      "wgc": 7,
+      "wpt": 52
+     },
+     12
+    ],
+    [
+     {
+      "frt": 2844,
+      "wgc": 37,
+      "wpt": 29
+     },
+     27
+    ],
+    [
+     {
+      "frt": 1654,
+      "wgc": 15,
+      "wpt": 39
+     },
+     23
+    ],
+    [
+     {
+      "frt": 5525,
+      "wgc": 12,
+      "wpt": 24
+     },
+     19
+    ],
+    [
+     {
+      "frt": 559,
+      "wgc": 20,
+      "wpt": 62
+     },
+     61
+    ],
+    [
+     {
+      "frt": 1729,
+      "wgc": 14,
+      "wpt": 52
+     },
+     39
+    ],
+    [
+     {
+      "frt": 445,
+      "wgc": 35,
+      "wpt": 73
+     },
+     66
+    ],
+    [
+     {
+      "frt": 1356,
+      "wgc": 34,
+      "wpt": 59
+     },
+     1
+    ],
+    [
+     {
+      "frt": 4590,
+      "wgc": 10,
+      "wpt": 79
+     },
+     71
+    ],
+    [
+     {
+      "frt": 1145,
+      "wgc": 13,
+      "wpt": 33
+     },
+     10
+    ]
+   ],
+   "task_id": "t-32",
+   "tier": "easy",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "wpt"
+     ],
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "frt"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "wpt"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "wpt"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "frt"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 197,
+   "cold_reason": null,
+   "domain": "railway",
+   "family": "r8_departures",
+   "formula": "departures including the last train = dph rnh + 1",
+   "inputs": [
+    "dph",
+    "rnh"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "dph": 5,
+      "rnh": 18
+     },
+     91
+    ],
+    [
+     {
+      "dph": 7,
+      "rnh": 11
+     },
+     78
+    ],
+    [
+     {
+      "dph": 12,
+      "rnh": 4
+     },
+     49
+    ],
+    [
+     {
+      "dph": 4,
+      "rnh": 12
+     },
+     49
+    ],
+    [
+     {
+      "dph": 1,
+      "rnh": 10
+     },
+     11
+    ],
+    [
+     {
+      "dph": 8,
+      "rnh": 20
+     },
+     161
+    ],
+    [
+     {
+      "dph": 12,
+      "rnh": 16
+     },
+     193
+    ],
+    [
+     {
+      "dph": 11,
+      "rnh": 15
+     },
+     166
+    ],
+    [
+     {
+      "dph": 3,
+      "rnh": 2
+     },
+     7
+    ],
+    [
+     {
+      "dph": 10,
+      "rnh": 6
+     },
+     61
+    ],
+    [
+     {
+      "dph": 2,
+      "rnh": 10
+     },
+     21
+    ]
+   ],
+   "task_id": "t-33",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "dph"
+     ],
+     [
+      "var",
+      "rnh"
+     ]
+    ],
+    [
+     "const",
+     1
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1115,
+   "cold_reason": null,
+   "domain": "railway",
+   "family": "r8_movements",
+   "formula": "movements, both directions = 2 dph rnh",
+   "inputs": [
+    "dph",
+    "rnh"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "dph": 6,
+      "rnh": 1
+     },
+     12
+    ],
+    [
+     {
+      "dph": 4,
+      "rnh": 17
+     },
+     136
+    ],
+    [
+     {
+      "dph": 7,
+      "rnh": 16
+     },
+     224
+    ],
+    [
+     {
+      "dph": 10,
+      "rnh": 7
+     },
+     140
+    ],
+    [
+     {
+      "dph": 12,
+      "rnh": 15
+     },
+     360
+    ],
+    [
+     {
+      "dph": 2,
+      "rnh": 17
+     },
+     68
+    ],
+    [
+     {
+      "dph": 11,
+      "rnh": 13
+     },
+     286
+    ],
+    [
+     {
+      "dph": 10,
+      "rnh": 5
+     },
+     100
+    ],
+    [
+     {
+      "dph": 3,
+      "rnh": 6
+     },
+     36
+    ],
+    [
+     {
+      "dph": 8,
+      "rnh": 13
+     },
+     208
+    ],
+    [
+     {
+      "dph": 10,
+      "rnh": 11
+     },
+     220
+    ]
+   ],
+   "task_id": "t-34",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "var",
+      "dph"
+     ],
+     [
+      "var",
+      "dph"
+     ]
+    ],
+    [
+     "var",
+     "rnh"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 9828,
+   "cold_reason": null,
+   "domain": "laundry",
+   "family": "l8_loads",
+   "formula": "machine loads for every kg = ceil(kgl / kpm)",
+   "inputs": [
+    "kgl",
+    "kpm",
+    "mch"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "kgl": 1451,
+      "kpm": 12,
+      "mch": 12
+     },
+     121
+    ],
+    [
+     {
+      "kgl": 2703,
+      "kpm": 23,
+      "mch": 2
+     },
+     118
+    ],
+    [
+     {
+      "kgl": 2335,
+      "kpm": 11,
+      "mch": 7
+     },
+     213
+    ],
+    [
+     {
+      "kgl": 1610,
+      "kpm": 18,
+      "mch": 1
+     },
+     90
+    ],
+    [
+     {
+      "kgl": 1824,
+      "kpm": 8,
+      "mch": 11
+     },
+     228
+    ],
+    [
+     {
+      "kgl": 661,
+      "kpm": 8,
+      "mch": 1
+     },
+     83
+    ],
+    [
+     {
+      "kgl": 2356,
+      "kpm": 7,
+      "mch": 1
+     },
+     337
+    ],
+    [
+     {
+      "kgl": 260,
+      "kpm": 17,
+      "mch": 11
+     },
+     16
+    ],
+    [
+     {
+      "kgl": 1936,
+      "kpm": 7,
+      "mch": 11
+     },
+     277
+    ],
+    [
+     {
+      "kgl": 2581,
+      "kpm": 23,
+      "mch": 1
+     },
+     113
+    ],
+    [
+     {
+      "kgl": 1198,
+      "kpm": 23,
+      "mch": 1
+     },
+     53
+    ]
+   ],
+   "task_id": "t-37",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "kgl"
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "kpm"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "kpm"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 7393,
+   "cold_reason": null,
+   "domain": "laundry",
+   "family": "l8_rounds",
+   "formula": "rounds of all machines = ceil(ceil(kgl / kpm) / mch)",
+   "inputs": [
+    "kgl",
+    "kpm",
+    "mch"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "kgl": 1381,
+      "kpm": 14,
+      "mch": 7
+     },
+     15
+    ],
+    [
+     {
+      "kgl": 784,
+      "kpm": 24,
+      "mch": 4
+     },
+     9
+    ],
+    [
+     {
+      "kgl": 2006,
+      "kpm": 24,
+      "mch": 12
+     },
+     7
+    ],
+    [
+     {
+      "kgl": 40,
+      "kpm": 18,
+      "mch": 3
+     },
+     1
+    ],
+    [
+     {
+      "kgl": 1532,
+      "kpm": 25,
+      "mch": 10
+     },
+     7
+    ],
+    [
+     {
+      "kgl": 2011,
+      "kpm": 9,
+      "mch": 6
+     },
+     38
+    ],
+    [
+     {
+      "kgl": 2838,
+      "kpm": 25,
+      "mch": 1
+     },
+     114
+    ],
+    [
+     {
+      "kgl": 1965,
+      "kpm": 7,
+      "mch": 9
+     },
+     32
+    ],
+    [
+     {
+      "kgl": 1924,
+      "kpm": 25,
+      "mch": 9
+     },
+     9
+    ],
+    [
+     {
+      "kgl": 2615,
+      "kpm": 17,
+      "mch": 2
+     },
+     77
+    ],
+    [
+     {
+      "kgl": 1443,
+      "kpm": 18,
+      "mch": 12
+     },
+     7
+    ]
+   ],
+   "task_id": "t-38",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "kgl"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "kpm"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "kpm"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "mch"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "mch"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 80,
+   "cold_reason": null,
+   "domain": "laundry",
+   "family": "l8_full_loads",
+   "formula": "full loads = kgl // kpm",
+   "inputs": [
+    "kgl",
+    "kpm",
+    "mch"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "kgl": 2996,
+      "kpm": 16,
+      "mch": 10
+     },
+     187
+    ],
+    [
+     {
+      "kgl": 2812,
+      "kpm": 9,
+      "mch": 3
+     },
+     312
+    ],
+    [
+     {
+      "kgl": 2839,
+      "kpm": 23,
+      "mch": 1
+     },
+     123
+    ],
+    [
+     {
+      "kgl": 412,
+      "kpm": 20,
+      "mch": 10
+     },
+     20
+    ],
+    [
+     {
+      "kgl": 834,
+      "kpm": 10,
+      "mch": 9
+     },
+     83
+    ],
+    [
+     {
+      "kgl": 268,
+      "kpm": 7,
+      "mch": 11
+     },
+     38
+    ],
+    [
+     {
+      "kgl": 2633,
+      "kpm": 8,
+      "mch": 9
+     },
+     329
+    ],
+    [
+     {
+      "kgl": 397,
+      "kpm": 22,
+      "mch": 8
+     },
+     18
+    ],
+    [
+     {
+      "kgl": 1015,
+      "kpm": 11,
+      "mch": 6
+     },
+     92
+    ],
+    [
+     {
+      "kgl": 2008,
+      "kpm": 20,
+      "mch": 10
+     },
+     100
+    ],
+    [
+     {
+      "kgl": 1305,
+      "kpm": 8,
+      "mch": 2
+     },
+     163
+    ]
+   ],
+   "task_id": "t-39",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "var",
+     "kgl"
+    ],
+    [
+     "var",
+     "kpm"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 110,
+   "cold_reason": null,
+   "domain": "laundry",
+   "family": "l8_last_load",
+   "formula": "kg in the part load = kgl mod kpm",
+   "inputs": [
+    "kgl",
+    "kpm",
+    "mch"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "kgl": 1251,
+      "kpm": 5,
+      "mch": 3
+     },
+     1
+    ],
+    [
+     {
+      "kgl": 2867,
+      "kpm": 14,
+      "mch": 10
+     },
+     11
+    ],
+    [
+     {
+      "kgl": 392,
+      "kpm": 15,
+      "mch": 4
+     },
+     2
+    ],
+    [
+     {
+      "kgl": 1884,
+      "kpm": 18,
+      "mch": 3
+     },
+     12
+    ],
+    [
+     {
+      "kgl": 1768,
+      "kpm": 19,
+      "mch": 8
+     },
+     1
+    ],
+    [
+     {
+      "kgl": 448,
+      "kpm": 21,
+      "mch": 8
+     },
+     7
+    ],
+    [
+     {
+      "kgl": 2154,
+      "kpm": 9,
+      "mch": 4
+     },
+     3
+    ],
+    [
+     {
+      "kgl": 2295,
+      "kpm": 23,
+      "mch": 3
+     },
+     18
+    ],
+    [
+     {
+      "kgl": 1352,
+      "kpm": 19,
+      "mch": 1
+     },
+     3
+    ],
+    [
+     {
+      "kgl": 1657,
+      "kpm": 12,
+      "mch": 2
+     },
+     1
+    ],
+    [
+     {
+      "kgl": 2139,
+      "kpm": 9,
+      "mch": 3
+     },
+     6
+    ]
+   ],
+   "task_id": "t-40",
+   "tier": "easy",
+   "tree": [
+    "mod",
+    [
+     "var",
+     "kgl"
+    ],
+    [
+     "var",
+     "kpm"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 5338,
+   "cold_reason": null,
+   "domain": "laundry",
+   "family": "l8_squares",
+   "formula": "sum of the squared sides = bdw^2 + bdl^2",
+   "inputs": [
+    "bdw",
+    "bdl"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "bdl": 12,
+      "bdw": 10
+     },
+     244
+    ],
+    [
+     {
+      "bdl": 5,
+      "bdw": 3
+     },
+     34
+    ],
+    [
+     {
+      "bdl": 18,
+      "bdw": 5
+     },
+     349
+    ],
+    [
+     {
+      "bdl": 23,
+      "bdw": 12
+     },
+     673
+    ],
+    [
+     {
+      "bdl": 15,
+      "bdw": 8
+     },
+     289
+    ],
+    [
+     {
+      "bdl": 13,
+      "bdw": 11
+     },
+     290
+    ],
+    [
+     {
+      "bdl": 9,
+      "bdw": 4
+     },
+     97
+    ],
+    [
+     {
+      "bdl": 10,
+      "bdw": 13
+     },
+     269
+    ],
+    [
+     {
+      "bdl": 16,
+      "bdw": 12
+     },
+     400
+    ],
+    [
+     {
+      "bdl": 9,
+      "bdw": 7
+     },
+     130
+    ],
+    [
+     {
+      "bdl": 17,
+      "bdw": 12
+     },
+     433
+    ]
+   ],
+   "task_id": "t-46",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "bdw"
+     ],
+     [
+      "var",
+      "bdw"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "bdl"
+     ],
+     [
+      "var",
+      "bdl"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1928,
+   "cold_reason": null,
+   "domain": "laundry",
+   "family": "l8_week_loads",
+   "formula": "loads a week = wsh lpd dop",
+   "inputs": [
+    "wsh",
+    "lpd",
+    "dop"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "dop": 3,
+      "lpd": 4,
+      "wsh": 11
+     },
+     132
+    ],
+    [
+     {
+      "dop": 4,
+      "lpd": 5,
+      "wsh": 6
+     },
+     120
+    ],
+    [
+     {
+      "dop": 7,
+      "lpd": 8,
+      "wsh": 5
+     },
+     280
+    ],
+    [
+     {
+      "dop": 4,
+      "lpd": 8,
+      "wsh": 4
+     },
+     128
+    ],
+    [
+     {
+      "dop": 5,
+      "lpd": 3,
+      "wsh": 7
+     },
+     105
+    ],
+    [
+     {
+      "dop": 2,
+      "lpd": 4,
+      "wsh": 1
+     },
+     8
+    ],
+    [
+     {
+      "dop": 3,
+      "lpd": 8,
+      "wsh": 2
+     },
+     48
+    ],
+    [
+     {
+      "dop": 4,
+      "lpd": 8,
+      "wsh": 2
+     },
+     64
+    ],
+    [
+     {
+      "dop": 7,
+      "lpd": 3,
+      "wsh": 6
+     },
+     126
+    ],
+    [
+     {
+      "dop": 3,
+      "lpd": 9,
+      "wsh": 6
+     },
+     162
+    ],
+    [
+     {
+      "dop": 5,
+      "lpd": 9,
+      "wsh": 1
+     },
+     45
+    ]
+   ],
+   "task_id": "t-47",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "wsh"
+     ],
+     [
+      "var",
+      "lpd"
+     ]
+    ],
+    [
+     "var",
+     "dop"
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "b8_litres_net",
+   "formula": "litres after a 10-litre sampling loss per batch = bch (lbt - 10)",
+   "inputs": [
+    "bch",
+    "lbt",
+    "fmd"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "bch": 4,
+      "fmd": 15,
+      "lbt": 248
+     },
+     952
+    ],
+    [
+     {
+      "bch": 25,
+      "fmd": 8,
+      "lbt": 341
+     },
+     8275
+    ],
+    [
+     {
+      "bch": 21,
+      "fmd": 10,
+      "lbt": 99
+     },
+     1869
+    ],
+    [
+     {
+      "bch": 5,
+      "fmd": 12,
+      "lbt": 93
+     },
+     415
+    ],
+    [
+     {
+      "bch": 10,
+      "fmd": 15,
+      "lbt": 257
+     },
+     2470
+    ],
+    [
+     {
+      "bch": 21,
+      "fmd": 7,
+      "lbt": 158
+     },
+     3108
+    ],
+    [
+     {
+      "bch": 21,
+      "fmd": 6,
+      "lbt": 456
+     },
+     9366
+    ],
+    [
+     {
+      "bch": 12,
+      "fmd": 9,
+      "lbt": 484
+     },
+     5688
+    ],
+    [
+     {
+      "bch": 6,
+      "fmd": 16,
+      "lbt": 134
+     },
+     744
+    ],
+    [
+     {
+      "bch": 18,
+      "fmd": 9,
+      "lbt": 419
+     },
+     7362
+    ],
+    [
+     {
+      "bch": 3,
+      "fmd": 21,
+      "lbt": 330
+     },
+     960
+    ]
+   ],
+   "task_id": "t-00",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "bch"
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "lbt"
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "b8_weeks",
+   "formula": "fermentation weeks started, all batches = bch ceil(fmd / 7)",
+   "inputs": [
+    "bch",
+    "lbt",
+    "fmd"
+   ],
+   "kind": "time",
+   "rows": [
+    [
+     {
+      "bch": 7,
+      "fmd": 9,
+      "lbt": 63
+     },
+     14
+    ],
+    [
+     {
+      "bch": 15,
+      "fmd": 15,
+      "lbt": 296
+     },
+     45
+    ],
+    [
+     {
+      "bch": 24,
+      "fmd": 18,
+      "lbt": 186
+     },
+     72
+    ],
+    [
+     {
+      "bch": 26,
+      "fmd": 10,
+      "lbt": 139
+     },
+     52
+    ],
+    [
+     {
+      "bch": 14,
+      "fmd": 21,
+      "lbt": 349
+     },
+     42
+    ],
+    [
+     {
+      "bch": 25,
+      "fmd": 5,
+      "lbt": 328
+     },
+     25
+    ],
+    [
+     {
+      "bch": 28,
+      "fmd": 4,
+      "lbt": 194
+     },
+     28
+    ],
+    [
+     {
+      "bch": 7,
+      "fmd": 8,
+      "lbt": 249
+     },
+     14
+    ],
+    [
+     {
+      "bch": 17,
+      "fmd": 11,
+      "lbt": 362
+     },
+     34
+    ],
+    [
+     {
+      "bch": 28,
+      "fmd": 5,
+      "lbt": 454
+     },
+     28
+    ],
+    [
+     {
+      "bch": 27,
+      "fmd": 13,
+      "lbt": 103
+     },
+     54
+    ]
+   ],
+   "task_id": "t-03",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "bch"
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "fmd"
+      ],
+      [
+       "sub",
+       [
+        "add",
+        [
+         "add",
+         [
+          "const",
+          2
+         ],
+         [
+          "const",
+          2
+         ]
+        ],
+        [
+         "const",
+         3
+        ]
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "add",
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "b8_blends",
+   "formula": "releases: every batch alone and every blend of two = bch (bch + 1) / 2",
+   "inputs": [
+    "bch",
+    "lbt",
+    "fmd"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "bch": 5,
+      "fmd": 9,
+      "lbt": 305
+     },
+     15
+    ],
+    [
+     {
+      "bch": 23,
+      "fmd": 14,
+      "lbt": 226
+     },
+     276
+    ],
+    [
+     {
+      "bch": 4,
+      "fmd": 9,
+      "lbt": 72
+     },
+     10
+    ],
+    [
+     {
+      "bch": 5,
+      "fmd": 20,
+      "lbt": 475
+     },
+     15
+    ],
+    [
+     {
+      "bch": 28,
+      "fmd": 19,
+      "lbt": 392
+     },
+     406
+    ],
+    [
+     {
+      "bch": 16,
+      "fmd": 8,
+      "lbt": 342
+     },
+     136
+    ],
+    [
+     {
+      "bch": 4,
+      "fmd": 10,
+      "lbt": 274
+     },
+     10
+    ],
+    [
+     {
+      "bch": 9,
+      "fmd": 10,
+      "lbt": 147
+     },
+     45
+    ],
+    [
+     {
+      "bch": 10,
+      "fmd": 5,
+      "lbt": 170
+     },
+     55
+    ],
+    [
+     {
+      "bch": 11,
+      "fmd": 7,
+      "lbt": 141
+     },
+     66
+    ],
+    [
+     {
+      "bch": 18,
+      "fmd": 7,
+      "lbt": 319
+     },
+     171
+    ]
+   ],
+   "task_id": "t-04",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "var",
+      "bch"
+     ],
+     [
+      "add",
+      [
+       "var",
+       "bch"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "b8_tasting",
+   "formula": "tasting litres: 2 per batch-day = 2 bch fmd, plus one litre per batch",
+   "inputs": [
+    "bch",
+    "lbt",
+    "fmd"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "bch": 16,
+      "fmd": 4,
+      "lbt": 93
+     },
+     144
+    ],
+    [
+     {
+      "bch": 27,
+      "fmd": 15,
+      "lbt": 126
+     },
+     837
+    ],
+    [
+     {
+      "bch": 28,
+      "fmd": 7,
+      "lbt": 138
+     },
+     420
+    ],
+    [
+     {
+      "bch": 14,
+      "fmd": 12,
+      "lbt": 263
+     },
+     350
+    ],
+    [
+     {
+      "bch": 19,
+      "fmd": 4,
+      "lbt": 47
+     },
+     171
+    ],
+    [
+     {
+      "bch": 20,
+      "fmd": 9,
+      "lbt": 226
+     },
+     380
+    ],
+    [
+     {
+      "bch": 3,
+      "fmd": 4,
+      "lbt": 404
+     },
+     27
+    ],
+    [
+     {
+      "bch": 9,
+      "fmd": 8,
+      "lbt": 29
+     },
+     153
+    ],
+    [
+     {
+      "bch": 27,
+      "fmd": 20,
+      "lbt": 313
+     },
+     1107
+    ],
+    [
+     {
+      "bch": 19,
+      "fmd": 20,
+      "lbt": 378
+     },
+     779
+    ],
+    [
+     {
+      "bch": 12,
+      "fmd": 15,
+      "lbt": 121
+     },
+     372
+    ]
+   ],
+   "task_id": "t-05",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "bch"
+      ],
+      [
+       "var",
+       "bch"
+      ]
+     ],
+     [
+      "var",
+      "fmd"
+     ]
+    ],
+    [
+     "var",
+     "bch"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "b8_pours",
+   "formula": "pints at 12 per tap-hour = 12 tpx opn",
+   "inputs": [
+    "tpx",
+    "opn"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "opn": 9,
+      "tpx": 22
+     },
+     2376
+    ],
+    [
+     {
+      "opn": 13,
+      "tpx": 21
+     },
+     3276
+    ],
+    [
+     {
+      "opn": 15,
+      "tpx": 6
+     },
+     1080
+    ],
+    [
+     {
+      "opn": 6,
+      "tpx": 22
+     },
+     1584
+    ],
+    [
+     {
+      "opn": 5,
+      "tpx": 20
+     },
+     1200
+    ],
+    [
+     {
+      "opn": 9,
+      "tpx": 16
+     },
+     1728
+    ],
+    [
+     {
+      "opn": 11,
+      "tpx": 10
+     },
+     1320
+    ],
+    [
+     {
+      "opn": 3,
+      "tpx": 15
+     },
+     540
+    ],
+    [
+     {
+      "opn": 15,
+      "tpx": 21
+     },
+     3780
+    ],
+    [
+     {
+      "opn": 6,
+      "tpx": 20
+     },
+     1440
+    ],
+    [
+     {
+      "opn": 7,
+      "tpx": 15
+     },
+     1260
+    ]
+   ],
+   "task_id": "t-12",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "var",
+      "tpx"
+     ]
+    ],
+    [
+     "var",
+     "opn"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "b8_line_cleans",
+   "formula": "line cleans: every 4 hours plus once at close, per tap = tpx (opn // 4 + 1)",
+   "inputs": [
+    "tpx",
+    "opn"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "opn": 9,
+      "tpx": 13
+     },
+     39
+    ],
+    [
+     {
+      "opn": 12,
+      "tpx": 3
+     },
+     12
+    ],
+    [
+     {
+      "opn": 10,
+      "tpx": 4
+     },
+     12
+    ],
+    [
+     {
+      "opn": 2,
+      "tpx": 22
+     },
+     22
+    ],
+    [
+     {
+      "opn": 10,
+      "tpx": 9
+     },
+     27
+    ],
+    [
+     {
+      "opn": 14,
+      "tpx": 2
+     },
+     8
+    ],
+    [
+     {
+      "opn": 14,
+      "tpx": 10
+     },
+     40
+    ],
+    [
+     {
+      "opn": 3,
+      "tpx": 6
+     },
+     6
+    ],
+    [
+     {
+      "opn": 13,
+      "tpx": 23
+     },
+     92
+    ],
+    [
+     {
+      "opn": 3,
+      "tpx": 23
+     },
+     23
+    ],
+    [
+     {
+      "opn": 16,
+      "tpx": 8
+     },
+     40
+    ]
+   ],
+   "task_id": "t-13",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "tpx"
+    ],
+    [
+     "add",
+     [
+      "div",
+      [
+       "var",
+       "opn"
+      ],
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "b8_staff",
+   "formula": "bar staff, one per 6 taps rounded up, each hour = opn ceil(tpx / 6)",
+   "inputs": [
+    "tpx",
+    "opn"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "opn": 8,
+      "tpx": 13
+     },
+     24
+    ],
+    [
+     {
+      "opn": 7,
+      "tpx": 9
+     },
+     14
+    ],
+    [
+     {
+      "opn": 5,
+      "tpx": 2
+     },
+     5
+    ],
+    [
+     {
+      "opn": 2,
+      "tpx": 7
+     },
+     4
+    ],
+    [
+     {
+      "opn": 10,
+      "tpx": 18
+     },
+     30
+    ],
+    [
+     {
+      "opn": 12,
+      "tpx": 16
+     },
+     36
+    ],
+    [
+     {
+      "opn": 12,
+      "tpx": 17
+     },
+     36
+    ],
+    [
+     {
+      "opn": 9,
+      "tpx": 17
+     },
+     27
+    ],
+    [
+     {
+      "opn": 13,
+      "tpx": 23
+     },
+     52
+    ],
+    [
+     {
+      "opn": 4,
+      "tpx": 23
+     },
+     16
+    ],
+    [
+     {
+      "opn": 1,
+      "tpx": 8
+     },
+     2
+    ]
+   ],
+   "task_id": "t-15",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "opn"
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "tpx"
+      ],
+      [
+       "sub",
+       [
+        "mul",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         3
+        ]
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "brewery",
+   "family": "b8_glasses",
+   "formula": "glasses: 12 pints per tap-hour plus 20 spare = 12 tpx opn + 20",
+   "inputs": [
+    "tpx",
+    "opn"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "opn": 6,
+      "tpx": 7
+     },
+     524
+    ],
+    [
+     {
+      "opn": 7,
+      "tpx": 7
+     },
+     608
+    ],
+    [
+     {
+      "opn": 9,
+      "tpx": 21
+     },
+     2288
+    ],
+    [
+     {
+      "opn": 14,
+      "tpx": 24
+     },
+     4052
+    ],
+    [
+     {
+      "opn": 16,
+      "tpx": 7
+     },
+     1364
+    ],
+    [
+     {
+      "opn": 16,
+      "tpx": 17
+     },
+     3284
+    ],
+    [
+     {
+      "opn": 16,
+      "tpx": 15
+     },
+     2900
+    ],
+    [
+     {
+      "opn": 11,
+      "tpx": 10
+     },
+     1340
+    ],
+    [
+     {
+      "opn": 11,
+      "tpx": 23
+     },
+     3056
+    ],
+    [
+     {
+      "opn": 4,
+      "tpx": 23
+     },
+     1124
+    ],
+    [
+     {
+      "opn": 8,
+      "tpx": 23
+     },
+     2228
+    ]
+   ],
+   "task_id": "t-16",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "add",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         2
+        ]
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "var",
+       "tpx"
+      ]
+     ],
+     [
+      "var",
+      "opn"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "railway",
+   "family": "r8_first_class",
+   "formula": "one carriage per train at half seating = trn ((cgt - 1) spc + spc // 2)",
+   "inputs": [
+    "trn",
+    "cgt",
+    "spc"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cgt": 7,
+      "spc": 22,
+      "trn": 8
+     },
+     1144
+    ],
+    [
+     {
+      "cgt": 6,
+      "spc": 76,
+      "trn": 5
+     },
+     2090
+    ],
+    [
+     {
+      "cgt": 8,
+      "spc": 50,
+      "trn": 2
+     },
+     750
+    ],
+    [
+     {
+      "cgt": 2,
+      "spc": 65,
+      "trn": 7
+     },
+     679
+    ],
+    [
+     {
+      "cgt": 3,
+      "spc": 61,
+      "trn": 19
+     },
+     2888
+    ],
+    [
+     {
+      "cgt": 5,
+      "spc": 36,
+      "trn": 17
+     },
+     2754
+    ],
+    [
+     {
+      "cgt": 12,
+      "spc": 54,
+      "trn": 15
+     },
+     9315
+    ],
+    [
+     {
+      "cgt": 5,
+      "spc": 23,
+      "trn": 1
+     },
+     103
+    ],
+    [
+     {
+      "cgt": 6,
+      "spc": 64,
+      "trn": 6
+     },
+     2112
+    ],
+    [
+     {
+      "cgt": 5,
+      "spc": 31,
+      "trn": 2
+     },
+     278
+    ],
+    [
+     {
+      "cgt": 7,
+      "spc": 72,
+      "trn": 18
+     },
+     8424
+    ]
+   ],
+   "task_id": "t-18",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "trn"
+    ],
+    [
+     "add",
+     [
+      "mul",
+      [
+       "sub",
+       [
+        "var",
+        "cgt"
+       ],
+       [
+        "const",
+        1
+       ]
+      ],
+      [
+       "var",
+       "spc"
+      ]
+     ],
+     [
+      "div",
+      [
+       "var",
+       "spc"
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "railway",
+   "family": "r8_doors",
+   "formula": "doors: 4 per carriage and 2 cab doors per train = 4 trn cgt + 2 trn",
+   "inputs": [
+    "trn",
+    "cgt",
+    "spc"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cgt": 10,
+      "spc": 76,
+      "trn": 8
+     },
+     336
+    ],
+    [
+     {
+      "cgt": 5,
+      "spc": 35,
+      "trn": 8
+     },
+     176
+    ],
+    [
+     {
+      "cgt": 2,
+      "spc": 32,
+      "trn": 13
+     },
+     130
+    ],
+    [
+     {
+      "cgt": 2,
+      "spc": 64,
+      "trn": 11
+     },
+     110
+    ],
+    [
+     {
+      "cgt": 6,
+      "spc": 33,
+      "trn": 11
+     },
+     286
+    ],
+    [
+     {
+      "cgt": 5,
+      "spc": 55,
+      "trn": 6
+     },
+     132
+    ],
+    [
+     {
+      "cgt": 7,
+      "spc": 48,
+      "trn": 18
+     },
+     540
+    ],
+    [
+     {
+      "cgt": 2,
+      "spc": 39,
+      "trn": 17
+     },
+     170
+    ],
+    [
+     {
+      "cgt": 7,
+      "spc": 61,
+      "trn": 12
+     },
+     360
+    ],
+    [
+     {
+      "cgt": 11,
+      "spc": 32,
+      "trn": 7
+     },
+     322
+    ],
+    [
+     {
+      "cgt": 12,
+      "spc": 26,
+      "trn": 11
+     },
+     550
+    ]
+   ],
+   "task_id": "t-19",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "var",
+       "trn"
+      ]
+     ],
+     [
+      "var",
+      "cgt"
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "trn"
+     ],
+     [
+      "var",
+      "trn"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "railway",
+   "family": "r8_capacity",
+   "formula": "capacity with 20 standing per carriage = trn cgt (spc + 20)",
+   "inputs": [
+    "trn",
+    "cgt",
+    "spc"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cgt": 7,
+      "spc": 45,
+      "trn": 12
+     },
+     5460
+    ],
+    [
+     {
+      "cgt": 4,
+      "spc": 35,
+      "trn": 2
+     },
+     440
+    ],
+    [
+     {
+      "cgt": 8,
+      "spc": 27,
+      "trn": 16
+     },
+     6016
+    ],
+    [
+     {
+      "cgt": 3,
+      "spc": 55,
+      "trn": 17
+     },
+     3825
+    ],
+    [
+     {
+      "cgt": 10,
+      "spc": 80,
+      "trn": 13
+     },
+     13000
+    ],
+    [
+     {
+      "cgt": 3,
+      "spc": 24,
+      "trn": 3
+     },
+     396
+    ],
+    [
+     {
+      "cgt": 8,
+      "spc": 40,
+      "trn": 13
+     },
+     6240
+    ],
+    [
+     {
+      "cgt": 10,
+      "spc": 39,
+      "trn": 16
+     },
+     9440
+    ],
+    [
+     {
+      "cgt": 3,
+      "spc": 46,
+      "trn": 9
+     },
+     1782
+    ],
+    [
+     {
+      "cgt": 5,
+      "spc": 55,
+      "trn": 10
+     },
+     3750
+    ],
+    [
+     {
+      "cgt": 3,
+      "spc": 20,
+      "trn": 2
+     },
+     240
+    ]
+   ],
+   "task_id": "t-21",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "trn"
+     ],
+     [
+      "var",
+      "cgt"
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "spc"
+     ],
+     [
+      "mul",
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "railway",
+   "family": "r8_verge",
+   "formula": "the verge itself = tkl tkw - (tkl - 2)(tkw - 2)",
+   "inputs": [
+    "tkl",
+    "tkw"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "tkl": 154,
+      "tkw": 5
+     },
+     314
+    ],
+    [
+     {
+      "tkl": 162,
+      "tkw": 9
+     },
+     338
+    ],
+    [
+     {
+      "tkl": 97,
+      "tkw": 9
+     },
+     208
+    ],
+    [
+     {
+      "tkl": 149,
+      "tkw": 16
+     },
+     326
+    ],
+    [
+     {
+      "tkl": 133,
+      "tkw": 26
+     },
+     314
+    ],
+    [
+     {
+      "tkl": 39,
+      "tkw": 26
+     },
+     126
+    ],
+    [
+     {
+      "tkl": 248,
+      "tkw": 29
+     },
+     550
+    ],
+    [
+     {
+      "tkl": 69,
+      "tkw": 23
+     },
+     180
+    ],
+    [
+     {
+      "tkl": 169,
+      "tkw": 7
+     },
+     348
+    ],
+    [
+     {
+      "tkl": 149,
+      "tkw": 28
+     },
+     350
+    ],
+    [
+     {
+      "tkl": 198,
+      "tkw": 24
+     },
+     440
+    ]
+   ],
+   "task_id": "t-25",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "tkl"
+     ],
+     [
+      "var",
+      "tkw"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "tkl"
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "tkw"
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "railway",
+   "family": "r8_strips",
+   "formula": "3-wide ballast strips along the length = tkl ceil(tkw / 3)",
+   "inputs": [
+    "tkl",
+    "tkw"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "tkl": 41,
+      "tkw": 30
+     },
+     410
+    ],
+    [
+     {
+      "tkl": 153,
+      "tkw": 37
+     },
+     1989
+    ],
+    [
+     {
+      "tkl": 165,
+      "tkw": 12
+     },
+     660
+    ],
+    [
+     {
+      "tkl": 77,
+      "tkw": 5
+     },
+     154
+    ],
+    [
+     {
+      "tkl": 198,
+      "tkw": 5
+     },
+     396
+    ],
+    [
+     {
+      "tkl": 10,
+      "tkw": 15
+     },
+     50
+    ],
+    [
+     {
+      "tkl": 158,
+      "tkw": 23
+     },
+     1264
+    ],
+    [
+     {
+      "tkl": 124,
+      "tkw": 13
+     },
+     620
+    ],
+    [
+     {
+      "tkl": 70,
+      "tkw": 38
+     },
+     910
+    ],
+    [
+     {
+      "tkl": 127,
+      "tkw": 17
+     },
+     762
+    ],
+    [
+     {
+      "tkl": 239,
+      "tkw": 9
+     },
+     717
+    ]
+   ],
+   "task_id": "t-26",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "tkl"
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "tkw"
+      ],
+      [
+       "sub",
+       [
+        "const",
+        3
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "railway",
+   "family": "r8_crews",
+   "formula": "crews, one per 4 departures rounded up, each hour = rnh ceil(dph / 4)",
+   "inputs": [
+    "dph",
+    "rnh"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "dph": 11,
+      "rnh": 3
+     },
+     9
+    ],
+    [
+     {
+      "dph": 12,
+      "rnh": 8
+     },
+     24
+    ],
+    [
+     {
+      "dph": 8,
+      "rnh": 15
+     },
+     30
+    ],
+    [
+     {
+      "dph": 5,
+      "rnh": 11
+     },
+     22
+    ],
+    [
+     {
+      "dph": 9,
+      "rnh": 6
+     },
+     18
+    ],
+    [
+     {
+      "dph": 1,
+      "rnh": 10
+     },
+     10
+    ],
+    [
+     {
+      "dph": 10,
+      "rnh": 5
+     },
+     15
+    ],
+    [
+     {
+      "dph": 12,
+      "rnh": 5
+     },
+     15
+    ],
+    [
+     {
+      "dph": 5,
+      "rnh": 15
+     },
+     30
+    ],
+    [
+     {
+      "dph": 5,
+      "rnh": 5
+     },
+     10
+    ],
+    [
+     {
+      "dph": 12,
+      "rnh": 19
+     },
+     57
+    ]
+   ],
+   "task_id": "t-35",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "rnh"
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "dph"
+      ],
+      [
+       "sub",
+       [
+        "add",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         2
+        ]
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "railway",
+   "family": "r8_meets",
+   "formula": "pairs of departures that could meet = dph rnh (dph rnh - 1) / 2",
+   "inputs": [
+    "dph",
+    "rnh"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "dph": 12,
+      "rnh": 20
+     },
+     28680
+    ],
+    [
+     {
+      "dph": 1,
+      "rnh": 16
+     },
+     120
+    ],
+    [
+     {
+      "dph": 2,
+      "rnh": 8
+     },
+     120
+    ],
+    [
+     {
+      "dph": 9,
+      "rnh": 8
+     },
+     2556
+    ],
+    [
+     {
+      "dph": 10,
+      "rnh": 14
+     },
+     9730
+    ],
+    [
+     {
+      "dph": 6,
+      "rnh": 20
+     },
+     7140
+    ],
+    [
+     {
+      "dph": 6,
+      "rnh": 3
+     },
+     153
+    ],
+    [
+     {
+      "dph": 1,
+      "rnh": 18
+     },
+     153
+    ],
+    [
+     {
+      "dph": 8,
+      "rnh": 14
+     },
+     6216
+    ],
+    [
+     {
+      "dph": 9,
+      "rnh": 7
+     },
+     1953
+    ],
+    [
+     {
+      "dph": 4,
+      "rnh": 17
+     },
+     2278
+    ]
+   ],
+   "task_id": "t-36",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "dph"
+      ],
+      [
+       "var",
+       "rnh"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "var",
+        "dph"
+       ],
+       [
+        "var",
+        "rnh"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "laundry",
+   "family": "l8_idle_slots",
+   "formula": "machine slots unused in the last round = mch ceil(ceil(kgl/kpm)/mch) - ceil(kgl/kpm)",
+   "inputs": [
+    "kgl",
+    "kpm",
+    "mch"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "kgl": 457,
+      "kpm": 22,
+      "mch": 5
+     },
+     4
+    ],
+    [
+     {
+      "kgl": 1688,
+      "kpm": 13,
+      "mch": 11
+     },
+     2
+    ],
+    [
+     {
+      "kgl": 590,
+      "kpm": 17,
+      "mch": 2
+     },
+     1
+    ],
+    [
+     {
+      "kgl": 309,
+      "kpm": 20,
+      "mch": 1
+     },
+     0
+    ],
+    [
+     {
+      "kgl": 935,
+      "kpm": 19,
+      "mch": 8
+     },
+     6
+    ],
+    [
+     {
+      "kgl": 2613,
+      "kpm": 18,
+      "mch": 4
+     },
+     2
+    ],
+    [
+     {
+      "kgl": 1136,
+      "kpm": 11,
+      "mch": 5
+     },
+     1
+    ],
+    [
+     {
+      "kgl": 2828,
+      "kpm": 14,
+      "mch": 3
+     },
+     2
+    ],
+    [
+     {
+      "kgl": 1142,
+      "kpm": 24,
+      "mch": 6
+     },
+     0
+    ],
+    [
+     {
+      "kgl": 1248,
+      "kpm": 13,
+      "mch": 7
+     },
+     2
+    ],
+    [
+     {
+      "kgl": 2925,
+      "kpm": 15,
+      "mch": 10
+     },
+     5
+    ]
+   ],
+   "task_id": "t-41",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "mch"
+     ],
+     [
+      "div",
+      [
+       "add",
+       [
+        "div",
+        [
+         "add",
+         [
+          "var",
+          "kgl"
+         ],
+         [
+          "sub",
+          [
+           "var",
+           "kpm"
+          ],
+          [
+           "const",
+           1
+          ]
+         ]
+        ],
+        [
+         "var",
+         "kpm"
+        ]
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "mch"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "mch"
+      ]
+     ]
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "kgl"
+      ],
+      [
+       "sub",
+       [
+        "var",
+        "kpm"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "var",
+      "kpm"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "laundry",
+   "family": "l8_sheet",
+   "formula": "flat sheet with a 2-unit tuck on every side = (bdw + 4)(bdl + 4)",
+   "inputs": [
+    "bdw",
+    "bdl"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "bdl": 6,
+      "bdw": 17
+     },
+     210
+    ],
+    [
+     {
+      "bdl": 19,
+      "bdw": 14
+     },
+     414
+    ],
+    [
+     {
+      "bdl": 19,
+      "bdw": 20
+     },
+     552
+    ],
+    [
+     {
+      "bdl": 21,
+      "bdw": 4
+     },
+     200
+    ],
+    [
+     {
+      "bdl": 25,
+      "bdw": 13
+     },
+     493
+    ],
+    [
+     {
+      "bdl": 13,
+      "bdw": 10
+     },
+     238
+    ],
+    [
+     {
+      "bdl": 5,
+      "bdw": 20
+     },
+     216
+    ],
+    [
+     {
+      "bdl": 12,
+      "bdw": 4
+     },
+     128
+    ],
+    [
+     {
+      "bdl": 11,
+      "bdw": 20
+     },
+     360
+    ],
+    [
+     {
+      "bdl": 24,
+      "bdw": 12
+     },
+     448
+    ],
+    [
+     {
+      "bdl": 17,
+      "bdw": 11
+     },
+     315
+    ]
+   ],
+   "task_id": "t-42",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "var",
+      "bdw"
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "bdl"
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "laundry",
+   "family": "l8_quarter",
+   "formula": "one quarter after folding in half both ways = (bdw // 2)(bdl // 2)",
+   "inputs": [
+    "bdw",
+    "bdl"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "bdl": 15,
+      "bdw": 3
+     },
+     7
+    ],
+    [
+     {
+      "bdl": 19,
+      "bdw": 4
+     },
+     18
+    ],
+    [
+     {
+      "bdl": 9,
+      "bdw": 4
+     },
+     8
+    ],
+    [
+     {
+      "bdl": 6,
+      "bdw": 20
+     },
+     30
+    ],
+    [
+     {
+      "bdl": 16,
+      "bdw": 4
+     },
+     16
+    ],
+    [
+     {
+      "bdl": 16,
+      "bdw": 9
+     },
+     32
+    ],
+    [
+     {
+      "bdl": 15,
+      "bdw": 8
+     },
+     28
+    ],
+    [
+     {
+      "bdl": 21,
+      "bdw": 17
+     },
+     80
+    ],
+    [
+     {
+      "bdl": 5,
+      "bdw": 15
+     },
+     14
+    ],
+    [
+     {
+      "bdl": 17,
+      "bdw": 18
+     },
+     72
+    ],
+    [
+     {
+      "bdl": 8,
+      "bdw": 8
+     },
+     16
+    ]
+   ],
+   "task_id": "t-44",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "div",
+     [
+      "var",
+      "bdw"
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "div",
+     [
+      "var",
+      "bdl"
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "laundry",
+   "family": "l8_set",
+   "formula": "flat and fitted sheet plus a pillow strip = 2 bdw bdl + 2 bdw",
+   "inputs": [
+    "bdw",
+    "bdl"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "bdl": 9,
+      "bdw": 10
+     },
+     200
+    ],
+    [
+     {
+      "bdl": 23,
+      "bdw": 20
+     },
+     960
+    ],
+    [
+     {
+      "bdl": 25,
+      "bdw": 12
+     },
+     624
+    ],
+    [
+     {
+      "bdl": 14,
+      "bdw": 15
+     },
+     450
+    ],
+    [
+     {
+      "bdl": 15,
+      "bdw": 8
+     },
+     256
+    ],
+    [
+     {
+      "bdl": 10,
+      "bdw": 10
+     },
+     220
+    ],
+    [
+     {
+      "bdl": 10,
+      "bdw": 6
+     },
+     132
+    ],
+    [
+     {
+      "bdl": 20,
+      "bdw": 7
+     },
+     294
+    ],
+    [
+     {
+      "bdl": 19,
+      "bdw": 12
+     },
+     480
+    ],
+    [
+     {
+      "bdl": 19,
+      "bdw": 3
+     },
+     120
+    ],
+    [
+     {
+      "bdl": 17,
+      "bdw": 10
+     },
+     360
+    ]
+   ],
+   "task_id": "t-45",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "bdw"
+      ],
+      [
+       "var",
+       "bdw"
+      ]
+     ],
+     [
+      "var",
+      "bdl"
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "bdw"
+     ],
+     [
+      "var",
+      "bdw"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "laundry",
+   "family": "l8_service",
+   "formula": "loads with one service slot per washer-day = wsh dop (lpd - 1)",
+   "inputs": [
+    "wsh",
+    "lpd",
+    "dop"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "dop": 6,
+      "lpd": 5,
+      "wsh": 9
+     },
+     216
+    ],
+    [
+     {
+      "dop": 3,
+      "lpd": 2,
+      "wsh": 9
+     },
+     27
+    ],
+    [
+     {
+      "dop": 6,
+      "lpd": 8,
+      "wsh": 10
+     },
+     420
+    ],
+    [
+     {
+      "dop": 1,
+      "lpd": 7,
+      "wsh": 7
+     },
+     42
+    ],
+    [
+     {
+      "dop": 5,
+      "lpd": 10,
+      "wsh": 5
+     },
+     225
+    ],
+    [
+     {
+      "dop": 3,
+      "lpd": 8,
+      "wsh": 2
+     },
+     42
+    ],
+    [
+     {
+      "dop": 4,
+      "lpd": 2,
+      "wsh": 6
+     },
+     24
+    ],
+    [
+     {
+      "dop": 1,
+      "lpd": 2,
+      "wsh": 1
+     },
+     1
+    ],
+    [
+     {
+      "dop": 5,
+      "lpd": 2,
+      "wsh": 11
+     },
+     55
+    ],
+    [
+     {
+      "dop": 2,
+      "lpd": 9,
+      "wsh": 12
+     },
+     192
+    ],
+    [
+     {
+      "dop": 6,
+      "lpd": 5,
+      "wsh": 4
+     },
+     96
+    ]
+   ],
+   "task_id": "t-48",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "wsh"
+     ],
+     [
+      "var",
+      "dop"
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "lpd"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "laundry",
+   "family": "l8_scoops",
+   "formula": "detergent scoops: 2 per load plus 1 per washer-day = wsh dop (2 lpd + 1)",
+   "inputs": [
+    "wsh",
+    "lpd",
+    "dop"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "dop": 6,
+      "lpd": 8,
+      "wsh": 12
+     },
+     1224
+    ],
+    [
+     {
+      "dop": 1,
+      "lpd": 9,
+      "wsh": 9
+     },
+     171
+    ],
+    [
+     {
+      "dop": 4,
+      "lpd": 10,
+      "wsh": 6
+     },
+     504
+    ],
+    [
+     {
+      "dop": 7,
+      "lpd": 9,
+      "wsh": 2
+     },
+     266
+    ],
+    [
+     {
+      "dop": 5,
+      "lpd": 6,
+      "wsh": 10
+     },
+     650
+    ],
+    [
+     {
+      "dop": 5,
+      "lpd": 5,
+      "wsh": 7
+     },
+     385
+    ],
+    [
+     {
+      "dop": 1,
+      "lpd": 6,
+      "wsh": 7
+     },
+     91
+    ],
+    [
+     {
+      "dop": 1,
+      "lpd": 7,
+      "wsh": 6
+     },
+     90
+    ],
+    [
+     {
+      "dop": 3,
+      "lpd": 8,
+      "wsh": 11
+     },
+     561
+    ],
+    [
+     {
+      "dop": 3,
+      "lpd": 6,
+      "wsh": 10
+     },
+     390
+    ],
+    [
+     {
+      "dop": 3,
+      "lpd": 2,
+      "wsh": 10
+     },
+     150
+    ]
+   ],
+   "task_id": "t-49",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "wsh"
+     ],
+     [
+      "var",
+      "dop"
+     ]
+    ],
+    [
+     "add",
+     [
+      "add",
+      [
+       "var",
+       "lpd"
+      ],
+      [
+       "var",
+       "lpd"
+      ]
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "laundry",
+   "family": "l8_pairs",
+   "formula": "washer pairs scheduled together, each day = dop wsh (wsh - 1) / 2",
+   "inputs": [
+    "wsh",
+    "lpd",
+    "dop"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "dop": 2,
+      "lpd": 2,
+      "wsh": 7
+     },
+     42
+    ],
+    [
+     {
+      "dop": 7,
+      "lpd": 9,
+      "wsh": 5
+     },
+     70
+    ],
+    [
+     {
+      "dop": 4,
+      "lpd": 8,
+      "wsh": 10
+     },
+     180
+    ],
+    [
+     {
+      "dop": 6,
+      "lpd": 5,
+      "wsh": 10
+     },
+     270
+    ],
+    [
+     {
+      "dop": 5,
+      "lpd": 7,
+      "wsh": 10
+     },
+     225
+    ],
+    [
+     {
+      "dop": 6,
+      "lpd": 3,
+      "wsh": 2
+     },
+     6
+    ],
+    [
+     {
+      "dop": 2,
+      "lpd": 2,
+      "wsh": 2
+     },
+     2
+    ],
+    [
+     {
+      "dop": 1,
+      "lpd": 10,
+      "wsh": 8
+     },
+     28
+    ],
+    [
+     {
+      "dop": 3,
+      "lpd": 10,
+      "wsh": 1
+     },
+     0
+    ],
+    [
+     {
+      "dop": 4,
+      "lpd": 2,
+      "wsh": 10
+     },
+     180
+    ],
+    [
+     {
+      "dop": 7,
+      "lpd": 3,
+      "wsh": 10
+     },
+     315
+    ]
+   ],
+   "task_id": "t-50",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "dop"
+      ],
+      [
+       "var",
+       "wsh"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "wsh"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "laundry",
+   "family": "l8_tokens",
+   "formula": "tokens: one per load plus 3 per washer = wsh lpd dop + 3 wsh",
+   "inputs": [
+    "wsh",
+    "lpd",
+    "dop"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "dop": 7,
+      "lpd": 5,
+      "wsh": 2
+     },
+     76
+    ],
+    [
+     {
+      "dop": 3,
+      "lpd": 10,
+      "wsh": 6
+     },
+     198
+    ],
+    [
+     {
+      "dop": 5,
+      "lpd": 7,
+      "wsh": 1
+     },
+     38
+    ],
+    [
+     {
+      "dop": 6,
+      "lpd": 10,
+      "wsh": 6
+     },
+     378
+    ],
+    [
+     {
+      "dop": 1,
+      "lpd": 4,
+      "wsh": 1
+     },
+     7
+    ],
+    [
+     {
+      "dop": 6,
+      "lpd": 6,
+      "wsh": 12
+     },
+     468
+    ],
+    [
+     {
+      "dop": 7,
+      "lpd": 5,
+      "wsh": 10
+     },
+     380
+    ],
+    [
+     {
+      "dop": 4,
+      "lpd": 8,
+      "wsh": 4
+     },
+     140
+    ],
+    [
+     {
+      "dop": 6,
+      "lpd": 7,
+      "wsh": 8
+     },
+     360
+    ],
+    [
+     {
+      "dop": 5,
+      "lpd": 3,
+      "wsh": 11
+     },
+     198
+    ],
+    [
+     {
+      "dop": 5,
+      "lpd": 10,
+      "wsh": 2
+     },
+     106
+    ]
+   ],
+   "task_id": "t-51",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "wsh"
+      ],
+      [
+       "var",
+       "lpd"
+      ]
+     ],
+     [
+      "var",
+      "dop"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      3
+     ],
+     [
+      "var",
+      "wsh"
+     ]
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "int",
+ "schema": "nomad.transfer8-suite.v1",
+ "seed": 20270203,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 26,
+  "families": 52,
+  "hard": 23,
+  "lookup_dropped": [
+   {
+    "easy_twin": [],
+    "family": "r8_fence",
+    "memory_lookup": [
+     "mul(2, add(tkl, add(2, tkw)))",
+     "mul(2, add(tkw, add(2, tkl)))"
+    ]
+   },
+   {
+    "easy_twin": [],
+    "family": "r8_inner",
+    "memory_lookup": [
+     "mul(sub(tkl, 2), sub(tkw, 2))",
+     "mul(sub(tkw, 2), sub(tkl, 2))"
+    ]
+   },
+   {
+    "easy_twin": [],
+    "family": "l8_hem",
+    "memory_lookup": [
+     "mul(2, add(bdw, add(2, bdl)))",
+     "mul(2, add(bdl, add(2, bdw)))"
+    ]
+   }
+  ]
+ },
+ "trained_on_by_any_arm": false
+}

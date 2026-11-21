@@ -40,11 +40,12 @@ JUDGES = {
     "text_chain": ["scripts/text_chain_judge.py"],     # TEXT_CHAIN sealed suite (ROUTE_CUT)
     "meaning": ["scripts/meaning_judge.py"],           # MEANING sealed suite (ROUTE_CUT addendum)
     "inflect": ["scripts/inflect_judge.py"],           # INFLECT sealed suite (INFLECT)
-    "let": ["scripts/let_judge.py"],                   # LET sealed suite (this step)
-    "textpat": ["scripts/textpat_judge.py"],          # TEXT_ABSTRACT sealed suite (this step)
+    "let": ["scripts/let_judge.py"],                   # LET sealed suite (LET)
+    "textpat": ["scripts/textpat_judge.py"],          # TEXT_ABSTRACT sealed suite
     "roles": ["scripts/roles_judge.py"],               # ROLES sealed suite (ROLES; not re-run by ROLES itself)
     "combine": ["scripts/combine_judge.py"],           # COMBINE sealed suite (COMBINE; not re-run by COMBINE itself)
     "ceil": ["scripts/ceil_judge.py"],                 # CEIL sealed suite (CEIL; not re-run by CEIL itself)
+    "merge": ["scripts/merge_judge.py"],               # MERGE sealed suite (MERGE; not re-run by MERGE itself)
 }
 
 
