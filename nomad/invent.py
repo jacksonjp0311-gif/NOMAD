@@ -56,6 +56,36 @@ DREAM_MAX = 1000      # synthetic ints are log-uniform in 1..DREAM_MAX (so neste
 DREAM_ROWS = 12       # synthetic rows for behavioural dedup (seeded; never task rows)
 
 
+def selfedit_on() -> bool:
+    """NOMAD_SELFEDIT (docs/SELFEDIT.md): the invention knobs below are read from the
+    bounded genome genes (data/genome.json, or the sandbox's in-process override)
+    instead of the module constants. The genome defaults equal the constants, so
+    with an untouched genome nothing changes."""
+    return W._flag("NOMAD_SELFEDIT", "off")
+
+
+def _gene(name: str, default):
+    if not selfedit_on():
+        return default
+    from . import genome
+    return genome.load()[name]
+
+
+def max_constants() -> int:
+    return int(_gene("inv_max_constants", MAX_CONSTANTS))
+
+
+def const_depth() -> int:
+    return int(_gene("inv_const_depth", 1))
+
+
+def floor_fit() -> bool:
+    """Floor-division fit (genome gene ``inv_floor_fit``, off by default): in the INVENT
+    phase a block value v with v // k equal to the goal on every public row, k a learned
+    or derived constant, is offered as ``v // k`` (WITNESS-gated, 1 evaluation each)."""
+    return bool(_gene("inv_floor_fit", 0))
+
+
 def enabled() -> bool:
     """NOMAD_INVENT: invented primitives in the field arm's block probe.
     Default on since the round-2 sealed judge passed (docs/INVENT.md)."""
@@ -329,7 +359,8 @@ def inventions(prior) -> list[Invention]:
     """Promoted abstractions for a field (cached on the prior by memory content)."""
     if prior is None or not prior.programs:
         return []
-    settings = (rounds(), MAX_COMPOSED, PER_HEAD, MIN_SAVING, COMPOSE_CONSTS, MIN_USES, MAX_INVENTIONS)
+    settings = (rounds(), MAX_COMPOSED, PER_HEAD, MIN_SAVING, COMPOSE_CONSTS, MIN_USES, MAX_INVENTIONS,
+                max_constants(), const_depth())
     key = hashlib.sha256(json.dumps([sorted(prior.programs.items()), settings]).encode()).hexdigest()
     cache = getattr(prior, "_invent_cache", None)
     if cache and cache[0] == key:
@@ -340,8 +371,9 @@ def inventions(prior) -> list[Invention]:
 
 
 def rounds() -> int:
-    """Invention rounds; NOMAD_INVENT_ROUNDS overrides ROUNDS (report-only ablations)."""
-    return int(os.environ.get("NOMAD_INVENT_ROUNDS", ROUNDS))
+    """Invention rounds; NOMAD_INVENT_ROUNDS overrides ROUNDS (report-only ablations);
+    with NOMAD_SELFEDIT on the default is the genome gene ``inv_rounds``."""
+    return int(os.environ.get("NOMAD_INVENT_ROUNDS", _gene("inv_rounds", ROUNDS)))
 
 
 def memory_scales(progs: list[tuple[str, list]]) -> list[tuple[int, list]]:
@@ -516,18 +548,30 @@ def compose(prev: list[Invention], parts: list[Invention], scales: list[tuple[in
 
 
 def constants(scales: list[tuple[int, list]]) -> list[tuple[int, list]]:
-    """Derived learned constants: pairwise products of learned scales, smallest first."""
+    """Derived learned constants: pairwise products of learned scales, smallest first.
+    ``const_depth()`` closure rounds (round 2 multiplies round-1 products by the
+    pool again: 8 = 2*4, 12 = 2*6, ...); ``max_constants()`` kept. Both are the
+    module defaults (1 round, MAX_CONSTANTS) unless NOMAD_SELFEDIT reads the genome."""
     have = {k for k, _ in scales}
+    pool = list(scales)
     out: dict[int, list] = {}
-    for i, (a, ta) in enumerate(scales):
-        for b, tb in scales[i:]:
-            v = a * b
-            if v in have or v > MAX_CONST_VALUE:
-                continue
-            t = ["mul", ta, tb]
-            if v not in out or W.size(t) < W.size(out[v]):
-                out[v] = t
-    return sorted(out.items())[:MAX_CONSTANTS]
+    for _rnd in range(max(1, const_depth())):
+        new: dict[int, list] = {}
+        for i, (a, ta) in enumerate(pool):
+            for b, tb in pool[i:]:
+                v = a * b
+                if v in have or v > MAX_CONST_VALUE:
+                    continue
+                t = ["mul", ta, tb]
+                if v not in out and (v not in new or W.size(t) < W.size(new[v])):
+                    new[v] = t
+                elif v in out and W.size(t) < W.size(out[v]):
+                    out[v] = t
+        if not new:
+            break
+        out.update(new)
+        pool = sorted(dict(pool + list(new.items())).items())
+    return sorted(out.items())[:max_constants()]
 
 
 INVENT_AT = "grow"    # "grow": the INVENT phase runs after PORT/GROW and the atoms; "after": after the regular levels
@@ -566,6 +610,7 @@ class Kit:
     consts: list         # derived learned constants [(k, tree)]
     instances: list      # [(name, expanded tree)] over the task's inputs
     rounds: dict = None  # instance name -> invention round
+    floor: bool = False  # floor-division fit by learned / derived constants (genome gene inv_floor_fit)
 
 
 def kit(prior, task, bank: list) -> Kit | None:
@@ -574,6 +619,7 @@ def kit(prior, task, bank: list) -> Kit | None:
     consts = constants(W.bank_scales(bank)) if task.out == "int" else []
     if not invs and not consts:
         return None
+    floor = floor_fit() and task.out == "int"
     from itertools import product
     ops = {}
     for x in invs:
@@ -603,4 +649,4 @@ def kit(prior, task, bank: list) -> Kit | None:
             rnd[nm] = x.round
             if len(inst) >= MAX_INSTANCES:
                 break
-    return Kit(ops if PROBE_OPS else {}, consts, inst if INSTANCES else [], rnd)
+    return Kit(ops if PROBE_OPS else {}, consts, inst if INSTANCES else [], rnd, floor)

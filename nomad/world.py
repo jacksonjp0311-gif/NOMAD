@@ -1478,6 +1478,23 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 return tree
             return None
 
+        # floor-division fit (genome gene inv_floor_fit, docs/SELFEDIT.md): a computed block value v
+        # with v // k == goal on every public row is offered as v // k. Like the rescaled targets
+        # (goal * k), the test is a lookup on a value already computed (no extra evaluation);
+        # only the WITNESS-gated offer counts as a fit.
+        floors = [(k, kt) for k, kt in learned + list(inv.consts) if k >= 2] \
+            if getattr(inv, "floor", False) and task.out == "int" else []
+        goal_t = tuple(goal)
+
+        def floor_fit(t, v, rnd):
+            for k, kt in floors:
+                if all(type(x) is int for x in v) and tuple(x // k for x in v) == goal_t:
+                    hit = fit(["div", t, kt], f"floor{k}", rnd)
+                    if hit is not None:
+                        return hit
+                    yield evals
+            return None
+
         # (1) invented blocks over the task's inputs
         ri = []
         for n, t in inv.instances:
@@ -1500,8 +1517,18 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 if hit is not None:
                     return hit
                 yield evals
+            elif floors:
+                hit = yield from floor_fit(t, v, inv.rounds.get(n, 1))
+                if hit is not None:
+                    return hit
             ri.append((None, n, t, v))
         inst_names = {n for n, _t in inv.instances}
+        if floors:
+            # floor-division fit on the bank blocks' values (already computed by the probe)
+            for z in ranked:
+                hit = yield from floor_fit(z[2], z[3], 0)
+                if hit is not None:
+                    return hit
         for g2, wrap, tag, derived in targets:
             cand = ri + (ranked if derived else [])
             if task.out != "int":
@@ -1561,6 +1588,10 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                                 return hit
                             yield evals
                             continue
+                        if floors and iop.out == "int":
+                            hit = yield from floor_fit(tree, vals, iop.round)
+                            if hit is not None:
+                                return hit
                         if k in B or k in istate["seen"]:
                             continue
                         istate["seen"].add(k)

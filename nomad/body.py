@@ -50,6 +50,21 @@ def evolve_step(*, push: bool) -> dict[str, Any]:
             sha = hostgit.find_commit(f"^nomad-evolve: {gid}")
             if sha:
                 out["reverted"] = hostgit.revert(sha, f"nomad-revert: {gid} live twin regression (reverts {sha[:7]})")
+    from . import selfedit
+    if selfedit.should():
+        # SELFEDIT sandbox (docs/SELFEDIT.md): one invention-gene step at this checkpoint, instead of evolve
+        res = selfedit.attempt()
+        out["selfedit"] = {k: res.get(k) for k in ("accepted", "reason", "gene", "id", "before", "after",
+                                                   "dev_before", "dev_after", "sandbox_clean")}
+        if push:
+            hostgit.commit(f"nomad-evolve-log: selfedit {res.get('gene')} accepted={res.get('accepted')}"
+                           f" ({res.get('reason') or 'advanced'})", ["data/evolution.jsonl"])
+            if res.get("accepted"):
+                g = res["gene"]
+                hostgit.commit(f"nomad-evolve: {res['id']} selfedit {g} {res['before'][g]} -> {res['after'][g]}"
+                               f" (dev {res['dev_before']['certified']} -> {res['dev_after']['certified']},"
+                               f" keep + replay no loss, tests passed)", ["data/genome.json"])
+        return out
     if evolve.should_evolve():
         res = evolve.evolve()
         out["evolve"] = {k: res.get(k) for k in ("accepted", "reason", "gene", "id", "before", "after")}
