@@ -207,3 +207,36 @@ class WeightsInMemory(_LoopBase):
                 Wt.reinforce(dom, 1)
                 Wt.reinforce_list(mem, dom, 1)
         self.assertEqual(Wt.packets_path().read_text(), Wt.serialize(mem))
+
+
+class FinalSplitSeparation(unittest.TestCase):
+    def test_consult_never_reads_final(self) -> None:
+        import dataclasses
+        from nomad import world as W
+
+        class Poison(tuple):
+            def __iter__(self):
+                raise AssertionError("final split read during a WITNESS consultation")
+        t = dataclasses.replace(_inc_task(), final=Poison())
+        r = W.consult(t, ADD1)
+        self.assertTrue(r is not None and r.supported)
+        self.assertEqual(r.receipt_hash, W.certify(_inc_task(), ADD1)[0].receipt_hash)
+
+    def test_search_gets_no_final_rows(self) -> None:
+        from nomad import world as W
+        seen = []
+        real = W.synthesize
+
+        def spy(task, **kw):
+            seen.append(task.final)
+            return real(task, **kw)
+        with mock.patch.object(W, "synthesize", side_effect=spy):
+            ev, r = W.evaluate(_inc_task(), prior=W.WorldPrior())
+        self.assertEqual(seen, [()])
+        self.assertTrue(ev.certified)                      # certification still uses the real final rows
+
+    def test_witness_gate_holds_no_final(self) -> None:
+        from nomad import world as W
+        g = W._WitnessGate(_inc_task(), {})
+        self.assertFalse(hasattr(g.view, "final"))
+        self.assertTrue(g(ADD1))

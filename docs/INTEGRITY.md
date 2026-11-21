@@ -117,3 +117,46 @@ versions, 1,550 distinct sleep records, 9,262 applied packet ids).
   So no count correction was needed and none was made.
 - Caveat: the queue is committed only when a checkpoint falls between enqueue and sleep, so
   receipts exist in history for 258 of the 9,262 applied packets. Binding was checked on all 258.
+
+## Defect 3: certify() computed final outputs during WITNESS consultations
+
+**Claim.** Search consults WITNESS on public-row fits (`_WitnessGate`, WITNESS_CONTINUE; the
+MEANING and COMBINE stages). Each consultation called `certify()`, which also ran the program on
+the final split and returned `final_ok`. The callers threw it away, so no search decision used it,
+but the boundary rested on caller discipline.
+
+**Reproduction (pre-fix).** `FinalSplitSeparation.test_search_gets_no_final_rows`: the task
+object handed to `synthesize()` by `evaluate()` carried the 3 final rows. `_WitnessGate` held the
+full task, and a consultation evaluated the program on those rows.
+
+**Fix.**
+- `world.consult(task, tree)` is the search-time consultation. It attests on public and challenge
+  rows only, through a `ChallengeView` (task_id, out, public, challenge) that has no final
+  attribute at all, and returns the same receipt `certify()` would
+  (`test_consult_never_reads_final` uses a final split that raises if iterated).
+- `_WitnessGate` holds only a `ChallengeView`. `meaning.stage` and `combine.stage` call
+  `consult`.
+- `evaluate()` hands every search stage (MEANING, COMBINE, `synthesize`) `search_view(task)`,
+  the task with `final=()`. It certifies the returned program with the full task only after
+  search returns. `certify()` = `_attest()` (shared with `consult`) + `final_check()`, and it is
+  for post-search use only (evaluate, the sleep learner, feeds, judges).
+- No search decision changed: search never read `task.final` (checked by grep over every search
+  module). The 21 judges are byte-identical to the pre-fix commit (ROLES under
+  `PYTHONHASHSEED=0`, see above), with LOFO at 5,883 and worst ratio 1.0x.
+- Not changed: `variation.explore()` (awake exploration, outside the twin comparison) still uses
+  `certify()` with final rows to choose which mutants it reports as "paid". The sleep learner
+  re-attests those itself. This is not part of the twin's search, but it is a final-split read
+  outside `evaluate()` and is noted here as a remaining caveat.
+
+## Note 4 (report only, no behavior change): evolve uses held-out probes for selection
+
+Confirmed. `evolve.benchmark()` calls `world_loop.probe_heldout(field, write=False)`. Its
+`heldout_wins` (field beats cold on the HELDOUT families) and the probes' evaluations
+(`probe_evaluations`, part of `total_evaluations`) are what `evolve.better()` compares, so the
+HELDOUT families drive which `decay` / `library_k` gene the evolve organ accepts. Those families
+never enter WorldPrior as training, but they do steer model selection. **They are validation
+(fitness) data, not a held-out test.** The live `world_heldout.json` probes and the organism's
+"held-out" line should be read the same way. SELFEDIT does not use `probe_heldout`: it uses its
+own dev catalogue at a dev seed plus keep and replay sets (`nomad/selfedit.py`). A clean held-out
+claim would need an outer test set that evolve, SELFEDIT, development and promotion never read
+until its designated evaluation. That is left for a later, pre-registered change.

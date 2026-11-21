@@ -237,7 +237,7 @@ def _comm_key(tree: list) -> str:
 
 def stage(task: Any, prior: Any, words: str, *, max_eval: int | None = None) -> tuple[tuple[str, list] | None, int, dict]:
     """Try the concepts the words retrieve, first. Returns ((concept, tree) | None, evaluations, info)."""
-    from .world import Invalid, _rename, certify, run
+    from .world import Invalid, _rename, consult, run
     budget = MEANING_BUDGET if max_eval is None else min(MEANING_BUDGET, max_eval)
     kind = None
     try:
@@ -281,7 +281,7 @@ def stage(task: Any, prior: Any, words: str, *, max_eval: int | None = None) -> 
             continue
         if vals != goal:
             continue
-        receipt, _pub, _fin = certify(task, inst)
+        receipt = consult(task, inst)   # INTEGRITY: challenge only, never final
         if receipt is not None and receipt.supported:
             info["rejected"] = rejects
             return (c, inst), evals, info

@@ -17,6 +17,7 @@ No transformers. No neural weights. Integer counts and receipts only.
 """
 from __future__ import annotations
 
+import dataclasses
 import hashlib
 import json
 from dataclasses import dataclass, field
@@ -1107,7 +1108,8 @@ class _WitnessGate:
     """
 
     def __init__(self, task: WorldTask, library: dict[str, list], max_rejects: int | None = None):
-        self.task, self.library = task, library
+        # INTEGRITY (docs/INTEGRITY.md): the gate holds a challenge view with no final split at all
+        self.view, self.library = ChallengeView.of(task), library
         self.max_rejects = WITNESS_MAX_REJECTS if max_rejects is None else max_rejects
         self.rejected: list[list] = []
         self.vias: list[str | None] = []
@@ -1116,7 +1118,7 @@ class _WitnessGate:
     def __call__(self, tree: list) -> bool:
         if len(self.rejected) >= self.max_rejects:
             return True
-        receipt, _pub, _fin = certify(self.task, expand(tree, self.library))
+        receipt = consult(self.view, expand(tree, self.library))
         if receipt is not None and receipt.supported:
             return True
         self.rejected.append(tree)
@@ -2845,6 +2847,7 @@ def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bo
     library = (prior.primitives_for(task.inputs)
                if (prior is not None and use_library and prior.wants_library(task.family if use_family else None))
                else {})
+    full, task = task, search_view(task)   # INTEGRITY: search never holds the final split
     spent, hit = 0, None
     if words and prior is not None and prior.lexicon:
         from . import meaning as _meaning
@@ -2872,7 +2875,7 @@ def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bo
     # Certify the standalone program: library calls are inlined first.
     # A mutant only fits the public rows; WITNESS decides here like for any program.
     tree = expand(s.tree, library)
-    receipt, public_ok, final_ok = certify(task, tree)
+    receipt, public_ok, final_ok = certify(full, tree)
     if receipt is None:
         return WorldEvaluation(task.task_id, task.family, render(tree), tree, False, False, False,
                                s.evaluations, "invalid_on_rows", s.order, tuple(s.library_used), s.via, vt, sr), None
@@ -2899,14 +2902,27 @@ def check_binding(tree: list, receipt: WitnessReceipt, task_id: str | None = Non
         raise ReceiptMismatch("receipt was attested on a different task")
 
 
-def certify(task: WorldTask, tree: list) -> tuple[WitnessReceipt | None, bool, bool]:
-    """WITNESS-attest a standalone program on a task's rows.
+@dataclass(frozen=True)
+class ChallengeView:
+    """INTEGRITY: what a search-time WITNESS consultation may see. There is no final split here."""
+    task_id: str
+    out: str
+    public: tuple
+    challenge: tuple
 
-    Deterministic: the same task rows and program always give the same
-    receipt_hash, so anyone holding the rows can re-attest and compare.
-    Returns (receipt or None if the program is invalid on public/challenge
-    rows, public_ok, final_ok).
-    """
+    @classmethod
+    def of(cls, task: "WorldTask | ChallengeView") -> "ChallengeView":
+        return cls(task.task_id, task.out, task.public, task.challenge)
+
+
+def search_view(task: WorldTask) -> WorldTask:
+    """INTEGRITY: the task as search receives it, with the final split removed (search never read it;
+    now it cannot). Certification uses the full task after search returns."""
+    return dataclasses.replace(task, final=())
+
+
+def _attest(view: "WorldTask | ChallengeView", tree: list) -> tuple[WitnessReceipt | None, list]:
+    """WITNESS on public + challenge rows only. Returns (receipt or None if invalid there, public values)."""
     def vals(rs):
         out = []
         for r, _ in rs:
@@ -2916,21 +2932,53 @@ def certify(task: WorldTask, tree: list) -> tuple[WitnessReceipt | None, bool, b
                 out.append(None)
         return out
 
-    pub, cha, fin = vals(task.public), vals(task.challenge), vals(task.final)
+    pub, cha = vals(view.public), vals(view.challenge)
     if any(v is None for v in pub + cha):
-        return None, False, False
-    d = _DEFAULT[task.out]
+        return None, pub
+    d = _DEFAULT[view.out]
     receipt = Witness(witness_id=WORLD_WITNESS_ID).attest(
-        task_id=task.task_id,
+        task_id=view.task_id,
         transmission_id=program_hash(tree),
         world_epoch=0,
-        current_public=tuple(_wv(d) for _ in task.public),
-        target_public=tuple(_wv(e) for _, e in task.public),
+        current_public=tuple(_wv(d) for _ in view.public),
+        target_public=tuple(_wv(e) for _, e in view.public),
         candidate_public=tuple(_wv(v) for v in pub),
-        current_challenge=tuple(_wv(d) for _ in task.challenge),
-        target_challenge=tuple(_wv(e) for _, e in task.challenge),
+        current_challenge=tuple(_wv(d) for _ in view.challenge),
+        target_challenge=tuple(_wv(e) for _, e in view.challenge),
         candidate_challenge=tuple(_wv(v) for v in cha),
     )
-    final_ok = all(v == e for v, (_, e) in zip(fin, task.final))
+    return receipt, pub
+
+
+def consult(task: "WorldTask | ChallengeView", tree: list) -> WitnessReceipt | None:
+    """INTEGRITY: the search-time WITNESS consultation. Reads public and challenge rows only, through
+    a ChallengeView, so the final split is structurally unreachable. Same receipt as certify()."""
+    return _attest(ChallengeView.of(task), tree)[0]
+
+
+def final_check(task: WorldTask, tree: list) -> bool:
+    """The independent final split: used only by certify(), after search has returned."""
+    out = []
+    for r, _ in task.final:
+        try:
+            out.append(run(tree, r))
+        except Invalid:
+            out.append(None)
+    return all(v == e for v, (_, e) in zip(out, task.final))
+
+
+def certify(task: WorldTask, tree: list) -> tuple[WitnessReceipt | None, bool, bool]:
+    """WITNESS-attest a standalone program on a task's rows.
+
+    Deterministic: the same task rows and program always give the same
+    receipt_hash, so anyone holding the rows can re-attest and compare.
+    Returns (receipt or None if the program is invalid on public/challenge
+    rows, public_ok, final_ok). For use after search only (evaluate, the learner,
+    feeds); search-time consultation is consult() (docs/INTEGRITY.md).
+    """
+    receipt, pub = _attest(task, tree)
+    if receipt is None:
+        return None, False, False
+    final_ok = final_check(task, tree)
     public_ok = all(v == e for v, (_, e) in zip(pub, task.public))
     return receipt, public_ok, final_ok

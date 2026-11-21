@@ -128,7 +128,7 @@ def compositions(prior: Any, ranked: list[str], n_inputs: int) -> list[tuple[str
 def stage(task: Any, prior: Any, words: str, *, max_eval: int | None = None) -> tuple[tuple[str, list] | None, int, dict]:
     """Compositions of retrieved concepts, after a MEANING miss. ((label, tree) | None, evaluations, info)."""
     from . import meaning as _meaning
-    from .world import Invalid, _rename, certify, run
+    from .world import Invalid, _rename, consult, run
     budget = COMBINE_BUDGET if max_eval is None else min(COMBINE_BUDGET, max_eval)
     kind = None
     try:
@@ -215,7 +215,7 @@ def stage(task: Any, prior: Any, words: str, *, max_eval: int | None = None) -> 
                         continue
                     if vals != goal:
                         continue
-                    receipt, _pub, _fin = certify(task, inst)
+                    receipt = consult(task, inst)   # INTEGRITY: challenge only, never final
                     if receipt is not None and receipt.supported:
                         info["rejected"] = st["rejects"]
                         return (f"{b_key}[{slot}:={a_key}]", inst), st["evals"], info
