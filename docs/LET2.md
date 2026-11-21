@@ -92,3 +92,34 @@ sha d045282f, 22 hard (`results/let2/let2_sealed.json`):
 - Criterion 3 pass: 0 lost on any field; nothing newly worse than cold.
 - Report: as expected before measuring, the pool control is close (12 / 12 / 11). The gain comes from the
   let operator reached safely, not from the field's blocks as intermediates.
+
+## Sealed result, part 2: existing suites and LOFO
+
+LOFO (`results/let2/lofo.json`): 5,883 / 5,883, worst 1.0x (criterion 5 LOFO passes).
+
+`SWITCH=NOMAD_LET2 scripts/switch_regress.py` over 21 judges (`results/let2/regress_compare.json`): 930
+per-task records with fewer evaluations, but **53 per-task losses on 6 judges**, including **certification
+losses**:
+
+- transfer2 `g2_kite` (math_sci_grow_off)
+- ceil `cl_h_rafts` (trained_on and rewired_1-3)
+- selfedit2 `se2_g_square9` (trained_tuned, math_sci_tuned)
+- meaning `ms_cake_split2` (words_only_on)
+
+The rest are evaluation increases: meaning 17, roles 24, combine `cs_fuel_weeks` x4. Judges with zero
+losses: bridge, inflect, learning (science hard incl. sci_water_mol), let, merge, route5, secondary4,
+text_chain, text_invent, text, textpat, transfer1, transfer3, transfer4, transfer6.
+
+**Verdict: FAIL** (criterion 4). `NOMAD_LET2` stays **off**.
+
+Diagnosis, after the measurement (not tuned on):
+
+1. **False positives pre-empt later stages.** In g2_kite, cl_h_rafts and se2_g_square9, a LET2 let fit
+   passed the public rows and WITNESS but failed the final rows (`via port:let2`, uncertified). It returned
+   before INVENT, which finds the true program with the switch off. "Runs only after main's stages missed"
+   is not "cannot lose": a WITNESS-accepted wrong fit ends the task. A future attempt needs LET2 placed
+   after every main stage, or a hit that only counts when nothing later would certify.
+2. **MEANING and ROLES arms change.** Example: ms_two_terminals shuffled_1 goes from 4 evaluations
+   (`meaning:` lookup) to 5,360 (`port:anchor`). These arms reach PORT along a different path with the
+   switch on. MERGE alone showed 0 losses there, so the cause is LET2-specific (not the MergedBank). Not
+   investigated further.
