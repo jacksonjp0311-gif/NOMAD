@@ -86,6 +86,15 @@ def floor_fit() -> bool:
     return bool(_gene("inv_floor_fit", 0))
 
 
+def text_enabled() -> bool:
+    """NOMAD_INVENT_TEXT (docs/INVENT_TEXT.md): concat residual anchors and an evidence-gated early
+    INVENT phase on string goals. Default off until its sealed judge passes."""
+    return W._flag("NOMAD_INVENT_TEXT", "off")
+
+
+TEXT_ANCHOR_N = 24    # string blocks tried as concat anchors per task (1 evaluation each)
+
+
 def enabled() -> bool:
     """NOMAD_INVENT: invented primitives in the field arm's block probe.
     Default on since the round-2 sealed judge passed (docs/INVENT.md)."""

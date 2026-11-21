@@ -1300,6 +1300,13 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 pinfo["port"] = "block"
                 return hit
         istate.update(table=table, ranked=ranked)
+        if task.out == "str" and text_invent() and inv is not None and invent_applies():
+            # INVENT_TEXT early pass: concat anchors on the bank blocks' values (already computed),
+            # at most TEXT_ANCHOR_N lookups, only when a block is a proper prefix / suffix of the goal
+            istate["ilimit"] = limit
+            hit = yield from text_anchors([z for z in ranked if all(type(x) is str for x in z[3])], table)
+            if hit is not None:
+                return hit
         if inv is not None and invent_applies() and not invent_deferred(ranked):
             hit = yield from invent_phase(P, B, limit)
             if hit is not None:
@@ -1433,6 +1440,52 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             return True
         return False
 
+    def text_invent() -> bool:
+        from . import invent as _I
+        return _I.text_enabled()
+
+    def text_split(v) -> str | None:
+        """'pre' / 'suf' when the string block value v is a proper prefix / suffix of the goal on every row."""
+        if not v or any(type(x) is not str or not x for x in v) or len(v) != len(goal):
+            return None
+        if all(len(x) < len(g) and g.startswith(x) for x, g in zip(v, goal)):
+            return "pre"
+        if all(len(x) < len(g) and g.endswith(x) for x, g in zip(v, goal)):
+            return "suf"
+        return None
+
+    def text_anchors(cands, table):
+        """Concat residual anchors, longest matching blocks first: the remainder lookup is free
+        (values already computed); an assembled candidate costs 1 evaluation."""
+        nonlocal evals
+        from . import invent as _I
+        local = dict(table)
+        for z in cands:
+            local.setdefault(_key(z[3]), z[2])
+        done = 0
+        for z in sorted(cands, key=lambda z: -sum(len(x) for x in z[3])):
+            side = text_split(z[3])
+            if side is None:
+                continue
+            if done >= _I.TEXT_ANCHOR_N or evals >= istate.get("ilimit", max_eval):
+                return None
+            done += 1
+            if side == "pre":
+                need = tuple(g[len(x):] for x, g in zip(z[3], goal))
+            else:
+                need = tuple(g[:len(g) - len(x)] for x, g in zip(z[3], goal))
+            b = local.get(_key(need))
+            if b is None:
+                continue   # a lookup on values already computed (no evaluation, like the rescaled targets)
+            evals += 1     # the assembled concat program is one candidate evaluation
+            yield evals
+            hit = ["concat", z[2], b] if side == "pre" else ["concat", b, z[2]]
+            if stop_on(hit):
+                pinfo["port"] = "invent:text:" + side
+                return hit
+            yield evals
+        return None
+
     def invent_phase(P, B, limit):
         """INVENT (docs/INVENT.md), one capped phase after PORT/GROW and the
         atoms: (1) the field's invented blocks instantiated over the task's
@@ -1451,6 +1504,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         istate["done"] = True
         table, ranked = istate["table"], istate["ranked"]
         ilimit = min(limit, evals + int(_I.INVENT_CAP * max_eval))
+        istate["ilimit"] = ilimit
         rej0 = len(gate.rejected) if gate is not None else 0
 
         def over():
@@ -1529,6 +1583,13 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 hit = yield from floor_fit(z[2], z[3], 0)
                 if hit is not None:
                     return hit
+        if task.out == "str" and text_invent():
+            # INVENT_TEXT (docs/INVENT_TEXT.md): concat residual anchors on string goals. A block value
+            # v that is a proper prefix (suffix) of the goal on every public row leaves a remainder;
+            # a pool / block value equal to the remainder completes concat(v, b) (concat(b, v)).
+            hit = yield from text_anchors(ri + [z for z in ranked if all(type(x) is str for x in z[3])], table)
+            if hit is not None:
+                return hit
         for g2, wrap, tag, derived in targets:
             cand = ri + (ranked if derived else [])
             if task.out != "int":
