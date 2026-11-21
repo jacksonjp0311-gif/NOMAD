@@ -1,0 +1,1417 @@
+{
+ "tasks": 22,
+ "certified": {
+  "cold": 0,
+  "empty_off": 0,
+  "empty_on": 0,
+  "trained_off": 10,
+  "trained_on": 22,
+  "world_only_off": 2,
+  "world_only_on": 20,
+  "bridge_only_off": 10,
+  "bridge_only_on": 22,
+  "trained_on_text_off": 3
+ },
+ "evaluations": {
+  "cold": 220000,
+  "empty_off": 220000,
+  "empty_on": 220000,
+  "trained_off": 170828,
+  "trained_on": 111785,
+  "world_only_off": 210053,
+  "world_only_on": 120413,
+  "bridge_only_off": 170516,
+  "bridge_only_on": 111323,
+  "trained_on_text_off": 205418
+ },
+ "worse_than_cold": {
+  "cold": [],
+  "empty_off": [],
+  "empty_on": [],
+  "trained_off": [],
+  "trained_on": [],
+  "world_only_off": [],
+  "world_only_on": [],
+  "bridge_only_off": [],
+  "bridge_only_on": [],
+  "trained_on_text_off": []
+ },
+ "per_task[certified, evals, via, candidate]": {
+  "m_head_colon_tail": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5052,
+    "port:invent:text:suf",
+    "concat(concat(take(ma, mk), ms), srev(take(srev(ma), mk)))"
+   ],
+   "trained_on": [
+    true,
+    5052,
+    "port:invent:text:suf",
+    "concat(concat(take(ma, mk), ms), srev(take(srev(ma), mk)))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(take(ma, mk), concat(ms, srev(take(srev(ma), mk))))"
+   ],
+   "bridge_only_off": [
+    true,
+    5039,
+    "port:invent:text:suf",
+    "concat(concat(take(ma, mk), ms), srev(take(srev(ma), mk)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:suf",
+    "concat(concat(take(ma, mk), ms), srev(take(srev(ma), mk)))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_initial_colon_len": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5052,
+    "port:invent:text:suf",
+    "concat(concat(first(ma), ms), itos(strlen(ma)))"
+   ],
+   "trained_on": [
+    true,
+    5052,
+    "port:invent:text:suf",
+    "concat(concat(first(ma), ms), itos(strlen(ma)))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(first(ma), concat(ms, itos(strlen(ma))))"
+   ],
+   "bridge_only_off": [
+    true,
+    5039,
+    "port:invent:text:suf",
+    "concat(concat(first(ma), ms), itos(strlen(ma)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:suf",
+    "concat(concat(first(ma), ms), itos(strlen(ma)))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_upper_name_slash_lower_word": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5100,
+    "port:invent:text:chain",
+    "concat(upper(srev(rest(srev(mb)))), concat(upper(last(mb)), lower(concat(mt, ma))))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(upper(srev(rest(srev(mb)))), concat(upper(last(mb)), lower(concat(mt, ma))))"
+   ],
+   "bridge_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5077,
+    "port:invent:text:chain",
+    "concat(upper(srev(rest(srev(mb)))), concat(upper(last(mb)), lower(concat(mt, ma))))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_rot_colon_initial": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5052,
+    "port:invent:text:pre",
+    "concat(concat(drop(ma, mk), take(ma, mk)), concat(ms, first(ma)))"
+   ],
+   "trained_on": [
+    true,
+    5052,
+    "port:invent:text:pre",
+    "concat(concat(drop(ma, mk), take(ma, mk)), concat(ms, first(ma)))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(drop(ma, mk), concat(concat(take(ma, mk), ms), first(ma)))"
+   ],
+   "bridge_only_off": [
+    true,
+    5039,
+    "port:invent:text:pre",
+    "concat(concat(drop(ma, mk), take(ma, mk)), concat(ms, first(ma)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:pre",
+    "concat(concat(drop(ma, mk), take(ma, mk)), concat(ms, first(ma)))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_k_slash_name_slash": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5098,
+    "port:invent:text:pre",
+    "concat(concat(itos(mk), mt), concat(mb, mt))"
+   ],
+   "trained_on": [
+    true,
+    5098,
+    "port:invent:text:pre",
+    "concat(concat(itos(mk), mt), concat(mb, mt))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5024,
+    "port:invent:text:chain",
+    "concat(itos(mk), concat(mt, concat(mb, mt)))"
+   ],
+   "bridge_only_off": [
+    true,
+    5075,
+    "port:invent:text:pre",
+    "concat(concat(itos(mk), mt), concat(mb, mt))"
+   ],
+   "bridge_only_on": [
+    true,
+    5075,
+    "port:invent:text:pre",
+    "concat(concat(itos(mk), mt), concat(mb, mt))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_take_take_mix": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5075,
+    "port:invent:text:chain",
+    "concat(take(ma, mk), concat(take(mb, mk), take(ma, mk)))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5019,
+    "port:invent:text:chain",
+    "concat(take(ma, mk), concat(take(mb, mk), take(ma, mk)))"
+   ],
+   "bridge_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5057,
+    "port:invent:text:chain",
+    "concat(take(ma, mk), concat(take(mb, mk), take(ma, mk)))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_rep_last_colon_name": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5075,
+    "port:invent:text:chain",
+    "concat(srep(last(ma), mk), concat(ms, mb))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5019,
+    "port:invent:text:chain",
+    "concat(srep(last(ma), mk), concat(ms, mb))"
+   ],
+   "bridge_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5057,
+    "port:invent:text:chain",
+    "concat(srep(last(ma), mk), concat(ms, mb))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_drop_colon_rev_take": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5052,
+    "port:invent:text:pre",
+    "concat(drop(ma, mk), srev(concat(take(ma, mk), ms)))"
+   ],
+   "trained_on": [
+    true,
+    5052,
+    "port:invent:text:pre",
+    "concat(drop(ma, mk), srev(concat(take(ma, mk), ms)))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(drop(ma, mk), concat(ms, srev(take(ma, mk))))"
+   ],
+   "bridge_only_off": [
+    true,
+    5039,
+    "port:invent:text:pre",
+    "concat(drop(ma, mk), srev(concat(take(ma, mk), ms)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:pre",
+    "concat(drop(ma, mk), srev(concat(take(ma, mk), ms)))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_lower_initials_colon": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5075,
+    "port:invent:text:chain",
+    "concat(lower(first(ma)), concat(ms, lower(first(mb))))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5019,
+    "port:invent:text:chain",
+    "concat(lower(first(ma)), concat(ms, lower(first(mb))))"
+   ],
+   "bridge_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5057,
+    "port:invent:text:chain",
+    "concat(lower(first(ma)), concat(ms, lower(first(mb))))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_len_sum_colon_word": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5052,
+    "port:invent:text:pre",
+    "concat(itos(add(mk, strlen(ma))), concat(ms, ma))"
+   ],
+   "trained_on": [
+    true,
+    5052,
+    "port:invent:text:pre",
+    "concat(itos(add(mk, strlen(ma))), concat(ms, ma))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(itos(add(mk, strlen(ma))), concat(ms, ma))"
+   ],
+   "bridge_only_off": [
+    true,
+    5039,
+    "port:invent:text:pre",
+    "concat(itos(add(mk, strlen(ma))), concat(ms, ma))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:pre",
+    "concat(itos(add(mk, strlen(ma))), concat(ms, ma))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_tail_colon_tail": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5075,
+    "port:invent:text:chain",
+    "concat(srev(take(srev(ma), mk)), concat(ms, srev(take(srev(mb), mk))))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5019,
+    "port:invent:text:chain",
+    "concat(srev(take(srev(ma), mk)), concat(ms, srev(take(srev(mb), mk))))"
+   ],
+   "bridge_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5057,
+    "port:invent:text:chain",
+    "concat(srev(take(srev(ma), mk)), concat(ms, srev(take(srev(mb), mk))))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_word_colon_name_slash_k": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5098,
+    "port:invent:text:chain",
+    "concat(concat(ma, concat(ms, mb)), concat(mt, itos(mk)))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5024,
+    "port:invent:text:chain",
+    "concat(concat(ma, concat(ms, mb)), concat(mt, itos(mk)))"
+   ],
+   "bridge_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5075,
+    "port:invent:text:chain",
+    "concat(concat(ma, concat(ms, mb)), concat(mt, itos(mk)))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_frame_colon_head": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5052,
+    "port:invent:text:pre",
+    "concat(upper(srev(ms)), concat(take(ma, mk), ms))"
+   ],
+   "trained_on": [
+    true,
+    5052,
+    "port:invent:text:pre",
+    "concat(upper(srev(ms)), concat(take(ma, mk), ms))"
+   ],
+   "world_only_off": [
+    true,
+    5014,
+    "port:invent:text:pre",
+    "concat(upper(srev(ms)), concat(take(ma, mk), ms))"
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:pre",
+    "concat(upper(srev(ms)), concat(take(ma, mk), ms))"
+   ],
+   "bridge_only_off": [
+    true,
+    5039,
+    "port:invent:text:pre",
+    "concat(upper(take(ms, mk)), concat(take(ma, mk), ms))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:pre",
+    "concat(upper(take(ms, mk)), concat(take(ma, mk), ms))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_initials_len": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5075,
+    "port:invent:text:chain",
+    "concat(concat(first(ma), first(mb)), concat(ms, itos(strlen(concat(ma, mb)))))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5019,
+    "port:invent:text:chain",
+    "concat(concat(first(ma), first(mb)), concat(ms, itos(strlen(concat(ma, mb)))))"
+   ],
+   "bridge_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5057,
+    "port:invent:text:chain",
+    "concat(concat(first(ma), first(mb)), concat(ms, itos(strlen(concat(ma, mb)))))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_up_head_colon_rest_colon_k": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5052,
+    "port:invent:text:chain",
+    "concat(upper(concat(take(ma, mk), ms)), concat(concat(drop(ma, mk), ms), itos(mk)))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(upper(concat(take(ma, mk), ms)), concat(concat(drop(ma, mk), ms), itos(mk)))"
+   ],
+   "bridge_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:chain",
+    "concat(upper(concat(take(ma, mk), ms)), concat(concat(drop(ma, mk), ms), itos(mk)))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_rot_rot_slash": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5195,
+    "port:invent:text:chain",
+    "concat(concat(drop(ma, mk), take(ma, mk)), concat(mt, concat(drop(mb, mj), take(mb, mj))))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5141,
+    "port:invent:text:chain",
+    "concat(concat(drop(ma, mk), take(ma, mk)), concat(mt, concat(drop(mb, mj), take(mb, mj))))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_name_word_lens": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5098,
+    "port:invent:text:chain",
+    "concat(concat(mb, concat(ms, ma)), concat(mt, itos(strlen(concat(ma, mb)))))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5024,
+    "port:invent:text:chain",
+    "concat(concat(mb, concat(ms, ma)), concat(mt, itos(strlen(concat(ma, mb)))))"
+   ],
+   "bridge_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5075,
+    "port:invent:text:chain",
+    "concat(concat(mb, concat(ms, ma)), concat(mt, itos(strlen(concat(ma, mb)))))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_head_mid_tail": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5117,
+    "port:invent:text:chain",
+    "concat(concat(take(ma, mj), ms), concat(take(drop(ma, mj), mk), concat(ms, drop(ma, add(mk, mj)))))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5045,
+    "port:invent:text:chain",
+    "concat(concat(take(ma, mj), ms), concat(take(drop(ma, mj), mk), concat(ms, drop(ma, add(mk, mj)))))"
+   ],
+   "bridge_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5073,
+    "port:invent:text:chain",
+    "concat(concat(take(ma, mj), ms), concat(take(drop(ma, mj), mk), concat(ms, drop(ma, add(mk, mj)))))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_last_first_slash_name_upper": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    5098,
+    "port:invent:text:chain",
+    "concat(last(ma), concat(first(ma), upper(concat(mt, mb))))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5024,
+    "port:invent:text:chain",
+    "concat(last(ma), concat(first(ma), upper(concat(mt, mb))))"
+   ],
+   "bridge_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_on": [
+    true,
+    5075,
+    "port:invent:text:chain",
+    "concat(last(ma), concat(first(ma), upper(concat(mt, mb))))"
+   ],
+   "trained_on_text_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "m_lower_rot_ctrl": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5228,
+    "port:probe",
+    "lower(srev(srev(concat(drop(ma, mk), take(ma, mk)))))"
+   ],
+   "trained_on": [
+    true,
+    5052,
+    "port:invent:text:chain",
+    "concat(lower(at(ma, mk)), concat(lower(rest(drop(ma, mk))), lower(take(ma, mk))))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    true,
+    5014,
+    "port:invent:text:chain",
+    "concat(lower(at(ma, mk)), concat(lower(rest(drop(ma, mk))), lower(take(ma, mk))))"
+   ],
+   "bridge_only_off": [
+    true,
+    5072,
+    "port:probe",
+    "lower(upper(concat(drop(ma, mk), take(ma, mk))))"
+   ],
+   "bridge_only_on": [
+    true,
+    5039,
+    "port:invent:text:chain",
+    "concat(lower(at(ma, mk)), concat(lower(rest(drop(ma, mk))), lower(take(ma, mk))))"
+   ],
+   "trained_on_text_off": [
+    true,
+    5228,
+    "port:probe",
+    "lower(srev(srev(concat(drop(ma, mk), take(ma, mk)))))"
+   ]
+  },
+  "m_len_three_ctrl": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5115,
+    "port:anchor",
+    "add(strlen(concat(ms, ms)), strlen(concat(ma, rest(mb))))"
+   ],
+   "trained_on": [
+    true,
+    5115,
+    "port:anchor",
+    "add(strlen(concat(ms, ms)), strlen(concat(ma, rest(mb))))"
+   ],
+   "world_only_off": [
+    true,
+    5039,
+    "port:anchor",
+    "add(strlen(concat(ms, ms)), strlen(concat(ma, rest(mb))))"
+   ],
+   "world_only_on": [
+    true,
+    5039,
+    "port:anchor",
+    "add(strlen(concat(ms, ms)), strlen(concat(ma, rest(mb))))"
+   ],
+   "bridge_only_off": [
+    true,
+    5078,
+    "port:anchor2",
+    "add(add(add(mk, strlen(mb)), add(mk, strlen(ma))), sub(1, add(mk, mk)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5078,
+    "port:anchor2",
+    "add(add(add(mk, strlen(mb)), add(mk, strlen(ma))), sub(1, add(mk, mk)))"
+   ],
+   "trained_on_text_off": [
+    true,
+    5115,
+    "port:anchor",
+    "add(strlen(concat(ms, ms)), strlen(concat(ma, rest(mb))))"
+   ]
+  },
+  "m_len_k_ctrl": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5075,
+    "port:anchor",
+    "add(add(mk, strlen(mb)), strlen(srep(rest(ma), mk)))"
+   ],
+   "trained_on": [
+    true,
+    5075,
+    "port:anchor",
+    "add(add(mk, strlen(mb)), strlen(srep(rest(ma), mk)))"
+   ],
+   "world_only_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "world_only_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "bridge_only_off": [
+    true,
+    5057,
+    "port:anchor",
+    "add(add(mk, strlen(mb)), strlen(srep(rest(ma), mk)))"
+   ],
+   "bridge_only_on": [
+    true,
+    5057,
+    "port:anchor",
+    "add(add(mk, strlen(mb)), strlen(srep(rest(ma), mk)))"
+   ],
+   "trained_on_text_off": [
+    true,
+    5075,
+    "port:anchor",
+    "add(add(mk, strlen(mb)), strlen(srep(rest(ma), mk)))"
+   ]
+  }
+ },
+ "sha256": "630f7a9eb941fccf9c77289f134bc0d0678f42983bc8d22a64b380576210d4eb",
+ "verdict": {
+  "on_minus_off": 12,
+  "fewer_evals_vs_off": 0.3456,
+  "c1_on_beats_off": true,
+  "empty_on_minus_empty_off": 0,
+  "report_empty_on_minus_cold": 0,
+  "c2_gain_vanishes_with_empty_field": true,
+  "trained_on_losses_vs_off": [],
+  "c3_no_task_worse": true,
+  "pass_1_to_3": true
+ }
+}

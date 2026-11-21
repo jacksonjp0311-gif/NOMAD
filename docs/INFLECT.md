@@ -112,3 +112,62 @@ suffix blocks reach (full plural, -ing, third person, the count forms) pass; the
 four-way split on five public rows) is the most likely miss (a public-row fit that WITNESS rejects).
 Criterion 4 is the one most at risk: on the dev suite the selector alone (field without inflection
 training) already certified 4 of 7 against 6 with the rule blocks.
+
+## Sealed result (measured once, 2026-11-21, code `96bcdba`; `results/inflect/`): **FAIL** (criteria 3 and 4)
+
+Sealed suite (sha `6e324b06...91d5`, 12 hard), certified / evaluations:
+
+| arm | certified | evaluations |
+|---|---|---|
+| cold (switch on) | 0 | 120,000 |
+| cold_off | 1 | 119,504 |
+| empty_off / empty_on | 1 / 0 | 119,504 / 120,000 |
+| trained_off (field trained with the switch off) | 1 | 115,027 |
+| **trained_on** (field trained on the 11 rule-block tasks) | **8** | **72,142** |
+| bridge_on (same field without inflection training, switch on) | 6 | 75,590 |
+| shuffled_on (rewired training outputs) | 6 | 76,240 |
+| inflect_only_on | 8 | 76,358 |
+
+| criterion | result |
+|---|---|
+| 1 it helps (>= +3) | **pass**: +7 (1 -> 8 of 12), 37.3% fewer evaluations |
+| 2 empty_on - empty_off <= 1 | **pass**: 0 - 1 = -1 (empty_on - cold = 0) |
+| 3 no sealed task worse | **FAIL**: `q_ctl_pair` (the control, a plain word + separator + length) certifies in both arms but costs 4 more evaluations with the switch on (5,027 -> 5,031: the bigger library/opset); nothing is worse than cold |
+| 4 learning matters (>= +3 over bridge_on and over shuffled_on) | **FAIL**: +2 over each (8 vs 6 / 6) |
+| 5 existing suites | pass (see below) |
+| 6 safety | pass: the off arms reproduce the headline numbers (the switch changes nothing for any existing task) |
+
+Existing suites, `SWITCH=NOMAD_INFLECT scripts/switch_regress.py` (`results/inflect/regress_default*`),
+default genome: **0 per-task losses and 0 gains (byte-identical records)** on learning (deep, science
+hard), TRANSFER-1..6, secondary, TEXT (56), BRIDGE (60), INVENT_TEXT (51), TEXT_CHAIN (89), MEANING (158),
+SELFEDIT round 2 (44) -- by construction: the new operators, the selector completion and the affix
+ranking are reachable only from tasks of the `inflect` opset. **LOFO** 5,883 (cold / trained /
+trained_port_off), worst ratio 1.0x. Full pytest: 505 passed, 6 skipped.
+
+Per task (certified in `trained_on`): full plural, full past tense (the expected miss was solved), -ing,
+third person, regular count noun, computed count, "n nouns is/are" -- 7 string families, plus the control.
+Not solved: the full-plural count noun (`q_count_noun`: a selector whose branch is itself a stem + ending
+chain, beyond one nested selector over pool values), the possessive of the count form (a public-row fit
+that WITNESS rejects), and the two integer-output lengths (as expected: the chain only completes string
+goals).
+
+Honest reading:
+
+- The gain is real but is mostly **the selector completion**, not the learned rule blocks. With the switch
+  on, a field *without* any inflection training (bridge_on) already certifies 6 of 12 through
+  `port:invent:text:chain` (full plural, full past, the regular and computed counts, "n nouns is/are", plus the control); the learned stem
+  and ending blocks add exactly two more (-ing and third person: the cases needing a stem block as a
+  peeled part), and the rewired field (shuffled) sits at 6 like the untrained one -- so the learned blocks
+  matter (they are the only difference between 8 and 6, and shuffling them removes it) but by 2, below the
+  pre-registered +3. The empty field certifies nothing with the switch on (the selector needs a bank and a
+  kit), so the gain does need memory.
+- "Off" is the system without this step (the opset collapses to the bridge world and the field cannot learn
+  the rule blocks); its 1 certified is the control.
+- Criterion 3 is a 4-evaluation difference on a task that needs no inflection, from the larger field.
+  The pre-registered rule counts it as a loss.
+
+Decision (pre-registered rule): criteria 3 and 4 fail -> **`NOMAD_INFLECT` stays OFF**. No retuning, no
+second measurement of this suite. What would be a fair next step (a new pre-registered suite, not a re-run):
+the selector's branch pool is the weak point -- a nested selector whose branch is a chain (`q_count_noun`)
+and a cheaper selector first (so the control's evaluations do not rise) are the obvious levers; a larger
+sealed suite would also make the +3 learning criterion less a matter of two tasks.
