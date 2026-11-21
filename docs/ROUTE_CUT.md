@@ -118,3 +118,25 @@ after this document was written, so its sealed suite joins criterion 5:
 main), zero per-task losses on every arm, switch on vs off. This only adds a
 suite; nothing else in the criteria changes. All ROUTE_CUT judges run with
 MEANING at its default (on).
+
+## Sealed result, primary (TRANSFER-7, sha256 f8906d60...e175, 31 hard): criteria 1-2 FAIL
+
+Measured once, 2026-11-21, with every other switch at its current default
+(TEXT_CHAIN, MEANING on); raw output `results/route_cut/route_cut_sealed_primary_20261121.json`.
+
+| arm | certified / 31 | evaluations |
+|---|---|---|
+| cold | 0 | 310,000 |
+| empty | 7 | 276,936 |
+| empty_cut | 7 | 276,936 |
+| trained (math_sci, ROUTE_CUT off) | 15 | 240,200 |
+| trained_cut / sh0 / sh1 / sh2 | 15 / 15 / 15 / 15 | 240,200 each (the bank never overflows: identical) |
+| practice (ROUTE_CUT off) | 19 | 238,254 |
+| practice_cut | 19 | 235,581 (-1.1%) |
+| practice_cut_sh0 / sh1 / sh2 | 19 / 19 / 19 | 238,359 / 238,036 / 238,178 |
+
+By domain: trained clinic 5/9, print 6/12, harbour 4/10; practice 6/9, 7/12,
+6/10 (identical for off, cut and every shuffled table). No task lost on
+either field; nothing worse than cold; empty_cut identical to empty.
+Criteria 3 and 4 pass; 1 and 2 fail (19 = 19 = 19/19/19).
+The secondary regression and LOFO follow below.
