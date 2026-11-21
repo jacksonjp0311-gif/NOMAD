@@ -112,3 +112,12 @@ sealed suite, its trained field: trained / trained_merge / trained_rw0..2).
 
 All six pass: `NOMAD_MERGE` defaults to on in a separate commit. Otherwise it stays off, and the
 code and the result are committed as they are.
+
+### Addendum to criterion 5 (before any MERGE measurement)
+
+COMBINE (8ae25e1) and CEIL (c7cc8d0) were pre-registered by other steps while this one was being
+written; their owners have not run their single sealed measurements, so their judges are **not**
+run here (running them off / on would measure their sealed suites first). Criterion 5 covers every
+other judge in `scripts/switch_regress.py` except `merge` itself: learning, transfer1-4, secondary4,
+text, bridge, text_invent, route5, transfer6, selfedit2, text_chain, meaning, inflect, let, textpat,
+roles. Measured from a snapshot of `81063e0`.
