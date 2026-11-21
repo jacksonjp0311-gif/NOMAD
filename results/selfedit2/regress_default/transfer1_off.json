@@ -1,0 +1,872 @@
+{
+ "tasks": 20,
+ "certified": {
+  "cold": 0,
+  "empty": 2,
+  "math": 8,
+  "math_sci": 19,
+  "all_sci": 19,
+  "math_sci_port_off": 2
+ },
+ "evaluations": {
+  "cold": 190918,
+  "empty": 188241,
+  "math": 157438,
+  "math_sci": 113467,
+  "all_sci": 113467,
+  "math_sci_port_off": 188241
+ },
+ "by_domain": {
+  "cold": {
+   "geometry": [
+    0,
+    14
+   ],
+   "finance": [
+    0,
+    6
+   ]
+  },
+  "empty": {
+   "geometry": [
+    2,
+    14
+   ],
+   "finance": [
+    0,
+    6
+   ]
+  },
+  "math": {
+   "geometry": [
+    3,
+    14
+   ],
+   "finance": [
+    5,
+    6
+   ]
+  },
+  "math_sci": {
+   "geometry": [
+    13,
+    14
+   ],
+   "finance": [
+    6,
+    6
+   ]
+  },
+  "all_sci": {
+   "geometry": [
+    13,
+    14
+   ],
+   "finance": [
+    6,
+    6
+   ]
+  },
+  "math_sci_port_off": {
+   "geometry": [
+    2,
+    14
+   ],
+   "finance": [
+    0,
+    6
+   ]
+  }
+ },
+ "worse_than_cold": {
+  "cold": [],
+  "empty": [],
+  "math": [],
+  "math_sci": [],
+  "all_sci": [],
+  "math_sci_port_off": []
+ },
+ "per_task[certified, evals, via, candidate]": {
+  "geo_box_lateral": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "math_sci": [
+    true,
+    5194,
+    "port:anchor",
+    "add(mul(add(W, W), H), mul(add(L, L), H))"
+   ],
+   "all_sci": [
+    true,
+    5194,
+    "port:anchor",
+    "add(mul(add(W, W), H), mul(add(L, L), H))"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "geo_box_surface": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci": [
+    true,
+    5768,
+    "port:anchor2",
+    "add(add(mul(add(H, H), L), mul(add(W, W), H)), mul(L, add(W, W)))"
+   ],
+   "all_sci": [
+    true,
+    5768,
+    "port:anchor2",
+    "add(add(mul(add(H, H), L), mul(add(W, W), H)), mul(L, add(W, W)))"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "geo_open_box": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci": [
+    true,
+    5762,
+    "port:anchor2",
+    "add(add(mul(add(H, H), L), mul(W, L)), mul(H, add(W, W)))"
+   ],
+   "all_sci": [
+    true,
+    5762,
+    "port:anchor2",
+    "add(add(mul(add(H, H), L), mul(W, L)), mul(H, add(W, W)))"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "geo_box_edges": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci": [
+    true,
+    6762,
+    "port:scale:mul2",
+    "mul(add(add(L, L), mul(add(W, H), 2)), 2)"
+   ],
+   "all_sci": [
+    true,
+    6762,
+    "port:scale:mul2",
+    "mul(add(add(L, L), mul(add(W, H), 2)), 2)"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "geo_diag2": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    true,
+    5074,
+    "port:anchor",
+    "add(add(mul(W, W), H), sub(mul(L, L), H))"
+   ],
+   "math_sci": [
+    true,
+    5222,
+    "port:anchor",
+    "add(add(mul(W, W), H), sub(mul(L, L), H))"
+   ],
+   "all_sci": [
+    true,
+    5222,
+    "port:anchor",
+    "add(add(mul(W, W), H), sub(mul(L, L), H))"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "geo_diag3": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    true,
+    5410,
+    "port:anchor2",
+    "add(add(add(mul(W, W), L), mul(H, H)), sub(mul(L, L), L))"
+   ],
+   "math_sci": [
+    true,
+    5738,
+    "port:anchor2",
+    "add(add(add(mul(W, W), L), mul(H, H)), sub(mul(L, L), L))"
+   ],
+   "all_sci": [
+    true,
+    5738,
+    "port:anchor2",
+    "add(add(add(mul(W, W), L), mul(H, H)), sub(mul(L, L), L))"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "geo_frame": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "geo_square_pyramid": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    true,
+    6940,
+    "sense:mul",
+    "mul(L, div(mul(L, H), 3))"
+   ],
+   "math": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci": [
+    true,
+    6425,
+    "port:scale:div2",
+    "div(mul(add(L, L), div(mul(L, H), 3)), 2)"
+   ],
+   "all_sci": [
+    true,
+    6425,
+    "port:scale:div2",
+    "div(mul(add(L, L), div(mul(L, H), 3)), 2)"
+   ],
+   "math_sci_port_off": [
+    true,
+    6940,
+    "sense:mul",
+    "mul(L, div(mul(L, H), 3))"
+   ]
+  },
+  "geo_trap_area": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci": [
+    true,
+    6366,
+    "port:scale:div2",
+    "div(add(add(mul(B, Z), T), sub(mul(Z, T), T)), 2)"
+   ],
+   "all_sci": [
+    true,
+    6366,
+    "port:scale:div2",
+    "div(add(add(mul(B, Z), T), sub(mul(Z, T), T)), 2)"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "geo_tri_prism": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "math_sci": [
+    true,
+    6372,
+    "port:scale:div2",
+    "div(mul(mul(Z, B), T), 2)"
+   ],
+   "all_sci": [
+    true,
+    6372,
+    "port:scale:div2",
+    "div(mul(mul(Z, B), T), 2)"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "geo_trap_diff": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci": [
+    true,
+    5881,
+    "port:scale:div2",
+    "div(add(mul(sub(B, T), Z), 0), 2)"
+   ],
+   "all_sci": [
+    true,
+    5881,
+    "port:scale:div2",
+    "div(add(mul(sub(B, T), Z), 0), 2)"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "geo_diagonals": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci": [
+    true,
+    3668,
+    "port:scale:div2",
+    "div(sub(mul(sub(n, 2), n), min(n, q)), 2)"
+   ],
+   "all_sci": [
+    true,
+    3668,
+    "port:scale:div2",
+    "div(sub(mul(sub(n, 2), n), min(n, q)), 2)"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "geo_tri_count": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci": [
+    true,
+    6615,
+    "port:scale:div2",
+    "div(sub(mul(sub(n, 2), add(2, n)), min(n, q)), 2)"
+   ],
+   "all_sci": [
+    true,
+    6615,
+    "port:scale:div2",
+    "div(sub(mul(sub(n, 2), add(2, n)), min(n, q)), 2)"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "geo_ext_angle": {
+   "cold": [
+    false,
+    918,
+    null,
+    null
+   ],
+   "empty": [
+    true,
+    1301,
+    null,
+    "div(add(q, q), n)"
+   ],
+   "math": [
+    true,
+    1301,
+    null,
+    "div(add(q, q), n)"
+   ],
+   "math_sci": [
+    true,
+    1301,
+    null,
+    "div(add(q, q), n)"
+   ],
+   "all_sci": [
+    true,
+    1301,
+    null,
+    "div(add(q, q), n)"
+   ],
+   "math_sci_port_off": [
+    true,
+    1301,
+    null,
+    "div(add(q, q), n)"
+   ]
+  },
+  "fin_simple_interest": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    true,
+    5125,
+    "port:anchor",
+    "mul(min(r, P), mul(Y, div(P, C)))"
+   ],
+   "math_sci": [
+    true,
+    5372,
+    "port:anchor",
+    "mul(mul(r, div(P, C)), Y)"
+   ],
+   "all_sci": [
+    true,
+    5372,
+    "port:anchor",
+    "mul(mul(r, div(P, C)), Y)"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "fin_amount": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    true,
+    5156,
+    "port:anchor",
+    "mul(div(P, C), add(C, mul(r, Y)))"
+   ],
+   "math_sci": [
+    true,
+    5572,
+    "port:anchor",
+    "mul(div(P, C), add(C, mul(r, Y)))"
+   ],
+   "all_sci": [
+    true,
+    5572,
+    "port:anchor",
+    "mul(div(P, C), add(C, mul(r, Y)))"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "fin_discounted": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    true,
+    5130,
+    "port:anchor",
+    "sub(max(C, P), mul(r, div(P, C)))"
+   ],
+   "math_sci": [
+    true,
+    5370,
+    "port:anchor",
+    "sub(max(C, P), mul(r, div(P, C)))"
+   ],
+   "all_sci": [
+    true,
+    5370,
+    "port:anchor",
+    "sub(max(C, P), mul(r, div(P, C)))"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "fin_taxed": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    true,
+    5129,
+    "port:anchor",
+    "add(max(C, P), mul(r, div(P, C)))"
+   ],
+   "math_sci": [
+    true,
+    5369,
+    "port:anchor",
+    "add(max(C, P), mul(r, div(P, C)))"
+   ],
+   "all_sci": [
+    true,
+    5369,
+    "port:anchor",
+    "add(max(C, P), mul(r, div(P, C)))"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "fin_installment": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    true,
+    5113,
+    "port:anchor",
+    "add(div(P, Y), mul(r, div(P, C)))"
+   ],
+   "math_sci": [
+    true,
+    5349,
+    "port:anchor",
+    "add(div(P, Y), mul(r, div(P, C)))"
+   ],
+   "all_sci": [
+    true,
+    5349,
+    "port:anchor",
+    "add(div(P, Y), mul(r, div(P, C)))"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "fin_net_profit": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "math_sci": [
+    true,
+    5361,
+    "port:anchor",
+    "add(mul(sub(S, K), N), sub(0, X))"
+   ],
+   "all_sci": [
+    true,
+    5361,
+    "port:anchor",
+    "add(mul(sub(S, K), N), sub(0, X))"
+   ],
+   "math_sci_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  }
+ },
+ "sha256": "f27adf3cbe3dbec76b7904c5311de6cc46e453ba1426706281f895e0104e872c",
+ "verdict": {
+  "math": {
+   "minus_empty": 6,
+   "fewer_evals_vs_empty": 0.1636,
+   "transfer": true
+  },
+  "math_sci": {
+   "minus_empty": 17,
+   "fewer_evals_vs_empty": 0.3972,
+   "transfer": true
+  },
+  "all_sci": {
+   "minus_empty": 17,
+   "fewer_evals_vs_empty": 0.3972,
+   "transfer": true
+  },
+  "no_arm_worse_than_cold": true,
+  "more_domains_more_transfer": 11,
+  "pass": true
+ }
+}

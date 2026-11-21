@@ -240,3 +240,40 @@ guard can revert). Any fail -> stays OFF, honest note. Measured once, from a cod
 
 Expectation (stated before measuring): criterion 1 passes (floor fits by 4/6/8/9/12/16/18/24/36);
 5, 7, 10, 30, 60 and the ceilings stay out of reach; 2-6 pass.
+
+### Round 2 sealed result (measured once, 2026-11-21, code `fba7754`; `results/selfedit2/`): **PASS**
+
+Sandbox (K = 24, base seed 20261203, round-2 reference field + 122-task keep set): 4 edits
+accepted -- `inv_floor_fit` 0 -> 1 (dev 6 -> 8), `inv_max_constants` 2 -> 6 (8 -> 9),
+`inv_const_depth` 1 -> 2 (9 -> 12), `inv_max_constants` 6 -> 8 (12 -> 12, fewer evaluations);
+`inv_rounds` 2 -> 3 rejected by the keep set. **G\*** = {max_constants 8, const_depth 2,
+rounds 2, floor_fit 1}. data/ fingerprint unchanged.
+
+Sealed suite (sha `f1507552...c7c1`, 22 hard), certified / evaluations:
+
+| arm | certified | evaluations |
+|---|---|---|
+| cold | 0 | 220,000 |
+| empty_default | 1 | 217,189 |
+| empty_tuned | 1 | 217,189 |
+| trained_off | 7 | 194,022 |
+| trained_default | 7 | 194,022 |
+| **trained_tuned** | **14** | **169,131** |
+| math_sci_tuned | 14 | 169,131 |
+
+All 7 gains are floor-division fits by learned constants (`port:invent:...:floor9 / floor12 /
+floor16 / floor24 / floor8`: flats // 12, bags // 32, square // 9, rows // 24, tables // 4, teams // 8,
+books // 16); `se2_g_trays6` also got cheaper (8,748 -> 7,950). Out of reach as expected: // 5, // 7,
+the three ceilings, boxes // 12 over three inputs, days // 24, shifts // 8, pallets.
+
+| criterion | result |
+|---|---|
+| 1 self-edit helps (>= +3) | **pass**: +7 certified (7 -> 14), 12.8% fewer evaluations |
+| 2 empty_tuned == empty_default | **pass**: 1 == 1 (the one empty win, `se2_f_bolts6`, is the same with either genome) |
+| 3 no sealed task worse | **pass**: no loss vs trained_default; nothing worse than cold |
+| 4a existing suites, default genome | **pass**: 0 losses, 0 gains on every arm of learning (deep, science), TRANSFER-1..4, secondary, TEXT, BRIDGE, INVENT_TEXT, TRANSFER-5 |
+| 4b existing suites, G\* | **pass**: 0 losses; 1 gain (TRANSFER-2 `g2_kite`, math_sci_grow_off, 5,900 -> 5,887). TEXT `t_line_len` all_sci 3,817 -> 3,817 (round 1: 4,089); BRIDGE trained 13 -> 13; TRANSFER-5 trained / empty / cold 26 / 8 / 0 of 33 unchanged; INVENT_TEXT 39 -> 39 certified records |
+| 5 LOFO, tests | **pass**: LOFO 5,883 (cold / trained / trained_port_off), worst 1.0x, both 4a and 4b; 444 passed, 6 skipped |
+| 6 safety | **pass**: trained_off == trained_default on every task; sandbox left data/ untouched |
+
+Decision (pre-registered rule): all six pass -> `NOMAD_SELFEDIT` default ON in a separate commit.
