@@ -1,0 +1,3363 @@
+{
+ "budget": 10000,
+ "domains": [
+  "garden",
+  "school",
+  "factory"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3369,
+   "cold_reason": null,
+   "domain": "garden",
+   "family": "se2_g_border4",
+   "formula": "edging stakes: 4 per bed plus yq spares = 4 yp + yq",
+   "inputs": [
+    "yp",
+    "yq"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "yp": 36,
+      "yq": 14
+     },
+     158
+    ],
+    [
+     {
+      "yp": 39,
+      "yq": 4
+     },
+     160
+    ],
+    [
+     {
+      "yp": 34,
+      "yq": 2
+     },
+     138
+    ],
+    [
+     {
+      "yp": 16,
+      "yq": 9
+     },
+     73
+    ],
+    [
+     {
+      "yp": 38,
+      "yq": 13
+     },
+     165
+    ],
+    [
+     {
+      "yp": 3,
+      "yq": 10
+     },
+     22
+    ],
+    [
+     {
+      "yp": 29,
+      "yq": 3
+     },
+     119
+    ],
+    [
+     {
+      "yp": 1,
+      "yq": 14
+     },
+     18
+    ],
+    [
+     {
+      "yp": 14,
+      "yq": 2
+     },
+     58
+    ],
+    [
+     {
+      "yp": 9,
+      "yq": 12
+     },
+     48
+    ],
+    [
+     {
+      "yp": 35,
+      "yq": 5
+     },
+     145
+    ]
+   ],
+   "task_id": "t-03",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "yp"
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "var",
+     "yq"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1766,
+   "cold_reason": null,
+   "domain": "factory",
+   "family": "se2_f_parts",
+   "formula": "parts from yu machines over yv hours at yw per hour = yu yv yw",
+   "inputs": [
+    "yu",
+    "yv",
+    "yw"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "yu": 9,
+      "yv": 21,
+      "yw": 11
+     },
+     2079
+    ],
+    [
+     {
+      "yu": 9,
+      "yv": 22,
+      "yw": 11
+     },
+     2178
+    ],
+    [
+     {
+      "yu": 6,
+      "yv": 21,
+      "yw": 6
+     },
+     756
+    ],
+    [
+     {
+      "yu": 6,
+      "yv": 24,
+      "yw": 4
+     },
+     576
+    ],
+    [
+     {
+      "yu": 8,
+      "yv": 23,
+      "yw": 3
+     },
+     552
+    ],
+    [
+     {
+      "yu": 7,
+      "yv": 15,
+      "yw": 4
+     },
+     420
+    ],
+    [
+     {
+      "yu": 2,
+      "yv": 2,
+      "yw": 11
+     },
+     44
+    ],
+    [
+     {
+      "yu": 1,
+      "yv": 23,
+      "yw": 8
+     },
+     184
+    ],
+    [
+     {
+      "yu": 3,
+      "yv": 4,
+      "yw": 4
+     },
+     48
+    ],
+    [
+     {
+      "yu": 6,
+      "yv": 5,
+      "yw": 10
+     },
+     300
+    ],
+    [
+     {
+      "yu": 2,
+      "yv": 17,
+      "yw": 1
+     },
+     34
+    ]
+   ],
+   "task_id": "t-16",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "yu"
+     ],
+     [
+      "var",
+      "yv"
+     ]
+    ],
+    [
+     "var",
+     "yw"
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "se2_g_trays6",
+   "formula": "full 6-cell seed trays for yp beds of yq plants = (yp yq) // 6",
+   "inputs": [
+    "yp",
+    "yq"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "yp": 21,
+      "yq": 14
+     },
+     49
+    ],
+    [
+     {
+      "yp": 12,
+      "yq": 9
+     },
+     18
+    ],
+    [
+     {
+      "yp": 23,
+      "yq": 12
+     },
+     46
+    ],
+    [
+     {
+      "yp": 16,
+      "yq": 6
+     },
+     16
+    ],
+    [
+     {
+      "yp": 40,
+      "yq": 13
+     },
+     86
+    ],
+    [
+     {
+      "yp": 8,
+      "yq": 12
+     },
+     16
+    ],
+    [
+     {
+      "yp": 17,
+      "yq": 13
+     },
+     36
+    ],
+    [
+     {
+      "yp": 36,
+      "yq": 8
+     },
+     48
+    ],
+    [
+     {
+      "yp": 35,
+      "yq": 2
+     },
+     11
+    ],
+    [
+     {
+      "yp": 16,
+      "yq": 12
+     },
+     32
+    ],
+    [
+     {
+      "yp": 9,
+      "yq": 7
+     },
+     10
+    ]
+   ],
+   "task_id": "t-00",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "var",
+      "yp"
+     ],
+     [
+      "var",
+      "yq"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "se2_g_flats12",
+   "formula": "full 12-pot flats for yp yq plants = (yp yq) // 12",
+   "inputs": [
+    "yp",
+    "yq"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "yp": 30,
+      "yq": 15
+     },
+     37
+    ],
+    [
+     {
+      "yp": 22,
+      "yq": 2
+     },
+     3
+    ],
+    [
+     {
+      "yp": 36,
+      "yq": 11
+     },
+     33
+    ],
+    [
+     {
+      "yp": 33,
+      "yq": 16
+     },
+     44
+    ],
+    [
+     {
+      "yp": 16,
+      "yq": 11
+     },
+     14
+    ],
+    [
+     {
+      "yp": 31,
+      "yq": 15
+     },
+     38
+    ],
+    [
+     {
+      "yp": 14,
+      "yq": 14
+     },
+     16
+    ],
+    [
+     {
+      "yp": 18,
+      "yq": 2
+     },
+     3
+    ],
+    [
+     {
+      "yp": 34,
+      "yq": 12
+     },
+     34
+    ],
+    [
+     {
+      "yp": 39,
+      "yq": 11
+     },
+     35
+    ],
+    [
+     {
+      "yp": 17,
+      "yq": 16
+     },
+     22
+    ]
+   ],
+   "task_id": "t-01",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "var",
+      "yp"
+     ],
+     [
+      "var",
+      "yq"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "se2_g_bulbs8",
+   "formula": "bulbs: 8 per plant spot, yp beds of yq spots = 8 yp yq",
+   "inputs": [
+    "yp",
+    "yq"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "yp": 10,
+      "yq": 15
+     },
+     1200
+    ],
+    [
+     {
+      "yp": 6,
+      "yq": 12
+     },
+     576
+    ],
+    [
+     {
+      "yp": 9,
+      "yq": 15
+     },
+     1080
+    ],
+    [
+     {
+      "yp": 25,
+      "yq": 13
+     },
+     2600
+    ],
+    [
+     {
+      "yp": 10,
+      "yq": 13
+     },
+     1040
+    ],
+    [
+     {
+      "yp": 11,
+      "yq": 9
+     },
+     792
+    ],
+    [
+     {
+      "yp": 18,
+      "yq": 7
+     },
+     1008
+    ],
+    [
+     {
+      "yp": 36,
+      "yq": 8
+     },
+     2304
+    ],
+    [
+     {
+      "yp": 16,
+      "yq": 3
+     },
+     384
+    ],
+    [
+     {
+      "yp": 12,
+      "yq": 8
+     },
+     768
+    ],
+    [
+     {
+      "yp": 29,
+      "yq": 5
+     },
+     1160
+    ]
+   ],
+   "task_id": "t-02",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "yp"
+     ],
+     [
+      "var",
+      "yq"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "se2_g_bags16",
+   "formula": "full 16-litre bags from a triangle of yp rows = yp(yp+1) // 32",
+   "inputs": [
+    "yp",
+    "yq"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "yp": 10,
+      "yq": 4
+     },
+     3
+    ],
+    [
+     {
+      "yp": 40,
+      "yq": 16
+     },
+     51
+    ],
+    [
+     {
+      "yp": 28,
+      "yq": 7
+     },
+     25
+    ],
+    [
+     {
+      "yp": 13,
+      "yq": 2
+     },
+     5
+    ],
+    [
+     {
+      "yp": 14,
+      "yq": 6
+     },
+     6
+    ],
+    [
+     {
+      "yp": 5,
+      "yq": 11
+     },
+     0
+    ],
+    [
+     {
+      "yp": 7,
+      "yq": 4
+     },
+     1
+    ],
+    [
+     {
+      "yp": 15,
+      "yq": 16
+     },
+     7
+    ],
+    [
+     {
+      "yp": 26,
+      "yq": 7
+     },
+     21
+    ],
+    [
+     {
+      "yp": 20,
+      "yq": 8
+     },
+     13
+    ],
+    [
+     {
+      "yp": 32,
+      "yq": 3
+     },
+     33
+    ]
+   ],
+   "task_id": "t-04",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "var",
+      "yp"
+     ],
+     [
+      "add",
+      [
+       "var",
+       "yp"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "se2_g_square9",
+   "formula": "full 9-plant squares in a yp x yp plot = (yp yp) // 9",
+   "inputs": [
+    "yp",
+    "yq"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "yp": 18,
+      "yq": 6
+     },
+     36
+    ],
+    [
+     {
+      "yp": 7,
+      "yq": 6
+     },
+     5
+    ],
+    [
+     {
+      "yp": 22,
+      "yq": 8
+     },
+     53
+    ],
+    [
+     {
+      "yp": 29,
+      "yq": 7
+     },
+     93
+    ],
+    [
+     {
+      "yp": 12,
+      "yq": 11
+     },
+     16
+    ],
+    [
+     {
+      "yp": 10,
+      "yq": 3
+     },
+     11
+    ],
+    [
+     {
+      "yp": 24,
+      "yq": 10
+     },
+     64
+    ],
+    [
+     {
+      "yp": 28,
+      "yq": 4
+     },
+     87
+    ],
+    [
+     {
+      "yp": 35,
+      "yq": 14
+     },
+     136
+    ],
+    [
+     {
+      "yp": 5,
+      "yq": 8
+     },
+     2
+    ],
+    [
+     {
+      "yp": 11,
+      "yq": 8
+     },
+     13
+    ]
+   ],
+   "task_id": "t-05",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "var",
+      "yp"
+     ],
+     [
+      "var",
+      "yp"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      3
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "se2_g_hoses5",
+   "formula": "hoses, one per 5 beds = ceil(yp / 5)",
+   "inputs": [
+    "yp",
+    "yq"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "yp": 23,
+      "yq": 2
+     },
+     5
+    ],
+    [
+     {
+      "yp": 40,
+      "yq": 2
+     },
+     8
+    ],
+    [
+     {
+      "yp": 19,
+      "yq": 3
+     },
+     4
+    ],
+    [
+     {
+      "yp": 34,
+      "yq": 16
+     },
+     7
+    ],
+    [
+     {
+      "yp": 16,
+      "yq": 8
+     },
+     4
+    ],
+    [
+     {
+      "yp": 5,
+      "yq": 10
+     },
+     1
+    ],
+    [
+     {
+      "yp": 6,
+      "yq": 13
+     },
+     2
+    ],
+    [
+     {
+      "yp": 15,
+      "yq": 9
+     },
+     3
+    ],
+    [
+     {
+      "yp": 11,
+      "yq": 11
+     },
+     3
+    ],
+    [
+     {
+      "yp": 35,
+      "yq": 16
+     },
+     7
+    ],
+    [
+     {
+      "yp": 4,
+      "yq": 16
+     },
+     1
+    ]
+   ],
+   "task_id": "t-06",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "yp"
+     ],
+     [
+      "sub",
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "add",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "garden",
+   "family": "se2_g_rows24",
+   "formula": "full 24-plant rows from yp beds of yq = (yp yq) // 24",
+   "inputs": [
+    "yp",
+    "yq"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "yp": 20,
+      "yq": 4
+     },
+     3
+    ],
+    [
+     {
+      "yp": 14,
+      "yq": 14
+     },
+     8
+    ],
+    [
+     {
+      "yp": 28,
+      "yq": 14
+     },
+     16
+    ],
+    [
+     {
+      "yp": 37,
+      "yq": 10
+     },
+     15
+    ],
+    [
+     {
+      "yp": 20,
+      "yq": 10
+     },
+     8
+    ],
+    [
+     {
+      "yp": 24,
+      "yq": 11
+     },
+     11
+    ],
+    [
+     {
+      "yp": 19,
+      "yq": 15
+     },
+     11
+    ],
+    [
+     {
+      "yp": 6,
+      "yq": 2
+     },
+     0
+    ],
+    [
+     {
+      "yp": 17,
+      "yq": 1
+     },
+     0
+    ],
+    [
+     {
+      "yp": 8,
+      "yq": 2
+     },
+     0
+    ],
+    [
+     {
+      "yp": 19,
+      "yq": 5
+     },
+     3
+    ]
+   ],
+   "task_id": "t-07",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "var",
+      "yp"
+     ],
+     [
+      "var",
+      "yq"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "school",
+   "family": "se2_s_lessons",
+   "formula": "lessons: 6 a day, 5 days, yt weeks, yr classes = 30 yr yt",
+   "inputs": [
+    "yr",
+    "ys",
+    "yt"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "yr": 11,
+      "ys": 16,
+      "yt": 7
+     },
+     2310
+    ],
+    [
+     {
+      "yr": 4,
+      "ys": 25,
+      "yt": 13
+     },
+     1560
+    ],
+    [
+     {
+      "yr": 8,
+      "ys": 5,
+      "yt": 9
+     },
+     2160
+    ],
+    [
+     {
+      "yr": 6,
+      "ys": 6,
+      "yt": 10
+     },
+     1800
+    ],
+    [
+     {
+      "yr": 5,
+      "ys": 18,
+      "yt": 14
+     },
+     2100
+    ],
+    [
+     {
+      "yr": 4,
+      "ys": 10,
+      "yt": 2
+     },
+     240
+    ],
+    [
+     {
+      "yr": 6,
+      "ys": 29,
+      "yt": 7
+     },
+     1260
+    ],
+    [
+     {
+      "yr": 3,
+      "ys": 15,
+      "yt": 13
+     },
+     1170
+    ],
+    [
+     {
+      "yr": 8,
+      "ys": 22,
+      "yt": 12
+     },
+     2880
+    ],
+    [
+     {
+      "yr": 2,
+      "ys": 11,
+      "yt": 9
+     },
+     540
+    ],
+    [
+     {
+      "yr": 5,
+      "ys": 6,
+      "yt": 14
+     },
+     2100
+    ]
+   ],
+   "task_id": "t-08",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "yr"
+     ],
+     [
+      "var",
+      "yt"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "school",
+   "family": "se2_s_tables4",
+   "formula": "full 4-seat tables for yr classes of ys = (yr ys) // 4",
+   "inputs": [
+    "yr",
+    "ys",
+    "yt"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "yr": 12,
+      "ys": 30,
+      "yt": 13
+     },
+     90
+    ],
+    [
+     {
+      "yr": 12,
+      "ys": 28,
+      "yt": 9
+     },
+     84
+    ],
+    [
+     {
+      "yr": 5,
+      "ys": 9,
+      "yt": 6
+     },
+     11
+    ],
+    [
+     {
+      "yr": 1,
+      "ys": 34,
+      "yt": 11
+     },
+     8
+    ],
+    [
+     {
+      "yr": 5,
+      "ys": 32,
+      "yt": 8
+     },
+     40
+    ],
+    [
+     {
+      "yr": 8,
+      "ys": 29,
+      "yt": 6
+     },
+     58
+    ],
+    [
+     {
+      "yr": 12,
+      "ys": 24,
+      "yt": 4
+     },
+     72
+    ],
+    [
+     {
+      "yr": 5,
+      "ys": 23,
+      "yt": 9
+     },
+     28
+    ],
+    [
+     {
+      "yr": 8,
+      "ys": 21,
+      "yt": 5
+     },
+     42
+    ],
+    [
+     {
+      "yr": 6,
+      "ys": 30,
+      "yt": 12
+     },
+     45
+    ],
+    [
+     {
+      "yr": 6,
+      "ys": 21,
+      "yt": 12
+     },
+     31
+    ]
+   ],
+   "task_id": "t-09",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "var",
+      "yr"
+     ],
+     [
+      "var",
+      "ys"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "school",
+   "family": "se2_s_teams8",
+   "formula": "full 8-player teams from yr ys students = (yr ys) // 8",
+   "inputs": [
+    "yr",
+    "ys",
+    "yt"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "yr": 12,
+      "ys": 20,
+      "yt": 2
+     },
+     30
+    ],
+    [
+     {
+      "yr": 10,
+      "ys": 13,
+      "yt": 1
+     },
+     16
+    ],
+    [
+     {
+      "yr": 4,
+      "ys": 33,
+      "yt": 13
+     },
+     16
+    ],
+    [
+     {
+      "yr": 8,
+      "ys": 5,
+      "yt": 12
+     },
+     5
+    ],
+    [
+     {
+      "yr": 3,
+      "ys": 6,
+      "yt": 11
+     },
+     2
+    ],
+    [
+     {
+      "yr": 11,
+      "ys": 27,
+      "yt": 6
+     },
+     37
+    ],
+    [
+     {
+      "yr": 3,
+      "ys": 26,
+      "yt": 1
+     },
+     9
+    ],
+    [
+     {
+      "yr": 1,
+      "ys": 11,
+      "yt": 9
+     },
+     1
+    ],
+    [
+     {
+      "yr": 6,
+      "ys": 7,
+      "yt": 1
+     },
+     5
+    ],
+    [
+     {
+      "yr": 11,
+      "ys": 24,
+      "yt": 2
+     },
+     33
+    ],
+    [
+     {
+      "yr": 9,
+      "ys": 11,
+      "yt": 2
+     },
+     12
+    ]
+   ],
+   "task_id": "t-10",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "var",
+      "yr"
+     ],
+     [
+      "var",
+      "ys"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "school",
+   "family": "se2_s_pencils12",
+   "formula": "pencils: a dozen per student, yr classes of ys = 12 yr ys",
+   "inputs": [
+    "yr",
+    "ys",
+    "yt"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "yr": 6,
+      "ys": 35,
+      "yt": 3
+     },
+     2520
+    ],
+    [
+     {
+      "yr": 11,
+      "ys": 28,
+      "yt": 4
+     },
+     3696
+    ],
+    [
+     {
+      "yr": 2,
+      "ys": 5,
+      "yt": 1
+     },
+     120
+    ],
+    [
+     {
+      "yr": 1,
+      "ys": 29,
+      "yt": 14
+     },
+     348
+    ],
+    [
+     {
+      "yr": 2,
+      "ys": 20,
+      "yt": 6
+     },
+     480
+    ],
+    [
+     {
+      "yr": 2,
+      "ys": 29,
+      "yt": 2
+     },
+     696
+    ],
+    [
+     {
+      "yr": 11,
+      "ys": 15,
+      "yt": 10
+     },
+     1980
+    ],
+    [
+     {
+      "yr": 7,
+      "ys": 23,
+      "yt": 5
+     },
+     1932
+    ],
+    [
+     {
+      "yr": 3,
+      "ys": 11,
+      "yt": 11
+     },
+     396
+    ],
+    [
+     {
+      "yr": 11,
+      "ys": 25,
+      "yt": 6
+     },
+     3300
+    ],
+    [
+     {
+      "yr": 9,
+      "ys": 26,
+      "yt": 5
+     },
+     2808
+    ]
+   ],
+   "task_id": "t-11",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "yr"
+     ],
+     [
+      "var",
+      "ys"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "school",
+   "family": "se2_s_buses",
+   "formula": "36-seat buses for yr classes of ys = ceil(yr ys / 36)",
+   "inputs": [
+    "yr",
+    "ys",
+    "yt"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "yr": 11,
+      "ys": 5,
+      "yt": 12
+     },
+     2
+    ],
+    [
+     {
+      "yr": 11,
+      "ys": 29,
+      "yt": 7
+     },
+     9
+    ],
+    [
+     {
+      "yr": 5,
+      "ys": 12,
+      "yt": 12
+     },
+     2
+    ],
+    [
+     {
+      "yr": 7,
+      "ys": 10,
+      "yt": 1
+     },
+     2
+    ],
+    [
+     {
+      "yr": 2,
+      "ys": 14,
+      "yt": 12
+     },
+     1
+    ],
+    [
+     {
+      "yr": 10,
+      "ys": 9,
+      "yt": 6
+     },
+     3
+    ],
+    [
+     {
+      "yr": 4,
+      "ys": 25,
+      "yt": 10
+     },
+     3
+    ],
+    [
+     {
+      "yr": 1,
+      "ys": 17,
+      "yt": 11
+     },
+     1
+    ],
+    [
+     {
+      "yr": 9,
+      "ys": 25,
+      "yt": 4
+     },
+     7
+    ],
+    [
+     {
+      "yr": 5,
+      "ys": 32,
+      "yt": 5
+     },
+     5
+    ],
+    [
+     {
+      "yr": 10,
+      "ys": 10,
+      "yt": 2
+     },
+     3
+    ]
+   ],
+   "task_id": "t-12",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "yr"
+      ],
+      [
+       "var",
+       "ys"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "mul",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         3
+        ]
+       ],
+       [
+        "mul",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         3
+        ]
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "school",
+   "family": "se2_s_terms7",
+   "formula": "full weeks in yt fortnights of yr days = (yr yt) // 7",
+   "inputs": [
+    "yr",
+    "ys",
+    "yt"
+   ],
+   "kind": "units",
+   "rows": [
+    [
+     {
+      "yr": 1,
+      "ys": 30,
+      "yt": 5
+     },
+     0
+    ],
+    [
+     {
+      "yr": 9,
+      "ys": 28,
+      "yt": 10
+     },
+     12
+    ],
+    [
+     {
+      "yr": 7,
+      "ys": 32,
+      "yt": 13
+     },
+     13
+    ],
+    [
+     {
+      "yr": 4,
+      "ys": 19,
+      "yt": 3
+     },
+     1
+    ],
+    [
+     {
+      "yr": 2,
+      "ys": 31,
+      "yt": 7
+     },
+     2
+    ],
+    [
+     {
+      "yr": 5,
+      "ys": 10,
+      "yt": 13
+     },
+     9
+    ],
+    [
+     {
+      "yr": 8,
+      "ys": 32,
+      "yt": 2
+     },
+     2
+    ],
+    [
+     {
+      "yr": 10,
+      "ys": 12,
+      "yt": 8
+     },
+     11
+    ],
+    [
+     {
+      "yr": 2,
+      "ys": 20,
+      "yt": 5
+     },
+     1
+    ],
+    [
+     {
+      "yr": 7,
+      "ys": 12,
+      "yt": 7
+     },
+     7
+    ],
+    [
+     {
+      "yr": 4,
+      "ys": 28,
+      "yt": 11
+     },
+     6
+    ]
+   ],
+   "task_id": "t-13",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "var",
+      "yr"
+     ],
+     [
+      "var",
+      "yt"
+     ]
+    ],
+    [
+     "add",
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "school",
+   "family": "se2_s_books16",
+   "formula": "full 16-book boxes, yt books each for yr ys students = (yr ys yt) // 16",
+   "inputs": [
+    "yr",
+    "ys",
+    "yt"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "yr": 3,
+      "ys": 35,
+      "yt": 4
+     },
+     26
+    ],
+    [
+     {
+      "yr": 11,
+      "ys": 28,
+      "yt": 3
+     },
+     57
+    ],
+    [
+     {
+      "yr": 2,
+      "ys": 13,
+      "yt": 10
+     },
+     16
+    ],
+    [
+     {
+      "yr": 3,
+      "ys": 18,
+      "yt": 6
+     },
+     20
+    ],
+    [
+     {
+      "yr": 8,
+      "ys": 21,
+      "yt": 7
+     },
+     73
+    ],
+    [
+     {
+      "yr": 12,
+      "ys": 7,
+      "yt": 8
+     },
+     42
+    ],
+    [
+     {
+      "yr": 12,
+      "ys": 15,
+      "yt": 8
+     },
+     90
+    ],
+    [
+     {
+      "yr": 1,
+      "ys": 35,
+      "yt": 5
+     },
+     10
+    ],
+    [
+     {
+      "yr": 9,
+      "ys": 12,
+      "yt": 5
+     },
+     33
+    ],
+    [
+     {
+      "yr": 1,
+      "ys": 34,
+      "yt": 1
+     },
+     2
+    ],
+    [
+     {
+      "yr": 8,
+      "ys": 28,
+      "yt": 14
+     },
+     196
+    ]
+   ],
+   "task_id": "t-14",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "yr"
+      ],
+      [
+       "var",
+       "ys"
+      ]
+     ],
+     [
+      "var",
+      "yt"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "school",
+   "family": "se2_s_register",
+   "formula": "register marks: 2 a day over yt weeks of 5 days for ys = 10 ys yt",
+   "inputs": [
+    "yr",
+    "ys",
+    "yt"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "yr": 8,
+      "ys": 22,
+      "yt": 7
+     },
+     1540
+    ],
+    [
+     {
+      "yr": 6,
+      "ys": 32,
+      "yt": 12
+     },
+     3840
+    ],
+    [
+     {
+      "yr": 8,
+      "ys": 32,
+      "yt": 13
+     },
+     4160
+    ],
+    [
+     {
+      "yr": 10,
+      "ys": 18,
+      "yt": 9
+     },
+     1620
+    ],
+    [
+     {
+      "yr": 10,
+      "ys": 28,
+      "yt": 9
+     },
+     2520
+    ],
+    [
+     {
+      "yr": 3,
+      "ys": 22,
+      "yt": 10
+     },
+     2200
+    ],
+    [
+     {
+      "yr": 12,
+      "ys": 28,
+      "yt": 12
+     },
+     3360
+    ],
+    [
+     {
+      "yr": 5,
+      "ys": 18,
+      "yt": 11
+     },
+     1980
+    ],
+    [
+     {
+      "yr": 2,
+      "ys": 22,
+      "yt": 11
+     },
+     2420
+    ],
+    [
+     {
+      "yr": 4,
+      "ys": 19,
+      "yt": 8
+     },
+     1520
+    ],
+    [
+     {
+      "yr": 12,
+      "ys": 33,
+      "yt": 2
+     },
+     660
+    ]
+   ],
+   "task_id": "t-15",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "ys"
+     ],
+     [
+      "var",
+      "yt"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "factory",
+   "family": "se2_f_boxes12",
+   "formula": "full 12-part boxes = (yu yv yw) // 12",
+   "inputs": [
+    "yu",
+    "yv",
+    "yw"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "yu": 8,
+      "yv": 9,
+      "yw": 2
+     },
+     12
+    ],
+    [
+     {
+      "yu": 8,
+      "yv": 5,
+      "yw": 4
+     },
+     13
+    ],
+    [
+     {
+      "yu": 6,
+      "yv": 19,
+      "yw": 2
+     },
+     19
+    ],
+    [
+     {
+      "yu": 4,
+      "yv": 4,
+      "yw": 3
+     },
+     4
+    ],
+    [
+     {
+      "yu": 6,
+      "yv": 19,
+      "yw": 5
+     },
+     47
+    ],
+    [
+     {
+      "yu": 7,
+      "yv": 5,
+      "yw": 5
+     },
+     14
+    ],
+    [
+     {
+      "yu": 3,
+      "yv": 11,
+      "yw": 5
+     },
+     13
+    ],
+    [
+     {
+      "yu": 7,
+      "yv": 7,
+      "yw": 11
+     },
+     44
+    ],
+    [
+     {
+      "yu": 3,
+      "yv": 6,
+      "yw": 11
+     },
+     16
+    ],
+    [
+     {
+      "yu": 8,
+      "yv": 12,
+      "yw": 6
+     },
+     48
+    ],
+    [
+     {
+      "yu": 7,
+      "yv": 3,
+      "yw": 3
+     },
+     5
+    ]
+   ],
+   "task_id": "t-17",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "yu"
+      ],
+      [
+       "var",
+       "yv"
+      ]
+     ],
+     [
+      "var",
+      "yw"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "factory",
+   "family": "se2_f_days24",
+   "formula": "full days of machine time in yu yv hours = (yu yv) // 24",
+   "inputs": [
+    "yu",
+    "yv",
+    "yw"
+   ],
+   "kind": "units",
+   "rows": [
+    [
+     {
+      "yu": 7,
+      "yv": 23,
+      "yw": 11
+     },
+     6
+    ],
+    [
+     {
+      "yu": 1,
+      "yv": 7,
+      "yw": 7
+     },
+     0
+    ],
+    [
+     {
+      "yu": 6,
+      "yv": 23,
+      "yw": 7
+     },
+     5
+    ],
+    [
+     {
+      "yu": 3,
+      "yv": 16,
+      "yw": 2
+     },
+     2
+    ],
+    [
+     {
+      "yu": 2,
+      "yv": 4,
+      "yw": 3
+     },
+     0
+    ],
+    [
+     {
+      "yu": 7,
+      "yv": 4,
+      "yw": 2
+     },
+     1
+    ],
+    [
+     {
+      "yu": 6,
+      "yv": 21,
+      "yw": 4
+     },
+     5
+    ],
+    [
+     {
+      "yu": 2,
+      "yv": 24,
+      "yw": 9
+     },
+     2
+    ],
+    [
+     {
+      "yu": 9,
+      "yv": 18,
+      "yw": 10
+     },
+     6
+    ],
+    [
+     {
+      "yu": 4,
+      "yv": 17,
+      "yw": 9
+     },
+     2
+    ],
+    [
+     {
+      "yu": 4,
+      "yv": 6,
+      "yw": 8
+     },
+     1
+    ]
+   ],
+   "task_id": "t-18",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "var",
+      "yu"
+     ],
+     [
+      "var",
+      "yv"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "factory",
+   "family": "se2_f_shifts8",
+   "formula": "full 8-hour shifts in yu yv machine-hours = (yu yv) // 8",
+   "inputs": [
+    "yu",
+    "yv",
+    "yw"
+   ],
+   "kind": "units",
+   "rows": [
+    [
+     {
+      "yu": 1,
+      "yv": 12,
+      "yw": 8
+     },
+     1
+    ],
+    [
+     {
+      "yu": 7,
+      "yv": 17,
+      "yw": 7
+     },
+     14
+    ],
+    [
+     {
+      "yu": 6,
+      "yv": 20,
+      "yw": 4
+     },
+     15
+    ],
+    [
+     {
+      "yu": 3,
+      "yv": 18,
+      "yw": 5
+     },
+     6
+    ],
+    [
+     {
+      "yu": 8,
+      "yv": 19,
+      "yw": 1
+     },
+     19
+    ],
+    [
+     {
+      "yu": 1,
+      "yv": 17,
+      "yw": 7
+     },
+     2
+    ],
+    [
+     {
+      "yu": 3,
+      "yv": 4,
+      "yw": 3
+     },
+     1
+    ],
+    [
+     {
+      "yu": 4,
+      "yv": 16,
+      "yw": 12
+     },
+     8
+    ],
+    [
+     {
+      "yu": 1,
+      "yv": 12,
+      "yw": 12
+     },
+     1
+    ],
+    [
+     {
+      "yu": 2,
+      "yv": 19,
+      "yw": 6
+     },
+     4
+    ],
+    [
+     {
+      "yu": 7,
+      "yv": 4,
+      "yw": 8
+     },
+     3
+    ]
+   ],
+   "task_id": "t-19",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "var",
+      "yu"
+     ],
+     [
+      "var",
+      "yv"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "factory",
+   "family": "se2_f_minutes",
+   "formula": "machine-minutes for yu machines over yv hours = 60 yu yv",
+   "inputs": [
+    "yu",
+    "yv",
+    "yw"
+   ],
+   "kind": "units",
+   "rows": [
+    [
+     {
+      "yu": 9,
+      "yv": 24,
+      "yw": 4
+     },
+     12960
+    ],
+    [
+     {
+      "yu": 8,
+      "yv": 17,
+      "yw": 4
+     },
+     8160
+    ],
+    [
+     {
+      "yu": 3,
+      "yv": 20,
+      "yw": 9
+     },
+     3600
+    ],
+    [
+     {
+      "yu": 9,
+      "yv": 16,
+      "yw": 9
+     },
+     8640
+    ],
+    [
+     {
+      "yu": 5,
+      "yv": 15,
+      "yw": 12
+     },
+     4500
+    ],
+    [
+     {
+      "yu": 9,
+      "yv": 13,
+      "yw": 1
+     },
+     7020
+    ],
+    [
+     {
+      "yu": 2,
+      "yv": 24,
+      "yw": 11
+     },
+     2880
+    ],
+    [
+     {
+      "yu": 2,
+      "yv": 14,
+      "yw": 8
+     },
+     1680
+    ],
+    [
+     {
+      "yu": 2,
+      "yv": 10,
+      "yw": 2
+     },
+     1200
+    ],
+    [
+     {
+      "yu": 2,
+      "yv": 22,
+      "yw": 11
+     },
+     2640
+    ],
+    [
+     {
+      "yu": 2,
+      "yv": 10,
+      "yw": 7
+     },
+     1200
+    ]
+   ],
+   "task_id": "t-20",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "yu"
+     ],
+     [
+      "var",
+      "yv"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "factory",
+   "family": "se2_f_pallets36",
+   "formula": "full 36-part pallets plus yu loose crates = (yv yw) // 36 + yu",
+   "inputs": [
+    "yu",
+    "yv",
+    "yw"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "yu": 1,
+      "yv": 24,
+      "yw": 4
+     },
+     3
+    ],
+    [
+     {
+      "yu": 9,
+      "yv": 1,
+      "yw": 9
+     },
+     9
+    ],
+    [
+     {
+      "yu": 8,
+      "yv": 13,
+      "yw": 1
+     },
+     8
+    ],
+    [
+     {
+      "yu": 7,
+      "yv": 1,
+      "yw": 9
+     },
+     7
+    ],
+    [
+     {
+      "yu": 6,
+      "yv": 23,
+      "yw": 11
+     },
+     13
+    ],
+    [
+     {
+      "yu": 8,
+      "yv": 22,
+      "yw": 7
+     },
+     12
+    ],
+    [
+     {
+      "yu": 8,
+      "yv": 8,
+      "yw": 2
+     },
+     8
+    ],
+    [
+     {
+      "yu": 3,
+      "yv": 17,
+      "yw": 4
+     },
+     4
+    ],
+    [
+     {
+      "yu": 5,
+      "yv": 6,
+      "yw": 5
+     },
+     5
+    ],
+    [
+     {
+      "yu": 2,
+      "yv": 9,
+      "yw": 8
+     },
+     4
+    ],
+    [
+     {
+      "yu": 7,
+      "yv": 18,
+      "yw": 1
+     },
+     7
+    ]
+   ],
+   "task_id": "t-21",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "yv"
+      ],
+      [
+       "var",
+       "yw"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ]
+     ]
+    ],
+    [
+     "var",
+     "yu"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "factory",
+   "family": "se2_f_bolts6",
+   "formula": "bolts: 6 per part, yu machines x yw parts = 6 yu yw",
+   "inputs": [
+    "yu",
+    "yv",
+    "yw"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "yu": 5,
+      "yv": 16,
+      "yw": 11
+     },
+     330
+    ],
+    [
+     {
+      "yu": 1,
+      "yv": 17,
+      "yw": 4
+     },
+     24
+    ],
+    [
+     {
+      "yu": 5,
+      "yv": 3,
+      "yw": 10
+     },
+     300
+    ],
+    [
+     {
+      "yu": 4,
+      "yv": 24,
+      "yw": 12
+     },
+     288
+    ],
+    [
+     {
+      "yu": 3,
+      "yv": 10,
+      "yw": 8
+     },
+     144
+    ],
+    [
+     {
+      "yu": 6,
+      "yv": 7,
+      "yw": 6
+     },
+     216
+    ],
+    [
+     {
+      "yu": 2,
+      "yv": 9,
+      "yw": 9
+     },
+     108
+    ],
+    [
+     {
+      "yu": 7,
+      "yv": 9,
+      "yw": 9
+     },
+     378
+    ],
+    [
+     {
+      "yu": 7,
+      "yv": 4,
+      "yw": 4
+     },
+     168
+    ],
+    [
+     {
+      "yu": 3,
+      "yv": 12,
+      "yw": 6
+     },
+     108
+    ],
+    [
+     {
+      "yu": 1,
+      "yv": 1,
+      "yw": 4
+     },
+     24
+    ]
+   ],
+   "task_id": "t-22",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "yu"
+     ],
+     [
+      "var",
+      "yw"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "factory",
+   "family": "se2_f_crates",
+   "formula": "crates of 18 for yv yw parts = ceil(yv yw / 18)",
+   "inputs": [
+    "yu",
+    "yv",
+    "yw"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "yu": 1,
+      "yv": 13,
+      "yw": 3
+     },
+     3
+    ],
+    [
+     {
+      "yu": 6,
+      "yv": 14,
+      "yw": 4
+     },
+     4
+    ],
+    [
+     {
+      "yu": 1,
+      "yv": 22,
+      "yw": 3
+     },
+     4
+    ],
+    [
+     {
+      "yu": 3,
+      "yv": 9,
+      "yw": 8
+     },
+     4
+    ],
+    [
+     {
+      "yu": 2,
+      "yv": 2,
+      "yw": 9
+     },
+     1
+    ],
+    [
+     {
+      "yu": 6,
+      "yv": 20,
+      "yw": 11
+     },
+     13
+    ],
+    [
+     {
+      "yu": 4,
+      "yv": 6,
+      "yw": 8
+     },
+     3
+    ],
+    [
+     {
+      "yu": 6,
+      "yv": 8,
+      "yw": 9
+     },
+     4
+    ],
+    [
+     {
+      "yu": 8,
+      "yv": 2,
+      "yw": 11
+     },
+     2
+    ],
+    [
+     {
+      "yu": 6,
+      "yv": 15,
+      "yw": 1
+     },
+     1
+    ],
+    [
+     {
+      "yu": 5,
+      "yv": 4,
+      "yw": 10
+     },
+     3
+    ]
+   ],
+   "task_id": "t-23",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "yv"
+      ],
+      [
+       "var",
+       "yw"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "mul",
+        [
+         "const",
+         3
+        ],
+        [
+         "const",
+         3
+        ]
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "mul",
+      [
+       "const",
+       3
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "int",
+ "schema": "nomad.selfedit2-suite.v1",
+ "seed": 20261203,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 2,
+  "families": 24,
+  "hard": 22,
+  "lookup_dropped": []
+ },
+ "trained_on_by_any_arm": false
+}

@@ -33,6 +33,8 @@ JUDGES = {
     "secondary4": ["scripts/invent2_judge.py", "--secondary"],
     "text": ["scripts/text_judge.py"],
     "bridge": ["scripts/bridge_judge.py"],
+    "text_invent": ["scripts/text_invent_judge.py"],   # INVENT_TEXT sealed suite (SELFEDIT round 2)
+    "route5": ["scripts/route_judge.py"],              # TRANSFER-5 sealed suite (SELFEDIT round 2)
 }
 
 

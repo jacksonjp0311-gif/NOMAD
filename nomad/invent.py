@@ -369,7 +369,7 @@ def inventions(prior) -> list[Invention]:
     if prior is None or not prior.programs:
         return []
     settings = (rounds(), MAX_COMPOSED, PER_HEAD, MIN_SAVING, COMPOSE_CONSTS, MIN_USES, MAX_INVENTIONS,
-                max_constants(), const_depth())
+                rounds())
     key = hashlib.sha256(json.dumps([sorted(prior.programs.items()), settings]).encode()).hexdigest()
     cache = getattr(prior, "_invent_cache", None)
     if cache and cache[0] == key:
@@ -556,15 +556,20 @@ def compose(prev: list[Invention], parts: list[Invention], scales: list[tuple[in
     return out
 
 
-def constants(scales: list[tuple[int, list]]) -> list[tuple[int, list]]:
+def constants(scales: list[tuple[int, list]], *, for_floor: bool = False) -> list[tuple[int, list]]:
     """Derived learned constants: pairwise products of learned scales, smallest first.
     ``const_depth()`` closure rounds (round 2 multiplies round-1 products by the
     pool again: 8 = 2*4, 12 = 2*6, ...); ``max_constants()`` kept. Both are the
     module defaults (1 round, MAX_CONSTANTS) unless NOMAD_SELFEDIT reads the genome."""
+    # SELFEDIT round 2: the genome's constant genes reach only the free floor-division fit
+    # (for_floor=True). Rescaled targets, residual anchors and compositions always use the
+    # INVENT round-2 set (1 round, MAX_CONSTANTS), so a gene change cannot slow them.
+    depth = const_depth() if for_floor else 1
+    cap = max_constants() if for_floor else MAX_CONSTANTS
     have = {k for k, _ in scales}
     pool = list(scales)
     out: dict[int, list] = {}
-    for _rnd in range(max(1, const_depth())):
+    for _rnd in range(max(1, depth)):
         new: dict[int, list] = {}
         for i, (a, ta) in enumerate(pool):
             for b, tb in pool[i:]:
@@ -580,7 +585,7 @@ def constants(scales: list[tuple[int, list]]) -> list[tuple[int, list]]:
             break
         out.update(new)
         pool = sorted(dict(pool + list(new.items())).items())
-    return sorted(out.items())[:max_constants()]
+    return sorted(out.items())[:cap]
 
 
 INVENT_AT = "grow"    # "grow": the INVENT phase runs after PORT/GROW and the atoms; "after": after the regular levels
@@ -620,6 +625,7 @@ class Kit:
     instances: list      # [(name, expanded tree)] over the task's inputs
     rounds: dict = None  # instance name -> invention round
     floor: bool = False  # floor-division fit by learned / derived constants (genome gene inv_floor_fit)
+    floor_consts: list = None   # derived constants for the floor fit only (genome genes)
 
 
 def kit(prior, task, bank: list) -> Kit | None:
@@ -629,6 +635,7 @@ def kit(prior, task, bank: list) -> Kit | None:
     if not invs and not consts:
         return None
     floor = floor_fit() and task.out == "int"
+    fconsts = constants(W.bank_scales(bank), for_floor=True) if floor else []
     from itertools import product
     ops = {}
     for x in invs:
@@ -658,4 +665,4 @@ def kit(prior, task, bank: list) -> Kit | None:
             rnd[nm] = x.round
             if len(inst) >= MAX_INSTANCES:
                 break
-    return Kit(ops if PROBE_OPS else {}, consts, inst if INSTANCES else [], rnd, floor)
+    return Kit(ops if PROBE_OPS else {}, consts, inst if INSTANCES else [], rnd, floor, fconsts)

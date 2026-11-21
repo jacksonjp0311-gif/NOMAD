@@ -121,11 +121,13 @@ _FIELD: dict[str, Any] = {}
 
 
 def reference_field():
-    """The dev benchmark's field: 16 WORLD families + the easy science curriculum (deterministic)."""
+    """The dev benchmark's field: 16 WORLD families + the easy science curriculum + the 16 bridge
+    training tasks (scripts/bridge_suite.fields()["trained"]; deterministic). Round 2: the bridge
+    training joined so the keep set's string / bridge tasks see the memory the live body will have."""
     if "f" not in _FIELD:
         sys.path.insert(0, str(PACKAGE_ROOT / "scripts"))
-        import transfer_suite as TS  # noqa: E402  (committed measurement helpers)
-        _FIELD["f"] = TS.fields()["all_sci"]
+        import bridge_suite as BS  # noqa: E402  (committed measurement helpers)
+        _FIELD["f"] = BS.fields()["trained"]
     return _FIELD["f"]
 
 
@@ -140,22 +142,46 @@ def dev_tasks(seed: int = DEV_SEED) -> list:
 
 
 def keep_tasks(seed: int = DEV_SEED) -> list:
-    """The no-loss keep set: the TRANSFER-4 catalogue at the dev seed (INVENT round 2's dev rows; the
-    sealed TRANSFER-4 suite uses seed 20261126). A candidate may not make any of these worse."""
+    """The no-loss keep set: the TRANSFER-4 catalogue, the TEXT catalogue (t_line_len and the other
+    string-length tasks) and the BRIDGE dev catalogue at the dev seed (fresh rows, never the sealed
+    rows). A candidate may not make any of them worse (round 2)."""
+    from . import bridge as XB
+    from . import text as XT
     from . import transfer4 as T4
     out = []
     for i, f in enumerate(T4.CATALOGUE):
         rows = T4.draw_rows(f, random.Random(f"{seed}:{f.family}"))
         out.append(T4.to_task({"task_id": f"sk-{i:02d}", "family": f.family, "inputs": list(f.inputs),
                                "rows": [[r, a] for r, a in rows]}))
+    for i, f in enumerate(XT.CATALOGUE):
+        rows = XT.draw_rows(f, random.Random(f"{seed}:{f.family}"))
+        out.append(XT.to_task({"task_id": f"st-{i:02d}", "family": f.family, "inputs": list(f.inputs),
+                               "out": f.out, "rows": [[r, a] for r, a in rows]}))
+    for i, f in enumerate(XB.DEV_CATALOGUE):
+        rows = XB.draw_rows(f, random.Random(f"{seed}:{f.family}"))
+        out.append(XB.to_task({"task_id": f"sb-{i:02d}", "family": f.family, "inputs": list(f.inputs),
+                               "out": f.out, "rows": [[r, a] for r, a in rows]}))
     return out
 
 
 def run_tasks(tasks: list, genes: dict[str, Any], prior, variation=None) -> dict[str, list]:
-    """Evaluate tasks on a deep copy of ``prior`` under ``genes`` (NOMAD_SELFEDIT on)."""
-    from .world import evaluate
+    """Evaluate tasks on a deep copy of ``prior`` under ``genes`` (NOMAD_SELFEDIT on, NOMAD_BRIDGE on
+    so bridge tasks use their opset)."""
     p = copy.deepcopy(prior)
     vs = copy.deepcopy(variation)
+    out = {}
+    old_b = os.environ.get("NOMAD_BRIDGE")
+    os.environ.setdefault("NOMAD_BRIDGE", "on")
+    try:
+        out = _run(tasks, genes, p, vs)
+    finally:
+        if old_b is None:
+            os.environ.pop("NOMAD_BRIDGE", None)
+    return out
+
+
+def _run(tasks, genes, p, vs) -> dict[str, list]:
+    from .world import evaluate
     out = {}
     with _on(genes):
         for t in tasks:

@@ -1536,7 +1536,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         # with v // k == goal on every public row is offered as v // k. Like the rescaled targets
         # (goal * k), the test is a lookup on a value already computed (no extra evaluation);
         # only the WITNESS-gated offer counts as a fit.
-        floors = [(k, kt) for k, kt in learned + list(inv.consts) if k >= 2] \
+        floors = [(k, kt) for k, kt in learned + list(getattr(inv, "floor_consts", None) or inv.consts) if k >= 2] \
             if getattr(inv, "floor", False) and task.out == "int" else []
         goal_t = tuple(goal)
 

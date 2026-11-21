@@ -176,3 +176,67 @@ Honest reading:
 - Next step, not attempted here: widen the keep set (TEXT / BRIDGE dev rows) or charge
   derived-constant targets only after the learned-scale ones, then a fresh sealed suite
   with a corrected criterion 2.
+
+## Round 2 (pre-registered; committed with the suite, before any field arm is measured)
+
+Approved follow-up to the round-1 FAIL. The round-1 suite (`selfedit_suite.json`) is **not**
+used for judging round 2.
+
+### Changes (code, all inert while `NOMAD_SELFEDIT` is off)
+- **Deep constants are floor-fit only.** `invent.constants(scales)` (residual targets, value
+  anchors, the integer residual loop) is back to depth 1 and `MAX_CONSTANTS` whatever the genome
+  says; only `constants(scales, for_floor=True)` (the `Kit.floor_consts` list used by the floor
+  fit) reads `inv_max_constants` / `inv_const_depth`. So depth 2 can no longer add residual
+  targets ahead of a hit (the round-1 `t_line_len` cost). The floor-fit comparison stays free;
+  only the WITNESS offer is charged.
+- **Wider keep set.** The sandbox's no-loss keep set = TRANSFER-4 catalogue + **TEXT catalogue**
+  (t_line_len and the other 12 string-length tasks) + **BRIDGE dev catalogue** (29 string /
+  mixed / length tasks), all on fresh dev-seed rows (seed 7, never sealed rows): 122 tasks.
+- **Reference field = the live curriculum.** The dev benchmark / keep set run on
+  `bridge_suite.fields()["trained"]` (WORLD + easy science + the 16 bridge training tasks),
+  with `NOMAD_BRIDGE` on, INVENT_TEXT at its default (on).
+- Dev check (uncommitted, dev catalogue only): K = 24 offline from seeds 20261128 and 20261201
+  both reach the same G\* = {max_constants 8, const_depth 2, rounds 2, floor_fit 1} with zero
+  keep-set losses (TEXT/BRIDGE rows included).
+
+### Sealed suite (round 2)
+`nomad/selfedit_tasks.CATALOGUE2`: 24 everyday formulas in **new domains** (garden, school,
+factory) over **new input names** `yp..yw` (disjoint from every catalogue); constants derivable
+from learned scales (4, 6, 8, 9, 12, 16, 18, 24, 36) and not (5, 7, 10, 30, 60), floors,
+products, ceilings; written before any field arm was measured, none chosen by outcome.
+Seed **20261203** (not 20261127 / 28 / 30). `python3 scripts/selfedit_suite.py --round 2`
+-> `data/deep/selfedit2_suite.json`, sha256
+`f1507552308f21d79cac417717449e2eda8c534aae1ce8cc16ec72c47445c7c1`; cold control only:
+24 families, 2 easy (`se2_g_border4`, `se2_f_parts`), **22 hard**, 0 lookup drops.
+
+### Judge (`python3 scripts/selfedit_judge.py --round 2`)
+Sandbox K = 24 offline, base seed 20261203, on the round-2 reference field + keep set
+(data/ fingerprinted). Arms on the hard 22, budget 10,000, max_size 7, PORT / ANCHOR2 /
+SCALE on, INVENT_TEXT at its default (on): cold / empty_default / empty_tuned / trained_off
+(SELFEDIT off) / trained_default (on, default genome) / **trained_tuned** (on, G\*) /
+math_sci_tuned (report); trained = `transfer_suite.fields()["all_sci"]` as in round 1.
+Regressions: `SWITCH=NOMAD_SELFEDIT scripts/switch_regress.py` over learning (deep, science
+hard, LOFO), transfer1-4, secondary4, text, bridge, **text_invent** (INVENT_TEXT suite) and
+**route5** (TRANSFER-5 suite, ROUTE off arm = 26/8/0 of 33) -- once with the default genome
+(4a) and once with `NOMAD_GENOME=G*` (4b).
+
+### Pre-registered criteria (round 2)
+1. **Self-edit helps**: trained_tuned - trained_default >= +3 certified, or >= 0 with >= 25%
+   fewer evaluations.
+2. **The gain is memory (corrected)**: `empty_tuned - empty_default == 0` certified (the tuned
+   genome adds nothing without a field).
+3. **No sealed task worse**: zero per-task losses of trained_tuned vs trained_default (lost
+   certification or more evaluations); trained_tuned and empty_tuned no worse than cold on
+   any task cold certifies.
+4. **Zero losses on every existing suite** (per task, per arm: lost certification or more
+   evaluations), (a) default genome and (b) G\*: deep, science hard, TRANSFER-1..4,
+   secondary, TEXT (incl. `t_line_len`), BRIDGE (trained 13), INVENT_TEXT, TRANSFER-5.
+5. **LOFO** totals 5,883, worst ratio 1.0x in both 4a and 4b; full pytest passes.
+6. **Safety**: trained_off == trained_default per task; the sandbox leaves data/ untouched.
+
+Rule: all six pass -> flip `NOMAD_SELFEDIT` default ON in a separate commit (the body then
+runs the sandbox at most once an hour, every accepted edit is a "nomad-evolve:" commit the
+guard can revert). Any fail -> stays OFF, honest note. Measured once, from a code snapshot.
+
+Expectation (stated before measuring): criterion 1 passes (floor fits by 4/6/8/9/12/16/18/24/36);
+5, 7, 10, 30, 60 and the ceilings stay out of reach; 2-6 pass.

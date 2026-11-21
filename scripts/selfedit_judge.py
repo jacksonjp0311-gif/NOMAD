@@ -3,6 +3,12 @@
     python3 scripts/selfedit_judge.py                     # the frozen sealed SELFEDIT suite (hash-checked)
     python3 scripts/selfedit_judge.py --suite PATH        # a dev suite (no hash check)
     python3 scripts/selfedit_judge.py ... --genome-out P  # also write the tuned genome to P
+    python3 scripts/selfedit_judge.py --round 2           # ROUND 2: the frozen selfedit2 suite (hash-checked)
+
+Round 2 (docs/SELFEDIT.md, "Round 2"): base seed 20261203; the sandbox tunes on its own reference field
+(``selfedit.reference_field()`` = WORLD + easy science + bridge training, the live body's curriculum) with
+its round-2 keep set (TRANSFER-4 + TEXT + BRIDGE dev rows); the arms are unchanged; criterion 2 is
+empty_tuned - empty_default == 0. INVENT_TEXT is at its default (on) in every arm.
 
 Protocol (pre-registered):
 1. The sandbox runs K = 24 steps offline (``nomad.selfedit.run_offline``, base seed 20261128) from the
@@ -35,15 +41,17 @@ from nomad.world_tasks import all_training  # noqa: E402
 BUDGET = 10000
 K = 24
 BASE_SEED = 20261128
+BASE_SEED2 = 20261203
+ROUND2 = "--round" in sys.argv and sys.argv[sys.argv.index("--round") + 1] == "2"
 
 
 def tune(fields: dict) -> dict:
-    p, vs = fields["all_sci"]
+    p, vs = S.reference_field() if ROUND2 else fields["all_sci"]
     tasks = all_training()
     win = {"pairs": 0, "families": [t.family for t in tasks], "tasks": tasks, "recorded": {}}
     fp0 = S._data_fingerprint()
     with env(**ON):
-        out = S.run_offline(K, BASE_SEED, dev_field=(p, vs), live_prior=p, win=win)
+        out = S.run_offline(K, BASE_SEED2 if ROUND2 else BASE_SEED, dev_field=(p, vs), live_prior=p, win=win)
     out["data_untouched"] = fp0 == S._data_fingerprint()
     return out
 
@@ -103,8 +111,8 @@ def verdict(out: dict) -> dict:
          "c1_tuned_beats_default": bool(gain >= 3 or (gain >= 0 and fewer >= 0.25)),
          "empty_tuned_minus_empty_default": c["empty_tuned"] - c["empty_default"],
          "empty_tuned_minus_cold": c["empty_tuned"] - c["cold"],
-         "c2_gain_vanishes_with_empty_field": bool(c["empty_tuned"] - c["empty_default"] <= 1
-                                                   and c["empty_tuned"] - c["cold"] <= 1),
+         "c2_gain_vanishes_with_empty_field": bool(c["empty_tuned"] - c["empty_default"] == 0) if ROUND2 else
+         bool(c["empty_tuned"] - c["empty_default"] <= 1 and c["empty_tuned"] - c["cold"] <= 1),
          "tuned_losses_vs_default": loss_vs_default,
          "c3_no_task_worse": bool(not loss_vs_default
                                   and all(not out["worse_than_cold"][k] for k in ("trained_tuned", "empty_tuned"))),
@@ -120,6 +128,8 @@ def verdict(out: dict) -> dict:
 def main() -> int:
     if "--suite" in sys.argv:
         suite, _e, hard = XS.load(Path(sys.argv[sys.argv.index("--suite") + 1]), check=False)
+    elif ROUND2:
+        suite, _e, hard = XS.load(XS.OUT2, check=True, hash_path=XS.HASH2)
     else:
         suite, _e, hard = XS.load(XS.OUT, check=True)
     fields = TS.fields()
@@ -130,6 +140,7 @@ def main() -> int:
     out = score(suite["hard"], hard, arms(fields, t["final"]), suite["max_size"])
     out["tune"] = t
     out["sha256"] = XS.suite_hash(suite)
+    out["round"] = 2 if ROUND2 else 1
     out["verdict"] = verdict(out)
     print(json.dumps(out, indent=1, default=str))
     return 0

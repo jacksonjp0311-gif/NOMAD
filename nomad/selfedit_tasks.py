@@ -175,7 +175,76 @@ CATALOGUE: tuple[Formula, ...] = (
        lambda zu, zv, zw: F(60 * zu + zv), _add(_mul(V("zu"), _mul(_k(6), _add(_add(C(3), C(3)), _add(C(2), C(2))))), V("zv"))),
 )
 
-BY_FAMILY = {f.family: f for f in DEV_CATALOGUE + CATALOGUE}
+# ---------------------------------------------------------------- the round-2 sealed catalogue
+# Written before any field arm is measured on it (docs/SELFEDIT.md, "Round 2"). New domains (garden,
+# school, factory), new input names (yp..yw, disjoint from every catalogue), new formulas of the same
+# kind: everyday counting / unit formulas with a constant factor or divisor; some constants derivable from
+# learned scales, some not (5, 7, 10, 30), some ceilings; none chosen by outcome.
+
+DOMAINS2 = ("garden", "school", "factory")
+
+BEDS = ("yp", "yq")            # beds, plants per bed
+CLASS = ("yr", "ys", "yt")     # classes, students per class, weeks
+LINE = ("yu", "yv", "yw")      # machines, hours, parts per hour
+R_BEDS = {"yp": (1, 40), "yq": (1, 16)}
+R_CLASS = {"yr": (1, 12), "ys": (5, 35), "yt": (1, 14)}
+R_LINE = {"yu": (1, 9), "yv": (1, 24), "yw": (1, 12)}
+
+CATALOGUE2: tuple[Formula, ...] = (
+    # garden
+    _f("se2_g_trays6", "garden", "packing", "full 6-cell seed trays for yp beds of yq plants = (yp yq) // 6", BEDS, R_BEDS,
+       lambda yp, yq: F((yp * yq) // 6), _div(_mul(V("yp"), V("yq")), _k(6))),
+    _f("se2_g_flats12", "garden", "packing", "full 12-pot flats for yp yq plants = (yp yq) // 12", BEDS, R_BEDS,
+       lambda yp, yq: F((yp * yq) // 12), _div(_mul(V("yp"), V("yq")), _k(12))),
+    _f("se2_g_bulbs8", "garden", "counting", "bulbs: 8 per plant spot, yp beds of yq spots = 8 yp yq", BEDS, R_BEDS,
+       lambda yp, yq: F(8 * yp * yq), _mul(_mul(V("yp"), V("yq")), _k(8))),
+    _f("se2_g_border4", "garden", "counting", "edging stakes: 4 per bed plus yq spares = 4 yp + yq", BEDS, R_BEDS,
+       lambda yp, yq: F(4 * yp + yq), _add(_mul(V("yp"), _k(4)), V("yq"))),
+    _f("se2_g_bags16", "garden", "packing", "full 16-litre bags from a triangle of yp rows = yp(yp+1) // 32", BEDS, R_BEDS,
+       lambda yp, yq: F((yp * (yp + 1)) // 32), _div(_mul(V("yp"), _add(V("yp"), C(1))), _mul(C(2), _k(16)))),
+    _f("se2_g_square9", "garden", "packing", "full 9-plant squares in a yp x yp plot = (yp yp) // 9", BEDS, R_BEDS,
+       lambda yp, yq: F((yp * yp) // 9), _div(_mul(V("yp"), V("yp")), _k(9))),
+    _f("se2_g_hoses5", "garden", "packing", "hoses, one per 5 beds = ceil(yp / 5)", BEDS, R_BEDS,
+       lambda yp, yq: F(-(-yp // 5)), _ceil_tree(V("yp"), _add(C(2), C(3)))),
+    _f("se2_g_rows24", "garden", "packing", "full 24-plant rows from yp beds of yq = (yp yq) // 24", BEDS, R_BEDS,
+       lambda yp, yq: F((yp * yq) // 24), _div(_mul(V("yp"), V("yq")), _k(24))),
+    # school
+    _f("se2_s_lessons", "school", "counting", "lessons: 6 a day, 5 days, yt weeks, yr classes = 30 yr yt", CLASS, R_CLASS,
+       lambda yr, ys, yt: F(30 * yr * yt), _mul(_mul(V("yr"), V("yt")), _mul(_k(6), _add(C(2), C(3))))),
+    _f("se2_s_tables4", "school", "packing", "full 4-seat tables for yr classes of ys = (yr ys) // 4", CLASS, R_CLASS,
+       lambda yr, ys, yt: F((yr * ys) // 4), _div(_mul(V("yr"), V("ys")), _k(4))),
+    _f("se2_s_teams8", "school", "packing", "full 8-player teams from yr ys students = (yr ys) // 8", CLASS, R_CLASS,
+       lambda yr, ys, yt: F((yr * ys) // 8), _div(_mul(V("yr"), V("ys")), _k(8))),
+    _f("se2_s_pencils12", "school", "counting", "pencils: a dozen per student, yr classes of ys = 12 yr ys", CLASS, R_CLASS,
+       lambda yr, ys, yt: F(12 * yr * ys), _mul(_mul(V("yr"), V("ys")), _k(12))),
+    _f("se2_s_buses", "school", "packing", "36-seat buses for yr classes of ys = ceil(yr ys / 36)", CLASS, R_CLASS,
+       lambda yr, ys, yt: F(-(-(yr * ys) // 36)), _ceil_tree(_mul(V("yr"), V("ys")), _k(36))),
+    _f("se2_s_terms7", "school", "units", "full weeks in yt fortnights of yr days = (yr yt) // 7", CLASS, R_CLASS,
+       lambda yr, ys, yt: F((yr * yt) // 7), _div(_mul(V("yr"), V("yt")), _add(_add(C(2), C(2)), C(3)))),
+    _f("se2_s_books16", "school", "packing", "full 16-book boxes, yt books each for yr ys students = (yr ys yt) // 16",
+       CLASS, R_CLASS, lambda yr, ys, yt: F((yr * ys * yt) // 16), _div(_mul(_mul(V("yr"), V("ys")), V("yt")), _k(16))),
+    _f("se2_s_register", "school", "counting", "register marks: 2 a day over yt weeks of 5 days for ys = 10 ys yt", CLASS, R_CLASS,
+       lambda yr, ys, yt: F(10 * ys * yt), _mul(_mul(V("ys"), V("yt")), _mul(C(2), _add(C(2), C(3))))),
+    # factory
+    _f("se2_f_parts", "factory", "counting", "parts from yu machines over yv hours at yw per hour = yu yv yw", LINE, R_LINE,
+       lambda yu, yv, yw: F(yu * yv * yw), _mul(_mul(V("yu"), V("yv")), V("yw"))),
+    _f("se2_f_boxes12", "factory", "packing", "full 12-part boxes = (yu yv yw) // 12", LINE, R_LINE,
+       lambda yu, yv, yw: F((yu * yv * yw) // 12), _div(_mul(_mul(V("yu"), V("yv")), V("yw")), _k(12))),
+    _f("se2_f_days24", "factory", "units", "full days of machine time in yu yv hours = (yu yv) // 24", LINE, R_LINE,
+       lambda yu, yv, yw: F((yu * yv) // 24), _div(_mul(V("yu"), V("yv")), _k(24))),
+    _f("se2_f_shifts8", "factory", "units", "full 8-hour shifts in yu yv machine-hours = (yu yv) // 8", LINE, R_LINE,
+       lambda yu, yv, yw: F((yu * yv) // 8), _div(_mul(V("yu"), V("yv")), _k(8))),
+    _f("se2_f_minutes", "factory", "units", "machine-minutes for yu machines over yv hours = 60 yu yv", LINE, R_LINE,
+       lambda yu, yv, yw: F(60 * yu * yv), _mul(_mul(V("yu"), V("yv")), _mul(_k(6), _mul(C(2), _add(C(2), C(3)))))),
+    _f("se2_f_pallets36", "factory", "packing", "full 36-part pallets plus yu loose crates = (yv yw) // 36 + yu", LINE, R_LINE,
+       lambda yu, yv, yw: F((yv * yw) // 36 + yu), _add(_div(_mul(V("yv"), V("yw")), _k(36)), V("yu"))),
+    _f("se2_f_bolts6", "factory", "counting", "bolts: 6 per part, yu machines x yw parts = 6 yu yw", LINE, R_LINE,
+       lambda yu, yv, yw: F(6 * yu * yw), _mul(_mul(V("yu"), V("yw")), _k(6))),
+    _f("se2_f_crates", "factory", "packing", "crates of 18 for yv yw parts = ceil(yv yw / 18)", LINE, R_LINE,
+       lambda yu, yv, yw: F(-(-(yv * yw) // 18)), _ceil_tree(_mul(V("yv"), V("yw")), _k(18))),
+)
+
+BY_FAMILY = {f.family: f for f in DEV_CATALOGUE + CATALOGUE + CATALOGUE2}
 
 
 class _Dev:
@@ -187,3 +256,14 @@ class _Dev:
 
 
 DEV = _Dev()
+
+
+class _Round2:
+    """Module-like view of the round-2 sealed catalogue (scripts/selfedit_suite.py --round 2)."""
+    CATALOGUE = CATALOGUE2
+    DOMAINS = DOMAINS2
+    draw_rows = staticmethod(draw_rows)
+    to_task = staticmethod(to_task)
+
+
+ROUND2 = _Round2()

@@ -88,17 +88,18 @@ class Constants(unittest.TestCase):
 
     def test_depth2_closure(self):
         with _Env(NOMAD_SELFEDIT="on"), G.override({"inv_const_depth": 2, "inv_max_constants": 8}):
-            got = dict(I.constants(self.scales))
+            got = dict(I.constants(self.scales, for_floor=True))
+            self.assertEqual([k for k, _ in I.constants(self.scales)], [4, 6])   # targets: never the genes
         self.assertEqual(sorted(got), [4, 6, 8, 9, 12, 16, 18, 24])   # 8 smallest of the depth-2 closure
         for k in got:
             self.assertIn(k, got)
             self.assertEqual(run(got[k], {}), k)
         with _Env(NOMAD_SELFEDIT="on"), G.override({"inv_const_depth": 2, "inv_max_constants": 2}):
-            self.assertEqual([k for k, _ in I.constants(self.scales)], [4, 6])   # cap first, smallest first
+            self.assertEqual([k for k, _ in I.constants(self.scales, for_floor=True)], [4, 6])   # cap, smallest first
 
     def test_empty_field_has_no_constants(self):
         with _Env(NOMAD_SELFEDIT="on"), G.override({"inv_const_depth": 2, "inv_max_constants": 8}):
-            self.assertEqual(I.constants([]), [])
+            self.assertEqual(I.constants([], for_floor=True), [])
 
 
 class Propose(unittest.TestCase):
