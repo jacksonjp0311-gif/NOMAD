@@ -143,3 +143,69 @@ INVENT on; report only). No arm trains on any transfer family.
 Decision: all met -> `NOMAD_INVENT` default **on**. Otherwise it stays
 **off** and the result is recorded here as a negative result. Nothing is
 re-tuned on a sealed suite.
+
+## Sealed result (measured once, 2026-11-21, after `d43ae99`)
+
+TRANSFER-3 (`python3 scripts/invent_judge.py`, sha `5a8dab57…10e9`, 40 hard):
+
+| Arm | Certified /40 | Building /15 | Games /11 | Travel /14 | Evaluations | vs empty |
+|---|---|---|---|---|---|---|
+| cold | 0 | 0 | 0 | 0 | 392,886 | |
+| empty (no memory, INVENT off) | 1 | 0 | 0 | 1 | 395,311 | |
+| empty, INVENT on | 1 | 0 | 0 | 1 | 395,311 (identical) | 0 |
+| trained (math + science, INVENT off = main) | 20 | 8 | 4 | 8 | 309,010 (-21.8%) | +19 |
+| **trained, INVENT on** | **24** | 11 | 5 | 8 | 290,998 (-26.4%) | **+23** |
+| math only, INVENT on (report) | 7 | 1 | 3 | 3 | 346,101 | +6 |
+
+Secondary (`--secondary`, each suite's own trained field, INVENT off -> on):
+
+| Suite | cold | empty | trained (off) | trained (INVENT on) | Per-task changes |
+|---|---|---|---|---|---|
+| deep `da3ae9bf…6fbd` | 0 | 25 | 27 | 27 (235,425 vs 235,421 evals) | none |
+| science hard `4517167f…868d` | 0 | 0 | 12 | 12 (-2.0% evals) | **+`sci_dist_m`**, **-`sci_water_mol`** |
+| TRANSFER-2 `d8de7508…f19b` | 0 | 2 | 30 | **33** (-3.7% evals) | +3, no loss |
+| TEXT `08a826a3…4a02` (lang field) | 0 | 0 | 3 | 3 | none |
+
+LOFO with INVENT on: 5,883, worst 1.0x. Tests: 404 pass (6 skipped).
+
+| Criterion | Bar | Result | Met? |
+|---|---|---|---|
+| 1. INVENT adds on TRANSFER-3 | >= +3 or 25% fewer evals | **+4** (24 vs 20), -5.8% evals, no trained win lost | yes |
+| 2. Gain vanishes with an empty field | empty_invent <= empty, < 5% fewer evals | 1 = 1, identical evaluations | yes |
+| 3. No arm worse than cold | 0 | 0 (all six arms) | yes |
+| 4. No loss on existing sealed suites | counts >= 27 / 12 / 30 / 3 and no per-task loss | counts 27 / 12 / 33 / 3, but science hard **loses `sci_water_mol`** (main certifies it at 9,890 of 10,000 evaluations; INVENT's extra anchors push it over budget) while gaining `sci_dist_m` | **no** |
+| 5. LOFO, tests | 5,883, 1.0x; all pass | 5,883, 1.0x; 404 pass | yes |
+
+Decision: **INVENT does not pass as pre-registered** (criterion 4: one
+per-task loss on the sealed science suite). `NOMAD_INVENT` stays **off** by
+default; nothing is re-tuned on a sealed suite. This is a near miss with a
+real positive signal, recorded honestly:
+
+- The primary test passes cleanly and the gain is learning, not search: the
+  same mechanism over an empty field changes nothing (identical
+  evaluations), and a math-only field, which can invent only `λa. a·a` and
+  learns no constants, certifies 7, not 24.
+- What the 4 TRANSFER-3 wins are (WITNESS-certified, final split included):
+  - invented block `λa b c. a·b·c` instantiated as a cube (`ht·ht·ht`,
+    `wd·wd·wd`), then PORT's anchor: `b3_two_cubes` wd^3 + ht^3,
+    `b3_room_minus_cube` wd·ln·ht - ht^3;
+  - learned constant 4 = `mul(2, 2)` rescaling the goal: `b3_slab`
+    pa·pb·pc/4 -> `div(pa·(pb·pc), mul(2, 2))`;
+  - invented primitives as single nodes in the probe, with a residual
+    lookup: `g3_star_number` 6n(n-1)+1 ->
+    `add(add(1, mul(3, mul(nl, nl))), mul(nl, mul(sub(nl, 2), 3)))`.
+- On TRANSFER-2 INVENT reaches 3 of its 5 known misses (cube via
+  `λabc. a·b·c`, `mul4`, `div6`); on science it adds `sci_dist_m` via the
+  derived 6 = `mul(2, 3)`.
+- The loss is a budget-edge effect, not a wrong answer: `sci_water_mol` was
+  certified by main with 110 evaluations to spare, and dev had flagged the
+  same task as fragile (it is why the lockstep / invention-first variants
+  were rejected on dev).
+
+Still unsolved on TRANSFER-3 by every arm: `b3_path_around`, `b3_two_beds`,
+`b3_cube_shell`, `g3_tetra_stack`, `g3_squares_on_board`,
+`g3_groups_then_final`, `g3_points_pct`, `g3_win_pct`,
+`t3_fuel_plus_toll`, `t3_litres_two_legs`, `t3_distance`,
+`t3_cost_per_head` (nested division, products of shifted terms, n(n+1)(n+2)).
+Some certified programs are exact on the stated input ranges rather than
+symbolic identities (e.g. `t3_hire_cost` via `hire·(pax div cap) + hire`).

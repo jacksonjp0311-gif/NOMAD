@@ -110,7 +110,7 @@ class Fields(unittest.TestCase):
 
     def test_default_off_and_off_switch_exact(self):
         _env()
-        self.assertFalse(I.enabled())
+        self.assertFalse(I.enabled())   # docs/INVENT.md: sealed criterion 4 failed (science per-task loss)
         t = _dev_task("g2_box_minus_cube")
         p, vs = self.fields["math_sci"]
         a = evaluate(t, prior=p, variation=vs, casesplit=True, max_eval=10000)[0]
