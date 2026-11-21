@@ -79,6 +79,7 @@ OPS = {
     "first": (("str",), "str", lambda s: s[:1]),
     "last": (("str",), "str", lambda s: s[-1:]),
     "strlen": (("str",), "int", lambda s: len(s)),
+    "rest": (("str",), "str", lambda s: s[1:]),
     "sort": (("list",), "list", lambda xs: tuple(sorted(xs))),
     "lrev": (("list",), "list", lambda xs: xs[::-1]),
     "tail": (("list",), "list", lambda xs: xs[1:]),

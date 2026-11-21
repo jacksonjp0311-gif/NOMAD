@@ -101,6 +101,7 @@ OPS: dict[str, Op] = {o.name: o for o in (
     Op("first", ("str",), "str", lambda s: s[:1]),
     Op("last", ("str",), "str", lambda s: s[-1:]),
     Op("strlen", ("str",), "int", lambda s: len(s)),
+    Op("rest", ("str",), "str", lambda s: s[1:]),   # TEXT only (docs/TEXT.md): drop the first character
     # int lists
     Op("sort", ("list",), "list", lambda xs: tuple(sorted(xs))),
     Op("lrev", ("list",), "list", lambda xs: xs[::-1]),
@@ -120,6 +121,11 @@ OPSETS: dict[str, tuple[str, ...]] = {
     "int": ("add", "sub", "mul", "div", "mod", "min", "max", "ite"),
     "str": ("upper", "lower", "srev", "concat", "first", "last", "strlen", "add", "sub"),
     "list": ("sort", "lrev", "tail", "sum", "len", "lmax", "lmin", "head", "add", "sub", "mul"),
+    # TEXT domain (nomad/text.py, docs/TEXT.md): the str world plus `rest` (the
+    # one string block the dev suite showed missing: capitalising and rotating
+    # need "all but the first character") and mul / div for mixed
+    # string+integer tasks. Used only by text tasks; "str" is unchanged.
+    "text": ("upper", "lower", "srev", "concat", "first", "last", "rest", "strlen", "add", "sub", "mul", "div"),
 }
 
 # ----------------------------------------------------------------- programs
@@ -794,6 +800,14 @@ def bank_scales(bank: list) -> list[tuple[int, list]]:
     return sorted(best.items())
 
 
+SPLICE_PIECES = 4        # most pieces a string goal is cut into
+
+
+def splice_enabled() -> bool:
+    """NOMAD_SPLICE: cut a string goal into learned blocks and pool values (docs/TEXT.md)."""
+    return _flag("NOMAD_SPLICE", "off")
+
+
 def const_enabled() -> bool:
     """NOMAD_CONST: learned constants (var-free certified sub-programs, value outside 0-3) enter the bank."""
     return _flag("NOMAD_CONST", "off")
@@ -1072,6 +1086,11 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 hit = yield from scaled(ranked, table, glimit)
                 if hit is not None:
                     return hit
+        if task.out == "str" and splice_enabled():
+            hit = yield from splice(ranked, P, limit)
+            if hit is not None:
+                pinfo["port"] = "splice"
+                return hit
         # the field's own atoms for this signature first (the plain probe's),
         # then the best-scoring bank blocks
         own = {json.dumps(t) for t in library.values()}
@@ -1126,6 +1145,74 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         if grow_rej[0] is None:
             grow_rej[0] = len(gate.rejected)
         return len(gate.rejected) - grow_rej[0] >= GROW_REJECTS
+
+    def splice(ranked, P, limit):
+        """SPLICE (docs/TEXT.md): the string analogue of the anchor. The goal
+        is cut, left to right, into at most SPLICE_PIECES pieces, each the
+        public values of a learned bank block or of a probe pool entry, with
+        at least one bank block; optionally under an upper / lower wrapper
+        when the goal is already in that case on every row. Candidates for
+        the next piece are found by an index on their first-row value (no
+        evaluation); each candidate checked on all rows costs 1 evaluation;
+        every fit is WITNESS-gated. Shares GROW's cap and rejection budget."""
+        nonlocal evals
+        glimit = min(limit, evals + int(GROW_CAP * max_eval))
+        # pool values first; a bank block counts as learned only when it adds
+        # a value the probe's pools do not already hold (so a renamed block
+        # that merely re-spells an input, e.g. upper(srev(sp)) = " ", does not)
+        cands: dict[str, tuple] = {}
+        for sz_ in sorted(P):
+            for tr, vs_, _f in P[sz_].get("str", []):
+                if all(vs_):
+                    cands.setdefault(_key(vs_), (tr, vs_, False))
+        for _sc, _n, t, v in ranked:
+            if type_of(v[0]) == "str" and all(v):
+                cands.setdefault(_key(v), (t, v, True))
+        for wrap in (None, "upper", "lower"):
+            fn = (lambda x: x) if wrap is None else (str.upper if wrap == "upper" else str.lower)
+            if wrap is not None and not all(fn(g) == g for g in goal):
+                continue
+            index: dict[str, list] = {}
+            for t, v, isb in cands.values():
+                index.setdefault(fn(v[0]), []).append((t, tuple(fn(x) for x in v), isb))
+
+            def dfs(rem, pieces, used):
+                nonlocal evals
+                if all(r == "" for r in rem):
+                    if not used or len(pieces) < 2:
+                        return None
+                    tree = pieces[-1]
+                    for x in reversed(pieces[:-1]):
+                        tree = ["concat", x, tree]
+                    return [wrap, tree] if wrap else tree
+                if len(pieces) >= SPLICE_PIECES or any(r == "" for r in rem):
+                    return None
+                last = len(pieces) == SPLICE_PIECES - 1
+                for L in range(len(rem[0]), 0, -1):
+                    for t, fv, isb in index.get(rem[0][:L], ()):
+                        if last and not (used or isb):
+                            continue
+                        if grow_spent() or evals >= glimit:
+                            return "stop"
+                        evals += 1
+                        yield evals
+                        if not all(r.startswith(x) for r, x in zip(rem, fv)):
+                            continue
+                        got = yield from dfs(tuple(r[len(x):] for r, x in zip(rem, fv)), pieces + [t], used or isb)
+                        if got == "stop":
+                            return "stop"
+                        if got is not None:
+                            if stop_on(got):
+                                return got
+                            yield evals
+                return None
+
+            got = yield from dfs(tuple(goal), [], False)
+            if got == "stop":
+                return None
+            if got is not None:
+                return got
+        return None
 
     def anchor1(rk, table, limit, g, wrap):
         """Depth-1 anchor on target g (the PORT anchor's loop, generalised)."""
@@ -1345,7 +1432,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
     # GROW (docs/GROW.md): stage 1 exhausted before the probe trigger (few
     # inputs), so the probe has not run; run it now, after the lead block,
     # case split and mutants (which keep their order) and before stage 2.
-    if probe_at and bank and (anchor2_enabled() or scale_enabled()):
+    if probe_at and bank and (anchor2_enabled() or scale_enabled() or splice_enabled()):
         probe_at.clear()
         ph = yield from probe()
         if ph is not None:

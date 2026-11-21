@@ -1,0 +1,6898 @@
+{
+ "budget": 10000,
+ "domains": [
+  "language"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1510,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_initials",
+   "formula": "first letters of first and last name",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "initials",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Ivan",
+      "ln": "gArCiA",
+      "sp": " "
+     },
+     "Ig"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "teSS",
+      "ln": "Novak",
+      "sp": " "
+     },
+     "tN"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "TEsS",
+      "ln": "SMITH",
+      "sp": " "
+     },
+     "TS"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "gus",
+      "ln": "Tanaka",
+      "sp": " "
+     },
+     "gT"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "pIa",
+      "ln": "SMITH",
+      "sp": " "
+     },
+     "pS"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Hana",
+      "ln": "rossi",
+      "sp": " "
+     },
+     "Hr"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "wes",
+      "ln": "BroWn",
+      "sp": " "
+     },
+     "wB"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "NOra",
+      "ln": "SMITH",
+      "sp": " "
+     },
+     "NS"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "zOE",
+      "ln": "Jones",
+      "sp": " "
+     },
+     "zJ"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Quinn",
+      "ln": "Lopez",
+      "sp": " "
+     },
+     "QL"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "mo",
+      "ln": "Costa",
+      "sp": " "
+     },
+     "mC"
+    ]
+   ],
+   "task_id": "x-00",
+   "tier": "easy",
+   "tree": [
+    "concat",
+    [
+     "first",
+     [
+      "var",
+      "fn"
+     ]
+    ],
+    [
+     "first",
+     [
+      "var",
+      "ln"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3080,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_initials_upper",
+   "formula": "upper-case initials",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "initials",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "carl",
+      "ln": "Brown",
+      "sp": " "
+     },
+     "CB"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Uma",
+      "ln": "Tanaka",
+      "sp": " "
+     },
+     "UT"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Carl",
+      "ln": "olsen",
+      "sp": " "
+     },
+     "CO"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ZOE",
+      "ln": "rossi",
+      "sp": " "
+     },
+     "ZR"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "CARL",
+      "ln": "Kim",
+      "sp": " "
+     },
+     "CK"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "vic",
+      "ln": "ROSSI",
+      "sp": " "
+     },
+     "VR"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Rosa",
+      "ln": "KIM",
+      "sp": " "
+     },
+     "RK"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "quiNn",
+      "ln": "HADDAD",
+      "sp": " "
+     },
+     "QH"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "JO",
+      "ln": "rOsSi",
+      "sp": " "
+     },
+     "JR"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "hana",
+      "ln": "Ivers",
+      "sp": " "
+     },
+     "HI"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Finn",
+      "ln": "PatEL",
+      "sp": " "
+     },
+     "FP"
+    ]
+   ],
+   "task_id": "x-01",
+   "tier": "easy",
+   "tree": [
+    "upper",
+    [
+     "concat",
+     [
+      "first",
+      [
+       "var",
+       "fn"
+      ]
+     ],
+     [
+      "first",
+      [
+       "var",
+       "ln"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1212,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_full_name",
+   "formula": "first space last",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "joining",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "NoRa",
+      "ln": "PATEL",
+      "sp": " "
+     },
+     "NoRa PATEL"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "zoe",
+      "ln": "Costa",
+      "sp": " "
+     },
+     "zoe Costa"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "anna",
+      "ln": "Garcia",
+      "sp": " "
+     },
+     "anna Garcia"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "jO",
+      "ln": "Novak",
+      "sp": " "
+     },
+     "jO Novak"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ivAn",
+      "ln": "weber",
+      "sp": " "
+     },
+     "ivAn weber"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "KAI",
+      "ln": "Brown",
+      "sp": " "
+     },
+     "KAI Brown"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "oTTO",
+      "ln": "tanaka",
+      "sp": " "
+     },
+     "oTTO tanaka"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "sam",
+      "ln": "BROWN",
+      "sp": " "
+     },
+     "sam BROWN"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "jo",
+      "ln": "HADDAD",
+      "sp": " "
+     },
+     "jo HADDAD"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "jO",
+      "ln": "novak",
+      "sp": " "
+     },
+     "jO novak"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "TESs",
+      "ln": "NGUYEN",
+      "sp": " "
+     },
+     "TESs NGUYEN"
+    ]
+   ],
+   "task_id": "x-06",
+   "tier": "easy",
+   "tree": [
+    "concat",
+    [
+     "var",
+     "fn"
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "sp"
+     ],
+     [
+      "var",
+      "ln"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3556,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_handle",
+   "formula": "lower-case first.last",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "joining",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "mo",
+      "ln": "Nguyen",
+      "sp": " "
+     },
+     "mo.nguyen"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "nora",
+      "ln": "rossi",
+      "sp": " "
+     },
+     "nora.rossi"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "QUINN",
+      "ln": "Nguyen",
+      "sp": " "
+     },
+     "quinn.nguyen"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ZOE",
+      "ln": "Moreau",
+      "sp": " "
+     },
+     "zoe.moreau"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "jo",
+      "ln": "OLSen",
+      "sp": " "
+     },
+     "jo.olsen"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "noRa",
+      "ln": "Costa",
+      "sp": " "
+     },
+     "nora.costa"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "tess",
+      "ln": "JONES",
+      "sp": " "
+     },
+     "tess.jones"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Vic",
+      "ln": "SMITH",
+      "sp": " "
+     },
+     "vic.smith"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Vic",
+      "ln": "ivers",
+      "sp": " "
+     },
+     "vic.ivers"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Dana",
+      "ln": "silva",
+      "sp": " "
+     },
+     "dana.silva"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ZOE",
+      "ln": "novAK",
+      "sp": " "
+     },
+     "zoe.novak"
+    ]
+   ],
+   "task_id": "x-08",
+   "tier": "easy",
+   "tree": [
+    "lower",
+    [
+     "concat",
+     [
+      "var",
+      "fn"
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "dt"
+      ],
+      [
+       "var",
+       "ln"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 980,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_username",
+   "formula": "lower-case first initial + last name",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "joining",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "KAI",
+      "ln": "rossi",
+      "sp": " "
+     },
+     "krossi"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "qUINn",
+      "ln": "Garcia",
+      "sp": " "
+     },
+     "qgarcia"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Hana",
+      "ln": "NOVAK",
+      "sp": " "
+     },
+     "hnovak"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Mo",
+      "ln": "Rossi",
+      "sp": " "
+     },
+     "mrossi"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "pia",
+      "ln": "OLSEN",
+      "sp": " "
+     },
+     "polsen"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Pia",
+      "ln": "pATEL",
+      "sp": " "
+     },
+     "ppatel"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "FInn",
+      "ln": "kIm",
+      "sp": " "
+     },
+     "fkim"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Nora",
+      "ln": "smith",
+      "sp": " "
+     },
+     "nsmith"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "rosa",
+      "ln": "hAddad",
+      "sp": " "
+     },
+     "rhaddad"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "GUS",
+      "ln": "MOREAU",
+      "sp": " "
+     },
+     "gmoreau"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Carl",
+      "ln": "Novak",
+      "sp": " "
+     },
+     "cnovak"
+    ]
+   ],
+   "task_id": "x-09",
+   "tier": "easy",
+   "tree": [
+    "lower",
+    [
+     "concat",
+     [
+      "first",
+      [
+       "var",
+       "fn"
+      ]
+     ],
+     [
+      "var",
+      "ln"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 864,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_echo_words",
+   "formula": "word space word",
+   "inputs": [
+    "w",
+    "w2",
+    "sp"
+   ],
+   "kind": "joining",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "sp": " ",
+      "w": "signaL",
+      "w2": "QUARTZ"
+     },
+     "signaL signaL"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "LUmEN",
+      "w2": "MEADOW"
+     },
+     "LUmEN LUmEN"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "pixEL",
+      "w2": "Atlas"
+     },
+     "pixEL pixEL"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "wind",
+      "w2": "STonE"
+     },
+     "wind wind"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "quArTZ",
+      "w2": "vapor"
+     },
+     "quArTZ quArTZ"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "EMBER",
+      "w2": "MEADOW"
+     },
+     "EMBER EMBER"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Lumen",
+      "w2": "harbor"
+     },
+     "Lumen Lumen"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "StoNe",
+      "w2": "Desert"
+     },
+     "StoNe StoNe"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "NOMAD",
+      "w2": "WIND"
+     },
+     "NOMAD NOMAD"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Desert",
+      "w2": "Stone"
+     },
+     "Desert Desert"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "pixel",
+      "w2": "stone"
+     },
+     "pixel pixel"
+    ]
+   ],
+   "task_id": "x-10",
+   "tier": "easy",
+   "tree": [
+    "concat",
+    [
+     "var",
+     "w"
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "sp"
+     ],
+     [
+      "var",
+      "w"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 897,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_pair_words",
+   "formula": "word-two space word",
+   "inputs": [
+    "w",
+    "w2",
+    "sp"
+   ],
+   "kind": "joining",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "sp": " ",
+      "w": "cedar",
+      "w2": "TUNDRA"
+     },
+     "TUNDRA cedar"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Harbor",
+      "w2": "orbit"
+     },
+     "orbit Harbor"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "gROvE",
+      "w2": "Vapor"
+     },
+     "Vapor gROvE"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "WIND",
+      "w2": "nomad"
+     },
+     "nomad WIND"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "vapor",
+      "w2": "TUNDRA"
+     },
+     "TUNDRA vapor"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "StONE",
+      "w2": "grove"
+     },
+     "grove StONE"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "RIVER",
+      "w2": "DESERT"
+     },
+     "DESERT RIVER"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Vapor",
+      "w2": "mEadoW"
+     },
+     "mEadoW Vapor"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Desert",
+      "w2": "orbIt"
+     },
+     "orbIt Desert"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "ATLas",
+      "w2": "Grove"
+     },
+     "Grove ATLas"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Stone",
+      "w2": "Lumen"
+     },
+     "Lumen Stone"
+    ]
+   ],
+   "task_id": "x-11",
+   "tier": "easy",
+   "tree": [
+    "concat",
+    [
+     "var",
+     "w2"
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "sp"
+     ],
+     [
+      "var",
+      "w"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2909,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_shout_name",
+   "formula": "upper-case full name",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "casing",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "EVE",
+      "ln": "garcia",
+      "sp": " "
+     },
+     "EVE GARCIA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "anna",
+      "ln": "Kim",
+      "sp": " "
+     },
+     "ANNA KIM"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "nora",
+      "ln": "costa",
+      "sp": " "
+     },
+     "NORA COSTA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "UMA",
+      "ln": "TanaKa",
+      "sp": " "
+     },
+     "UMA TANAKA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Gus",
+      "ln": "TaNaka",
+      "sp": " "
+     },
+     "GUS TANAKA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Quinn",
+      "ln": "ROSSI",
+      "sp": " "
+     },
+     "QUINN ROSSI"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "GUS",
+      "ln": "NovAK",
+      "sp": " "
+     },
+     "GUS NOVAK"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "nora",
+      "ln": "Jones",
+      "sp": " "
+     },
+     "NORA JONES"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "zoe",
+      "ln": "weber",
+      "sp": " "
+     },
+     "ZOE WEBER"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "otto",
+      "ln": "LOPEZ",
+      "sp": " "
+     },
+     "OTTO LOPEZ"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Hana",
+      "ln": "roSSI",
+      "sp": " "
+     },
+     "HANA ROSSI"
+    ]
+   ],
+   "task_id": "x-12",
+   "tier": "easy",
+   "tree": [
+    "upper",
+    [
+     "concat",
+     [
+      "var",
+      "fn"
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "sp"
+      ],
+      [
+       "var",
+       "ln"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 4566,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_upper_last",
+   "formula": "first name then upper-case last name",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "casing",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "quINN",
+      "ln": "weber",
+      "sp": " "
+     },
+     "quINN WEBER"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "zoe",
+      "ln": "Jones",
+      "sp": " "
+     },
+     "zoe JONES"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "pia",
+      "ln": "Ivers",
+      "sp": " "
+     },
+     "pia IVERS"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "anna",
+      "ln": "Haddad",
+      "sp": " "
+     },
+     "anna HADDAD"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Eve",
+      "ln": "rosSI",
+      "sp": " "
+     },
+     "Eve ROSSI"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "SAM",
+      "ln": "WEBER",
+      "sp": " "
+     },
+     "SAM WEBER"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ivan",
+      "ln": "ivers",
+      "sp": " "
+     },
+     "ivan IVERS"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Ben",
+      "ln": "smItH",
+      "sp": " "
+     },
+     "Ben SMITH"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "caRl",
+      "ln": "Olsen",
+      "sp": " "
+     },
+     "caRl OLSEN"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "quinn",
+      "ln": "NoVaK",
+      "sp": " "
+     },
+     "quinn NOVAK"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "tess",
+      "ln": "Kim",
+      "sp": " "
+     },
+     "tess KIM"
+    ]
+   ],
+   "task_id": "x-14",
+   "tier": "easy",
+   "tree": [
+    "concat",
+    [
+     "var",
+     "fn"
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "sp"
+     ],
+     [
+      "upper",
+      [
+       "var",
+       "ln"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 256,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_mirror",
+   "formula": "word followed by itself reversed",
+   "inputs": [
+    "w",
+    "w2",
+    "sp"
+   ],
+   "kind": "casing",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "sp": " ",
+      "w": "VAPOR",
+      "w2": "NOMAD"
+     },
+     "VAPORROPAV"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "vapor",
+      "w2": "wInD"
+     },
+     "vaporropav"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Wind",
+      "w2": "Orbit"
+     },
+     "WinddniW"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "LUMEN",
+      "w2": "EMBER"
+     },
+     "LUMENNEMUL"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "ATLAS",
+      "w2": "vapor"
+     },
+     "ATLASSALTA"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "River",
+      "w2": "Vapor"
+     },
+     "RiverreviR"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "tuNDRA",
+      "w2": "HaRBOr"
+     },
+     "tuNDRAARDNut"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "MEADOW",
+      "w2": "STONE"
+     },
+     "MEADOWWODAEM"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "EMber",
+      "w2": "WiNd"
+     },
+     "EMberrebME"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "tunDra",
+      "w2": "ember"
+     },
+     "tunDraarDnut"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "harbor",
+      "w2": "quartz"
+     },
+     "harborrobrah"
+    ]
+   ],
+   "task_id": "x-16",
+   "tier": "easy",
+   "tree": [
+    "concat",
+    [
+     "var",
+     "w"
+    ],
+    [
+     "srev",
+     [
+      "var",
+      "w"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 651,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_mirror_lower",
+   "formula": "lower-case word + reversed",
+   "inputs": [
+    "w",
+    "w2",
+    "sp"
+   ],
+   "kind": "casing",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "sp": " ",
+      "w": "Nomad",
+      "w2": "lumEn"
+     },
+     "nomaddamon"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "siGNAl",
+      "w2": "PIxeL"
+     },
+     "signallangis"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Ember",
+      "w2": "Orbit"
+     },
+     "emberrebme"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Meadow",
+      "w2": "QUARTZ"
+     },
+     "meadowwodaem"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "desert",
+      "w2": "sIgNal"
+     },
+     "deserttresed"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "SIgNAL",
+      "w2": "Lumen"
+     },
+     "signallangis"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Quartz",
+      "w2": "NOMAD"
+     },
+     "quartzztrauq"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "cEdaR",
+      "w2": "tundra"
+     },
+     "cedarradec"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Atlas",
+      "w2": "meadow"
+     },
+     "atlassalta"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "nomad",
+      "w2": "ember"
+     },
+     "nomaddamon"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "groVE",
+      "w2": "rIVEr"
+     },
+     "groveevorg"
+    ]
+   ],
+   "task_id": "x-17",
+   "tier": "easy",
+   "tree": [
+    "lower",
+    [
+     "concat",
+     [
+      "var",
+      "w"
+     ],
+     [
+      "srev",
+      [
+       "var",
+       "w"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2964,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_rev_each",
+   "formula": "each word reversed, space between",
+   "inputs": [
+    "w",
+    "w2",
+    "sp"
+   ],
+   "kind": "casing",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "sp": " ",
+      "w": "orbit",
+      "w2": "grove"
+     },
+     "tibro evorg"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "QUARTZ",
+      "w2": "Signal"
+     },
+     "ZTRAUQ langiS"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Vapor",
+      "w2": "ORBIT"
+     },
+     "ropaV TIBRO"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Grove",
+      "w2": "Meadow"
+     },
+     "evorG wodaeM"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Grove",
+      "w2": "grove"
+     },
+     "evorG evorg"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "PIXEL",
+      "w2": "nomad"
+     },
+     "LEXIP damon"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "dEsErt",
+      "w2": "Wind"
+     },
+     "trEsEd dniW"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "orbiT",
+      "w2": "LUMEN"
+     },
+     "Tibro NEMUL"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Nomad",
+      "w2": "signal"
+     },
+     "damoN langis"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "ember",
+      "w2": "wind"
+     },
+     "rebme dniw"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Meadow",
+      "w2": "nOmAD"
+     },
+     "wodaeM DAmOn"
+    ]
+   ],
+   "task_id": "x-18",
+   "tier": "easy",
+   "tree": [
+    "concat",
+    [
+     "srev",
+     [
+      "var",
+      "w"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "sp"
+     ],
+     [
+      "srev",
+      [
+       "var",
+       "w2"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 628,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_name_len",
+   "formula": "letters in first + last name",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "lengths",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Tess",
+      "ln": "Lopez",
+      "sp": " "
+     },
+     9
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "uma",
+      "ln": "Silva",
+      "sp": " "
+     },
+     8
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Nora",
+      "ln": "sILvA",
+      "sp": " "
+     },
+     9
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "uma",
+      "ln": "Novak",
+      "sp": " "
+     },
+     8
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ANNA",
+      "ln": "NOVAK",
+      "sp": " "
+     },
+     9
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Hana",
+      "ln": "tanaka",
+      "sp": " "
+     },
+     10
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "BEn",
+      "ln": "MOREAU",
+      "sp": " "
+     },
+     9
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "uma",
+      "ln": "LOPEZ",
+      "sp": " "
+     },
+     8
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "CArl",
+      "ln": "brown",
+      "sp": " "
+     },
+     9
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "rosa",
+      "ln": "WeBer",
+      "sp": " "
+     },
+     9
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "VIC",
+      "ln": "Olsen",
+      "sp": " "
+     },
+     8
+    ]
+   ],
+   "task_id": "x-19",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "strlen",
+     [
+      "var",
+      "fn"
+     ]
+    ],
+    [
+     "strlen",
+     [
+      "var",
+      "ln"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 9640,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_full_len",
+   "formula": "characters in 'first last'",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "lengths",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "nora",
+      "ln": "Olsen",
+      "sp": " "
+     },
+     10
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "UMa",
+      "ln": "NGUYEN",
+      "sp": " "
+     },
+     10
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "BeN",
+      "ln": "Jones",
+      "sp": " "
+     },
+     9
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ivan",
+      "ln": "sMith",
+      "sp": " "
+     },
+     10
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "hana",
+      "ln": "GARCIA",
+      "sp": " "
+     },
+     11
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "JO",
+      "ln": "gaRCIa",
+      "sp": " "
+     },
+     9
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "gus",
+      "ln": "novAk",
+      "sp": " "
+     },
+     9
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "OtTO",
+      "ln": "SILVA",
+      "sp": " "
+     },
+     10
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Eve",
+      "ln": "Novak",
+      "sp": " "
+     },
+     9
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "BEN",
+      "ln": "Costa",
+      "sp": " "
+     },
+     9
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "kAI",
+      "ln": "rosSI",
+      "sp": " "
+     },
+     9
+    ]
+   ],
+   "task_id": "x-20",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "add",
+     [
+      "strlen",
+      [
+       "var",
+       "fn"
+      ]
+     ],
+     [
+      "strlen",
+      [
+       "var",
+       "sp"
+      ]
+     ]
+    ],
+    [
+     "strlen",
+     [
+      "var",
+      "ln"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2553,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_len_gap",
+   "formula": "letters in first minus letters in last",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "lengths",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ANNA",
+      "ln": "kim",
+      "sp": " "
+     },
+     1
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ZOE",
+      "ln": "Weber",
+      "sp": " "
+     },
+     -2
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "otto",
+      "ln": "KIm",
+      "sp": " "
+     },
+     1
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Ivan",
+      "ln": "GARCIa",
+      "sp": " "
+     },
+     -2
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "BEN",
+      "ln": "COSTA",
+      "sp": " "
+     },
+     -2
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "WES",
+      "ln": "Haddad",
+      "sp": " "
+     },
+     -3
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "zOE",
+      "ln": "Patel",
+      "sp": " "
+     },
+     -2
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "LENA",
+      "ln": "PATEL",
+      "sp": " "
+     },
+     -1
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "DANA",
+      "ln": "RoSSi",
+      "sp": " "
+     },
+     -1
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "otTO",
+      "ln": "weber",
+      "sp": " "
+     },
+     -1
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "NorA",
+      "ln": "IVERS",
+      "sp": " "
+     },
+     -1
+    ]
+   ],
+   "task_id": "x-21",
+   "tier": "easy",
+   "tree": [
+    "sub",
+    [
+     "strlen",
+     [
+      "var",
+      "fn"
+     ]
+    ],
+    [
+     "strlen",
+     [
+      "var",
+      "ln"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 9512,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_double_len_plus",
+   "formula": "2*len(first) + len(last)",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "lengths",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "CARL",
+      "ln": "novak",
+      "sp": " "
+     },
+     13
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "LENA",
+      "ln": "TANAKA",
+      "sp": " "
+     },
+     14
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "OtTO",
+      "ln": "GarcIa",
+      "sp": " "
+     },
+     14
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "IVAN",
+      "ln": "Olsen",
+      "sp": " "
+     },
+     13
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "roSa",
+      "ln": "ROSSI",
+      "sp": " "
+     },
+     13
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "EvE",
+      "ln": "brown",
+      "sp": " "
+     },
+     11
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Vic",
+      "ln": "Olsen",
+      "sp": " "
+     },
+     11
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "finn",
+      "ln": "Patel",
+      "sp": " "
+     },
+     13
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "quinn",
+      "ln": "brOWn",
+      "sp": " "
+     },
+     15
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Pia",
+      "ln": "HADDAD",
+      "sp": " "
+     },
+     12
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "HANA",
+      "ln": "Novak",
+      "sp": " "
+     },
+     13
+    ]
+   ],
+   "task_id": "x-22",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "add",
+     [
+      "strlen",
+      [
+       "var",
+       "fn"
+      ]
+     ],
+     [
+      "strlen",
+      [
+       "var",
+       "fn"
+      ]
+     ]
+    ],
+    [
+     "strlen",
+     [
+      "var",
+      "ln"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2608,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_banner_len",
+   "formula": "characters in rep copies of 'word ' = rep*(len(w)+1)",
+   "inputs": [
+    "w",
+    "sp",
+    "rep"
+   ],
+   "kind": "mixed",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "rep": 1,
+      "sp": " ",
+      "w": "Stone"
+     },
+     6
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "nomad"
+     },
+     30
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "orbIT"
+     },
+     30
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "tundra"
+     },
+     35
+    ],
+    [
+     {
+      "rep": 1,
+      "sp": " ",
+      "w": "Grove"
+     },
+     6
+    ],
+    [
+     {
+      "rep": 4,
+      "sp": " ",
+      "w": "WIND"
+     },
+     20
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "VApOR"
+     },
+     30
+    ],
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "GrOVe"
+     },
+     12
+    ],
+    [
+     {
+      "rep": 4,
+      "sp": " ",
+      "w": "LUMEN"
+     },
+     24
+    ],
+    [
+     {
+      "rep": 1,
+      "sp": " ",
+      "w": "Nomad"
+     },
+     6
+    ],
+    [
+     {
+      "rep": 1,
+      "sp": " ",
+      "w": "STONE"
+     },
+     6
+    ]
+   ],
+   "task_id": "x-24",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "rep"
+    ],
+    [
+     "add",
+     [
+      "strlen",
+      [
+       "var",
+       "w"
+      ]
+     ],
+     [
+      "strlen",
+      [
+       "var",
+       "sp"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2610,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_rep_letters",
+   "formula": "rep*len(w) + rep",
+   "inputs": [
+    "w",
+    "sp",
+    "rep"
+   ],
+   "kind": "mixed",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "ORBiT"
+     },
+     12
+    ],
+    [
+     {
+      "rep": 4,
+      "sp": " ",
+      "w": "GROVE"
+     },
+     24
+    ],
+    [
+     {
+      "rep": 6,
+      "sp": " ",
+      "w": "Wind"
+     },
+     30
+    ],
+    [
+     {
+      "rep": 4,
+      "sp": " ",
+      "w": "Cedar"
+     },
+     24
+    ],
+    [
+     {
+      "rep": 3,
+      "sp": " ",
+      "w": "Tundra"
+     },
+     21
+    ],
+    [
+     {
+      "rep": 3,
+      "sp": " ",
+      "w": "vapor"
+     },
+     18
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "HarboR"
+     },
+     35
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "TUNDRA"
+     },
+     35
+    ],
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "Vapor"
+     },
+     12
+    ],
+    [
+     {
+      "rep": 6,
+      "sp": " ",
+      "w": "RIVER"
+     },
+     36
+    ],
+    [
+     {
+      "rep": 4,
+      "sp": " ",
+      "w": "pixel"
+     },
+     24
+    ]
+   ],
+   "task_id": "x-25",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "rep"
+     ],
+     [
+      "strlen",
+      [
+       "var",
+       "w"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "rep"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 7883,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_square_len",
+   "formula": "len(w)^2 + rep",
+   "inputs": [
+    "w",
+    "sp",
+    "rep"
+   ],
+   "kind": "mixed",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "rep": 6,
+      "sp": " ",
+      "w": "CEDAR"
+     },
+     31
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "Pixel"
+     },
+     30
+    ],
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "desert"
+     },
+     38
+    ],
+    [
+     {
+      "rep": 4,
+      "sp": " ",
+      "w": "Orbit"
+     },
+     29
+    ],
+    [
+     {
+      "rep": 6,
+      "sp": " ",
+      "w": "atLaS"
+     },
+     31
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "Meadow"
+     },
+     41
+    ],
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "ORBIT"
+     },
+     27
+    ],
+    [
+     {
+      "rep": 3,
+      "sp": " ",
+      "w": "atlas"
+     },
+     28
+    ],
+    [
+     {
+      "rep": 6,
+      "sp": " ",
+      "w": "ATLAS"
+     },
+     31
+    ],
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "Meadow"
+     },
+     38
+    ],
+    [
+     {
+      "rep": 4,
+      "sp": " ",
+      "w": "WIND"
+     },
+     20
+    ]
+   ],
+   "task_id": "x-26",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "strlen",
+      [
+       "var",
+       "w"
+      ]
+     ],
+     [
+      "strlen",
+      [
+       "var",
+       "w"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "rep"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1072,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_rotate",
+   "formula": "move the first letter to the end",
+   "inputs": [
+    "w",
+    "w2",
+    "sp"
+   ],
+   "kind": "slicing",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "sp": " ",
+      "w": "Meadow",
+      "w2": "quartz"
+     },
+     "eadowM"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "atLaS",
+      "w2": "stOnE"
+     },
+     "tLaSa"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Atlas",
+      "w2": "ember"
+     },
+     "tlasA"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "winD",
+      "w2": "Desert"
+     },
+     "inDw"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "HARBOR",
+      "w2": "Quartz"
+     },
+     "ARBORH"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "GROVE",
+      "w2": "cedar"
+     },
+     "ROVEG"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "grove",
+      "w2": "OrbIt"
+     },
+     "roveg"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Signal",
+      "w2": "atlAs"
+     },
+     "ignalS"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "haRbor",
+      "w2": "ember"
+     },
+     "aRborh"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Pixel",
+      "w2": "Atlas"
+     },
+     "ixelP"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Nomad",
+      "w2": "aTlaS"
+     },
+     "omadN"
+    ]
+   ],
+   "task_id": "x-29",
+   "tier": "easy",
+   "tree": [
+    "concat",
+    [
+     "rest",
+     [
+      "var",
+      "w"
+     ]
+    ],
+    [
+     "first",
+     [
+      "var",
+      "w"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2642,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_drop_first_both",
+   "formula": "each word without its first letter, lower-case, joined",
+   "inputs": [
+    "w",
+    "w2",
+    "sp"
+   ],
+   "kind": "slicing",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "sp": " ",
+      "w": "Ember",
+      "w2": "NOMAD"
+     },
+     "mberomad"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "meadow",
+      "w2": "EMBER"
+     },
+     "eadowmber"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "LUmEN",
+      "w2": "HARBOR"
+     },
+     "umenarbor"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "lumen",
+      "w2": "stONe"
+     },
+     "umentone"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Wind",
+      "w2": "Harbor"
+     },
+     "indarbor"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "GROVE",
+      "w2": "WIND"
+     },
+     "roveind"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "PIXeL",
+      "w2": "RIVER"
+     },
+     "ixeliver"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "SIGNAL",
+      "w2": "Atlas"
+     },
+     "ignaltlas"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "grove",
+      "w2": "Wind"
+     },
+     "roveind"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Desert",
+      "w2": "Lumen"
+     },
+     "esertumen"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Quartz",
+      "w2": "Cedar"
+     },
+     "uartzedar"
+    ]
+   ],
+   "task_id": "x-31",
+   "tier": "easy",
+   "tree": [
+    "lower",
+    [
+     "concat",
+     [
+      "rest",
+      [
+       "var",
+       "w"
+      ]
+     ],
+     [
+      "rest",
+      [
+       "var",
+       "w2"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2556,
+   "cold_reason": null,
+   "domain": "language",
+   "family": "t_len_product",
+   "formula": "len(first) * len(last)",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "lengths",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Finn",
+      "ln": "olsen",
+      "sp": " "
+     },
+     20
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Vic",
+      "ln": "rossi",
+      "sp": " "
+     },
+     15
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Tess",
+      "ln": "TaNaKa",
+      "sp": " "
+     },
+     24
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "PiA",
+      "ln": "kim",
+      "sp": " "
+     },
+     9
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Uma",
+      "ln": "WEBER",
+      "sp": " "
+     },
+     15
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Pia",
+      "ln": "Patel",
+      "sp": " "
+     },
+     15
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "KAi",
+      "ln": "JONES",
+      "sp": " "
+     },
+     15
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "kAi",
+      "ln": "SiLvA",
+      "sp": " "
+     },
+     15
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "eve",
+      "ln": "Silva",
+      "sp": " "
+     },
+     15
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "TESs",
+      "ln": "PatEl",
+      "sp": " "
+     },
+     20
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Ivan",
+      "ln": "Kim",
+      "sp": " "
+     },
+     12
+    ]
+   ],
+   "task_id": "x-40",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "strlen",
+     [
+      "var",
+      "fn"
+     ]
+    ],
+    [
+     "strlen",
+     [
+      "var",
+      "ln"
+     ]
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_initials_dot",
+   "formula": "initials with dots: F.L.",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "initials",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "EVe",
+      "ln": "JONES",
+      "sp": " "
+     },
+     "E.J."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "quinN",
+      "ln": "MOREAU",
+      "sp": " "
+     },
+     "q.M."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "zoe",
+      "ln": "SmITH",
+      "sp": " "
+     },
+     "z.S."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ivaN",
+      "ln": "Costa",
+      "sp": " "
+     },
+     "i.C."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ZOE",
+      "ln": "brown",
+      "sp": " "
+     },
+     "Z.b."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Ben",
+      "ln": "lopez",
+      "sp": " "
+     },
+     "B.l."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "haNa",
+      "ln": "jones",
+      "sp": " "
+     },
+     "h.j."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Quinn",
+      "ln": "TANAKA",
+      "sp": " "
+     },
+     "Q.T."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Anna",
+      "ln": "Moreau",
+      "sp": " "
+     },
+     "A.M."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "otto",
+      "ln": "weber",
+      "sp": " "
+     },
+     "o.w."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "FINN",
+      "ln": "kim",
+      "sp": " "
+     },
+     "F.k."
+    ]
+   ],
+   "task_id": "x-02",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "first",
+     [
+      "var",
+      "fn"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "dt"
+     ],
+     [
+      "concat",
+      [
+       "first",
+       [
+        "var",
+        "ln"
+       ]
+      ],
+      [
+       "var",
+       "dt"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_initials_dot_upper",
+   "formula": "upper-case initials with dots: F.L.",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "initials",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "nora",
+      "ln": "weber",
+      "sp": " "
+     },
+     "N.W."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "gus",
+      "ln": "joneS",
+      "sp": " "
+     },
+     "G.J."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Carl",
+      "ln": "IVERS",
+      "sp": " "
+     },
+     "C.I."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Wes",
+      "ln": "Silva",
+      "sp": " "
+     },
+     "W.S."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "IVaN",
+      "ln": "Kim",
+      "sp": " "
+     },
+     "I.K."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "lena",
+      "ln": "Weber",
+      "sp": " "
+     },
+     "L.W."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "DAnA",
+      "ln": "WEBER",
+      "sp": " "
+     },
+     "D.W."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "OTtO",
+      "ln": "patel",
+      "sp": " "
+     },
+     "O.P."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "WES",
+      "ln": "JONES",
+      "sp": " "
+     },
+     "W.J."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "jo",
+      "ln": "Rossi",
+      "sp": " "
+     },
+     "J.R."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Dana",
+      "ln": "JONES",
+      "sp": " "
+     },
+     "D.J."
+    ]
+   ],
+   "task_id": "x-03",
+   "tier": "hard",
+   "tree": [
+    "upper",
+    [
+     "concat",
+     [
+      "first",
+      [
+       "var",
+       "fn"
+      ]
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "dt"
+      ],
+      [
+       "concat",
+       [
+        "first",
+        [
+         "var",
+         "ln"
+        ]
+       ],
+       [
+        "var",
+        "dt"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_short_name",
+   "formula": "first initial, dot, space, last name: F. Last",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "initials",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "mo",
+      "ln": "costa",
+      "sp": " "
+     },
+     "m. costa"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Pia",
+      "ln": "HAdDAd",
+      "sp": " "
+     },
+     "P. HAdDAd"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Vic",
+      "ln": "WEBER",
+      "sp": " "
+     },
+     "V. WEBER"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Mo",
+      "ln": "joNES",
+      "sp": " "
+     },
+     "M. joNES"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "PIA",
+      "ln": "jones",
+      "sp": " "
+     },
+     "P. jones"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ZOE",
+      "ln": "OLSEN",
+      "sp": " "
+     },
+     "Z. OLSEN"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "PIA",
+      "ln": "NOVAK",
+      "sp": " "
+     },
+     "P. NOVAK"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Finn",
+      "ln": "Nguyen",
+      "sp": " "
+     },
+     "F. Nguyen"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "eve",
+      "ln": "Patel",
+      "sp": " "
+     },
+     "e. Patel"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "gus",
+      "ln": "Patel",
+      "sp": " "
+     },
+     "g. Patel"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Eve",
+      "ln": "Tanaka",
+      "sp": " "
+     },
+     "E. Tanaka"
+    ]
+   ],
+   "task_id": "x-04",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "first",
+     [
+      "var",
+      "fn"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "dt"
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "sp"
+      ],
+      [
+       "var",
+       "ln"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_ends_both",
+   "formula": "first and last letter of each name",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "initials",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "JO",
+      "ln": "Garcia",
+      "sp": " "
+     },
+     "JOGa"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "QUINN",
+      "ln": "costa",
+      "sp": " "
+     },
+     "QNca"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Carl",
+      "ln": "Tanaka",
+      "sp": " "
+     },
+     "ClTa"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "FINN",
+      "ln": "Patel",
+      "sp": " "
+     },
+     "FNPl"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "lena",
+      "ln": "BROwn",
+      "sp": " "
+     },
+     "laBn"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "IVAN",
+      "ln": "CoSTa",
+      "sp": " "
+     },
+     "INCa"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Eve",
+      "ln": "oLsen",
+      "sp": " "
+     },
+     "Eeon"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ivaN",
+      "ln": "WEBER",
+      "sp": " "
+     },
+     "iNWR"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "MO",
+      "ln": "ROSsI",
+      "sp": " "
+     },
+     "MORI"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "dana",
+      "ln": "Nguyen",
+      "sp": " "
+     },
+     "daNn"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Eve",
+      "ln": "NGUYEN",
+      "sp": " "
+     },
+     "EeNN"
+    ]
+   ],
+   "task_id": "x-05",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "first",
+     [
+      "var",
+      "fn"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "last",
+      [
+       "var",
+       "fn"
+      ]
+     ],
+     [
+      "concat",
+      [
+       "first",
+       [
+        "var",
+        "ln"
+       ]
+      ],
+      [
+       "last",
+       [
+        "var",
+        "ln"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_last_first",
+   "formula": "last, comma, space, first",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "joining",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "mo",
+      "ln": "KIM",
+      "sp": " "
+     },
+     "KIM, mo"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Rosa",
+      "ln": "Lopez",
+      "sp": " "
+     },
+     "Lopez, Rosa"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "SAM",
+      "ln": "noVak",
+      "sp": " "
+     },
+     "noVak, SAM"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "QUINN",
+      "ln": "BROWN",
+      "sp": " "
+     },
+     "BROWN, QUINN"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "pia",
+      "ln": "IVERS",
+      "sp": " "
+     },
+     "IVERS, pia"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Uma",
+      "ln": "ROSSI",
+      "sp": " "
+     },
+     "ROSSI, Uma"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ivan",
+      "ln": "OLSEN",
+      "sp": " "
+     },
+     "OLSEN, ivan"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "EVE",
+      "ln": "Moreau",
+      "sp": " "
+     },
+     "Moreau, EVE"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "QuINN",
+      "ln": "KIM",
+      "sp": " "
+     },
+     "KIM, QuINN"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "sam",
+      "ln": "Smith",
+      "sp": " "
+     },
+     "Smith, sam"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ben",
+      "ln": "weber",
+      "sp": " "
+     },
+     "weber, ben"
+    ]
+   ],
+   "task_id": "x-07",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "var",
+     "ln"
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "cm"
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "sp"
+      ],
+      [
+       "var",
+       "fn"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_quiet_last_first",
+   "formula": "lower-case last, first",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "casing",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "IVaN",
+      "ln": "Weber",
+      "sp": " "
+     },
+     "weber, ivan"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "sam",
+      "ln": "OLseN",
+      "sp": " "
+     },
+     "olsen, sam"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "PIA",
+      "ln": "SILVA",
+      "sp": " "
+     },
+     "silva, pia"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ZOE",
+      "ln": "Olsen",
+      "sp": " "
+     },
+     "olsen, zoe"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Pia",
+      "ln": "kim",
+      "sp": " "
+     },
+     "kim, pia"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "SAM",
+      "ln": "NoVaK",
+      "sp": " "
+     },
+     "novak, sam"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "LENA",
+      "ln": "Novak",
+      "sp": " "
+     },
+     "novak, lena"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Ben",
+      "ln": "BRown",
+      "sp": " "
+     },
+     "brown, ben"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Eve",
+      "ln": "Patel",
+      "sp": " "
+     },
+     "patel, eve"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "carl",
+      "ln": "haDDAd",
+      "sp": " "
+     },
+     "haddad, carl"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Ivan",
+      "ln": "lopez",
+      "sp": " "
+     },
+     "lopez, ivan"
+    ]
+   ],
+   "task_id": "x-13",
+   "tier": "hard",
+   "tree": [
+    "lower",
+    [
+     "concat",
+     [
+      "var",
+      "ln"
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "cm"
+      ],
+      [
+       "concat",
+       [
+        "var",
+        "sp"
+       ],
+       [
+        "var",
+        "fn"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_shout_rev_both",
+   "formula": "each name reversed and upper-cased",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "casing",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "mo",
+      "ln": "nguyen",
+      "sp": " "
+     },
+     "OM NEYUGN"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "uma",
+      "ln": "PateL",
+      "sp": " "
+     },
+     "AMU LETAP"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "NORA",
+      "ln": "sILVA",
+      "sp": " "
+     },
+     "ARON AVLIS"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "pia",
+      "ln": "brOwn",
+      "sp": " "
+     },
+     "AIP NWORB"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Otto",
+      "ln": "pAtEl",
+      "sp": " "
+     },
+     "OTTO LETAP"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "gus",
+      "ln": "MOreau",
+      "sp": " "
+     },
+     "SUG UAEROM"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "eVE",
+      "ln": "JONeS",
+      "sp": " "
+     },
+     "EVE SENOJ"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Gus",
+      "ln": "KIM",
+      "sp": " "
+     },
+     "SUG MIK"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "TESS",
+      "ln": "JONES",
+      "sp": " "
+     },
+     "SSET SENOJ"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "wes",
+      "ln": "OLSEN",
+      "sp": " "
+     },
+     "SEW NESLO"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "nora",
+      "ln": "kim",
+      "sp": " "
+     },
+     "ARON MIK"
+    ]
+   ],
+   "task_id": "x-15",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "upper",
+     [
+      "srev",
+      [
+       "var",
+       "fn"
+      ]
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "sp"
+     ],
+     [
+      "upper",
+      [
+       "srev",
+       [
+        "var",
+        "ln"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_card_len",
+   "formula": "characters in 'Last, First'",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "lengths",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "DANA",
+      "ln": "Kim",
+      "sp": " "
+     },
+     9
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "kAi",
+      "ln": "Jones",
+      "sp": " "
+     },
+     10
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "mo",
+      "ln": "nGuyeN",
+      "sp": " "
+     },
+     10
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "rosa",
+      "ln": "HADDAD",
+      "sp": " "
+     },
+     12
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "rosa",
+      "ln": "nGuYEn",
+      "sp": " "
+     },
+     12
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Nora",
+      "ln": "jones",
+      "sp": " "
+     },
+     11
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Quinn",
+      "ln": "novak",
+      "sp": " "
+     },
+     12
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "nora",
+      "ln": "KIM",
+      "sp": " "
+     },
+     9
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "FINN",
+      "ln": "nguyen",
+      "sp": " "
+     },
+     12
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "carL",
+      "ln": "cOSTA",
+      "sp": " "
+     },
+     11
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Dana",
+      "ln": "tanaka",
+      "sp": " "
+     },
+     12
+    ]
+   ],
+   "task_id": "x-23",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "add",
+     [
+      "strlen",
+      [
+       "var",
+       "ln"
+      ]
+     ],
+     [
+      "add",
+      [
+       "strlen",
+       [
+        "var",
+        "cm"
+       ]
+      ],
+      [
+       "strlen",
+       [
+        "var",
+        "sp"
+       ]
+      ]
+     ]
+    ],
+    [
+     "strlen",
+     [
+      "var",
+      "fn"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_capitalize",
+   "formula": "capitalise a word: upper first letter, lower the rest",
+   "inputs": [
+    "w",
+    "w2",
+    "sp"
+   ],
+   "kind": "slicing",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "sp": " ",
+      "w": "meadow",
+      "w2": "luMen"
+     },
+     "Meadow"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "VaPOr",
+      "w2": "VaPor"
+     },
+     "Vapor"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "cedar",
+      "w2": "Ember"
+     },
+     "Cedar"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Ember",
+      "w2": "pixel"
+     },
+     "Ember"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Cedar",
+      "w2": "Cedar"
+     },
+     "Cedar"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Vapor",
+      "w2": "atlas"
+     },
+     "Vapor"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "hARbOR",
+      "w2": "rIVer"
+     },
+     "Harbor"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "ember",
+      "w2": "Wind"
+     },
+     "Ember"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "WIND",
+      "w2": "HARBOR"
+     },
+     "Wind"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "DESERT",
+      "w2": "cedar"
+     },
+     "Desert"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Lumen",
+      "w2": "QUARTZ"
+     },
+     "Lumen"
+    ]
+   ],
+   "task_id": "x-27",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "upper",
+     [
+      "first",
+      [
+       "var",
+       "w"
+      ]
+     ]
+    ],
+    [
+     "lower",
+     [
+      "rest",
+      [
+       "var",
+       "w"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_title_name",
+   "formula": "capitalise first and last name",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "slicing",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "saM",
+      "ln": "garcia",
+      "sp": " "
+     },
+     "Sam Garcia"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "HANA",
+      "ln": "moreau",
+      "sp": " "
+     },
+     "Hana Moreau"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Kai",
+      "ln": "novak",
+      "sp": " "
+     },
+     "Kai Novak"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "cARL",
+      "ln": "Jones",
+      "sp": " "
+     },
+     "Carl Jones"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ROSA",
+      "ln": "patel",
+      "sp": " "
+     },
+     "Rosa Patel"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Anna",
+      "ln": "MOREAU",
+      "sp": " "
+     },
+     "Anna Moreau"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "dana",
+      "ln": "COsTA",
+      "sp": " "
+     },
+     "Dana Costa"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "iVAN",
+      "ln": "SILVA",
+      "sp": " "
+     },
+     "Ivan Silva"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "rosa",
+      "ln": "PAtEL",
+      "sp": " "
+     },
+     "Rosa Patel"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "QUINN",
+      "ln": "BroWN",
+      "sp": " "
+     },
+     "Quinn Brown"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "EVE",
+      "ln": "lopez",
+      "sp": " "
+     },
+     "Eve Lopez"
+    ]
+   ],
+   "task_id": "x-28",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "upper",
+     [
+      "first",
+      [
+       "var",
+       "fn"
+      ]
+     ]
+    ],
+    [
+     "concat",
+     [
+      "lower",
+      [
+       "rest",
+       [
+        "var",
+        "fn"
+       ]
+      ]
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "sp"
+      ],
+      [
+       "concat",
+       [
+        "upper",
+        [
+         "first",
+         [
+          "var",
+          "ln"
+         ]
+        ]
+       ],
+       [
+        "lower",
+        [
+         "rest",
+         [
+          "var",
+          "ln"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_rotate_both",
+   "formula": "rotate each word by one, space between",
+   "inputs": [
+    "w",
+    "w2",
+    "sp"
+   ],
+   "kind": "slicing",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "sp": " ",
+      "w": "HARBOR",
+      "w2": "rivEr"
+     },
+     "ARBORH ivErr"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "piXeL",
+      "w2": "QUARTZ"
+     },
+     "iXeLp UARTZQ"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "atlas",
+      "w2": "Lumen"
+     },
+     "tlasa umenL"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Ember",
+      "w2": "WIND"
+     },
+     "mberE INDW"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Stone",
+      "w2": "LUMEN"
+     },
+     "toneS UMENL"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "Orbit",
+      "w2": "vapor"
+     },
+     "rbitO aporv"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "EmBER",
+      "w2": "signal"
+     },
+     "mBERE ignals"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "quArTz",
+      "w2": "NOMAD"
+     },
+     "uArTzq OMADN"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "CeDaR",
+      "w2": "NOMAD"
+     },
+     "eDaRC OMADN"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "CEDAR",
+      "w2": "SIGNAL"
+     },
+     "EDARC IGNALS"
+    ],
+    [
+     {
+      "sp": " ",
+      "w": "lumen",
+      "w2": "STOnE"
+     },
+     "umenl TOnES"
+    ]
+   ],
+   "task_id": "x-30",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "rest",
+     [
+      "var",
+      "w"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "first",
+      [
+       "var",
+       "w"
+      ]
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "sp"
+      ],
+      [
+       "concat",
+       [
+        "rest",
+        [
+         "var",
+         "w2"
+        ]
+       ],
+       [
+        "first",
+        [
+         "var",
+         "w2"
+        ]
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_formal_cap",
+   "formula": "capitalised last name, comma, space, first initial, dot",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "slicing",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "HANA",
+      "ln": "PATEL",
+      "sp": " "
+     },
+     "Patel, H."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "vic",
+      "ln": "weber",
+      "sp": " "
+     },
+     "Weber, V."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "otto",
+      "ln": "silva",
+      "sp": " "
+     },
+     "Silva, O."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "beN",
+      "ln": "tANAKa",
+      "sp": " "
+     },
+     "Tanaka, B."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "wes",
+      "ln": "NOVAK",
+      "sp": " "
+     },
+     "Novak, W."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Pia",
+      "ln": "PATEl",
+      "sp": " "
+     },
+     "Patel, P."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "hana",
+      "ln": "Kim",
+      "sp": " "
+     },
+     "Kim, H."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Jo",
+      "ln": "WEBER",
+      "sp": " "
+     },
+     "Weber, J."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "fINn",
+      "ln": "TANAKA",
+      "sp": " "
+     },
+     "Tanaka, F."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "fINn",
+      "ln": "Garcia",
+      "sp": " "
+     },
+     "Garcia, F."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "LENA",
+      "ln": "Nguyen",
+      "sp": " "
+     },
+     "Nguyen, L."
+    ]
+   ],
+   "task_id": "x-32",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "upper",
+     [
+      "first",
+      [
+       "var",
+       "ln"
+      ]
+     ]
+    ],
+    [
+     "concat",
+     [
+      "lower",
+      [
+       "rest",
+       [
+        "var",
+        "ln"
+       ]
+      ]
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "cm"
+      ],
+      [
+       "concat",
+       [
+        "var",
+        "sp"
+       ],
+       [
+        "concat",
+        [
+         "upper",
+         [
+          "first",
+          [
+           "var",
+           "fn"
+          ]
+         ]
+        ],
+        [
+         "var",
+         "dt"
+        ]
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_initial_upper_last",
+   "formula": "F. LAST",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "joining",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "otto",
+      "ln": "OLSEN",
+      "sp": " "
+     },
+     "o. OLSEN"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Quinn",
+      "ln": "jones",
+      "sp": " "
+     },
+     "Q. JONES"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "dana",
+      "ln": "GARCIA",
+      "sp": " "
+     },
+     "d. GARCIA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ivan",
+      "ln": "moREaU",
+      "sp": " "
+     },
+     "i. MOREAU"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Dana",
+      "ln": "Weber",
+      "sp": " "
+     },
+     "D. WEBER"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Ivan",
+      "ln": "noVAK",
+      "sp": " "
+     },
+     "I. NOVAK"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "OTTO",
+      "ln": "smith",
+      "sp": " "
+     },
+     "O. SMITH"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Kai",
+      "ln": "SMITH",
+      "sp": " "
+     },
+     "K. SMITH"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "nora",
+      "ln": "lopez",
+      "sp": " "
+     },
+     "n. LOPEZ"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Wes",
+      "ln": "olsen",
+      "sp": " "
+     },
+     "W. OLSEN"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "SAm",
+      "ln": "silva",
+      "sp": " "
+     },
+     "S. SILVA"
+    ]
+   ],
+   "task_id": "x-33",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "first",
+     [
+      "var",
+      "fn"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "dt"
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "sp"
+      ],
+      [
+       "upper",
+       [
+        "var",
+        "ln"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_shout_last_first",
+   "formula": "upper-case LAST, FIRST",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "casing",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "eve",
+      "ln": "NOVAK",
+      "sp": " "
+     },
+     "NOVAK, EVE"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "DANA",
+      "ln": "Ivers",
+      "sp": " "
+     },
+     "IVERS, DANA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "anna",
+      "ln": "Costa",
+      "sp": " "
+     },
+     "COSTA, ANNA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "rosa",
+      "ln": "Garcia",
+      "sp": " "
+     },
+     "GARCIA, ROSA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ROSA",
+      "ln": "Olsen",
+      "sp": " "
+     },
+     "OLSEN, ROSA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ben",
+      "ln": "Olsen",
+      "sp": " "
+     },
+     "OLSEN, BEN"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Wes",
+      "ln": "PatEL",
+      "sp": " "
+     },
+     "PATEL, WES"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Rosa",
+      "ln": "WEbeR",
+      "sp": " "
+     },
+     "WEBER, ROSA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "pia",
+      "ln": "NGuYeN",
+      "sp": " "
+     },
+     "NGUYEN, PIA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "vIC",
+      "ln": "costa",
+      "sp": " "
+     },
+     "COSTA, VIC"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "mo",
+      "ln": "wEber",
+      "sp": " "
+     },
+     "WEBER, MO"
+    ]
+   ],
+   "task_id": "x-34",
+   "tier": "hard",
+   "tree": [
+    "upper",
+    [
+     "concat",
+     [
+      "var",
+      "ln"
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "cm"
+      ],
+      [
+       "concat",
+       [
+        "var",
+        "sp"
+       ],
+       [
+        "var",
+        "fn"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_quiet_initials_dot",
+   "formula": "lower-case initials with dots: f.l.",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "initials",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ROSA",
+      "ln": "tanaka",
+      "sp": " "
+     },
+     "r.t."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "DANA",
+      "ln": "Haddad",
+      "sp": " "
+     },
+     "d.h."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "jo",
+      "ln": "COSTA",
+      "sp": " "
+     },
+     "j.c."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Sam",
+      "ln": "Patel",
+      "sp": " "
+     },
+     "s.p."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Anna",
+      "ln": "lopez",
+      "sp": " "
+     },
+     "a.l."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "kai",
+      "ln": "Weber",
+      "sp": " "
+     },
+     "k.w."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "NORA",
+      "ln": "moreAu",
+      "sp": " "
+     },
+     "n.m."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "vIc",
+      "ln": "Moreau",
+      "sp": " "
+     },
+     "v.m."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "pia",
+      "ln": "Smith",
+      "sp": " "
+     },
+     "p.s."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "OTTO",
+      "ln": "WebER",
+      "sp": " "
+     },
+     "o.w."
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ivan",
+      "ln": "jones",
+      "sp": " "
+     },
+     "i.j."
+    ]
+   ],
+   "task_id": "x-35",
+   "tier": "hard",
+   "tree": [
+    "lower",
+    [
+     "concat",
+     [
+      "first",
+      [
+       "var",
+       "fn"
+      ]
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "dt"
+      ],
+      [
+       "concat",
+       [
+        "first",
+        [
+         "var",
+         "ln"
+        ]
+       ],
+       [
+        "var",
+        "dt"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_ends_upper_both",
+   "formula": "upper-case first and last letter of each name",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "initials",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "uma",
+      "ln": "nOvAK",
+      "sp": " "
+     },
+     "UANK"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "roSA",
+      "ln": "GARCIA",
+      "sp": " "
+     },
+     "RAGA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "SAM",
+      "ln": "GARCIA",
+      "sp": " "
+     },
+     "SMGA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Sam",
+      "ln": "Moreau",
+      "sp": " "
+     },
+     "SMMU"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Vic",
+      "ln": "JONES",
+      "sp": " "
+     },
+     "VCJS"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Eve",
+      "ln": "Tanaka",
+      "sp": " "
+     },
+     "EETA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Finn",
+      "ln": "wEbeR",
+      "sp": " "
+     },
+     "FNWR"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Zoe",
+      "ln": "ivers",
+      "sp": " "
+     },
+     "ZEIS"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Anna",
+      "ln": "nguyen",
+      "sp": " "
+     },
+     "AANN"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "eve",
+      "ln": "TaNAkA",
+      "sp": " "
+     },
+     "EETA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "aNNa",
+      "ln": "NGUYEN",
+      "sp": " "
+     },
+     "AANN"
+    ]
+   ],
+   "task_id": "x-36",
+   "tier": "hard",
+   "tree": [
+    "upper",
+    [
+     "concat",
+     [
+      "first",
+      [
+       "var",
+       "fn"
+      ]
+     ],
+     [
+      "concat",
+      [
+       "last",
+       [
+        "var",
+        "fn"
+       ]
+      ],
+      [
+       "concat",
+       [
+        "first",
+        [
+         "var",
+         "ln"
+        ]
+       ],
+       [
+        "last",
+        [
+         "var",
+         "ln"
+        ]
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_double_first",
+   "formula": "lower first name twice, space, last name",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "joining",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Sam",
+      "ln": "Lopez",
+      "sp": " "
+     },
+     "samsam Lopez"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "carl",
+      "ln": "SMITH",
+      "sp": " "
+     },
+     "carlcarl SMITH"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Ivan",
+      "ln": "moreau",
+      "sp": " "
+     },
+     "ivanivan moreau"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "EVE",
+      "ln": "PATEL",
+      "sp": " "
+     },
+     "eveeve PATEL"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "finn",
+      "ln": "JONES",
+      "sp": " "
+     },
+     "finnfinn JONES"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "gus",
+      "ln": "tanAka",
+      "sp": " "
+     },
+     "gusgus tanAka"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "DANA",
+      "ln": "Patel",
+      "sp": " "
+     },
+     "danadana Patel"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "WES",
+      "ln": "Costa",
+      "sp": " "
+     },
+     "weswes Costa"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "anna",
+      "ln": "JONES",
+      "sp": " "
+     },
+     "annaanna JONES"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ben",
+      "ln": "iverS",
+      "sp": " "
+     },
+     "benben iverS"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "sAM",
+      "ln": "kim",
+      "sp": " "
+     },
+     "samsam kim"
+    ]
+   ],
+   "task_id": "x-37",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "lower",
+     [
+      "var",
+      "fn"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "lower",
+      [
+       "var",
+       "fn"
+      ]
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "sp"
+      ],
+      [
+       "var",
+       "ln"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_ends_name",
+   "formula": "first and last letter of first name, space, last name",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "joining",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "quinn",
+      "ln": "costa",
+      "sp": " "
+     },
+     "qn costa"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ROSA",
+      "ln": "COSTA",
+      "sp": " "
+     },
+     "RA COSTA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "quinn",
+      "ln": "SILVA",
+      "sp": " "
+     },
+     "qn SILVA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Mo",
+      "ln": "PATEL",
+      "sp": " "
+     },
+     "Mo PATEL"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "NORA",
+      "ln": "OLSeN",
+      "sp": " "
+     },
+     "NA OLSeN"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "WES",
+      "ln": "Ivers",
+      "sp": " "
+     },
+     "WS Ivers"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "ZOE",
+      "ln": "TANAKA",
+      "sp": " "
+     },
+     "ZE TANAKA"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "UMa",
+      "ln": "brown",
+      "sp": " "
+     },
+     "Ua brown"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "UMa",
+      "ln": "Lopez",
+      "sp": " "
+     },
+     "Ua Lopez"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "dana",
+      "ln": "Brown",
+      "sp": " "
+     },
+     "da Brown"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Gus",
+      "ln": "NOvak",
+      "sp": " "
+     },
+     "Gs NOvak"
+    ]
+   ],
+   "task_id": "x-38",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "first",
+     [
+      "var",
+      "fn"
+     ]
+    ],
+    [
+     "concat",
+     [
+      "last",
+      [
+       "var",
+       "fn"
+      ]
+     ],
+     [
+      "concat",
+      [
+       "var",
+       "sp"
+      ],
+      [
+       "var",
+       "ln"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_rev_upper_first",
+   "formula": "first name reversed upper-case, dot, last name",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "dt",
+    "cm"
+   ],
+   "kind": "casing",
+   "out": "str",
+   "rows": [
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "DANA",
+      "ln": "Novak",
+      "sp": " "
+     },
+     "ANAD.Novak"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "AnNa",
+      "ln": "Tanaka",
+      "sp": " "
+     },
+     "ANNA.Tanaka"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "IVAN",
+      "ln": "Ivers",
+      "sp": " "
+     },
+     "NAVI.Ivers"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Vic",
+      "ln": "PATEL",
+      "sp": " "
+     },
+     "CIV.PATEL"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Ivan",
+      "ln": "HADDAD",
+      "sp": " "
+     },
+     "NAVI.HADDAD"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "PIA",
+      "ln": "TAnAKa",
+      "sp": " "
+     },
+     "AIP.TAnAKa"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Dana",
+      "ln": "smith",
+      "sp": " "
+     },
+     "ANAD.smith"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Anna",
+      "ln": "Kim",
+      "sp": " "
+     },
+     "ANNA.Kim"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "FINN",
+      "ln": "moreau",
+      "sp": " "
+     },
+     "NNIF.moreau"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "Zoe",
+      "ln": "silva",
+      "sp": " "
+     },
+     "EOZ.silva"
+    ],
+    [
+     {
+      "cm": ",",
+      "dt": ".",
+      "fn": "vic",
+      "ln": "haddad",
+      "sp": " "
+     },
+     "CIV.haddad"
+    ]
+   ],
+   "task_id": "x-39",
+   "tier": "hard",
+   "tree": [
+    "concat",
+    [
+     "upper",
+     [
+      "srev",
+      [
+       "var",
+       "fn"
+      ]
+     ]
+    ],
+    [
+     "concat",
+     [
+      "var",
+      "dt"
+     ],
+     [
+      "var",
+      "ln"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_badge_len",
+   "formula": "rep badges of 'first last' = rep*(len(fn)+len(ln)+1)",
+   "inputs": [
+    "fn",
+    "ln",
+    "sp",
+    "rep"
+   ],
+   "kind": "mixed",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "fn": "NORA",
+      "ln": "jones",
+      "rep": 5,
+      "sp": " "
+     },
+     50
+    ],
+    [
+     {
+      "fn": "VIC",
+      "ln": "NOVAK",
+      "rep": 6,
+      "sp": " "
+     },
+     54
+    ],
+    [
+     {
+      "fn": "VIC",
+      "ln": "pateL",
+      "rep": 3,
+      "sp": " "
+     },
+     27
+    ],
+    [
+     {
+      "fn": "MO",
+      "ln": "kIM",
+      "rep": 5,
+      "sp": " "
+     },
+     30
+    ],
+    [
+     {
+      "fn": "Zoe",
+      "ln": "IVeRs",
+      "rep": 4,
+      "sp": " "
+     },
+     36
+    ],
+    [
+     {
+      "fn": "lena",
+      "ln": "ROSSI",
+      "rep": 6,
+      "sp": " "
+     },
+     60
+    ],
+    [
+     {
+      "fn": "jO",
+      "ln": "KIM",
+      "rep": 6,
+      "sp": " "
+     },
+     36
+    ],
+    [
+     {
+      "fn": "SAM",
+      "ln": "TANAKA",
+      "rep": 4,
+      "sp": " "
+     },
+     40
+    ],
+    [
+     {
+      "fn": "tESS",
+      "ln": "brown",
+      "rep": 5,
+      "sp": " "
+     },
+     50
+    ],
+    [
+     {
+      "fn": "otto",
+      "ln": "lOPez",
+      "rep": 4,
+      "sp": " "
+     },
+     40
+    ],
+    [
+     {
+      "fn": "pia",
+      "ln": "PATEL",
+      "rep": 5,
+      "sp": " "
+     },
+     45
+    ]
+   ],
+   "task_id": "x-41",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "rep"
+    ],
+    [
+     "add",
+     [
+      "strlen",
+      [
+       "var",
+       "fn"
+      ]
+     ],
+     [
+      "add",
+      [
+       "strlen",
+       [
+        "var",
+        "ln"
+       ]
+      ],
+      [
+       "strlen",
+       [
+        "var",
+        "sp"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_line_len",
+   "formula": "rep words joined by spaces = rep*len(w) + rep - 1",
+   "inputs": [
+    "w",
+    "sp",
+    "rep"
+   ],
+   "kind": "mixed",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "rep": 4,
+      "sp": " ",
+      "w": "cedar"
+     },
+     23
+    ],
+    [
+     {
+      "rep": 1,
+      "sp": " ",
+      "w": "nomad"
+     },
+     5
+    ],
+    [
+     {
+      "rep": 6,
+      "sp": " ",
+      "w": "Tundra"
+     },
+     41
+    ],
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "meadow"
+     },
+     13
+    ],
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "Meadow"
+     },
+     13
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "TundrA"
+     },
+     34
+    ],
+    [
+     {
+      "rep": 6,
+      "sp": " ",
+      "w": "lUmEn"
+     },
+     35
+    ],
+    [
+     {
+      "rep": 4,
+      "sp": " ",
+      "w": "Tundra"
+     },
+     27
+    ],
+    [
+     {
+      "rep": 6,
+      "sp": " ",
+      "w": "river"
+     },
+     35
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "Ember"
+     },
+     29
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "HARBOR"
+     },
+     34
+    ]
+   ],
+   "task_id": "x-42",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "rep"
+     ],
+     [
+      "add",
+      [
+       "strlen",
+       [
+        "var",
+        "w"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     1
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_pyramid_len",
+   "formula": "letters in a pyramid of 1..rep words = rep(rep+1)/2 * len(w)",
+   "inputs": [
+    "w",
+    "sp",
+    "rep"
+   ],
+   "kind": "mixed",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "rep": 6,
+      "sp": " ",
+      "w": "meadow"
+     },
+     126
+    ],
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "desert"
+     },
+     18
+    ],
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "river"
+     },
+     15
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "mEadOw"
+     },
+     90
+    ],
+    [
+     {
+      "rep": 1,
+      "sp": " ",
+      "w": "tundra"
+     },
+     6
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "CEDAR"
+     },
+     75
+    ],
+    [
+     {
+      "rep": 6,
+      "sp": " ",
+      "w": "lumen"
+     },
+     105
+    ],
+    [
+     {
+      "rep": 1,
+      "sp": " ",
+      "w": "SIGNAL"
+     },
+     6
+    ],
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "River"
+     },
+     15
+    ],
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "Nomad"
+     },
+     15
+    ],
+    [
+     {
+      "rep": 4,
+      "sp": " ",
+      "w": "cedar"
+     },
+     50
+    ]
+   ],
+   "task_id": "x-43",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "rep"
+      ],
+      [
+       "add",
+       [
+        "var",
+        "rep"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "strlen",
+      [
+       "var",
+       "w"
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_sq_plus_len",
+   "formula": "len(w)^2 + rep*len(w)",
+   "inputs": [
+    "w",
+    "sp",
+    "rep"
+   ],
+   "kind": "mixed",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "rep": 6,
+      "sp": " ",
+      "w": "Atlas"
+     },
+     55
+    ],
+    [
+     {
+      "rep": 3,
+      "sp": " ",
+      "w": "STONE"
+     },
+     40
+    ],
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "PIXeL"
+     },
+     35
+    ],
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "Wind"
+     },
+     24
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "HARBOR"
+     },
+     66
+    ],
+    [
+     {
+      "rep": 4,
+      "sp": " ",
+      "w": "STONE"
+     },
+     45
+    ],
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "Quartz"
+     },
+     48
+    ],
+    [
+     {
+      "rep": 6,
+      "sp": " ",
+      "w": "sIGNAl"
+     },
+     72
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "wiNd"
+     },
+     36
+    ],
+    [
+     {
+      "rep": 3,
+      "sp": " ",
+      "w": "cedar"
+     },
+     40
+    ],
+    [
+     {
+      "rep": 1,
+      "sp": " ",
+      "w": "NOMAD"
+     },
+     30
+    ]
+   ],
+   "task_id": "x-44",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "strlen",
+     [
+      "var",
+      "w"
+     ]
+    ],
+    [
+     "add",
+     [
+      "strlen",
+      [
+       "var",
+       "w"
+      ]
+     ],
+     [
+      "var",
+      "rep"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "language",
+   "family": "t_half_len_rep",
+   "formula": "rep*len(w)*(rep+1)/2 letters in a staircase of words",
+   "inputs": [
+    "w",
+    "sp",
+    "rep"
+   ],
+   "kind": "mixed",
+   "out": "int",
+   "rows": [
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "atlas"
+     },
+     15
+    ],
+    [
+     {
+      "rep": 6,
+      "sp": " ",
+      "w": "stONe"
+     },
+     105
+    ],
+    [
+     {
+      "rep": 1,
+      "sp": " ",
+      "w": "Ember"
+     },
+     5
+    ],
+    [
+     {
+      "rep": 6,
+      "sp": " ",
+      "w": "Vapor"
+     },
+     105
+    ],
+    [
+     {
+      "rep": 4,
+      "sp": " ",
+      "w": "STONE"
+     },
+     50
+    ],
+    [
+     {
+      "rep": 5,
+      "sp": " ",
+      "w": "Quartz"
+     },
+     90
+    ],
+    [
+     {
+      "rep": 3,
+      "sp": " ",
+      "w": "STONE"
+     },
+     30
+    ],
+    [
+     {
+      "rep": 6,
+      "sp": " ",
+      "w": "River"
+     },
+     105
+    ],
+    [
+     {
+      "rep": 4,
+      "sp": " ",
+      "w": "tundra"
+     },
+     60
+    ],
+    [
+     {
+      "rep": 2,
+      "sp": " ",
+      "w": "WIND"
+     },
+     12
+    ],
+    [
+     {
+      "rep": 3,
+      "sp": " ",
+      "w": "harbor"
+     },
+     36
+    ]
+   ],
+   "task_id": "x-45",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "rep"
+      ],
+      [
+       "add",
+       [
+        "var",
+        "rep"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "strlen",
+     [
+      "var",
+      "w"
+     ]
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "text",
+ "schema": "nomad.text-suite.v1",
+ "seed": 20261124,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 22,
+  "families": 46,
+  "hard": 24,
+  "lookup_dropped": []
+ },
+ "trained_on_by_any_arm": false
+}
