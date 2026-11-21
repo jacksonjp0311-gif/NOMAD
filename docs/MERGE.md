@@ -144,3 +144,15 @@ Science hard (`results/merge/science_hard.json`): trained 12, trained_merge 12 (
 - Criterion 5: running (adds COMBINE and CEIL, now measured by their owners, as extra judges).
 
 `NOMAD_MERGE` stays **off** whatever criterion 5 shows.
+
+## Sealed result, part 2: existing suites (criterion 5)
+
+`SWITCH=NOMAD_MERGE scripts/switch_regress.py` from the 81063e0 snapshot over 20 judges (learning, transfer1-4,
+secondary4, text, bridge, text_invent, route5, transfer6, selfedit2, text_chain, meaning, inflect, let, textpat,
+roles, plus COMBINE and CEIL, now measured by their owners): **0 per-task losses** on every judge, counting
+both certification losses and evaluation increases; 794 per-task records with fewer evaluations; certified
+totals unchanged (`results/merge/regress_compare.json`). Criterion 5 passes.
+
+**Verdict: FAIL** (criterion 1 only). MERGE is safe (zero losses everywhere, LOFO unchanged) but adds no
+certified task on the sealed suite, so `NOMAD_MERGE` stays **off**. Its skip machinery is reused by LET2
+(docs/LET2.md).
