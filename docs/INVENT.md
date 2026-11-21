@@ -7,7 +7,7 @@ constants. Both only *reuse* what was certified. INVENT makes **new
 primitives** out of certified experience: lambda-abstractions with holes
 that recur across certified programs, and constants derived from the
 constants memory uses, and lets the field arm's enumerator use each one as
-a single node. Off switch `NOMAD_INVENT` (default **off** until the sealed
+a single node. Off switch `NOMAD_INVENT` (default **off** until a sealed
 judge below passes). No transformers, no neural weights, no LLM.
 
 ## Mechanism (`nomad/invent.py`, hooks in `nomad/world.py`)
@@ -209,3 +209,125 @@ Still unsolved on TRANSFER-3 by every arm: `b3_path_around`, `b3_two_beds`,
 `t3_cost_per_head` (nested division, products of shifted terms, n(n+1)(n+2)).
 Some certified programs are exact on the stated input ranges rather than
 symbolic identities (e.g. `t3_hire_cost` via `hire·(pax div cap) + hire`).
+
+---
+
+# Round 2: budget-safe INVENT phase + iterated invention (pre-registered)
+
+Round 1 failed only criterion 4: on the frozen science suite main certifies
+`sci_water_mol` at 9,890 of 10,000 evaluations and INVENT's extra anchors
+(derived-constant targets inside GROW, invented instances in PORT's bank)
+pushed it over budget. Round 2 changes *where* INVENT spends and lets
+invented primitives compose. Off switch unchanged (`NOMAD_INVENT`, default
+off until the judge below passes).
+
+## Mechanism changes
+
+1. **Main's path is untouched up to one INVENT phase.** Invented instances no
+   longer join PORT's bank and derived constants no longer join GROW's
+   targets: stage 1, SENSE, BLOCKPROBE trigger, PORT (bank run, anchors,
+   atoms), GROW (two-block and rescaled anchors) and the atoms offered to the
+   probe are exactly main's. Then a single capped **INVENT phase**
+   (`invent_phase` in `world.py`, at most `INVENT_CAP = 0.15` of the budget
+   and PORT's per-task rejection cap) runs before the probe's regular levels:
+   (a) invented blocks over the task's inputs (1 evaluation each; constants
+   and plain inputs such as `min(a, a·a) = a` skipped) are anchored on the
+   goal and on the goal rescaled by every learned and derived constant;
+   derived constants also rescale the bank blocks' anchors; (b) invented
+   primitives as single nodes over the probe's pools, size by size up to
+   max_size + 1, with direct and residual fits on the same targets
+   (applications that return one of their arguments are skipped).
+2. **Evidence gate (the budget edge).** When some bank block already equals
+   the goal on `INVENT_EQ_GATE = 2` or more public rows, the regular levels
+   are likely to finish the task, so the phase is **deferred** and runs only
+   on the budget the regular levels leave. (`INVENT_AT = "after"`, always
+   deferring, is the strict guarantee; on dev it leaves INVENT no budget and
+   no gain, so it is not the default.) This is a heuristic, not a proof: an
+   already-solvable task without such a block can still be pushed over
+   budget; the sealed judge checks per-task losses on every frozen suite.
+3. **Iterated invention (rounds >= 2, `ROUNDS = 2`).** Parts: the round-1
+   primitives and **learned operator frames** (each binary int operator used,
+   with a non-constant argument, by >= 2 certified programs). A round-r
+   candidate fills one hole of a round-(r-1) primitive (or frame) with a
+   round-1 primitive or frame (two different frames never compose alone; a
+   frame may compose with itself, e.g. nested division), or wraps a round-1+
+   primitive by a learned / derived constant (`// k`, `* k`). Kept: <= 3
+   holes, saves >= 1 node per application (a learned constant counts as one
+   node), not degenerate (constant or a bare hole on the synthetic rows),
+   behaviourally new against every earlier primitive and frame; ranked by
+   evidence x saving (evidence = the smaller use count of its parts), at most
+   `PER_HEAD = 2` per outer part and `MAX_COMPOSED = 6` per round. Synthetic
+   rows are now log-uniform in 1..1000 so division is not all zeros.
+
+Invented primitives with round 2 (`python3 scripts/invent2_judge.py --inventions`):
+
+| Field | Round 1 | Round 2 (built from) |
+|---|---|---|
+| math only | `λa. a·a` | `λa. a·a·a·a` (sq∘sq), `λa b. min(a,b)·min(a,b)` (sq∘min), `λa b. min(a, b·b)`, `λa b. a·b·b`, `λa b. a - b·b`, `λa b. a·a - b` |
+| math + science | `λa b c. a + b·c`, `λa. a·a`, `λa b c. a·b·c` | `λa b c. (a + b·c)·(a + b·c)` (sq∘fma), `λa. a·a·a·a`, `λa b c. (a + b·c) // 2`, `λa b c. (a + b·c) // 3` (fma under a learned constant), `λa b c. (a + b) + c`, `λa b. a + b·b` |
+| all + science | as math + science, + `λa. concat(a, a)` | as math + science with `λa. concat(concat(a,a), concat(a,a))` |
+
+## Dev tuning (uncommitted dev suites only; trained = INVENT off)
+
+TRANSFER-2 catalogue at seeds 7 / 11 (math_sci field), TRANSFER(-1)
+catalogue at seeds 7 / 11, deep dev 7 / 11, science dev 7 / 11 / 13 and text
+dev 7 / 11 (all_sci field). Net extra solves, per-task losses:
+
+| Setting | T2 dev 7 / 11 | T1 dev | deep dev | sci dev | text dev | losses |
+|---|---|---|---|---|---|---|
+| chosen settings but no gate | +3 / +2 | 0 | +2 | 0 | +3 / +3 | **water_mol x2** |
+| `INVENT_AT = "after"` (early settings) | 0 / 0 | 0 | . | . | . | 0 |
+| gate 1 (early settings) | +3 / +1 | . | . | . | . | 0 |
+| **gate 2 (chosen)**, rounds 2, frames, constant wraps, 2 per head | +3 / +2 | 0 | +2 | 0 | +3 / +3 | 0 |
+| chosen, rounds 1 only | +4 / +3 | 0 | +1 | 0 | +1 / +1 | 0 |
+| chosen, rounds 3 | +3 / +3 | 0 | +2 | 0 | +1 / +1 | 0 |
+| gate 4 / 5 / 6 (early settings) | +3 / +2 | . | +2 | **water_mol x2** | . | 2 |
+
+"Early settings": 1 composition per head, no constant wraps (the first
+round-2 build); "." = not run with that setting. The gate and the round-2
+settings were picked on these dev numbers only.
+Gate 3 is the edge (the water_mol dev tasks have a block equal on 3 rows),
+so 2 was chosen. Round 2 beats round 1 on dev in total (+13 vs +10 extra
+solves) but loses on the TRANSFER-2 dev seeds (+5 vs +7), so the fresh suite
+decides; round 1 alone is a report-only arm.
+
+## The new sealed suite (TRANSFER-4)
+
+`nomad/transfer4.py`, `scripts/invent2_suite.py`, seed **20261126**, 47
+families in three new domains (kitchen / baking, garden, workshop / crafts),
+input names disjoint from every earlier catalogue, the science catalogue and
+all training tasks (tested). By the owner's brief it deliberately includes
+the round-2 target shapes (products of shifted terms such as `(cb - 2)^3`,
+`(tw + 1)(tl + 1)tk`; n(n+1)(n+2)-type products; nested floor / ceiling
+division) next to ordinary formulas. Same procedure as TRANSFER-3: cold
+control at 10,000 evaluations, max_size 7 -> easy / hard, lookup guard,
+WITNESS challenge rows, a disjoint never-read final split. Generated (cold
+only) and committed with its sha256 **after** this pre-registration and
+with the INVENT code frozen; no field arm, and no INVENT run, ever touched
+the TRANSFER-4 catalogue before the single sealed measurement.
+
+## Arms (`python3 scripts/invent2_judge.py`, budget 10,000, max_size 7)
+
+cold / empty / empty_invent / trained (math_sci, INVENT off) /
+trained_invent (math_sci, INVENT on), and report only: trained_invent_r1
+(round 1 only) and math_invent. Secondary (`--secondary`): cold / empty /
+trained / trained_invent on deep, science hard, TRANSFER(-1), TRANSFER-2,
+TEXT and TRANSFER-3, each with its own trained field.
+
+## Pre-registered criteria (round 2; all required to turn INVENT on)
+
+1. **INVENT adds** on TRANSFER-4 hard: trained_invent certifies >= 3 more
+   than trained, or as many with >= 25% fewer evaluations.
+2. **The gain vanishes with an empty field:** empty_invent certifies no more
+   than empty and spends within 5% of its evaluations.
+3. **No decision arm worse than cold** on any TRANSFER-4 task.
+4. **No per-task loss on any existing sealed suite:** on each of deep,
+   science hard, TRANSFER(-1), TRANSFER-2, TEXT and TRANSFER-3,
+   trained_invent certifies every task trained certifies, at least the
+   recorded baseline (deep 27, science 12, TRANSFER-2 30, TEXT 3), and no
+   arm is worse than cold.
+5. **LOFO** stays 5,883 / worst 1.0x (with INVENT on).
+6. **All tests pass**; CI green.
+
+If every criterion passes, `NOMAD_INVENT` defaults to on. Otherwise INVENT
+stays off and the result is committed as measured.

@@ -35,16 +35,24 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import math
 import random
 from dataclasses import dataclass
 
 from . import world as W
 
+ROUNDS = 2            # invention rounds (round >= 2 composes earlier primitives)
+MAX_COMPOSED = 6      # composed primitives kept per round
+PER_HEAD = 2          # composed primitives per outer part (diversity)
+MIN_SAVING = 1        # nodes a composed primitive saves per application
+COMPOSE_CONSTS = True # wrap round>=1 primitives by learned / derived constants (// k, * k)
 MIN_USES = 2          # distinct certified programs an abstraction must compress
 MAX_INVENTIONS = 8    # promoted abstractions kept per field
 MAX_HOLES = 3
 MAX_CONSTANTS = 2     # derived learned constants kept per field
 MAX_CONST_VALUE = 1000
+DREAM_MAX = 1000      # synthetic ints are log-uniform in 1..DREAM_MAX (so nested division is not all zeros)
 DREAM_ROWS = 12       # synthetic rows for behavioural dedup (seeded; never task rows)
 
 
@@ -62,7 +70,9 @@ class Invention:
     uses: int
     saving: int
     utility: int
-    example: str         # a rendered certified source
+    example: str         # a rendered certified source (round 1) or the composition (round >= 2)
+    round: int = 1
+    parts: tuple = ()    # names of the primitives / frames / constants it is built from
 
     @property
     def tree(self) -> list:
@@ -240,7 +250,7 @@ def _rows(types: tuple, seed: str) -> list[list]:
     rng = random.Random(f"invent:{seed}")
     out = []
     for _ in range(DREAM_ROWS):
-        out.append([rng.randint(1, 30) if ty == "int" else "".join(rng.choice("abcXYZ ")
+        out.append([int(round(math.exp(rng.uniform(0, math.log(DREAM_MAX))))) if ty == "int" else "".join(rng.choice("abcXYZ ")
                     for _ in range(rng.randint(1, 6))) for ty in types])
     return out
 
@@ -266,6 +276,23 @@ def _fp(body: list, types: tuple, perm) -> str | None:
     if all(v is None for v in vals):
         return None
     return json.dumps(vals)
+
+
+def degenerate(body: list, types: tuple) -> bool:
+    """True when, on the seeded synthetic rows, the body is a constant or
+    just one of its holes (e.g. (a·a // a) // a = 1): no new block."""
+    t = instantiate(body, [["var", f"_h{i}"] for i in range(len(types))])
+    rows, vals = _rows(types, json.dumps(list(types))), []
+    for r in rows:
+        try:
+            vals.append((r, W.run(t, {f"_h{i}": v for i, v in enumerate(r)})))
+        except W.Invalid:
+            pass
+    if len(vals) < 2:
+        return True
+    if len({json.dumps(v) for _r, v in vals}) == 1:
+        return True
+    return any(all(r[i] == v for r, v in vals) for i in range(len(types)))
 
 
 def symmetries(body: list, types: tuple) -> tuple:
@@ -295,12 +322,43 @@ def inventions(prior) -> list[Invention]:
     """Promoted abstractions for a field (cached on the prior by memory content)."""
     if prior is None or not prior.programs:
         return []
-    key = hashlib.sha256(json.dumps(sorted(prior.programs.items())).encode()).hexdigest()
+    settings = (rounds(), MAX_COMPOSED, PER_HEAD, MIN_SAVING, COMPOSE_CONSTS, MIN_USES, MAX_INVENTIONS)
+    key = hashlib.sha256(json.dumps([sorted(prior.programs.items()), settings]).encode()).hexdigest()
     cache = getattr(prior, "_invent_cache", None)
     if cache and cache[0] == key:
         return cache[1]
-    out = _invent(corpus(prior))
+    out = _rounds(corpus(prior))
     prior._invent_cache = (key, out)
+    return out
+
+
+def rounds() -> int:
+    """Invention rounds; NOMAD_INVENT_ROUNDS overrides ROUNDS (report-only ablations)."""
+    return int(os.environ.get("NOMAD_INVENT_ROUNDS", ROUNDS))
+
+
+def memory_scales(progs: list[tuple[str, list]]) -> list[tuple[int, list]]:
+    """Learned scales (GROW) plus derived constants, from memory only."""
+    scales = W.bank_scales(progs)
+    return scales + constants(scales)
+
+
+def _rounds(progs: list[tuple[str, list]]) -> list[Invention]:
+    """Round 1: abstraction by compression. Rounds 2..ROUNDS: compositions."""
+    r1 = _invent(progs)
+    out = list(r1)
+    if rounds() < 2 or not progs:
+        return out
+    fr = frames(progs)
+    allk = memory_scales(progs)
+    seen = {behaviour(x.tree, x.args) for x in r1 + fr}
+    prev, parts = r1 + fr, r1 + fr
+    for rnd in range(2, rounds() + 1):
+        new = compose(prev, parts, allk, seen, rnd)
+        if not new:
+            break
+        out += new
+        prev = new
     return out
 
 
@@ -355,6 +413,101 @@ def _invent(progs: list[tuple[str, list]]) -> list[Invention]:
     return out
 
 
+FRAME_OPS = ("add", "sub", "mul", "div", "mod", "min", "max")
+
+
+def frames(progs: list[tuple[str, list]]) -> list[Invention]:
+    """Learned operator frames: each binary int operator used, with at least
+    one non-constant argument, in >= MIN_USES distinct certified programs.
+    A frame alone saves nothing (it is one operator); it only enters
+    compositions (round >= 2)."""
+    users: dict[str, set] = {}
+    for n, t in progs:
+        for x in W.subtrees(t):
+            if x[0] in FRAME_OPS and any(_has_var(c) for c in x[1:]):
+                users.setdefault(x[0], set()).add(n)
+    out = []
+    for op in FRAME_OPS:
+        u = len(users.get(op, ()))
+        if u >= MIN_USES:
+            out.append(Invention("F" + op, (op, ["hole", 0], ["hole", 1]), ("int", "int"), "int", u, 0, 0,
+                                 f"{op}(a, b)", 0, ()))
+    return out
+
+
+def _subst_hole(body: list, i: int, sub: list, shift: int) -> list:
+    """Replace hole i of ``body`` by ``sub`` whose holes are shifted by ``shift``."""
+    def sh(x):
+        if x[0] == "hole":
+            return ["hole", x[1] + shift]
+        if _is_leaf(x):
+            return x
+        return [x[0]] + [sh(c) for c in x[1:]]
+
+    def go(x):
+        if x[0] == "hole":
+            return sh(sub) if x[1] == i else x
+        if _is_leaf(x):
+            return x
+        return [x[0]] + [go(c) for c in x[1:]]
+    return go(body)
+
+
+def compose(prev: list[Invention], parts: list[Invention], scales: list[tuple[int, list]],
+            seen: set, rnd: int) -> list[Invention]:
+    """Iterated invention (round ``rnd`` >= 2): a primitive of the previous
+    round with one hole filled by a round-1 primitive or a learned frame, or
+    wrapped by a learned / derived constant (``// k``, ``* k``). Kept when it
+    has at most MAX_HOLES holes, saves >= MIN_SAVING nodes per application and
+    behaves unlike every primitive so far (seeded synthetic rows). Ranked
+    by evidence x saving, evidence = the smaller use count of its parts."""
+    cands = {}
+    for A in prev:
+        a = A.tree
+        ah = len(A.args)
+        for B in parts:
+            if A.round == 0 and B.round == 0 and A.body[0] != B.body[0]:
+                continue   # two frames compose only with themselves (nested division, a - b - c, ...)
+            for i in range(ah):
+                if A.args[i] != B.out:
+                    continue
+                body = _canon(_subst_hole(a, i, B.tree, ah))
+                cands.setdefault(json.dumps(body), (body, min(A.uses, B.uses), (A.name, B.name),
+                                                    f"{A.name}[{'abcdefgh'[i]} := {B.name}]", 0))
+        if COMPOSE_CONSTS and A.out == "int" and A.round >= 1:   # a learned constant wraps primitives, not bare frames
+            for k, kt in scales:
+                for op in ("div", "mul"):
+                    body = _canon([op, a, kt])
+                    cands.setdefault(json.dumps(body), (body, A.uses, (A.name, f"k{k}"),
+                                                        f"{A.name} {'//' if op == 'div' else '*'} {k}",
+                                                        _size(kt) - 1))
+    scored = []
+    for k, (body, ev, pn, desc, kx) in cands.items():
+        h = len(_holes(body, []))
+        if not 1 <= h <= MAX_HOLES:
+            continue
+        saving = _size(body) - kx - h - 1     # a learned constant counts as one node
+        if saving < MIN_SAVING:
+            continue
+        ht = _hole_types(body, {})
+        scored.append((-(ev * saving), _size(body), k, body, tuple(ht[j] for j in range(h)), ev, saving, pn, desc))
+    scored.sort(key=lambda z: z[:3])
+    out, heads = [], {}
+    for _sc, _sz, k, body, types, ev, saving, pn, desc in scored:
+        if heads.get(pn[0], 0) >= PER_HEAD:
+            continue
+        fp = behaviour(body, types)
+        if fp is None or fp in seen or degenerate(body, types):
+            continue
+        seen.add(fp)
+        heads[pn[0]] = heads.get(pn[0], 0) + 1
+        out.append(Invention("I" + hashlib.sha256(k.encode()).hexdigest()[:6], json.loads(k), types,
+                             W.OPS[body[0]].out, ev, saving, ev * saving, desc, rnd, pn))
+        if len(out) >= MAX_COMPOSED:
+            break
+    return out
+
+
 def constants(scales: list[tuple[int, list]]) -> list[tuple[int, list]]:
     """Derived learned constants: pairwise products of learned scales, smallest first."""
     have = {k for k, _ in scales}
@@ -370,6 +523,9 @@ def constants(scales: list[tuple[int, list]]) -> list[tuple[int, list]]:
     return sorted(out.items())[:MAX_CONSTANTS]
 
 
+INVENT_AT = "grow"    # "grow": the INVENT phase runs after PORT/GROW and the atoms; "after": after the regular levels
+INVENT_EQ_GATE = 2    # defer the phase when a bank block already equals the goal on >= this many public rows
+LEVEL_TARGETS = "all" # residual targets for invented-node values: "goal" or "all" (goal and rescaled goals)
 INVENT_CAP = 0.15     # fraction of max_eval the invention pass in the probe may spend
 INVENT_SIZE = 1       # the invention pass reaches max_size + INVENT_SIZE (an invented node is one node)
 PROBE_OPS = True      # inventions as single-node operators in the probe's enumerator
@@ -387,6 +543,7 @@ class InvOp:
     template: list
     commutative: bool = False
     symmetric: tuple = ()   # hole pairs (i, j) whose swap leaves behaviour unchanged
+    round: int = 1
 
 
     def fn(self, *vals):
@@ -401,6 +558,7 @@ class Kit:
     ops: dict            # name -> InvOp
     consts: list         # derived learned constants [(k, tree)]
     instances: list      # [(name, expanded tree)] over the task's inputs
+    rounds: dict = None  # instance name -> invention round
 
 
 def kit(prior, task, bank: list) -> Kit | None:
@@ -415,11 +573,11 @@ def kit(prior, task, bank: list) -> Kit | None:
         b = x.tree
         ops[x.name] = InvOp(x.name, x.args, x.out,
                             b, instantiate(b, [["var", f"_h{i}"] for i in range(len(x.args))]),
-                            symmetric=symmetries(b, x.args))
+                            symmetric=symmetries(b, x.args), round=x.round)
     by_type: dict[str, list] = {}
     for nm, ty in task.inputs:
         by_type.setdefault(ty, []).append(["var", nm])
-    inst, seen = [], set()
+    inst, seen, rnd = [], set(), {}
     for x in invs:
         if x.out != task.out:
             continue
@@ -433,7 +591,9 @@ def kit(prior, task, bank: list) -> Kit | None:
             if k in seen:
                 continue
             seen.add(k)
-            inst.append(("N" + hashlib.sha256(k.encode()).hexdigest()[:8], t))
+            nm = "N" + hashlib.sha256(k.encode()).hexdigest()[:8]
+            inst.append((nm, t))
+            rnd[nm] = x.round
             if len(inst) >= MAX_INSTANCES:
                 break
-    return Kit(ops if PROBE_OPS else {}, consts, inst if INSTANCES else [])
+    return Kit(ops if PROBE_OPS else {}, consts, inst if INSTANCES else [], rnd)

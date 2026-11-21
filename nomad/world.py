@@ -616,9 +616,7 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     if bank:
         from . import invent as _invent
         if _invent.enabled():
-            inv = _invent.kit(prior, task, bank)
-            if inv is not None:
-                bank = inv.instances + bank   # invented blocks join PORT's anchors (not its atoms)
+            inv = _invent.kit(prior, task, bank)   # used only by the INVENT phase (main's path unchanged)
     gate = _WitnessGate(task, library) if witness_continue_enabled() else None
     s = _drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split, aim,
                            probe_on, gate, bank, inv))
@@ -1098,13 +1096,11 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             if hit is not None:
                 pinfo["port"] = "splice"
                 return hit
-        istate["table"] = table
         # the field's own atoms for this signature first (the plain probe's),
         # then the best-scoring bank blocks
         own = {json.dumps(t) for t in library.values()}
         keep = [z for z in ranked if json.dumps(z[2]) in own]
-        inst = {n for n, _t in inv.instances} if inv is not None else set()
-        keep += [z for z in ranked if json.dumps(z[2]) not in own and z[1] not in inst][:PORT_K]
+        keep += [z for z in ranked if json.dumps(z[2]) not in own][:PORT_K]
         for _sc, _n, t, v in keep:
             hit = offer(1, t, v, True, P, B)
             if hit is not None:
@@ -1112,6 +1108,11 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     yield evals
                     continue
                 pinfo["port"] = "block"
+                return hit
+        istate.update(table=table, ranked=ranked)
+        if inv is not None and task.out == "int" and not invent_deferred(ranked):
+            hit = yield from invent_phase(P, B, limit)
+            if hit is not None:
                 return hit
         return None
 
@@ -1122,7 +1123,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         is anchored and wrapped in mul(., k). Rescaling costs no evaluation;
         every lookup costs 1 and every fit is WITNESS-gated."""
         targets = []
-        for k, kt in bank_scales(bank) + (inv.consts if inv is not None else []):
+        for k, kt in bank_scales(bank):
             targets.append((tuple(g * k for g in goal), (lambda h, kt=kt: ["div", h, kt]), f"div{k}"))
             if all(g % k == 0 for g in goal):
                 targets.append((tuple(g // k for g in goal), (lambda h, kt=kt: ["mul", h, kt]), f"mul{k}"))
@@ -1223,26 +1224,115 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 return got
         return None
 
-    istate: dict = {"spent": 0, "seen": set()}
+    istate: dict = {"seen": set(), "done": False}
 
-    def invent_level(sz, P, B, limit):
-        """INVENT (docs/INVENT.md): invented primitives as single nodes, one
-        size level (an application of arity k costs 1 + its arguments' sizes).
+    def invent_deferred(ranked) -> bool:
+        """INVENT runs after the probe's regular levels (not before them)
+        when the after-levels mode is set, or when a bank block already
+        equals the goal on >= INVENT_EQ_GATE public rows (the regular
+        levels are then likely to finish the task; docs/INVENT.md)."""
+        from . import invent as _I
+        if _I.INVENT_AT == "after":
+            return True
+        if _I.INVENT_EQ_GATE and ranked and ranked[0][0][0] >= _I.INVENT_EQ_GATE:
+            return True
+        return False
 
-        Each invention is applied to the probe's pool entries (1 evaluation
-        each; its own symmetric argument orders and all-constant arguments
-        skipped); a new value enters the pools, so later levels combine it,
-        and, for int goals, gets the anchor's residual lookup for add / sub /
-        reversed sub / mul against the probe's values (1 evaluation each).
-        Every fit is WITNESS-gated. All invention work in a task shares
-        INVENT_CAP of the budget and PORT_ANCHOR_REJECTS rejections."""
+    def invent_phase(P, B, limit):
+        """INVENT (docs/INVENT.md), one capped phase after PORT/GROW and the
+        atoms: (1) the field's invented blocks instantiated over the task's
+        inputs (1 evaluation each) are anchored (residual lookup add / sub /
+        reversed sub / mul, 1 evaluation each) on the goal and on the goal
+        rescaled by learned and derived constants; derived constants also
+        rescale the bank blocks' anchors; (2) invented primitives (round 1
+        and composed rounds) as single nodes over the probe's pools, size
+        by size, with direct and residual fits on the same targets. Every
+        fit is WITNESS-gated; the phase spends at most INVENT_CAP of the
+        budget and PORT_ANCHOR_REJECTS rejections."""
         nonlocal evals
-        from .invent import INVENT_CAP
-        table = istate.get("table") or {}
-        rej0 = istate.setdefault("rej0", len(gate.rejected) if gate is not None else 0)
-        start = evals
-        ilimit = min(limit, evals + int(INVENT_CAP * max_eval) - istate["spent"])
-        try:
+        from . import invent as _I
+        if istate["done"]:
+            return None
+        istate["done"] = True
+        table, ranked = istate["table"], istate["ranked"]
+        ilimit = min(limit, evals + int(_I.INVENT_CAP * max_eval))
+        rej0 = len(gate.rejected) if gate is not None else 0
+
+        def over():
+            if evals >= ilimit:
+                return True
+            return gate is not None and len(gate.rejected) - rej0 >= PORT_ANCHOR_REJECTS
+
+        learned = bank_scales(bank)
+        targets = [(goal, None, "", False)]
+        for k, kt in learned + list(inv.consts):
+            derived = k not in {a for a, _ in learned}
+            targets.append((tuple(g * k for g in goal), (lambda h, kt=kt: ["div", h, kt]), f"div{k}", derived))
+            if all(g % k == 0 for g in goal):
+                targets.append((tuple(g // k for g in goal), (lambda h, kt=kt: ["mul", h, kt]), f"mul{k}", derived))
+        targets = [z for z in targets if not any(abs(x) > MAX_INT for x in z[0])]
+        if _I.LEVEL_TARGETS == "goal":
+            ltargets = targets[:1]
+        else:
+            ltargets = targets
+        tset = {_key(g2): (wrap, tag) for g2, wrap, tag, _d in targets}
+
+        def fit(tree, tag, rnd):
+            if stop_on(tree):
+                pinfo["port"] = f"invent:r{rnd}" + (":" + tag if tag else "")
+                return tree
+            return None
+
+        # (1) invented blocks over the task's inputs
+        ri = []
+        for n, t in inv.instances:
+            if over():
+                return None
+            evals += 1
+            yield evals
+            try:
+                v = tuple(run(t, r) for r in rows)
+            except Invalid:
+                continue
+            if not v or any(type_of(x) != "int" for x in v):
+                continue
+            if len(set(v)) == 1 or any(v == tuple(r[nm] for r in rows) for nm, _ty in task.inputs):
+                continue   # a constant or just an input (e.g. min(a, a·a) = a): no new block
+            table.setdefault(_key(v), t)
+            if _key(v) in tset:
+                wrap, tag = tset[_key(v)]
+                hit = fit(wrap(t) if wrap else t, tag, inv.rounds.get(n, 1))
+                if hit is not None:
+                    return hit
+                yield evals
+            ri.append((None, n, t, v))
+        inst_names = {n for n, _t in inv.instances}
+        for g2, wrap, tag, derived in targets:
+            cand = ri + (ranked if derived else [])
+            rk = sorted(((block_score(z[3], g2, task.out),) + z[1:] for z in cand),
+                        key=lambda z: (z[0], z[1]), reverse=True)
+            for sc, _n, t, v in rk[:PORT_ANCHOR_N]:
+                if sc[0] < 0:
+                    break
+                rnd = inv.rounds.get(_n, 1) if _n in inst_names else 0   # 0: a bank block under a derived constant
+                for op in ("add", "sub", "rsub", "mul"):
+                    if over():
+                        return None
+                    evals += 1
+                    yield evals
+                    need = _residual(op, v, g2)
+                    b = table.get(_key(need)) if need is not None else None
+                    if b is None:
+                        continue
+                    hit = ["sub", b, t] if op == "rsub" else [op, t, b]
+                    hit = fit(wrap(hit) if wrap else hit, tag, rnd)
+                    if hit is not None:
+                        return hit
+                    yield evals
+        # (2) invented primitives as single nodes
+        if not inv.ops:
+            return None
+        for sz in range(2, max_size + _I.INVENT_SIZE + 1):
             for name, iop in inv.ops.items():
                 for split in _compositions(sz - 1, len(iop.args)):
                     lists = [list((P.get(s_, {}).get(t) or [])) for s_, t in zip(split, iop.args)]
@@ -1253,9 +1343,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                             continue   # the invention's own symmetry: one order is enough
                         if not any(_var_names(c[0], []) for c in combo):
                             continue   # constant arguments only: a constant, not a block
-                        if evals >= ilimit:
-                            return None
-                        if gate is not None and len(gate.rejected) - rej0 >= PORT_ANCHOR_REJECTS:
+                        if over():
                             return None
                         evals += 1
                         yield evals
@@ -1265,35 +1353,39 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                             continue
                         if any(type_of(v) != iop.out for v in vals):
                             continue
+                        if any(vals == c[1] for c in combo):
+                            continue   # the application just returns an argument: no new block
                         tree = iop.build([c[0] for c in combo])
                         k = (iop.out, _key(vals))
-                        if iop.out == task.out and vals == goal:
-                            if stop_on(tree):
-                                return tree
+                        if iop.out == "int" and _key(vals) in tset:
+                            wrap, tag = tset[_key(vals)]
+                            hit = fit(wrap(tree) if wrap else tree, tag, iop.round)
+                            if hit is not None:
+                                return hit
                             yield evals
                             continue
                         if k in B or k in istate["seen"]:
                             continue
                         istate["seen"].add(k)
                         offer(sz, tree, vals, True, P, B)
-                        if task.out != "int" or iop.out != "int":
+                        if iop.out != "int":
                             continue
-                        for op in ("add", "sub", "rsub", "mul"):
-                            if evals >= ilimit:
-                                return None
-                            evals += 1
-                            yield evals
-                            need = _residual(op, vals, goal)
-                            b = table.get(_key(need)) if need is not None else None
-                            if b is None:
-                                continue
-                            hit = ["sub", b, tree] if op == "rsub" else [op, tree, b]
-                            if stop_on(hit):
-                                return hit
-                            yield evals
-            return None
-        finally:
-            istate["spent"] += evals - start
+                        for g2, wrap, tag, _d in ltargets:
+                            for op in ("add", "sub", "rsub", "mul"):
+                                if over():
+                                    return None
+                                evals += 1
+                                yield evals
+                                need = _residual(op, vals, g2)
+                                b = table.get(_key(need)) if need is not None else None
+                                if b is None:
+                                    continue
+                                hit = ["sub", b, tree] if op == "rsub" else [op, tree, b]
+                                hit = fit(wrap(hit) if wrap else hit, tag, iop.round)
+                                if hit is not None:
+                                    return hit
+                                yield evals
+        return None
 
     def anchor1(rk, table, limit, g, wrap):
         """Depth-1 anchor on target g (the PORT anchor's loop, generalised)."""
@@ -1382,20 +1474,16 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     continue
                 pinfo.update(spent=evals - start, hit=True)
                 return hit
-        from .invent import INVENT_SIZE
-        top = max_size + (INVENT_SIZE if (inv is not None and inv.ops) else 0)
-        for sz_ in range(2, top + 1):
-            if inv is not None and inv.ops:
-                # inventions first at each size: the learned, compressive nodes
-                hit = yield from invent_level(sz_, P, B, limit)
-                if hit is not None:
-                    pinfo.update(spent=evals - start, hit=True, port="invent")
-                    return hit
-            if sz_ > max_size:
-                continue
+        for sz_ in range(2, max_size + 1):
             hit = yield from level(sz_, True, cap=limit, P=P, B=B)
             if hit in ("budget", "cap"):
                 break
+            if hit is not None:
+                pinfo.update(spent=evals - start, hit=True)
+                return hit
+        if inv is not None and task.out == "int" and "table" in istate and not istate["done"]:
+            # deferred INVENT: only the budget the regular levels left
+            hit = yield from invent_phase(P, B, limit)
             if hit is not None:
                 pinfo.update(spent=evals - start, hit=True)
                 return hit
