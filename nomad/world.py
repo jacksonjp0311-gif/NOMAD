@@ -612,9 +612,16 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     if not library and not split and aim is None and not bank:
         s = _drive(_search_gen(task, cold_order, {}, max_size, max_eval))
         return _with_sense(_variation_fallback(task, s, mut, max_eval), rec)
+    inv = None
+    if bank:
+        from . import invent as _invent
+        if _invent.enabled():
+            inv = _invent.kit(prior, task, bank)
+            if inv is not None:
+                bank = inv.instances + bank   # invented blocks join PORT's anchors (not its atoms)
     gate = _WitnessGate(task, library) if witness_continue_enabled() else None
     s = _drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split, aim,
-                           probe_on, gate, bank))
+                           probe_on, gate, bank, inv))
     return _with_sense(_witness_finish(s, gate), rec)
 
 
@@ -932,7 +939,7 @@ def blockprobe_enabled() -> bool:
 def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list],
                 max_size: int, max_eval: int, variation: list[tuple[str, list]] | None = None,
                 split: bool = False, aim: tuple[str, ...] | None = None, blockprobe: bool = False,
-                gate: "_WitnessGate | None" = None, bank: list | None = None):
+                gate: "_WitnessGate | None" = None, bank: list | None = None, inv=None):
     """Staged transfer as one incremental search (a generator, like _search_gen).
 
     Stage 1 is exactly the cold search below ``max_size`` (same order, same
@@ -1091,11 +1098,13 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             if hit is not None:
                 pinfo["port"] = "splice"
                 return hit
+        istate["table"] = table
         # the field's own atoms for this signature first (the plain probe's),
         # then the best-scoring bank blocks
         own = {json.dumps(t) for t in library.values()}
         keep = [z for z in ranked if json.dumps(z[2]) in own]
-        keep += [z for z in ranked if json.dumps(z[2]) not in own][:PORT_K]
+        inst = {n for n, _t in inv.instances} if inv is not None else set()
+        keep += [z for z in ranked if json.dumps(z[2]) not in own and z[1] not in inst][:PORT_K]
         for _sc, _n, t, v in keep:
             hit = offer(1, t, v, True, P, B)
             if hit is not None:
@@ -1113,7 +1122,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         is anchored and wrapped in mul(., k). Rescaling costs no evaluation;
         every lookup costs 1 and every fit is WITNESS-gated."""
         targets = []
-        for k, kt in bank_scales(bank):
+        for k, kt in bank_scales(bank) + (inv.consts if inv is not None else []):
             targets.append((tuple(g * k for g in goal), (lambda h, kt=kt: ["div", h, kt]), f"div{k}"))
             if all(g % k == 0 for g in goal):
                 targets.append((tuple(g // k for g in goal), (lambda h, kt=kt: ["mul", h, kt]), f"mul{k}"))
@@ -1214,6 +1223,78 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 return got
         return None
 
+    istate: dict = {"spent": 0, "seen": set()}
+
+    def invent_level(sz, P, B, limit):
+        """INVENT (docs/INVENT.md): invented primitives as single nodes, one
+        size level (an application of arity k costs 1 + its arguments' sizes).
+
+        Each invention is applied to the probe's pool entries (1 evaluation
+        each; its own symmetric argument orders and all-constant arguments
+        skipped); a new value enters the pools, so later levels combine it,
+        and, for int goals, gets the anchor's residual lookup for add / sub /
+        reversed sub / mul against the probe's values (1 evaluation each).
+        Every fit is WITNESS-gated. All invention work in a task shares
+        INVENT_CAP of the budget and PORT_ANCHOR_REJECTS rejections."""
+        nonlocal evals
+        from .invent import INVENT_CAP
+        table = istate.get("table") or {}
+        rej0 = istate.setdefault("rej0", len(gate.rejected) if gate is not None else 0)
+        start = evals
+        ilimit = min(limit, evals + int(INVENT_CAP * max_eval) - istate["spent"])
+        try:
+            for name, iop in inv.ops.items():
+                for split in _compositions(sz - 1, len(iop.args)):
+                    lists = [list((P.get(s_, {}).get(t) or [])) for s_, t in zip(split, iop.args)]
+                    if any(not l for l in lists):
+                        continue
+                    for combo in product(*lists):
+                        if any(_key(combo[i][1]) > _key(combo[j][1]) for i, j in iop.symmetric):
+                            continue   # the invention's own symmetry: one order is enough
+                        if not any(_var_names(c[0], []) for c in combo):
+                            continue   # constant arguments only: a constant, not a block
+                        if evals >= ilimit:
+                            return None
+                        if gate is not None and len(gate.rejected) - rej0 >= PORT_ANCHOR_REJECTS:
+                            return None
+                        evals += 1
+                        yield evals
+                        try:
+                            vals = tuple(iop.fn(*args) for args in zip(*(c[1] for c in combo)))
+                        except (Invalid, ValueError, TypeError, IndexError, OverflowError):
+                            continue
+                        if any(type_of(v) != iop.out for v in vals):
+                            continue
+                        tree = iop.build([c[0] for c in combo])
+                        k = (iop.out, _key(vals))
+                        if iop.out == task.out and vals == goal:
+                            if stop_on(tree):
+                                return tree
+                            yield evals
+                            continue
+                        if k in B or k in istate["seen"]:
+                            continue
+                        istate["seen"].add(k)
+                        offer(sz, tree, vals, True, P, B)
+                        if task.out != "int" or iop.out != "int":
+                            continue
+                        for op in ("add", "sub", "rsub", "mul"):
+                            if evals >= ilimit:
+                                return None
+                            evals += 1
+                            yield evals
+                            need = _residual(op, vals, goal)
+                            b = table.get(_key(need)) if need is not None else None
+                            if b is None:
+                                continue
+                            hit = ["sub", b, tree] if op == "rsub" else [op, tree, b]
+                            if stop_on(hit):
+                                return hit
+                            yield evals
+            return None
+        finally:
+            istate["spent"] += evals - start
+
     def anchor1(rk, table, limit, g, wrap):
         """Depth-1 anchor on target g (the PORT anchor's loop, generalised)."""
         nonlocal evals
@@ -1301,7 +1382,17 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     continue
                 pinfo.update(spent=evals - start, hit=True)
                 return hit
-        for sz_ in range(2, max_size + 1):
+        from .invent import INVENT_SIZE
+        top = max_size + (INVENT_SIZE if (inv is not None and inv.ops) else 0)
+        for sz_ in range(2, top + 1):
+            if inv is not None and inv.ops:
+                # inventions first at each size: the learned, compressive nodes
+                hit = yield from invent_level(sz_, P, B, limit)
+                if hit is not None:
+                    pinfo.update(spent=evals - start, hit=True, port="invent")
+                    return hit
+            if sz_ > max_size:
+                continue
             hit = yield from level(sz_, True, cap=limit, P=P, B=B)
             if hit in ("budget", "cap"):
                 break
