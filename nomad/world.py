@@ -324,6 +324,131 @@ def task_route_key(task: "WorldTask") -> str | None:
 ROUTE_GRAIN = "group"     # "group": memory kind x source SENSE key; "block": each block up to renaming
 
 
+def graph_enabled() -> bool:
+    """NOMAD_GRAPH: co-occurrence graph proposes two-block anchor pairs (docs/GRAPH.md)."""
+    return _flag("NOMAD_GRAPH", "off")
+
+
+GRAPH_PRUNE = 0.01       # node / edge counts below this are dropped on decay
+GRAPH_PAIRS = 64         # most graph-proposed pairs per two-block anchor target (dev-chosen)
+GRAPH_PER_NODE = 4       # bank instances per graph node considered for pairs (best seed first)
+GRAPH_NESTED = True      # a block and a sub-program of it also co-occur (dev-chosen)
+GRAPH_EDGES_ONLY = True  # the GRAPH design: only learned edges propose (False: dev probe, see docs/GRAPH.md)
+GRAPH_FREE_N = 120       # dev probe only: best-seeded blocks paired freely
+GRAPH_SCORE = "fit"      # pair score: "fit" = goal match of the pair's sum x (1 + edge) x activation; "act"
+GRAPH_SPREAD = 0.5       # weight of one spreading-activation step
+
+
+def graph_key(tree: list) -> str:
+    return hashlib.sha256(json.dumps(_canon_vars(tree)).encode()).hexdigest()[:12]
+
+
+def graph_edge(a: str, b: str) -> str:
+    return f"{a}|{b}" if a <= b else f"{b}|{a}"
+
+
+def graph_nodes_of(tree: list) -> list[tuple[str, tuple]]:
+    """(graph_key, path) of every sub-program of size >= 3 without library refs."""
+    out: list[tuple[str, tuple]] = []
+
+    def walk(t, path):
+        if t[0] in ("var", "const", "lib"):
+            return t[0] == "lib"
+        has_lib = False
+        for i, c in enumerate(t[1:]):
+            has_lib = walk(c, path + (i,)) or has_lib
+        if not has_lib and size(t) >= 3:
+            out.append((graph_key(t), path))
+        return has_lib
+    walk(tree, ())
+    return out
+
+
+def _seed(v: tuple, goal: tuple) -> float:
+    """Goal match of a block's public values in (0, 1] (block_score, scalar)."""
+    eq, nd, agree = block_score(v, goal, "int")
+    n = len(goal)
+    npairs = max(1, n * (n - 1) // 2)
+    return (eq / n + agree / npairs + 1.0 / max(1, -nd)) / 3.0
+
+
+def graph_pairs(prior: "WorldPrior", ranked: list, goal: tuple, cache: dict) -> list[tuple]:
+    """Block pairs for the two-block anchor, by spreading activation.
+
+    Seed: each int bank block's goal match. Node activation: best seed of the
+    node's instances plus GRAPH_SPREAD x the edge-weighted seeds of its graph
+    neighbours (edge weight: co-occurrence Jaccard). Candidates: instance
+    pairs whose nodes share an edge, scored edge weight x (activation sum).
+    Only learned edges propose: an empty graph proposes nothing."""
+    if not prior.graph_edges:
+        return []
+    inst: dict[str, list] = {}
+    seenv: set = set()
+    for z in ranked:
+        v = z[3]
+        if type_of(v[0]) != "int" or _key(v) in seenv:
+            continue
+        seenv.add(_key(v))
+        k = cache.get(z[1])
+        if k is None:
+            k = cache[z[1]] = graph_key(z[2])
+        if k in prior.graph_nodes or not GRAPH_EDGES_ONLY:
+            inst.setdefault(k, []).append((_seed(v, goal), z))
+    if not inst:
+        return []
+    for k in inst:
+        inst[k].sort(key=lambda sz: (-sz[0], sz[1][1]))
+        inst[k] = inst[k][:GRAPH_PER_NODE]
+    a0 = {k: l[0][0] for k, l in inst.items()}
+    nodes = prior.graph_nodes
+    edges = []
+    for e, n_ab in prior.graph_edges.items():
+        a, b = e.split("|")
+        if a in inst and b in inst:
+            w = n_ab / max(1e-9, nodes.get(a, 0.0) + nodes.get(b, 0.0) - (n_ab if a != b else 0.0))
+            edges.append((a, b, min(1.0, w)))
+    if not edges and GRAPH_EDGES_ONLY:
+        return []
+    act = dict(a0)
+    for a, b, w in edges:
+        if a != b:
+            act[a] += GRAPH_SPREAD * w * a0[b]
+            act[b] += GRAPH_SPREAD * w * a0[a]
+    cand = []
+    for a, b, w in edges:
+        for i, (_sa, za) in enumerate(inst[a]):
+            for j, (_sb, zb) in enumerate(inst[b]):
+                if a == b and j < i:
+                    continue
+                if GRAPH_SCORE == "fit":
+                    # the pair's summed values matched against the goal (the query)
+                    vs_ = tuple(x + y for x, y in zip(za[3], zb[3]))
+                    sc = _seed(vs_, goal) * (1.0 + w) * (act[a] + act[b])
+                else:
+                    sc = w * (act[a] + act[b])
+                cand.append((sc, za[1], zb[1], za, zb))
+    if not GRAPH_EDGES_ONLY:
+        # dev probe (not the GRAPH design): every pair of the best-seeded
+        # int blocks, scored by the goal match of its sum; edges only boost
+        wmap = {graph_edge(a, b): w for a, b, w in edges}
+        flat = sorted(((sz, k) for k, l in inst.items() for sz in l), key=lambda x: (-x[0][0], x[0][1][1]))[:GRAPH_FREE_N]
+        for i, ((_s1, za), ka) in enumerate(flat):
+            for (_s2, zb), kb in flat[i:]:
+                vs_ = tuple(x + y for x, y in zip(za[3], zb[3]))
+                cand.append((_seed(vs_, goal) * (1.0 + wmap.get(graph_edge(ka, kb), 0.0)), za[1], zb[1], za, zb))
+    cand.sort(key=lambda c: (-c[0], c[1], c[2]))
+    out, seen = [], set()
+    for _sc, _n1, _n2, za, zb in cand:
+        pk = frozenset((_key(za[3]), _key(zb[3])))
+        if pk in seen:
+            continue
+        seen.add(pk)
+        out.append((za, zb))
+        if len(out) >= GRAPH_PAIRS:
+            break
+    return out
+
+
 def route_group(kind: str, src: str | None, tree: list | None = None) -> str:
     if ROUTE_GRAIN == "block" and tree is not None:
         return "b:" + hashlib.sha256(json.dumps(_canon_vars(tree)).encode()).hexdigest()[:10]
@@ -373,6 +498,14 @@ class WorldPrior:
         self.route: dict[str, dict[str, list[float]]] = {}
         self.library_src: dict[str, str] = {}
         self.programs_src: dict[str, str] = {}
+        # GRAPH (docs/GRAPH.md): per-block co-occurrence graph. Nodes are
+        # certified sub-programs (size >= 3, up to variable renaming, keyed by
+        # graph_key); graph_nodes[k] counts certified programs containing k,
+        # graph_edges["a|b"] counts certified programs containing a and b as
+        # disjoint sub-programs. Learned only in add_witnessed (verified
+        # receipts), decays with the genome; read only when NOMAD_GRAPH is on.
+        self.graph_nodes: dict[str, float] = {}
+        self.graph_edges: dict[str, float] = {}
 
     # ---- ordering
     def order(self, opset: Sequence[str], family: str | None = None) -> tuple[str, ...]:
@@ -394,6 +527,8 @@ class WorldPrior:
             raise ValueError("Cannot learn from an unverified or failed WITNESS receipt")
         if sense_key:
             self._route_learn(tree, sense_key)
+        if harvest:
+            self._graph_learn(tree)
         used = set(ops_used(tree))
         tables = [self.global_counts]
         if family:
@@ -430,6 +565,23 @@ class WorldPrior:
         for g in groups:
             pair = table.setdefault(g, [0.0, 0.0])
             pair[0 if g in used else 1] += 1.0
+
+    def _graph_learn(self, tree: list) -> None:
+        """GRAPH: one co-occurrence update from a certified program."""
+        nodes = graph_nodes_of(tree)
+        keys = sorted({k for k, _p in nodes})
+        for k in keys:
+            self.graph_nodes[k] = self.graph_nodes.get(k, 0.0) + 1.0
+        pairs = set()
+        for i, (a, pa) in enumerate(nodes):
+            for b, pb in nodes[i + 1:]:
+                if a == b and pa == pb:
+                    continue
+                if not GRAPH_NESTED and (pa[:len(pb)] == pb or pb[:len(pa)] == pa):
+                    continue      # nested: one contains the other
+                pairs.add(graph_edge(a, b))
+        for e in pairs:
+            self.graph_edges[e] = self.graph_edges.get(e, 0.0) + 1.0
 
     def relevance(self, key: str | None, kind: str, name: str) -> float | None:
         """Learned relevance of a memory entry to a task of SENSE key ``key``
@@ -499,6 +651,11 @@ class WorldPrior:
             for pair in table.values():
                 pair[0] *= gamma
                 pair[1] *= gamma
+        for d in (self.graph_nodes, self.graph_edges):
+            for k in list(d):
+                d[k] *= gamma
+                if d[k] < GRAPH_PRUNE:
+                    del d[k]
 
     # ---- persistence
     def snapshot(self) -> dict:
@@ -508,7 +665,8 @@ class WorldPrior:
                 "library_sig": self.library_sig, "family_lib": self.family_lib,
                 "programs": self.programs, "programs_sig": self.programs_sig,
                 "programs_uses": self.programs_uses,
-                "route": self.route, "library_src": self.library_src, "programs_src": self.programs_src}
+                "route": self.route, "library_src": self.library_src, "programs_src": self.programs_src,
+                "graph_nodes": self.graph_nodes, "graph_edges": self.graph_edges}
 
     @classmethod
     def from_snapshot(cls, snap: dict) -> "WorldPrior":
@@ -528,6 +686,8 @@ class WorldPrior:
                    for k, t in (snap.get("route") or {}).items()}
         p.library_src = dict(snap.get("library_src") or {})
         p.programs_src = dict(snap.get("programs_src") or {})
+        p.graph_nodes = {k: float(v) for k, v in (snap.get("graph_nodes") or {}).items()}
+        p.graph_edges = {k: float(v) for k, v in (snap.get("graph_edges") or {}).items()}
         return p
 
 
@@ -771,7 +931,8 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
             inv = _invent.kit(prior, task, bank)   # used only by the INVENT phase (main's path unchanged)
     gate = _WitnessGate(task, library) if witness_continue_enabled() else None
     s = _drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split, aim,
-                           probe_on, gate, bank, inv, rel or None))
+                           probe_on, gate, bank, inv, rel or None,
+                           prior if (graph_enabled() and prior.graph_edges) else None))
     return _with_sense(_witness_finish(s, gate), rec)
 
 
@@ -1121,7 +1282,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 max_size: int, max_eval: int, variation: list[tuple[str, list]] | None = None,
                 split: bool = False, aim: tuple[str, ...] | None = None, blockprobe: bool = False,
                 gate: "_WitnessGate | None" = None, bank: list | None = None, inv=None,
-                rel: dict | None = None):
+                rel: dict | None = None, graph: "WorldPrior | None" = None):
     """Staged transfer as one incremental search (a generator, like _search_gen).
 
     Stage 1 is exactly the cold search below ``max_size`` (same order, same
@@ -1422,6 +1583,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         return None
 
     istate: dict = {"seen": set(), "done": False}
+    gcache: dict = {}
 
     def invent_applies() -> bool:
         """INVENT runs for int goals; with NOMAD_BRIDGE on also for str goals
@@ -1722,10 +1884,37 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         else:
             top.sort(key=lambda z: (-z[0][2], z[0][1], z[1]))
         top = top[:ANCHOR2_M]
+        tried: set = set()
+        if graph is not None:
+            # GRAPH (docs/GRAPH.md): pairs proposed by spreading activation
+            # over the certified co-occurrence graph, tried first; same
+            # accounting, same caps. The loop below skips a pair tried here.
+            for za, zb in graph_pairs(graph, ranked, goal, gcache):
+                a, va = za[2], za[3]
+                b, vb = zb[2], zb[3]
+                tried.add(frozenset((_key(va), _key(vb))) if _key(va) != _key(vb) else (_key(va),))
+                if grow_spent():
+                    return None
+                if evals >= limit:
+                    return None
+                evals += 1
+                yield evals
+                need = tuple(g - x - y for g, x, y in zip(goal, va, vb))
+                c = table.get(_key(need))
+                if c is None:
+                    continue
+                hit = ["add", ["add", a, b], c]
+                hit = wrap(hit) if wrap else hit
+                if stop_on(hit):
+                    pinfo["graph"] = True
+                    return hit
+                yield evals
         for i in range(len(top)):
             for j in range(i, len(top)):
                 a, va = top[i][2], top[i][3]
                 b, vb = top[j][2], top[j][3]
+                if tried and (frozenset((_key(va), _key(vb))) if _key(va) != _key(vb) else (_key(va),)) in tried:
+                    continue
                 if grow_spent():
                     return None
                 if evals >= limit:
@@ -1841,6 +2030,8 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         via = None
         if pinfo.get("hit"):
             via = ("port:" + pinfo.get("port", "probe")) if bank else "blockprobe"
+            if pinfo.get("graph"):
+                via += "+graph"
         return Search(hit, evals, None, order, libs, via, tried, sinfo)
 
     # stage 1: the cold search below max_size
