@@ -6,7 +6,7 @@ mixed string+integer tasks got nothing, because the DSL had no operator that
 turns an integer into a position, a length-bounded slice, a repeat or a digit
 string. BRIDGE adds those operators, a mixed int/str domain, a bridge
 training set, and lets INVENT run on string goals. Everything is behind
-**`NOMAD_BRIDGE`, default OFF until proven**. No transformers, no neural
+**`NOMAD_BRIDGE`, default OFF until proven (flipped ON after the sealed run below)**. No transformers, no neural
 weights, no LLM; WITNESS certifies; the cold control's code is untouched.
 
 ## What is built
@@ -94,3 +94,44 @@ operators matter for *training* (the bridge families can only be certified
 with them) and the transfer is carried by memory, not by searching them.
 Expectation for the sealed suite: criteria 1-3 pass with a smaller margin than
 dev; INVENT on strings adds nothing measurable.
+
+## Sealed result (measured once, 2026-11-21, after `67e1459`; `results/bridge/`)
+
+`python3 scripts/bridge_judge.py`, sha `ddc3a93d...b712f`, 22 hard:
+
+| Arm | Certified /22 | Evaluations |
+|---|---|---|
+| cold | 0 | 201,051 |
+| empty (no memory) | 0 | 201,051 |
+| **trained** (WORLD + science + bridge training) | **6** | 182,449 (-9.3% vs empty) |
+| world_only (no bridge training; report) | 3 | 195,407 |
+| bridge_only (report) | 9 | 183,151 |
+| trained, PORT off | 0 | 201,051 |
+| trained, INVENT off / INVENT-on-strings off | 6 / 6 | 182,449 / 182,449 |
+| trained, NOMAD_BRIDGE=off (memory only; report) | 7 | 167,779 |
+
+| Criterion | Bar | Result | Met? |
+|---|---|---|---|
+| 1. trained vs empty | >= +3 or 25% fewer | **+6** (6 vs 0), -9.3% | yes |
+| 2. gain vanishes with an empty field | empty - cold <= 1 | 0 (empty 0, PORT off 0) | yes |
+| 3. no task worse than cold | 0 | 0 (trained, empty, and every report arm) | yes |
+| 4. no per-task loss on existing sealed suites, switch on vs off | 0 | **0 losses, 0 gains, outputs byte-identical** on deep, science hard, transfer 1-4, text, and the INVENT secondary sweep (381 per-task records, every arm) | yes |
+| 5. LOFO <= 5,883, worst 1.0x; tests | | 5,883, worst 1.0x; 424 tests pass | yes |
+
+Decision: all five pass, so `NOMAD_BRIDGE` is **on by default** (commit below).
+
+Honest reading:
+
+- The gain is **renamed memory (PORT)**, not search and not INVENT: empty = cold = 0, PORT off = 0,
+  INVENT on strings changes nothing (the field's string inventions are tiny:
+  `itos(strlen(a))`, `concat(a, a)`; most bridge programs recur once, below MIN_USES = 2).
+- The WORLD-only field (no bridge training) certifies 3, so bridge training is what lets integer and
+  string skills combine; 6 of 22 is a modest transfer, not a solved one.
+- **bridge_only (9) beats trained (6)** and **bridge_off (7, fewer evaluations) beats bridge_on (6)**:
+  the broad WORLD memory dilutes the narrow bridge memory, and exposing five more operators to the
+  cold stage enlarges every pool for programs that memory already supplies. The operators matter for
+  *training* (bridge families are uncertifiable without them), not for searching. A follow-up could
+  gate the extra operators to the post-memory stage; not attempted here.
+- Because default-on changes no existing result (byte-identical with the switch on), it is safe, but it
+  also means the live body does not benefit until its curriculum contains bridge families; that is not
+  part of this step.

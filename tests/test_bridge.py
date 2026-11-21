@@ -69,7 +69,7 @@ class BridgeOps(unittest.TestCase):
             self.assertTrue(W.bridge_enabled())
             self.assertEqual(W.opset_of(t), W.OPSETS["bridge"])
         os.environ.pop("NOMAD_BRIDGE", None)
-        self.assertFalse(W.bridge_enabled(), "default is off")
+        self.assertTrue(W.bridge_enabled(), "default is on (flipped after the sealed judge, docs/BRIDGE.md)")
         # non-bridge tasks never see a different opset
         from nomad.world_tasks import all_training
         for x in all_training():

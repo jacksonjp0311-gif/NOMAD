@@ -168,8 +168,8 @@ OPSETS: dict[str, tuple[str, ...]] = {
 
 
 def bridge_enabled() -> bool:
-    """NOMAD_BRIDGE (default off until proven; docs/BRIDGE.md)."""
-    return _flag("NOMAD_BRIDGE", "off")
+    """NOMAD_BRIDGE (default on since the sealed judge passed, docs/BRIDGE.md; set off to restore the text opset)."""
+    return _flag("NOMAD_BRIDGE", "on")
 
 
 def opset_of(task: "WorldTask") -> tuple[str, ...]:
