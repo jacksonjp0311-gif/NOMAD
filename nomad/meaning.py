@@ -146,6 +146,9 @@ def decay(prior: Any, gamma: float) -> None:
     for c in list(prior.concepts):
         rec = prior.concepts[c]
         rec["uses"] = float(rec.get("uses", 0.0)) * gamma
+        if rec.get("roles"):
+            from . import roles as _roles
+            _roles.decay(rec, gamma)
         for k in list(rec["kinds"]):
             rec["kinds"][k] *= gamma
 
@@ -247,32 +250,45 @@ def stage(task: Any, prior: Any, words: str, *, max_eval: int | None = None) -> 
     evals = rejects = 0
     seen: set[str] = set()
     info: dict = {"retrieved": [c for _s, c in ranked], "rejected": 0}
-    for _sc, c in ranked:
+    plan: list[tuple[str, dict]] = []
+    from . import roles as _roles
+    if _roles.enabled():   # ROLES (docs/ROLES.md): renamings in the order the story's numbers imply
+        lists = []
+        for _sc, c in ranked:
+            rm = _roles.ranked_maps(prior.concepts[c], task, words, prior)
+            lists.append((c, rm[:MEANING_MAPS] if rm is not None else _maps(prior.concepts[c]["types"], task),
+                          rm is not None))
+            info["roles"] = info.get("roles", 0) + (rm is not None)
+        f = _roles.ROLES_FIRST   # first pass: the best renamings of every role-read concept; then the rest
+        plan = ([(c, m) for c, ms, read in lists if read for m in ms[:f]]
+                + [(c, m) for c, ms, read in lists for m in (ms[f:] if read else ms)])
+    else:
+        plan = [(c, m) for _sc, c in ranked for m in _maps(prior.concepts[c]["types"], task)]
+    for c, m in plan:
         rec = prior.concepts[c]
-        for m in _maps(rec["types"], task):
-            if evals >= budget:
-                info["rejected"] = rejects
-                return None, evals, info
-            inst = _rename(rec["tree"], m)
-            k = _comm_key(inst)
-            if k in seen:
-                continue
-            seen.add(k)
-            evals += 1
-            try:
-                vals = [run(inst, r) for r, _e in task.public]
-            except Invalid:
-                continue
-            if vals != goal:
-                continue
-            receipt, _pub, _fin = certify(task, inst)
-            if receipt is not None and receipt.supported:
-                info["rejected"] = rejects
-                return (c, inst), evals, info
-            rejects += 1
-            evals += 1
-            if rejects >= MEANING_REJECTS:
-                info["rejected"] = rejects
-                return None, evals, info
+        if evals >= budget:
+            info["rejected"] = rejects
+            return None, evals, info
+        inst = _rename(rec["tree"], m)
+        k = _comm_key(inst)
+        if k in seen:
+            continue
+        seen.add(k)
+        evals += 1
+        try:
+            vals = [run(inst, r) for r, _e in task.public]
+        except Invalid:
+            continue
+        if vals != goal:
+            continue
+        receipt, _pub, _fin = certify(task, inst)
+        if receipt is not None and receipt.supported:
+            info["rejected"] = rejects
+            return (c, inst), evals, info
+        rejects += 1
+        evals += 1
+        if rejects >= MEANING_REJECTS:
+            info["rejected"] = rejects
+            return None, evals, info
     info["rejected"] = rejects
     return None, evals, info

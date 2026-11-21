@@ -577,13 +577,17 @@ class WorldPrior:
     def add_witnessed(self, tree: list, receipt: WitnessReceipt, *, family: str | None,
                       opset: Sequence[str], inputs: Sequence[Sequence[str]], harvest: bool = True,
                       sense_key: str | None = None, words: str | None = None,
-                      out: str | None = None, kind: str | None = None) -> None:
+                      out: str | None = None, kind: str | None = None, row: dict | None = None) -> None:
         if not receipt.supported or not receipt.verify_checksum():
             raise ValueError("Cannot learn from an unverified or failed WITNESS receipt")
         if words:
             from . import meaning as _meaning
             if _meaning.enabled():
                 _meaning.learn(self, tree, inputs, words, out=out, kind=kind)
+                if row:   # ROLES (docs/ROLES.md): which number in the story filled which role
+                    from . import roles as _roles
+                    if _roles.enabled():
+                        _roles.learn(self, tree, inputs, words, row)
         if sense_key:
             self._route_learn(tree, sense_key)
         if harvest:

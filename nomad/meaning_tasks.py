@@ -338,6 +338,23 @@ def entry(fam: WordFamily, task_id: str, seed: int | str, name_pool: Sequence[st
             "rows": [[r, a] for r, a in rows]}
 
 
+def story_entry(fam: WordFamily, task_id: str, seed: int | str, name_pool: Sequence[str], shuffle: bool) -> dict:
+    """ROLES (docs/ROLES.md): ``entry`` plus ``story``, the description with its quantities written
+    out as the numbers of the first public row (the story a person would read). ``entry`` itself is
+    unchanged, so every MEANING suite and field is byte-identical."""
+    e = entry(fam, task_id, seed, name_pool, shuffle)
+    rng = random.Random(f"{seed}:{fam.family}")
+    c = CONCEPTS[fam.concept]
+    slots = list(c.roles) + list(fam.distractors)
+    pool = list(name_pool)
+    if shuffle:
+        rng.shuffle(pool)
+    names = dict(zip(slots, pool))
+    row0 = e["rows"][0][0]
+    e["story"] = fam.text.format(**{s: row0[names[s]] for s in slots})
+    return e
+
+
 def to_task(e: dict) -> WorldTask:
     rows = [(dict(r), a) for r, a in e["rows"]]
     a, b = N_PUBLIC, N_PUBLIC + N_CHALLENGE
@@ -347,6 +364,11 @@ def to_task(e: dict) -> WorldTask:
 
 def train_entries() -> list[dict]:
     return [entry(f, f"mt-{i:02d}", "meaning-train", TRAIN_NAMES, shuffle=False) for i, f in enumerate(TRAIN)]
+
+
+def train_story_entries() -> list[dict]:
+    """ROLES: the same training tasks (same rows, same names) with their stories written out."""
+    return [story_entry(f, f"mt-{i:02d}", "meaning-train", TRAIN_NAMES, shuffle=False) for i, f in enumerate(TRAIN)]
 
 
 from typing import Sequence  # noqa: E402  (used in annotations above)

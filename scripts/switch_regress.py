@@ -42,6 +42,7 @@ JUDGES = {
     "inflect": ["scripts/inflect_judge.py"],           # INFLECT sealed suite (INFLECT)
     "let": ["scripts/let_judge.py"],                   # LET sealed suite (this step)
     "textpat": ["scripts/textpat_judge.py"],          # TEXT_ABSTRACT sealed suite (this step)
+    "roles": ["scripts/roles_judge.py"],               # ROLES sealed suite (ROLES; not re-run by ROLES itself)
 }
 
 

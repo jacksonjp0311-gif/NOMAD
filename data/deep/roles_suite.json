@@ -1,0 +1,3733 @@
+{
+ "schema": "nomad.roles-suite.v1",
+ "seed": 20270209,
+ "budget": 10000,
+ "max_size": 7,
+ "names": [
+  "ha",
+  "hb",
+  "hc",
+  "hd",
+  "he",
+  "hf",
+  "hg"
+ ],
+ "tasks": [
+  {
+   "task_id": "r-00",
+   "family": "rs_star_plates",
+   "concept": "product",
+   "domain": "observatory",
+   "words": "An archive {x} years old keeps {a} drawers of glass plates with {b} plates in each drawer, read by {y} astronomers. How many plates are in the archive?",
+   "inputs": [
+    "ha",
+    "hc",
+    "hd",
+    "hf"
+   ],
+   "tree": [
+    "mul",
+    [
+     "var",
+     "hc"
+    ],
+    [
+     "var",
+     "hf"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hc": 14,
+      "hf": 10,
+      "hd": 1,
+      "ha": 20
+     },
+     140
+    ],
+    [
+     {
+      "hc": 4,
+      "hf": 14,
+      "hd": 5,
+      "ha": 21
+     },
+     56
+    ],
+    [
+     {
+      "hc": 9,
+      "hf": 4,
+      "hd": 16,
+      "ha": 9
+     },
+     36
+    ],
+    [
+     {
+      "hc": 12,
+      "hf": 8,
+      "hd": 16,
+      "ha": 23
+     },
+     96
+    ],
+    [
+     {
+      "hc": 6,
+      "hf": 5,
+      "hd": 8,
+      "ha": 18
+     },
+     30
+    ],
+    [
+     {
+      "hc": 7,
+      "hf": 5,
+      "hd": 21,
+      "ha": 5
+     },
+     35
+    ],
+    [
+     {
+      "hc": 7,
+      "hf": 2,
+      "hd": 25,
+      "ha": 4
+     },
+     14
+    ],
+    [
+     {
+      "hc": 14,
+      "hf": 13,
+      "hd": 24,
+      "ha": 3
+     },
+     182
+    ],
+    [
+     {
+      "hc": 3,
+      "hf": 10,
+      "hd": 22,
+      "ha": 15
+     },
+     30
+    ],
+    [
+     {
+      "hc": 2,
+      "hf": 14,
+      "hd": 19,
+      "ha": 17
+     },
+     28
+    ],
+    [
+     {
+      "hc": 4,
+      "hf": 15,
+      "hd": 17,
+      "ha": 3
+     },
+     60
+    ]
+   ],
+   "story": "An archive 1 years old keeps 14 drawers of glass plates with 10 plates in each drawer, read by 20 astronomers. How many plates are in the archive?",
+   "cold_certified": true,
+   "cold_evaluations": 99
+  },
+  {
+   "task_id": "r-01",
+   "family": "rs_barrel_cellar",
+   "concept": "volume",
+   "domain": "vineyard",
+   "words": "The cellar has {a} aisles, each aisle has {b} racks and each rack holds {c} barrels; the estate has {x} workers, {y} dogs and {z} tractors. How many barrels are in the cellar?",
+   "inputs": [
+    "hb",
+    "he",
+    "hd",
+    "ha",
+    "hc",
+    "hf"
+   ],
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "ha"
+     ],
+     [
+      "var",
+      "he"
+     ]
+    ],
+    [
+     "var",
+     "hc"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "ha": 2,
+      "he": 7,
+      "hc": 3,
+      "hf": 14,
+      "hd": 9,
+      "hb": 2
+     },
+     42
+    ],
+    [
+     {
+      "ha": 9,
+      "he": 8,
+      "hc": 8,
+      "hf": 16,
+      "hd": 25,
+      "hb": 23
+     },
+     576
+    ],
+    [
+     {
+      "ha": 2,
+      "he": 9,
+      "hc": 3,
+      "hf": 1,
+      "hd": 13,
+      "hb": 21
+     },
+     54
+    ],
+    [
+     {
+      "ha": 8,
+      "he": 2,
+      "hc": 5,
+      "hf": 12,
+      "hd": 7,
+      "hb": 23
+     },
+     80
+    ],
+    [
+     {
+      "ha": 4,
+      "he": 6,
+      "hc": 2,
+      "hf": 2,
+      "hd": 24,
+      "hb": 20
+     },
+     48
+    ],
+    [
+     {
+      "ha": 4,
+      "he": 5,
+      "hc": 7,
+      "hf": 7,
+      "hd": 19,
+      "hb": 6
+     },
+     140
+    ],
+    [
+     {
+      "ha": 5,
+      "he": 6,
+      "hc": 2,
+      "hf": 5,
+      "hd": 23,
+      "hb": 2
+     },
+     60
+    ],
+    [
+     {
+      "ha": 9,
+      "he": 4,
+      "hc": 5,
+      "hf": 5,
+      "hd": 2,
+      "hb": 3
+     },
+     180
+    ],
+    [
+     {
+      "ha": 7,
+      "he": 9,
+      "hc": 7,
+      "hf": 3,
+      "hd": 3,
+      "hb": 11
+     },
+     441
+    ],
+    [
+     {
+      "ha": 6,
+      "he": 8,
+      "hc": 2,
+      "hf": 21,
+      "hd": 1,
+      "hb": 25
+     },
+     96
+    ],
+    [
+     {
+      "ha": 4,
+      "he": 5,
+      "hc": 6,
+      "hf": 4,
+      "hd": 11,
+      "hb": 12
+     },
+     120
+    ]
+   ],
+   "story": "The cellar has 2 aisles, each aisle has 7 racks and each rack holds 3 barrels; the estate has 14 workers, 9 dogs and 2 tractors. How many barrels are in the cellar?",
+   "cold_certified": true,
+   "cold_evaluations": 8133
+  },
+  {
+   "task_id": "r-02",
+   "family": "rs_ring_rope",
+   "concept": "perimeter",
+   "domain": "circus",
+   "words": "A rectangular ring is {a} long and {b} wide; {x} clowns and {y} horses perform in it. How much rope goes all the way around the ring?",
+   "inputs": [
+    "ha",
+    "hg",
+    "hf",
+    "hb"
+   ],
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "var",
+      "hg"
+     ],
+     [
+      "var",
+      "ha"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hg": 11,
+      "ha": 12,
+      "hb": 6,
+      "hf": 18
+     },
+     46
+    ],
+    [
+     {
+      "hg": 9,
+      "ha": 28,
+      "hb": 3,
+      "hf": 15
+     },
+     74
+    ],
+    [
+     {
+      "hg": 24,
+      "ha": 22,
+      "hb": 2,
+      "hf": 11
+     },
+     92
+    ],
+    [
+     {
+      "hg": 27,
+      "ha": 21,
+      "hb": 12,
+      "hf": 20
+     },
+     96
+    ],
+    [
+     {
+      "hg": 21,
+      "ha": 19,
+      "hb": 12,
+      "hf": 2
+     },
+     80
+    ],
+    [
+     {
+      "hg": 15,
+      "ha": 28,
+      "hb": 8,
+      "hf": 14
+     },
+     86
+    ],
+    [
+     {
+      "hg": 9,
+      "ha": 25,
+      "hb": 6,
+      "hf": 3
+     },
+     68
+    ],
+    [
+     {
+      "hg": 5,
+      "ha": 10,
+      "hb": 15,
+      "hf": 7
+     },
+     30
+    ],
+    [
+     {
+      "hg": 27,
+      "ha": 17,
+      "hb": 5,
+      "hf": 1
+     },
+     88
+    ],
+    [
+     {
+      "hg": 17,
+      "ha": 2,
+      "hb": 10,
+      "hf": 25
+     },
+     38
+    ],
+    [
+     {
+      "hg": 23,
+      "ha": 3,
+      "hb": 13,
+      "hf": 8
+     },
+     52
+    ]
+   ],
+   "story": "A rectangular ring is 11 long and 12 wide; 6 clowns and 18 horses perform in it. How much rope goes all the way around the ring?",
+   "cold_certified": true,
+   "cold_evaluations": 3512
+  },
+  {
+   "task_id": "r-03",
+   "family": "rs_parcel_sacks",
+   "concept": "groups_plus",
+   "domain": "post office",
+   "words": "On a day with {x} clerks, a sorter fills {a} sacks with {b} parcels each, plus {c} loose parcels, and {y} trucks wait outside. How many parcels in total?",
+   "inputs": [
+    "ha",
+    "hg",
+    "he",
+    "hb",
+    "hc"
+   ],
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "he"
+     ],
+     [
+      "var",
+      "hg"
+     ]
+    ],
+    [
+     "var",
+     "hb"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "he": 2,
+      "hg": 10,
+      "hb": 13,
+      "ha": 7,
+      "hc": 3
+     },
+     33
+    ],
+    [
+     {
+      "he": 9,
+      "hg": 5,
+      "hb": 14,
+      "ha": 20,
+      "hc": 10
+     },
+     59
+    ],
+    [
+     {
+      "he": 2,
+      "hg": 10,
+      "hb": 9,
+      "ha": 1,
+      "hc": 4
+     },
+     29
+    ],
+    [
+     {
+      "he": 9,
+      "hg": 6,
+      "hb": 10,
+      "ha": 4,
+      "hc": 25
+     },
+     64
+    ],
+    [
+     {
+      "he": 9,
+      "hg": 5,
+      "hb": 14,
+      "ha": 18,
+      "hc": 20
+     },
+     59
+    ],
+    [
+     {
+      "he": 10,
+      "hg": 7,
+      "hb": 10,
+      "ha": 5,
+      "hc": 5
+     },
+     80
+    ],
+    [
+     {
+      "he": 4,
+      "hg": 12,
+      "hb": 7,
+      "ha": 7,
+      "hc": 10
+     },
+     55
+    ],
+    [
+     {
+      "he": 12,
+      "hg": 11,
+      "hb": 4,
+      "ha": 3,
+      "hc": 3
+     },
+     136
+    ],
+    [
+     {
+      "he": 12,
+      "hg": 3,
+      "hb": 15,
+      "ha": 6,
+      "hc": 16
+     },
+     51
+    ],
+    [
+     {
+      "he": 6,
+      "hg": 2,
+      "hb": 15,
+      "ha": 25,
+      "hc": 9
+     },
+     27
+    ],
+    [
+     {
+      "he": 7,
+      "hg": 8,
+      "hb": 12,
+      "ha": 11,
+      "hc": 19
+     },
+     68
+    ]
+   ],
+   "story": "On a day with 7 clerks, a sorter fills 2 sacks with 10 parcels each, plus 13 loose parcels, and 3 trucks wait outside. How many parcels in total?",
+   "cold_certified": true,
+   "cold_evaluations": 585
+  },
+  {
+   "task_id": "r-04",
+   "family": "rs_lift_change",
+   "concept": "change",
+   "domain": "ski resort",
+   "words": "A skier with {x} friends pays with {c} dollars for {a} lift passes at {b} dollars each, on a slope of {y} meters and {z} turns. How much change comes back?",
+   "inputs": [
+    "hf",
+    "ha",
+    "hc",
+    "hb",
+    "hd",
+    "he"
+   ],
+   "tree": [
+    "sub",
+    [
+     "var",
+     "hc"
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "hd"
+     ],
+     [
+      "var",
+      "hf"
+     ]
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hd": 5,
+      "hf": 3,
+      "hc": 16,
+      "he": 17,
+      "hb": 1,
+      "ha": 14
+     },
+     1
+    ],
+    [
+     {
+      "hd": 6,
+      "hf": 3,
+      "hc": 38,
+      "he": 4,
+      "hb": 20,
+      "ha": 4
+     },
+     20
+    ],
+    [
+     {
+      "hd": 6,
+      "hf": 6,
+      "hc": 49,
+      "he": 23,
+      "hb": 14,
+      "ha": 24
+     },
+     13
+    ],
+    [
+     {
+      "hd": 4,
+      "hf": 8,
+      "hc": 58,
+      "he": 10,
+      "hb": 17,
+      "ha": 16
+     },
+     26
+    ],
+    [
+     {
+      "hd": 2,
+      "hf": 3,
+      "hc": 16,
+      "he": 23,
+      "hb": 9,
+      "ha": 18
+     },
+     10
+    ],
+    [
+     {
+      "hd": 4,
+      "hf": 4,
+      "hc": 36,
+      "he": 25,
+      "hb": 10,
+      "ha": 16
+     },
+     20
+    ],
+    [
+     {
+      "hd": 5,
+      "hf": 6,
+      "hc": 51,
+      "he": 23,
+      "hb": 4,
+      "ha": 15
+     },
+     21
+    ],
+    [
+     {
+      "hd": 6,
+      "hf": 8,
+      "hc": 70,
+      "he": 17,
+      "hb": 12,
+      "ha": 20
+     },
+     22
+    ],
+    [
+     {
+      "hd": 3,
+      "hf": 8,
+      "hc": 33,
+      "he": 15,
+      "hb": 16,
+      "ha": 16
+     },
+     9
+    ],
+    [
+     {
+      "hd": 2,
+      "hf": 7,
+      "hc": 15,
+      "he": 10,
+      "hb": 9,
+      "ha": 4
+     },
+     1
+    ],
+    [
+     {
+      "hd": 9,
+      "hf": 4,
+      "hc": 45,
+      "he": 20,
+      "hb": 2,
+      "ha": 23
+     },
+     9
+    ]
+   ],
+   "story": "A skier with 17 friends pays with 16 dollars for 5 lift passes at 3 dollars each, on a slope of 1 meters and 14 turns. How much change comes back?",
+   "cold_certified": true,
+   "cold_evaluations": 3218
+  },
+  {
+   "task_id": "r-05",
+   "family": "rs_lamp_broken",
+   "concept": "loss_each",
+   "domain": "mine",
+   "words": "Each of {c} tunnels has {a} lamps and {b} lamps in every tunnel are broken, in a mine {x} meters deep with {y} miners. How many lamps still work in all the tunnels?",
+   "inputs": [
+    "he",
+    "hc",
+    "hb",
+    "hd",
+    "hf"
+   ],
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "var",
+      "hc"
+     ],
+     [
+      "var",
+      "he"
+     ]
+    ],
+    [
+     "var",
+     "hf"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hc": 10,
+      "he": 9,
+      "hf": 5,
+      "hd": 24,
+      "hb": 2
+     },
+     5
+    ],
+    [
+     {
+      "hc": 10,
+      "he": 8,
+      "hf": 6,
+      "hd": 7,
+      "hb": 13
+     },
+     12
+    ],
+    [
+     {
+      "hc": 8,
+      "he": 5,
+      "hf": 3,
+      "hd": 4,
+      "hb": 24
+     },
+     9
+    ],
+    [
+     {
+      "hc": 15,
+      "he": 5,
+      "hf": 4,
+      "hd": 1,
+      "hb": 5
+     },
+     40
+    ],
+    [
+     {
+      "hc": 8,
+      "he": 3,
+      "hf": 4,
+      "hd": 25,
+      "hb": 25
+     },
+     20
+    ],
+    [
+     {
+      "hc": 10,
+      "he": 5,
+      "hf": 6,
+      "hd": 2,
+      "hb": 18
+     },
+     30
+    ],
+    [
+     {
+      "hc": 11,
+      "he": 1,
+      "hf": 3,
+      "hd": 25,
+      "hb": 25
+     },
+     30
+    ],
+    [
+     {
+      "hc": 21,
+      "he": 9,
+      "hf": 8,
+      "hd": 11,
+      "hb": 5
+     },
+     96
+    ],
+    [
+     {
+      "hc": 9,
+      "he": 4,
+      "hf": 9,
+      "hd": 13,
+      "hb": 1
+     },
+     45
+    ],
+    [
+     {
+      "hc": 8,
+      "he": 5,
+      "hf": 7,
+      "hd": 6,
+      "hb": 17
+     },
+     21
+    ],
+    [
+     {
+      "hc": 19,
+      "he": 9,
+      "hf": 9,
+      "hd": 3,
+      "hb": 22
+     },
+     90
+    ]
+   ],
+   "story": "Each of 5 tunnels has 10 lamps and 9 lamps in every tunnel are broken, in a mine 24 meters deep with 2 miners. How many lamps still work in all the tunnels?",
+   "cold_certified": true,
+   "cold_evaluations": 5956
+  },
+  {
+   "task_id": "r-06",
+   "family": "rs_two_domes",
+   "concept": "two_areas",
+   "domain": "observatory",
+   "words": "One dome floor is {a} by {b} tiles and the other dome floor is {c} by {d} tiles; there are {x} telescopes, {y} stairs and {z} guides. How many tiles cover both floors?",
+   "inputs": [
+    "ha",
+    "hd",
+    "hc",
+    "hf",
+    "hg",
+    "hb",
+    "he"
+   ],
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "hb"
+     ],
+     [
+      "var",
+      "he"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "hc"
+     ],
+     [
+      "var",
+      "hg"
+     ]
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hb": 2,
+      "he": 5,
+      "hc": 9,
+      "hg": 4,
+      "hd": 15,
+      "ha": 12,
+      "hf": 6
+     },
+     46
+    ],
+    [
+     {
+      "hb": 2,
+      "he": 2,
+      "hc": 9,
+      "hg": 5,
+      "hd": 11,
+      "ha": 7,
+      "hf": 13
+     },
+     49
+    ],
+    [
+     {
+      "hb": 3,
+      "he": 8,
+      "hc": 8,
+      "hg": 7,
+      "hd": 8,
+      "ha": 5,
+      "hf": 15
+     },
+     80
+    ],
+    [
+     {
+      "hb": 7,
+      "he": 7,
+      "hc": 9,
+      "hg": 2,
+      "hd": 18,
+      "ha": 2,
+      "hf": 15
+     },
+     67
+    ],
+    [
+     {
+      "hb": 4,
+      "he": 4,
+      "hc": 7,
+      "hg": 9,
+      "hd": 10,
+      "ha": 23,
+      "hf": 23
+     },
+     79
+    ],
+    [
+     {
+      "hb": 2,
+      "he": 8,
+      "hc": 6,
+      "hg": 8,
+      "hd": 23,
+      "ha": 7,
+      "hf": 21
+     },
+     64
+    ],
+    [
+     {
+      "hb": 4,
+      "he": 8,
+      "hc": 8,
+      "hg": 2,
+      "hd": 21,
+      "ha": 20,
+      "hf": 23
+     },
+     48
+    ],
+    [
+     {
+      "hb": 2,
+      "he": 6,
+      "hc": 4,
+      "hg": 9,
+      "hd": 17,
+      "ha": 18,
+      "hf": 4
+     },
+     48
+    ],
+    [
+     {
+      "hb": 5,
+      "he": 4,
+      "hc": 2,
+      "hg": 6,
+      "hd": 3,
+      "ha": 3,
+      "hf": 5
+     },
+     32
+    ],
+    [
+     {
+      "hb": 7,
+      "he": 3,
+      "hc": 9,
+      "hg": 2,
+      "hd": 19,
+      "ha": 4,
+      "hf": 3
+     },
+     39
+    ],
+    [
+     {
+      "hb": 3,
+      "he": 7,
+      "hc": 4,
+      "hg": 5,
+      "hd": 16,
+      "ha": 25,
+      "hf": 2
+     },
+     41
+    ]
+   ],
+   "story": "One dome floor is 2 by 5 tiles and the other dome floor is 9 by 4 tiles; there are 15 telescopes, 12 stairs and 6 guides. How many tiles cover both floors?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "r-07",
+   "family": "rs_tent_canvas",
+   "concept": "frame",
+   "domain": "circus",
+   "words": "A canvas is {a} by {b} squares with a door of {c} by {d} squares cut out of it, for a show with {x} acrobats and {y} seats. How many squares of canvas remain?",
+   "inputs": [
+    "hb",
+    "ha",
+    "hg",
+    "hd",
+    "hf",
+    "he"
+   ],
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "ha"
+     ],
+     [
+      "var",
+      "hf"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "hg"
+     ],
+     [
+      "var",
+      "he"
+     ]
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "ha": 8,
+      "hf": 9,
+      "hg": 1,
+      "he": 4,
+      "hd": 11,
+      "hb": 15
+     },
+     68
+    ],
+    [
+     {
+      "ha": 10,
+      "hf": 7,
+      "hg": 6,
+      "he": 4,
+      "hd": 11,
+      "hb": 4
+     },
+     46
+    ],
+    [
+     {
+      "ha": 9,
+      "hf": 11,
+      "hg": 5,
+      "he": 5,
+      "hd": 21,
+      "hb": 14
+     },
+     74
+    ],
+    [
+     {
+      "ha": 8,
+      "hf": 13,
+      "hg": 6,
+      "he": 5,
+      "hd": 5,
+      "hb": 22
+     },
+     74
+    ],
+    [
+     {
+      "ha": 10,
+      "hf": 9,
+      "hg": 4,
+      "he": 3,
+      "hd": 4,
+      "hb": 4
+     },
+     78
+    ],
+    [
+     {
+      "ha": 9,
+      "hf": 3,
+      "hg": 4,
+      "he": 2,
+      "hd": 18,
+      "hb": 20
+     },
+     19
+    ],
+    [
+     {
+      "ha": 8,
+      "hf": 7,
+      "hg": 5,
+      "he": 2,
+      "hd": 6,
+      "hb": 7
+     },
+     46
+    ],
+    [
+     {
+      "ha": 5,
+      "hf": 7,
+      "hg": 2,
+      "he": 5,
+      "hd": 3,
+      "hb": 19
+     },
+     25
+    ],
+    [
+     {
+      "ha": 6,
+      "hf": 3,
+      "hg": 3,
+      "he": 1,
+      "hd": 17,
+      "hb": 17
+     },
+     15
+    ],
+    [
+     {
+      "ha": 8,
+      "hf": 5,
+      "hg": 4,
+      "he": 1,
+      "hd": 1,
+      "hb": 10
+     },
+     36
+    ],
+    [
+     {
+      "ha": 3,
+      "hf": 7,
+      "hg": 2,
+      "he": 2,
+      "hd": 8,
+      "hb": 25
+     },
+     17
+    ]
+   ],
+   "story": "A canvas is 8 by 9 squares with a door of 1 by 4 squares cut out of it, for a show with 11 acrobats and 15 seats. How many squares of canvas remain?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "r-08",
+   "family": "rs_grape_share",
+   "concept": "share",
+   "domain": "vineyard",
+   "words": "{a} crates with {b} bunches of grapes each are shared equally among {c} buyers at a market {x} miles away with {y} stalls. How many bunches does each buyer get?",
+   "inputs": [
+    "ha",
+    "hg",
+    "hd",
+    "he",
+    "hb"
+   ],
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "var",
+      "hg"
+     ],
+     [
+      "var",
+      "he"
+     ]
+    ],
+    [
+     "var",
+     "ha"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hg": 10,
+      "he": 3,
+      "ha": 4,
+      "hb": 13,
+      "hd": 13
+     },
+     7
+    ],
+    [
+     {
+      "hg": 10,
+      "he": 10,
+      "ha": 3,
+      "hb": 25,
+      "hd": 21
+     },
+     33
+    ],
+    [
+     {
+      "hg": 6,
+      "he": 12,
+      "ha": 2,
+      "hb": 2,
+      "hd": 11
+     },
+     36
+    ],
+    [
+     {
+      "hg": 2,
+      "he": 7,
+      "ha": 3,
+      "hb": 1,
+      "hd": 18
+     },
+     4
+    ],
+    [
+     {
+      "hg": 10,
+      "he": 10,
+      "ha": 6,
+      "hb": 4,
+      "hd": 11
+     },
+     16
+    ],
+    [
+     {
+      "hg": 4,
+      "he": 5,
+      "ha": 3,
+      "hb": 19,
+      "hd": 20
+     },
+     6
+    ],
+    [
+     {
+      "hg": 12,
+      "he": 12,
+      "ha": 4,
+      "hb": 16,
+      "hd": 12
+     },
+     36
+    ],
+    [
+     {
+      "hg": 3,
+      "he": 8,
+      "ha": 5,
+      "hb": 14,
+      "hd": 13
+     },
+     4
+    ],
+    [
+     {
+      "hg": 5,
+      "he": 7,
+      "ha": 2,
+      "hb": 8,
+      "hd": 2
+     },
+     17
+    ],
+    [
+     {
+      "hg": 9,
+      "he": 12,
+      "ha": 3,
+      "hb": 22,
+      "hd": 23
+     },
+     36
+    ],
+    [
+     {
+      "hg": 4,
+      "he": 11,
+      "ha": 4,
+      "hb": 7,
+      "hd": 1
+     },
+     11
+    ]
+   ],
+   "story": "10 crates with 3 bunches of grapes each are shared equally among 4 buyers at a market 13 miles away with 13 stalls. How many bunches does each buyer get?",
+   "cold_certified": true,
+   "cold_evaluations": 8592
+  },
+  {
+   "task_id": "r-09",
+   "family": "rs_avg_snow",
+   "concept": "mean2",
+   "domain": "ski resort",
+   "words": "With {x} lifts open and {y} instructors on duty, the snow is {a} centimeters deep at the top and {b} centimeters at the bottom. What is the average of the two depths?",
+   "inputs": [
+    "hf",
+    "hc",
+    "hd",
+    "hg"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "hc"
+     ],
+     [
+      "var",
+      "hd"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hc": 16,
+      "hd": 15,
+      "hf": 9,
+      "hg": 2
+     },
+     15
+    ],
+    [
+     {
+      "hc": 8,
+      "hd": 13,
+      "hf": 8,
+      "hg": 25
+     },
+     10
+    ],
+    [
+     {
+      "hc": 36,
+      "hd": 28,
+      "hf": 17,
+      "hg": 24
+     },
+     32
+    ],
+    [
+     {
+      "hc": 26,
+      "hd": 23,
+      "hf": 6,
+      "hg": 8
+     },
+     24
+    ],
+    [
+     {
+      "hc": 23,
+      "hd": 22,
+      "hf": 12,
+      "hg": 9
+     },
+     22
+    ],
+    [
+     {
+      "hc": 18,
+      "hd": 34,
+      "hf": 21,
+      "hg": 11
+     },
+     26
+    ],
+    [
+     {
+      "hc": 19,
+      "hd": 38,
+      "hf": 9,
+      "hg": 13
+     },
+     28
+    ],
+    [
+     {
+      "hc": 23,
+      "hd": 35,
+      "hf": 4,
+      "hg": 23
+     },
+     29
+    ],
+    [
+     {
+      "hc": 18,
+      "hd": 4,
+      "hf": 23,
+      "hg": 21
+     },
+     11
+    ],
+    [
+     {
+      "hc": 17,
+      "hd": 16,
+      "hf": 13,
+      "hg": 9
+     },
+     16
+    ],
+    [
+     {
+      "hc": 10,
+      "hd": 31,
+      "hf": 11,
+      "hg": 16
+     },
+     20
+    ]
+   ],
+   "story": "With 9 lifts open and 2 instructors on duty, the snow is 16 centimeters deep at the top and 15 centimeters at the bottom. What is the average of the two depths?",
+   "cold_certified": true,
+   "cold_evaluations": 4852
+  },
+  {
+   "task_id": "r-10",
+   "family": "rs_ore_pool",
+   "concept": "pool_share",
+   "domain": "mine",
+   "words": "Two carts of {a} and {b} kilograms of ore are tipped together and divided equally into {c} bins, by {x} miners after {y} hours, near tunnel {z}. How much ore per bin?",
+   "inputs": [
+    "hf",
+    "hb",
+    "hd",
+    "he",
+    "hc",
+    "hg"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "hc"
+     ],
+     [
+      "var",
+      "he"
+     ]
+    ],
+    [
+     "var",
+     "hf"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hc": 27,
+      "he": 13,
+      "hf": 3,
+      "hg": 11,
+      "hd": 17,
+      "hb": 20
+     },
+     13
+    ],
+    [
+     {
+      "hc": 22,
+      "he": 19,
+      "hf": 6,
+      "hg": 20,
+      "hd": 21,
+      "hb": 3
+     },
+     6
+    ],
+    [
+     {
+      "hc": 30,
+      "he": 26,
+      "hf": 4,
+      "hg": 10,
+      "hd": 5,
+      "hb": 6
+     },
+     14
+    ],
+    [
+     {
+      "hc": 11,
+      "he": 15,
+      "hf": 5,
+      "hg": 22,
+      "hd": 18,
+      "hb": 12
+     },
+     5
+    ],
+    [
+     {
+      "hc": 9,
+      "he": 20,
+      "hf": 5,
+      "hg": 8,
+      "hd": 18,
+      "hb": 5
+     },
+     5
+    ],
+    [
+     {
+      "hc": 28,
+      "he": 6,
+      "hf": 2,
+      "hg": 20,
+      "hd": 8,
+      "hb": 18
+     },
+     17
+    ],
+    [
+     {
+      "hc": 22,
+      "he": 28,
+      "hf": 4,
+      "hg": 10,
+      "hd": 10,
+      "hb": 24
+     },
+     12
+    ],
+    [
+     {
+      "hc": 13,
+      "he": 23,
+      "hf": 5,
+      "hg": 12,
+      "hd": 23,
+      "hb": 7
+     },
+     7
+    ],
+    [
+     {
+      "hc": 23,
+      "he": 26,
+      "hf": 5,
+      "hg": 13,
+      "hd": 3,
+      "hb": 9
+     },
+     9
+    ],
+    [
+     {
+      "hc": 1,
+      "he": 8,
+      "hf": 2,
+      "hg": 23,
+      "hd": 18,
+      "hb": 20
+     },
+     4
+    ],
+    [
+     {
+      "hc": 5,
+      "he": 17,
+      "hf": 5,
+      "hg": 9,
+      "hd": 4,
+      "hb": 11
+     },
+     4
+    ]
+   ],
+   "story": "Two carts of 27 and 13 kilograms of ore are tipped together and divided equally into 3 bins, by 11 miners after 17 hours, near tunnel 20. How much ore per bin?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "r-11",
+   "family": "rs_stamp_left",
+   "concept": "leftover",
+   "domain": "post office",
+   "words": "{a} stamps are sorted into books of {b} by {x} clerks at counter {y}. How many stamps are left over without a full book?",
+   "inputs": [
+    "hc",
+    "hg",
+    "ha",
+    "he"
+   ],
+   "tree": [
+    "mod",
+    [
+     "var",
+     "ha"
+    ],
+    [
+     "var",
+     "hc"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "ha": 6,
+      "hc": 3,
+      "hg": 3,
+      "he": 12
+     },
+     0
+    ],
+    [
+     {
+      "ha": 24,
+      "hc": 8,
+      "hg": 14,
+      "he": 13
+     },
+     0
+    ],
+    [
+     {
+      "ha": 17,
+      "hc": 9,
+      "hg": 20,
+      "he": 18
+     },
+     8
+    ],
+    [
+     {
+      "ha": 53,
+      "hc": 6,
+      "hg": 18,
+      "he": 14
+     },
+     5
+    ],
+    [
+     {
+      "ha": 46,
+      "hc": 9,
+      "hg": 4,
+      "he": 19
+     },
+     1
+    ],
+    [
+     {
+      "ha": 33,
+      "hc": 7,
+      "hg": 25,
+      "he": 12
+     },
+     5
+    ],
+    [
+     {
+      "ha": 46,
+      "hc": 5,
+      "hg": 16,
+      "he": 13
+     },
+     1
+    ],
+    [
+     {
+      "ha": 19,
+      "hc": 4,
+      "hg": 21,
+      "he": 19
+     },
+     3
+    ],
+    [
+     {
+      "ha": 18,
+      "hc": 5,
+      "hg": 5,
+      "he": 1
+     },
+     3
+    ],
+    [
+     {
+      "ha": 14,
+      "hc": 4,
+      "hg": 6,
+      "he": 10
+     },
+     2
+    ],
+    [
+     {
+      "ha": 56,
+      "hc": 6,
+      "hg": 20,
+      "he": 25
+     },
+     2
+    ]
+   ],
+   "story": "6 stamps are sorted into books of 3 by 3 clerks at counter 12. How many stamps are left over without a full book?",
+   "cold_certified": true,
+   "cold_evaluations": 161
+  },
+  {
+   "task_id": "r-12",
+   "family": "rs_sled_needed",
+   "concept": "boxes_needed",
+   "domain": "ski resort",
+   "words": "{a} skiers ride up in gondolas that seat {b} each, to a peak {x} meters high, while {y} skiers rest and {z} gondolas are idle. How many gondolas are needed to carry everyone?",
+   "inputs": [
+    "hg",
+    "hb",
+    "he",
+    "hf",
+    "hd"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "hg"
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "he"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "he"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hg": 8,
+      "he": 5,
+      "hd": 11,
+      "hf": 10,
+      "hb": 14
+     },
+     2
+    ],
+    [
+     {
+      "hg": 30,
+      "he": 2,
+      "hd": 19,
+      "hf": 15,
+      "hb": 9
+     },
+     15
+    ],
+    [
+     {
+      "hg": 54,
+      "he": 4,
+      "hd": 11,
+      "hf": 9,
+      "hb": 21
+     },
+     14
+    ],
+    [
+     {
+      "hg": 50,
+      "he": 9,
+      "hd": 6,
+      "hf": 16,
+      "hb": 11
+     },
+     6
+    ],
+    [
+     {
+      "hg": 51,
+      "he": 2,
+      "hd": 3,
+      "hf": 23,
+      "hb": 3
+     },
+     26
+    ],
+    [
+     {
+      "hg": 59,
+      "he": 4,
+      "hd": 6,
+      "hf": 5,
+      "hb": 11
+     },
+     15
+    ],
+    [
+     {
+      "hg": 2,
+      "he": 7,
+      "hd": 6,
+      "hf": 19,
+      "hb": 10
+     },
+     1
+    ],
+    [
+     {
+      "hg": 14,
+      "he": 4,
+      "hd": 4,
+      "hf": 8,
+      "hb": 8
+     },
+     4
+    ],
+    [
+     {
+      "hg": 11,
+      "he": 2,
+      "hd": 1,
+      "hf": 24,
+      "hb": 13
+     },
+     6
+    ],
+    [
+     {
+      "hg": 9,
+      "he": 6,
+      "hd": 2,
+      "hf": 3,
+      "hb": 9
+     },
+     2
+    ],
+    [
+     {
+      "hg": 56,
+      "he": 5,
+      "hd": 19,
+      "hf": 16,
+      "hb": 6
+     },
+     12
+    ]
+   ],
+   "story": "8 skiers ride up in gondolas that seat 5 each, to a peak 11 meters high, while 10 skiers rest and 14 gondolas are idle. How many gondolas are needed to carry everyone?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "r-13",
+   "family": "rs_clown_kits",
+   "concept": "bundle",
+   "domain": "circus",
+   "words": "Each kit has {a} balls and {b} hoops, and the circus packs {c} kits for a tour of {x} towns with {y} trucks. How many props in all the kits?",
+   "inputs": [
+    "hc",
+    "hb",
+    "ha",
+    "hf",
+    "he"
+   ],
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "var",
+      "hc"
+     ],
+     [
+      "var",
+      "hb"
+     ]
+    ],
+    [
+     "var",
+     "he"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hc": 3,
+      "hb": 1,
+      "he": 6,
+      "hf": 3,
+      "ha": 17
+     },
+     24
+    ],
+    [
+     {
+      "hc": 3,
+      "hb": 3,
+      "he": 6,
+      "hf": 8,
+      "ha": 8
+     },
+     36
+    ],
+    [
+     {
+      "hc": 4,
+      "hb": 6,
+      "he": 2,
+      "hf": 1,
+      "ha": 5
+     },
+     20
+    ],
+    [
+     {
+      "hc": 2,
+      "hb": 9,
+      "he": 9,
+      "hf": 22,
+      "ha": 23
+     },
+     99
+    ],
+    [
+     {
+      "hc": 3,
+      "hb": 1,
+      "he": 7,
+      "hf": 11,
+      "ha": 11
+     },
+     28
+    ],
+    [
+     {
+      "hc": 6,
+      "hb": 5,
+      "he": 6,
+      "hf": 23,
+      "ha": 15
+     },
+     66
+    ],
+    [
+     {
+      "hc": 9,
+      "hb": 7,
+      "he": 5,
+      "hf": 4,
+      "ha": 9
+     },
+     80
+    ],
+    [
+     {
+      "hc": 9,
+      "hb": 8,
+      "he": 2,
+      "hf": 3,
+      "ha": 10
+     },
+     34
+    ],
+    [
+     {
+      "hc": 6,
+      "hb": 3,
+      "he": 4,
+      "hf": 7,
+      "ha": 24
+     },
+     36
+    ],
+    [
+     {
+      "hc": 7,
+      "hb": 8,
+      "he": 4,
+      "hf": 13,
+      "ha": 2
+     },
+     60
+    ],
+    [
+     {
+      "hc": 6,
+      "hb": 2,
+      "he": 6,
+      "hf": 18,
+      "ha": 18
+     },
+     48
+    ]
+   ],
+   "story": "Each kit has 3 balls and 1 hoops, and the circus packs 6 kits for a tour of 3 towns with 17 trucks. How many props in all the kits?",
+   "cold_certified": true,
+   "cold_evaluations": 5788
+  },
+  {
+   "task_id": "r-14",
+   "family": "rs_walk_telescope",
+   "concept": "round_trip",
+   "domain": "observatory",
+   "words": "The telescope is {a} steps away and an astronomer goes there and back {b} times a night, carrying {x} charts, under {y} stars and {z} clouds. How many steps in total?",
+   "inputs": [
+    "hc",
+    "hf",
+    "hg",
+    "hb",
+    "hd"
+   ],
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "hb"
+     ],
+     [
+      "var",
+      "hc"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hb": 10,
+      "hc": 7,
+      "hf": 1,
+      "hg": 16,
+      "hd": 8
+     },
+     140
+    ],
+    [
+     {
+      "hb": 17,
+      "hc": 1,
+      "hf": 12,
+      "hg": 24,
+      "hd": 10
+     },
+     34
+    ],
+    [
+     {
+      "hb": 14,
+      "hc": 9,
+      "hf": 24,
+      "hg": 5,
+      "hd": 23
+     },
+     252
+    ],
+    [
+     {
+      "hb": 14,
+      "hc": 2,
+      "hf": 15,
+      "hg": 4,
+      "hd": 21
+     },
+     56
+    ],
+    [
+     {
+      "hb": 9,
+      "hc": 3,
+      "hf": 21,
+      "hg": 16,
+      "hd": 21
+     },
+     54
+    ],
+    [
+     {
+      "hb": 11,
+      "hc": 5,
+      "hf": 3,
+      "hg": 15,
+      "hd": 10
+     },
+     110
+    ],
+    [
+     {
+      "hb": 9,
+      "hc": 5,
+      "hf": 21,
+      "hg": 25,
+      "hd": 11
+     },
+     90
+    ],
+    [
+     {
+      "hb": 20,
+      "hc": 8,
+      "hf": 21,
+      "hg": 21,
+      "hd": 23
+     },
+     320
+    ],
+    [
+     {
+      "hb": 18,
+      "hc": 9,
+      "hf": 19,
+      "hg": 23,
+      "hd": 24
+     },
+     324
+    ],
+    [
+     {
+      "hb": 6,
+      "hc": 7,
+      "hf": 2,
+      "hg": 3,
+      "hd": 24
+     },
+     84
+    ],
+    [
+     {
+      "hb": 12,
+      "hc": 7,
+      "hf": 23,
+      "hg": 16,
+      "hd": 23
+     },
+     168
+    ]
+   ],
+   "story": "The telescope is 10 steps away and an astronomer goes there and back 7 times a night, carrying 1 charts, under 16 stars and 8 clouds. How many steps in total?",
+   "cold_certified": true,
+   "cold_evaluations": 5604
+  },
+  {
+   "task_id": "r-15",
+   "family": "rs_picker_pay",
+   "concept": "sum_times",
+   "domain": "vineyard",
+   "words": "A picker works {a}, {b} and {c} hours on three days and earns {d} dollars per hour, on a vineyard of {x} rows with {y} sheds. How many dollars in total?",
+   "inputs": [
+    "hf",
+    "hb",
+    "hd",
+    "he",
+    "hc",
+    "ha"
+   ],
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "add",
+      [
+       "var",
+       "hd"
+      ],
+      [
+       "var",
+       "hf"
+      ]
+     ],
+     [
+      "var",
+      "hc"
+     ]
+    ],
+    [
+     "var",
+     "he"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hd": 4,
+      "hf": 5,
+      "hc": 6,
+      "he": 5,
+      "hb": 3,
+      "ha": 15
+     },
+     75
+    ],
+    [
+     {
+      "hd": 5,
+      "hf": 8,
+      "hc": 9,
+      "he": 5,
+      "hb": 13,
+      "ha": 10
+     },
+     110
+    ],
+    [
+     {
+      "hd": 8,
+      "hf": 6,
+      "hc": 6,
+      "he": 6,
+      "hb": 23,
+      "ha": 5
+     },
+     120
+    ],
+    [
+     {
+      "hd": 5,
+      "hf": 5,
+      "hc": 3,
+      "he": 2,
+      "hb": 12,
+      "ha": 12
+     },
+     26
+    ],
+    [
+     {
+      "hd": 6,
+      "hf": 8,
+      "hc": 5,
+      "he": 6,
+      "hb": 16,
+      "ha": 19
+     },
+     114
+    ],
+    [
+     {
+      "hd": 2,
+      "hf": 8,
+      "hc": 1,
+      "he": 3,
+      "hb": 8,
+      "ha": 22
+     },
+     33
+    ],
+    [
+     {
+      "hd": 9,
+      "hf": 4,
+      "hc": 9,
+      "he": 5,
+      "hb": 12,
+      "ha": 14
+     },
+     110
+    ],
+    [
+     {
+      "hd": 3,
+      "hf": 4,
+      "hc": 4,
+      "he": 3,
+      "hb": 3,
+      "ha": 7
+     },
+     33
+    ],
+    [
+     {
+      "hd": 1,
+      "hf": 6,
+      "hc": 9,
+      "he": 4,
+      "hb": 12,
+      "ha": 12
+     },
+     64
+    ],
+    [
+     {
+      "hd": 3,
+      "hf": 8,
+      "hc": 8,
+      "he": 3,
+      "hb": 12,
+      "ha": 4
+     },
+     57
+    ],
+    [
+     {
+      "hd": 7,
+      "hf": 1,
+      "hc": 9,
+      "he": 6,
+      "hb": 3,
+      "ha": 7
+     },
+     102
+    ]
+   ],
+   "story": "A picker works 4, 5 and 6 hours on three days and earns 5 dollars per hour, on a vineyard of 3 rows with 15 sheds. How many dollars in total?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "r-16",
+   "family": "rs_coal_used",
+   "concept": "net",
+   "domain": "mine",
+   "words": "A pile has {a} tons of coal; {b} tons are shipped in the morning and {c} tons in the afternoon, by {x} trains with {y} wagons and {z} drivers. How many tons are left?",
+   "inputs": [
+    "ha",
+    "hf",
+    "he",
+    "hg",
+    "hc",
+    "hd"
+   ],
+   "tree": [
+    "sub",
+    [
+     "sub",
+     [
+      "var",
+      "hf"
+     ],
+     [
+      "var",
+      "hg"
+     ]
+    ],
+    [
+     "var",
+     "he"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hf": 38,
+      "hg": 15,
+      "he": 12,
+      "ha": 11,
+      "hc": 22,
+      "hd": 19
+     },
+     11
+    ],
+    [
+     {
+      "hf": 45,
+      "hg": 17,
+      "he": 7,
+      "ha": 21,
+      "hc": 9,
+      "hd": 9
+     },
+     21
+    ],
+    [
+     {
+      "hf": 69,
+      "hg": 16,
+      "he": 13,
+      "ha": 2,
+      "hc": 6,
+      "hd": 4
+     },
+     40
+    ],
+    [
+     {
+      "hf": 41,
+      "hg": 10,
+      "he": 15,
+      "ha": 18,
+      "hc": 5,
+      "hd": 7
+     },
+     16
+    ],
+    [
+     {
+      "hf": 61,
+      "hg": 15,
+      "he": 12,
+      "ha": 2,
+      "hc": 9,
+      "hd": 14
+     },
+     34
+    ],
+    [
+     {
+      "hf": 43,
+      "hg": 11,
+      "he": 1,
+      "ha": 16,
+      "hc": 3,
+      "hd": 21
+     },
+     31
+    ],
+    [
+     {
+      "hf": 36,
+      "hg": 11,
+      "he": 17,
+      "ha": 3,
+      "hc": 4,
+      "hd": 17
+     },
+     8
+    ],
+    [
+     {
+      "hf": 52,
+      "hg": 8,
+      "he": 7,
+      "ha": 2,
+      "hc": 19,
+      "hd": 10
+     },
+     37
+    ],
+    [
+     {
+      "hf": 49,
+      "hg": 8,
+      "he": 6,
+      "ha": 21,
+      "hc": 6,
+      "hd": 10
+     },
+     35
+    ],
+    [
+     {
+      "hf": 9,
+      "hg": 7,
+      "he": 2,
+      "ha": 21,
+      "hc": 8,
+      "hd": 9
+     },
+     0
+    ],
+    [
+     {
+      "hf": 34,
+      "hg": 2,
+      "he": 15,
+      "ha": 12,
+      "hc": 12,
+      "hd": 5
+     },
+     17
+    ]
+   ],
+   "story": "A pile has 38 tons of coal; 15 tons are shipped in the morning and 12 tons in the afternoon, by 11 trains with 22 wagons and 19 drivers. How many tons are left?",
+   "cold_certified": true,
+   "cold_evaluations": 2827
+  },
+  {
+   "task_id": "r-17",
+   "family": "rs_three_vans",
+   "concept": "triple_sum",
+   "domain": "post office",
+   "words": "Three vans carry {a}, {b} and {c} letters, and the postmaster has {x} stamps and {y} keys. How many letters altogether?",
+   "inputs": [
+    "hd",
+    "hf",
+    "ha",
+    "hg",
+    "hc"
+   ],
+   "tree": [
+    "add",
+    [
+     "add",
+     [
+      "var",
+      "hf"
+     ],
+     [
+      "var",
+      "ha"
+     ]
+    ],
+    [
+     "var",
+     "hc"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hf": 8,
+      "ha": 16,
+      "hc": 18,
+      "hg": 24,
+      "hd": 9
+     },
+     42
+    ],
+    [
+     {
+      "hf": 11,
+      "ha": 39,
+      "hc": 21,
+      "hg": 6,
+      "hd": 8
+     },
+     71
+    ],
+    [
+     {
+      "hf": 37,
+      "ha": 33,
+      "hc": 11,
+      "hg": 4,
+      "hd": 18
+     },
+     81
+    ],
+    [
+     {
+      "hf": 28,
+      "ha": 19,
+      "hc": 33,
+      "hg": 22,
+      "hd": 9
+     },
+     80
+    ],
+    [
+     {
+      "hf": 23,
+      "ha": 8,
+      "hc": 26,
+      "hg": 9,
+      "hd": 10
+     },
+     57
+    ],
+    [
+     {
+      "hf": 34,
+      "ha": 37,
+      "hc": 8,
+      "hg": 6,
+      "hd": 21
+     },
+     79
+    ],
+    [
+     {
+      "hf": 35,
+      "ha": 36,
+      "hc": 4,
+      "hg": 16,
+      "hd": 4
+     },
+     75
+    ],
+    [
+     {
+      "hf": 22,
+      "ha": 32,
+      "hc": 34,
+      "hg": 21,
+      "hd": 5
+     },
+     88
+    ],
+    [
+     {
+      "hf": 36,
+      "ha": 24,
+      "hc": 15,
+      "hg": 23,
+      "hd": 20
+     },
+     75
+    ],
+    [
+     {
+      "hf": 26,
+      "ha": 14,
+      "hc": 4,
+      "hg": 13,
+      "hd": 21
+     },
+     44
+    ],
+    [
+     {
+      "hf": 16,
+      "ha": 20,
+      "hc": 20,
+      "hg": 21,
+      "hd": 14
+     },
+     56
+    ]
+   ],
+   "story": "Three vans carry 8, 16 and 18 letters, and the postmaster has 24 stamps and 9 keys. How many letters altogether?",
+   "cold_certified": true,
+   "cold_evaluations": 371
+  },
+  {
+   "task_id": "r-18",
+   "family": "rs_avg_jugglers",
+   "concept": "avg3",
+   "domain": "circus",
+   "words": "The circus sells {a}, {b} and {c} tickets on three nights, with {x} jugglers, {y} lions and {z} tents. What is the average number of tickets per night?",
+   "inputs": [
+    "hg",
+    "ha",
+    "he",
+    "hd",
+    "hc",
+    "hf"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "var",
+       "hd"
+      ],
+      [
+       "var",
+       "hg"
+      ]
+     ],
+     [
+      "var",
+      "ha"
+     ]
+    ],
+    [
+     "const",
+     3
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hd": 30,
+      "hg": 40,
+      "ha": 36,
+      "hc": 10,
+      "he": 23,
+      "hf": 23
+     },
+     35
+    ],
+    [
+     {
+      "hd": 32,
+      "hg": 22,
+      "ha": 33,
+      "hc": 9,
+      "he": 16,
+      "hf": 10
+     },
+     29
+    ],
+    [
+     {
+      "hd": 22,
+      "hg": 9,
+      "ha": 21,
+      "hc": 15,
+      "he": 2,
+      "hf": 21
+     },
+     17
+    ],
+    [
+     {
+      "hd": 10,
+      "hg": 28,
+      "ha": 13,
+      "hc": 24,
+      "he": 25,
+      "hf": 19
+     },
+     17
+    ],
+    [
+     {
+      "hd": 22,
+      "hg": 34,
+      "ha": 37,
+      "hc": 11,
+      "he": 4,
+      "hf": 2
+     },
+     31
+    ],
+    [
+     {
+      "hd": 17,
+      "hg": 19,
+      "ha": 10,
+      "hc": 25,
+      "he": 10,
+      "hf": 16
+     },
+     15
+    ],
+    [
+     {
+      "hd": 5,
+      "hg": 2,
+      "ha": 18,
+      "hc": 16,
+      "he": 4,
+      "hf": 13
+     },
+     8
+    ],
+    [
+     {
+      "hd": 4,
+      "hg": 30,
+      "ha": 18,
+      "hc": 2,
+      "he": 20,
+      "hf": 14
+     },
+     17
+    ],
+    [
+     {
+      "hd": 2,
+      "hg": 24,
+      "ha": 1,
+      "hc": 18,
+      "he": 25,
+      "hf": 7
+     },
+     9
+    ],
+    [
+     {
+      "hd": 7,
+      "hg": 29,
+      "ha": 8,
+      "hc": 14,
+      "he": 18,
+      "hf": 10
+     },
+     14
+    ],
+    [
+     {
+      "hd": 20,
+      "hg": 37,
+      "ha": 5,
+      "hc": 5,
+      "he": 15,
+      "hf": 21
+     },
+     20
+    ]
+   ],
+   "story": "The circus sells 30, 40 and 36 tickets on three nights, with 10 jugglers, 23 lions and 23 tents. What is the average number of tickets per night?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "r-19",
+   "family": "rs_lens_split",
+   "concept": "split_bill",
+   "domain": "observatory",
+   "words": "{a} lenses cost {b} dollars each plus a {c} dollar shipping fee, and the bill is split equally among {d} astronomers; the dome is {x} meters wide with {y} windows. How much does each astronomer pay?",
+   "inputs": [
+    "hg",
+    "hb",
+    "he",
+    "hc",
+    "hf",
+    "hd"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "hc"
+      ],
+      [
+       "var",
+       "hd"
+      ]
+     ],
+     [
+      "var",
+      "hf"
+     ]
+    ],
+    [
+     "var",
+     "hb"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hc": 7,
+      "hd": 2,
+      "hf": 13,
+      "hb": 6,
+      "he": 20,
+      "hg": 6
+     },
+     4
+    ],
+    [
+     {
+      "hc": 3,
+      "hd": 3,
+      "hf": 12,
+      "hb": 5,
+      "he": 24,
+      "hg": 7
+     },
+     4
+    ],
+    [
+     {
+      "hc": 2,
+      "hd": 8,
+      "hf": 20,
+      "hb": 6,
+      "he": 7,
+      "hg": 2
+     },
+     6
+    ],
+    [
+     {
+      "hc": 8,
+      "hd": 3,
+      "hf": 16,
+      "hb": 3,
+      "he": 6,
+      "hg": 20
+     },
+     13
+    ],
+    [
+     {
+      "hc": 6,
+      "hd": 4,
+      "hf": 13,
+      "hb": 6,
+      "he": 24,
+      "hg": 16
+     },
+     6
+    ],
+    [
+     {
+      "hc": 7,
+      "hd": 6,
+      "hf": 1,
+      "hb": 2,
+      "he": 9,
+      "hg": 14
+     },
+     21
+    ],
+    [
+     {
+      "hc": 9,
+      "hd": 10,
+      "hf": 8,
+      "hb": 6,
+      "he": 3,
+      "hg": 17
+     },
+     16
+    ],
+    [
+     {
+      "hc": 5,
+      "hd": 2,
+      "hf": 7,
+      "hb": 2,
+      "he": 25,
+      "hg": 24
+     },
+     8
+    ],
+    [
+     {
+      "hc": 3,
+      "hd": 7,
+      "hf": 5,
+      "hb": 6,
+      "he": 6,
+      "hg": 19
+     },
+     4
+    ],
+    [
+     {
+      "hc": 7,
+      "hd": 4,
+      "hf": 10,
+      "hb": 5,
+      "he": 16,
+      "hg": 11
+     },
+     7
+    ],
+    [
+     {
+      "hc": 9,
+      "hd": 10,
+      "hf": 13,
+      "hb": 4,
+      "he": 3,
+      "hg": 23
+     },
+     25
+    ]
+   ],
+   "story": "7 lenses cost 2 dollars each plus a 13 dollar shipping fee, and the bill is split equally among 6 astronomers; the dome is 20 meters wide with 6 windows. How much does each astronomer pay?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "r-20",
+   "family": "rs_wine_savings",
+   "concept": "save_days",
+   "domain": "vineyard",
+   "words": "A press makes {a} bottles a day and sells {b} bottles a day for {c} days, starting with {d} bottles in store, in a cellar of {x} rooms with {y} lamps and {z} doors. How many bottles are in store at the end?",
+   "inputs": [
+    "hc",
+    "hd",
+    "ha",
+    "hb",
+    "hf",
+    "hg",
+    "he"
+   ],
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "hg"
+      ],
+      [
+       "var",
+       "hb"
+      ]
+     ],
+     [
+      "var",
+      "hf"
+     ]
+    ],
+    [
+     "var",
+     "hc"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hg": 9,
+      "hb": 7,
+      "hf": 8,
+      "hc": 23,
+      "ha": 20,
+      "hd": 23,
+      "he": 7
+     },
+     39
+    ],
+    [
+     {
+      "hg": 7,
+      "hb": 2,
+      "hf": 6,
+      "hc": 5,
+      "ha": 10,
+      "hd": 4,
+      "he": 2
+     },
+     35
+    ],
+    [
+     {
+      "hg": 11,
+      "hb": 2,
+      "hf": 3,
+      "hc": 19,
+      "ha": 21,
+      "hd": 17,
+      "he": 5
+     },
+     46
+    ],
+    [
+     {
+      "hg": 15,
+      "hb": 3,
+      "hf": 5,
+      "hc": 18,
+      "ha": 16,
+      "hd": 17,
+      "he": 13
+     },
+     78
+    ],
+    [
+     {
+      "hg": 4,
+      "hb": 2,
+      "hf": 3,
+      "hc": 15,
+      "ha": 8,
+      "hd": 21,
+      "he": 10
+     },
+     21
+    ],
+    [
+     {
+      "hg": 7,
+      "hb": 6,
+      "hf": 8,
+      "hc": 5,
+      "ha": 1,
+      "hd": 11,
+      "he": 2
+     },
+     13
+    ],
+    [
+     {
+      "hg": 11,
+      "hb": 9,
+      "hf": 8,
+      "hc": 8,
+      "ha": 12,
+      "hd": 23,
+      "he": 23
+     },
+     24
+    ],
+    [
+     {
+      "hg": 14,
+      "hb": 8,
+      "hf": 8,
+      "hc": 24,
+      "ha": 5,
+      "hd": 17,
+      "he": 19
+     },
+     72
+    ],
+    [
+     {
+      "hg": 15,
+      "hb": 7,
+      "hf": 3,
+      "hc": 26,
+      "ha": 24,
+      "hd": 20,
+      "he": 14
+     },
+     50
+    ],
+    [
+     {
+      "hg": 11,
+      "hb": 7,
+      "hf": 6,
+      "hc": 24,
+      "ha": 7,
+      "hd": 3,
+      "he": 6
+     },
+     48
+    ],
+    [
+     {
+      "hg": 19,
+      "hb": 9,
+      "hf": 2,
+      "hc": 14,
+      "ha": 16,
+      "hd": 12,
+      "he": 22
+     },
+     34
+    ]
+   ],
+   "story": "A press makes 9 bottles a day and sells 7 bottles a day for 8 days, starting with 23 bottles in store, in a cellar of 20 rooms with 23 lamps and 7 doors. How many bottles are in store at the end?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "r-21",
+   "family": "rs_courier_weeks",
+   "concept": "weeks_pay",
+   "domain": "post office",
+   "words": "A courier delivers {a} routes a week at {b} dollars per route plus a {c} dollar bonus each week, for {d} weeks, with {x} bikes and {y} bags. How much is earned in total?",
+   "inputs": [
+    "hc",
+    "ha",
+    "hb",
+    "hf",
+    "hd",
+    "he"
+   ],
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "hd"
+      ],
+      [
+       "var",
+       "ha"
+      ]
+     ],
+     [
+      "var",
+      "hf"
+     ]
+    ],
+    [
+     "var",
+     "hc"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hd": 3,
+      "ha": 2,
+      "hf": 13,
+      "hc": 3,
+      "hb": 8,
+      "he": 6
+     },
+     57
+    ],
+    [
+     {
+      "hd": 3,
+      "ha": 5,
+      "hf": 7,
+      "hc": 4,
+      "hb": 22,
+      "he": 19
+     },
+     88
+    ],
+    [
+     {
+      "hd": 9,
+      "ha": 4,
+      "hf": 13,
+      "hc": 3,
+      "hb": 9,
+      "he": 1
+     },
+     147
+    ],
+    [
+     {
+      "hd": 3,
+      "ha": 6,
+      "hf": 2,
+      "hc": 3,
+      "hb": 8,
+      "he": 10
+     },
+     60
+    ],
+    [
+     {
+      "hd": 5,
+      "ha": 5,
+      "hf": 13,
+      "hc": 6,
+      "hb": 15,
+      "he": 18
+     },
+     228
+    ],
+    [
+     {
+      "hd": 6,
+      "ha": 4,
+      "hf": 8,
+      "hc": 6,
+      "hb": 5,
+      "he": 14
+     },
+     192
+    ],
+    [
+     {
+      "hd": 6,
+      "ha": 4,
+      "hf": 7,
+      "hc": 6,
+      "hb": 24,
+      "he": 22
+     },
+     186
+    ],
+    [
+     {
+      "hd": 2,
+      "ha": 6,
+      "hf": 5,
+      "hc": 2,
+      "hb": 18,
+      "he": 24
+     },
+     34
+    ],
+    [
+     {
+      "hd": 4,
+      "ha": 8,
+      "hf": 2,
+      "hc": 6,
+      "hb": 1,
+      "he": 16
+     },
+     204
+    ],
+    [
+     {
+      "hd": 7,
+      "ha": 6,
+      "hf": 5,
+      "hc": 2,
+      "hb": 11,
+      "he": 16
+     },
+     94
+    ],
+    [
+     {
+      "hd": 2,
+      "ha": 6,
+      "hf": 15,
+      "hc": 5,
+      "hb": 5,
+      "he": 15
+     },
+     135
+    ]
+   ],
+   "story": "A courier delivers 3 routes a week at 2 dollars per route plus a 13 dollar bonus each week, for 3 weeks, with 8 bikes and 6 bags. How much is earned in total?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "r-22",
+   "family": "rs_shaft_trips",
+   "concept": "trips_total",
+   "domain": "mine",
+   "words": "The lift is {a} meters to the first shaft and {b} more meters to the seam; a miner goes there and back {c} times carrying {x} tools for {y} hours with {z} lamps. How many meters in total?",
+   "inputs": [
+    "hf",
+    "hb",
+    "ha",
+    "hg",
+    "hc",
+    "hd"
+   ],
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "hb"
+      ],
+      [
+       "var",
+       "hf"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "var",
+     "hd"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hb": 10,
+      "hf": 6,
+      "hd": 3,
+      "hc": 14,
+      "hg": 3,
+      "ha": 1
+     },
+     96
+    ],
+    [
+     {
+      "hb": 4,
+      "hf": 8,
+      "hd": 3,
+      "hc": 15,
+      "hg": 3,
+      "ha": 5
+     },
+     72
+    ],
+    [
+     {
+      "hb": 10,
+      "hf": 2,
+      "hd": 7,
+      "hc": 24,
+      "hg": 21,
+      "ha": 23
+     },
+     168
+    ],
+    [
+     {
+      "hb": 10,
+      "hf": 14,
+      "hd": 7,
+      "hc": 4,
+      "hg": 4,
+      "ha": 15
+     },
+     336
+    ],
+    [
+     {
+      "hb": 14,
+      "hf": 2,
+      "hd": 5,
+      "hc": 23,
+      "hg": 15,
+      "ha": 19
+     },
+     160
+    ],
+    [
+     {
+      "hb": 9,
+      "hf": 14,
+      "hd": 5,
+      "hc": 22,
+      "hg": 22,
+      "ha": 20
+     },
+     230
+    ],
+    [
+     {
+      "hb": 15,
+      "hf": 12,
+      "hd": 4,
+      "hc": 17,
+      "hg": 11,
+      "ha": 1
+     },
+     216
+    ],
+    [
+     {
+      "hb": 4,
+      "hf": 4,
+      "hd": 7,
+      "hc": 25,
+      "hg": 12,
+      "ha": 13
+     },
+     112
+    ],
+    [
+     {
+      "hb": 13,
+      "hf": 1,
+      "hd": 3,
+      "hc": 4,
+      "hg": 5,
+      "ha": 12
+     },
+     84
+    ],
+    [
+     {
+      "hb": 8,
+      "hf": 2,
+      "hd": 3,
+      "hc": 10,
+      "hg": 19,
+      "ha": 2
+     },
+     60
+    ],
+    [
+     {
+      "hb": 4,
+      "hf": 5,
+      "hd": 5,
+      "hc": 22,
+      "hg": 19,
+      "ha": 24
+     },
+     90
+    ]
+   ],
+   "story": "The lift is 10 meters to the first shaft and 6 more meters to the seam; a miner goes there and back 3 times carrying 14 tools for 3 hours with 1 lamps. How many meters in total?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "r-23",
+   "family": "rs_paint_lodges",
+   "concept": "paint_rest",
+   "domain": "ski resort",
+   "words": "Each lodge wall is {a} by {b} boards with {c} boards taken by a window, and there are {d} walls on a lodge {x} years old with {y} beds. How many boards are painted on all the walls?",
+   "inputs": [
+    "hc",
+    "ha",
+    "hd",
+    "hg",
+    "hb",
+    "hf"
+   ],
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "mul",
+      [
+       "var",
+       "hb"
+      ],
+      [
+       "var",
+       "hc"
+      ]
+     ],
+     [
+      "var",
+      "ha"
+     ]
+    ],
+    [
+     "var",
+     "hg"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "hb": 6,
+      "hc": 5,
+      "ha": 7,
+      "hg": 4,
+      "hd": 12,
+      "hf": 19
+     },
+     92
+    ],
+    [
+     {
+      "hb": 7,
+      "hc": 2,
+      "ha": 2,
+      "hg": 3,
+      "hd": 3,
+      "hf": 11
+     },
+     36
+    ],
+    [
+     {
+      "hb": 4,
+      "hc": 5,
+      "ha": 11,
+      "hg": 3,
+      "hd": 4,
+      "hf": 4
+     },
+     27
+    ],
+    [
+     {
+      "hb": 9,
+      "hc": 2,
+      "ha": 1,
+      "hg": 5,
+      "hd": 5,
+      "hf": 16
+     },
+     85
+    ],
+    [
+     {
+      "hb": 6,
+      "hc": 4,
+      "ha": 21,
+      "hg": 2,
+      "hd": 12,
+      "hf": 1
+     },
+     6
+    ],
+    [
+     {
+      "hb": 6,
+      "hc": 8,
+      "ha": 36,
+      "hg": 3,
+      "hd": 14,
+      "hf": 20
+     },
+     36
+    ],
+    [
+     {
+      "hb": 8,
+      "hc": 2,
+      "ha": 10,
+      "hg": 3,
+      "hd": 8,
+      "hf": 23
+     },
+     18
+    ],
+    [
+     {
+      "hb": 7,
+      "hc": 3,
+      "ha": 4,
+      "hg": 3,
+      "hd": 9,
+      "hf": 18
+     },
+     51
+    ],
+    [
+     {
+      "hb": 6,
+      "hc": 6,
+      "ha": 24,
+      "hg": 5,
+      "hd": 1,
+      "hf": 2
+     },
+     60
+    ],
+    [
+     {
+      "hb": 6,
+      "hc": 9,
+      "ha": 19,
+      "hg": 5,
+      "hd": 23,
+      "hf": 25
+     },
+     175
+    ],
+    [
+     {
+      "hb": 6,
+      "hc": 8,
+      "ha": 10,
+      "hg": 3,
+      "hd": 23,
+      "hf": 9
+     },
+     114
+    ]
+   ],
+   "story": "Each lodge wall is 6 by 5 boards with 7 boards taken by a window, and there are 4 walls on a lodge 12 years old with 19 beds. How many boards are painted on all the walls?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  }
+ ]
+}
