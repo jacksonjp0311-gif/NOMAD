@@ -66,3 +66,11 @@ that adds this file.
    judged). COMBINE and CEIL are excluded (their owners have not measured them yet).
 5. **LOFO** (`let2_judge.py --lofo`): trained_let2 total <= 5,883 and worst ratio <= 1.0x; full pytest passes.
 6. Report only: pool control per field; on vs empty_on vs cold.
+
+### Addendum to criterion 4 (owner instruction; written after the sealed LET2 suite run started, before any regression run)
+
+COMBINE and CEIL have now been measured by their owners (results/combine, results/ceil), so their judges
+are **added** to criterion 4: learning, transfer1-4, secondary4, text, bridge, text_invent, route5,
+transfer6, selfedit2, text_chain, meaning, inflect, let, textpat, roles, combine, ceil, merge. This only
+makes the criterion stricter. Per-task evaluation increases on certified tasks are also listed (as CEIL
+did) and are reported next to the certification verdict. Measured from the snapshot of `0f97201`.
