@@ -1,0 +1,6426 @@
+{
+ "budget": 10000,
+ "domains": [
+  "sport",
+  "transit",
+  "venue"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3888,
+   "cold_reason": null,
+   "domain": "sport",
+   "family": "s5_empty_lanes",
+   "formula": "empty lanes over all heats = lan ceil(ath / lan) - ath",
+   "inputs": [
+    "ath",
+    "lan",
+    "evn"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "ath": 23,
+      "evn": 2,
+      "lan": 8
+     },
+     1
+    ],
+    [
+     {
+      "ath": 88,
+      "evn": 4,
+      "lan": 4
+     },
+     0
+    ],
+    [
+     {
+      "ath": 10,
+      "evn": 11,
+      "lan": 9
+     },
+     8
+    ],
+    [
+     {
+      "ath": 197,
+      "evn": 10,
+      "lan": 9
+     },
+     1
+    ],
+    [
+     {
+      "ath": 85,
+      "evn": 5,
+      "lan": 7
+     },
+     6
+    ],
+    [
+     {
+      "ath": 172,
+      "evn": 3,
+      "lan": 10
+     },
+     8
+    ],
+    [
+     {
+      "ath": 77,
+      "evn": 3,
+      "lan": 8
+     },
+     3
+    ],
+    [
+     {
+      "ath": 83,
+      "evn": 6,
+      "lan": 9
+     },
+     7
+    ],
+    [
+     {
+      "ath": 167,
+      "evn": 7,
+      "lan": 7
+     },
+     1
+    ],
+    [
+     {
+      "ath": 48,
+      "evn": 7,
+      "lan": 7
+     },
+     1
+    ],
+    [
+     {
+      "ath": 23,
+      "evn": 3,
+      "lan": 8
+     },
+     1
+    ]
+   ],
+   "task_id": "t-15",
+   "tier": "easy",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "lan"
+     ],
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "ath"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "lan"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "lan"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "ath"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 327,
+   "cold_reason": null,
+   "domain": "transit",
+   "family": "t5_buses",
+   "formula": "buses for every rider = ceil(rid / bcp)",
+   "inputs": [
+    "rid",
+    "bcp",
+    "dpt"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bcp": 19,
+      "dpt": 4,
+      "rid": 1181
+     },
+     63
+    ],
+    [
+     {
+      "bcp": 53,
+      "dpt": 4,
+      "rid": 209
+     },
+     4
+    ],
+    [
+     {
+      "bcp": 42,
+      "dpt": 4,
+      "rid": 804
+     },
+     20
+    ],
+    [
+     {
+      "bcp": 20,
+      "dpt": 3,
+      "rid": 1590
+     },
+     80
+    ],
+    [
+     {
+      "bcp": 32,
+      "dpt": 2,
+      "rid": 439
+     },
+     14
+    ],
+    [
+     {
+      "bcp": 48,
+      "dpt": 10,
+      "rid": 1163
+     },
+     25
+    ],
+    [
+     {
+      "bcp": 45,
+      "dpt": 10,
+      "rid": 1472
+     },
+     33
+    ],
+    [
+     {
+      "bcp": 45,
+      "dpt": 7,
+      "rid": 213
+     },
+     5
+    ],
+    [
+     {
+      "bcp": 51,
+      "dpt": 9,
+      "rid": 861
+     },
+     17
+    ],
+    [
+     {
+      "bcp": 12,
+      "dpt": 9,
+      "rid": 1201
+     },
+     101
+    ],
+    [
+     {
+      "bcp": 41,
+      "dpt": 7,
+      "rid": 1662
+     },
+     41
+    ]
+   ],
+   "task_id": "t-18",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "rid"
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "bcp"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "bcp"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 7053,
+   "cold_reason": null,
+   "domain": "transit",
+   "family": "t5_depots",
+   "formula": "depots for those buses = ceil(ceil(rid / bcp) / dpt)",
+   "inputs": [
+    "rid",
+    "bcp",
+    "dpt"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bcp": 47,
+      "dpt": 4,
+      "rid": 1574
+     },
+     9
+    ],
+    [
+     {
+      "bcp": 18,
+      "dpt": 9,
+      "rid": 110
+     },
+     1
+    ],
+    [
+     {
+      "bcp": 37,
+      "dpt": 10,
+      "rid": 1898
+     },
+     6
+    ],
+    [
+     {
+      "bcp": 32,
+      "dpt": 9,
+      "rid": 890
+     },
+     4
+    ],
+    [
+     {
+      "bcp": 9,
+      "dpt": 9,
+      "rid": 301
+     },
+     4
+    ],
+    [
+     {
+      "bcp": 40,
+      "dpt": 5,
+      "rid": 134
+     },
+     1
+    ],
+    [
+     {
+      "bcp": 48,
+      "dpt": 6,
+      "rid": 649
+     },
+     3
+    ],
+    [
+     {
+      "bcp": 35,
+      "dpt": 6,
+      "rid": 891
+     },
+     5
+    ],
+    [
+     {
+      "bcp": 37,
+      "dpt": 10,
+      "rid": 1084
+     },
+     3
+    ],
+    [
+     {
+      "bcp": 43,
+      "dpt": 7,
+      "rid": 1774
+     },
+     6
+    ],
+    [
+     {
+      "bcp": 29,
+      "dpt": 8,
+      "rid": 595
+     },
+     3
+    ]
+   ],
+   "task_id": "t-19",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "rid"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "bcp"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "bcp"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "dpt"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "dpt"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2086,
+   "cold_reason": null,
+   "domain": "transit",
+   "family": "t5_full_depots",
+   "formula": "depots filled by full buses = (rid // bcp) // dpt",
+   "inputs": [
+    "rid",
+    "bcp",
+    "dpt"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bcp": 51,
+      "dpt": 3,
+      "rid": 1020
+     },
+     6
+    ],
+    [
+     {
+      "bcp": 51,
+      "dpt": 4,
+      "rid": 144
+     },
+     0
+    ],
+    [
+     {
+      "bcp": 37,
+      "dpt": 4,
+      "rid": 1142
+     },
+     7
+    ],
+    [
+     {
+      "bcp": 10,
+      "dpt": 7,
+      "rid": 592
+     },
+     8
+    ],
+    [
+     {
+      "bcp": 51,
+      "dpt": 5,
+      "rid": 1897
+     },
+     7
+    ],
+    [
+     {
+      "bcp": 23,
+      "dpt": 2,
+      "rid": 490
+     },
+     10
+    ],
+    [
+     {
+      "bcp": 22,
+      "dpt": 8,
+      "rid": 268
+     },
+     1
+    ],
+    [
+     {
+      "bcp": 24,
+      "dpt": 7,
+      "rid": 166
+     },
+     0
+    ],
+    [
+     {
+      "bcp": 56,
+      "dpt": 7,
+      "rid": 299
+     },
+     0
+    ],
+    [
+     {
+      "bcp": 8,
+      "dpt": 3,
+      "rid": 1171
+     },
+     48
+    ],
+    [
+     {
+      "bcp": 49,
+      "dpt": 4,
+      "rid": 789
+     },
+     4
+    ]
+   ],
+   "task_id": "t-20",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "div",
+     [
+      "var",
+      "rid"
+     ],
+     [
+      "var",
+      "bcp"
+     ]
+    ],
+    [
+     "var",
+     "dpt"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3760,
+   "cold_reason": null,
+   "domain": "transit",
+   "family": "t5_spare_buses",
+   "formula": "full buses outside full depots = (rid // bcp) mod dpt",
+   "inputs": [
+    "rid",
+    "bcp",
+    "dpt"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bcp": 50,
+      "dpt": 6,
+      "rid": 582
+     },
+     5
+    ],
+    [
+     {
+      "bcp": 60,
+      "dpt": 8,
+      "rid": 29
+     },
+     0
+    ],
+    [
+     {
+      "bcp": 37,
+      "dpt": 9,
+      "rid": 466
+     },
+     3
+    ],
+    [
+     {
+      "bcp": 33,
+      "dpt": 5,
+      "rid": 1813
+     },
+     4
+    ],
+    [
+     {
+      "bcp": 27,
+      "dpt": 9,
+      "rid": 669
+     },
+     6
+    ],
+    [
+     {
+      "bcp": 45,
+      "dpt": 8,
+      "rid": 147
+     },
+     3
+    ],
+    [
+     {
+      "bcp": 52,
+      "dpt": 3,
+      "rid": 566
+     },
+     1
+    ],
+    [
+     {
+      "bcp": 13,
+      "dpt": 7,
+      "rid": 246
+     },
+     4
+    ],
+    [
+     {
+      "bcp": 43,
+      "dpt": 3,
+      "rid": 1865
+     },
+     1
+    ],
+    [
+     {
+      "bcp": 58,
+      "dpt": 6,
+      "rid": 1273
+     },
+     3
+    ],
+    [
+     {
+      "bcp": 11,
+      "dpt": 9,
+      "rid": 754
+     },
+     5
+    ]
+   ],
+   "task_id": "t-21",
+   "tier": "easy",
+   "tree": [
+    "mod",
+    [
+     "div",
+     [
+      "var",
+      "rid"
+     ],
+     [
+      "var",
+      "bcp"
+     ]
+    ],
+    [
+     "var",
+     "dpt"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 844,
+   "cold_reason": null,
+   "domain": "transit",
+   "family": "t5_empty_seats",
+   "formula": "empty seats on the last bus = bcp ceil(rid / bcp) - rid",
+   "inputs": [
+    "rid",
+    "bcp",
+    "dpt"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "bcp": 16,
+      "dpt": 4,
+      "rid": 548
+     },
+     12
+    ],
+    [
+     {
+      "bcp": 19,
+      "dpt": 7,
+      "rid": 1021
+     },
+     5
+    ],
+    [
+     {
+      "bcp": 17,
+      "dpt": 4,
+      "rid": 1155
+     },
+     1
+    ],
+    [
+     {
+      "bcp": 44,
+      "dpt": 2,
+      "rid": 19
+     },
+     25
+    ],
+    [
+     {
+      "bcp": 59,
+      "dpt": 9,
+      "rid": 1821
+     },
+     8
+    ],
+    [
+     {
+      "bcp": 14,
+      "dpt": 8,
+      "rid": 326
+     },
+     10
+    ],
+    [
+     {
+      "bcp": 22,
+      "dpt": 10,
+      "rid": 1275
+     },
+     1
+    ],
+    [
+     {
+      "bcp": 31,
+      "dpt": 7,
+      "rid": 998
+     },
+     25
+    ],
+    [
+     {
+      "bcp": 12,
+      "dpt": 7,
+      "rid": 1137
+     },
+     3
+    ],
+    [
+     {
+      "bcp": 20,
+      "dpt": 5,
+      "rid": 1421
+     },
+     19
+    ],
+    [
+     {
+      "bcp": 40,
+      "dpt": 5,
+      "rid": 386
+     },
+     14
+    ]
+   ],
+   "task_id": "t-22",
+   "tier": "easy",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "bcp"
+     ],
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "rid"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "bcp"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "bcp"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "rid"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1902,
+   "cold_reason": null,
+   "domain": "transit",
+   "family": "t5_lot_minus_aisle",
+   "formula": "lot area less a centre aisle of width stl = lotd (lotw - stl)",
+   "inputs": [
+    "lotw",
+    "lotd",
+    "stl"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "lotd": 9,
+      "lotw": 70,
+      "stl": 4
+     },
+     594
+    ],
+    [
+     {
+      "lotd": 13,
+      "lotw": 5,
+      "stl": 5
+     },
+     0
+    ],
+    [
+     {
+      "lotd": 54,
+      "lotw": 17,
+      "stl": 7
+     },
+     540
+    ],
+    [
+     {
+      "lotd": 85,
+      "lotw": 94,
+      "stl": 8
+     },
+     7310
+    ],
+    [
+     {
+      "lotd": 57,
+      "lotw": 17,
+      "stl": 7
+     },
+     570
+    ],
+    [
+     {
+      "lotd": 32,
+      "lotw": 44,
+      "stl": 7
+     },
+     1184
+    ],
+    [
+     {
+      "lotd": 22,
+      "lotw": 46,
+      "stl": 9
+     },
+     814
+    ],
+    [
+     {
+      "lotd": 28,
+      "lotw": 52,
+      "stl": 9
+     },
+     1204
+    ],
+    [
+     {
+      "lotd": 49,
+      "lotw": 48,
+      "stl": 7
+     },
+     2009
+    ],
+    [
+     {
+      "lotd": 35,
+      "lotw": 43,
+      "stl": 2
+     },
+     1435
+    ],
+    [
+     {
+      "lotd": 16,
+      "lotw": 61,
+      "stl": 9
+     },
+     832
+    ]
+   ],
+   "task_id": "t-30",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "lotd"
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "lotw"
+     ],
+     [
+      "var",
+      "stl"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 909,
+   "cold_reason": null,
+   "domain": "transit",
+   "family": "t5_steps",
+   "formula": "steps from the ground to floor flr = (flr - 1) stp",
+   "inputs": [
+    "flr",
+    "stp"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "flr": 34,
+      "stp": 21
+     },
+     693
+    ],
+    [
+     {
+      "flr": 2,
+      "stp": 24
+     },
+     24
+    ],
+    [
+     {
+      "flr": 28,
+      "stp": 12
+     },
+     324
+    ],
+    [
+     {
+      "flr": 40,
+      "stp": 11
+     },
+     429
+    ],
+    [
+     {
+      "flr": 5,
+      "stp": 17
+     },
+     68
+    ],
+    [
+     {
+      "flr": 17,
+      "stp": 22
+     },
+     352
+    ],
+    [
+     {
+      "flr": 29,
+      "stp": 12
+     },
+     336
+    ],
+    [
+     {
+      "flr": 17,
+      "stp": 17
+     },
+     272
+    ],
+    [
+     {
+      "flr": 30,
+      "stp": 8
+     },
+     232
+    ],
+    [
+     {
+      "flr": 19,
+      "stp": 11
+     },
+     198
+    ],
+    [
+     {
+      "flr": 24,
+      "stp": 23
+     },
+     529
+    ]
+   ],
+   "task_id": "t-31",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "var",
+      "flr"
+     ],
+     [
+      "const",
+      1
+     ]
+    ],
+    [
+     "var",
+     "stp"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3033,
+   "cold_reason": null,
+   "domain": "venue",
+   "family": "v5_back_row",
+   "formula": "seats in the back row = fst + 2(rws - 1)",
+   "inputs": [
+    "rws",
+    "fst"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "fst": 29,
+      "rws": 15
+     },
+     57
+    ],
+    [
+     {
+      "fst": 12,
+      "rws": 29
+     },
+     68
+    ],
+    [
+     {
+      "fst": 9,
+      "rws": 23
+     },
+     53
+    ],
+    [
+     {
+      "fst": 4,
+      "rws": 12
+     },
+     26
+    ],
+    [
+     {
+      "fst": 27,
+      "rws": 22
+     },
+     69
+    ],
+    [
+     {
+      "fst": 28,
+      "rws": 7
+     },
+     40
+    ],
+    [
+     {
+      "fst": 12,
+      "rws": 5
+     },
+     20
+    ],
+    [
+     {
+      "fst": 23,
+      "rws": 1
+     },
+     23
+    ],
+    [
+     {
+      "fst": 10,
+      "rws": 14
+     },
+     36
+    ],
+    [
+     {
+      "fst": 20,
+      "rws": 10
+     },
+     38
+    ],
+    [
+     {
+      "fst": 18,
+      "rws": 27
+     },
+     70
+    ]
+   ],
+   "task_id": "t-35",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "var",
+     "fst"
+    ],
+    [
+     "add",
+     [
+      "sub",
+      [
+       "var",
+       "rws"
+      ],
+      [
+       "const",
+       1
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "rws"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 145,
+   "cold_reason": null,
+   "domain": "venue",
+   "family": "v5_aisle_seats",
+   "formula": "aisle seats, two a row, plus the front row = 2 rws + fst",
+   "inputs": [
+    "rws",
+    "fst"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "fst": 17,
+      "rws": 4
+     },
+     25
+    ],
+    [
+     {
+      "fst": 18,
+      "rws": 7
+     },
+     32
+    ],
+    [
+     {
+      "fst": 23,
+      "rws": 33
+     },
+     89
+    ],
+    [
+     {
+      "fst": 23,
+      "rws": 1
+     },
+     25
+    ],
+    [
+     {
+      "fst": 11,
+      "rws": 12
+     },
+     35
+    ],
+    [
+     {
+      "fst": 15,
+      "rws": 19
+     },
+     53
+    ],
+    [
+     {
+      "fst": 5,
+      "rws": 5
+     },
+     15
+    ],
+    [
+     {
+      "fst": 25,
+      "rws": 4
+     },
+     33
+    ],
+    [
+     {
+      "fst": 4,
+      "rws": 23
+     },
+     50
+    ],
+    [
+     {
+      "fst": 5,
+      "rws": 35
+     },
+     75
+    ],
+    [
+     {
+      "fst": 27,
+      "rws": 22
+     },
+     71
+    ]
+   ],
+   "task_id": "t-37",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "add",
+     [
+      "var",
+      "rws"
+     ],
+     [
+      "var",
+      "rws"
+     ]
+    ],
+    [
+     "var",
+     "fst"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 4528,
+   "cold_reason": null,
+   "domain": "venue",
+   "family": "v5_rim_panels",
+   "formula": "rim panels of a stg x stg stage = 4 stg - 4",
+   "inputs": [
+    "stg"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "stg": 12
+     },
+     44
+    ],
+    [
+     {
+      "stg": 15
+     },
+     56
+    ],
+    [
+     {
+      "stg": 6
+     },
+     20
+    ],
+    [
+     {
+      "stg": 9
+     },
+     32
+    ],
+    [
+     {
+      "stg": 7
+     },
+     24
+    ],
+    [
+     {
+      "stg": 16
+     },
+     60
+    ],
+    [
+     {
+      "stg": 20
+     },
+     76
+    ],
+    [
+     {
+      "stg": 3
+     },
+     8
+    ],
+    [
+     {
+      "stg": 23
+     },
+     88
+    ],
+    [
+     {
+      "stg": 11
+     },
+     40
+    ],
+    [
+     {
+      "stg": 4
+     },
+     12
+    ]
+   ],
+   "task_id": "t-38",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "stg"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 4886,
+   "cold_reason": null,
+   "domain": "venue",
+   "family": "v5_inner_panels",
+   "formula": "panels off the rim = (stg - 2)^2",
+   "inputs": [
+    "stg"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "stg": 17
+     },
+     225
+    ],
+    [
+     {
+      "stg": 18
+     },
+     256
+    ],
+    [
+     {
+      "stg": 6
+     },
+     16
+    ],
+    [
+     {
+      "stg": 8
+     },
+     36
+    ],
+    [
+     {
+      "stg": 16
+     },
+     196
+    ],
+    [
+     {
+      "stg": 25
+     },
+     529
+    ],
+    [
+     {
+      "stg": 7
+     },
+     25
+    ],
+    [
+     {
+      "stg": 22
+     },
+     400
+    ],
+    [
+     {
+      "stg": 19
+     },
+     289
+    ],
+    [
+     {
+      "stg": 14
+     },
+     144
+    ],
+    [
+     {
+      "stg": 24
+     },
+     484
+    ]
+   ],
+   "task_id": "t-39",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "var",
+      "stg"
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "stg"
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 4408,
+   "cold_reason": null,
+   "domain": "venue",
+   "family": "v5_truss_bars",
+   "formula": "unit bars of a stg x stg floor grid = 2 stg (stg + 1)",
+   "inputs": [
+    "stg"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "stg": 14
+     },
+     420
+    ],
+    [
+     {
+      "stg": 13
+     },
+     364
+    ],
+    [
+     {
+      "stg": 9
+     },
+     180
+    ],
+    [
+     {
+      "stg": 25
+     },
+     1300
+    ],
+    [
+     {
+      "stg": 23
+     },
+     1104
+    ],
+    [
+     {
+      "stg": 7
+     },
+     112
+    ],
+    [
+     {
+      "stg": 20
+     },
+     840
+    ],
+    [
+     {
+      "stg": 3
+     },
+     24
+    ],
+    [
+     {
+      "stg": 11
+     },
+     264
+    ],
+    [
+     {
+      "stg": 18
+     },
+     684
+    ],
+    [
+     {
+      "stg": 4
+     },
+     40
+    ]
+   ],
+   "task_id": "t-42",
+   "tier": "easy",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "var",
+      "stg"
+     ],
+     [
+      "var",
+      "stg"
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "stg"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 6722,
+   "cold_reason": null,
+   "domain": "venue",
+   "family": "v5_blocks",
+   "formula": "seat blocks for every group = ceil(ceil(tix / grp) / blk)",
+   "inputs": [
+    "tix",
+    "grp",
+    "blk"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "blk": 9,
+      "grp": 25,
+      "tix": 1497
+     },
+     7
+    ],
+    [
+     {
+      "blk": 4,
+      "grp": 16,
+      "tix": 4938
+     },
+     78
+    ],
+    [
+     {
+      "blk": 5,
+      "grp": 19,
+      "tix": 3402
+     },
+     36
+    ],
+    [
+     {
+      "blk": 8,
+      "grp": 28,
+      "tix": 746
+     },
+     4
+    ],
+    [
+     {
+      "blk": 7,
+      "grp": 15,
+      "tix": 3748
+     },
+     36
+    ],
+    [
+     {
+      "blk": 6,
+      "grp": 11,
+      "tix": 1705
+     },
+     26
+    ],
+    [
+     {
+      "blk": 10,
+      "grp": 15,
+      "tix": 3588
+     },
+     24
+    ],
+    [
+     {
+      "blk": 5,
+      "grp": 21,
+      "tix": 930
+     },
+     9
+    ],
+    [
+     {
+      "blk": 11,
+      "grp": 14,
+      "tix": 4120
+     },
+     27
+    ],
+    [
+     {
+      "blk": 12,
+      "grp": 4,
+      "tix": 1781
+     },
+     38
+    ],
+    [
+     {
+      "blk": 6,
+      "grp": 4,
+      "tix": 669
+     },
+     28
+    ]
+   ],
+   "task_id": "t-45",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "tix"
+       ],
+       [
+        "sub",
+        [
+         "var",
+         "grp"
+        ],
+        [
+         "const",
+         1
+        ]
+       ]
+      ],
+      [
+       "var",
+       "grp"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "blk"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "blk"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 2110,
+   "cold_reason": null,
+   "domain": "venue",
+   "family": "v5_full_blocks",
+   "formula": "blocks filled by full groups = (tix // grp) // blk",
+   "inputs": [
+    "tix",
+    "grp",
+    "blk"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "blk": 11,
+      "grp": 23,
+      "tix": 705
+     },
+     2
+    ],
+    [
+     {
+      "blk": 7,
+      "grp": 29,
+      "tix": 4949
+     },
+     24
+    ],
+    [
+     {
+      "blk": 2,
+      "grp": 26,
+      "tix": 4588
+     },
+     88
+    ],
+    [
+     {
+      "blk": 2,
+      "grp": 10,
+      "tix": 1347
+     },
+     67
+    ],
+    [
+     {
+      "blk": 2,
+      "grp": 8,
+      "tix": 2935
+     },
+     183
+    ],
+    [
+     {
+      "blk": 3,
+      "grp": 5,
+      "tix": 4463
+     },
+     297
+    ],
+    [
+     {
+      "blk": 11,
+      "grp": 18,
+      "tix": 2849
+     },
+     14
+    ],
+    [
+     {
+      "blk": 9,
+      "grp": 13,
+      "tix": 1073
+     },
+     9
+    ],
+    [
+     {
+      "blk": 7,
+      "grp": 2,
+      "tix": 3105
+     },
+     221
+    ],
+    [
+     {
+      "blk": 9,
+      "grp": 21,
+      "tix": 1516
+     },
+     8
+    ],
+    [
+     {
+      "blk": 10,
+      "grp": 26,
+      "tix": 919
+     },
+     3
+    ]
+   ],
+   "task_id": "t-46",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "div",
+     [
+      "var",
+      "tix"
+     ],
+     [
+      "var",
+      "grp"
+     ]
+    ],
+    [
+     "var",
+     "blk"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3948,
+   "cold_reason": null,
+   "domain": "venue",
+   "family": "v5_leftover_groups",
+   "formula": "full groups outside full blocks = (tix // grp) mod blk",
+   "inputs": [
+    "tix",
+    "grp",
+    "blk"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "blk": 2,
+      "grp": 23,
+      "tix": 2459
+     },
+     0
+    ],
+    [
+     {
+      "blk": 11,
+      "grp": 9,
+      "tix": 2928
+     },
+     6
+    ],
+    [
+     {
+      "blk": 9,
+      "grp": 28,
+      "tix": 2862
+     },
+     3
+    ],
+    [
+     {
+      "blk": 7,
+      "grp": 5,
+      "tix": 907
+     },
+     6
+    ],
+    [
+     {
+      "blk": 10,
+      "grp": 8,
+      "tix": 1717
+     },
+     4
+    ],
+    [
+     {
+      "blk": 3,
+      "grp": 23,
+      "tix": 3546
+     },
+     1
+    ],
+    [
+     {
+      "blk": 8,
+      "grp": 20,
+      "tix": 1424
+     },
+     7
+    ],
+    [
+     {
+      "blk": 8,
+      "grp": 6,
+      "tix": 4072
+     },
+     6
+    ],
+    [
+     {
+      "blk": 4,
+      "grp": 20,
+      "tix": 2258
+     },
+     0
+    ],
+    [
+     {
+      "blk": 11,
+      "grp": 29,
+      "tix": 2150
+     },
+     8
+    ],
+    [
+     {
+      "blk": 3,
+      "grp": 10,
+      "tix": 904
+     },
+     0
+    ]
+   ],
+   "task_id": "t-47",
+   "tier": "easy",
+   "tree": [
+    "mod",
+    [
+     "div",
+     [
+      "var",
+      "tix"
+     ],
+     [
+      "var",
+      "grp"
+     ]
+    ],
+    [
+     "var",
+     "blk"
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_round_robin",
+   "formula": "games in rds round-robin cycles of tm teams = rds tm(tm-1)/2",
+   "inputs": [
+    "tm",
+    "rds"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "rds": 1,
+      "tm": 28
+     },
+     378
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 13
+     },
+     156
+    ],
+    [
+     {
+      "rds": 4,
+      "tm": 22
+     },
+     924
+    ],
+    [
+     {
+      "rds": 4,
+      "tm": 24
+     },
+     1104
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 2
+     },
+     2
+    ],
+    [
+     {
+      "rds": 4,
+      "tm": 5
+     },
+     40
+    ],
+    [
+     {
+      "rds": 1,
+      "tm": 16
+     },
+     120
+    ],
+    [
+     {
+      "rds": 3,
+      "tm": 4
+     },
+     18
+    ],
+    [
+     {
+      "rds": 3,
+      "tm": 2
+     },
+     3
+    ],
+    [
+     {
+      "rds": 3,
+      "tm": 18
+     },
+     459
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 14
+     },
+     182
+    ]
+   ],
+   "task_id": "t-00",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "rds"
+      ],
+      [
+       "var",
+       "tm"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "tm"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_max_points",
+   "formula": "most points a team can take, 3 a win, rds cycles = 3 rds (tm - 1)",
+   "inputs": [
+    "tm",
+    "rds"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "rds": 3,
+      "tm": 17
+     },
+     144
+    ],
+    [
+     {
+      "rds": 3,
+      "tm": 26
+     },
+     225
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 21
+     },
+     120
+    ],
+    [
+     {
+      "rds": 3,
+      "tm": 28
+     },
+     243
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 25
+     },
+     144
+    ],
+    [
+     {
+      "rds": 4,
+      "tm": 27
+     },
+     312
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 27
+     },
+     156
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 3
+     },
+     12
+    ],
+    [
+     {
+      "rds": 4,
+      "tm": 5
+     },
+     48
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 17
+     },
+     96
+    ],
+    [
+     {
+      "rds": 1,
+      "tm": 30
+     },
+     87
+    ]
+   ],
+   "task_id": "t-01",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "const",
+      3
+     ],
+     [
+      "var",
+      "rds"
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "tm"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_fixtures_home_away",
+   "formula": "home and away fixtures, rds cycles = rds tm (tm - 1)",
+   "inputs": [
+    "tm",
+    "rds"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "rds": 4,
+      "tm": 19
+     },
+     1368
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 24
+     },
+     1104
+    ],
+    [
+     {
+      "rds": 4,
+      "tm": 23
+     },
+     2024
+    ],
+    [
+     {
+      "rds": 1,
+      "tm": 27
+     },
+     702
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 18
+     },
+     612
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 9
+     },
+     144
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 20
+     },
+     760
+    ],
+    [
+     {
+      "rds": 4,
+      "tm": 27
+     },
+     2808
+    ],
+    [
+     {
+      "rds": 3,
+      "tm": 24
+     },
+     1656
+    ],
+    [
+     {
+      "rds": 4,
+      "tm": 13
+     },
+     624
+    ],
+    [
+     {
+      "rds": 4,
+      "tm": 7
+     },
+     168
+    ]
+   ],
+   "task_id": "t-02",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "rds"
+     ],
+     [
+      "var",
+      "tm"
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "tm"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_matchdays",
+   "formula": "matchdays of a double round robin with tm teams, rds cycles = 2 rds (tm - 1)",
+   "inputs": [
+    "tm",
+    "rds"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "rds": 1,
+      "tm": 18
+     },
+     34
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 8
+     },
+     28
+    ],
+    [
+     {
+      "rds": 3,
+      "tm": 7
+     },
+     36
+    ],
+    [
+     {
+      "rds": 1,
+      "tm": 8
+     },
+     14
+    ],
+    [
+     {
+      "rds": 3,
+      "tm": 24
+     },
+     138
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 14
+     },
+     52
+    ],
+    [
+     {
+      "rds": 4,
+      "tm": 10
+     },
+     72
+    ],
+    [
+     {
+      "rds": 3,
+      "tm": 22
+     },
+     126
+    ],
+    [
+     {
+      "rds": 4,
+      "tm": 18
+     },
+     136
+    ],
+    [
+     {
+      "rds": 1,
+      "tm": 27
+     },
+     52
+    ],
+    [
+     {
+      "rds": 4,
+      "tm": 21
+     },
+     160
+    ]
+   ],
+   "task_id": "t-03",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "var",
+      "rds"
+     ],
+     [
+      "var",
+      "rds"
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "tm"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_triangles",
+   "formula": "three-team mini leagues from tm teams, rds sets = rds tm(tm-1)(tm-2)/6",
+   "inputs": [
+    "tm",
+    "rds"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "rds": 2,
+      "tm": 21
+     },
+     2660
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 26
+     },
+     5200
+    ],
+    [
+     {
+      "rds": 3,
+      "tm": 27
+     },
+     8775
+    ],
+    [
+     {
+      "rds": 3,
+      "tm": 25
+     },
+     6900
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 28
+     },
+     6552
+    ],
+    [
+     {
+      "rds": 3,
+      "tm": 10
+     },
+     360
+    ],
+    [
+     {
+      "rds": 1,
+      "tm": 23
+     },
+     1771
+    ],
+    [
+     {
+      "rds": 1,
+      "tm": 28
+     },
+     3276
+    ],
+    [
+     {
+      "rds": 4,
+      "tm": 8
+     },
+     224
+    ],
+    [
+     {
+      "rds": 2,
+      "tm": 30
+     },
+     8120
+    ],
+    [
+     {
+      "rds": 4,
+      "tm": 6
+     },
+     80
+    ]
+   ],
+   "task_id": "t-04",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "rds"
+       ],
+       [
+        "var",
+        "tm"
+       ]
+      ],
+      [
+       "sub",
+       [
+        "var",
+        "tm"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "tm"
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_cross_handshakes",
+   "formula": "handshakes between players of different teams = sqd^2 tm(tm-1)/2",
+   "inputs": [
+    "tm",
+    "sqd"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "sqd": 12,
+      "tm": 4
+     },
+     864
+    ],
+    [
+     {
+      "sqd": 11,
+      "tm": 2
+     },
+     121
+    ],
+    [
+     {
+      "sqd": 14,
+      "tm": 3
+     },
+     588
+    ],
+    [
+     {
+      "sqd": 22,
+      "tm": 2
+     },
+     484
+    ],
+    [
+     {
+      "sqd": 23,
+      "tm": 9
+     },
+     19044
+    ],
+    [
+     {
+      "sqd": 20,
+      "tm": 17
+     },
+     54400
+    ],
+    [
+     {
+      "sqd": 15,
+      "tm": 6
+     },
+     3375
+    ],
+    [
+     {
+      "sqd": 21,
+      "tm": 5
+     },
+     4410
+    ],
+    [
+     {
+      "sqd": 3,
+      "tm": 4
+     },
+     54
+    ],
+    [
+     {
+      "sqd": 8,
+      "tm": 10
+     },
+     2880
+    ],
+    [
+     {
+      "sqd": 15,
+      "tm": 14
+     },
+     20475
+    ]
+   ],
+   "task_id": "t-05",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "sqd"
+       ],
+       [
+        "var",
+        "sqd"
+       ]
+      ],
+      [
+       "var",
+       "tm"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "tm"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_all_handshakes",
+   "formula": "handshakes among all tm sqd players = tm sqd (tm sqd - 1)/2",
+   "inputs": [
+    "tm",
+    "sqd"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "sqd": 14,
+      "tm": 13
+     },
+     16471
+    ],
+    [
+     {
+      "sqd": 10,
+      "tm": 11
+     },
+     5995
+    ],
+    [
+     {
+      "sqd": 6,
+      "tm": 8
+     },
+     1128
+    ],
+    [
+     {
+      "sqd": 22,
+      "tm": 11
+     },
+     29161
+    ],
+    [
+     {
+      "sqd": 19,
+      "tm": 8
+     },
+     11476
+    ],
+    [
+     {
+      "sqd": 4,
+      "tm": 3
+     },
+     66
+    ],
+    [
+     {
+      "sqd": 20,
+      "tm": 5
+     },
+     4950
+    ],
+    [
+     {
+      "sqd": 21,
+      "tm": 6
+     },
+     7875
+    ],
+    [
+     {
+      "sqd": 11,
+      "tm": 7
+     },
+     2926
+    ],
+    [
+     {
+      "sqd": 16,
+      "tm": 20
+     },
+     51040
+    ],
+    [
+     {
+      "sqd": 18,
+      "tm": 4
+     },
+     2556
+    ]
+   ],
+   "task_id": "t-06",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "tm"
+      ],
+      [
+       "var",
+       "sqd"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "var",
+        "tm"
+       ],
+       [
+        "var",
+        "sqd"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_bench",
+   "formula": "players on the bench, 11 on the field per team = tm (sqd - 11)",
+   "inputs": [
+    "tm",
+    "sqd"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "sqd": 14,
+      "tm": 14
+     },
+     42
+    ],
+    [
+     {
+      "sqd": 16,
+      "tm": 8
+     },
+     40
+    ],
+    [
+     {
+      "sqd": 25,
+      "tm": 14
+     },
+     196
+    ],
+    [
+     {
+      "sqd": 13,
+      "tm": 19
+     },
+     38
+    ],
+    [
+     {
+      "sqd": 13,
+      "tm": 13
+     },
+     26
+    ],
+    [
+     {
+      "sqd": 20,
+      "tm": 10
+     },
+     90
+    ],
+    [
+     {
+      "sqd": 13,
+      "tm": 8
+     },
+     16
+    ],
+    [
+     {
+      "sqd": 22,
+      "tm": 19
+     },
+     209
+    ],
+    [
+     {
+      "sqd": 16,
+      "tm": 3
+     },
+     15
+    ],
+    [
+     {
+      "sqd": 24,
+      "tm": 17
+     },
+     221
+    ],
+    [
+     {
+      "sqd": 22,
+      "tm": 15
+     },
+     165
+    ]
+   ],
+   "task_id": "t-07",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "tm"
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "sqd"
+     ],
+     [
+      "add",
+      [
+       "mul",
+       [
+        "const",
+        3
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_captain_pairs",
+   "formula": "captain + vice-captain choices over all teams = tm sqd (sqd - 1)",
+   "inputs": [
+    "tm",
+    "sqd"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "sqd": 5,
+      "tm": 19
+     },
+     380
+    ],
+    [
+     {
+      "sqd": 21,
+      "tm": 20
+     },
+     8400
+    ],
+    [
+     {
+      "sqd": 25,
+      "tm": 20
+     },
+     12000
+    ],
+    [
+     {
+      "sqd": 19,
+      "tm": 10
+     },
+     3420
+    ],
+    [
+     {
+      "sqd": 16,
+      "tm": 4
+     },
+     960
+    ],
+    [
+     {
+      "sqd": 7,
+      "tm": 5
+     },
+     210
+    ],
+    [
+     {
+      "sqd": 11,
+      "tm": 17
+     },
+     1870
+    ],
+    [
+     {
+      "sqd": 20,
+      "tm": 14
+     },
+     5320
+    ],
+    [
+     {
+      "sqd": 8,
+      "tm": 16
+     },
+     896
+    ],
+    [
+     {
+      "sqd": 4,
+      "tm": 9
+     },
+     108
+    ],
+    [
+     {
+      "sqd": 17,
+      "tm": 18
+     },
+     4896
+    ]
+   ],
+   "task_id": "t-08",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "tm"
+     ],
+     [
+      "var",
+      "sqd"
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "sqd"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_court_margin",
+   "formula": "margin of width lnw inside the court = cwd cln - (cwd - 2lnw)(cln - 2lnw)",
+   "inputs": [
+    "cwd",
+    "cln",
+    "lnw"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "cln": 21,
+      "cwd": 25,
+      "lnw": 3
+     },
+     240
+    ],
+    [
+     {
+      "cln": 8,
+      "cwd": 9,
+      "lnw": 1
+     },
+     30
+    ],
+    [
+     {
+      "cln": 15,
+      "cwd": 29,
+      "lnw": 3
+     },
+     228
+    ],
+    [
+     {
+      "cln": 34,
+      "cwd": 28,
+      "lnw": 3
+     },
+     336
+    ],
+    [
+     {
+      "cln": 28,
+      "cwd": 11,
+      "lnw": 3
+     },
+     198
+    ],
+    [
+     {
+      "cln": 28,
+      "cwd": 30,
+      "lnw": 4
+     },
+     400
+    ],
+    [
+     {
+      "cln": 44,
+      "cwd": 22,
+      "lnw": 4
+     },
+     464
+    ],
+    [
+     {
+      "cln": 59,
+      "cwd": 13,
+      "lnw": 1
+     },
+     140
+    ],
+    [
+     {
+      "cln": 53,
+      "cwd": 27,
+      "lnw": 2
+     },
+     304
+    ],
+    [
+     {
+      "cln": 41,
+      "cwd": 16,
+      "lnw": 3
+     },
+     306
+    ],
+    [
+     {
+      "cln": 50,
+      "cwd": 31,
+      "lnw": 4
+     },
+     584
+    ]
+   ],
+   "task_id": "t-09",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "cwd"
+     ],
+     [
+      "var",
+      "cln"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "cwd"
+      ],
+      [
+       "add",
+       [
+        "var",
+        "lnw"
+       ],
+       [
+        "var",
+        "lnw"
+       ]
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "cln"
+      ],
+      [
+       "add",
+       [
+        "var",
+        "lnw"
+       ],
+       [
+        "var",
+        "lnw"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_court_with_runoff",
+   "formula": "court plus a run-off of lnw all round = (cwd + 2lnw)(cln + 2lnw)",
+   "inputs": [
+    "cwd",
+    "cln",
+    "lnw"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "cln": 6,
+      "cwd": 32,
+      "lnw": 4
+     },
+     560
+    ],
+    [
+     {
+      "cln": 51,
+      "cwd": 17,
+      "lnw": 3
+     },
+     1311
+    ],
+    [
+     {
+      "cln": 40,
+      "cwd": 5,
+      "lnw": 1
+     },
+     294
+    ],
+    [
+     {
+      "cln": 20,
+      "cwd": 19,
+      "lnw": 1
+     },
+     462
+    ],
+    [
+     {
+      "cln": 18,
+      "cwd": 14,
+      "lnw": 1
+     },
+     320
+    ],
+    [
+     {
+      "cln": 23,
+      "cwd": 8,
+      "lnw": 1
+     },
+     250
+    ],
+    [
+     {
+      "cln": 60,
+      "cwd": 7,
+      "lnw": 1
+     },
+     558
+    ],
+    [
+     {
+      "cln": 6,
+      "cwd": 23,
+      "lnw": 4
+     },
+     434
+    ],
+    [
+     {
+      "cln": 53,
+      "cwd": 11,
+      "lnw": 2
+     },
+     855
+    ],
+    [
+     {
+      "cln": 55,
+      "cwd": 25,
+      "lnw": 2
+     },
+     1711
+    ],
+    [
+     {
+      "cln": 37,
+      "cwd": 4,
+      "lnw": 3
+     },
+     430
+    ]
+   ],
+   "task_id": "t-10",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "var",
+      "cwd"
+     ],
+     [
+      "add",
+      [
+       "var",
+       "lnw"
+      ],
+      [
+       "var",
+       "lnw"
+      ]
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "cln"
+     ],
+     [
+      "add",
+      [
+       "var",
+       "lnw"
+      ],
+      [
+       "var",
+       "lnw"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_court_tiles",
+   "formula": "lnw-square tiles to cover the court = (cwd // lnw)(cln // lnw)",
+   "inputs": [
+    "cwd",
+    "cln",
+    "lnw"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "cln": 5,
+      "cwd": 40,
+      "lnw": 1
+     },
+     200
+    ],
+    [
+     {
+      "cln": 52,
+      "cwd": 20,
+      "lnw": 1
+     },
+     1040
+    ],
+    [
+     {
+      "cln": 38,
+      "cwd": 8,
+      "lnw": 2
+     },
+     76
+    ],
+    [
+     {
+      "cln": 52,
+      "cwd": 29,
+      "lnw": 1
+     },
+     1508
+    ],
+    [
+     {
+      "cln": 54,
+      "cwd": 5,
+      "lnw": 1
+     },
+     270
+    ],
+    [
+     {
+      "cln": 56,
+      "cwd": 33,
+      "lnw": 3
+     },
+     198
+    ],
+    [
+     {
+      "cln": 37,
+      "cwd": 5,
+      "lnw": 4
+     },
+     9
+    ],
+    [
+     {
+      "cln": 19,
+      "cwd": 23,
+      "lnw": 3
+     },
+     42
+    ],
+    [
+     {
+      "cln": 17,
+      "cwd": 19,
+      "lnw": 1
+     },
+     323
+    ],
+    [
+     {
+      "cln": 23,
+      "cwd": 37,
+      "lnw": 2
+     },
+     198
+    ],
+    [
+     {
+      "cln": 27,
+      "cwd": 24,
+      "lnw": 2
+     },
+     156
+    ]
+   ],
+   "task_id": "t-11",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "div",
+     [
+      "var",
+      "cwd"
+     ],
+     [
+      "var",
+      "lnw"
+     ]
+    ],
+    [
+     "div",
+     [
+      "var",
+      "cln"
+     ],
+     [
+      "var",
+      "lnw"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_net_posts",
+   "formula": "posts every lnw round the court = 2 (cwd // lnw + cln // lnw)",
+   "inputs": [
+    "cwd",
+    "cln",
+    "lnw"
+   ],
+   "kind": "length",
+   "rows": [
+    [
+     {
+      "cln": 46,
+      "cwd": 12,
+      "lnw": 3
+     },
+     38
+    ],
+    [
+     {
+      "cln": 30,
+      "cwd": 34,
+      "lnw": 4
+     },
+     30
+    ],
+    [
+     {
+      "cln": 10,
+      "cwd": 31,
+      "lnw": 3
+     },
+     26
+    ],
+    [
+     {
+      "cln": 39,
+      "cwd": 18,
+      "lnw": 4
+     },
+     26
+    ],
+    [
+     {
+      "cln": 29,
+      "cwd": 33,
+      "lnw": 1
+     },
+     124
+    ],
+    [
+     {
+      "cln": 24,
+      "cwd": 23,
+      "lnw": 2
+     },
+     46
+    ],
+    [
+     {
+      "cln": 39,
+      "cwd": 31,
+      "lnw": 3
+     },
+     46
+    ],
+    [
+     {
+      "cln": 60,
+      "cwd": 40,
+      "lnw": 2
+     },
+     100
+    ],
+    [
+     {
+      "cln": 12,
+      "cwd": 5,
+      "lnw": 2
+     },
+     16
+    ],
+    [
+     {
+      "cln": 57,
+      "cwd": 28,
+      "lnw": 2
+     },
+     84
+    ],
+    [
+     {
+      "cln": 14,
+      "cwd": 18,
+      "lnw": 1
+     },
+     64
+    ]
+   ],
+   "task_id": "t-12",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "const",
+     2
+    ],
+    [
+     "add",
+     [
+      "div",
+      [
+       "var",
+       "cwd"
+      ],
+      [
+       "var",
+       "lnw"
+      ]
+     ],
+     [
+      "div",
+      [
+       "var",
+       "cln"
+      ],
+      [
+       "var",
+       "lnw"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_center_cross",
+   "formula": "centre cross of width lnw = lnw (cwd + cln - lnw)",
+   "inputs": [
+    "cwd",
+    "cln",
+    "lnw"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "cln": 25,
+      "cwd": 25,
+      "lnw": 1
+     },
+     49
+    ],
+    [
+     {
+      "cln": 26,
+      "cwd": 7,
+      "lnw": 4
+     },
+     116
+    ],
+    [
+     {
+      "cln": 57,
+      "cwd": 13,
+      "lnw": 3
+     },
+     201
+    ],
+    [
+     {
+      "cln": 17,
+      "cwd": 14,
+      "lnw": 4
+     },
+     108
+    ],
+    [
+     {
+      "cln": 21,
+      "cwd": 38,
+      "lnw": 4
+     },
+     220
+    ],
+    [
+     {
+      "cln": 26,
+      "cwd": 22,
+      "lnw": 2
+     },
+     92
+    ],
+    [
+     {
+      "cln": 25,
+      "cwd": 30,
+      "lnw": 2
+     },
+     106
+    ],
+    [
+     {
+      "cln": 4,
+      "cwd": 33,
+      "lnw": 3
+     },
+     102
+    ],
+    [
+     {
+      "cln": 47,
+      "cwd": 14,
+      "lnw": 4
+     },
+     228
+    ],
+    [
+     {
+      "cln": 52,
+      "cwd": 9,
+      "lnw": 3
+     },
+     174
+    ],
+    [
+     {
+      "cln": 49,
+      "cwd": 11,
+      "lnw": 2
+     },
+     116
+    ]
+   ],
+   "task_id": "t-13",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "lnw"
+    ],
+    [
+     "sub",
+     [
+      "add",
+      [
+       "var",
+       "cwd"
+      ],
+      [
+       "var",
+       "cln"
+      ]
+     ],
+     [
+      "var",
+      "lnw"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 286,
+   "cold_reason": null,
+   "domain": "sport",
+   "family": "s5_heats",
+   "formula": "heats to run every athlete in lan lanes = ceil(ath / lan)",
+   "inputs": [
+    "ath",
+    "lan",
+    "evn"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "ath": 22,
+      "evn": 5,
+      "lan": 6
+     },
+     4
+    ],
+    [
+     {
+      "ath": 115,
+      "evn": 7,
+      "lan": 7
+     },
+     17
+    ],
+    [
+     {
+      "ath": 195,
+      "evn": 9,
+      "lan": 4
+     },
+     49
+    ],
+    [
+     {
+      "ath": 98,
+      "evn": 6,
+      "lan": 6
+     },
+     17
+    ],
+    [
+     {
+      "ath": 134,
+      "evn": 2,
+      "lan": 8
+     },
+     17
+    ],
+    [
+     {
+      "ath": 17,
+      "evn": 9,
+      "lan": 10
+     },
+     2
+    ],
+    [
+     {
+      "ath": 41,
+      "evn": 9,
+      "lan": 10
+     },
+     5
+    ],
+    [
+     {
+      "ath": 144,
+      "evn": 12,
+      "lan": 9
+     },
+     16
+    ],
+    [
+     {
+      "ath": 52,
+      "evn": 9,
+      "lan": 6
+     },
+     9
+    ],
+    [
+     {
+      "ath": 48,
+      "evn": 4,
+      "lan": 8
+     },
+     6
+    ],
+    [
+     {
+      "ath": 108,
+      "evn": 11,
+      "lan": 7
+     },
+     16
+    ]
+   ],
+   "task_id": "t-14",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "ath"
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "lan"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "lan"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_all_heats",
+   "formula": "heats over evn events = evn ceil(ath / lan)",
+   "inputs": [
+    "ath",
+    "lan",
+    "evn"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "ath": 100,
+      "evn": 3,
+      "lan": 10
+     },
+     30
+    ],
+    [
+     {
+      "ath": 13,
+      "evn": 4,
+      "lan": 8
+     },
+     8
+    ],
+    [
+     {
+      "ath": 137,
+      "evn": 8,
+      "lan": 5
+     },
+     224
+    ],
+    [
+     {
+      "ath": 156,
+      "evn": 5,
+      "lan": 10
+     },
+     80
+    ],
+    [
+     {
+      "ath": 121,
+      "evn": 2,
+      "lan": 7
+     },
+     36
+    ],
+    [
+     {
+      "ath": 60,
+      "evn": 3,
+      "lan": 7
+     },
+     27
+    ],
+    [
+     {
+      "ath": 32,
+      "evn": 4,
+      "lan": 9
+     },
+     16
+    ],
+    [
+     {
+      "ath": 90,
+      "evn": 6,
+      "lan": 7
+     },
+     78
+    ],
+    [
+     {
+      "ath": 96,
+      "evn": 2,
+      "lan": 6
+     },
+     32
+    ],
+    [
+     {
+      "ath": 180,
+      "evn": 7,
+      "lan": 6
+     },
+     210
+    ],
+    [
+     {
+      "ath": 40,
+      "evn": 2,
+      "lan": 8
+     },
+     10
+    ]
+   ],
+   "task_id": "t-16",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "var",
+     "evn"
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "ath"
+      ],
+      [
+       "sub",
+       [
+        "var",
+        "lan"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "var",
+      "lan"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "s5_podiums",
+   "formula": "podium orders over evn events of lan finalists = evn lan(lan-1)(lan-2)",
+   "inputs": [
+    "ath",
+    "lan",
+    "evn"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "ath": 137,
+      "evn": 2,
+      "lan": 7
+     },
+     420
+    ],
+    [
+     {
+      "ath": 81,
+      "evn": 10,
+      "lan": 5
+     },
+     600
+    ],
+    [
+     {
+      "ath": 183,
+      "evn": 4,
+      "lan": 8
+     },
+     1344
+    ],
+    [
+     {
+      "ath": 65,
+      "evn": 8,
+      "lan": 4
+     },
+     192
+    ],
+    [
+     {
+      "ath": 197,
+      "evn": 5,
+      "lan": 5
+     },
+     300
+    ],
+    [
+     {
+      "ath": 130,
+      "evn": 3,
+      "lan": 8
+     },
+     1008
+    ],
+    [
+     {
+      "ath": 63,
+      "evn": 10,
+      "lan": 8
+     },
+     3360
+    ],
+    [
+     {
+      "ath": 67,
+      "evn": 8,
+      "lan": 8
+     },
+     2688
+    ],
+    [
+     {
+      "ath": 158,
+      "evn": 2,
+      "lan": 6
+     },
+     240
+    ],
+    [
+     {
+      "ath": 90,
+      "evn": 2,
+      "lan": 5
+     },
+     120
+    ],
+    [
+     {
+      "ath": 194,
+      "evn": 12,
+      "lan": 7
+     },
+     2520
+    ]
+   ],
+   "task_id": "t-17",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "evn"
+      ],
+      [
+       "var",
+       "lan"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "lan"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "lan"
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "transit",
+   "family": "t5_train_seats",
+   "formula": "seats when the first car is the engine = (ncar - 1) spr rpc",
+   "inputs": [
+    "ncar",
+    "spr",
+    "rpc"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "ncar": 7,
+      "rpc": 28,
+      "spr": 3
+     },
+     504
+    ],
+    [
+     {
+      "ncar": 14,
+      "rpc": 16,
+      "spr": 5
+     },
+     1040
+    ],
+    [
+     {
+      "ncar": 12,
+      "rpc": 13,
+      "spr": 6
+     },
+     858
+    ],
+    [
+     {
+      "ncar": 9,
+      "rpc": 5,
+      "spr": 5
+     },
+     200
+    ],
+    [
+     {
+      "ncar": 6,
+      "rpc": 25,
+      "spr": 6
+     },
+     750
+    ],
+    [
+     {
+      "ncar": 3,
+      "rpc": 10,
+      "spr": 6
+     },
+     120
+    ],
+    [
+     {
+      "ncar": 12,
+      "rpc": 10,
+      "spr": 4
+     },
+     440
+    ],
+    [
+     {
+      "ncar": 11,
+      "rpc": 11,
+      "spr": 3
+     },
+     330
+    ],
+    [
+     {
+      "ncar": 14,
+      "rpc": 10,
+      "spr": 6
+     },
+     780
+    ],
+    [
+     {
+      "ncar": 5,
+      "rpc": 28,
+      "spr": 6
+     },
+     672
+    ],
+    [
+     {
+      "ncar": 2,
+      "rpc": 25,
+      "spr": 2
+     },
+     50
+    ]
+   ],
+   "task_id": "t-23",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "ncar"
+      ],
+      [
+       "const",
+       1
+      ]
+     ],
+     [
+      "var",
+      "spr"
+     ]
+    ],
+    [
+     "var",
+     "rpc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "transit",
+   "family": "t5_window_seats",
+   "formula": "window seats, two a row, engine excluded = 2 rpc (ncar - 1)",
+   "inputs": [
+    "ncar",
+    "spr",
+    "rpc"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "ncar": 2,
+      "rpc": 30,
+      "spr": 2
+     },
+     60
+    ],
+    [
+     {
+      "ncar": 7,
+      "rpc": 17,
+      "spr": 3
+     },
+     204
+    ],
+    [
+     {
+      "ncar": 5,
+      "rpc": 25,
+      "spr": 2
+     },
+     200
+    ],
+    [
+     {
+      "ncar": 14,
+      "rpc": 6,
+      "spr": 3
+     },
+     156
+    ],
+    [
+     {
+      "ncar": 6,
+      "rpc": 18,
+      "spr": 2
+     },
+     180
+    ],
+    [
+     {
+      "ncar": 8,
+      "rpc": 21,
+      "spr": 2
+     },
+     294
+    ],
+    [
+     {
+      "ncar": 7,
+      "rpc": 13,
+      "spr": 2
+     },
+     156
+    ],
+    [
+     {
+      "ncar": 9,
+      "rpc": 25,
+      "spr": 3
+     },
+     400
+    ],
+    [
+     {
+      "ncar": 9,
+      "rpc": 23,
+      "spr": 4
+     },
+     368
+    ],
+    [
+     {
+      "ncar": 4,
+      "rpc": 29,
+      "spr": 6
+     },
+     174
+    ],
+    [
+     {
+      "ncar": 11,
+      "rpc": 6,
+      "spr": 6
+     },
+     120
+    ]
+   ],
+   "task_id": "t-24",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "var",
+      "rpc"
+     ],
+     [
+      "var",
+      "rpc"
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "ncar"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "transit",
+   "family": "t5_middle_seats",
+   "formula": "seats off the windows, engine excluded = (spr - 2) rpc (ncar - 1)",
+   "inputs": [
+    "ncar",
+    "spr",
+    "rpc"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "ncar": 2,
+      "rpc": 23,
+      "spr": 4
+     },
+     46
+    ],
+    [
+     {
+      "ncar": 5,
+      "rpc": 8,
+      "spr": 5
+     },
+     96
+    ],
+    [
+     {
+      "ncar": 2,
+      "rpc": 23,
+      "spr": 5
+     },
+     69
+    ],
+    [
+     {
+      "ncar": 7,
+      "rpc": 7,
+      "spr": 3
+     },
+     42
+    ],
+    [
+     {
+      "ncar": 8,
+      "rpc": 13,
+      "spr": 4
+     },
+     182
+    ],
+    [
+     {
+      "ncar": 9,
+      "rpc": 8,
+      "spr": 3
+     },
+     64
+    ],
+    [
+     {
+      "ncar": 12,
+      "rpc": 20,
+      "spr": 5
+     },
+     660
+    ],
+    [
+     {
+      "ncar": 4,
+      "rpc": 26,
+      "spr": 3
+     },
+     78
+    ],
+    [
+     {
+      "ncar": 9,
+      "rpc": 18,
+      "spr": 3
+     },
+     144
+    ],
+    [
+     {
+      "ncar": 6,
+      "rpc": 11,
+      "spr": 5
+     },
+     165
+    ],
+    [
+     {
+      "ncar": 14,
+      "rpc": 12,
+      "spr": 6
+     },
+     624
+    ]
+   ],
+   "task_id": "t-25",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "spr"
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "var",
+      "rpc"
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "ncar"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "transit",
+   "family": "t5_couplings",
+   "formula": "seat pairs facing across the car = spr rpc (rpc - 1) ncar / 2",
+   "inputs": [
+    "ncar",
+    "spr",
+    "rpc"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "ncar": 7,
+      "rpc": 9,
+      "spr": 5
+     },
+     1260
+    ],
+    [
+     {
+      "ncar": 12,
+      "rpc": 20,
+      "spr": 4
+     },
+     9120
+    ],
+    [
+     {
+      "ncar": 12,
+      "rpc": 22,
+      "spr": 6
+     },
+     16632
+    ],
+    [
+     {
+      "ncar": 4,
+      "rpc": 18,
+      "spr": 5
+     },
+     3060
+    ],
+    [
+     {
+      "ncar": 3,
+      "rpc": 5,
+      "spr": 2
+     },
+     60
+    ],
+    [
+     {
+      "ncar": 13,
+      "rpc": 22,
+      "spr": 4
+     },
+     12012
+    ],
+    [
+     {
+      "ncar": 5,
+      "rpc": 11,
+      "spr": 5
+     },
+     1375
+    ],
+    [
+     {
+      "ncar": 13,
+      "rpc": 6,
+      "spr": 6
+     },
+     1170
+    ],
+    [
+     {
+      "ncar": 2,
+      "rpc": 19,
+      "spr": 2
+     },
+     684
+    ],
+    [
+     {
+      "ncar": 4,
+      "rpc": 21,
+      "spr": 6
+     },
+     5040
+    ],
+    [
+     {
+      "ncar": 8,
+      "rpc": 5,
+      "spr": 4
+     },
+     320
+    ]
+   ],
+   "task_id": "t-26",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "spr"
+       ],
+       [
+        "var",
+        "rpc"
+       ]
+      ],
+      [
+       "sub",
+       [
+        "var",
+        "rpc"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "var",
+      "ncar"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "transit",
+   "family": "t5_stalls",
+   "formula": "stalls of side stl in the lot = (lotw // stl)(lotd // stl)",
+   "inputs": [
+    "lotw",
+    "lotd",
+    "stl"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "lotd": 55,
+      "lotw": 115,
+      "stl": 2
+     },
+     1539
+    ],
+    [
+     {
+      "lotd": 90,
+      "lotw": 117,
+      "stl": 3
+     },
+     1170
+    ],
+    [
+     {
+      "lotd": 57,
+      "lotw": 40,
+      "stl": 8
+     },
+     35
+    ],
+    [
+     {
+      "lotd": 50,
+      "lotw": 23,
+      "stl": 2
+     },
+     275
+    ],
+    [
+     {
+      "lotd": 42,
+      "lotw": 37,
+      "stl": 7
+     },
+     30
+    ],
+    [
+     {
+      "lotd": 25,
+      "lotw": 78,
+      "stl": 7
+     },
+     33
+    ],
+    [
+     {
+      "lotd": 41,
+      "lotw": 58,
+      "stl": 3
+     },
+     247
+    ],
+    [
+     {
+      "lotd": 67,
+      "lotw": 100,
+      "stl": 3
+     },
+     726
+    ],
+    [
+     {
+      "lotd": 90,
+      "lotw": 120,
+      "stl": 6
+     },
+     300
+    ],
+    [
+     {
+      "lotd": 51,
+      "lotw": 44,
+      "stl": 8
+     },
+     30
+    ],
+    [
+     {
+      "lotd": 68,
+      "lotw": 18,
+      "stl": 7
+     },
+     18
+    ]
+   ],
+   "task_id": "t-27",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "div",
+     [
+      "var",
+      "lotw"
+     ],
+     [
+      "var",
+      "stl"
+     ]
+    ],
+    [
+     "div",
+     [
+      "var",
+      "lotd"
+     ],
+     [
+      "var",
+      "stl"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "transit",
+   "family": "t5_lamps",
+   "formula": "lamps on every stl grid point = (lotw // stl + 1)(lotd // stl + 1)",
+   "inputs": [
+    "lotw",
+    "lotd",
+    "stl"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "lotd": 29,
+      "lotw": 80,
+      "stl": 6
+     },
+     70
+    ],
+    [
+     {
+      "lotd": 71,
+      "lotw": 103,
+      "stl": 3
+     },
+     840
+    ],
+    [
+     {
+      "lotd": 57,
+      "lotw": 47,
+      "stl": 4
+     },
+     180
+    ],
+    [
+     {
+      "lotd": 34,
+      "lotw": 26,
+      "stl": 5
+     },
+     42
+    ],
+    [
+     {
+      "lotd": 39,
+      "lotw": 116,
+      "stl": 2
+     },
+     1180
+    ],
+    [
+     {
+      "lotd": 31,
+      "lotw": 54,
+      "stl": 9
+     },
+     28
+    ],
+    [
+     {
+      "lotd": 76,
+      "lotw": 5,
+      "stl": 2
+     },
+     117
+    ],
+    [
+     {
+      "lotd": 13,
+      "lotw": 114,
+      "stl": 6
+     },
+     60
+    ],
+    [
+     {
+      "lotd": 68,
+      "lotw": 89,
+      "stl": 6
+     },
+     180
+    ],
+    [
+     {
+      "lotd": 33,
+      "lotw": 31,
+      "stl": 9
+     },
+     16
+    ],
+    [
+     {
+      "lotd": 24,
+      "lotw": 98,
+      "stl": 4
+     },
+     175
+    ]
+   ],
+   "task_id": "t-28",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "div",
+      [
+       "var",
+       "lotw"
+      ],
+      [
+       "var",
+       "stl"
+      ]
+     ],
+     [
+      "const",
+      1
+     ]
+    ],
+    [
+     "add",
+     [
+      "div",
+      [
+       "var",
+       "lotd"
+      ],
+      [
+       "var",
+       "stl"
+      ]
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "transit",
+   "family": "t5_paved_ring",
+   "formula": "ring road of width stl inside the lot = lotw lotd - (lotw - 2stl)(lotd - 2stl)",
+   "inputs": [
+    "lotw",
+    "lotd",
+    "stl"
+   ],
+   "kind": "area",
+   "rows": [
+    [
+     {
+      "lotd": 13,
+      "lotw": 58,
+      "stl": 3
+     },
+     390
+    ],
+    [
+     {
+      "lotd": 68,
+      "lotw": 56,
+      "stl": 2
+     },
+     480
+    ],
+    [
+     {
+      "lotd": 52,
+      "lotw": 51,
+      "stl": 9
+     },
+     1530
+    ],
+    [
+     {
+      "lotd": 33,
+      "lotw": 32,
+      "stl": 4
+     },
+     456
+    ],
+    [
+     {
+      "lotd": 32,
+      "lotw": 19,
+      "stl": 7
+     },
+     518
+    ],
+    [
+     {
+      "lotd": 55,
+      "lotw": 109,
+      "stl": 9
+     },
+     2628
+    ],
+    [
+     {
+      "lotd": 52,
+      "lotw": 95,
+      "stl": 8
+     },
+     2096
+    ],
+    [
+     {
+      "lotd": 78,
+      "lotw": 55,
+      "stl": 2
+     },
+     516
+    ],
+    [
+     {
+      "lotd": 28,
+      "lotw": 26,
+      "stl": 3
+     },
+     288
+    ],
+    [
+     {
+      "lotd": 19,
+      "lotw": 69,
+      "stl": 3
+     },
+     492
+    ],
+    [
+     {
+      "lotd": 32,
+      "lotw": 58,
+      "stl": 5
+     },
+     800
+    ]
+   ],
+   "task_id": "t-29",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "lotw"
+     ],
+     [
+      "var",
+      "lotd"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "lotw"
+      ],
+      [
+       "add",
+       [
+        "var",
+        "stl"
+       ],
+       [
+        "var",
+        "stl"
+       ]
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "lotd"
+      ],
+      [
+       "add",
+       [
+        "var",
+        "stl"
+       ],
+       [
+        "var",
+        "stl"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "transit",
+   "family": "t5_visit_all",
+   "formula": "steps climbed visiting every floor from the ground in turn = stp flr(flr-1)/2",
+   "inputs": [
+    "flr",
+    "stp"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "flr": 4,
+      "stp": 7
+     },
+     42
+    ],
+    [
+     {
+      "flr": 2,
+      "stp": 24
+     },
+     24
+    ],
+    [
+     {
+      "flr": 4,
+      "stp": 24
+     },
+     144
+    ],
+    [
+     {
+      "flr": 23,
+      "stp": 14
+     },
+     3542
+    ],
+    [
+     {
+      "flr": 37,
+      "stp": 23
+     },
+     15318
+    ],
+    [
+     {
+      "flr": 28,
+      "stp": 11
+     },
+     4158
+    ],
+    [
+     {
+      "flr": 24,
+      "stp": 18
+     },
+     4968
+    ],
+    [
+     {
+      "flr": 40,
+      "stp": 14
+     },
+     10920
+    ],
+    [
+     {
+      "flr": 10,
+      "stp": 16
+     },
+     720
+    ],
+    [
+     {
+      "flr": 25,
+      "stp": 12
+     },
+     3600
+    ],
+    [
+     {
+      "flr": 10,
+      "stp": 20
+     },
+     900
+    ]
+   ],
+   "task_id": "t-32",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "stp"
+      ],
+      [
+       "var",
+       "flr"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "flr"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "transit",
+   "family": "t5_round_trips",
+   "formula": "steps up and down to each floor and back = stp flr(flr-1)",
+   "inputs": [
+    "flr",
+    "stp"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "flr": 14,
+      "stp": 12
+     },
+     2184
+    ],
+    [
+     {
+      "flr": 7,
+      "stp": 24
+     },
+     1008
+    ],
+    [
+     {
+      "flr": 11,
+      "stp": 13
+     },
+     1430
+    ],
+    [
+     {
+      "flr": 4,
+      "stp": 6
+     },
+     72
+    ],
+    [
+     {
+      "flr": 28,
+      "stp": 15
+     },
+     11340
+    ],
+    [
+     {
+      "flr": 19,
+      "stp": 17
+     },
+     5814
+    ],
+    [
+     {
+      "flr": 24,
+      "stp": 22
+     },
+     12144
+    ],
+    [
+     {
+      "flr": 35,
+      "stp": 16
+     },
+     19040
+    ],
+    [
+     {
+      "flr": 4,
+      "stp": 13
+     },
+     156
+    ],
+    [
+     {
+      "flr": 3,
+      "stp": 23
+     },
+     138
+    ],
+    [
+     {
+      "flr": 2,
+      "stp": 20
+     },
+     40
+    ]
+   ],
+   "task_id": "t-33",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "var",
+      "stp"
+     ],
+     [
+      "var",
+      "flr"
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "flr"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "venue",
+   "family": "v5_tier_seats",
+   "formula": "rws rows, fst in front, 2 more each row = rws fst + rws(rws-1)",
+   "inputs": [
+    "rws",
+    "fst"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "fst": 5,
+      "rws": 39
+     },
+     1677
+    ],
+    [
+     {
+      "fst": 20,
+      "rws": 25
+     },
+     1100
+    ],
+    [
+     {
+      "fst": 6,
+      "rws": 40
+     },
+     1800
+    ],
+    [
+     {
+      "fst": 11,
+      "rws": 20
+     },
+     600
+    ],
+    [
+     {
+      "fst": 7,
+      "rws": 7
+     },
+     91
+    ],
+    [
+     {
+      "fst": 5,
+      "rws": 11
+     },
+     165
+    ],
+    [
+     {
+      "fst": 15,
+      "rws": 33
+     },
+     1551
+    ],
+    [
+     {
+      "fst": 12,
+      "rws": 30
+     },
+     1230
+    ],
+    [
+     {
+      "fst": 21,
+      "rws": 8
+     },
+     224
+    ],
+    [
+     {
+      "fst": 30,
+      "rws": 40
+     },
+     2760
+    ],
+    [
+     {
+      "fst": 5,
+      "rws": 28
+     },
+     896
+    ]
+   ],
+   "task_id": "t-34",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "rws"
+     ],
+     [
+      "var",
+      "fst"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "rws"
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "rws"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "venue",
+   "family": "v5_fan_seats",
+   "formula": "rws rows, fst in front, 1 more each row = rws fst + rws(rws-1)/2",
+   "inputs": [
+    "rws",
+    "fst"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "fst": 25,
+      "rws": 1
+     },
+     25
+    ],
+    [
+     {
+      "fst": 4,
+      "rws": 12
+     },
+     114
+    ],
+    [
+     {
+      "fst": 26,
+      "rws": 39
+     },
+     1755
+    ],
+    [
+     {
+      "fst": 12,
+      "rws": 17
+     },
+     340
+    ],
+    [
+     {
+      "fst": 14,
+      "rws": 34
+     },
+     1037
+    ],
+    [
+     {
+      "fst": 11,
+      "rws": 24
+     },
+     540
+    ],
+    [
+     {
+      "fst": 29,
+      "rws": 24
+     },
+     972
+    ],
+    [
+     {
+      "fst": 16,
+      "rws": 7
+     },
+     133
+    ],
+    [
+     {
+      "fst": 16,
+      "rws": 4
+     },
+     70
+    ],
+    [
+     {
+      "fst": 16,
+      "rws": 5
+     },
+     90
+    ],
+    [
+     {
+      "fst": 28,
+      "rws": 29
+     },
+     1218
+    ]
+   ],
+   "task_id": "t-36",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "rws"
+     ],
+     [
+      "var",
+      "fst"
+     ]
+    ],
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "rws"
+      ],
+      [
+       "sub",
+       [
+        "var",
+        "rws"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "venue",
+   "family": "v5_light_pyramid",
+   "formula": "lights in a square pyramid rig of stg tiers = stg(stg+1)(2stg+1)/6",
+   "inputs": [
+    "stg"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "stg": 3
+     },
+     14
+    ],
+    [
+     {
+      "stg": 24
+     },
+     4900
+    ],
+    [
+     {
+      "stg": 16
+     },
+     1496
+    ],
+    [
+     {
+      "stg": 8
+     },
+     204
+    ],
+    [
+     {
+      "stg": 10
+     },
+     385
+    ],
+    [
+     {
+      "stg": 17
+     },
+     1785
+    ],
+    [
+     {
+      "stg": 12
+     },
+     650
+    ],
+    [
+     {
+      "stg": 18
+     },
+     2109
+    ],
+    [
+     {
+      "stg": 23
+     },
+     4324
+    ],
+    [
+     {
+      "stg": 20
+     },
+     2870
+    ],
+    [
+     {
+      "stg": 13
+     },
+     819
+    ]
+   ],
+   "task_id": "t-40",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "stg"
+      ],
+      [
+       "add",
+       [
+        "var",
+        "stg"
+       ],
+       [
+        "const",
+        1
+       ]
+      ]
+     ],
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "stg"
+       ],
+       [
+        "var",
+        "stg"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "venue",
+   "family": "v5_truss_nodes",
+   "formula": "truss nodes of a stg-cube rig = (stg + 1)^3",
+   "inputs": [
+    "stg"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "stg": 13
+     },
+     2744
+    ],
+    [
+     {
+      "stg": 4
+     },
+     125
+    ],
+    [
+     {
+      "stg": 3
+     },
+     64
+    ],
+    [
+     {
+      "stg": 11
+     },
+     1728
+    ],
+    [
+     {
+      "stg": 23
+     },
+     13824
+    ],
+    [
+     {
+      "stg": 19
+     },
+     8000
+    ],
+    [
+     {
+      "stg": 8
+     },
+     729
+    ],
+    [
+     {
+      "stg": 18
+     },
+     6859
+    ],
+    [
+     {
+      "stg": 10
+     },
+     1331
+    ],
+    [
+     {
+      "stg": 12
+     },
+     2197
+    ],
+    [
+     {
+      "stg": 20
+     },
+     9261
+    ]
+   ],
+   "task_id": "t-41",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "add",
+     [
+      "var",
+      "stg"
+     ],
+     [
+      "const",
+      1
+     ]
+    ],
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "stg"
+      ],
+      [
+       "const",
+       1
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "stg"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "venue",
+   "family": "v5_speaker_stack",
+   "formula": "speakers in a triangular stack of stg rows on a base of stg+1 = (stg+1)(stg+2)/2",
+   "inputs": [
+    "stg"
+   ],
+   "kind": "counting",
+   "rows": [
+    [
+     {
+      "stg": 6
+     },
+     28
+    ],
+    [
+     {
+      "stg": 5
+     },
+     21
+    ],
+    [
+     {
+      "stg": 17
+     },
+     171
+    ],
+    [
+     {
+      "stg": 21
+     },
+     253
+    ],
+    [
+     {
+      "stg": 25
+     },
+     351
+    ],
+    [
+     {
+      "stg": 10
+     },
+     66
+    ],
+    [
+     {
+      "stg": 7
+     },
+     36
+    ],
+    [
+     {
+      "stg": 4
+     },
+     15
+    ],
+    [
+     {
+      "stg": 12
+     },
+     91
+    ],
+    [
+     {
+      "stg": 19
+     },
+     210
+    ],
+    [
+     {
+      "stg": 23
+     },
+     300
+    ]
+   ],
+   "task_id": "t-43",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "stg"
+      ],
+      [
+       "const",
+       1
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "stg"
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 295,
+   "cold_reason": null,
+   "domain": "venue",
+   "family": "v5_groups",
+   "formula": "groups to seat every ticket holder = ceil(tix / grp)",
+   "inputs": [
+    "tix",
+    "grp",
+    "blk"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "blk": 5,
+      "grp": 24,
+      "tix": 4382
+     },
+     183
+    ],
+    [
+     {
+      "blk": 7,
+      "grp": 12,
+      "tix": 380
+     },
+     32
+    ],
+    [
+     {
+      "blk": 12,
+      "grp": 7,
+      "tix": 1454
+     },
+     208
+    ],
+    [
+     {
+      "blk": 5,
+      "grp": 2,
+      "tix": 1309
+     },
+     655
+    ],
+    [
+     {
+      "blk": 11,
+      "grp": 8,
+      "tix": 4071
+     },
+     509
+    ],
+    [
+     {
+      "blk": 12,
+      "grp": 21,
+      "tix": 1761
+     },
+     84
+    ],
+    [
+     {
+      "blk": 11,
+      "grp": 11,
+      "tix": 677
+     },
+     62
+    ],
+    [
+     {
+      "blk": 10,
+      "grp": 11,
+      "tix": 2050
+     },
+     187
+    ],
+    [
+     {
+      "blk": 2,
+      "grp": 17,
+      "tix": 1862
+     },
+     110
+    ],
+    [
+     {
+      "blk": 11,
+      "grp": 15,
+      "tix": 2266
+     },
+     152
+    ],
+    [
+     {
+      "blk": 3,
+      "grp": 5,
+      "tix": 2655
+     },
+     531
+    ]
+   ],
+   "task_id": "t-44",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "tix"
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "grp"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "grp"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "venue",
+   "family": "v5_block_seats",
+   "formula": "seats in the full blocks = ((tix // grp) // blk) blk grp",
+   "inputs": [
+    "tix",
+    "grp",
+    "blk"
+   ],
+   "kind": "packing",
+   "rows": [
+    [
+     {
+      "blk": 9,
+      "grp": 12,
+      "tix": 289
+     },
+     216
+    ],
+    [
+     {
+      "blk": 2,
+      "grp": 14,
+      "tix": 649
+     },
+     644
+    ],
+    [
+     {
+      "blk": 8,
+      "grp": 8,
+      "tix": 2473
+     },
+     2432
+    ],
+    [
+     {
+      "blk": 8,
+      "grp": 5,
+      "tix": 966
+     },
+     960
+    ],
+    [
+     {
+      "blk": 5,
+      "grp": 24,
+      "tix": 2149
+     },
+     2040
+    ],
+    [
+     {
+      "blk": 4,
+      "grp": 4,
+      "tix": 579
+     },
+     576
+    ],
+    [
+     {
+      "blk": 7,
+      "grp": 28,
+      "tix": 214
+     },
+     196
+    ],
+    [
+     {
+      "blk": 3,
+      "grp": 15,
+      "tix": 4728
+     },
+     4725
+    ],
+    [
+     {
+      "blk": 4,
+      "grp": 26,
+      "tix": 4878
+     },
+     4784
+    ],
+    [
+     {
+      "blk": 11,
+      "grp": 28,
+      "tix": 3448
+     },
+     3388
+    ],
+    [
+     {
+      "blk": 4,
+      "grp": 7,
+      "tix": 662
+     },
+     644
+    ]
+   ],
+   "task_id": "t-48",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "div",
+      [
+       "div",
+       [
+        "var",
+        "tix"
+       ],
+       [
+        "var",
+        "grp"
+       ]
+      ],
+      [
+       "var",
+       "blk"
+      ]
+     ],
+     [
+      "var",
+      "blk"
+     ]
+    ],
+    [
+     "var",
+     "grp"
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "int",
+ "schema": "nomad.transfer5-suite.v1",
+ "seed": 20261127,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 16,
+  "families": 49,
+  "hard": 33,
+  "lookup_dropped": []
+ },
+ "trained_on_by_any_arm": false
+}
