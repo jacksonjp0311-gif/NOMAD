@@ -107,3 +107,58 @@ templated English written by the same agent that wrote the training texts; relat
 (`each`, `per`, `average`, `there and back`, `left`, `shared equally`) overlap between training
 and sealed stories by design, nouns and domains do not. The shuffled-lexicon control is the
 test that the words, not the extra retrieval budget, carry the gain.
+
+## Sealed result (measured once, 2026-11-21, code `59f6add`; `results/meaning/`): **PASS -> default ON**
+
+Suite sha `d684a355...5d77`, 19 hard; lexicon of the trained field: 813 tokens, 41 concepts.
+
+| arm | certified | evaluations |
+|---|---|---|
+| cold | 0 | 190,000 |
+| empty_off | 0 | 190,000 |
+| empty_on | 0 | 190,000 |
+| trained_off | 15 | 122,306 |
+| **trained_on** | **19** | **6,171** |
+| shuffled_1 | 15 | 101,470 |
+| shuffled_2 | 15 | 123,382 |
+| shuffled_3 | 15 | 112,211 |
+| words_only_on (report) | 19 | 6,145 |
+
+New certifications (all four via `meaning:`): `ms_avg_crowd`, `ms_avg_patients` (average of
+three), `ms_taxi_split`, `ms_cake_split2` (`(a*b+c)//d`). 18 of 19 solved by the retrieved
+concept in 4-110 evaluations; the other 14 cost ~5,400-5,700 evaluations without words (PORT
+after the block-probe trigger). One miss: `ms_pitch_goal` (frame: grass left around a stage)
+retrieved the wrong concepts, spent 75 evaluations, then the normal search certified it as
+before (5,457 -> 5,532). The shuffled controls hit 1-3 tasks by chance (shared relational
+tokens) and certify nothing new. Easy section (report, 15): all 15 certified by every arm;
+13 via `meaning:` in 1-24 evaluations, total 37,829 -> 5,346; two misses (`ms_snack_trays`
++72, `ms_budget_used` +48).
+
+| criterion | result |
+|---|---|
+| 1 meaning helps (>= +3) | **pass**: +4 certified (15 -> 19), 94.95% fewer evaluations |
+| 2 words carry meaning (vs best shuffled) | **pass**: +4 over shuffled_1 (15), 93.9% fewer evaluations; shuffled_2/3 also 15 |
+| 3 empty field gains nothing | **pass**: empty_on = empty_off = 0 certified, 190,000 = 190,000 evaluations (empty_on - cold = 0) |
+| 4 no sealed task lost | **pass**: no loss vs trained_off; nothing worse than cold; one miss +75 evaluations (reported above) |
+| 5 existing suites, every arm | **pass**: 0 losses, 0 gains, every judge's on/off output byte-identical (learning deep 27 / science 12 incl. `sci_water_mol` 9,890 / LOFO; T1 19, T2 32, T3 27, T4 18, secondary; text lang 7 / all_sci 10; bridge 13; INVENT_TEXT 13; TRANSFER-5 26; TRANSFER-6 23; SELFEDIT2 14) |
+| 5b re-check on main `b5c64c8` (TEXT_CHAIN default ON) | **pass**: the 12 judges + `text_chain_judge` (TEXT_CHAIN 22) re-run off / on after rebasing: 13 of 13 byte-identical, 0 losses; LOFO 5,883 worst 1.0x (TEXT lang 17 / all_sci 20, BRIDGE 15, INVENT_TEXT 15 are TEXT_CHAIN's new baselines). The sealed MEANING suite was not re-measured (measured once; its tasks are integer-only, and TEXT_CHAIN acts on string goals) |
+| 6 LOFO, tests | **pass**: LOFO 5,883, worst 1.0x; 490 passed, 6 skipped |
+
+Honest reading. The gain is memory-borne (empty field 0, cold 0) and word-borne (the same
+field with scrambled word -> concept links stays at 15 and pays ~5,500 evaluations per task):
+NOMAD read a stadium / hospital / airport story it had never seen, with distractor numbers
+and new input names, and pulled up the verified program the story meant. What it is not:
+language understanding. The association is bag-of-words counts over templated English the
+same agent wrote for training and sealed stories; relational words overlap by design; the
+concepts are only those the field already certified; variable roles are found by trying
+renamings, not read from the words; numbers in text are not parsed. Criterion 5 is trivially
+met: no existing judge passes words, so MEANING cannot touch them (verified, not assumed).
+The live body has no word tasks yet, so default ON changes nothing live until a curriculum
+carries descriptions.
+
+Best next steps: (1) a live word-problem curriculum domain behind its own switch (like
+`NOMAD_LIVE_BRIDGE`), so sleep learns the lexicon from live receipts; (2) ground *roles*:
+learn token -> variable-position links so the stage tries the renaming the words imply first
+(today up to 360 renamings are tried blind); (3) compositional meaning: when no single concept
+fits, combine two retrieved concepts (`avg of a two-area`), WITNESS-gated; (4) human-written
+held-out descriptions to test beyond the templates.
