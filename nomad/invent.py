@@ -61,7 +61,7 @@ def selfedit_on() -> bool:
     bounded genome genes (data/genome.json, or the sandbox's in-process override)
     instead of the module constants. The genome defaults equal the constants, so
     with an untouched genome nothing changes."""
-    return W._flag("NOMAD_SELFEDIT", "off")
+    return W._flag("NOMAD_SELFEDIT", "on")   # default ON since SELFEDIT round 2 PASS (docs/SELFEDIT.md)
 
 
 def _gene(name: str, default):

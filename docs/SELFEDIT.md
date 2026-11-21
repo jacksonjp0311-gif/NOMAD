@@ -6,7 +6,8 @@ Those knobs were frozen in code. SELFEDIT makes them **bounded genome genes** an
 adds a **sandbox** in which NOMAD proposes a tiny change to them, tests it, replays
 what it just did under the change, and advances or rolls back -- at checkpoint
 cadence, never inside a sleep. Everything is behind **`NOMAD_SELFEDIT`, default
-OFF** (the sealed judge below failed two criteria, so it stays off). No transformers, no neural weights, no
+ON since round 2** (round 1 failed two criteria and stayed off; round 2 passed all six;
+`NOMAD_SELFEDIT=off` restores the frozen constants and stops the sandbox). No transformers, no neural weights, no
 LLM; WITNESS certifies every program; the sandbox edits genome *data*, never code;
 the cold control is untouched.
 

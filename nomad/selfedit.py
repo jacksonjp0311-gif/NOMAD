@@ -56,7 +56,7 @@ STEPS = {"inv_max_constants": (-2, -1, 1, 2, 4), "inv_const_depth": (-1, 1),
 
 def enabled() -> bool:
     """NOMAD_SELFEDIT: invention genes read from the genome + the sandbox at checkpoints."""
-    v = os.environ.get("NOMAD_SELFEDIT", "off").strip().lower()
+    v = os.environ.get("NOMAD_SELFEDIT", "on").strip().lower()   # default ON since round 2 PASS
     return v not in ("0", "off", "false", "no")
 
 
