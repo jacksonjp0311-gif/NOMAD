@@ -24,12 +24,12 @@ def vals(tree):
 
 
 class TextChainTests(unittest.TestCase):
-    def test_default_off(self) -> None:
+    def test_default_on_and_off_switch(self) -> None:
         old = os.environ.pop("NOMAD_TEXT_CHAIN", None)
         try:
-            self.assertFalse(I.chain_enabled())
-            os.environ["NOMAD_TEXT_CHAIN"] = "on"
             self.assertTrue(I.chain_enabled())
+            os.environ["NOMAD_TEXT_CHAIN"] = "off"
+            self.assertFalse(I.chain_enabled())
         finally:
             os.environ.pop("NOMAD_TEXT_CHAIN", None)
             if old is not None:

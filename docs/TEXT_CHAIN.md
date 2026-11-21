@@ -4,8 +4,8 @@ INVENT_TEXT (docs/INVENT_TEXT.md) completes a string goal from **two** known pie
 is a prefix (suffix) of the goal plus a pool / block value equal to the remainder. Goals built from
 three or more pieces -- `last(w) + sep + first(w)`, `word + ":" + name + "/" + k`, `tail + sep +
 tail` -- stay out of reach unless some pool entry happens to hold two pieces already. TEXT_CHAIN
-peels pieces off both ends recursively. Everything is behind **`NOMAD_TEXT_CHAIN`, default OFF**
-until the sealed judge below passes. No transformers, no neural weights, no LLM; WITNESS certifies
+peels pieces off both ends recursively. Everything is behind **`NOMAD_TEXT_CHAIN`, default ON
+since the sealed judge below passed** (off switch: `NOMAD_TEXT_CHAIN=off`). No transformers, no neural weights, no LLM; WITNESS certifies
 every program; the cold control is untouched.
 
 ## What is built (`nomad/invent.py`: `chain_parts`, `text_chain`; `nomad/world.py`: `text_chain`)

@@ -105,8 +105,8 @@ TEXT_CHAIN_LEARNED = False  # require a part whose value only a learned (bank / 
 
 def chain_enabled() -> bool:
     """NOMAD_TEXT_CHAIN (docs/TEXT_CHAIN.md): multi-part concat chains on string goals, built by
-    recursive prefix / suffix peeling over computed values. Default off until its sealed judge passes."""
-    return W._flag("NOMAD_TEXT_CHAIN", "off")
+    recursive prefix / suffix peeling over computed values. Default on since its sealed judge passed."""
+    return W._flag("NOMAD_TEXT_CHAIN", "on")
 
 
 def chain_parts(goal, pool_str, learned_str, pool_int, ops) -> list:
