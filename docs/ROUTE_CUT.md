@@ -109,3 +109,12 @@ Generated (`python3 scripts/route_cut_suite.py`, cold control only):
 `f8906d60f56e03dcc1205ec1e73aa1fe8ece00dbce548d258b4b8816233ae175`; 51
 families, 19 easy, **31 hard**, 1 lookup drop (p7_waste: memory already
 holds `mod(sub(ups, lfs), ups)`).
+
+### Addendum to criterion 5 (before any MEANING measurement with ROUTE_CUT)
+
+MEANING was measured by its owner (sealed PASS 7e299b3, default ON ceb4b7b)
+after this document was written, so its sealed suite joins criterion 5:
+`meaning` in `scripts/switch_regress.py` (trained_on 19 of 19 on current
+main), zero per-task losses on every arm, switch on vs off. This only adds a
+suite; nothing else in the criteria changes. All ROUTE_CUT judges run with
+MEANING at its default (on).
