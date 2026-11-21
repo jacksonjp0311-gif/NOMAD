@@ -145,6 +145,15 @@ CONCEPTS: dict[str, Concept] = {c.name: c for c in (
 )}
 
 
+# COMBINE (docs/COMBINE.md): two-concept story truths, registered by nomad/combine_tasks.py.
+# Never part of the field's training; looked up only for families that name them.
+COMPOSITES: dict[str, Concept] = {}
+
+
+def _concept(name: str) -> Concept:
+    return CONCEPTS[name] if name in CONCEPTS else COMPOSITES[name]
+
+
 @dataclass(frozen=True)
 class WordFamily:
     family: str
@@ -282,7 +291,7 @@ DISTRACT = {"x": (1, 25), "y": (1, 25)}
 
 def draw_rows(fam: WordFamily, rng: random.Random, names: dict[str, str]) -> list[tuple[dict, int]]:
     """Rows over the family's input names (roles + distractors), exact by the reference tree."""
-    c = CONCEPTS[fam.concept]
+    c = _concept(fam.concept)
     n = N_PUBLIC + N_CHALLENGE + N_FINAL
     tree = rename_tree(c.tree, names)
     for _ in range(50):
@@ -323,7 +332,7 @@ def rename_tree(tree: list, names: dict[str, str]) -> list:
 def entry(fam: WordFamily, task_id: str, seed: int | str, name_pool: Sequence[str], shuffle: bool) -> dict:
     """A JSON-safe task entry: input names drawn from ``name_pool``, order shuffled when asked."""
     rng = random.Random(f"{seed}:{fam.family}")
-    c = CONCEPTS[fam.concept]
+    c = _concept(fam.concept)
     slots = list(c.roles) + list(fam.distractors)
     pool = list(name_pool)
     if shuffle:
@@ -344,7 +353,7 @@ def story_entry(fam: WordFamily, task_id: str, seed: int | str, name_pool: Seque
     unchanged, so every MEANING suite and field is byte-identical."""
     e = entry(fam, task_id, seed, name_pool, shuffle)
     rng = random.Random(f"{seed}:{fam.family}")
-    c = CONCEPTS[fam.concept]
+    c = _concept(fam.concept)
     slots = list(c.roles) + list(fam.distractors)
     pool = list(name_pool)
     if shuffle:

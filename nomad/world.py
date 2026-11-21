@@ -2572,8 +2572,15 @@ def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bo
         from . import meaning as _meaning
         if _meaning.enabled():
             hit, spent, _info = _meaning.stage(task, prior, words, max_eval=max_eval)
+            via = "meaning:"
+            if hit is None:
+                from . import combine as _combine
+                if _combine.enabled():   # COMBINE (docs/COMBINE.md): two retrieved concepts composed
+                    hit, more, _info = _combine.stage(task, prior, words, max_eval=max_eval - spent)
+                    spent += more
+                    via = "combine:"
     if hit is not None:
-        s = Search(hit[1], spent, None, (), [], "meaning:" + hit[0])
+        s = Search(hit[1], spent, None, (), [], via + hit[0])
     else:
         s = synthesize(task, prior=prior, use_family=use_family, use_library=use_library,
                        max_size=max_size, max_eval=max_eval - spent, variation=variation, casesplit=casesplit,

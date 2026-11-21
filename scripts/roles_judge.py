@@ -109,7 +109,7 @@ def score(entries, tasks, arm_kw, max_size) -> dict:
         for k, ev in res.items():
             cert[k] += ev.certified
             evals[k] += ev.evaluations
-            via_meaning[k] += bool(ev.certified and ev.via and ev.via.startswith("meaning:"))
+            via_meaning[k] += bool(ev.certified and ev.via and ev.via.startswith(("meaning:", "combine:")))
             if (c.certified and not ev.certified) or (c.certified and ev.certified and ev.evaluations > c.evaluations):
                 worse[k].append(e["family"])
         per[e["family"]] = {k: [ev.certified, ev.evaluations, ev.via, ev.candidate if ev.certified else None]

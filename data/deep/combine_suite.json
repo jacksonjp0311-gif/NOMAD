@@ -1,0 +1,2724 @@
+{
+ "schema": "nomad.combine-suite.v1",
+ "seed": 20270223,
+ "budget": 10000,
+ "max_size": 7,
+ "names": [
+  "ja",
+  "jb",
+  "jc",
+  "jd",
+  "je",
+  "jf",
+  "jg"
+ ],
+ "easy": [],
+ "hard": [
+  {
+   "task_id": "c-00",
+   "family": "cs_lamp_boxes",
+   "concept": "cb_boxes_two_areas",
+   "domain": "lighthouse",
+   "words": "The keeper's two rooms are {a} by {b} tiles and {c} by {d} tiles, and tiles are sold in boxes of {e}; the tower is {x} meters tall. How many boxes of tiles are needed for both rooms?",
+   "inputs": [
+    "jg",
+    "jb",
+    "jd",
+    "ja",
+    "jf",
+    "jc"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "jf"
+       ],
+       [
+        "var",
+        "jg"
+       ]
+      ],
+      [
+       "mul",
+       [
+        "var",
+        "jc"
+       ],
+       [
+        "var",
+        "ja"
+       ]
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "jd"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "jd"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "jf": 9,
+      "jg": 4,
+      "jc": 7,
+      "ja": 7,
+      "jd": 5,
+      "jb": 18
+     },
+     17
+    ],
+    [
+     {
+      "jf": 7,
+      "jg": 9,
+      "jc": 4,
+      "ja": 8,
+      "jd": 9,
+      "jb": 12
+     },
+     11
+    ],
+    [
+     {
+      "jf": 4,
+      "jg": 6,
+      "jc": 8,
+      "ja": 3,
+      "jd": 9,
+      "jb": 21
+     },
+     6
+    ],
+    [
+     {
+      "jf": 3,
+      "jg": 7,
+      "jc": 8,
+      "ja": 7,
+      "jd": 5,
+      "jb": 7
+     },
+     16
+    ],
+    [
+     {
+      "jf": 7,
+      "jg": 3,
+      "jc": 8,
+      "ja": 3,
+      "jd": 4,
+      "jb": 2
+     },
+     12
+    ],
+    [
+     {
+      "jf": 4,
+      "jg": 2,
+      "jc": 3,
+      "ja": 5,
+      "jd": 8,
+      "jb": 15
+     },
+     3
+    ],
+    [
+     {
+      "jf": 6,
+      "jg": 2,
+      "jc": 9,
+      "ja": 7,
+      "jd": 4,
+      "jb": 14
+     },
+     19
+    ],
+    [
+     {
+      "jf": 3,
+      "jg": 5,
+      "jc": 6,
+      "ja": 8,
+      "jd": 9,
+      "jb": 22
+     },
+     7
+    ],
+    [
+     {
+      "jf": 8,
+      "jg": 8,
+      "jc": 5,
+      "ja": 2,
+      "jd": 6,
+      "jb": 8
+     },
+     13
+    ],
+    [
+     {
+      "jf": 7,
+      "jg": 7,
+      "jc": 3,
+      "ja": 9,
+      "jd": 6,
+      "jb": 5
+     },
+     13
+    ],
+    [
+     {
+      "jf": 2,
+      "jg": 3,
+      "jc": 7,
+      "ja": 8,
+      "jd": 9,
+      "jb": 2
+     },
+     7
+    ]
+   ],
+   "story": "The keeper's two rooms are 9 by 4 tiles and 7 by 7 tiles, and tiles are sold in boxes of 5; the tower is 18 meters tall. How many boxes of tiles are needed for both rooms?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "c-01",
+   "family": "cs_hive_boxes",
+   "concept": "cb_boxes_two_areas",
+   "domain": "apiary",
+   "words": "One field has {a} rows of {b} hives and another field has {c} rows of {d} hives, and a truck carries {e} hives at a time, over {x} miles with {y} beekeepers. How many truck loads move every hive?",
+   "inputs": [
+    "jb",
+    "jg",
+    "jc",
+    "ja",
+    "jd",
+    "je",
+    "jf"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "jc"
+       ],
+       [
+        "var",
+        "je"
+       ]
+      ],
+      [
+       "mul",
+       [
+        "var",
+        "jb"
+       ],
+       [
+        "var",
+        "ja"
+       ]
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "jf"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "jf"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "jc": 2,
+      "je": 3,
+      "jb": 3,
+      "ja": 6,
+      "jf": 7,
+      "jg": 8,
+      "jd": 17
+     },
+     4
+    ],
+    [
+     {
+      "jc": 2,
+      "je": 4,
+      "jb": 6,
+      "ja": 6,
+      "jf": 4,
+      "jg": 11,
+      "jd": 6
+     },
+     11
+    ],
+    [
+     {
+      "jc": 2,
+      "je": 3,
+      "jb": 5,
+      "ja": 2,
+      "jf": 3,
+      "jg": 3,
+      "jd": 25
+     },
+     6
+    ],
+    [
+     {
+      "jc": 4,
+      "je": 2,
+      "jb": 7,
+      "ja": 3,
+      "jf": 8,
+      "jg": 20,
+      "jd": 15
+     },
+     4
+    ],
+    [
+     {
+      "jc": 2,
+      "je": 7,
+      "jb": 9,
+      "ja": 5,
+      "jf": 4,
+      "jg": 16,
+      "jd": 13
+     },
+     15
+    ],
+    [
+     {
+      "jc": 8,
+      "je": 5,
+      "jb": 3,
+      "ja": 9,
+      "jf": 4,
+      "jg": 17,
+      "jd": 11
+     },
+     17
+    ],
+    [
+     {
+      "jc": 2,
+      "je": 8,
+      "jb": 9,
+      "ja": 2,
+      "jf": 4,
+      "jg": 5,
+      "jd": 23
+     },
+     9
+    ],
+    [
+     {
+      "jc": 9,
+      "je": 7,
+      "jb": 3,
+      "ja": 3,
+      "jf": 3,
+      "jg": 11,
+      "jd": 22
+     },
+     24
+    ],
+    [
+     {
+      "jc": 8,
+      "je": 3,
+      "jb": 2,
+      "ja": 7,
+      "jf": 9,
+      "jg": 1,
+      "jd": 7
+     },
+     5
+    ],
+    [
+     {
+      "jc": 2,
+      "je": 2,
+      "jb": 9,
+      "ja": 4,
+      "jf": 9,
+      "jg": 8,
+      "jd": 6
+     },
+     5
+    ],
+    [
+     {
+      "jc": 8,
+      "je": 8,
+      "jb": 5,
+      "ja": 3,
+      "jf": 5,
+      "jg": 13,
+      "jd": 25
+     },
+     16
+    ]
+   ],
+   "story": "One field has 2 rows of 3 hives and another field has 3 rows of 6 hives, and a truck carries 7 hives at a time, over 8 miles with 17 beekeepers. How many truck loads move every hive?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "c-02",
+   "family": "cs_jar_left",
+   "concept": "cb_left_volume",
+   "domain": "apiary",
+   "words": "A shed holds {a} shelves with {b} crates on each shelf and {c} jars in each crate, and the jars are packed into gift sets of {d}, for {x} shops. How many jars are left over without a full set?",
+   "inputs": [
+    "jg",
+    "je",
+    "ja",
+    "jc",
+    "jd"
+   ],
+   "tree": [
+    "mod",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "ja"
+      ],
+      [
+       "var",
+       "jg"
+      ]
+     ],
+     [
+      "var",
+      "jd"
+     ]
+    ],
+    [
+     "var",
+     "jc"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "ja": 4,
+      "jg": 4,
+      "jd": 3,
+      "jc": 3,
+      "je": 2
+     },
+     0
+    ],
+    [
+     {
+      "ja": 6,
+      "jg": 5,
+      "jd": 4,
+      "jc": 7,
+      "je": 12
+     },
+     1
+    ],
+    [
+     {
+      "ja": 7,
+      "jg": 6,
+      "jd": 3,
+      "jc": 7,
+      "je": 11
+     },
+     0
+    ],
+    [
+     {
+      "ja": 9,
+      "jg": 9,
+      "jd": 4,
+      "jc": 9,
+      "je": 6
+     },
+     0
+    ],
+    [
+     {
+      "ja": 7,
+      "jg": 7,
+      "jd": 5,
+      "jc": 5,
+      "je": 5
+     },
+     0
+    ],
+    [
+     {
+      "ja": 7,
+      "jg": 3,
+      "jd": 2,
+      "jc": 7,
+      "je": 17
+     },
+     0
+    ],
+    [
+     {
+      "ja": 8,
+      "jg": 4,
+      "jd": 5,
+      "jc": 8,
+      "je": 6
+     },
+     0
+    ],
+    [
+     {
+      "ja": 2,
+      "jg": 2,
+      "jd": 2,
+      "jc": 4,
+      "je": 17
+     },
+     0
+    ],
+    [
+     {
+      "ja": 9,
+      "jg": 9,
+      "jd": 5,
+      "jc": 7,
+      "je": 13
+     },
+     6
+    ],
+    [
+     {
+      "ja": 8,
+      "jg": 8,
+      "jd": 2,
+      "jc": 7,
+      "je": 16
+     },
+     2
+    ],
+    [
+     {
+      "ja": 8,
+      "jg": 7,
+      "jd": 7,
+      "jc": 3,
+      "je": 14
+     },
+     2
+    ]
+   ],
+   "story": "A shed holds 4 shelves with 4 crates on each shelf and 3 jars in each crate, and the jars are packed into gift sets of 3, for 2 shops. How many jars are left over without a full set?",
+   "cold_certified": false,
+   "cold_evaluations": 2377
+  },
+  {
+   "task_id": "c-03",
+   "family": "cs_cup_left",
+   "concept": "cb_left_volume",
+   "domain": "pottery studio",
+   "words": "A kiln has {a} racks, each rack has {b} trays and each tray holds {c} cups; the cups go into boxes of {d}, fired at {x} degrees for {y} hours. How many cups are left over without a full box?",
+   "inputs": [
+    "ja",
+    "je",
+    "jd",
+    "jb",
+    "jc",
+    "jg"
+   ],
+   "tree": [
+    "mod",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "jd"
+      ],
+      [
+       "var",
+       "jb"
+      ]
+     ],
+     [
+      "var",
+      "jg"
+     ]
+    ],
+    [
+     "var",
+     "je"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "jd": 6,
+      "jb": 7,
+      "jg": 3,
+      "je": 6,
+      "jc": 20,
+      "ja": 19
+     },
+     0
+    ],
+    [
+     {
+      "jd": 8,
+      "jb": 5,
+      "jg": 7,
+      "je": 8,
+      "jc": 14,
+      "ja": 5
+     },
+     0
+    ],
+    [
+     {
+      "jd": 2,
+      "jb": 2,
+      "jg": 8,
+      "je": 3,
+      "jc": 2,
+      "ja": 11
+     },
+     2
+    ],
+    [
+     {
+      "jd": 2,
+      "jb": 3,
+      "jg": 2,
+      "je": 6,
+      "jc": 5,
+      "ja": 14
+     },
+     0
+    ],
+    [
+     {
+      "jd": 5,
+      "jb": 9,
+      "jg": 7,
+      "je": 3,
+      "jc": 7,
+      "ja": 9
+     },
+     0
+    ],
+    [
+     {
+      "jd": 7,
+      "jb": 2,
+      "jg": 6,
+      "je": 7,
+      "jc": 4,
+      "ja": 21
+     },
+     0
+    ],
+    [
+     {
+      "jd": 5,
+      "jb": 7,
+      "jg": 5,
+      "je": 3,
+      "jc": 24,
+      "ja": 11
+     },
+     1
+    ],
+    [
+     {
+      "jd": 2,
+      "jb": 9,
+      "jg": 2,
+      "je": 3,
+      "jc": 5,
+      "ja": 4
+     },
+     0
+    ],
+    [
+     {
+      "jd": 4,
+      "jb": 2,
+      "jg": 5,
+      "je": 7,
+      "jc": 21,
+      "ja": 11
+     },
+     5
+    ],
+    [
+     {
+      "jd": 5,
+      "jb": 8,
+      "jg": 6,
+      "je": 9,
+      "jc": 20,
+      "ja": 5
+     },
+     6
+    ],
+    [
+     {
+      "jd": 3,
+      "jb": 9,
+      "jg": 8,
+      "je": 5,
+      "jc": 2,
+      "ja": 1
+     },
+     1
+    ]
+   ],
+   "story": "A kiln has 6 racks, each rack has 7 trays and each tray holds 3 cups; the cups go into boxes of 6, fired at 20 degrees for 19 hours. How many cups are left over without a full box?",
+   "cold_certified": false,
+   "cold_evaluations": 3545
+  },
+  {
+   "task_id": "c-04",
+   "family": "cs_avg_lanes",
+   "concept": "cb_mean2_times",
+   "domain": "bowling alley",
+   "words": "One lane scores {a} pins and another lane scores {b} pins in a frame, and the average of the two lanes is kept up for {c} frames, with {x} bowlers. How many pins is that in total?",
+   "inputs": [
+    "jg",
+    "jd",
+    "jb",
+    "je"
+   ],
+   "tree": [
+    "mul",
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "jd"
+      ],
+      [
+       "var",
+       "jb"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "var",
+     "je"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "jd": 19,
+      "jb": 17,
+      "je": 9,
+      "jg": 19
+     },
+     162
+    ],
+    [
+     {
+      "jd": 23,
+      "jb": 20,
+      "je": 2,
+      "jg": 21
+     },
+     42
+    ],
+    [
+     {
+      "jd": 5,
+      "jb": 23,
+      "je": 2,
+      "jg": 4
+     },
+     28
+    ],
+    [
+     {
+      "jd": 14,
+      "jb": 5,
+      "je": 5,
+      "jg": 13
+     },
+     45
+    ],
+    [
+     {
+      "jd": 24,
+      "jb": 29,
+      "je": 6,
+      "jg": 1
+     },
+     156
+    ],
+    [
+     {
+      "jd": 21,
+      "jb": 20,
+      "je": 7,
+      "jg": 4
+     },
+     140
+    ],
+    [
+     {
+      "jd": 29,
+      "jb": 12,
+      "je": 3,
+      "jg": 19
+     },
+     60
+    ],
+    [
+     {
+      "jd": 12,
+      "jb": 1,
+      "je": 3,
+      "jg": 16
+     },
+     18
+    ],
+    [
+     {
+      "jd": 20,
+      "jb": 6,
+      "je": 2,
+      "jg": 20
+     },
+     26
+    ],
+    [
+     {
+      "jd": 16,
+      "jb": 25,
+      "je": 3,
+      "jg": 4
+     },
+     60
+    ],
+    [
+     {
+      "jd": 21,
+      "jb": 10,
+      "je": 9,
+      "jg": 4
+     },
+     135
+    ]
+   ],
+   "story": "One lane scores 19 pins and another lane scores 17 pins in a frame, and the average of the two lanes is kept up for 9 frames, with 19 bowlers. How many pins is that in total?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "c-05",
+   "family": "cs_avg_oxygen",
+   "concept": "cb_mean2_times",
+   "domain": "space station",
+   "words": "Two tanks give {a} and {b} liters of oxygen an hour, and the station uses the average of the two for {c} hours, while {x} astronauts sleep and {y} modules stay sealed. How many liters are used?",
+   "inputs": [
+    "jf",
+    "jg",
+    "ja",
+    "jb",
+    "jc"
+   ],
+   "tree": [
+    "mul",
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "ja"
+      ],
+      [
+       "var",
+       "jb"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "var",
+     "jf"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "ja": 3,
+      "jb": 1,
+      "jf": 2,
+      "jg": 5,
+      "jc": 8
+     },
+     4
+    ],
+    [
+     {
+      "ja": 30,
+      "jb": 13,
+      "jf": 9,
+      "jg": 17,
+      "jc": 23
+     },
+     189
+    ],
+    [
+     {
+      "ja": 4,
+      "jb": 19,
+      "jf": 7,
+      "jg": 22,
+      "jc": 13
+     },
+     77
+    ],
+    [
+     {
+      "ja": 8,
+      "jb": 18,
+      "jf": 9,
+      "jg": 5,
+      "jc": 7
+     },
+     117
+    ],
+    [
+     {
+      "ja": 26,
+      "jb": 27,
+      "jf": 6,
+      "jg": 23,
+      "jc": 6
+     },
+     156
+    ],
+    [
+     {
+      "ja": 3,
+      "jb": 1,
+      "jf": 4,
+      "jg": 13,
+      "jc": 11
+     },
+     8
+    ],
+    [
+     {
+      "ja": 27,
+      "jb": 5,
+      "jf": 8,
+      "jg": 23,
+      "jc": 5
+     },
+     128
+    ],
+    [
+     {
+      "ja": 27,
+      "jb": 10,
+      "jf": 4,
+      "jg": 4,
+      "jc": 16
+     },
+     72
+    ],
+    [
+     {
+      "ja": 13,
+      "jb": 17,
+      "jf": 8,
+      "jg": 7,
+      "jc": 2
+     },
+     120
+    ],
+    [
+     {
+      "ja": 5,
+      "jb": 27,
+      "jf": 8,
+      "jg": 6,
+      "jc": 1
+     },
+     128
+    ],
+    [
+     {
+      "ja": 4,
+      "jb": 8,
+      "jf": 7,
+      "jg": 10,
+      "jc": 25
+     },
+     42
+    ]
+   ],
+   "story": "Two tanks give 3 and 1 liters of oxygen an hour, and the station uses the average of the two for 2 hours, while 5 astronauts sleep and 8 modules stay sealed. How many liters are used?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "c-06",
+   "family": "cs_shoe_change",
+   "concept": "cb_change_sum",
+   "domain": "bowling alley",
+   "words": "A team rents {a}, {b} and {c} pairs of shoes in three games at {d} dollars a pair and pays with {e} dollars, on lane {x}. How much change comes back?",
+   "inputs": [
+    "jb",
+    "je",
+    "jc",
+    "ja",
+    "jd",
+    "jf"
+   ],
+   "tree": [
+    "sub",
+    [
+     "var",
+     "je"
+    ],
+    [
+     "mul",
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "jd"
+       ],
+       [
+        "var",
+        "ja"
+       ]
+      ],
+      [
+       "var",
+       "jb"
+      ]
+     ],
+     [
+      "var",
+      "jf"
+     ]
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "jd": 3,
+      "ja": 6,
+      "jb": 3,
+      "jf": 3,
+      "je": 42,
+      "jc": 12
+     },
+     6
+    ],
+    [
+     {
+      "jd": 2,
+      "ja": 3,
+      "jb": 3,
+      "jf": 2,
+      "je": 17,
+      "jc": 17
+     },
+     1
+    ],
+    [
+     {
+      "jd": 2,
+      "ja": 3,
+      "jb": 6,
+      "jf": 5,
+      "je": 72,
+      "jc": 10
+     },
+     17
+    ],
+    [
+     {
+      "jd": 6,
+      "ja": 5,
+      "jb": 5,
+      "jf": 5,
+      "je": 83,
+      "jc": 14
+     },
+     3
+    ],
+    [
+     {
+      "jd": 1,
+      "ja": 4,
+      "jb": 4,
+      "jf": 4,
+      "je": 54,
+      "jc": 18
+     },
+     18
+    ],
+    [
+     {
+      "jd": 5,
+      "ja": 1,
+      "jb": 1,
+      "jf": 5,
+      "je": 46,
+      "jc": 6
+     },
+     11
+    ],
+    [
+     {
+      "jd": 4,
+      "ja": 6,
+      "jb": 5,
+      "jf": 4,
+      "je": 77,
+      "jc": 1
+     },
+     17
+    ],
+    [
+     {
+      "jd": 1,
+      "ja": 5,
+      "jb": 6,
+      "jf": 3,
+      "je": 42,
+      "jc": 20
+     },
+     6
+    ],
+    [
+     {
+      "jd": 4,
+      "ja": 4,
+      "jb": 2,
+      "jf": 4,
+      "je": 57,
+      "jc": 12
+     },
+     17
+    ],
+    [
+     {
+      "jd": 1,
+      "ja": 6,
+      "jb": 1,
+      "jf": 4,
+      "je": 45,
+      "jc": 13
+     },
+     13
+    ],
+    [
+     {
+      "jd": 4,
+      "ja": 5,
+      "jb": 4,
+      "jf": 3,
+      "je": 62,
+      "jc": 18
+     },
+     23
+    ]
+   ],
+   "story": "A team rents 3, 6 and 3 pairs of shoes in three games at 3 dollars a pair and pays with 42 dollars, on lane 12. How much change comes back?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "c-07",
+   "family": "cs_clay_change",
+   "concept": "cb_change_sum",
+   "domain": "pottery studio",
+   "words": "A potter buys {a}, {b} and {c} bags of clay on three days at {d} dollars a bag, starting with {e} dollars, in a studio of {x} wheels and {y} kilns. How many dollars are left?",
+   "inputs": [
+    "jg",
+    "jb",
+    "jc",
+    "je",
+    "ja",
+    "jd",
+    "jf"
+   ],
+   "tree": [
+    "sub",
+    [
+     "var",
+     "ja"
+    ],
+    [
+     "mul",
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "je"
+       ],
+       [
+        "var",
+        "jc"
+       ]
+      ],
+      [
+       "var",
+       "jg"
+      ]
+     ],
+     [
+      "var",
+      "jb"
+     ]
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "je": 2,
+      "jc": 4,
+      "jg": 5,
+      "jb": 5,
+      "ja": 75,
+      "jd": 19,
+      "jf": 19
+     },
+     20
+    ],
+    [
+     {
+      "je": 2,
+      "jc": 6,
+      "jg": 3,
+      "jb": 5,
+      "ja": 67,
+      "jd": 20,
+      "jf": 12
+     },
+     12
+    ],
+    [
+     {
+      "je": 2,
+      "jc": 1,
+      "jg": 6,
+      "jb": 3,
+      "ja": 49,
+      "jd": 11,
+      "jf": 9
+     },
+     22
+    ],
+    [
+     {
+      "je": 4,
+      "jc": 1,
+      "jg": 5,
+      "jb": 2,
+      "ja": 41,
+      "jd": 5,
+      "jf": 11
+     },
+     21
+    ],
+    [
+     {
+      "je": 1,
+      "jc": 1,
+      "jg": 3,
+      "jb": 4,
+      "ja": 28,
+      "jd": 12,
+      "jf": 12
+     },
+     8
+    ],
+    [
+     {
+      "je": 2,
+      "jc": 5,
+      "jg": 2,
+      "jb": 4,
+      "ja": 45,
+      "jd": 18,
+      "jf": 16
+     },
+     9
+    ],
+    [
+     {
+      "je": 4,
+      "jc": 3,
+      "jg": 2,
+      "jb": 2,
+      "ja": 33,
+      "jd": 17,
+      "jf": 8
+     },
+     15
+    ],
+    [
+     {
+      "je": 3,
+      "jc": 4,
+      "jg": 2,
+      "jb": 3,
+      "ja": 32,
+      "jd": 25,
+      "jf": 1
+     },
+     5
+    ],
+    [
+     {
+      "je": 1,
+      "jc": 3,
+      "jg": 2,
+      "jb": 3,
+      "ja": 40,
+      "jd": 2,
+      "jf": 1
+     },
+     22
+    ],
+    [
+     {
+      "je": 2,
+      "jc": 3,
+      "jg": 1,
+      "jb": 4,
+      "ja": 38,
+      "jd": 17,
+      "jf": 23
+     },
+     14
+    ],
+    [
+     {
+      "je": 1,
+      "jc": 3,
+      "jg": 3,
+      "jb": 3,
+      "ja": 41,
+      "jd": 12,
+      "jf": 25
+     },
+     20
+    ]
+   ],
+   "story": "A potter buys 2, 4 and 5 bags of clay on three days at 5 dollars a bag, starting with 75 dollars, in a studio of 19 wheels and 19 kilns. How many dollars are left?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "c-08",
+   "family": "cs_stairs_legs",
+   "concept": "cb_trip_legs",
+   "domain": "lighthouse",
+   "words": "The path is {a} steps to the gate, {b} steps to the door and {c} steps up the stairs, and the keeper goes there and back {d} times a day with {x} lamps. How many steps a day?",
+   "inputs": [
+    "jb",
+    "je",
+    "jg",
+    "ja",
+    "jc"
+   ],
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "ja"
+       ],
+       [
+        "var",
+        "jc"
+       ]
+      ],
+      [
+       "var",
+       "je"
+      ]
+     ],
+     [
+      "var",
+      "jb"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "ja": 3,
+      "jc": 1,
+      "je": 2,
+      "jb": 6,
+      "jg": 25
+     },
+     72
+    ],
+    [
+     {
+      "ja": 1,
+      "jc": 11,
+      "je": 8,
+      "jb": 5,
+      "jg": 3
+     },
+     200
+    ],
+    [
+     {
+      "ja": 4,
+      "jc": 7,
+      "je": 3,
+      "jb": 3,
+      "jg": 15
+     },
+     84
+    ],
+    [
+     {
+      "ja": 9,
+      "jc": 9,
+      "je": 11,
+      "jb": 4,
+      "jg": 4
+     },
+     232
+    ],
+    [
+     {
+      "ja": 2,
+      "jc": 9,
+      "je": 2,
+      "jb": 3,
+      "jg": 22
+     },
+     78
+    ],
+    [
+     {
+      "ja": 9,
+      "jc": 9,
+      "je": 1,
+      "jb": 4,
+      "jg": 13
+     },
+     152
+    ],
+    [
+     {
+      "ja": 9,
+      "jc": 12,
+      "je": 2,
+      "jb": 6,
+      "jg": 17
+     },
+     276
+    ],
+    [
+     {
+      "ja": 5,
+      "jc": 3,
+      "je": 11,
+      "jb": 3,
+      "jg": 6
+     },
+     114
+    ],
+    [
+     {
+      "ja": 11,
+      "jc": 1,
+      "je": 2,
+      "jb": 3,
+      "jg": 9
+     },
+     84
+    ],
+    [
+     {
+      "ja": 1,
+      "jc": 5,
+      "je": 8,
+      "jb": 2,
+      "jg": 5
+     },
+     56
+    ],
+    [
+     {
+      "ja": 9,
+      "jc": 3,
+      "je": 7,
+      "jb": 5,
+      "jg": 14
+     },
+     190
+    ]
+   ],
+   "story": "The path is 3 steps to the gate, 1 steps to the door and 2 steps up the stairs, and the keeper goes there and back 6 times a day with 25 lamps. How many steps a day?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "c-09",
+   "family": "cs_hose_legs",
+   "concept": "cb_trip_legs",
+   "domain": "fire station",
+   "words": "The hose runs {a} meters to the truck, {b} meters to the hydrant and {c} meters to the house, and a firefighter walks it there and back {d} times, with {x} ladders and {y} helmets. How many meters are walked?",
+   "inputs": [
+    "jf",
+    "jc",
+    "jg",
+    "jb",
+    "ja",
+    "je"
+   ],
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "jb"
+       ],
+       [
+        "var",
+        "je"
+       ]
+      ],
+      [
+       "var",
+       "jf"
+      ]
+     ],
+     [
+      "var",
+      "jc"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "jb": 6,
+      "je": 12,
+      "jf": 9,
+      "jc": 4,
+      "jg": 13,
+      "ja": 17
+     },
+     216
+    ],
+    [
+     {
+      "jb": 6,
+      "je": 12,
+      "jf": 1,
+      "jc": 4,
+      "jg": 10,
+      "ja": 18
+     },
+     152
+    ],
+    [
+     {
+      "jb": 1,
+      "je": 5,
+      "jf": 7,
+      "jc": 4,
+      "jg": 5,
+      "ja": 18
+     },
+     104
+    ],
+    [
+     {
+      "jb": 12,
+      "je": 3,
+      "jf": 5,
+      "jc": 4,
+      "jg": 20,
+      "ja": 11
+     },
+     160
+    ],
+    [
+     {
+      "jb": 11,
+      "je": 10,
+      "jf": 1,
+      "jc": 6,
+      "jg": 15,
+      "ja": 25
+     },
+     264
+    ],
+    [
+     {
+      "jb": 2,
+      "je": 1,
+      "jf": 7,
+      "jc": 5,
+      "jg": 14,
+      "ja": 8
+     },
+     100
+    ],
+    [
+     {
+      "jb": 9,
+      "je": 4,
+      "jf": 2,
+      "jc": 3,
+      "jg": 12,
+      "ja": 10
+     },
+     90
+    ],
+    [
+     {
+      "jb": 3,
+      "je": 9,
+      "jf": 8,
+      "jc": 3,
+      "jg": 20,
+      "ja": 22
+     },
+     120
+    ],
+    [
+     {
+      "jb": 6,
+      "je": 12,
+      "jf": 6,
+      "jc": 4,
+      "jg": 8,
+      "ja": 20
+     },
+     192
+    ],
+    [
+     {
+      "jb": 4,
+      "je": 12,
+      "jf": 4,
+      "jc": 4,
+      "jg": 5,
+      "ja": 1
+     },
+     160
+    ],
+    [
+     {
+      "jb": 7,
+      "je": 11,
+      "jf": 9,
+      "jc": 3,
+      "jg": 19,
+      "ja": 22
+     },
+     162
+    ]
+   ],
+   "story": "The hose runs 6 meters to the truck, 12 meters to the hydrant and 9 meters to the house, and a firefighter walks it there and back 4 times, with 13 ladders and 17 helmets. How many meters are walked?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "c-10",
+   "family": "cs_suits_used",
+   "concept": "cb_net_groups",
+   "domain": "space station",
+   "words": "A locker holds {a} racks of {b} suits plus {c} spare suits; {d} suits go out on the first walk and {e} on the second, at an orbit of {x} kilometers. How many suits are left in the locker?",
+   "inputs": [
+    "jf",
+    "je",
+    "jg",
+    "jd",
+    "jc",
+    "jb"
+   ],
+   "tree": [
+    "sub",
+    [
+     "sub",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "jg"
+       ],
+       [
+        "var",
+        "jb"
+       ]
+      ],
+      [
+       "var",
+       "jd"
+      ]
+     ],
+     [
+      "var",
+      "jf"
+     ]
+    ],
+    [
+     "var",
+     "jc"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "jg": 4,
+      "jb": 4,
+      "jd": 3,
+      "jf": 6,
+      "jc": 5,
+      "je": 3
+     },
+     8
+    ],
+    [
+     {
+      "jg": 2,
+      "jb": 4,
+      "jd": 3,
+      "jf": 9,
+      "jc": 2,
+      "je": 18
+     },
+     0
+    ],
+    [
+     {
+      "jg": 6,
+      "jb": 6,
+      "jd": 8,
+      "jf": 6,
+      "jc": 8,
+      "je": 3
+     },
+     30
+    ],
+    [
+     {
+      "jg": 6,
+      "jb": 2,
+      "jd": 2,
+      "jf": 3,
+      "jc": 4,
+      "je": 21
+     },
+     7
+    ],
+    [
+     {
+      "jg": 2,
+      "jb": 4,
+      "jd": 7,
+      "jf": 1,
+      "jc": 6,
+      "je": 11
+     },
+     8
+    ],
+    [
+     {
+      "jg": 5,
+      "jb": 5,
+      "jd": 9,
+      "jf": 2,
+      "jc": 3,
+      "je": 3
+     },
+     29
+    ],
+    [
+     {
+      "jg": 2,
+      "jb": 4,
+      "jd": 7,
+      "jf": 7,
+      "jc": 8,
+      "je": 4
+     },
+     0
+    ],
+    [
+     {
+      "jg": 4,
+      "jb": 6,
+      "jd": 9,
+      "jf": 5,
+      "jc": 8,
+      "je": 10
+     },
+     20
+    ],
+    [
+     {
+      "jg": 6,
+      "jb": 2,
+      "jd": 8,
+      "jf": 9,
+      "jc": 1,
+      "je": 19
+     },
+     10
+    ],
+    [
+     {
+      "jg": 3,
+      "jb": 6,
+      "jd": 9,
+      "jf": 8,
+      "jc": 2,
+      "je": 5
+     },
+     17
+    ],
+    [
+     {
+      "jg": 6,
+      "jb": 5,
+      "jd": 4,
+      "jf": 2,
+      "jc": 5,
+      "je": 7
+     },
+     27
+    ]
+   ],
+   "story": "A locker holds 4 racks of 4 suits plus 3 spare suits; 6 suits go out on the first walk and 5 on the second, at an orbit of 3 kilometers. How many suits are left in the locker?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "c-11",
+   "family": "cs_hose_used",
+   "concept": "cb_net_groups",
+   "domain": "fire station",
+   "words": "The store has {a} reels of {b} hoses each plus {c} loose hoses; {d} hoses go to one fire and {e} to another, with {x} trucks and {y} sirens. How many hoses are left?",
+   "inputs": [
+    "jg",
+    "je",
+    "jf",
+    "ja",
+    "jc",
+    "jd",
+    "jb"
+   ],
+   "tree": [
+    "sub",
+    [
+     "sub",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "jf"
+       ],
+       [
+        "var",
+        "jg"
+       ]
+      ],
+      [
+       "var",
+       "jb"
+      ]
+     ],
+     [
+      "var",
+      "jc"
+     ]
+    ],
+    [
+     "var",
+     "ja"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "jf": 2,
+      "jg": 4,
+      "jb": 9,
+      "jc": 2,
+      "ja": 9,
+      "je": 10,
+      "jd": 7
+     },
+     6
+    ],
+    [
+     {
+      "jf": 4,
+      "jg": 2,
+      "jb": 6,
+      "jc": 4,
+      "ja": 6,
+      "je": 24,
+      "jd": 6
+     },
+     4
+    ],
+    [
+     {
+      "jf": 3,
+      "jg": 6,
+      "jb": 9,
+      "jc": 5,
+      "ja": 6,
+      "je": 5,
+      "jd": 17
+     },
+     16
+    ],
+    [
+     {
+      "jf": 3,
+      "jg": 6,
+      "jb": 4,
+      "jc": 5,
+      "ja": 2,
+      "je": 5,
+      "jd": 25
+     },
+     15
+    ],
+    [
+     {
+      "jf": 5,
+      "jg": 6,
+      "jb": 4,
+      "jc": 2,
+      "ja": 9,
+      "je": 3,
+      "jd": 1
+     },
+     23
+    ],
+    [
+     {
+      "jf": 2,
+      "jg": 5,
+      "jb": 2,
+      "jc": 4,
+      "ja": 5,
+      "je": 6,
+      "jd": 7
+     },
+     3
+    ],
+    [
+     {
+      "jf": 6,
+      "jg": 2,
+      "jb": 6,
+      "jc": 7,
+      "ja": 6,
+      "je": 7,
+      "jd": 16
+     },
+     5
+    ],
+    [
+     {
+      "jf": 3,
+      "jg": 2,
+      "jb": 7,
+      "jc": 4,
+      "ja": 6,
+      "je": 18,
+      "jd": 16
+     },
+     3
+    ],
+    [
+     {
+      "jf": 2,
+      "jg": 3,
+      "jb": 3,
+      "jc": 3,
+      "ja": 9,
+      "je": 2,
+      "jd": 4
+     },
+     -3
+    ],
+    [
+     {
+      "jf": 4,
+      "jg": 3,
+      "jb": 6,
+      "jc": 1,
+      "ja": 8,
+      "je": 24,
+      "jd": 11
+     },
+     9
+    ],
+    [
+     {
+      "jf": 3,
+      "jg": 3,
+      "jb": 8,
+      "jc": 2,
+      "ja": 6,
+      "je": 22,
+      "jd": 24
+     },
+     9
+    ]
+   ],
+   "story": "The store has 2 reels of 4 hoses each plus 9 loose hoses; 2 hoses go to one fire and 9 to another, with 10 trucks and 7 sirens. How many hoses are left?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "c-12",
+   "family": "cs_avg_honey",
+   "concept": "cb_avg3_product",
+   "domain": "apiary",
+   "words": "The first hive gives {a} frames of {b} grams of honey, the second gives {c} grams and the third {d} grams, with {x} bees on guard. What is the average yield of the three hives?",
+   "inputs": [
+    "ja",
+    "jb",
+    "je",
+    "jg",
+    "jf"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "jb"
+       ],
+       [
+        "var",
+        "jg"
+       ]
+      ],
+      [
+       "var",
+       "ja"
+      ]
+     ],
+     [
+      "var",
+      "je"
+     ]
+    ],
+    [
+     "const",
+     3
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "jb": 3,
+      "jg": 6,
+      "ja": 2,
+      "je": 38,
+      "jf": 2
+     },
+     19
+    ],
+    [
+     {
+      "jb": 8,
+      "jg": 3,
+      "ja": 37,
+      "je": 19,
+      "jf": 19
+     },
+     26
+    ],
+    [
+     {
+      "jb": 2,
+      "jg": 6,
+      "ja": 32,
+      "je": 30,
+      "jf": 21
+     },
+     24
+    ],
+    [
+     {
+      "jb": 2,
+      "jg": 7,
+      "ja": 15,
+      "je": 12,
+      "jf": 21
+     },
+     13
+    ],
+    [
+     {
+      "jb": 8,
+      "jg": 3,
+      "ja": 4,
+      "je": 32,
+      "jf": 24
+     },
+     20
+    ],
+    [
+     {
+      "jb": 9,
+      "jg": 2,
+      "ja": 27,
+      "je": 20,
+      "jf": 4
+     },
+     21
+    ],
+    [
+     {
+      "jb": 3,
+      "jg": 5,
+      "ja": 36,
+      "je": 36,
+      "jf": 17
+     },
+     29
+    ],
+    [
+     {
+      "jb": 2,
+      "jg": 8,
+      "ja": 3,
+      "je": 6,
+      "jf": 9
+     },
+     8
+    ],
+    [
+     {
+      "jb": 7,
+      "jg": 9,
+      "ja": 16,
+      "je": 7,
+      "jf": 10
+     },
+     28
+    ],
+    [
+     {
+      "jb": 6,
+      "jg": 8,
+      "ja": 9,
+      "je": 2,
+      "jf": 16
+     },
+     19
+    ],
+    [
+     {
+      "jb": 9,
+      "jg": 8,
+      "ja": 1,
+      "je": 8,
+      "jf": 15
+     },
+     27
+    ]
+   ],
+   "story": "The first hive gives 3 frames of 6 grams of honey, the second gives 2 grams and the third 38 grams, with 2 bees on guard. What is the average yield of the three hives?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "c-13",
+   "family": "cs_avg_pins",
+   "concept": "cb_avg3_product",
+   "domain": "bowling alley",
+   "words": "The first team knocks {a} frames of {b} pins, the second team knocks {c} pins and the third {d} pins, on a night with {x} lanes and {y} snacks. What is the average score of the three teams?",
+   "inputs": [
+    "jf",
+    "ja",
+    "je",
+    "jg",
+    "jc",
+    "jd"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "je"
+       ],
+       [
+        "var",
+        "ja"
+       ]
+      ],
+      [
+       "var",
+       "jf"
+      ]
+     ],
+     [
+      "var",
+      "jd"
+     ]
+    ],
+    [
+     "const",
+     3
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "je": 3,
+      "ja": 7,
+      "jf": 35,
+      "jd": 21,
+      "jg": 1,
+      "jc": 13
+     },
+     25
+    ],
+    [
+     {
+      "je": 8,
+      "ja": 9,
+      "jf": 6,
+      "jd": 24,
+      "jg": 15,
+      "jc": 12
+     },
+     34
+    ],
+    [
+     {
+      "je": 2,
+      "ja": 6,
+      "jf": 14,
+      "jd": 5,
+      "jg": 4,
+      "jc": 14
+     },
+     10
+    ],
+    [
+     {
+      "je": 2,
+      "ja": 7,
+      "jf": 22,
+      "jd": 40,
+      "jg": 4,
+      "jc": 19
+     },
+     25
+    ],
+    [
+     {
+      "je": 6,
+      "ja": 3,
+      "jf": 3,
+      "jd": 34,
+      "jg": 15,
+      "jc": 10
+     },
+     18
+    ],
+    [
+     {
+      "je": 6,
+      "ja": 2,
+      "jf": 3,
+      "jd": 23,
+      "jg": 19,
+      "jc": 11
+     },
+     12
+    ],
+    [
+     {
+      "je": 9,
+      "ja": 6,
+      "jf": 14,
+      "jd": 38,
+      "jg": 19,
+      "jc": 4
+     },
+     35
+    ],
+    [
+     {
+      "je": 2,
+      "ja": 9,
+      "jf": 27,
+      "jd": 24,
+      "jg": 16,
+      "jc": 21
+     },
+     23
+    ],
+    [
+     {
+      "je": 6,
+      "ja": 2,
+      "jf": 23,
+      "jd": 39,
+      "jg": 14,
+      "jc": 14
+     },
+     24
+    ],
+    [
+     {
+      "je": 3,
+      "ja": 4,
+      "jf": 11,
+      "jd": 34,
+      "jg": 24,
+      "jc": 23
+     },
+     19
+    ],
+    [
+     {
+      "je": 8,
+      "ja": 5,
+      "jf": 32,
+      "jd": 31,
+      "jg": 3,
+      "jc": 4
+     },
+     34
+    ]
+   ],
+   "story": "The first team knocks 3 frames of 7 pins, the second team knocks 35 pins and the third 21 pins, on a night with 1 lanes and 13 snacks. What is the average score of the three teams?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "c-14",
+   "family": "cs_fuel_weeks",
+   "concept": "cb_change_weeks",
+   "domain": "space station",
+   "words": "Each week the station gets {c} liters of fuel and burns {a} engines at {b} liters each, for {d} weeks, with {x} panels. How many liters are saved over all the weeks?",
+   "inputs": [
+    "jf",
+    "jg",
+    "jd",
+    "jb",
+    "jc"
+   ],
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "var",
+      "jc"
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "jg"
+      ],
+      [
+       "var",
+       "jb"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "jd"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "jg": 2,
+      "jb": 6,
+      "jc": 25,
+      "jd": 6,
+      "jf": 12
+     },
+     78
+    ],
+    [
+     {
+      "jg": 3,
+      "jb": 4,
+      "jc": 19,
+      "jd": 7,
+      "jf": 17
+     },
+     49
+    ],
+    [
+     {
+      "jg": 6,
+      "jb": 6,
+      "jc": 50,
+      "jd": 3,
+      "jf": 6
+     },
+     42
+    ],
+    [
+     {
+      "jg": 3,
+      "jb": 3,
+      "jc": 15,
+      "jd": 5,
+      "jf": 18
+     },
+     30
+    ],
+    [
+     {
+      "jg": 3,
+      "jb": 6,
+      "jc": 22,
+      "jd": 5,
+      "jf": 6
+     },
+     20
+    ],
+    [
+     {
+      "jg": 3,
+      "jb": 6,
+      "jc": 36,
+      "jd": 7,
+      "jf": 19
+     },
+     126
+    ],
+    [
+     {
+      "jg": 3,
+      "jb": 5,
+      "jc": 23,
+      "jd": 4,
+      "jf": 20
+     },
+     32
+    ],
+    [
+     {
+      "jg": 5,
+      "jb": 5,
+      "jc": 31,
+      "jd": 3,
+      "jf": 5
+     },
+     18
+    ],
+    [
+     {
+      "jg": 3,
+      "jb": 5,
+      "jc": 33,
+      "jd": 4,
+      "jf": 7
+     },
+     72
+    ],
+    [
+     {
+      "jg": 5,
+      "jb": 2,
+      "jc": 22,
+      "jd": 3,
+      "jf": 12
+     },
+     36
+    ],
+    [
+     {
+      "jg": 3,
+      "jb": 2,
+      "jc": 11,
+      "jd": 3,
+      "jf": 19
+     },
+     15
+    ]
+   ],
+   "story": "Each week the station gets 25 liters of fuel and burns 2 engines at 6 liters each, for 6 weeks, with 12 panels. How many liters are saved over all the weeks?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "c-15",
+   "family": "cs_glaze_weeks",
+   "concept": "cb_change_weeks",
+   "domain": "pottery studio",
+   "words": "Each week a potter is given {c} dollars and spends it on {a} pots of glaze at {b} dollars each, for {d} weeks, at a studio with {x} windows and {y} shelves. How many dollars are kept over all the weeks?",
+   "inputs": [
+    "ja",
+    "jg",
+    "jb",
+    "jc",
+    "je",
+    "jf"
+   ],
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "var",
+      "ja"
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "jg"
+      ],
+      [
+       "var",
+       "je"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "jb"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "jg": 5,
+      "je": 5,
+      "ja": 28,
+      "jb": 7,
+      "jc": 12,
+      "jf": 25
+     },
+     21
+    ],
+    [
+     {
+      "jg": 3,
+      "je": 3,
+      "ja": 22,
+      "jb": 6,
+      "jc": 18,
+      "jf": 2
+     },
+     78
+    ],
+    [
+     {
+      "jg": 4,
+      "je": 5,
+      "ja": 37,
+      "jb": 7,
+      "jc": 14,
+      "jf": 17
+     },
+     119
+    ],
+    [
+     {
+      "jg": 3,
+      "je": 6,
+      "ja": 34,
+      "jb": 3,
+      "jc": 16,
+      "jf": 14
+     },
+     48
+    ],
+    [
+     {
+      "jg": 2,
+      "je": 5,
+      "ja": 28,
+      "jb": 6,
+      "jc": 15,
+      "jf": 6
+     },
+     108
+    ],
+    [
+     {
+      "jg": 2,
+      "je": 3,
+      "ja": 26,
+      "jb": 3,
+      "jc": 20,
+      "jf": 19
+     },
+     60
+    ],
+    [
+     {
+      "jg": 2,
+      "je": 2,
+      "ja": 8,
+      "jb": 6,
+      "jc": 22,
+      "jf": 19
+     },
+     24
+    ],
+    [
+     {
+      "jg": 5,
+      "je": 3,
+      "ja": 29,
+      "jb": 4,
+      "jc": 2,
+      "jf": 13
+     },
+     56
+    ],
+    [
+     {
+      "jg": 5,
+      "je": 2,
+      "ja": 18,
+      "jb": 6,
+      "jc": 10,
+      "jf": 14
+     },
+     48
+    ],
+    [
+     {
+      "jg": 2,
+      "je": 6,
+      "ja": 21,
+      "jb": 3,
+      "jc": 24,
+      "jf": 2
+     },
+     27
+    ],
+    [
+     {
+      "jg": 6,
+      "je": 5,
+      "ja": 49,
+      "jb": 6,
+      "jc": 3,
+      "jf": 20
+     },
+     114
+    ]
+   ],
+   "story": "Each week a potter is given 28 dollars and spends it on 5 pots of glaze at 5 dollars each, for 7 weeks, at a studio with 12 windows and 25 shelves. How many dollars are kept over all the weeks?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  }
+ ]
+}
