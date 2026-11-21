@@ -33,6 +33,10 @@ def trim() -> dict[str, int]:
         if len(lines) > keep:
             dropped[rel] = len(lines) - keep
             p.write_text("\n".join(lines[-keep:]) + "\n")
+    from .society import trim_registry
+    inbox_dropped = trim_registry()
+    if inbox_dropped:
+        dropped["society/registry.json:inbox"] = inbox_dropped
     if dropped:
         ledger = root / "retention.json"
         total = json.loads(ledger.read_text()) if ledger.exists() else {}

@@ -30,6 +30,9 @@ def _bus() -> Path:
 def _fitness() -> Path:
     return _society() / "fitness.json"
 
+INBOX_KEEP = 200  # newest messages kept per role; the full stream lives in bus.jsonl (trimmed by retention)
+
+
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -55,7 +58,25 @@ def load_registry() -> dict[str, Role]:
 
 def save_registry(reg: dict[str, Role]) -> None:
     _ensure()
-    _registry().write_text(json.dumps({k: vars(v) for k, v in reg.items()}, indent=2))
+    _registry().write_text(json.dumps({k: vars(v) for k, v in reg.items()}, separators=(",", ":")))
+
+
+def trim_registry(keep: int = INBOX_KEEP) -> int:
+    """Cap every role inbox at its newest ``keep`` rows; return rows dropped.
+
+    Unbounded inboxes pushed data/society/registry.json past GitHub's 100 MB
+    file limit on Nov 21 2026, so every body checkpoint push was rejected."""
+    if not _registry().exists():
+        return 0
+    reg = load_registry()
+    dropped = 0
+    for r in reg.values():
+        if len(r.inbox) > keep:
+            dropped += len(r.inbox) - keep
+            r.inbox = r.inbox[-keep:]
+    if dropped:
+        save_registry(reg)
+    return dropped
 
 def post(role: str, message: dict[str, Any]) -> None:
     _ensure()
@@ -65,6 +86,7 @@ def post(role: str, message: dict[str, Any]) -> None:
     reg = load_registry()
     if role in reg:
         reg[role].inbox.append(row)
+        reg[role].inbox = reg[role].inbox[-INBOX_KEEP:]
         save_registry(reg)
 
 def load_fitness() -> dict[str, float]:
