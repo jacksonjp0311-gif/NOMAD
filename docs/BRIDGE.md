@@ -135,3 +135,28 @@ Honest reading:
 - Because default-on changes no existing result (byte-identical with the switch on), it is safe, but it
   also means the live body does not benefit until its curriculum contains bridge families; that is not
   part of this step.
+
+## Live curriculum (`NOMAD_LIVE_BRIDGE`)
+
+The running body now practises number-text tasks: with `NOMAD_LIVE_BRIDGE=on` the 16 bridge
+training families (`nomad.bridge.train_tasks`, opset `bridge`, the same tasks the sealed judge's
+`trained` field learns from) join the live curriculum as one more domain, `bridge`, at a single
+open level (`world_tasks.curriculum_train`). They go through the normal twin pair (cold control,
+then the field), the WITNESS receipt, the queue and the single learner (`by_family` /
+`domain_of` resolve them), and the curriculum's usual rules: never-attempted, not-yet-beaten
+families first, parked after `patience` attempts without beating the control. Requires the
+bridge opset itself (`NOMAD_BRIDGE`, on).
+
+- **Code default: off.** Off, `curriculum_train()` *is* `world_tasks.TRAIN`; verified: `choose()`
+  on 205 prefixes of the live scoreboard (7,366 rows) picks byte-identical families / candidates /
+  open levels before and after the change. `all_training()` (evolve benchmark, feed, sealed judges)
+  never includes bridge families.
+- **The body workflow turns it on**: `.github/workflows/nomad-body.yml` passes
+  `NOMAD_LIVE_BRIDGE: ${{ vars.NOMAD_LIVE_BRIDGE || 'on' }}`; set the repo variable
+  `NOMAD_LIVE_BRIDGE=off` to switch it off without a commit.
+- Smoke (local, temp `NOMAD_DATA`, `--max-cycles 6`, inline learner, evolve on): on -> the six
+  pairs were br_at, br_chop, br_digits, br_drop, br_head_rep, br_itos_len (all certified, learner
+  absorbed all six); off -> div_pair, first_last, max_pair, min_pair, mod_pair, range, as before;
+  both exit 0, lease released, no cycle errors.
+- Expected effect on the live body: the bridge families have 0 attempts, so the next ~16-64 pairs
+  are mostly bridge families until each is beaten or parked; then the usual rotation resumes.

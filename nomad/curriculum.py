@@ -10,6 +10,10 @@ control was not, or treatment needed fewer evaluations. Held-out families
 never enter the curriculum. Within the open levels, families not yet beaten
 come first, then the least-attempted. Choice is deterministic given the
 scoreboard, so a run can be replayed.
+
+NOMAD_LIVE_BRIDGE=on adds the 16 bridge training families (string x int)
+as one more domain (world_tasks.curriculum_train); off (default), the
+curriculum is exactly world_tasks.TRAIN.
 """
 from __future__ import annotations
 
@@ -17,7 +21,7 @@ from collections import defaultdict
 from typing import Any, Iterable
 
 from .world import WorldTask
-from .world_tasks import TRAIN
+from .world_tasks import curriculum_train
 
 
 PATIENCE = 4
@@ -48,7 +52,7 @@ def family_records(rows: Iterable[dict]) -> dict[str, dict[str, Any]]:
 def open_levels(records: dict[str, dict[str, Any]]) -> dict[str, int]:
     """Highest open level per domain."""
     out = {}
-    for dom, levels in TRAIN.items():
+    for dom, levels in curriculum_train().items():
         lvl = min(levels)
         for L in sorted(levels):
             if L == min(levels):
@@ -67,7 +71,7 @@ def choose(rows: Iterable[dict], domain: str | None = None, step: int = 0) -> tu
     records = family_records(rows)
     levels = open_levels(records)
     candidates: list[WorldTask] = []
-    for dom, levels_map in TRAIN.items():
+    for dom, levels_map in curriculum_train().items():
         if domain and dom != domain:
             continue
         for L, tasks in levels_map.items():

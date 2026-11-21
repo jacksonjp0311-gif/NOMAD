@@ -59,6 +59,10 @@ jobs:
           echo "successor queued at start"
       - name: Live
         id: body
+        env:
+          # Bridge training families (string x int) in the live curriculum; repo variable
+          # NOMAD_LIVE_BRIDGE=off turns it off (code default is off everywhere else).
+          NOMAD_LIVE_BRIDGE: ${{ vars.NOMAD_LIVE_BRIDGE || 'on' }}
         run: |
           git config user.name "nomad"
           git config user.email "nomad@users.noreply.github.com"

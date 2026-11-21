@@ -111,10 +111,49 @@ def all_training() -> list[WorldTask]:
     return [t for levels in TRAIN.values() for ts in levels.values() for t in ts]
 
 
+# ---------------------------------------------------------------- live bridge curriculum (docs/BRIDGE.md)
+# NOMAD_LIVE_BRIDGE=on (default off; the body workflow passes the repo variable NOMAD_LIVE_BRIDGE) adds
+# the 16 bridge training families (nomad.bridge.train_tasks: string x int tasks, opset "bridge") to the
+# live curriculum as one more domain, so the running body practises number-text tasks. Off: the
+# curriculum is exactly TRAIN. all_training() (evolve benchmark, feed, judges) never changes.
+BRIDGE_DOMAIN = "bridge"
+_BRIDGE_TASKS: list[WorldTask] = []
+
+
+def live_bridge_enabled() -> bool:
+    import os
+    if os.environ.get("NOMAD_LIVE_BRIDGE", "off").strip().lower() not in ("on", "1", "true", "yes"):
+        return False
+    from .world import bridge_enabled
+    return bridge_enabled()   # the bridge opset itself must be on
+
+
+def bridge_training() -> list[WorldTask]:
+    if not _BRIDGE_TASKS:
+        from .bridge import train_tasks
+        _BRIDGE_TASKS.extend(train_tasks())
+    return _BRIDGE_TASKS
+
+
+def curriculum_train() -> dict[str, dict[int, list[WorldTask]]]:
+    """The live curriculum's domain -> level -> tasks: TRAIN itself when NOMAD_LIVE_BRIDGE is off."""
+    if not live_bridge_enabled():
+        return TRAIN
+    ts = bridge_training()
+    return {**TRAIN, BRIDGE_DOMAIN: {min(t.level for t in ts): list(ts)}}
+
+
 def by_family(family: str) -> WorldTask | None:
     for t in all_training():
         if t.family == family:
             return t
+    # bridge training families (only ever recorded when NOMAD_LIVE_BRIDGE was on; resolved whatever
+    # the switch says now, so packets queued under the switch are still re-attested by the learner)
+    from .bridge import TRAIN_FAMILIES
+    if family in TRAIN_FAMILIES:
+        for t in bridge_training():
+            if t.family == family:
+                return t
     return None
 
 
@@ -123,6 +162,9 @@ def domain_of(family: str) -> str | None:
         for ts in levels.values():
             if any(t.family == family for t in ts):
                 return dom
+    from .bridge import TRAIN_FAMILIES
+    if family in TRAIN_FAMILIES:
+        return BRIDGE_DOMAIN
     # Science families (nomad/science.py) are not training families; they are
     # tagged so the sensing step can key on them. See docs/SCIENCE.md.
     from .science import DOMAIN, is_science
