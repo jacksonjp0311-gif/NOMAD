@@ -1,0 +1,2618 @@
+{
+ "schema": "nomad.clause-suite.v1",
+ "seed": 20270415,
+ "budget": 10000,
+ "max_size": 7,
+ "names": [
+  "qa",
+  "qb",
+  "qc",
+  "qd",
+  "qe",
+  "qf",
+  "qg"
+ ],
+ "easy": [],
+ "hard": [
+  {
+   "task_id": "q-00",
+   "family": "cl_greenhouse_crates",
+   "concept": "cq_boxes_volume",
+   "domain": "greenhouse",
+   "words": "A greenhouse has {a} shelves, each shelf has {b} trays and each tray holds {c} pots. The pots are packed into crates that hold {d} each. The greenhouse is {x} years old. How many crates are needed to hold all the pots?",
+   "inputs": [
+    "qb",
+    "qa",
+    "qe",
+    "qd",
+    "qc"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "qe"
+       ],
+       [
+        "var",
+        "qd"
+       ]
+      ],
+      [
+       "var",
+       "qa"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "qc"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "qc"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qe": 6,
+      "qd": 5,
+      "qa": 4,
+      "qc": 7,
+      "qb": 6
+     },
+     18
+    ],
+    [
+     {
+      "qe": 5,
+      "qd": 4,
+      "qa": 3,
+      "qc": 2,
+      "qb": 12
+     },
+     30
+    ],
+    [
+     {
+      "qe": 2,
+      "qd": 3,
+      "qa": 5,
+      "qc": 2,
+      "qb": 22
+     },
+     15
+    ],
+    [
+     {
+      "qe": 4,
+      "qd": 4,
+      "qa": 5,
+      "qc": 2,
+      "qb": 17
+     },
+     40
+    ],
+    [
+     {
+      "qe": 6,
+      "qd": 4,
+      "qa": 6,
+      "qc": 7,
+      "qb": 22
+     },
+     21
+    ],
+    [
+     {
+      "qe": 4,
+      "qd": 2,
+      "qa": 5,
+      "qc": 9,
+      "qb": 19
+     },
+     5
+    ],
+    [
+     {
+      "qe": 3,
+      "qd": 2,
+      "qa": 5,
+      "qc": 5,
+      "qb": 1
+     },
+     6
+    ],
+    [
+     {
+      "qe": 6,
+      "qd": 6,
+      "qa": 6,
+      "qc": 7,
+      "qb": 1
+     },
+     31
+    ],
+    [
+     {
+      "qe": 5,
+      "qd": 4,
+      "qa": 6,
+      "qc": 5,
+      "qb": 21
+     },
+     24
+    ],
+    [
+     {
+      "qe": 2,
+      "qd": 3,
+      "qa": 6,
+      "qc": 8,
+      "qb": 22
+     },
+     5
+    ],
+    [
+     {
+      "qe": 5,
+      "qd": 6,
+      "qa": 2,
+      "qc": 5,
+      "qb": 23
+     },
+     12
+    ]
+   ],
+   "story": "A greenhouse has 6 shelves, each shelf has 5 trays and each tray holds 4 pots. The pots are packed into crates that hold 7 each. The greenhouse is 6 years old. How many crates are needed to hold all the pots?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-01",
+   "family": "cl_ferry_pallets",
+   "concept": "cq_boxes_volume",
+   "domain": "ferry",
+   "words": "A ferry deck has {a} lanes with {b} cars on each lane and {c} boxes in each car. The boxes go onto pallets that hold {d} each, on a route of {x} miles. How many pallets are needed for all the boxes?",
+   "inputs": [
+    "qb",
+    "qg",
+    "qa",
+    "qc",
+    "qd"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "mul",
+       [
+        "var",
+        "qc"
+       ],
+       [
+        "var",
+        "qa"
+       ]
+      ],
+      [
+       "var",
+       "qg"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "qd"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "qd"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qc": 2,
+      "qa": 3,
+      "qg": 4,
+      "qd": 9,
+      "qb": 2
+     },
+     3
+    ],
+    [
+     {
+      "qc": 5,
+      "qa": 6,
+      "qg": 2,
+      "qd": 2,
+      "qb": 15
+     },
+     30
+    ],
+    [
+     {
+      "qc": 4,
+      "qa": 6,
+      "qg": 5,
+      "qd": 2,
+      "qb": 7
+     },
+     60
+    ],
+    [
+     {
+      "qc": 5,
+      "qa": 5,
+      "qg": 2,
+      "qd": 5,
+      "qb": 6
+     },
+     10
+    ],
+    [
+     {
+      "qc": 6,
+      "qa": 5,
+      "qg": 3,
+      "qd": 7,
+      "qb": 17
+     },
+     13
+    ],
+    [
+     {
+      "qc": 4,
+      "qa": 2,
+      "qg": 5,
+      "qd": 8,
+      "qb": 23
+     },
+     5
+    ],
+    [
+     {
+      "qc": 5,
+      "qa": 2,
+      "qg": 2,
+      "qd": 6,
+      "qb": 18
+     },
+     4
+    ],
+    [
+     {
+      "qc": 6,
+      "qa": 5,
+      "qg": 5,
+      "qd": 6,
+      "qb": 13
+     },
+     25
+    ],
+    [
+     {
+      "qc": 2,
+      "qa": 3,
+      "qg": 3,
+      "qd": 4,
+      "qb": 15
+     },
+     5
+    ],
+    [
+     {
+      "qc": 2,
+      "qa": 4,
+      "qg": 6,
+      "qd": 5,
+      "qb": 8
+     },
+     10
+    ],
+    [
+     {
+      "qc": 3,
+      "qa": 4,
+      "qg": 3,
+      "qd": 9,
+      "qb": 18
+     },
+     4
+    ]
+   ],
+   "story": "A ferry deck has 2 lanes with 3 cars on each lane and 4 boxes in each car. The boxes go onto pallets that hold 9 each, on a route of 2 miles. How many pallets are needed for all the boxes?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-02",
+   "family": "cl_cannery_left",
+   "concept": "cq_left_two",
+   "domain": "cannery",
+   "words": "One shelf has {a} rows of {b} cans and another shelf has {c} rows of {d} cans. The cans are packed into cases of {e}. The cannery has {x} workers. How many cans are left over that do not fill a case?",
+   "inputs": [
+    "qb",
+    "qd",
+    "qe",
+    "qg",
+    "qa",
+    "qf"
+   ],
+   "tree": [
+    "mod",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "qd"
+      ],
+      [
+       "var",
+       "qg"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "qb"
+      ],
+      [
+       "var",
+       "qa"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "qe"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qd": 4,
+      "qg": 6,
+      "qb": 6,
+      "qa": 3,
+      "qe": 9,
+      "qf": 20
+     },
+     6
+    ],
+    [
+     {
+      "qd": 9,
+      "qg": 6,
+      "qb": 7,
+      "qa": 7,
+      "qe": 7,
+      "qf": 20
+     },
+     5
+    ],
+    [
+     {
+      "qd": 6,
+      "qg": 8,
+      "qb": 5,
+      "qa": 8,
+      "qe": 8,
+      "qf": 23
+     },
+     0
+    ],
+    [
+     {
+      "qd": 3,
+      "qg": 4,
+      "qb": 7,
+      "qa": 4,
+      "qe": 3,
+      "qf": 10
+     },
+     1
+    ],
+    [
+     {
+      "qd": 4,
+      "qg": 3,
+      "qb": 2,
+      "qa": 4,
+      "qe": 6,
+      "qf": 6
+     },
+     2
+    ],
+    [
+     {
+      "qd": 7,
+      "qg": 3,
+      "qb": 9,
+      "qa": 9,
+      "qe": 6,
+      "qf": 17
+     },
+     0
+    ],
+    [
+     {
+      "qd": 4,
+      "qg": 2,
+      "qb": 5,
+      "qa": 6,
+      "qe": 4,
+      "qf": 10
+     },
+     2
+    ],
+    [
+     {
+      "qd": 9,
+      "qg": 4,
+      "qb": 6,
+      "qa": 3,
+      "qe": 3,
+      "qf": 14
+     },
+     0
+    ],
+    [
+     {
+      "qd": 4,
+      "qg": 5,
+      "qb": 2,
+      "qa": 8,
+      "qe": 7,
+      "qf": 8
+     },
+     1
+    ],
+    [
+     {
+      "qd": 2,
+      "qg": 8,
+      "qb": 4,
+      "qa": 8,
+      "qe": 5,
+      "qf": 8
+     },
+     3
+    ],
+    [
+     {
+      "qd": 8,
+      "qg": 5,
+      "qb": 4,
+      "qa": 2,
+      "qe": 5,
+      "qf": 22
+     },
+     3
+    ]
+   ],
+   "story": "One shelf has 4 rows of 6 cans and another shelf has 6 rows of 3 cans. The cans are packed into cases of 9. The cannery has 20 workers. How many cans are left over that do not fill a case?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-03",
+   "family": "cl_quarry_left",
+   "concept": "cq_left_two",
+   "domain": "quarry",
+   "words": "One wall of the quarry is {a} by {b} blocks and a second wall is {c} by {d} blocks. The blocks are loaded onto trucks of {e}, and the quarry is {x} meters deep. How many blocks are left over without a full truck?",
+   "inputs": [
+    "qc",
+    "qd",
+    "qg",
+    "qb",
+    "qa",
+    "qf"
+   ],
+   "tree": [
+    "mod",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "qb"
+      ],
+      [
+       "var",
+       "qf"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "qd"
+      ],
+      [
+       "var",
+       "qa"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "qc"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qb": 6,
+      "qf": 6,
+      "qd": 2,
+      "qa": 9,
+      "qc": 6,
+      "qg": 18
+     },
+     0
+    ],
+    [
+     {
+      "qb": 2,
+      "qf": 8,
+      "qd": 2,
+      "qa": 4,
+      "qc": 7,
+      "qg": 8
+     },
+     3
+    ],
+    [
+     {
+      "qb": 7,
+      "qf": 9,
+      "qd": 4,
+      "qa": 2,
+      "qc": 7,
+      "qg": 25
+     },
+     1
+    ],
+    [
+     {
+      "qb": 8,
+      "qf": 6,
+      "qd": 3,
+      "qa": 3,
+      "qc": 6,
+      "qg": 2
+     },
+     3
+    ],
+    [
+     {
+      "qb": 4,
+      "qf": 7,
+      "qd": 8,
+      "qa": 7,
+      "qc": 8,
+      "qg": 3
+     },
+     4
+    ],
+    [
+     {
+      "qb": 8,
+      "qf": 3,
+      "qd": 3,
+      "qa": 7,
+      "qc": 7,
+      "qg": 23
+     },
+     3
+    ],
+    [
+     {
+      "qb": 7,
+      "qf": 2,
+      "qd": 5,
+      "qa": 8,
+      "qc": 6,
+      "qg": 10
+     },
+     0
+    ],
+    [
+     {
+      "qb": 4,
+      "qf": 7,
+      "qd": 7,
+      "qa": 8,
+      "qc": 8,
+      "qg": 19
+     },
+     4
+    ],
+    [
+     {
+      "qb": 3,
+      "qf": 2,
+      "qd": 7,
+      "qa": 5,
+      "qc": 8,
+      "qg": 11
+     },
+     1
+    ],
+    [
+     {
+      "qb": 3,
+      "qf": 4,
+      "qd": 9,
+      "qa": 6,
+      "qc": 5,
+      "qg": 16
+     },
+     1
+    ],
+    [
+     {
+      "qb": 5,
+      "qf": 5,
+      "qd": 3,
+      "qa": 2,
+      "qc": 6,
+      "qg": 14
+     },
+     1
+    ]
+   ],
+   "story": "One wall of the quarry is 6 by 6 blocks and a second wall is 2 by 9 blocks. The blocks are loaded onto trucks of 6, and the quarry is 18 meters deep. How many blocks are left over without a full truck?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-04",
+   "family": "cl_dome_mean",
+   "concept": "cq_mean_product",
+   "domain": "planetarium",
+   "words": "One hall has {a} rows of {b} seats and a small hall has {c} seats, and the planetarium has {x} lamps. What is the average of the two halls?",
+   "inputs": [
+    "qd",
+    "qa",
+    "qg",
+    "qb"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "qb"
+      ],
+      [
+       "var",
+       "qa"
+      ]
+     ],
+     [
+      "var",
+      "qd"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qb": 2,
+      "qa": 9,
+      "qd": 7,
+      "qg": 15
+     },
+     12
+    ],
+    [
+     {
+      "qb": 9,
+      "qa": 4,
+      "qd": 8,
+      "qg": 10
+     },
+     22
+    ],
+    [
+     {
+      "qb": 8,
+      "qa": 2,
+      "qd": 12,
+      "qg": 23
+     },
+     14
+    ],
+    [
+     {
+      "qb": 5,
+      "qa": 8,
+      "qd": 23,
+      "qg": 15
+     },
+     31
+    ],
+    [
+     {
+      "qb": 3,
+      "qa": 2,
+      "qd": 18,
+      "qg": 15
+     },
+     12
+    ],
+    [
+     {
+      "qb": 4,
+      "qa": 5,
+      "qd": 37,
+      "qg": 14
+     },
+     28
+    ],
+    [
+     {
+      "qb": 4,
+      "qa": 3,
+      "qd": 15,
+      "qg": 1
+     },
+     13
+    ],
+    [
+     {
+      "qb": 5,
+      "qa": 7,
+      "qd": 17,
+      "qg": 11
+     },
+     26
+    ],
+    [
+     {
+      "qb": 7,
+      "qa": 7,
+      "qd": 25,
+      "qg": 9
+     },
+     37
+    ],
+    [
+     {
+      "qb": 5,
+      "qa": 3,
+      "qd": 5,
+      "qg": 14
+     },
+     10
+    ],
+    [
+     {
+      "qb": 8,
+      "qa": 5,
+      "qd": 21,
+      "qg": 18
+     },
+     30
+    ]
+   ],
+   "story": "One hall has 2 rows of 9 seats and a small hall has 7 seats, and the planetarium has 15 lamps. What is the average of the two halls?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-05",
+   "family": "cl_orchard_mean",
+   "concept": "cq_mean_product",
+   "domain": "orchard",
+   "words": "One field has {a} rows of {b} trees and a small plot has {c} trees, with {x} pickers on the farm. What is the average of the field and the plot?",
+   "inputs": [
+    "qg",
+    "qa",
+    "qd",
+    "qb"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "qd"
+      ],
+      [
+       "var",
+       "qg"
+      ]
+     ],
+     [
+      "var",
+      "qb"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qd": 3,
+      "qg": 4,
+      "qb": 36,
+      "qa": 14
+     },
+     24
+    ],
+    [
+     {
+      "qd": 7,
+      "qg": 9,
+      "qb": 1,
+      "qa": 7
+     },
+     32
+    ],
+    [
+     {
+      "qd": 2,
+      "qg": 2,
+      "qb": 39,
+      "qa": 16
+     },
+     21
+    ],
+    [
+     {
+      "qd": 2,
+      "qg": 2,
+      "qb": 2,
+      "qa": 13
+     },
+     3
+    ],
+    [
+     {
+      "qd": 3,
+      "qg": 9,
+      "qb": 6,
+      "qa": 16
+     },
+     16
+    ],
+    [
+     {
+      "qd": 2,
+      "qg": 6,
+      "qb": 24,
+      "qa": 18
+     },
+     18
+    ],
+    [
+     {
+      "qd": 3,
+      "qg": 9,
+      "qb": 8,
+      "qa": 4
+     },
+     17
+    ],
+    [
+     {
+      "qd": 3,
+      "qg": 4,
+      "qb": 1,
+      "qa": 5
+     },
+     6
+    ],
+    [
+     {
+      "qd": 4,
+      "qg": 3,
+      "qb": 32,
+      "qa": 12
+     },
+     22
+    ],
+    [
+     {
+      "qd": 3,
+      "qg": 7,
+      "qb": 7,
+      "qa": 9
+     },
+     14
+    ],
+    [
+     {
+      "qd": 5,
+      "qg": 2,
+      "qb": 29,
+      "qa": 4
+     },
+     19
+    ]
+   ],
+   "story": "One field has 3 rows of 4 trees and a small plot has 36 trees, with 14 pickers on the farm. What is the average of the field and the plot?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-06",
+   "family": "cl_clock_left",
+   "concept": "cq_net_area",
+   "domain": "clock shop",
+   "words": "A display wall is laid in {a} rows with {b} clocks in each row. {c} clocks are sold on Monday and {d} clocks on Tuesday, and the shop has {x} lamps. How many clocks are left?",
+   "inputs": [
+    "qg",
+    "qa",
+    "qc",
+    "qe",
+    "qf"
+   ],
+   "tree": [
+    "sub",
+    [
+     "sub",
+     [
+      "mul",
+      [
+       "var",
+       "qc"
+      ],
+      [
+       "var",
+       "qa"
+      ]
+     ],
+     [
+      "var",
+      "qe"
+     ]
+    ],
+    [
+     "var",
+     "qg"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qc": 3,
+      "qa": 8,
+      "qe": 3,
+      "qg": 1,
+      "qf": 23
+     },
+     20
+    ],
+    [
+     {
+      "qc": 8,
+      "qa": 7,
+      "qe": 5,
+      "qg": 5,
+      "qf": 18
+     },
+     46
+    ],
+    [
+     {
+      "qc": 5,
+      "qa": 4,
+      "qe": 1,
+      "qg": 5,
+      "qf": 1
+     },
+     14
+    ],
+    [
+     {
+      "qc": 3,
+      "qa": 5,
+      "qe": 2,
+      "qg": 3,
+      "qf": 7
+     },
+     10
+    ],
+    [
+     {
+      "qc": 8,
+      "qa": 8,
+      "qe": 4,
+      "qg": 4,
+      "qf": 11
+     },
+     56
+    ],
+    [
+     {
+      "qc": 5,
+      "qa": 3,
+      "qe": 3,
+      "qg": 2,
+      "qf": 19
+     },
+     10
+    ],
+    [
+     {
+      "qc": 7,
+      "qa": 8,
+      "qe": 4,
+      "qg": 5,
+      "qf": 15
+     },
+     47
+    ],
+    [
+     {
+      "qc": 9,
+      "qa": 5,
+      "qe": 3,
+      "qg": 1,
+      "qf": 17
+     },
+     41
+    ],
+    [
+     {
+      "qc": 3,
+      "qa": 5,
+      "qe": 5,
+      "qg": 3,
+      "qf": 3
+     },
+     7
+    ],
+    [
+     {
+      "qc": 4,
+      "qa": 8,
+      "qe": 1,
+      "qg": 5,
+      "qf": 15
+     },
+     26
+    ],
+    [
+     {
+      "qc": 8,
+      "qa": 8,
+      "qe": 5,
+      "qg": 2,
+      "qf": 14
+     },
+     57
+    ]
+   ],
+   "story": "A display wall is laid in 3 rows with 8 clocks in each row. 3 clocks are sold on Monday and 1 clocks on Tuesday, and the shop has 23 lamps. How many clocks are left?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-07",
+   "family": "cl_hide_left",
+   "concept": "cq_net_area",
+   "domain": "tannery",
+   "words": "A drying rack has {a} rows with {b} hides in each row; {c} hides are sold in spring and {d} hides in summer. The tannery has {x} workers. How many hides remain?",
+   "inputs": [
+    "qd",
+    "qg",
+    "qc",
+    "qa",
+    "qb"
+   ],
+   "tree": [
+    "sub",
+    [
+     "sub",
+     [
+      "mul",
+      [
+       "var",
+       "qa"
+      ],
+      [
+       "var",
+       "qg"
+      ]
+     ],
+     [
+      "var",
+      "qd"
+     ]
+    ],
+    [
+     "var",
+     "qc"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qa": 8,
+      "qg": 8,
+      "qd": 3,
+      "qc": 4,
+      "qb": 17
+     },
+     57
+    ],
+    [
+     {
+      "qa": 4,
+      "qg": 8,
+      "qd": 3,
+      "qc": 2,
+      "qb": 8
+     },
+     27
+    ],
+    [
+     {
+      "qa": 9,
+      "qg": 4,
+      "qd": 5,
+      "qc": 2,
+      "qb": 3
+     },
+     29
+    ],
+    [
+     {
+      "qa": 8,
+      "qg": 8,
+      "qd": 3,
+      "qc": 1,
+      "qb": 4
+     },
+     60
+    ],
+    [
+     {
+      "qa": 9,
+      "qg": 4,
+      "qd": 2,
+      "qc": 2,
+      "qb": 3
+     },
+     32
+    ],
+    [
+     {
+      "qa": 5,
+      "qg": 5,
+      "qd": 1,
+      "qc": 3,
+      "qb": 25
+     },
+     21
+    ],
+    [
+     {
+      "qa": 3,
+      "qg": 9,
+      "qd": 2,
+      "qc": 3,
+      "qb": 5
+     },
+     22
+    ],
+    [
+     {
+      "qa": 4,
+      "qg": 8,
+      "qd": 5,
+      "qc": 4,
+      "qb": 9
+     },
+     23
+    ],
+    [
+     {
+      "qa": 4,
+      "qg": 5,
+      "qd": 5,
+      "qc": 1,
+      "qb": 20
+     },
+     14
+    ],
+    [
+     {
+      "qa": 3,
+      "qg": 4,
+      "qd": 2,
+      "qc": 3,
+      "qb": 1
+     },
+     7
+    ],
+    [
+     {
+      "qa": 5,
+      "qg": 9,
+      "qd": 1,
+      "qc": 3,
+      "qb": 25
+     },
+     41
+    ]
+   ],
+   "story": "A drying rack has 8 rows with 8 hides in each row; 3 hides are sold in spring and 4 hides in summer. The tannery has 17 workers. How many hides remain?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-08",
+   "family": "cl_flower_change",
+   "concept": "cq_change_bundle",
+   "domain": "greenhouse",
+   "words": "Each bag holds {a} tulips and {b} roses, and a buyer takes {c} bags. Every flower costs {d} dollars, and the buyer pays with {e} dollars, in a greenhouse of {x} rooms. How much change comes back?",
+   "inputs": [
+    "qe",
+    "qd",
+    "qg",
+    "qb",
+    "qc",
+    "qa"
+   ],
+   "tree": [
+    "sub",
+    [
+     "var",
+     "qa"
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "add",
+       [
+        "var",
+        "qc"
+       ],
+       [
+        "var",
+        "qb"
+       ]
+      ],
+      [
+       "var",
+       "qe"
+      ]
+     ],
+     [
+      "var",
+      "qd"
+     ]
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qc": 1,
+      "qb": 1,
+      "qe": 2,
+      "qd": 3,
+      "qa": 31,
+      "qg": 16
+     },
+     19
+    ],
+    [
+     {
+      "qc": 3,
+      "qb": 5,
+      "qe": 3,
+      "qd": 2,
+      "qa": 64,
+      "qg": 1
+     },
+     16
+    ],
+    [
+     {
+      "qc": 5,
+      "qb": 5,
+      "qe": 2,
+      "qd": 4,
+      "qa": 84,
+      "qg": 1
+     },
+     4
+    ],
+    [
+     {
+      "qc": 5,
+      "qb": 4,
+      "qe": 3,
+      "qd": 4,
+      "qa": 114,
+      "qg": 17
+     },
+     6
+    ],
+    [
+     {
+      "qc": 3,
+      "qb": 5,
+      "qe": 3,
+      "qd": 4,
+      "qa": 103,
+      "qg": 8
+     },
+     7
+    ],
+    [
+     {
+      "qc": 5,
+      "qb": 5,
+      "qe": 2,
+      "qd": 3,
+      "qa": 61,
+      "qg": 14
+     },
+     1
+    ],
+    [
+     {
+      "qc": 3,
+      "qb": 4,
+      "qe": 2,
+      "qd": 3,
+      "qa": 51,
+      "qg": 23
+     },
+     9
+    ],
+    [
+     {
+      "qc": 1,
+      "qb": 1,
+      "qe": 2,
+      "qd": 3,
+      "qa": 20,
+      "qg": 20
+     },
+     8
+    ],
+    [
+     {
+      "qc": 2,
+      "qb": 3,
+      "qe": 2,
+      "qd": 3,
+      "qa": 37,
+      "qg": 15
+     },
+     7
+    ],
+    [
+     {
+      "qc": 3,
+      "qb": 5,
+      "qe": 3,
+      "qd": 4,
+      "qa": 104,
+      "qg": 10
+     },
+     8
+    ],
+    [
+     {
+      "qc": 3,
+      "qb": 4,
+      "qe": 3,
+      "qd": 3,
+      "qa": 75,
+      "qg": 18
+     },
+     12
+    ]
+   ],
+   "story": "Each bag holds 1 tulips and 1 roses, and a buyer takes 2 bags. Every flower costs 3 dollars, and the buyer pays with 31 dollars, in a greenhouse of 16 rooms. How much change comes back?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-09",
+   "family": "cl_ferry_change",
+   "concept": "cq_change_bundle",
+   "domain": "ferry",
+   "words": "A tour boat takes {c} groups of {a} adults and {b} children. Each ticket costs {d} dollars and the host pays with {e} dollars, with {x} lifebelts on board. How much change comes back?",
+   "inputs": [
+    "qa",
+    "qg",
+    "qf",
+    "qb",
+    "qe",
+    "qc"
+   ],
+   "tree": [
+    "sub",
+    [
+     "var",
+     "qb"
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "add",
+       [
+        "var",
+        "qe"
+       ],
+       [
+        "var",
+        "qc"
+       ]
+      ],
+      [
+       "var",
+       "qg"
+      ]
+     ],
+     [
+      "var",
+      "qf"
+     ]
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qe": 5,
+      "qc": 1,
+      "qg": 4,
+      "qf": 3,
+      "qb": 78,
+      "qa": 4
+     },
+     6
+    ],
+    [
+     {
+      "qe": 4,
+      "qc": 4,
+      "qg": 3,
+      "qf": 2,
+      "qb": 51,
+      "qa": 9
+     },
+     3
+    ],
+    [
+     {
+      "qe": 4,
+      "qc": 2,
+      "qg": 2,
+      "qf": 4,
+      "qb": 64,
+      "qa": 9
+     },
+     16
+    ],
+    [
+     {
+      "qe": 2,
+      "qc": 1,
+      "qg": 2,
+      "qf": 4,
+      "qb": 38,
+      "qa": 22
+     },
+     14
+    ],
+    [
+     {
+      "qe": 2,
+      "qc": 5,
+      "qg": 3,
+      "qf": 3,
+      "qb": 82,
+      "qa": 20
+     },
+     19
+    ],
+    [
+     {
+      "qe": 3,
+      "qc": 2,
+      "qg": 2,
+      "qf": 2,
+      "qb": 24,
+      "qa": 19
+     },
+     4
+    ],
+    [
+     {
+      "qe": 5,
+      "qc": 3,
+      "qg": 4,
+      "qf": 3,
+      "qb": 101,
+      "qa": 22
+     },
+     5
+    ],
+    [
+     {
+      "qe": 5,
+      "qc": 5,
+      "qg": 2,
+      "qf": 3,
+      "qb": 76,
+      "qa": 17
+     },
+     16
+    ],
+    [
+     {
+      "qe": 3,
+      "qc": 4,
+      "qg": 4,
+      "qf": 3,
+      "qb": 86,
+      "qa": 22
+     },
+     2
+    ],
+    [
+     {
+      "qe": 1,
+      "qc": 4,
+      "qg": 4,
+      "qf": 4,
+      "qb": 83,
+      "qa": 8
+     },
+     3
+    ],
+    [
+     {
+      "qe": 1,
+      "qc": 3,
+      "qg": 3,
+      "qf": 4,
+      "qb": 56,
+      "qa": 8
+     },
+     8
+    ]
+   ],
+   "story": "A tour boat takes 4 groups of 5 adults and 1 children. Each ticket costs 3 dollars and the host pays with 78 dollars, with 4 lifebelts on board. How much change comes back?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-10",
+   "family": "cl_cannery_loose",
+   "concept": "cq_left_groups",
+   "domain": "cannery",
+   "words": "There are {a} cartons with {b} cans in each carton, plus {c} loose cans. The cans go into cases of {d}, and the cannery has {x} workers. How many cans are left over without a full case?",
+   "inputs": [
+    "qf",
+    "qd",
+    "qc",
+    "qb",
+    "qg"
+   ],
+   "tree": [
+    "mod",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "qd"
+      ],
+      [
+       "var",
+       "qb"
+      ]
+     ],
+     [
+      "var",
+      "qf"
+     ]
+    ],
+    [
+     "var",
+     "qg"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qd": 3,
+      "qb": 9,
+      "qf": 13,
+      "qg": 7,
+      "qc": 24
+     },
+     5
+    ],
+    [
+     {
+      "qd": 4,
+      "qb": 6,
+      "qf": 12,
+      "qg": 3,
+      "qc": 23
+     },
+     0
+    ],
+    [
+     {
+      "qd": 3,
+      "qb": 4,
+      "qf": 8,
+      "qg": 5,
+      "qc": 11
+     },
+     0
+    ],
+    [
+     {
+      "qd": 2,
+      "qb": 2,
+      "qf": 15,
+      "qg": 3,
+      "qc": 7
+     },
+     1
+    ],
+    [
+     {
+      "qd": 2,
+      "qb": 7,
+      "qf": 8,
+      "qg": 7,
+      "qc": 9
+     },
+     1
+    ],
+    [
+     {
+      "qd": 4,
+      "qb": 7,
+      "qf": 4,
+      "qg": 6,
+      "qc": 18
+     },
+     2
+    ],
+    [
+     {
+      "qd": 8,
+      "qb": 9,
+      "qf": 14,
+      "qg": 6,
+      "qc": 5
+     },
+     2
+    ],
+    [
+     {
+      "qd": 9,
+      "qb": 2,
+      "qf": 12,
+      "qg": 8,
+      "qc": 23
+     },
+     6
+    ],
+    [
+     {
+      "qd": 3,
+      "qb": 6,
+      "qf": 11,
+      "qg": 8,
+      "qc": 24
+     },
+     5
+    ],
+    [
+     {
+      "qd": 2,
+      "qb": 5,
+      "qf": 2,
+      "qg": 4,
+      "qc": 6
+     },
+     0
+    ],
+    [
+     {
+      "qd": 6,
+      "qb": 4,
+      "qf": 6,
+      "qg": 4,
+      "qc": 7
+     },
+     2
+    ]
+   ],
+   "story": "There are 3 cartons with 9 cans in each carton, plus 13 loose cans. The cans go into cases of 7, and the cannery has 24 workers. How many cans are left over without a full case?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-11",
+   "family": "cl_quarry_loose",
+   "concept": "cq_left_groups",
+   "domain": "quarry",
+   "words": "A yard has {a} stacks with {b} stones in each stack, plus {c} more stones. The stones are loaded in trucks of {d}, and the quarry is {x} meters deep. How many stones are left over that do not fill a truck?",
+   "inputs": [
+    "qg",
+    "qc",
+    "qb",
+    "qa",
+    "qd"
+   ],
+   "tree": [
+    "mod",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "qg"
+      ],
+      [
+       "var",
+       "qa"
+      ]
+     ],
+     [
+      "var",
+      "qd"
+     ]
+    ],
+    [
+     "var",
+     "qb"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qg": 5,
+      "qa": 7,
+      "qd": 12,
+      "qb": 4,
+      "qc": 1
+     },
+     3
+    ],
+    [
+     {
+      "qg": 5,
+      "qa": 3,
+      "qd": 8,
+      "qb": 9,
+      "qc": 4
+     },
+     5
+    ],
+    [
+     {
+      "qg": 8,
+      "qa": 9,
+      "qd": 14,
+      "qb": 7,
+      "qc": 18
+     },
+     2
+    ],
+    [
+     {
+      "qg": 2,
+      "qa": 3,
+      "qd": 5,
+      "qb": 5,
+      "qc": 8
+     },
+     1
+    ],
+    [
+     {
+      "qg": 4,
+      "qa": 8,
+      "qd": 15,
+      "qb": 4,
+      "qc": 22
+     },
+     3
+    ],
+    [
+     {
+      "qg": 5,
+      "qa": 7,
+      "qd": 15,
+      "qb": 6,
+      "qc": 8
+     },
+     2
+    ],
+    [
+     {
+      "qg": 2,
+      "qa": 8,
+      "qd": 15,
+      "qb": 5,
+      "qc": 17
+     },
+     1
+    ],
+    [
+     {
+      "qg": 7,
+      "qa": 4,
+      "qd": 8,
+      "qb": 9,
+      "qc": 3
+     },
+     0
+    ],
+    [
+     {
+      "qg": 7,
+      "qa": 4,
+      "qd": 8,
+      "qb": 7,
+      "qc": 7
+     },
+     1
+    ],
+    [
+     {
+      "qg": 4,
+      "qa": 5,
+      "qd": 12,
+      "qb": 7,
+      "qc": 1
+     },
+     4
+    ],
+    [
+     {
+      "qg": 8,
+      "qa": 8,
+      "qd": 15,
+      "qb": 5,
+      "qc": 4
+     },
+     4
+    ]
+   ],
+   "story": "A yard has 5 stacks with 7 stones in each stack, plus 12 more stones. The stones are loaded in trucks of 4, and the quarry is 1 meters deep. How many stones are left over that do not fill a truck?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-12",
+   "family": "cl_dome_crates",
+   "concept": "cq_boxes_frame",
+   "domain": "planetarium",
+   "words": "A glass ceiling is {a} by {b} panels with a hole of {c} by {d} panels cut out of it. The panels are packed into crates that hold {e} each, and there are {x} domes. How many crates are needed for the panels that remain?",
+   "inputs": [
+    "qc",
+    "qe",
+    "qf",
+    "qg",
+    "qd",
+    "qa"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "var",
+        "qe"
+       ],
+       [
+        "var",
+        "qf"
+       ]
+      ],
+      [
+       "mul",
+       [
+        "var",
+        "qg"
+       ],
+       [
+        "var",
+        "qa"
+       ]
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "qc"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "qc"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qe": 5,
+      "qf": 7,
+      "qg": 3,
+      "qa": 4,
+      "qc": 3,
+      "qd": 18
+     },
+     8
+    ],
+    [
+     {
+      "qe": 6,
+      "qf": 4,
+      "qg": 2,
+      "qa": 2,
+      "qc": 2,
+      "qd": 8
+     },
+     10
+    ],
+    [
+     {
+      "qe": 4,
+      "qf": 5,
+      "qg": 1,
+      "qa": 2,
+      "qc": 4,
+      "qd": 23
+     },
+     5
+    ],
+    [
+     {
+      "qe": 8,
+      "qf": 7,
+      "qg": 3,
+      "qa": 4,
+      "qc": 2,
+      "qd": 16
+     },
+     22
+    ],
+    [
+     {
+      "qe": 7,
+      "qf": 7,
+      "qg": 1,
+      "qa": 4,
+      "qc": 2,
+      "qd": 15
+     },
+     23
+    ],
+    [
+     {
+      "qe": 8,
+      "qf": 6,
+      "qg": 4,
+      "qa": 3,
+      "qc": 9,
+      "qd": 21
+     },
+     4
+    ],
+    [
+     {
+      "qe": 7,
+      "qf": 5,
+      "qg": 4,
+      "qa": 1,
+      "qc": 8,
+      "qd": 17
+     },
+     4
+    ],
+    [
+     {
+      "qe": 8,
+      "qf": 5,
+      "qg": 1,
+      "qa": 1,
+      "qc": 5,
+      "qd": 25
+     },
+     8
+    ],
+    [
+     {
+      "qe": 3,
+      "qf": 8,
+      "qg": 1,
+      "qa": 3,
+      "qc": 4,
+      "qd": 16
+     },
+     6
+    ],
+    [
+     {
+      "qe": 9,
+      "qf": 9,
+      "qg": 4,
+      "qa": 1,
+      "qc": 4,
+      "qd": 5
+     },
+     20
+    ],
+    [
+     {
+      "qe": 7,
+      "qf": 9,
+      "qg": 1,
+      "qa": 2,
+      "qc": 7,
+      "qd": 24
+     },
+     9
+    ]
+   ],
+   "story": "A glass ceiling is 5 by 7 panels with a hole of 3 by 4 panels cut out of it. The panels are packed into crates that hold 3 each, and there are 18 domes. How many crates are needed for the panels that remain?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-13",
+   "family": "cl_clock_boxes",
+   "concept": "cq_boxes_frame",
+   "domain": "clock shop",
+   "words": "A wall is {a} by {b} with a window of {c} by {d}, and the wall is {x} floors up. The tiles are packed into boxes that hold {e} each. How many boxes are needed for the wall that is left?",
+   "inputs": [
+    "qb",
+    "qe",
+    "qg",
+    "qd",
+    "qa",
+    "qc"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "var",
+        "qd"
+       ],
+       [
+        "var",
+        "qb"
+       ]
+      ],
+      [
+       "mul",
+       [
+        "var",
+        "qg"
+       ],
+       [
+        "var",
+        "qc"
+       ]
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "qe"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "qe"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qd": 5,
+      "qb": 8,
+      "qg": 1,
+      "qc": 3,
+      "qe": 6,
+      "qa": 2
+     },
+     7
+    ],
+    [
+     {
+      "qd": 9,
+      "qb": 8,
+      "qg": 4,
+      "qc": 3,
+      "qe": 4,
+      "qa": 25
+     },
+     15
+    ],
+    [
+     {
+      "qd": 6,
+      "qb": 5,
+      "qg": 2,
+      "qc": 3,
+      "qe": 8,
+      "qa": 8
+     },
+     3
+    ],
+    [
+     {
+      "qd": 6,
+      "qb": 5,
+      "qg": 1,
+      "qc": 1,
+      "qe": 7,
+      "qa": 5
+     },
+     5
+    ],
+    [
+     {
+      "qd": 5,
+      "qb": 7,
+      "qg": 1,
+      "qc": 1,
+      "qe": 6,
+      "qa": 12
+     },
+     6
+    ],
+    [
+     {
+      "qd": 5,
+      "qb": 5,
+      "qg": 3,
+      "qc": 3,
+      "qe": 3,
+      "qa": 19
+     },
+     6
+    ],
+    [
+     {
+      "qd": 6,
+      "qb": 6,
+      "qg": 3,
+      "qc": 3,
+      "qe": 2,
+      "qa": 23
+     },
+     14
+    ],
+    [
+     {
+      "qd": 9,
+      "qb": 9,
+      "qg": 1,
+      "qc": 1,
+      "qe": 3,
+      "qa": 20
+     },
+     27
+    ],
+    [
+     {
+      "qd": 5,
+      "qb": 6,
+      "qg": 3,
+      "qc": 4,
+      "qe": 7,
+      "qa": 24
+     },
+     3
+    ],
+    [
+     {
+      "qd": 3,
+      "qb": 6,
+      "qg": 1,
+      "qc": 4,
+      "qe": 8,
+      "qa": 24
+     },
+     2
+    ],
+    [
+     {
+      "qd": 9,
+      "qb": 5,
+      "qg": 4,
+      "qc": 3,
+      "qe": 2,
+      "qa": 17
+     },
+     17
+    ]
+   ],
+   "story": "A wall is 5 by 8 with a window of 1 by 3, and the wall is 2 floors up. The tiles are packed into boxes that hold 6 each. How many boxes are needed for the wall that is left?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-14",
+   "family": "cl_orchard_trip",
+   "concept": "cq_trip_mean",
+   "domain": "orchard",
+   "words": "The first tree is {a} meters away and the second tree is {b} meters away. What is the average of the two distances? A picker walks that distance there and back {c} times, with {x} baskets. How many meters are walked?",
+   "inputs": [
+    "qa",
+    "qe",
+    "qb",
+    "qf"
+   ],
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "qb"
+       ],
+       [
+        "var",
+        "qe"
+       ]
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "var",
+      "qa"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qb": 15,
+      "qe": 21,
+      "qa": 5,
+      "qf": 24
+     },
+     180
+    ],
+    [
+     {
+      "qb": 22,
+      "qe": 16,
+      "qa": 6,
+      "qf": 13
+     },
+     228
+    ],
+    [
+     {
+      "qb": 1,
+      "qe": 13,
+      "qa": 6,
+      "qf": 23
+     },
+     84
+    ],
+    [
+     {
+      "qb": 10,
+      "qe": 8,
+      "qa": 6,
+      "qf": 23
+     },
+     108
+    ],
+    [
+     {
+      "qb": 4,
+      "qe": 13,
+      "qa": 2,
+      "qf": 14
+     },
+     32
+    ],
+    [
+     {
+      "qb": 25,
+      "qe": 19,
+      "qa": 7,
+      "qf": 1
+     },
+     308
+    ],
+    [
+     {
+      "qb": 21,
+      "qe": 6,
+      "qa": 2,
+      "qf": 23
+     },
+     52
+    ],
+    [
+     {
+      "qb": 15,
+      "qe": 6,
+      "qa": 4,
+      "qf": 11
+     },
+     80
+    ],
+    [
+     {
+      "qb": 15,
+      "qe": 1,
+      "qa": 5,
+      "qf": 13
+     },
+     80
+    ],
+    [
+     {
+      "qb": 8,
+      "qe": 15,
+      "qa": 2,
+      "qf": 6
+     },
+     44
+    ],
+    [
+     {
+      "qb": 19,
+      "qe": 8,
+      "qa": 7,
+      "qf": 19
+     },
+     182
+    ]
+   ],
+   "story": "The first tree is 15 meters away and the second tree is 21 meters away. What is the average of the two distances? A picker walks that distance there and back 5 times, with 24 baskets. How many meters are walked?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-15",
+   "family": "cl_ferry_trip",
+   "concept": "cq_trip_mean",
+   "domain": "ferry",
+   "words": "Two docks are {a} and {b} kilometers away. What is the average of the two? A ferry sails that far there and back {c} times a day, with {x} ferries in service. How many kilometers are sailed?",
+   "inputs": [
+    "qg",
+    "qa",
+    "qd",
+    "qe"
+   ],
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "qg"
+       ],
+       [
+        "var",
+        "qe"
+       ]
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "var",
+      "qa"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "qg": 11,
+      "qe": 1,
+      "qa": 2,
+      "qd": 2
+     },
+     24
+    ],
+    [
+     {
+      "qg": 18,
+      "qe": 4,
+      "qa": 3,
+      "qd": 14
+     },
+     66
+    ],
+    [
+     {
+      "qg": 7,
+      "qe": 28,
+      "qa": 6,
+      "qd": 9
+     },
+     204
+    ],
+    [
+     {
+      "qg": 1,
+      "qe": 30,
+      "qa": 5,
+      "qd": 12
+     },
+     150
+    ],
+    [
+     {
+      "qg": 3,
+      "qe": 26,
+      "qa": 4,
+      "qd": 16
+     },
+     112
+    ],
+    [
+     {
+      "qg": 24,
+      "qe": 29,
+      "qa": 4,
+      "qd": 11
+     },
+     208
+    ],
+    [
+     {
+      "qg": 18,
+      "qe": 3,
+      "qa": 3,
+      "qd": 14
+     },
+     60
+    ],
+    [
+     {
+      "qg": 25,
+      "qe": 26,
+      "qa": 6,
+      "qd": 17
+     },
+     300
+    ],
+    [
+     {
+      "qg": 4,
+      "qe": 9,
+      "qa": 5,
+      "qd": 13
+     },
+     60
+    ],
+    [
+     {
+      "qg": 16,
+      "qe": 6,
+      "qa": 7,
+      "qd": 19
+     },
+     154
+    ],
+    [
+     {
+      "qg": 19,
+      "qe": 3,
+      "qa": 4,
+      "qd": 24
+     },
+     88
+    ]
+   ],
+   "story": "Two docks are 11 and 1 kilometers away. What is the average of the two? A ferry sails that far there and back 2 times a day, with 2 ferries in service. How many kilometers are sailed?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  }
+ ]
+}

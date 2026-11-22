@@ -2909,6 +2909,12 @@ def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bo
             hit, spent, _info = _meaning.stage(task, prior, words, max_eval=max_eval)
             via = "meaning:"
             if hit is None:
+                from . import clause as _clause
+                if _clause.enabled():   # CLAUSE (docs/CLAUSE.md): one concept per clause, composed
+                    hit, more, _info = _clause.stage(task, prior, words, max_eval=max_eval - spent)
+                    spent += more
+                    via = "clause:"
+            if hit is None:
                 from . import combine as _combine
                 if _combine.enabled():   # COMBINE (docs/COMBINE.md): two retrieved concepts composed
                     hit, more, _info = _combine.stage(task, prior, words, max_eval=max_eval - spent)
