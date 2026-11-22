@@ -5,7 +5,8 @@ Each test first reproduced a defect on the pre-fix code (it failed there), then 
 1. receipt binding: a WITNESS receipt admits only the exact program (hash) and task it attests;
 2. crash replay: a packet applied before a crash is not applied again on the next sleep;
 3. challenge/final separation: WITNESS consultation during search cannot reach the final split,
-   and search receives a task view with no final rows.
+   and search receives a task view with no final rows; awake exploration
+   (variation.explore) never reads the final split either.
 """
 from __future__ import annotations
 
@@ -240,3 +241,28 @@ class FinalSplitSeparation(unittest.TestCase):
         g = W._WitnessGate(_inc_task(), {})
         self.assertFalse(hasattr(g.view, "final"))
         self.assertTrue(g(ADD1))
+
+    def test_explore_never_reads_final(self) -> None:
+        import dataclasses
+        from nomad import variation as V
+        from nomad import world as W
+        from nomad.world_tasks import by_family
+
+        class Poison(tuple):
+            def __iter__(self):
+                raise AssertionError("final split read during variation.explore")
+
+            def __len__(self):
+                raise AssertionError("final split read during variation.explore")
+        vs = V.VariationState()
+        vs.add_elite(["min", ["var", "x"], ["var", "y"]], V.sig_key(by_family("min_pair").inputs), "min_pair")
+        real = by_family("max_pair")
+        poisoned = dataclasses.replace(real, final=Poison(real.final))
+
+        def no_final(*_a, **_k):
+            raise AssertionError("final split checked during variation.explore")
+        with mock.patch.object(W, "final_check", side_effect=no_final), \
+                mock.patch.object(V, "certify", side_effect=no_final):
+            ex = V.explore(poisoned, vs)
+        self.assertTrue(any(p["tree"] == ["max", ["var", "x"], ["var", "y"]] for p in ex["paid"]))
+        self.assertEqual(json.dumps(ex, sort_keys=True), json.dumps(V.explore(real, vs), sort_keys=True))
