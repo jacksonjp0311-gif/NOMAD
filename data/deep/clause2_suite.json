@@ -1,0 +1,2598 @@
+{
+ "schema": "nomad.clause-suite.v1",
+ "seed": 20270507,
+ "budget": 10000,
+ "max_size": 7,
+ "names": [
+  "ya",
+  "yb",
+  "yc",
+  "yd",
+  "ye",
+  "yf",
+  "yg"
+ ],
+ "easy": [],
+ "hard": [
+  {
+   "task_id": "q-00",
+   "family": "cw_hive_left",
+   "concept": "cr_avg_left",
+   "domain": "beehive",
+   "words": "What is the average of the three hives? They give {a}, {b} and {c} jars of honey, and the keeper owns {x} hats. The jars are packed into crates of {d}. How many jars are left over that do not fill a crate?",
+   "inputs": [
+    "ye",
+    "ya",
+    "yf",
+    "yb",
+    "yg"
+   ],
+   "tree": [
+    "mod",
+    [
+     "div",
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "yg"
+       ],
+       [
+        "var",
+        "yb"
+       ]
+      ],
+      [
+       "var",
+       "ye"
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ],
+    [
+     "var",
+     "ya"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "yg": 39,
+      "yb": 76,
+      "ye": 29,
+      "ya": 3,
+      "yf": 3
+     },
+     0
+    ],
+    [
+     {
+      "yg": 89,
+      "yb": 39,
+      "ye": 52,
+      "ya": 7,
+      "yf": 11
+     },
+     4
+    ],
+    [
+     {
+      "yg": 34,
+      "yb": 17,
+      "ye": 6,
+      "ya": 9,
+      "yf": 24
+     },
+     1
+    ],
+    [
+     {
+      "yg": 38,
+      "yb": 66,
+      "ye": 10,
+      "ya": 8,
+      "yf": 22
+     },
+     6
+    ],
+    [
+     {
+      "yg": 64,
+      "yb": 17,
+      "ye": 53,
+      "ya": 7,
+      "yf": 9
+     },
+     2
+    ],
+    [
+     {
+      "yg": 28,
+      "yb": 83,
+      "ye": 49,
+      "ya": 9,
+      "yf": 17
+     },
+     8
+    ],
+    [
+     {
+      "yg": 78,
+      "yb": 68,
+      "ye": 61,
+      "ya": 5,
+      "yf": 18
+     },
+     4
+    ],
+    [
+     {
+      "yg": 38,
+      "yb": 45,
+      "ye": 48,
+      "ya": 9,
+      "yf": 5
+     },
+     7
+    ],
+    [
+     {
+      "yg": 87,
+      "yb": 79,
+      "ye": 58,
+      "ya": 6,
+      "yf": 11
+     },
+     2
+    ],
+    [
+     {
+      "yg": 25,
+      "yb": 23,
+      "ye": 20,
+      "ya": 4,
+      "yf": 13
+     },
+     2
+    ],
+    [
+     {
+      "yg": 74,
+      "yb": 39,
+      "ye": 85,
+      "ya": 4,
+      "yf": 24
+     },
+     2
+    ]
+   ],
+   "story": "What is the average of the three hives? They give 39, 76 and 29 jars of honey, and the keeper owns 3 hats. The jars are packed into crates of 3. How many jars are left over that do not fill a crate?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-01",
+   "family": "cw_mill_left",
+   "concept": "cr_avg_left",
+   "domain": "sawmill",
+   "words": "Find the average of the three loads: {a}, {b} and {c} planks. The planks are stacked into bundles of {d}, and the mill has {x} saws. How many planks are left over without a full bundle?",
+   "inputs": [
+    "yg",
+    "ya",
+    "yb",
+    "ye",
+    "yd"
+   ],
+   "tree": [
+    "mod",
+    [
+     "div",
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "ye"
+       ],
+       [
+        "var",
+        "yb"
+       ]
+      ],
+      [
+       "var",
+       "ya"
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ],
+    [
+     "var",
+     "yg"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "ye": 61,
+      "yb": 18,
+      "ya": 88,
+      "yg": 8,
+      "yd": 19
+     },
+     7
+    ],
+    [
+     {
+      "ye": 41,
+      "yb": 17,
+      "ya": 71,
+      "yg": 5,
+      "yd": 22
+     },
+     3
+    ],
+    [
+     {
+      "ye": 80,
+      "yb": 70,
+      "ya": 47,
+      "yg": 4,
+      "yd": 8
+     },
+     1
+    ],
+    [
+     {
+      "ye": 48,
+      "yb": 18,
+      "ya": 82,
+      "yg": 5,
+      "yd": 7
+     },
+     4
+    ],
+    [
+     {
+      "ye": 72,
+      "yb": 32,
+      "ya": 78,
+      "yg": 4,
+      "yd": 21
+     },
+     0
+    ],
+    [
+     {
+      "ye": 7,
+      "yb": 63,
+      "ya": 60,
+      "yg": 9,
+      "yd": 14
+     },
+     7
+    ],
+    [
+     {
+      "ye": 88,
+      "yb": 17,
+      "ya": 85,
+      "yg": 8,
+      "yd": 4
+     },
+     7
+    ],
+    [
+     {
+      "ye": 46,
+      "yb": 21,
+      "ya": 76,
+      "yg": 8,
+      "yd": 7
+     },
+     7
+    ],
+    [
+     {
+      "ye": 85,
+      "yb": 42,
+      "ya": 8,
+      "yg": 5,
+      "yd": 20
+     },
+     0
+    ],
+    [
+     {
+      "ye": 32,
+      "yb": 32,
+      "ya": 45,
+      "yg": 7,
+      "yd": 9
+     },
+     1
+    ],
+    [
+     {
+      "ye": 54,
+      "yb": 29,
+      "ya": 16,
+      "yg": 8,
+      "yd": 23
+     },
+     1
+    ]
+   ],
+   "story": "Find the average of the three loads: 61, 18 and 88 planks. The planks are stacked into bundles of 8, and the mill has 19 saws. How many planks are left over without a full bundle?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-02",
+   "family": "cw_rink_change",
+   "concept": "cr_avg_change",
+   "domain": "ice rink",
+   "words": "What is the average of the three nights? The rink rented {a}, {b} and {c} pairs of skates. A club buys that many tickets at {d} dollars each and pays with {e} dollars, and the rink has {x} lights. How much change comes back?",
+   "inputs": [
+    "yb",
+    "yc",
+    "ya",
+    "ye",
+    "yd",
+    "yf"
+   ],
+   "tree": [
+    "sub",
+    [
+     "var",
+     "ye"
+    ],
+    [
+     "mul",
+     [
+      "div",
+      [
+       "add",
+       [
+        "add",
+        [
+         "var",
+         "yd"
+        ],
+        [
+         "var",
+         "yf"
+        ]
+       ],
+       [
+        "var",
+        "yb"
+       ]
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "var",
+      "yc"
+     ]
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "yd": 30,
+      "yf": 25,
+      "yb": 9,
+      "yc": 4,
+      "ye": 98,
+      "ya": 10
+     },
+     14
+    ],
+    [
+     {
+      "yd": 30,
+      "yf": 14,
+      "yb": 7,
+      "yc": 5,
+      "ye": 103,
+      "ya": 2
+     },
+     18
+    ],
+    [
+     {
+      "yd": 18,
+      "yf": 10,
+      "yb": 17,
+      "yc": 5,
+      "ye": 91,
+      "ya": 13
+     },
+     16
+    ],
+    [
+     {
+      "yd": 26,
+      "yf": 16,
+      "yb": 29,
+      "yc": 3,
+      "ye": 96,
+      "ya": 6
+     },
+     27
+    ],
+    [
+     {
+      "yd": 11,
+      "yf": 11,
+      "yb": 21,
+      "yc": 3,
+      "ye": 60,
+      "ya": 5
+     },
+     18
+    ],
+    [
+     {
+      "yd": 2,
+      "yf": 24,
+      "yb": 5,
+      "yc": 6,
+      "ye": 84,
+      "ya": 10
+     },
+     24
+    ],
+    [
+     {
+      "yd": 16,
+      "yf": 20,
+      "yb": 3,
+      "yc": 5,
+      "ye": 92,
+      "ya": 15
+     },
+     27
+    ],
+    [
+     {
+      "yd": 9,
+      "yf": 7,
+      "yb": 7,
+      "yc": 6,
+      "ye": 80,
+      "ya": 9
+     },
+     38
+    ],
+    [
+     {
+      "yd": 2,
+      "yf": 10,
+      "yb": 15,
+      "yc": 3,
+      "ye": 40,
+      "ya": 21
+     },
+     13
+    ],
+    [
+     {
+      "yd": 7,
+      "yf": 20,
+      "yb": 22,
+      "yc": 5,
+      "ye": 103,
+      "ya": 2
+     },
+     23
+    ],
+    [
+     {
+      "yd": 11,
+      "yf": 17,
+      "yb": 30,
+      "yc": 3,
+      "ye": 96,
+      "ya": 1
+     },
+     39
+    ]
+   ],
+   "story": "What is the average of the three nights? The rink rented 30, 25 and 9 pairs of skates. A club buys that many tickets at 4 dollars each and pays with 98 dollars, and the rink has 10 lights. How much change comes back?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-03",
+   "family": "cw_bike_change",
+   "concept": "cr_avg_change",
+   "domain": "bike shop",
+   "words": "The shop takes the average of three weeks of repairs, {a}, {b} and {c}. A rider buys that many bells at {d} dollars each, the shop has {x} stands, and the rider pays with {e} dollars. How much change comes back?",
+   "inputs": [
+    "yb",
+    "ya",
+    "yc",
+    "yf",
+    "yg",
+    "yd"
+   ],
+   "tree": [
+    "sub",
+    [
+     "var",
+     "ya"
+    ],
+    [
+     "mul",
+     [
+      "div",
+      [
+       "add",
+       [
+        "add",
+        [
+         "var",
+         "yc"
+        ],
+        [
+         "var",
+         "yd"
+        ]
+       ],
+       [
+        "var",
+        "yg"
+       ]
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "var",
+      "yb"
+     ]
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "yc": 11,
+      "yd": 13,
+      "yg": 21,
+      "yb": 5,
+      "ya": 85,
+      "yf": 9
+     },
+     10
+    ],
+    [
+     {
+      "yc": 13,
+      "yd": 28,
+      "yg": 29,
+      "yb": 6,
+      "ya": 155,
+      "yf": 9
+     },
+     17
+    ],
+    [
+     {
+      "yc": 28,
+      "yd": 6,
+      "yg": 29,
+      "yb": 6,
+      "ya": 164,
+      "yf": 4
+     },
+     38
+    ],
+    [
+     {
+      "yc": 4,
+      "yd": 11,
+      "yg": 23,
+      "yb": 6,
+      "ya": 77,
+      "yf": 7
+     },
+     5
+    ],
+    [
+     {
+      "yc": 21,
+      "yd": 4,
+      "yg": 25,
+      "yb": 3,
+      "ya": 53,
+      "yf": 22
+     },
+     5
+    ],
+    [
+     {
+      "yc": 24,
+      "yd": 22,
+      "yg": 5,
+      "yb": 2,
+      "ya": 66,
+      "yf": 22
+     },
+     32
+    ],
+    [
+     {
+      "yc": 10,
+      "yd": 18,
+      "yg": 17,
+      "yb": 6,
+      "ya": 103,
+      "yf": 3
+     },
+     13
+    ],
+    [
+     {
+      "yc": 10,
+      "yd": 22,
+      "yg": 30,
+      "yb": 3,
+      "ya": 69,
+      "yf": 1
+     },
+     9
+    ],
+    [
+     {
+      "yc": 28,
+      "yd": 7,
+      "yg": 8,
+      "yb": 3,
+      "ya": 80,
+      "yf": 18
+     },
+     38
+    ],
+    [
+     {
+      "yc": 7,
+      "yd": 25,
+      "yg": 11,
+      "yb": 4,
+      "ya": 71,
+      "yf": 3
+     },
+     15
+    ],
+    [
+     {
+      "yc": 13,
+      "yd": 25,
+      "yg": 23,
+      "yb": 4,
+      "ya": 105,
+      "yf": 14
+     },
+     25
+    ]
+   ],
+   "story": "The shop takes the average of three weeks of repairs, 11, 13 and 21. A rider buys that many bells at 5 dollars each, the shop has 9 stands, and the rider pays with 85 dollars. How much change comes back?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-04",
+   "family": "cw_tank_round",
+   "concept": "cr_mean_round",
+   "domain": "aquarium",
+   "words": "What is the average of the two tanks? They are {a} and {b} meters from the door, and the aquarium has {x} pumps. A keeper walks that distance there and back {c} times. How many meters are walked?",
+   "inputs": [
+    "yc",
+    "yd",
+    "yg",
+    "ya"
+   ],
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "ya"
+       ],
+       [
+        "var",
+        "yg"
+       ]
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "var",
+      "yc"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "ya": 46,
+      "yg": 21,
+      "yc": 5,
+      "yd": 10
+     },
+     330
+    ],
+    [
+     {
+      "ya": 48,
+      "yg": 43,
+      "yc": 7,
+      "yd": 11
+     },
+     630
+    ],
+    [
+     {
+      "ya": 32,
+      "yg": 6,
+      "yc": 4,
+      "yd": 18
+     },
+     152
+    ],
+    [
+     {
+      "ya": 38,
+      "yg": 14,
+      "yc": 7,
+      "yd": 22
+     },
+     364
+    ],
+    [
+     {
+      "ya": 19,
+      "yg": 44,
+      "yc": 2,
+      "yd": 9
+     },
+     124
+    ],
+    [
+     {
+      "ya": 18,
+      "yg": 26,
+      "yc": 4,
+      "yd": 12
+     },
+     176
+    ],
+    [
+     {
+      "ya": 14,
+      "yg": 7,
+      "yc": 4,
+      "yd": 7
+     },
+     80
+    ],
+    [
+     {
+      "ya": 49,
+      "yg": 50,
+      "yc": 2,
+      "yd": 22
+     },
+     196
+    ],
+    [
+     {
+      "ya": 21,
+      "yg": 13,
+      "yc": 3,
+      "yd": 14
+     },
+     102
+    ],
+    [
+     {
+      "ya": 59,
+      "yg": 26,
+      "yc": 7,
+      "yd": 8
+     },
+     588
+    ],
+    [
+     {
+      "ya": 16,
+      "yg": 55,
+      "yc": 3,
+      "yd": 25
+     },
+     210
+    ]
+   ],
+   "story": "What is the average of the two tanks? They are 46 and 21 meters from the door, and the aquarium has 10 pumps. A keeper walks that distance there and back 5 times. How many meters are walked?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-05",
+   "family": "cw_dock_round",
+   "concept": "cr_mean_round",
+   "domain": "shipyard",
+   "words": "Find the average of the two docks: {a} and {b} meters from the gate. A welder walks that far there and back {c} times a day, with {x} cranes in the yard. How far does the welder walk?",
+   "inputs": [
+    "yd",
+    "ya",
+    "yb",
+    "yc"
+   ],
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "ya"
+       ],
+       [
+        "var",
+        "yd"
+       ]
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "var",
+      "yc"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "ya": 39,
+      "yd": 21,
+      "yc": 6,
+      "yb": 9
+     },
+     360
+    ],
+    [
+     {
+      "ya": 4,
+      "yd": 16,
+      "yc": 5,
+      "yb": 15
+     },
+     100
+    ],
+    [
+     {
+      "ya": 22,
+      "yd": 47,
+      "yc": 3,
+      "yb": 4
+     },
+     204
+    ],
+    [
+     {
+      "ya": 13,
+      "yd": 45,
+      "yc": 7,
+      "yb": 15
+     },
+     406
+    ],
+    [
+     {
+      "ya": 43,
+      "yd": 28,
+      "yc": 4,
+      "yb": 16
+     },
+     280
+    ],
+    [
+     {
+      "ya": 32,
+      "yd": 34,
+      "yc": 7,
+      "yb": 19
+     },
+     462
+    ],
+    [
+     {
+      "ya": 28,
+      "yd": 48,
+      "yc": 4,
+      "yb": 22
+     },
+     304
+    ],
+    [
+     {
+      "ya": 60,
+      "yd": 7,
+      "yc": 3,
+      "yb": 18
+     },
+     198
+    ],
+    [
+     {
+      "ya": 17,
+      "yd": 27,
+      "yc": 4,
+      "yb": 11
+     },
+     176
+    ],
+    [
+     {
+      "ya": 10,
+      "yd": 43,
+      "yc": 6,
+      "yb": 15
+     },
+     312
+    ],
+    [
+     {
+      "ya": 36,
+      "yd": 33,
+      "yc": 2,
+      "yb": 2
+     },
+     136
+    ]
+   ],
+   "story": "Find the average of the two docks: 39 and 21 meters from the gate. A welder walks that far there and back 6 times a day, with 9 cranes in the yard. How far does the welder walk?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-06",
+   "family": "cw_milk_boxes",
+   "concept": "cr_mean_boxes",
+   "domain": "dairy",
+   "words": "What is the average of the two milkings? The cows gave {a} and {b} liters, and the dairy has {x} barns. The milk goes into cans that hold {c} each. How many cans are needed for all the milk?",
+   "inputs": [
+    "yb",
+    "ya",
+    "yc",
+    "yf"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "ya"
+       ],
+       [
+        "var",
+        "yc"
+       ]
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "yf"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "yf"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "ya": 56,
+      "yc": 29,
+      "yf": 7,
+      "yb": 11
+     },
+     6
+    ],
+    [
+     {
+      "ya": 43,
+      "yc": 18,
+      "yf": 5,
+      "yb": 25
+     },
+     6
+    ],
+    [
+     {
+      "ya": 26,
+      "yc": 61,
+      "yf": 3,
+      "yb": 4
+     },
+     15
+    ],
+    [
+     {
+      "ya": 46,
+      "yc": 31,
+      "yf": 9,
+      "yb": 5
+     },
+     5
+    ],
+    [
+     {
+      "ya": 76,
+      "yc": 14,
+      "yf": 4,
+      "yb": 16
+     },
+     12
+    ],
+    [
+     {
+      "ya": 64,
+      "yc": 58,
+      "yf": 5,
+      "yb": 3
+     },
+     13
+    ],
+    [
+     {
+      "ya": 62,
+      "yc": 51,
+      "yf": 7,
+      "yb": 4
+     },
+     8
+    ],
+    [
+     {
+      "ya": 83,
+      "yc": 77,
+      "yf": 4,
+      "yb": 20
+     },
+     20
+    ],
+    [
+     {
+      "ya": 60,
+      "yc": 79,
+      "yf": 3,
+      "yb": 11
+     },
+     23
+    ],
+    [
+     {
+      "ya": 35,
+      "yc": 39,
+      "yf": 9,
+      "yb": 23
+     },
+     5
+    ],
+    [
+     {
+      "ya": 72,
+      "yc": 68,
+      "yf": 6,
+      "yb": 5
+     },
+     12
+    ]
+   ],
+   "story": "What is the average of the two milkings? The cows gave 56 and 29 liters, and the dairy has 11 barns. The milk goes into cans that hold 7 each. How many cans are needed for all the milk?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-07",
+   "family": "cw_book_boxes",
+   "concept": "cr_mean_boxes",
+   "domain": "bookbindery",
+   "words": "Take the average of the two orders: {a} and {b} books. The books are packed into boxes that hold {c} each, and the bindery has {x} presses. How many boxes are needed to hold all the books?",
+   "inputs": [
+    "ya",
+    "ye",
+    "yc",
+    "yg"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "ya"
+       ],
+       [
+        "var",
+        "yc"
+       ]
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "yg"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "yg"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "ya": 10,
+      "yc": 56,
+      "yg": 9,
+      "ye": 25
+     },
+     4
+    ],
+    [
+     {
+      "ya": 62,
+      "yc": 48,
+      "yg": 6,
+      "ye": 22
+     },
+     10
+    ],
+    [
+     {
+      "ya": 72,
+      "yc": 34,
+      "yg": 3,
+      "ye": 24
+     },
+     18
+    ],
+    [
+     {
+      "ya": 49,
+      "yc": 73,
+      "yg": 3,
+      "ye": 2
+     },
+     21
+    ],
+    [
+     {
+      "ya": 33,
+      "yc": 12,
+      "yg": 2,
+      "ye": 5
+     },
+     11
+    ],
+    [
+     {
+      "ya": 27,
+      "yc": 44,
+      "yg": 7,
+      "ye": 8
+     },
+     5
+    ],
+    [
+     {
+      "ya": 89,
+      "yc": 29,
+      "yg": 9,
+      "ye": 2
+     },
+     7
+    ],
+    [
+     {
+      "ya": 67,
+      "yc": 10,
+      "yg": 8,
+      "ye": 2
+     },
+     5
+    ],
+    [
+     {
+      "ya": 38,
+      "yc": 83,
+      "yg": 7,
+      "ye": 21
+     },
+     9
+    ],
+    [
+     {
+      "ya": 38,
+      "yc": 40,
+      "yg": 6,
+      "ye": 2
+     },
+     7
+    ],
+    [
+     {
+      "ya": 87,
+      "yc": 84,
+      "yg": 2,
+      "ye": 5
+     },
+     43
+    ]
+   ],
+   "story": "Take the average of the two orders: 10 and 56 books. The books are packed into boxes that hold 9 each, and the bindery has 25 presses. How many boxes are needed to hold all the books?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-08",
+   "family": "cw_hive_share",
+   "concept": "cr_avg_share",
+   "domain": "beehive",
+   "words": "What is the average of the three days? The bees fill {a}, {b} and {c} combs. There are {d} frames of that many combs, shared equally among {e} keepers, with {x} hives on the hill. How many combs does each keeper get?",
+   "inputs": [
+    "yc",
+    "yf",
+    "yg",
+    "yb",
+    "ye",
+    "ya"
+   ],
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "div",
+      [
+       "add",
+       [
+        "add",
+        [
+         "var",
+         "yf"
+        ],
+        [
+         "var",
+         "ya"
+        ]
+       ],
+       [
+        "var",
+        "yc"
+       ]
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "var",
+      "yg"
+     ]
+    ],
+    [
+     "var",
+     "ye"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "yf": 31,
+      "ya": 37,
+      "yc": 29,
+      "yg": 8,
+      "ye": 7,
+      "yb": 24
+     },
+     36
+    ],
+    [
+     {
+      "yf": 11,
+      "ya": 28,
+      "yc": 10,
+      "yg": 3,
+      "ye": 5,
+      "yb": 19
+     },
+     9
+    ],
+    [
+     {
+      "yf": 14,
+      "ya": 2,
+      "yc": 4,
+      "yg": 7,
+      "ye": 4,
+      "yb": 24
+     },
+     10
+    ],
+    [
+     {
+      "yf": 33,
+      "ya": 22,
+      "yc": 38,
+      "yg": 9,
+      "ye": 6,
+      "yb": 21
+     },
+     46
+    ],
+    [
+     {
+      "yf": 11,
+      "ya": 37,
+      "yc": 33,
+      "yg": 8,
+      "ye": 5,
+      "yb": 13
+     },
+     43
+    ],
+    [
+     {
+      "yf": 4,
+      "ya": 34,
+      "yc": 4,
+      "yg": 9,
+      "ye": 4,
+      "yb": 21
+     },
+     31
+    ],
+    [
+     {
+      "yf": 22,
+      "ya": 32,
+      "yc": 8,
+      "yg": 4,
+      "ye": 6,
+      "yb": 20
+     },
+     13
+    ],
+    [
+     {
+      "yf": 33,
+      "ya": 5,
+      "yc": 10,
+      "yg": 6,
+      "ye": 5,
+      "yb": 19
+     },
+     19
+    ],
+    [
+     {
+      "yf": 23,
+      "ya": 40,
+      "yc": 37,
+      "yg": 8,
+      "ye": 7,
+      "yb": 6
+     },
+     37
+    ],
+    [
+     {
+      "yf": 11,
+      "ya": 9,
+      "yc": 30,
+      "yg": 4,
+      "ye": 2,
+      "yb": 8
+     },
+     32
+    ],
+    [
+     {
+      "yf": 36,
+      "ya": 28,
+      "yc": 27,
+      "yg": 7,
+      "ye": 3,
+      "yb": 23
+     },
+     70
+    ]
+   ],
+   "story": "What is the average of the three days? The bees fill 31, 37 and 29 combs. There are 8 frames of that many combs, shared equally among 7 keepers, with 24 hives on the hill. How many combs does each keeper get?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-09",
+   "family": "cw_dairy_share",
+   "concept": "cr_avg_share",
+   "domain": "dairy",
+   "words": "Find the average of the three churns: {a}, {b} and {c} pats of butter. {d} trays of that many pats are split equally between {e} shops, and the dairy has {x} cows. How many pats does each shop get?",
+   "inputs": [
+    "yb",
+    "ya",
+    "ye",
+    "yf",
+    "yc",
+    "yg"
+   ],
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "div",
+      [
+       "add",
+       [
+        "add",
+        [
+         "var",
+         "yb"
+        ],
+        [
+         "var",
+         "yg"
+        ]
+       ],
+       [
+        "var",
+        "yc"
+       ]
+      ],
+      [
+       "const",
+       3
+      ]
+     ],
+     [
+      "var",
+      "ye"
+     ]
+    ],
+    [
+     "var",
+     "yf"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "yb": 23,
+      "yg": 32,
+      "yc": 15,
+      "ye": 3,
+      "yf": 5,
+      "ya": 24
+     },
+     13
+    ],
+    [
+     {
+      "yb": 36,
+      "yg": 4,
+      "yc": 27,
+      "ye": 5,
+      "yf": 5,
+      "ya": 25
+     },
+     22
+    ],
+    [
+     {
+      "yb": 19,
+      "yg": 6,
+      "yc": 16,
+      "ye": 8,
+      "yf": 5,
+      "ya": 11
+     },
+     20
+    ],
+    [
+     {
+      "yb": 23,
+      "yg": 4,
+      "yc": 19,
+      "ye": 8,
+      "yf": 4,
+      "ya": 14
+     },
+     30
+    ],
+    [
+     {
+      "yb": 26,
+      "yg": 3,
+      "yc": 29,
+      "ye": 2,
+      "yf": 3,
+      "ya": 18
+     },
+     12
+    ],
+    [
+     {
+      "yb": 8,
+      "yg": 6,
+      "yc": 38,
+      "ye": 4,
+      "yf": 4,
+      "ya": 1
+     },
+     17
+    ],
+    [
+     {
+      "yb": 32,
+      "yg": 7,
+      "yc": 12,
+      "ye": 8,
+      "yf": 7,
+      "ya": 15
+     },
+     19
+    ],
+    [
+     {
+      "yb": 12,
+      "yg": 7,
+      "yc": 39,
+      "ye": 9,
+      "yf": 2,
+      "ya": 5
+     },
+     85
+    ],
+    [
+     {
+      "yb": 8,
+      "yg": 32,
+      "yc": 2,
+      "ye": 5,
+      "yf": 6,
+      "ya": 25
+     },
+     11
+    ],
+    [
+     {
+      "yb": 14,
+      "yg": 6,
+      "yc": 24,
+      "ye": 6,
+      "yf": 7,
+      "ya": 21
+     },
+     12
+    ],
+    [
+     {
+      "yb": 32,
+      "yg": 6,
+      "yc": 9,
+      "ye": 4,
+      "yf": 5,
+      "ya": 18
+     },
+     12
+    ]
+   ],
+   "story": "Find the average of the three churns: 23, 32 and 15 pats of butter. 3 trays of that many pats are split equally between 5 shops, and the dairy has 24 cows. How many pats does each shop get?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-10",
+   "family": "cw_pier_round",
+   "concept": "cr_area_round",
+   "domain": "shipyard",
+   "words": "A pier is built of {a} sections with {b} meters in each section. A worker walks the pier there and back {c} times, and the yard has {x} boats. How many meters are walked?",
+   "inputs": [
+    "ye",
+    "yf",
+    "yb",
+    "yg"
+   ],
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "yg"
+      ],
+      [
+       "var",
+       "ye"
+      ]
+     ],
+     [
+      "var",
+      "yf"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "yg": 7,
+      "ye": 15,
+      "yf": 3,
+      "yb": 9
+     },
+     630
+    ],
+    [
+     {
+      "yg": 6,
+      "ye": 14,
+      "yf": 7,
+      "yb": 1
+     },
+     1176
+    ],
+    [
+     {
+      "yg": 2,
+      "ye": 29,
+      "yf": 5,
+      "yb": 20
+     },
+     580
+    ],
+    [
+     {
+      "yg": 11,
+      "ye": 3,
+      "yf": 2,
+      "yb": 16
+     },
+     132
+    ],
+    [
+     {
+      "yg": 12,
+      "ye": 15,
+      "yf": 4,
+      "yb": 2
+     },
+     1440
+    ],
+    [
+     {
+      "yg": 12,
+      "ye": 25,
+      "yf": 6,
+      "yb": 4
+     },
+     3600
+    ],
+    [
+     {
+      "yg": 12,
+      "ye": 10,
+      "yf": 6,
+      "yb": 14
+     },
+     1440
+    ],
+    [
+     {
+      "yg": 11,
+      "ye": 30,
+      "yf": 7,
+      "yb": 16
+     },
+     4620
+    ],
+    [
+     {
+      "yg": 11,
+      "ye": 27,
+      "yf": 2,
+      "yb": 23
+     },
+     1188
+    ],
+    [
+     {
+      "yg": 8,
+      "ye": 7,
+      "yf": 5,
+      "yb": 19
+     },
+     560
+    ],
+    [
+     {
+      "yg": 12,
+      "ye": 18,
+      "yf": 5,
+      "yb": 18
+     },
+     2160
+    ]
+   ],
+   "story": "A pier is built of 7 sections with 15 meters in each section. A worker walks the pier there and back 3 times, and the yard has 9 boats. How many meters are walked?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-11",
+   "family": "cw_glass_round",
+   "concept": "cr_area_round",
+   "domain": "aquarium",
+   "words": "A glass tunnel has {a} panels with {b} steps in each panel, and the aquarium has {x} sharks. A diver goes there and back through it {c} times. How many steps in total?",
+   "inputs": [
+    "ya",
+    "ye",
+    "yc",
+    "yg"
+   ],
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "ya"
+      ],
+      [
+       "var",
+       "ye"
+      ]
+     ],
+     [
+      "var",
+      "yc"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "ya": 5,
+      "ye": 9,
+      "yc": 2,
+      "yg": 14
+     },
+     180
+    ],
+    [
+     {
+      "ya": 9,
+      "ye": 28,
+      "yc": 2,
+      "yg": 3
+     },
+     1008
+    ],
+    [
+     {
+      "ya": 7,
+      "ye": 29,
+      "yc": 4,
+      "yg": 14
+     },
+     1624
+    ],
+    [
+     {
+      "ya": 7,
+      "ye": 18,
+      "yc": 6,
+      "yg": 9
+     },
+     1512
+    ],
+    [
+     {
+      "ya": 7,
+      "ye": 29,
+      "yc": 6,
+      "yg": 6
+     },
+     2436
+    ],
+    [
+     {
+      "ya": 8,
+      "ye": 27,
+      "yc": 3,
+      "yg": 11
+     },
+     1296
+    ],
+    [
+     {
+      "ya": 12,
+      "ye": 4,
+      "yc": 3,
+      "yg": 11
+     },
+     288
+    ],
+    [
+     {
+      "ya": 10,
+      "ye": 9,
+      "yc": 7,
+      "yg": 7
+     },
+     1260
+    ],
+    [
+     {
+      "ya": 7,
+      "ye": 21,
+      "yc": 6,
+      "yg": 21
+     },
+     1764
+    ],
+    [
+     {
+      "ya": 5,
+      "ye": 3,
+      "yc": 5,
+      "yg": 13
+     },
+     150
+    ],
+    [
+     {
+      "ya": 12,
+      "ye": 15,
+      "yc": 4,
+      "yg": 2
+     },
+     1440
+    ]
+   ],
+   "story": "A glass tunnel has 5 panels with 9 steps in each panel, and the aquarium has 14 sharks. A diver goes there and back through it 2 times. How many steps in total?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-12",
+   "family": "cw_wheel_left",
+   "concept": "cr_bundle_left",
+   "domain": "bike shop",
+   "words": "Each box holds {a} front wheels and {b} back wheels, and there are {c} boxes. The wheels are packed into racks of {d}, and the shop is {x} years old. How many wheels are left over that do not fill a rack?",
+   "inputs": [
+    "ye",
+    "ya",
+    "yg",
+    "yf",
+    "yb"
+   ],
+   "tree": [
+    "mod",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "yg"
+      ],
+      [
+       "var",
+       "yb"
+      ]
+     ],
+     [
+      "var",
+      "yf"
+     ]
+    ],
+    [
+     "var",
+     "ya"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "yg": 7,
+      "yb": 3,
+      "yf": 4,
+      "ya": 6,
+      "ye": 23
+     },
+     4
+    ],
+    [
+     {
+      "yg": 7,
+      "yb": 8,
+      "yf": 3,
+      "ya": 8,
+      "ye": 1
+     },
+     5
+    ],
+    [
+     {
+      "yg": 12,
+      "yb": 12,
+      "yf": 7,
+      "ya": 8,
+      "ye": 18
+     },
+     0
+    ],
+    [
+     {
+      "yg": 9,
+      "yb": 9,
+      "yf": 5,
+      "ya": 8,
+      "ye": 11
+     },
+     2
+    ],
+    [
+     {
+      "yg": 8,
+      "yb": 3,
+      "yf": 6,
+      "ya": 4,
+      "ye": 24
+     },
+     2
+    ],
+    [
+     {
+      "yg": 9,
+      "yb": 8,
+      "yf": 8,
+      "ya": 8,
+      "ye": 12
+     },
+     0
+    ],
+    [
+     {
+      "yg": 2,
+      "yb": 10,
+      "yf": 3,
+      "ya": 5,
+      "ye": 1
+     },
+     1
+    ],
+    [
+     {
+      "yg": 3,
+      "yb": 9,
+      "yf": 5,
+      "ya": 4,
+      "ye": 5
+     },
+     0
+    ],
+    [
+     {
+      "yg": 12,
+      "yb": 9,
+      "yf": 7,
+      "ya": 6,
+      "ye": 4
+     },
+     3
+    ],
+    [
+     {
+      "yg": 7,
+      "yb": 7,
+      "yf": 9,
+      "ya": 6,
+      "ye": 3
+     },
+     0
+    ],
+    [
+     {
+      "yg": 8,
+      "yb": 7,
+      "yf": 3,
+      "ya": 9,
+      "ye": 15
+     },
+     0
+    ]
+   ],
+   "story": "Each box holds 7 front wheels and 3 back wheels, and there are 4 boxes. The wheels are packed into racks of 6, and the shop is 23 years old. How many wheels are left over that do not fill a rack?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-13",
+   "family": "cw_skate_left",
+   "concept": "cr_bundle_left",
+   "domain": "ice rink",
+   "words": "Each locker holds {a} skates and {b} helmets, and there are {c} lockers. The gear is packed into bags of {d}, with {x} coaches on the ice. How many pieces are left over that do not fill a bag?",
+   "inputs": [
+    "ye",
+    "yf",
+    "yd",
+    "yb",
+    "ya"
+   ],
+   "tree": [
+    "mod",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "yb"
+      ],
+      [
+       "var",
+       "ye"
+      ]
+     ],
+     [
+      "var",
+      "yf"
+     ]
+    ],
+    [
+     "var",
+     "yd"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "yb": 12,
+      "ye": 8,
+      "yf": 9,
+      "yd": 8,
+      "ya": 21
+     },
+     4
+    ],
+    [
+     {
+      "yb": 11,
+      "ye": 9,
+      "yf": 5,
+      "yd": 3,
+      "ya": 24
+     },
+     1
+    ],
+    [
+     {
+      "yb": 7,
+      "ye": 8,
+      "yf": 2,
+      "yd": 6,
+      "ya": 5
+     },
+     0
+    ],
+    [
+     {
+      "yb": 11,
+      "ye": 7,
+      "yf": 7,
+      "yd": 7,
+      "ya": 24
+     },
+     0
+    ],
+    [
+     {
+      "yb": 12,
+      "ye": 10,
+      "yf": 3,
+      "yd": 9,
+      "ya": 23
+     },
+     3
+    ],
+    [
+     {
+      "yb": 7,
+      "ye": 5,
+      "yf": 6,
+      "yd": 4,
+      "ya": 22
+     },
+     0
+    ],
+    [
+     {
+      "yb": 3,
+      "ye": 10,
+      "yf": 6,
+      "yd": 6,
+      "ya": 24
+     },
+     0
+    ],
+    [
+     {
+      "yb": 9,
+      "ye": 12,
+      "yf": 7,
+      "yd": 5,
+      "ya": 7
+     },
+     2
+    ],
+    [
+     {
+      "yb": 7,
+      "ye": 9,
+      "yf": 3,
+      "yd": 7,
+      "ya": 20
+     },
+     6
+    ],
+    [
+     {
+      "yb": 6,
+      "ye": 3,
+      "yf": 6,
+      "yd": 7,
+      "ya": 17
+     },
+     5
+    ],
+    [
+     {
+      "yb": 5,
+      "ye": 5,
+      "yf": 8,
+      "yd": 4,
+      "ya": 22
+     },
+     0
+    ]
+   ],
+   "story": "Each locker holds 12 skates and 8 helmets, and there are 9 lockers. The gear is packed into bags of 8, with 21 coaches on the ice. How many pieces are left over that do not fill a bag?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-14",
+   "family": "cw_log_boxes",
+   "concept": "cr_sum_boxes",
+   "domain": "sawmill",
+   "words": "Three trucks bring {a}, {b} and {c} logs, and the mill has {x} workers. The logs are loaded onto carts that hold {d} each. How many carts are needed for all the logs?",
+   "inputs": [
+    "yb",
+    "yc",
+    "ya",
+    "yd",
+    "yf"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "yb"
+       ],
+       [
+        "var",
+        "yc"
+       ]
+      ],
+      [
+       "var",
+       "yd"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "yf"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "yf"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "yb": 15,
+      "yc": 11,
+      "yd": 15,
+      "yf": 6,
+      "ya": 15
+     },
+     7
+    ],
+    [
+     {
+      "yb": 12,
+      "yc": 39,
+      "yd": 59,
+      "yf": 4,
+      "ya": 11
+     },
+     28
+    ],
+    [
+     {
+      "yb": 37,
+      "yc": 11,
+      "yd": 32,
+      "yf": 6,
+      "ya": 19
+     },
+     14
+    ],
+    [
+     {
+      "yb": 14,
+      "yc": 44,
+      "yd": 20,
+      "yf": 5,
+      "ya": 16
+     },
+     16
+    ],
+    [
+     {
+      "yb": 54,
+      "yc": 23,
+      "yd": 60,
+      "yf": 9,
+      "ya": 3
+     },
+     16
+    ],
+    [
+     {
+      "yb": 32,
+      "yc": 6,
+      "yd": 34,
+      "yf": 4,
+      "ya": 17
+     },
+     18
+    ],
+    [
+     {
+      "yb": 54,
+      "yc": 14,
+      "yd": 27,
+      "yf": 6,
+      "ya": 9
+     },
+     16
+    ],
+    [
+     {
+      "yb": 48,
+      "yc": 45,
+      "yd": 4,
+      "yf": 4,
+      "ya": 17
+     },
+     25
+    ],
+    [
+     {
+      "yb": 58,
+      "yc": 8,
+      "yd": 22,
+      "yf": 9,
+      "ya": 22
+     },
+     10
+    ],
+    [
+     {
+      "yb": 50,
+      "yc": 44,
+      "yd": 47,
+      "yf": 9,
+      "ya": 19
+     },
+     16
+    ],
+    [
+     {
+      "yb": 19,
+      "yc": 55,
+      "yd": 22,
+      "yf": 8,
+      "ya": 12
+     },
+     12
+    ]
+   ],
+   "story": "Three trucks bring 15, 11 and 15 logs, and the mill has 15 workers. The logs are loaded onto carts that hold 6 each. How many carts are needed for all the logs?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  },
+  {
+   "task_id": "q-15",
+   "family": "cw_page_boxes",
+   "concept": "cr_sum_boxes",
+   "domain": "bookbindery",
+   "words": "Three presses print {a}, {b} and {c} pages. The pages are packed into folders that hold {d} each, and the bindery opened {x} years ago. How many folders are needed to hold all the pages?",
+   "inputs": [
+    "ya",
+    "yb",
+    "yc",
+    "yf",
+    "yd"
+   ],
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "ya"
+       ],
+       [
+        "var",
+        "yd"
+       ]
+      ],
+      [
+       "var",
+       "yb"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "yc"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "yc"
+    ]
+   ],
+   "rows": [
+    [
+     {
+      "ya": 29,
+      "yd": 29,
+      "yb": 46,
+      "yc": 8,
+      "yf": 18
+     },
+     13
+    ],
+    [
+     {
+      "ya": 19,
+      "yd": 9,
+      "yb": 25,
+      "yc": 2,
+      "yf": 6
+     },
+     27
+    ],
+    [
+     {
+      "ya": 16,
+      "yd": 32,
+      "yb": 32,
+      "yc": 2,
+      "yf": 6
+     },
+     40
+    ],
+    [
+     {
+      "ya": 29,
+      "yd": 10,
+      "yb": 53,
+      "yc": 9,
+      "yf": 2
+     },
+     11
+    ],
+    [
+     {
+      "ya": 33,
+      "yd": 17,
+      "yb": 51,
+      "yc": 2,
+      "yf": 20
+     },
+     51
+    ],
+    [
+     {
+      "ya": 38,
+      "yd": 39,
+      "yb": 43,
+      "yc": 7,
+      "yf": 13
+     },
+     18
+    ],
+    [
+     {
+      "ya": 45,
+      "yd": 51,
+      "yb": 42,
+      "yc": 6,
+      "yf": 3
+     },
+     23
+    ],
+    [
+     {
+      "ya": 42,
+      "yd": 46,
+      "yb": 27,
+      "yc": 5,
+      "yf": 15
+     },
+     23
+    ],
+    [
+     {
+      "ya": 34,
+      "yd": 48,
+      "yb": 20,
+      "yc": 8,
+      "yf": 3
+     },
+     13
+    ],
+    [
+     {
+      "ya": 31,
+      "yd": 27,
+      "yb": 37,
+      "yc": 5,
+      "yf": 14
+     },
+     19
+    ],
+    [
+     {
+      "ya": 30,
+      "yd": 60,
+      "yb": 33,
+      "yc": 3,
+      "yf": 11
+     },
+     41
+    ]
+   ],
+   "story": "Three presses print 29, 29 and 46 pages. The pages are packed into folders that hold 8 each, and the bindery opened 18 years ago. How many folders are needed to hold all the pages?",
+   "cold_certified": false,
+   "cold_evaluations": 10000
+  }
+ ]
+}

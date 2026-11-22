@@ -37,6 +37,12 @@ class Invalid(Exception):
     pass
 
 
+# CLAUSE2 (docs/CLAUSE2.md): the per-task evaluation ledger, set only while NOMAD_CLAUSE2's
+# search runs inside synthesize (None everywhere else: main's code path is then byte-for-byte off).
+import contextvars as _contextvars
+_C2 = _contextvars.ContextVar("nomad_clause2_ledger", default=None)
+
+
 def _int(v: int) -> int:
     if not isinstance(v, int) or isinstance(v, bool) or abs(v) > MAX_INT:
         raise Invalid
@@ -854,10 +860,14 @@ def _search_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             return tree
         return None
 
+    c2 = _C2.get()   # CLAUSE2 ledger (None unless NOMAD_CLAUSE2's search runs): same values, memo reads
+
     def evaluate(tree: list) -> tuple | None:
         nonlocal evals
         evals += 1
         try:
+            if c2 is not None:
+                return c2.leaf(tree, lambda: tuple(run(tree, r, library) for r in rows))
             return tuple(run(tree, r, library) for r in rows)
         except Invalid:
             return None
@@ -896,7 +906,11 @@ def _search_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     evals += 1
                     yield evals
                     try:
-                        vals = tuple(op.fn(*args) for args in zip(*(c[1] for c in combo)))
+                        if c2 is not None:
+                            vals = c2.node(name, op.commutative, tuple(c[1] for c in combo),
+                                           lambda: tuple(op.fn(*args) for args in zip(*(c[1] for c in combo))))
+                        else:
+                            vals = tuple(op.fn(*args) for args in zip(*(c[1] for c in combo)))
                         if any(type_of(v) != op.out for v in vals):
                             continue
                         if op.out == "str" and any(len(v) > MAX_STR for v in vals):
@@ -917,6 +931,21 @@ def _drive(g) -> Search:
             next(g)
         except StopIteration as stop:
             return stop.value
+
+
+def _drain_c2(s: Search) -> Search:
+    """CLAUSE2: after main missed, the ledger's remaining credit (no-op without the ledger)."""
+    c2 = _C2.get()
+    return s if c2 is None else c2.drain(s)
+
+
+def _drive_main(g, order: tuple[str, ...]) -> Search:
+    """synthesize's driver: ``_drive``, or with NOMAD_CLAUSE2's ledger set, main in lockstep with
+    CLAUSE2's paid-from-savings search (docs/CLAUSE2.md). Main's steps are never changed."""
+    c2 = _C2.get()
+    if c2 is None:
+        return _drive(g)
+    return c2.drive(g, order)
 
 
 def familiar(prior: WorldPrior | None, family: str | None) -> bool:
@@ -985,8 +1014,8 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     else:
         rec = _sense.sense(task) if (sense is True or _sense.enabled()) else None
     if not staged or familiar(prior, fam):
-        s = _drive(_search_gen(task, order, library, max_size, max_eval))
-        return _with_sense(_variation_fallback(task, s, mut, max_eval), rec)
+        s = _drive_main(_search_gen(task, order, library, max_size, max_eval), order)
+        return _with_sense(_drain_c2(_variation_fallback(task, s, mut, max_eval)), rec)
     aim = None
     if rec is not None:
         aim = _sense.lead_ops(rec, cold_order) or None
@@ -1001,8 +1030,8 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
         ckey = route_key(rec if rec is not None else _sense.sense(task))
     bank = port_bank(prior, task, rkey, rel, ckey) if (lib_ok and probe_on and port_enabled()) else []
     if not library and not split and aim is None and not bank:
-        s = _drive(_search_gen(task, cold_order, {}, max_size, max_eval))
-        return _with_sense(_variation_fallback(task, s, mut, max_eval), rec)
+        s = _drive_main(_search_gen(task, cold_order, {}, max_size, max_eval), cold_order)
+        return _with_sense(_drain_c2(_variation_fallback(task, s, mut, max_eval)), rec)
     inv = None
     if bank:
         from . import invent as _invent
@@ -1014,9 +1043,14 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
         if _TP.enabled():
             pats = _TP.prepare(prior, task)
     gate = _WitnessGate(task, library) if witness_continue_enabled() else None
-    s = _drive(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split, aim,
-                           probe_on, gate, bank, inv, rel or None,
-                           prior if (graph_enabled() and prior.graph_edges) else None, pats))
+    s = _drive_main(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split, aim,
+                                probe_on, gate, bank, inv, rel or None,
+                                prior if (graph_enabled() and prior.graph_edges) else None, pats), cold_order)
+    if s.via and s.via.startswith("clause2:"):
+        return _with_sense(s, rec)
+    s = _drain_c2(s)
+    if s.via and s.via.startswith("clause2:"):
+        return _with_sense(s, rec)
     return _with_sense(_witness_finish(s, gate), rec)
 
 
@@ -1659,11 +1693,16 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             return tree
         return None
 
+    c2 = _C2.get()   # CLAUSE2 ledger (None unless NOMAD_CLAUSE2's search runs): same values, memo reads
+
     def atom(a: list, fresh: bool):
         nonlocal evals
         evals += 1
         try:
-            vals = tuple(run(a, r, library) for r in rows)
+            if c2 is not None:
+                vals = c2.leaf(a, lambda: tuple(run(a, r, library) for r in rows))
+            else:
+                vals = tuple(run(a, r, library) for r in rows)
         except Invalid:
             return None
         return offer(1, a, vals, fresh)
@@ -2717,7 +2756,11 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     evals += 1
                     yield evals
                     try:
-                        vals = tuple(op.fn(*args) for args in zip(*(c[1] for c in combo)))
+                        if c2 is not None:
+                            vals = c2.node(name, op.commutative, tuple(c[1] for c in combo),
+                                           lambda: tuple(op.fn(*args) for args in zip(*(c[1] for c in combo))))
+                        else:
+                            vals = tuple(op.fn(*args) for args in zip(*(c[1] for c in combo)))
                         if any(type_of(v) != op.out for v in vals):
                             continue
                         if op.out == "str" and any(len(v) > MAX_STR for v in vals):
@@ -2903,10 +2946,17 @@ def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bo
                else {})
     full, task = task, search_view(task)   # INTEGRITY: search never holds the final split
     spent, hit = 0, None
+    c2 = None
     if words and prior is not None and prior.lexicon:
         from . import meaning as _meaning
         if _meaning.enabled():
-            hit, spent, _info = _meaning.stage(task, prior, words, max_eval=max_eval)
+            from . import clause2 as _clause2
+            if _clause2.enabled() and _clause2.applicable(words):
+                # CLAUSE2 (docs/CLAUSE2.md): a per-task ledger; MEANING's stage records the values its
+                # (already charged) runs compute, so main's identical computations later become savings
+                c2 = _clause2.Ledger(task, prior, words)
+            hit, spent, _info = _meaning.stage(task, prior, words, max_eval=max_eval,
+                                               record=c2.record if c2 is not None else None)
             via = "meaning:"
             if hit is None:
                 from . import clause as _clause
@@ -2923,9 +2973,14 @@ def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bo
     if hit is not None:
         s = Search(hit[1], spent, None, (), [], via + hit[0])
     else:
-        s = synthesize(task, prior=prior, use_family=use_family, use_library=use_library,
-                       max_size=max_size, max_eval=max_eval - spent, variation=variation, casesplit=casesplit,
-                       sense=sense)
+        tok = _C2.set(c2) if c2 is not None else None
+        try:
+            s = synthesize(task, prior=prior, use_family=use_family, use_library=use_library,
+                           max_size=max_size, max_eval=max_eval - spent, variation=variation, casesplit=casesplit,
+                           sense=sense)
+        finally:
+            if tok is not None:
+                _C2.reset(tok)
         s.evaluations += spent
     vt = tuple(s.variation)
     sr = s.sense

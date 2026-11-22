@@ -235,8 +235,13 @@ def _comm_key(tree: list) -> str:
     return json.dumps(norm(tree))
 
 
-def stage(task: Any, prior: Any, words: str, *, max_eval: int | None = None) -> tuple[tuple[str, list] | None, int, dict]:
-    """Try the concepts the words retrieve, first. Returns ((concept, tree) | None, evaluations, info)."""
+def stage(task: Any, prior: Any, words: str, *, max_eval: int | None = None,
+          record: Any = None) -> tuple[tuple[str, list] | None, int, dict]:
+    """Try the concepts the words retrieve, first. Returns ((concept, tree) | None, evaluations, info).
+
+    ``record`` (CLAUSE2, docs/CLAUSE2.md): computes an instance's public-row values exactly like
+    ``run`` (same values, Invalid on the same instances) and keeps the values its nodes took, so a
+    later identical computation can be read instead of redone. Same evaluations, same result."""
     from .world import Invalid, _rename, consult, run
     budget = MEANING_BUDGET if max_eval is None else min(MEANING_BUDGET, max_eval)
     kind = None
@@ -276,7 +281,7 @@ def stage(task: Any, prior: Any, words: str, *, max_eval: int | None = None) -> 
         seen.add(k)
         evals += 1
         try:
-            vals = [run(inst, r) for r, _e in task.public]
+            vals = record(inst) if record is not None else [run(inst, r) for r, _e in task.public]
         except Invalid:
             continue
         if vals != goal:
