@@ -8,7 +8,8 @@ recovery can count evidence twice", "WITNESS's challenge split guides search" an
 first reproduced by a failing test in `tests/test_integrity.py` on the unfixed code, then fixed.
 
 These are correctness fixes, not science switches. There is no `NOMAD_*` switch: they are always
-on, and they do not change any search decision. All existing sealed judges were re-run before and
+on, and they do not change any search decision. All known final-split reads during search,
+including awake exploration (`variation.explore()`, Gap 3b), are now closed. All existing sealed judges were re-run before and
 after the fixes, and their per-task certified counts and evaluation counts were identical (see
 "Judge identity" below).
 
@@ -143,10 +144,41 @@ full task, and a consultation evaluated the program on those rows.
 - No search decision changed: search never read `task.final` (checked by grep over every search
   module). The 21 judges are byte-identical to the pre-fix commit (ROLES under
   `PYTHONHASHSEED=0`, see above), with LOFO at 5,883 and worst ratio 1.0x.
-- Not changed: `variation.explore()` (awake exploration, outside the twin comparison) still uses
-  `certify()` with final rows to choose which mutants it reports as "paid". The sleep learner
-  re-attests those itself. This is not part of the twin's search, but it is a final-split read
-  outside `evaluate()` and is noted here as a remaining caveat.
+- `variation.explore()` (awake exploration) originally still used `certify()` with final rows to
+  choose which mutants it reported as "paid". That gap is now closed; see "Gap 3b" below.
+
+## Gap 3b (closed): variation.explore() read the final split to pick "paid" mutants
+
+**Claim.** `variation.explore()` (awake exploration on a training task, outside the twin
+comparison) called `certify(task, t)` on every mutant that fit all public rows and reported it as
+"paid" only if `final_ok` was true. That is a final-split read during search-time selection.
+
+**Reproduction (pre-fix).** `FinalSplitSeparation.test_explore_never_reads_final` hands
+`explore()` the `max_pair` task with a final split that raises on iteration (and patches
+`final_check` / `certify` to raise). On the unfixed code it fails: the final split was read.
+
+**Fix.** `explore()` now works on `search_view(task)` (final=()) for sources, candidates,
+fitness and situation, and consults WITNESS with `consult(view, t)` (public + challenge rows only,
+through a `ChallengeView`). A "paid" row now means "supported on public and challenge rows". The
+sleep learner (`apply_trace`) already re-attested every paid row with `certify()`, including the
+final split, before counting or learning it, so a mutant that passed challenge but failed final
+would still be refused there and handled exactly like any unpaid tried row. The test also checks
+that the trace on the poisoned task equals the trace on the real task.
+
+**Callers.** `world_loop.pair()` (the live body: its trace goes into the queued packet and its
+`explore_paid` count is report-only), `scripts/roles_judge.py`, `scripts/meaning_judge.py`,
+`scripts/science_probe.py`, `scripts/variation_probe.py`, and `tests/test_variation.py`.
+LOFO (`scripts/learning_judge.py`) does not call `explore()`.
+
+**Judge identity.** With `PYTHONHASHSEED=0`, on the pre-fix commit (32cfdcb) in a pristine
+worktree and on the fixed commit: ROLES, MEANING, the science probe, the variation probe and
+`learning_judge --no-practice` (deep, science hard, LOFO) gave byte-identical JSON outputs.
+LOFO stayed at 5,883 (cold, trained and trained_port_off) with worst ratio 1.0x. In addition, the
+old and new "paid" selections were compared on every `explore()` call those four scripts make
+(1,156 calls: ROLES 204, MEANING 348, science 92, variation 512): the old rule (`certify` +
+`final_ok`) and the new rule (`consult`) paid the same 128 mutants, with 0 calls differing. So no
+report changed either on these suites; in the live body a challenge-passing, final-failing mutant
+could now appear in a packet's "paid" list and in `explore_paid`, and the learner refuses it.
 
 ## Note 4 (report only, no behavior change): evolve uses held-out probes for selection
 
