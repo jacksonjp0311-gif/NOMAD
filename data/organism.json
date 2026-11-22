@@ -1,16 +1,16 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-22T12:10:50Z",
+  "ts": "2026-11-22T12:24:03Z",
   "sense": {
-    "last_pair": "2026-11-22T12:09:03Z",
-    "last_world_pair": "2026-11-22T12:09:03Z",
-    "last_sleep": "2026-11-22T12:10:50Z"
+    "last_pair": "2026-11-22T12:19:16Z",
+    "last_world_pair": "2026-11-22T12:19:16Z",
+    "last_sleep": "2026-11-22T12:21:03Z"
   },
   "think": {
     "curriculum_open_levels": {
-      "mathematics": 1,
-      "language": 1,
-      "coding": 1,
+      "mathematics": 2,
+      "language": 2,
+      "coding": 2,
       "bridge": 3,
       "words": 1
     }
@@ -32,14 +32,14 @@
     "world_twin": {
       "estimator": "rloo",
       "groups": 128,
-      "pass_rate": 0.91796875,
-      "all_pass_rate": 0.8359375,
+      "pass_rate": 0.9296875,
+      "all_pass_rate": 0.859375,
       "all_fail_rate": 0.0,
-      "informative_rate": 0.1640625,
-      "informative_pairs": 21,
+      "informative_rate": 0.140625,
+      "informative_pairs": 18,
       "mean_treatment_advantage": 1.0,
-      "both_certified_pairs_with_cost": 107,
-      "mean_evaluations_saved": 1552.271028037383,
+      "both_certified_pairs_with_cost": 110,
+      "mean_evaluations_saved": 1336.7818181818182,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     }
   },
@@ -47,7 +47,7 @@
     "queued": 0,
     "inflight": 0,
     "certified_queued": 0,
-    "field_version": 1852,
+    "field_version": 1856,
     "genesis_heldout": {
       "field_certified": true,
       "cold_certified": false
@@ -62,46 +62,6 @@
   },
   "evolve": {
     "recent": [
-      {
-        "organ": "selfedit",
-        "seed": 2050086417,
-        "gene": "inv_max_constants",
-        "before": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 2,
-          "inv_const_depth": 1,
-          "inv_rounds": 2,
-          "inv_floor_fit": 0
-        },
-        "after": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 0,
-          "inv_const_depth": 1,
-          "inv_rounds": 2,
-          "inv_floor_fit": 0
-        },
-        "dev_before": {
-          "certified": 6,
-          "evaluations": 145260,
-          "tasks": 16
-        },
-        "dev_after": {
-          "certified": 6,
-          "evaluations": 145260,
-          "tasks": 16
-        },
-        "dev_losses": [],
-        "accepted": false,
-        "reason": "dev_not_better",
-        "ts": "2026-11-22T07:00:19Z",
-        "sandbox_clean": true
-      },
       {
         "organ": "selfedit",
         "seed": 2207005323,
@@ -319,6 +279,104 @@
         "reason": "dev_not_better",
         "ts": "2026-11-22T11:20:09Z",
         "sandbox_clean": true
+      },
+      {
+        "organ": "selfedit",
+        "seed": 3494544170,
+        "gene": "inv_floor_fit",
+        "before": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "after": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 1
+        },
+        "dev_before": {
+          "certified": 6,
+          "evaluations": 145260,
+          "tasks": 16
+        },
+        "dev_after": {
+          "certified": 8,
+          "evaluations": 134908,
+          "tasks": 16
+        },
+        "dev_losses": [],
+        "keep_before": {
+          "certified": 95,
+          "evaluations": 636283,
+          "tasks": 122
+        },
+        "keep_after": {
+          "certified": 95,
+          "evaluations": 636283,
+          "tasks": 122
+        },
+        "keep_losses": [],
+        "window_families": [
+          "wt_jars_needed",
+          "wt_kit_items",
+          "wt_lap_points",
+          "wt_pages_read",
+          "wt_pots_needed",
+          "wt_seeds_used",
+          "wt_shift_pay",
+          "wt_three_classes",
+          "wt_three_rows",
+          "wt_three_trays",
+          "wt_walk_pantry",
+          "double_lower",
+          "len_plus_len",
+          "pick_gt",
+          "relu_diff",
+          "second_smallest",
+          "sort_desc",
+          "square_plus_y",
+          "max_pair",
+          "min_pair",
+          "mod_pair",
+          "range",
+          "rev_upper",
+          "sum_tail"
+        ],
+        "window_pairs": 72,
+        "recorded": {
+          "certified": 24,
+          "evaluations": 919,
+          "tasks": 24
+        },
+        "replay_before": {
+          "certified": 24,
+          "evaluations": 4964,
+          "tasks": 24
+        },
+        "replay_after": {
+          "certified": 24,
+          "evaluations": 4964,
+          "tasks": 24
+        },
+        "replay_losses": [],
+        "replay_vs_recorded": {
+          "certified_recorded": 24,
+          "certified_replay_after": 24
+        },
+        "accepted": false,
+        "reason": "tests_failed",
+        "ts": "2026-11-22T12:24:03Z",
+        "sandbox_clean": true
       }
     ]
   },
@@ -353,11 +411,11 @@
     ],
     "body_lease": {
       "host": "gh-44987930437",
-      "heartbeat": "2026-11-22T12:10:50Z",
-      "age_min": 0.0019557333333333335,
+      "heartbeat": "2026-11-22T12:24:03Z",
+      "age_min": 0.014845016666666665,
       "alive": true,
-      "cycles": 111,
-      "cycles_per_hour": 71.8,
+      "cycles": 123,
+      "cycles_per_hour": 71.6,
       "released": false
     }
   },
