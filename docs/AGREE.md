@@ -157,3 +157,41 @@ certified totals and gains; budgets left at each guard decision (dev only).
 
 Decision rule: all seven -> `NOMAD_AGREE` default ON in a separate commit; otherwise it stays OFF with an
 honest write-up here and in `results/agree/`.
+
+## Result (measured once, from de72128, PYTHONHASHSEED=0): FAIL, stays OFF
+
+Sealed AGREE suite (sha256 57c7ad22..., 23 hard): cold 0, empty_off 0 = empty_on 0 (identical, every task).
+
+| field | off | **on (AGREE)** | unguarded LET2 (report) | shuffled | rewired |
+|---|---|---|---|---|---|
+| trained (all_sci) | 6 | **6** | 11 | 6 | 6 |
+| math_sci | 6 | **6** | 11 | 6 | 6 |
+| practice | 5 | **5** | 8 | 5 | 5 |
+
+1. It helps: **FAIL** (trained_on - trained_off = 0; bar >= 2).
+2. Empty identical, cold untouched: pass.
+3. No loss on the sealed suite: pass (0 losses; on needs fewer evaluations on every task certified both ways,
+   e.g. trained 197,033 -> 196,305 total, from MERGE's bank skips).
+4. The agreement carries it: **FAIL** (on 17 = shuffled 17 = rewired 17; no control loses a task on keeps).
+5. Zero per-task losses on every existing judge: pass. switch_regress over 26 judges (the 25 listed plus
+   agree itself): **0 losses**; certified gains on older judges (task x arm): ceil +8 (35 -> 43:
+   cl_h_moorings, cl_m_lockers), discrim +8 (171 -> 179), let +4 (51 -> 55), let2 +3 (97 -> 100:
+   k2_off_target), transfer4 +3 (61 -> 64: g4_inner_bed), transfer6 +5 (242 -> 247: f6_pen_grass); every other
+   judge's certified total unchanged; the rest of the "gains" are evaluation decreases.
+6. LET2's gain kept: **FAIL** (let2 judge trained_off arm with AGREE on: 10, off 9, bar 11; unguarded LET2 13).
+7. LOFO: pass (trained_agree 5,883, worst ratio 1.0x); full test suite 615 passed, 6 skipped.
+
+Unguarded LET2 made no wrong returns on this suite either: its 5 extra sealed solves (ag_kite_triple_half,
+ag_salt_bags_left, ag_tail_double_less, ag_cap_load, ag_spill_mod) were all correct, and AGREE found
+no independent alternative agreeing with any of them, so every one ended as a (budget-neutral) miss.
+
+What it means, honestly: the budget-neutral construction works exactly as designed (zero losses on 26
+judges, identical empty arm, a miss costs nothing, some older-judge gains), but positive support is too
+strict for this suite's let fits: `t`-composed shapes such as `(t // k) + (t % k)` or `min(t, a) * min(t, b)`
+have no second derivation inside the bounded alternative set, so the guard rejects correct fits as readily
+as wrong ones, and the controls tie. Dev (60% of LET2's gain kept) overstated it: the dev guard suites
+were rich in ceilings and offset quotients, which the alternative set covers. Next idea, not tested here:
+an alternative set grown from the field's certified library blocks (so support follows what the field
+already knows) rather than from fixed decompositions; any retry needs a new sealed suite and seed.
+
+Artifacts: `results/agree/` (sealed judge JSON, LOFO JSON, switch_regress compare).
