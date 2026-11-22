@@ -1148,12 +1148,29 @@ class _WitnessGate:
         self.rejected: list[list] = []
         self.vias: list[str | None] = []
         self.stage: str | None = None   # set by the staged search: where fits come from
+        # CERT (docs/CERT.md): the task's input signature and a scope flag; only fits found inside the
+        # PORT stages of a populated field are checked (an empty field never sets it)
+        self.inputs = tuple(task.inputs)
+        self.cert_scope = False
+        self.cert_log: list = []
 
     def __call__(self, tree: list) -> bool:
         if len(self.rejected) >= self.max_rejects:
             return True
         receipt = consult(self.view, expand(tree, self.library))
         if receipt is not None and receipt.supported:
+            if self.cert_scope and _cert_on():
+                # CERT: a fit WITNESS accepts is also checked on distinguishing inputs; a violation is
+                # a rejection like WITNESS's (the caller charges the same 1 evaluation); no violation
+                # costs nothing and changes nothing
+                from . import cert as _C
+                c = _C.check(expand(tree, self.library), self.inputs, list(self.view.public) + list(self.view.challenge),
+                             self.view.out)
+                self.cert_log.append((c["verdict"], c["props"]))
+                if c["verdict"] == "veto":
+                    self.rejected.append(tree)
+                    self.vias.append("cert:" + str(self.stage))
+                    return False
             return True
         self.rejected.append(tree)
         self.vias.append(self.stage)
@@ -1166,10 +1183,12 @@ def _witness_finish(s: Search, gate: "_WitnessGate | None") -> Search:
     if gate is None:
         return s
     s.witness = {"rejected": len(gate.rejected)}
-    if s.tree is None and gate.rejected:
-        t = gate.rejected[0]
+    # CERT (docs/CERT.md): a fit only CERT vetoed (WITNESS supported it) is never the fallback answer
+    first = [i for i, v in enumerate(gate.vias) if not (isinstance(v, str) and v.startswith("cert:"))]
+    if s.tree is None and first:
+        t = gate.rejected[first[0]]
         libs = [x[1] for x in subtrees(t) if x[0] == "lib"]
-        return Search(t, s.evaluations, None, s.order, libs, gate.vias[0], s.variation, s.casesplit, s.sense,
+        return Search(t, s.evaluations, None, s.order, libs, gate.vias[first[0]], s.variation, s.casesplit, s.sense,
                       {"rejected": len(gate.rejected), "returned": "first_rejected"})
     return s
 
@@ -1253,6 +1272,12 @@ def let2_enabled() -> bool:
 
 
 LET2_RESTORE = True  # LET2: forget the stage's WITNESS rejections on a miss (later stages see main's gate)
+
+
+def _cert_on() -> bool:
+    """NOMAD_CERT (docs/CERT.md): fits found by PORT are also checked on generated distinguishing inputs
+    against properties derived from the evidence rows; default off until its sealed judge passes."""
+    return _flag("NOMAD_CERT", "off")
 
 
 def _discrim_on() -> bool:
@@ -1501,7 +1526,7 @@ def port_bank(prior: "WorldPrior", task: WorldTask, key: str | None = None,
     element, annotated for the probe with which blocks are probe-equivalent
     to an earlier one."""
     out = _port_bank_main(prior, task, key, rel, cut_key)
-    if not out or not (merge_enabled() or let2_enabled() or _discrim_on() or _agree_on()) or task.out != "int":
+    if not out or not (merge_enabled() or let2_enabled() or _discrim_on() or _agree_on() or _cert_on()) or task.out != "int":
         return out
     if rel is not None and key and route_enabled() and prior.route.get(key):
         return out
@@ -1852,7 +1877,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     pinfo["port"] = "let"
                     return hit
             if mstate["on"]:
-                if (let2_enabled() or _discrim_on() or _agree_on()) and mstate["skips"] > mstate["spent"]:
+                if (let2_enabled() or _discrim_on() or _agree_on() or _cert_on()) and mstate["skips"] > mstate["spent"]:
                     # LET2 (docs/LET2.md): LET's stage paid only from the unspent skips; on a miss
                     # the gate's rejection record is restored, so later stages see main's gate.
                     # NOMAD_DISCRIM on runs this stage with its distinguishing-experiment guard
@@ -2033,6 +2058,10 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         cands.sort(key=lambda z: z[:2])
         tried: set = set()
         agree_mode = bool(real and _agree_on() and not (let2_enabled() or _discrim_on()))
+        # CERT (docs/CERT.md): LET2's fallback stage; a WITNESS- and CERT-accepted let fit returns early only
+        # when CERT *verified* it (no violation, >= CERT_MIN_PROPS properties derived from the evidence);
+        # otherwise the stage is a budget-neutral miss. LET2 / DISCRIM / AGREE take precedence when on.
+        cert_mode = bool(real and _cert_on() and not (let2_enabled() or _discrim_on() or _agree_on()))
         for ti, (_sz, _sc, t, v) in enumerate(cands[:LET_N]):
             if gate is not None and len(gate.rejected) - rej0 >= LET_REJECTS:
                 return None
@@ -2048,8 +2077,8 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             for hit in fits:
                 if (evals if real else vev()) >= limit or (gate is not None and len(gate.rejected) - rej0 >= LET_REJECTS):
                     return None
-                if agree_mode and evals + 2 > limit:
-                    return None     # AGREE: the candidate and a possible rejection must both fit the budget
+                if (agree_mode or cert_mode) and evals + 2 > limit:
+                    return None     # AGREE / CERT: the candidate and a possible rejection must both fit the budget
                 key = json.dumps(hit)
                 if key in tried:
                     continue
@@ -2057,6 +2086,12 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 evals += 1      # an assembled program is one candidate evaluation
                 yield evals
                 if stop_on(hit):
+                    if cert_mode:
+                        from . import cert as _C
+                        c = _C.check(hit, task.inputs, _D_evidence(task), task.out)
+                        if c["verdict"] != "verified":
+                            return None
+                        return hit
                     if agree_mode:
                         # AGREE guard (docs/AGREE.md): the accepted let fit returns early only when an
                         # independently derived alternative agrees with it; otherwise the stage is a miss
@@ -2839,7 +2874,13 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
     def probe_body(P, B, limit, start):
         nonlocal evals
         if bank:
-            hit = yield from port_body(P, B, limit, start)
+            if gate is not None:
+                gate.cert_scope = True
+            try:
+                hit = yield from port_body(P, B, limit, start)
+            finally:
+                if gate is not None:
+                    gate.cert_scope = False
             if hit is not None:
                 pinfo.update(spent=evals - start, hit=True)
                 return hit
