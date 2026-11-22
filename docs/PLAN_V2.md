@@ -18,11 +18,11 @@ Three conditions for a generated abstraction to count as transfer:
 
 These are gates, not features.
 
-## Phase A — implementable now
+## Phase A — implemented
 
-1. **Version space.** When orbit returns multiple domain packets with conflicting operators, abstain or log the conflict. Do not certify.
-2. **Probe-family distance.** Held-out records whether the certified candidate and the reference disagree on a reserved probe set. Disagreement is a failure, not a tie.
-3. **Portability check.** A frozen field can be loaded by another process. The check verifies that the recipient operation agrees with the source on the declared examples after the adapter is applied.
+1. **Version space.** `nomad/versionspace.py`. When domain packets disagree on operator, the decision abstains. Certification requires agreement.
+2. **Portability check.** `nomad/portability.py`. Verifies that a recipient operation agrees with the source on declared examples after the adapter is applied.
+3. **Probe-family distance.** Held-out records disagreement on a reserved probe set as a failure.
 
 ## Phase B — generation-first (audit move 1)
 
