@@ -126,3 +126,30 @@ control). Measured once, from a snapshot of the commit that adds this file.
 7. Report only: on vs unguarded LET2 per field; on the LET2 sealed suite and the 21 judges where LET2
    lost, whether DISCRIM keeps LET2's gain (let2 judge, `*_off` arms with DISCRIM on, vs LET2's 9 -> 13)
    without its losses.
+
+## Sealed result, part 1: DISCRIM suite and LOFO (measured once from the 7eeaf41 snapshot; regressions pending)
+
+sha 55042ce2, 22 hard (`results/discrim/discrim_sealed.json`):
+
+| arm | off | **on** | LET2 unguarded | blind control | shuffled control |
+|---|---|---|---|---|---|
+| cold | 0 | | | | |
+| empty | 0 | 0 (identical per task) | | | |
+| trained (all_sci) | 7 (188,150 evals) | **14** (172,333) | 14 (172,311) | 14 (172,333) | 12 (176,941) |
+| math_sci | 7 (188,150) | 14 (172,333) | 14 (172,311) | 14 (172,333) | 12 (176,941) |
+| practice | 6 (188,154) | 11 (176,638) | 11 (176,624) | 11 (176,638) | 10 (180,580) |
+
+- Criterion 1 pass (+7, bar +2).
+- Criterion 2 pass (empty_on = empty_off on every task; cold 0).
+- Criterion 3 pass: 0 lost, 0 more-evaluation tasks, nothing newly worse than cold, on every field.
+- Criterion 4 **fails** on the blind control: on 39 = blind 39 summed over the fields, and the blind
+  control loses nothing. It passes on the shuffled control (39 vs 34; shuffled loses `dx_layers_and_third`
+  and `dx_clay_left` to spurious disagreements). The ambiguity traps the suite was built for did not
+  materialize: unguarded LET2 lost no task here either, so on this suite the whole gain (+7) comes from
+  LET2's let stage, not from the distinguishing experiment. The guard's own cost: 22 evaluations on
+  trained (172,333 vs 172,311).
+- LOFO (`results/discrim/lofo.json`): trained_discrim 5,883 / 5,883, worst 1.0x (criterion 6 LOFO passes).
+
+Verdict so far: **FAIL** (criterion 4). `NOMAD_DISCRIM` stays **off**. Criterion 5 (the 22 earlier judges)
+is still measured and reported, because it answers the report-only question: does the guard remove LET2's
+losses there?
