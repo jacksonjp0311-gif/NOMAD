@@ -142,3 +142,36 @@ COMBINE's whole-story retrieval certified all 20 forward dev tasks, so the forwa
 fix of CLAUSE's binding, not a new capability over COMBINE; COMBINE itself stays off (it failed its own
 criterion 5). CLAUSE2's credit is small (it is only what main reads instead of recomputing), so a hit
 can wait until main has earned enough.
+
+## Sealed result, part 1 (measured once from the f5b8631 snapshot)
+
+`python3 scripts/clause2_judge.py` was run once on `data/deep/clause2_suite.json` (sha256
+`4ae17326...ea91`, seed 20270507) right after f5b8631 was pushed; output committed unchanged as
+`results/clause2/clause2_sealed.json`. Field: 813 tokens, 41 concepts.
+
+| arm | certified / 16 | evaluations |
+|---|---|---|
+| cold | 0 | 160,000 |
+| empty_off / empty_on | 0 / 0 | 160,000 / 160,000 (identical) |
+| trained_off | 5 | 137,936 |
+| **trained_on** | **14** | **33,990** |
+| shuffled_1 / 2 / 3 | 5 / 5 / 5 | 138,001 / 138,009 / 137,993 |
+| rewired | 7 | 118,689 |
+| clause_report (CLAUSE on, report only) | 9 | 83,270 |
+| combine_report (COMBINE on, report only) | 14 | 38,215 |
+
+- Criterion 1 PASS: +9 (5 -> 14).
+- Criterion 2 PASS: +9 over the best shuffled lexicon (5), +7 over rewired (7).
+- Criterion 3 PASS: empty_on = empty_off (0, 160,000, per task identical); cold untouched (0).
+- Criterion 4 PASS: no task certified off and lost on; no task certified by both with more evaluations on
+  (cw_tank_round 5,581 -> 55, cw_dock_round 5,551 -> 43, cw_page_boxes 5,862 -> 123; cw_pier_round 5,478
+  and cw_glass_round 5,464 unchanged, CLAUSE2 missed there and the counts are identical to off, where
+  CLAUSE's report arm pays +158 and +190); nothing worse than cold. About 75% fewer evaluations than off.
+- Forward subset (10 "average ... before its numbers" tasks): trained_on 10 / 10, trained_off 2,
+  clause_report 6, combine_report 9. Backward subset (6): trained_on 4, trained_off 3, clause_report 3,
+  combine_report 5. Misses: cw_wheel_left and cw_skate_left ((a+b)*c % d; no arm but COMBINE certifies
+  cw_skate_left).
+- Credits: a hit needed 1 to 66 new values (median about 7) and landed at the normal search's
+  evaluation 1 to 578; on the four misses CLAUSE2 spent 44-236 credits and the reported counts equal off.
+
+Criteria 5 and 6 (existing judges, LOFO, tests) follow in part 2.
