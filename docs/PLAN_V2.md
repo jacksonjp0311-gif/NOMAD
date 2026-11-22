@@ -24,11 +24,11 @@ These are gates, not features.
 2. **Portability check.** `nomad/portability.py`. Verifies that a recipient operation agrees with the source on declared examples after the adapter is applied.
 3. **Probe-family distance.** Held-out records disagreement on a reserved probe set as a failure.
 
-## Phase B — generation-first (audit move 1)
+## Phase B — generation-first implemented, default OFF
 
-Draft candidates from the problem statement before memory. Score against examples. Fall back to recall only if nothing fits. Switch default OFF. Sealed suite with unused seed. On/off, cold, empty, real-vs-shuffled arms. Zero per-task losses.
+`nomad/generator.py`. Drafts candidates from public examples alone. Falls back to the existing synthesizer only if no draft fits. Enable with `NOMAD_GENFIRST=on`.
 
-Gate: solve at least five additional independently authored problems beyond the frozen baseline, without increasing incorrect certifications.
+Gate: solve at least five additional independently authored problems beyond the frozen baseline, without increasing incorrect certifications. Requires a sealed suite with unused seed and on/off, cold, empty, real-vs-shuffled arms.
 
 ## Phase C — abstraction discovery (audit move 2)
 
@@ -40,7 +40,7 @@ When candidates disagree, generate a probe that distinguishes them. Where a trus
 
 ## Order
 
-Phase A is the acceptance criteria made executable. Phase B is the generation engine. Phase C is the abstraction test. Phase D is the response to CERT's failure. Moves 4–10 from the audit wait until these have sealed results.
+Phase A is the acceptance criteria made executable. Phase B is the generation engine, ready for a sealed comparison. Phase C is the abstraction test. Phase D is the response to CERT's failure. Moves 4–10 from the audit wait until these have sealed results.
 
 ## What is not claimed
 
