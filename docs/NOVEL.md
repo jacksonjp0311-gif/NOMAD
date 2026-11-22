@@ -104,6 +104,80 @@ reported for every arm. The suite is measured **once**; no criterion, arm or bud
 
 Results will go to `results/novel/` and the verdict below.
 
-## Results
+## Results (measured once, from df61004, `PYTHONHASHSEED=0`, 51 s; results/novel/novel_judge.json)
 
-(pending; filled in after the single measurement)
+Fields: trained_on 184 witnessed, 99 whole programs, 81 library blocks, 41 concepts, 813 lexicon tokens;
+trained_old 165 witnessed, 70 programs, 36 blocks, no lexicon (MEANING off). No `data/genome.json`
+(frozen invention genes).
+
+26 sealed hard tasks (coord 8, digits 8, order 10), budget 10,000 each:
+
+| arm | certified | evaluations | coord | digits | order |
+|---|---|---|---|---|---|
+| cold | 0 | 228,796 | 0 | 0 | 0 |
+| empty | 0 | 248,462 | 0 | 0 | 0 |
+| **trained_on** | **9** | **194,302** | 1 | 5 | 3 |
+| trained_old | 0 | 248,462 | 0 | 0 | 0 |
+| shuffled_1 | 6 | 205,912 | 0 | 4 | 2 |
+| shuffled_2 | 7 | 205,090 | 1 | 4 | 2 |
+| shuffled_3 | 10 | 190,487 | 1 | 5 | 4 |
+| empty_old (report) | 0 | 248,462 | 0 | 0 | 0 |
+| trained_on_field_old (report) | 0 | 248,462 | 0 | 0 | 0 |
+
+(cold spends fewer evaluations than empty because the cold control stops at its first WITNESS
+rejection.) No arm is worse than cold on any task. The 2 easy tasks: every reported arm certifies both
+with 3,192 evaluations, identical to cold.
+
+trained_on certified `nv_c_mid_sum`, `nv_d_reverse2`, `nv_d_swap_change`, `nv_d_round10`,
+`nv_d_ends_sum`, `nv_d_digit_prod2`, `nv_o_top_two`, `nv_o_range3`, `nv_o_gap_top`. Every one of them
+came through PORT (`port:anchor` 5, `port:anchor2` 2, `port:scale` 2).
+
+| criterion | result |
+|---|---|
+| C1 trained_on beats empty and cold | **pass** (+9 vs both; 21.8% / 15.1% fewer evaluations) |
+| C2 trained_on beats trained_old | **pass** (+9; trained_old 0) |
+| C3 trained_on beats every shuffled field | **fail** (+3 vs shuffled_1, +2 vs shuffled_2, -1 vs shuffled_3) |
+
+## Verdict: TRANSFER, not attributable to learned content
+
+By the pre-registered rule there is evidence of transfer: the current NOMAD certifies 9 of 26
+never-trained tasks where cold, the empty field and the older NOMAD certify none. But a field whose
+remembered programs keep their shape and inputs, with every operator randomized, does about as well
+(6, 7, 10). So the gain comes from the post-Nov-20 machinery (PORT and its GROW anchors) working on
+*a populated memory of the right shape*. What the memory specifically learned contributes little that
+this suite can see.
+
+### Post-hoc audit (report only; changes no criterion)
+
+`scripts/novel_audit.py` checks every certified program on 2,000 fresh exact rows per family
+(results/novel/novel_audit.json):
+
+- trained_on: 8 of 9 are right everywhere. **`nv_d_round10` is wrong on 613 / 2,000 rows**:
+  `mul(sub(0, tn), div(sub(1, nn), tn))` is 10 * ceil((nn - 1) / 10), which rounds 792 up to 800. It
+  matched all 11 sealed rows (public, challenge and final) by chance. WITNESS's 11 rows did not
+  separate rounding from ceiling.
+- shuffled fields: round10 is wrong in all three; shuffled_3's `nv_d_reverse2` (17 wrong) and
+  `nv_d_digit_prod2` (30 wrong) also overfit.
+- Audited counts: trained_on 8, shuffled 5 / 6 / 7. The content gap widens slightly (+1 to +3), still
+  short of the pre-registered +3 against every control. The verdict stands as measured.
+
+### Where transfer breaks
+
+1. **No PORT, no transfer.** Library blocks are keyed to an exact input signature, so on a new
+   signature only PORT (whole programs renamed onto new inputs) and the variation archive can reach
+   memory. With the post-Nov-20 switches off, the trained field is byte-for-byte the empty field (same
+   0 certified, same 248,462 evaluations), and so is the current field evaluated under OLD. The older
+   NOMAD's learning does not leave its training signatures at all.
+2. **Transfer follows the building blocks training actually certified, not the domain.** digits
+   (5/8) reuse the `div` / `mod` blocks of the trained `div_pair` / `mod_pair` families. coord gets 1/8:
+   six of its tasks need |a - b| (= max - min) twice. Absolute difference was never trained (it is
+   the held-out probe `absdiff`), so it is not in memory, and composing it twice is beyond size 7. order
+   gets 3/10. It misses the nested min/max chains no training task produced (median of 3, second
+   largest and middle two of 4, count above), and two size-7 four-input tasks (`max_pair_sum`,
+   `minmax4`) that shuffled fields found, because the trained memory steered PORT elsewhere. `nv_o_clamp`
+   stops after 167 evaluations in every arm: `max(oa, ob)` fits the public and challenge rows, which
+   never hit the upper clip, and the sealed final rows correctly refuse it. And since shuffled memories work as
+   well, PORT is mostly using memory as *shaped scaffolds* for its residual anchors, not as knowledge.
+3. **WITNESS can certify a wrong generalization on a new domain** (round10). With 11 rows,
+   rounding-to-nearest and ceiling-after-shift agree by chance. Better witnesses here would use more
+   rows, or DISCRIM-style distinguishing inputs, at certification time. This was not tested here.
