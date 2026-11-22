@@ -30,9 +30,11 @@ These are gates, not features.
 
 Gate: solve at least five additional independently authored problems beyond the frozen baseline, without increasing incorrect certifications. Requires a sealed suite with unused seed and on/off, cold, empty, real-vs-shuffled arms.
 
-## Phase C — abstraction discovery (audit move 2)
+## Phase C — targets added, measurement pending
 
-Synthesize absdiff, median, and clamp without giving the solutions. Discover at least three nontrivial abstractions from training evidence. Show they improve a frozen family-held-out benchmark against equal-sized random and frequency-matched libraries.
+`nomad/abstract_targets.py`. Defines absdiff, median, and clamp as example sets. The solutions are not supplied. The synthesizer sees public examples only.
+
+This is not wired into the continuous loop. It is a measurement tool. Run `attempt_all()` against the current synthesizer and record whether the targets are reachable. Do not claim discovery until the measurement shows it.
 
 ## Phase D — active discrimination (audit move 3)
 
@@ -40,7 +42,7 @@ When candidates disagree, generate a probe that distinguishes them. Where a trus
 
 ## Order
 
-Phase A is the acceptance criteria made executable. Phase B is the generation engine, ready for a sealed comparison. Phase C is the abstraction test. Phase D is the response to CERT's failure. Moves 4–10 from the audit wait until these have sealed results.
+Phase A is the acceptance criteria made executable. Phase B is the generation engine, ready for a sealed comparison. Phase C targets are defined; measurement is not run. Phase D is the response to CERT's failure. Moves 4–10 from the audit wait until these have sealed results.
 
 ## What is not claimed
 
