@@ -1,0 +1,4171 @@
+{
+ "budget": 10000,
+ "domains": [
+  "coord",
+  "digits",
+  "order"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1801,
+   "cold_reason": null,
+   "domain": "digits",
+   "family": "nv_d_tens",
+   "formula": "tens digit of nn",
+   "inputs": [
+    "nn",
+    "tn"
+   ],
+   "kind": "digit",
+   "rows": [
+    [
+     {
+      "nn": 648,
+      "tn": 10
+     },
+     4
+    ],
+    [
+     {
+      "nn": 425,
+      "tn": 10
+     },
+     2
+    ],
+    [
+     {
+      "nn": 905,
+      "tn": 10
+     },
+     0
+    ],
+    [
+     {
+      "nn": 169,
+      "tn": 10
+     },
+     6
+    ],
+    [
+     {
+      "nn": 695,
+      "tn": 10
+     },
+     9
+    ],
+    [
+     {
+      "nn": 283,
+      "tn": 10
+     },
+     8
+    ],
+    [
+     {
+      "nn": 545,
+      "tn": 10
+     },
+     4
+    ],
+    [
+     {
+      "nn": 159,
+      "tn": 10
+     },
+     5
+    ],
+    [
+     {
+      "nn": 966,
+      "tn": 10
+     },
+     6
+    ],
+    [
+     {
+      "nn": 567,
+      "tn": 10
+     },
+     6
+    ],
+    [
+     {
+      "nn": 420,
+      "tn": 10
+     },
+     2
+    ]
+   ],
+   "task_id": "t-11",
+   "tier": "easy",
+   "tree": [
+    "mod",
+    [
+     "div",
+     [
+      "var",
+      "nn"
+     ],
+     [
+      "var",
+      "tn"
+     ]
+    ],
+    [
+     "var",
+     "tn"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1391,
+   "cold_reason": null,
+   "domain": "digits",
+   "family": "nv_d_nines",
+   "formula": "remainder of nn's digit sum after casting out nines",
+   "inputs": [
+    "nn",
+    "tn"
+   ],
+   "kind": "digit",
+   "rows": [
+    [
+     {
+      "nn": 830,
+      "tn": 10
+     },
+     2
+    ],
+    [
+     {
+      "nn": 429,
+      "tn": 10
+     },
+     6
+    ],
+    [
+     {
+      "nn": 300,
+      "tn": 10
+     },
+     3
+    ],
+    [
+     {
+      "nn": 903,
+      "tn": 10
+     },
+     3
+    ],
+    [
+     {
+      "nn": 320,
+      "tn": 10
+     },
+     5
+    ],
+    [
+     {
+      "nn": 145,
+      "tn": 10
+     },
+     1
+    ],
+    [
+     {
+      "nn": 738,
+      "tn": 10
+     },
+     0
+    ],
+    [
+     {
+      "nn": 106,
+      "tn": 10
+     },
+     7
+    ],
+    [
+     {
+      "nn": 804,
+      "tn": 10
+     },
+     3
+    ],
+    [
+     {
+      "nn": 631,
+      "tn": 10
+     },
+     1
+    ],
+    [
+     {
+      "nn": 974,
+      "tn": 10
+     },
+     2
+    ]
+   ],
+   "task_id": "t-18",
+   "tier": "easy",
+   "tree": [
+    "mod",
+    [
+     "var",
+     "nn"
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "tn"
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "coord",
+   "family": "nv_c_taxicab",
+   "formula": "taxicab distance |px-qx| + |py-qy|",
+   "inputs": [
+    "px",
+    "py",
+    "qx",
+    "qy"
+   ],
+   "kind": "distance",
+   "rows": [
+    [
+     {
+      "px": 8,
+      "py": 9,
+      "qx": -10,
+      "qy": 9
+     },
+     18
+    ],
+    [
+     {
+      "px": -12,
+      "py": 8,
+      "qx": -5,
+      "qy": -11
+     },
+     26
+    ],
+    [
+     {
+      "px": 5,
+      "py": 3,
+      "qx": -3,
+      "qy": -3
+     },
+     14
+    ],
+    [
+     {
+      "px": -4,
+      "py": 6,
+      "qx": -8,
+      "qy": 3
+     },
+     7
+    ],
+    [
+     {
+      "px": -12,
+      "py": -8,
+      "qx": -12,
+      "qy": 8
+     },
+     16
+    ],
+    [
+     {
+      "px": -9,
+      "py": 10,
+      "qx": 9,
+      "qy": -6
+     },
+     34
+    ],
+    [
+     {
+      "px": -2,
+      "py": 0,
+      "qx": -8,
+      "qy": 11
+     },
+     17
+    ],
+    [
+     {
+      "px": 1,
+      "py": -5,
+      "qx": -2,
+      "qy": -4
+     },
+     4
+    ],
+    [
+     {
+      "px": 7,
+      "py": -11,
+      "qx": 2,
+      "qy": 5
+     },
+     21
+    ],
+    [
+     {
+      "px": -2,
+      "py": -3,
+      "qx": -3,
+      "qy": -3
+     },
+     1
+    ],
+    [
+     {
+      "px": 1,
+      "py": -11,
+      "qx": -10,
+      "qy": 12
+     },
+     34
+    ]
+   ],
+   "task_id": "t-00",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "px"
+      ],
+      [
+       "var",
+       "qx"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "px"
+      ],
+      [
+       "var",
+       "qx"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "py"
+      ],
+      [
+       "var",
+       "qy"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "py"
+      ],
+      [
+       "var",
+       "qy"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "coord",
+   "family": "nv_c_chebyshev",
+   "formula": "king-move distance max(|px-qx|, |py-qy|)",
+   "inputs": [
+    "px",
+    "py",
+    "qx",
+    "qy"
+   ],
+   "kind": "distance",
+   "rows": [
+    [
+     {
+      "px": -7,
+      "py": 7,
+      "qx": -6,
+      "qy": 5
+     },
+     2
+    ],
+    [
+     {
+      "px": 2,
+      "py": -4,
+      "qx": 8,
+      "qy": -2
+     },
+     6
+    ],
+    [
+     {
+      "px": 10,
+      "py": -4,
+      "qx": 8,
+      "qy": -7
+     },
+     3
+    ],
+    [
+     {
+      "px": 12,
+      "py": -4,
+      "qx": 11,
+      "qy": -4
+     },
+     1
+    ],
+    [
+     {
+      "px": 7,
+      "py": 0,
+      "qx": 0,
+      "qy": 3
+     },
+     7
+    ],
+    [
+     {
+      "px": 7,
+      "py": -4,
+      "qx": 10,
+      "qy": 8
+     },
+     12
+    ],
+    [
+     {
+      "px": -7,
+      "py": -3,
+      "qx": -4,
+      "qy": 4
+     },
+     7
+    ],
+    [
+     {
+      "px": -8,
+      "py": -4,
+      "qx": 10,
+      "qy": -9
+     },
+     18
+    ],
+    [
+     {
+      "px": 4,
+      "py": -3,
+      "qx": 1,
+      "qy": 9
+     },
+     12
+    ],
+    [
+     {
+      "px": -3,
+      "py": 6,
+      "qx": 11,
+      "qy": 8
+     },
+     14
+    ],
+    [
+     {
+      "px": 10,
+      "py": 12,
+      "qx": -11,
+      "qy": 10
+     },
+     21
+    ]
+   ],
+   "task_id": "t-01",
+   "tier": "hard",
+   "tree": [
+    "max",
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "px"
+      ],
+      [
+       "var",
+       "qx"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "px"
+      ],
+      [
+       "var",
+       "qx"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "py"
+      ],
+      [
+       "var",
+       "qy"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "py"
+      ],
+      [
+       "var",
+       "qy"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "coord",
+   "family": "nv_c_dist_sq",
+   "formula": "squared distance (px-qx)^2 + (py-qy)^2",
+   "inputs": [
+    "px",
+    "py",
+    "qx",
+    "qy"
+   ],
+   "kind": "distance",
+   "rows": [
+    [
+     {
+      "px": 8,
+      "py": -4,
+      "qx": 5,
+      "qy": 4
+     },
+     73
+    ],
+    [
+     {
+      "px": -5,
+      "py": -11,
+      "qx": -3,
+      "qy": 12
+     },
+     533
+    ],
+    [
+     {
+      "px": 10,
+      "py": -5,
+      "qx": -5,
+      "qy": -5
+     },
+     225
+    ],
+    [
+     {
+      "px": 8,
+      "py": 3,
+      "qx": -7,
+      "qy": -1
+     },
+     241
+    ],
+    [
+     {
+      "px": -7,
+      "py": -12,
+      "qx": 3,
+      "qy": 10
+     },
+     584
+    ],
+    [
+     {
+      "px": -3,
+      "py": 6,
+      "qx": -9,
+      "qy": 3
+     },
+     45
+    ],
+    [
+     {
+      "px": -6,
+      "py": -5,
+      "qx": 12,
+      "qy": 4
+     },
+     405
+    ],
+    [
+     {
+      "px": -10,
+      "py": 4,
+      "qx": -10,
+      "qy": -6
+     },
+     100
+    ],
+    [
+     {
+      "px": 9,
+      "py": 4,
+      "qx": -2,
+      "qy": -12
+     },
+     377
+    ],
+    [
+     {
+      "px": -2,
+      "py": -9,
+      "qx": 4,
+      "qy": -12
+     },
+     45
+    ],
+    [
+     {
+      "px": -1,
+      "py": -10,
+      "qx": 9,
+      "qy": -10
+     },
+     100
+    ]
+   ],
+   "task_id": "t-02",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "px"
+      ],
+      [
+       "var",
+       "qx"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "px"
+      ],
+      [
+       "var",
+       "qx"
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "py"
+      ],
+      [
+       "var",
+       "qy"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "py"
+      ],
+      [
+       "var",
+       "qy"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "coord",
+   "family": "nv_c_box_area",
+   "formula": "area of the bounding box of P and Q = |px-qx| |py-qy|",
+   "inputs": [
+    "px",
+    "py",
+    "qx",
+    "qy"
+   ],
+   "kind": "box",
+   "rows": [
+    [
+     {
+      "px": 6,
+      "py": 9,
+      "qx": 6,
+      "qy": -4
+     },
+     0
+    ],
+    [
+     {
+      "px": -6,
+      "py": 0,
+      "qx": -1,
+      "qy": -6
+     },
+     30
+    ],
+    [
+     {
+      "px": 5,
+      "py": 4,
+      "qx": 5,
+      "qy": 1
+     },
+     0
+    ],
+    [
+     {
+      "px": 6,
+      "py": 6,
+      "qx": -3,
+      "qy": 0
+     },
+     54
+    ],
+    [
+     {
+      "px": 11,
+      "py": 10,
+      "qx": -4,
+      "qy": 3
+     },
+     105
+    ],
+    [
+     {
+      "px": 10,
+      "py": 10,
+      "qx": 4,
+      "qy": -9
+     },
+     114
+    ],
+    [
+     {
+      "px": -3,
+      "py": -5,
+      "qx": 4,
+      "qy": -9
+     },
+     28
+    ],
+    [
+     {
+      "px": 1,
+      "py": 6,
+      "qx": 11,
+      "qy": 6
+     },
+     0
+    ],
+    [
+     {
+      "px": -1,
+      "py": -11,
+      "qx": 9,
+      "qy": -12
+     },
+     10
+    ],
+    [
+     {
+      "px": -7,
+      "py": 8,
+      "qx": 7,
+      "qy": 4
+     },
+     56
+    ],
+    [
+     {
+      "px": -1,
+      "py": -5,
+      "qx": -9,
+      "qy": -2
+     },
+     24
+    ]
+   ],
+   "task_id": "t-05",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "px"
+      ],
+      [
+       "var",
+       "qx"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "px"
+      ],
+      [
+       "var",
+       "qx"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "py"
+      ],
+      [
+       "var",
+       "qy"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "py"
+      ],
+      [
+       "var",
+       "qy"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "coord",
+   "family": "nv_c_box_perim",
+   "formula": "perimeter of the bounding box = 2(|px-qx| + |py-qy|)",
+   "inputs": [
+    "px",
+    "py",
+    "qx",
+    "qy"
+   ],
+   "kind": "box",
+   "rows": [
+    [
+     {
+      "px": -5,
+      "py": -11,
+      "qx": -6,
+      "qy": 5
+     },
+     34
+    ],
+    [
+     {
+      "px": -11,
+      "py": 8,
+      "qx": -11,
+      "qy": 8
+     },
+     0
+    ],
+    [
+     {
+      "px": -1,
+      "py": 10,
+      "qx": -7,
+      "qy": -3
+     },
+     38
+    ],
+    [
+     {
+      "px": 10,
+      "py": -4,
+      "qx": 7,
+      "qy": -10
+     },
+     18
+    ],
+    [
+     {
+      "px": 6,
+      "py": -10,
+      "qx": 12,
+      "qy": -3
+     },
+     26
+    ],
+    [
+     {
+      "px": 11,
+      "py": 0,
+      "qx": -4,
+      "qy": 1
+     },
+     32
+    ],
+    [
+     {
+      "px": 7,
+      "py": 5,
+      "qx": 6,
+      "qy": 9
+     },
+     10
+    ],
+    [
+     {
+      "px": 7,
+      "py": 5,
+      "qx": 5,
+      "qy": -7
+     },
+     28
+    ],
+    [
+     {
+      "px": -6,
+      "py": 5,
+      "qx": -2,
+      "qy": -5
+     },
+     28
+    ],
+    [
+     {
+      "px": -2,
+      "py": -2,
+      "qx": 1,
+      "qy": -2
+     },
+     6
+    ],
+    [
+     {
+      "px": 8,
+      "py": -4,
+      "qx": -7,
+      "qy": -1
+     },
+     36
+    ]
+   ],
+   "task_id": "t-06",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "const",
+     2
+    ],
+    [
+     "add",
+     [
+      "sub",
+      [
+       "max",
+       [
+        "var",
+        "px"
+       ],
+       [
+        "var",
+        "qx"
+       ]
+      ],
+      [
+       "min",
+       [
+        "var",
+        "px"
+       ],
+       [
+        "var",
+        "qx"
+       ]
+      ]
+     ],
+     [
+      "sub",
+      [
+       "max",
+       [
+        "var",
+        "py"
+       ],
+       [
+        "var",
+        "qy"
+       ]
+      ],
+      [
+       "min",
+       [
+        "var",
+        "py"
+       ],
+       [
+        "var",
+        "qy"
+       ]
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "coord",
+   "family": "nv_c_tri_area2",
+   "formula": "twice the area of triangle O P Q = |px qy - py qx|",
+   "inputs": [
+    "px",
+    "py",
+    "qx",
+    "qy"
+   ],
+   "kind": "box",
+   "rows": [
+    [
+     {
+      "px": 10,
+      "py": 5,
+      "qx": 11,
+      "qy": 3
+     },
+     25
+    ],
+    [
+     {
+      "px": -5,
+      "py": 4,
+      "qx": -10,
+      "qy": 7
+     },
+     5
+    ],
+    [
+     {
+      "px": 2,
+      "py": -11,
+      "qx": 1,
+      "qy": -12
+     },
+     13
+    ],
+    [
+     {
+      "px": 6,
+      "py": 12,
+      "qx": 12,
+      "qy": 12
+     },
+     72
+    ],
+    [
+     {
+      "px": -12,
+      "py": 10,
+      "qx": 5,
+      "qy": 0
+     },
+     50
+    ],
+    [
+     {
+      "px": 6,
+      "py": -6,
+      "qx": 11,
+      "qy": -4
+     },
+     42
+    ],
+    [
+     {
+      "px": -7,
+      "py": -4,
+      "qx": 7,
+      "qy": 6
+     },
+     14
+    ],
+    [
+     {
+      "px": -6,
+      "py": -12,
+      "qx": 5,
+      "qy": 1
+     },
+     54
+    ],
+    [
+     {
+      "px": 4,
+      "py": 2,
+      "qx": -10,
+      "qy": 11
+     },
+     64
+    ],
+    [
+     {
+      "px": -11,
+      "py": -12,
+      "qx": 0,
+      "qy": 7
+     },
+     77
+    ],
+    [
+     {
+      "px": -4,
+      "py": 9,
+      "qx": 10,
+      "qy": 1
+     },
+     94
+    ]
+   ],
+   "task_id": "t-07",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "max",
+     [
+      "mul",
+      [
+       "var",
+       "px"
+      ],
+      [
+       "var",
+       "qy"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "py"
+      ],
+      [
+       "var",
+       "qx"
+      ]
+     ]
+    ],
+    [
+     "min",
+     [
+      "mul",
+      [
+       "var",
+       "px"
+      ],
+      [
+       "var",
+       "qy"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "py"
+      ],
+      [
+       "var",
+       "qx"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "coord",
+   "family": "nv_c_mid_sum",
+   "formula": "x + y of the lattice midpoint of P and Q = (px+qx)/2 + (py+qy)/2",
+   "inputs": [
+    "px",
+    "py",
+    "qx",
+    "qy"
+   ],
+   "kind": "vector",
+   "rows": [
+    [
+     {
+      "px": 2,
+      "py": -12,
+      "qx": 4,
+      "qy": 10
+     },
+     2
+    ],
+    [
+     {
+      "px": 7,
+      "py": 12,
+      "qx": 9,
+      "qy": -6
+     },
+     11
+    ],
+    [
+     {
+      "px": -9,
+      "py": 5,
+      "qx": 7,
+      "qy": -1
+     },
+     1
+    ],
+    [
+     {
+      "px": 0,
+      "py": 7,
+      "qx": -4,
+      "qy": -5
+     },
+     -1
+    ],
+    [
+     {
+      "px": -2,
+      "py": -6,
+      "qx": 2,
+      "qy": -6
+     },
+     -6
+    ],
+    [
+     {
+      "px": -1,
+      "py": 3,
+      "qx": -3,
+      "qy": 11
+     },
+     5
+    ],
+    [
+     {
+      "px": -8,
+      "py": -5,
+      "qx": 2,
+      "qy": 1
+     },
+     -5
+    ],
+    [
+     {
+      "px": 2,
+      "py": 11,
+      "qx": -4,
+      "qy": 1
+     },
+     5
+    ],
+    [
+     {
+      "px": -11,
+      "py": 1,
+      "qx": 5,
+      "qy": -1
+     },
+     -3
+    ],
+    [
+     {
+      "px": 8,
+      "py": -12,
+      "qx": 8,
+      "qy": 6
+     },
+     5
+    ],
+    [
+     {
+      "px": -3,
+      "py": -6,
+      "qx": -11,
+      "qy": -4
+     },
+     -12
+    ]
+   ],
+   "task_id": "t-08",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "px"
+      ],
+      [
+       "var",
+       "qx"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "py"
+      ],
+      [
+       "var",
+       "qy"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 7252,
+   "cold_reason": null,
+   "domain": "coord",
+   "family": "nv_c_overlap",
+   "formula": "overlap of the x-shadows [px, qx] and [py, qy] (px < qx, py < qy) = max(0, min(qx,qy) - max(px,py))",
+   "inputs": [
+    "px",
+    "py",
+    "qx",
+    "qy"
+   ],
+   "kind": "box",
+   "rows": [
+    [
+     {
+      "px": -10,
+      "py": -8,
+      "qx": -7,
+      "qy": 9
+     },
+     1
+    ],
+    [
+     {
+      "px": -11,
+      "py": 5,
+      "qx": -8,
+      "qy": 7
+     },
+     0
+    ],
+    [
+     {
+      "px": -12,
+      "py": 7,
+      "qx": -7,
+      "qy": 12
+     },
+     0
+    ],
+    [
+     {
+      "px": 3,
+      "py": -11,
+      "qx": 4,
+      "qy": -2
+     },
+     0
+    ],
+    [
+     {
+      "px": 7,
+      "py": -8,
+      "qx": 9,
+      "qy": -4
+     },
+     0
+    ],
+    [
+     {
+      "px": -3,
+      "py": -8,
+      "qx": 1,
+      "qy": -3
+     },
+     0
+    ],
+    [
+     {
+      "px": -3,
+      "py": 5,
+      "qx": 9,
+      "qy": 8
+     },
+     3
+    ],
+    [
+     {
+      "px": -9,
+      "py": -3,
+      "qx": 1,
+      "qy": 9
+     },
+     4
+    ],
+    [
+     {
+      "px": -7,
+      "py": -8,
+      "qx": 6,
+      "qy": -1
+     },
+     6
+    ],
+    [
+     {
+      "px": -4,
+      "py": -6,
+      "qx": 7,
+      "qy": 5
+     },
+     9
+    ],
+    [
+     {
+      "px": -3,
+      "py": 1,
+      "qx": -2,
+      "qy": 3
+     },
+     0
+    ]
+   ],
+   "task_id": "t-09",
+   "tier": "hard",
+   "tree": [
+    "max",
+    [
+     "const",
+     0
+    ],
+    [
+     "sub",
+     [
+      "min",
+      [
+       "var",
+       "qx"
+      ],
+      [
+       "var",
+       "qy"
+      ]
+     ],
+     [
+      "max",
+      [
+       "var",
+       "px"
+      ],
+      [
+       "var",
+       "py"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "digits",
+   "family": "nv_d_digit_sum3",
+   "formula": "sum of the three digits of nn",
+   "inputs": [
+    "nn",
+    "tn"
+   ],
+   "kind": "digit",
+   "rows": [
+    [
+     {
+      "nn": 946,
+      "tn": 10
+     },
+     19
+    ],
+    [
+     {
+      "nn": 645,
+      "tn": 10
+     },
+     15
+    ],
+    [
+     {
+      "nn": 613,
+      "tn": 10
+     },
+     10
+    ],
+    [
+     {
+      "nn": 759,
+      "tn": 10
+     },
+     21
+    ],
+    [
+     {
+      "nn": 834,
+      "tn": 10
+     },
+     15
+    ],
+    [
+     {
+      "nn": 372,
+      "tn": 10
+     },
+     12
+    ],
+    [
+     {
+      "nn": 144,
+      "tn": 10
+     },
+     9
+    ],
+    [
+     {
+      "nn": 408,
+      "tn": 10
+     },
+     12
+    ],
+    [
+     {
+      "nn": 777,
+      "tn": 10
+     },
+     21
+    ],
+    [
+     {
+      "nn": 310,
+      "tn": 10
+     },
+     4
+    ],
+    [
+     {
+      "nn": 983,
+      "tn": 10
+     },
+     20
+    ]
+   ],
+   "task_id": "t-10",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "add",
+     [
+      "mod",
+      [
+       "var",
+       "nn"
+      ],
+      [
+       "var",
+       "tn"
+      ]
+     ],
+     [
+      "mod",
+      [
+       "div",
+       [
+        "var",
+        "nn"
+       ],
+       [
+        "var",
+        "tn"
+       ]
+      ],
+      [
+       "var",
+       "tn"
+      ]
+     ]
+    ],
+    [
+     "div",
+     [
+      "var",
+      "nn"
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "tn"
+      ],
+      [
+       "var",
+       "tn"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "digits",
+   "family": "nv_d_reverse2",
+   "formula": "two-digit nn with its digits swapped",
+   "inputs": [
+    "nn",
+    "tn"
+   ],
+   "kind": "rearrange",
+   "rows": [
+    [
+     {
+      "nn": 11,
+      "tn": 10
+     },
+     11
+    ],
+    [
+     {
+      "nn": 92,
+      "tn": 10
+     },
+     29
+    ],
+    [
+     {
+      "nn": 29,
+      "tn": 10
+     },
+     92
+    ],
+    [
+     {
+      "nn": 47,
+      "tn": 10
+     },
+     74
+    ],
+    [
+     {
+      "nn": 53,
+      "tn": 10
+     },
+     35
+    ],
+    [
+     {
+      "nn": 77,
+      "tn": 10
+     },
+     77
+    ],
+    [
+     {
+      "nn": 48,
+      "tn": 10
+     },
+     84
+    ],
+    [
+     {
+      "nn": 98,
+      "tn": 10
+     },
+     89
+    ],
+    [
+     {
+      "nn": 51,
+      "tn": 10
+     },
+     15
+    ],
+    [
+     {
+      "nn": 45,
+      "tn": 10
+     },
+     54
+    ],
+    [
+     {
+      "nn": 32,
+      "tn": 10
+     },
+     23
+    ]
+   ],
+   "task_id": "t-12",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "mod",
+      [
+       "var",
+       "nn"
+      ],
+      [
+       "var",
+       "tn"
+      ]
+     ],
+     [
+      "var",
+      "tn"
+     ]
+    ],
+    [
+     "div",
+     [
+      "var",
+      "nn"
+     ],
+     [
+      "var",
+      "tn"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "digits",
+   "family": "nv_d_swap_change",
+   "formula": "digits-swapped two-digit nn minus nn",
+   "inputs": [
+    "nn",
+    "tn"
+   ],
+   "kind": "rearrange",
+   "rows": [
+    [
+     {
+      "nn": 39,
+      "tn": 10
+     },
+     54
+    ],
+    [
+     {
+      "nn": 64,
+      "tn": 10
+     },
+     -18
+    ],
+    [
+     {
+      "nn": 75,
+      "tn": 10
+     },
+     -18
+    ],
+    [
+     {
+      "nn": 21,
+      "tn": 10
+     },
+     -9
+    ],
+    [
+     {
+      "nn": 18,
+      "tn": 10
+     },
+     63
+    ],
+    [
+     {
+      "nn": 12,
+      "tn": 10
+     },
+     9
+    ],
+    [
+     {
+      "nn": 60,
+      "tn": 10
+     },
+     -54
+    ],
+    [
+     {
+      "nn": 71,
+      "tn": 10
+     },
+     -54
+    ],
+    [
+     {
+      "nn": 89,
+      "tn": 10
+     },
+     9
+    ],
+    [
+     {
+      "nn": 40,
+      "tn": 10
+     },
+     -36
+    ],
+    [
+     {
+      "nn": 51,
+      "tn": 10
+     },
+     -36
+    ]
+   ],
+   "task_id": "t-13",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "mod",
+       [
+        "var",
+        "nn"
+       ],
+       [
+        "var",
+        "tn"
+       ]
+      ],
+      [
+       "var",
+       "tn"
+      ]
+     ],
+     [
+      "div",
+      [
+       "var",
+       "nn"
+      ],
+      [
+       "var",
+       "tn"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "nn"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "digits",
+   "family": "nv_d_round10",
+   "formula": "nn rounded to the nearest ten (halves up)",
+   "inputs": [
+    "nn",
+    "tn"
+   ],
+   "kind": "round",
+   "rows": [
+    [
+     {
+      "nn": 815,
+      "tn": 10
+     },
+     820
+    ],
+    [
+     {
+      "nn": 328,
+      "tn": 10
+     },
+     330
+    ],
+    [
+     {
+      "nn": 330,
+      "tn": 10
+     },
+     330
+    ],
+    [
+     {
+      "nn": 391,
+      "tn": 10
+     },
+     390
+    ],
+    [
+     {
+      "nn": 601,
+      "tn": 10
+     },
+     600
+    ],
+    [
+     {
+      "nn": 999,
+      "tn": 10
+     },
+     1000
+    ],
+    [
+     {
+      "nn": 707,
+      "tn": 10
+     },
+     710
+    ],
+    [
+     {
+      "nn": 616,
+      "tn": 10
+     },
+     620
+    ],
+    [
+     {
+      "nn": 841,
+      "tn": 10
+     },
+     840
+    ],
+    [
+     {
+      "nn": 698,
+      "tn": 10
+     },
+     700
+    ],
+    [
+     {
+      "nn": 805,
+      "tn": 10
+     },
+     810
+    ]
+   ],
+   "task_id": "t-14",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "nn"
+      ],
+      [
+       "div",
+       [
+        "var",
+        "tn"
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ],
+     [
+      "var",
+      "tn"
+     ]
+    ],
+    [
+     "var",
+     "tn"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "digits",
+   "family": "nv_d_ends_sum",
+   "formula": "first digit plus last digit of three-digit nn",
+   "inputs": [
+    "nn",
+    "tn"
+   ],
+   "kind": "digit",
+   "rows": [
+    [
+     {
+      "nn": 533,
+      "tn": 10
+     },
+     8
+    ],
+    [
+     {
+      "nn": 896,
+      "tn": 10
+     },
+     14
+    ],
+    [
+     {
+      "nn": 609,
+      "tn": 10
+     },
+     15
+    ],
+    [
+     {
+      "nn": 674,
+      "tn": 10
+     },
+     10
+    ],
+    [
+     {
+      "nn": 430,
+      "tn": 10
+     },
+     4
+    ],
+    [
+     {
+      "nn": 824,
+      "tn": 10
+     },
+     12
+    ],
+    [
+     {
+      "nn": 378,
+      "tn": 10
+     },
+     11
+    ],
+    [
+     {
+      "nn": 237,
+      "tn": 10
+     },
+     9
+    ],
+    [
+     {
+      "nn": 458,
+      "tn": 10
+     },
+     12
+    ],
+    [
+     {
+      "nn": 217,
+      "tn": 10
+     },
+     9
+    ],
+    [
+     {
+      "nn": 441,
+      "tn": 10
+     },
+     5
+    ]
+   ],
+   "task_id": "t-15",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "div",
+     [
+      "var",
+      "nn"
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "tn"
+      ],
+      [
+       "var",
+       "tn"
+      ]
+     ]
+    ],
+    [
+     "mod",
+     [
+      "var",
+      "nn"
+     ],
+     [
+      "var",
+      "tn"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "digits",
+   "family": "nv_d_drop_middle",
+   "formula": "three-digit nn with its middle digit removed",
+   "inputs": [
+    "nn",
+    "tn"
+   ],
+   "kind": "rearrange",
+   "rows": [
+    [
+     {
+      "nn": 268,
+      "tn": 10
+     },
+     28
+    ],
+    [
+     {
+      "nn": 285,
+      "tn": 10
+     },
+     25
+    ],
+    [
+     {
+      "nn": 382,
+      "tn": 10
+     },
+     32
+    ],
+    [
+     {
+      "nn": 792,
+      "tn": 10
+     },
+     72
+    ],
+    [
+     {
+      "nn": 957,
+      "tn": 10
+     },
+     97
+    ],
+    [
+     {
+      "nn": 242,
+      "tn": 10
+     },
+     22
+    ],
+    [
+     {
+      "nn": 367,
+      "tn": 10
+     },
+     37
+    ],
+    [
+     {
+      "nn": 565,
+      "tn": 10
+     },
+     55
+    ],
+    [
+     {
+      "nn": 524,
+      "tn": 10
+     },
+     54
+    ],
+    [
+     {
+      "nn": 899,
+      "tn": 10
+     },
+     89
+    ],
+    [
+     {
+      "nn": 462,
+      "tn": 10
+     },
+     42
+    ]
+   ],
+   "task_id": "t-16",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "div",
+      [
+       "var",
+       "nn"
+      ],
+      [
+       "mul",
+       [
+        "var",
+        "tn"
+       ],
+       [
+        "var",
+        "tn"
+       ]
+      ]
+     ],
+     [
+      "var",
+      "tn"
+     ]
+    ],
+    [
+     "mod",
+     [
+      "var",
+      "nn"
+     ],
+     [
+      "var",
+      "tn"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "digits",
+   "family": "nv_d_digit_prod2",
+   "formula": "product of the two digits of nn",
+   "inputs": [
+    "nn",
+    "tn"
+   ],
+   "kind": "digit",
+   "rows": [
+    [
+     {
+      "nn": 53,
+      "tn": 10
+     },
+     15
+    ],
+    [
+     {
+      "nn": 20,
+      "tn": 10
+     },
+     0
+    ],
+    [
+     {
+      "nn": 41,
+      "tn": 10
+     },
+     4
+    ],
+    [
+     {
+      "nn": 49,
+      "tn": 10
+     },
+     36
+    ],
+    [
+     {
+      "nn": 44,
+      "tn": 10
+     },
+     16
+    ],
+    [
+     {
+      "nn": 69,
+      "tn": 10
+     },
+     54
+    ],
+    [
+     {
+      "nn": 50,
+      "tn": 10
+     },
+     0
+    ],
+    [
+     {
+      "nn": 76,
+      "tn": 10
+     },
+     42
+    ],
+    [
+     {
+      "nn": 96,
+      "tn": 10
+     },
+     54
+    ],
+    [
+     {
+      "nn": 32,
+      "tn": 10
+     },
+     6
+    ],
+    [
+     {
+      "nn": 87,
+      "tn": 10
+     },
+     56
+    ]
+   ],
+   "task_id": "t-17",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "div",
+     [
+      "var",
+      "nn"
+     ],
+     [
+      "var",
+      "tn"
+     ]
+    ],
+    [
+     "mod",
+     [
+      "var",
+      "nn"
+     ],
+     [
+      "var",
+      "tn"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "digits",
+   "family": "nv_d_alternating",
+   "formula": "alternating digit sum: hundreds - tens + units",
+   "inputs": [
+    "nn",
+    "tn"
+   ],
+   "kind": "digit",
+   "rows": [
+    [
+     {
+      "nn": 745,
+      "tn": 10
+     },
+     8
+    ],
+    [
+     {
+      "nn": 300,
+      "tn": 10
+     },
+     3
+    ],
+    [
+     {
+      "nn": 979,
+      "tn": 10
+     },
+     11
+    ],
+    [
+     {
+      "nn": 159,
+      "tn": 10
+     },
+     5
+    ],
+    [
+     {
+      "nn": 425,
+      "tn": 10
+     },
+     7
+    ],
+    [
+     {
+      "nn": 180,
+      "tn": 10
+     },
+     -7
+    ],
+    [
+     {
+      "nn": 315,
+      "tn": 10
+     },
+     7
+    ],
+    [
+     {
+      "nn": 755,
+      "tn": 10
+     },
+     7
+    ],
+    [
+     {
+      "nn": 927,
+      "tn": 10
+     },
+     14
+    ],
+    [
+     {
+      "nn": 176,
+      "tn": 10
+     },
+     0
+    ],
+    [
+     {
+      "nn": 649,
+      "tn": 10
+     },
+     11
+    ]
+   ],
+   "task_id": "t-19",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "sub",
+     [
+      "div",
+      [
+       "var",
+       "nn"
+      ],
+      [
+       "mul",
+       [
+        "var",
+        "tn"
+       ],
+       [
+        "var",
+        "tn"
+       ]
+      ]
+     ],
+     [
+      "mod",
+      [
+       "div",
+       [
+        "var",
+        "nn"
+       ],
+       [
+        "var",
+        "tn"
+       ]
+      ],
+      [
+       "var",
+       "tn"
+      ]
+     ]
+    ],
+    [
+     "mod",
+     [
+      "var",
+      "nn"
+     ],
+     [
+      "var",
+      "tn"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "order",
+   "family": "nv_o_median3",
+   "formula": "median of oa, ob, oc",
+   "inputs": [
+    "oa",
+    "ob",
+    "oc"
+   ],
+   "kind": "statistic",
+   "rows": [
+    [
+     {
+      "oa": 32,
+      "ob": 25,
+      "oc": 23
+     },
+     25
+    ],
+    [
+     {
+      "oa": 38,
+      "ob": 13,
+      "oc": 30
+     },
+     30
+    ],
+    [
+     {
+      "oa": 15,
+      "ob": 22,
+      "oc": 22
+     },
+     22
+    ],
+    [
+     {
+      "oa": 20,
+      "ob": 6,
+      "oc": 30
+     },
+     20
+    ],
+    [
+     {
+      "oa": 10,
+      "ob": 38,
+      "oc": 22
+     },
+     22
+    ],
+    [
+     {
+      "oa": 1,
+      "ob": 30,
+      "oc": 3
+     },
+     3
+    ],
+    [
+     {
+      "oa": 27,
+      "ob": 20,
+      "oc": 1
+     },
+     20
+    ],
+    [
+     {
+      "oa": 39,
+      "ob": 10,
+      "oc": 34
+     },
+     34
+    ],
+    [
+     {
+      "oa": 30,
+      "ob": 11,
+      "oc": 33
+     },
+     30
+    ],
+    [
+     {
+      "oa": 2,
+      "ob": 17,
+      "oc": 11
+     },
+     11
+    ],
+    [
+     {
+      "oa": 21,
+      "ob": 33,
+      "oc": 5
+     },
+     21
+    ]
+   ],
+   "task_id": "t-20",
+   "tier": "hard",
+   "tree": [
+    "max",
+    [
+     "min",
+     [
+      "var",
+      "oa"
+     ],
+     [
+      "var",
+      "ob"
+     ]
+    ],
+    [
+     "min",
+     [
+      "max",
+      [
+       "var",
+       "oa"
+      ],
+      [
+       "var",
+       "ob"
+      ]
+     ],
+     [
+      "var",
+      "oc"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 167,
+   "cold_reason": null,
+   "domain": "order",
+   "family": "nv_o_clamp",
+   "formula": "oa clamped to the window [ob, ob + oc]",
+   "inputs": [
+    "oa",
+    "ob",
+    "oc"
+   ],
+   "kind": "clamp",
+   "rows": [
+    [
+     {
+      "oa": 16,
+      "ob": 28,
+      "oc": 37
+     },
+     28
+    ],
+    [
+     {
+      "oa": 27,
+      "ob": 20,
+      "oc": 25
+     },
+     27
+    ],
+    [
+     {
+      "oa": 29,
+      "ob": 28,
+      "oc": 33
+     },
+     29
+    ],
+    [
+     {
+      "oa": 6,
+      "ob": 36,
+      "oc": 25
+     },
+     36
+    ],
+    [
+     {
+      "oa": 26,
+      "ob": 35,
+      "oc": 18
+     },
+     35
+    ],
+    [
+     {
+      "oa": 19,
+      "ob": 18,
+      "oc": 23
+     },
+     19
+    ],
+    [
+     {
+      "oa": 35,
+      "ob": 28,
+      "oc": 22
+     },
+     35
+    ],
+    [
+     {
+      "oa": 38,
+      "ob": 39,
+      "oc": 5
+     },
+     39
+    ],
+    [
+     {
+      "oa": 7,
+      "ob": 23,
+      "oc": 1
+     },
+     23
+    ],
+    [
+     {
+      "oa": 24,
+      "ob": 22,
+      "oc": 1
+     },
+     23
+    ],
+    [
+     {
+      "oa": 8,
+      "ob": 1,
+      "oc": 1
+     },
+     2
+    ]
+   ],
+   "task_id": "t-21",
+   "tier": "hard",
+   "tree": [
+    "min",
+    [
+     "max",
+     [
+      "var",
+      "oa"
+     ],
+     [
+      "var",
+      "ob"
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "ob"
+     ],
+     [
+      "var",
+      "oc"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 276,
+   "cold_reason": null,
+   "domain": "order",
+   "family": "nv_o_top_two",
+   "formula": "sum of the two largest of oa, ob, oc",
+   "inputs": [
+    "oa",
+    "ob",
+    "oc"
+   ],
+   "kind": "statistic",
+   "rows": [
+    [
+     {
+      "oa": 11,
+      "ob": 30,
+      "oc": 34
+     },
+     64
+    ],
+    [
+     {
+      "oa": 20,
+      "ob": 29,
+      "oc": 19
+     },
+     49
+    ],
+    [
+     {
+      "oa": 35,
+      "ob": 18,
+      "oc": 1
+     },
+     53
+    ],
+    [
+     {
+      "oa": 36,
+      "ob": 27,
+      "oc": 20
+     },
+     63
+    ],
+    [
+     {
+      "oa": 8,
+      "ob": 27,
+      "oc": 10
+     },
+     37
+    ],
+    [
+     {
+      "oa": 23,
+      "ob": 31,
+      "oc": 34
+     },
+     65
+    ],
+    [
+     {
+      "oa": 12,
+      "ob": 19,
+      "oc": 10
+     },
+     31
+    ],
+    [
+     {
+      "oa": 27,
+      "ob": 13,
+      "oc": 19
+     },
+     46
+    ],
+    [
+     {
+      "oa": 11,
+      "ob": 2,
+      "oc": 20
+     },
+     31
+    ],
+    [
+     {
+      "oa": 1,
+      "ob": 29,
+      "oc": 33
+     },
+     62
+    ],
+    [
+     {
+      "oa": 4,
+      "ob": 35,
+      "oc": 5
+     },
+     40
+    ]
+   ],
+   "task_id": "t-22",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "add",
+     [
+      "add",
+      [
+       "var",
+       "oa"
+      ],
+      [
+       "var",
+       "ob"
+      ]
+     ],
+     [
+      "var",
+      "oc"
+     ]
+    ],
+    [
+     "min",
+     [
+      "min",
+      [
+       "var",
+       "oa"
+      ],
+      [
+       "var",
+       "ob"
+      ]
+     ],
+     [
+      "var",
+      "oc"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "order",
+   "family": "nv_o_range3",
+   "formula": "largest minus smallest of oa, ob, oc",
+   "inputs": [
+    "oa",
+    "ob",
+    "oc"
+   ],
+   "kind": "statistic",
+   "rows": [
+    [
+     {
+      "oa": 9,
+      "ob": 6,
+      "oc": 20
+     },
+     14
+    ],
+    [
+     {
+      "oa": 3,
+      "ob": 7,
+      "oc": 10
+     },
+     7
+    ],
+    [
+     {
+      "oa": 33,
+      "ob": 12,
+      "oc": 18
+     },
+     21
+    ],
+    [
+     {
+      "oa": 24,
+      "ob": 14,
+      "oc": 27
+     },
+     13
+    ],
+    [
+     {
+      "oa": 8,
+      "ob": 37,
+      "oc": 16
+     },
+     29
+    ],
+    [
+     {
+      "oa": 23,
+      "ob": 22,
+      "oc": 16
+     },
+     7
+    ],
+    [
+     {
+      "oa": 23,
+      "ob": 10,
+      "oc": 23
+     },
+     13
+    ],
+    [
+     {
+      "oa": 40,
+      "ob": 8,
+      "oc": 14
+     },
+     32
+    ],
+    [
+     {
+      "oa": 17,
+      "ob": 25,
+      "oc": 14
+     },
+     11
+    ],
+    [
+     {
+      "oa": 16,
+      "ob": 2,
+      "oc": 7
+     },
+     14
+    ],
+    [
+     {
+      "oa": 16,
+      "ob": 39,
+      "oc": 25
+     },
+     23
+    ]
+   ],
+   "task_id": "t-23",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "max",
+     [
+      "max",
+      [
+       "var",
+       "oa"
+      ],
+      [
+       "var",
+       "ob"
+      ]
+     ],
+     [
+      "var",
+      "oc"
+     ]
+    ],
+    [
+     "min",
+     [
+      "min",
+      [
+       "var",
+       "oa"
+      ],
+      [
+       "var",
+       "ob"
+      ]
+     ],
+     [
+      "var",
+      "oc"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "order",
+   "family": "nv_o_gap_top",
+   "formula": "how far oa is below the largest of oa, ob, oc",
+   "inputs": [
+    "oa",
+    "ob",
+    "oc"
+   ],
+   "kind": "statistic",
+   "rows": [
+    [
+     {
+      "oa": 24,
+      "ob": 29,
+      "oc": 33
+     },
+     9
+    ],
+    [
+     {
+      "oa": 38,
+      "ob": 20,
+      "oc": 40
+     },
+     2
+    ],
+    [
+     {
+      "oa": 32,
+      "ob": 33,
+      "oc": 26
+     },
+     1
+    ],
+    [
+     {
+      "oa": 35,
+      "ob": 20,
+      "oc": 16
+     },
+     0
+    ],
+    [
+     {
+      "oa": 40,
+      "ob": 25,
+      "oc": 9
+     },
+     0
+    ],
+    [
+     {
+      "oa": 13,
+      "ob": 32,
+      "oc": 6
+     },
+     19
+    ],
+    [
+     {
+      "oa": 21,
+      "ob": 8,
+      "oc": 24
+     },
+     3
+    ],
+    [
+     {
+      "oa": 20,
+      "ob": 15,
+      "oc": 28
+     },
+     8
+    ],
+    [
+     {
+      "oa": 20,
+      "ob": 13,
+      "oc": 22
+     },
+     2
+    ],
+    [
+     {
+      "oa": 24,
+      "ob": 7,
+      "oc": 11
+     },
+     0
+    ],
+    [
+     {
+      "oa": 40,
+      "ob": 21,
+      "oc": 23
+     },
+     0
+    ]
+   ],
+   "task_id": "t-24",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "max",
+     [
+      "max",
+      [
+       "var",
+       "oa"
+      ],
+      [
+       "var",
+       "ob"
+      ]
+     ],
+     [
+      "var",
+      "oc"
+     ]
+    ],
+    [
+     "var",
+     "oa"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 1101,
+   "cold_reason": null,
+   "domain": "order",
+   "family": "nv_o_count_above",
+   "formula": "how many of oa, ob exceed oc",
+   "inputs": [
+    "oa",
+    "ob",
+    "oc"
+   ],
+   "kind": "count",
+   "rows": [
+    [
+     {
+      "oa": 20,
+      "ob": 4,
+      "oc": 11
+     },
+     1
+    ],
+    [
+     {
+      "oa": 19,
+      "ob": 0,
+      "oc": 5
+     },
+     1
+    ],
+    [
+     {
+      "oa": 6,
+      "ob": 2,
+      "oc": 7
+     },
+     0
+    ],
+    [
+     {
+      "oa": 38,
+      "ob": 12,
+      "oc": 38
+     },
+     0
+    ],
+    [
+     {
+      "oa": 23,
+      "ob": 5,
+      "oc": 35
+     },
+     0
+    ],
+    [
+     {
+      "oa": 24,
+      "ob": 32,
+      "oc": 27
+     },
+     1
+    ],
+    [
+     {
+      "oa": 26,
+      "ob": 7,
+      "oc": 23
+     },
+     1
+    ],
+    [
+     {
+      "oa": 10,
+      "ob": 39,
+      "oc": 36
+     },
+     1
+    ],
+    [
+     {
+      "oa": 40,
+      "ob": 1,
+      "oc": 10
+     },
+     1
+    ],
+    [
+     {
+      "oa": 35,
+      "ob": 25,
+      "oc": 14
+     },
+     2
+    ],
+    [
+     {
+      "oa": 24,
+      "ob": 11,
+      "oc": 30
+     },
+     0
+    ]
+   ],
+   "task_id": "t-25",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "ite",
+     [
+      "sub",
+      [
+       "var",
+       "oa"
+      ],
+      [
+       "var",
+       "oc"
+      ]
+     ],
+     [
+      "const",
+      1
+     ],
+     [
+      "const",
+      0
+     ]
+    ],
+    [
+     "ite",
+     [
+      "sub",
+      [
+       "var",
+       "ob"
+      ],
+      [
+       "var",
+       "oc"
+      ]
+     ],
+     [
+      "const",
+      1
+     ],
+     [
+      "const",
+      0
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "order",
+   "family": "nv_o_max_pair_sum",
+   "formula": "the larger of the pair sums oa + ob and oc + od",
+   "inputs": [
+    "oa",
+    "ob",
+    "oc",
+    "od"
+   ],
+   "kind": "statistic",
+   "rows": [
+    [
+     {
+      "oa": 8,
+      "ob": 9,
+      "oc": 23,
+      "od": 2
+     },
+     25
+    ],
+    [
+     {
+      "oa": 37,
+      "ob": 23,
+      "oc": 27,
+      "od": 13
+     },
+     60
+    ],
+    [
+     {
+      "oa": 23,
+      "ob": 6,
+      "oc": 21,
+      "od": 8
+     },
+     29
+    ],
+    [
+     {
+      "oa": 15,
+      "ob": 33,
+      "oc": 34,
+      "od": 34
+     },
+     68
+    ],
+    [
+     {
+      "oa": 19,
+      "ob": 36,
+      "oc": 22,
+      "od": 39
+     },
+     61
+    ],
+    [
+     {
+      "oa": 28,
+      "ob": 8,
+      "oc": 16,
+      "od": 28
+     },
+     44
+    ],
+    [
+     {
+      "oa": 34,
+      "ob": 29,
+      "oc": 34,
+      "od": 3
+     },
+     63
+    ],
+    [
+     {
+      "oa": 38,
+      "ob": 18,
+      "oc": 17,
+      "od": 22
+     },
+     56
+    ],
+    [
+     {
+      "oa": 30,
+      "ob": 3,
+      "oc": 40,
+      "od": 30
+     },
+     70
+    ],
+    [
+     {
+      "oa": 8,
+      "ob": 38,
+      "oc": 2,
+      "od": 26
+     },
+     46
+    ],
+    [
+     {
+      "oa": 21,
+      "ob": 20,
+      "oc": 16,
+      "od": 35
+     },
+     51
+    ]
+   ],
+   "task_id": "t-26",
+   "tier": "hard",
+   "tree": [
+    "max",
+    [
+     "add",
+     [
+      "var",
+      "oa"
+     ],
+     [
+      "var",
+      "ob"
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "oc"
+     ],
+     [
+      "var",
+      "od"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "order",
+   "family": "nv_o_minmax4",
+   "formula": "the smaller of max(oa, ob) and max(oc, od)",
+   "inputs": [
+    "oa",
+    "ob",
+    "oc",
+    "od"
+   ],
+   "kind": "statistic",
+   "rows": [
+    [
+     {
+      "oa": 8,
+      "ob": 34,
+      "oc": 12,
+      "od": 13
+     },
+     13
+    ],
+    [
+     {
+      "oa": 12,
+      "ob": 16,
+      "oc": 34,
+      "od": 0
+     },
+     16
+    ],
+    [
+     {
+      "oa": 10,
+      "ob": 5,
+      "oc": 36,
+      "od": 4
+     },
+     10
+    ],
+    [
+     {
+      "oa": 30,
+      "ob": 35,
+      "oc": 7,
+      "od": 25
+     },
+     25
+    ],
+    [
+     {
+      "oa": 37,
+      "ob": 3,
+      "oc": 37,
+      "od": 26
+     },
+     37
+    ],
+    [
+     {
+      "oa": 18,
+      "ob": 30,
+      "oc": 11,
+      "od": 15
+     },
+     15
+    ],
+    [
+     {
+      "oa": 39,
+      "ob": 36,
+      "oc": 14,
+      "od": 24
+     },
+     24
+    ],
+    [
+     {
+      "oa": 2,
+      "ob": 20,
+      "oc": 37,
+      "od": 3
+     },
+     20
+    ],
+    [
+     {
+      "oa": 16,
+      "ob": 0,
+      "oc": 23,
+      "od": 10
+     },
+     16
+    ],
+    [
+     {
+      "oa": 16,
+      "ob": 35,
+      "oc": 20,
+      "od": 13
+     },
+     20
+    ],
+    [
+     {
+      "oa": 9,
+      "ob": 31,
+      "oc": 24,
+      "od": 12
+     },
+     24
+    ]
+   ],
+   "task_id": "t-27",
+   "tier": "hard",
+   "tree": [
+    "min",
+    [
+     "max",
+     [
+      "var",
+      "oa"
+     ],
+     [
+      "var",
+      "ob"
+     ]
+    ],
+    [
+     "max",
+     [
+      "var",
+      "oc"
+     ],
+     [
+      "var",
+      "od"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "order",
+   "family": "nv_o_middle_two4",
+   "formula": "sum of the middle two of oa, ob, oc, od",
+   "inputs": [
+    "oa",
+    "ob",
+    "oc",
+    "od"
+   ],
+   "kind": "statistic",
+   "rows": [
+    [
+     {
+      "oa": 38,
+      "ob": 31,
+      "oc": 0,
+      "od": 17
+     },
+     48
+    ],
+    [
+     {
+      "oa": 13,
+      "ob": 7,
+      "oc": 18,
+      "od": 24
+     },
+     31
+    ],
+    [
+     {
+      "oa": 9,
+      "ob": 38,
+      "oc": 29,
+      "od": 23
+     },
+     52
+    ],
+    [
+     {
+      "oa": 14,
+      "ob": 33,
+      "oc": 36,
+      "od": 23
+     },
+     56
+    ],
+    [
+     {
+      "oa": 31,
+      "ob": 30,
+      "oc": 2,
+      "od": 10
+     },
+     40
+    ],
+    [
+     {
+      "oa": 38,
+      "ob": 27,
+      "oc": 24,
+      "od": 31
+     },
+     58
+    ],
+    [
+     {
+      "oa": 1,
+      "ob": 6,
+      "oc": 37,
+      "od": 23
+     },
+     29
+    ],
+    [
+     {
+      "oa": 40,
+      "ob": 40,
+      "oc": 10,
+      "od": 1
+     },
+     50
+    ],
+    [
+     {
+      "oa": 38,
+      "ob": 13,
+      "oc": 6,
+      "od": 32
+     },
+     45
+    ],
+    [
+     {
+      "oa": 20,
+      "ob": 31,
+      "oc": 9,
+      "od": 3
+     },
+     29
+    ],
+    [
+     {
+      "oa": 1,
+      "ob": 12,
+      "oc": 19,
+      "od": 14
+     },
+     26
+    ]
+   ],
+   "task_id": "t-28",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "sub",
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "oa"
+       ],
+       [
+        "var",
+        "ob"
+       ]
+      ],
+      [
+       "add",
+       [
+        "var",
+        "oc"
+       ],
+       [
+        "var",
+        "od"
+       ]
+      ]
+     ],
+     [
+      "max",
+      [
+       "max",
+       [
+        "var",
+        "oa"
+       ],
+       [
+        "var",
+        "ob"
+       ]
+      ],
+      [
+       "max",
+       [
+        "var",
+        "oc"
+       ],
+       [
+        "var",
+        "od"
+       ]
+      ]
+     ]
+    ],
+    [
+     "min",
+     [
+      "min",
+      [
+       "var",
+       "oa"
+      ],
+      [
+       "var",
+       "ob"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "oc"
+      ],
+      [
+       "var",
+       "od"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "order",
+   "family": "nv_o_second4",
+   "formula": "second largest of oa, ob, oc, od",
+   "inputs": [
+    "oa",
+    "ob",
+    "oc",
+    "od"
+   ],
+   "kind": "statistic",
+   "rows": [
+    [
+     {
+      "oa": 32,
+      "ob": 7,
+      "oc": 9,
+      "od": 15
+     },
+     15
+    ],
+    [
+     {
+      "oa": 4,
+      "ob": 40,
+      "oc": 30,
+      "od": 1
+     },
+     30
+    ],
+    [
+     {
+      "oa": 14,
+      "ob": 7,
+      "oc": 6,
+      "od": 4
+     },
+     7
+    ],
+    [
+     {
+      "oa": 29,
+      "ob": 32,
+      "oc": 30,
+      "od": 11
+     },
+     30
+    ],
+    [
+     {
+      "oa": 25,
+      "ob": 40,
+      "oc": 0,
+      "od": 4
+     },
+     25
+    ],
+    [
+     {
+      "oa": 28,
+      "ob": 6,
+      "oc": 15,
+      "od": 28
+     },
+     28
+    ],
+    [
+     {
+      "oa": 0,
+      "ob": 29,
+      "oc": 9,
+      "od": 13
+     },
+     13
+    ],
+    [
+     {
+      "oa": 29,
+      "ob": 24,
+      "oc": 23,
+      "od": 17
+     },
+     24
+    ],
+    [
+     {
+      "oa": 39,
+      "ob": 21,
+      "oc": 5,
+      "od": 12
+     },
+     21
+    ],
+    [
+     {
+      "oa": 33,
+      "ob": 20,
+      "oc": 38,
+      "od": 33
+     },
+     33
+    ],
+    [
+     {
+      "oa": 7,
+      "ob": 24,
+      "oc": 30,
+      "od": 24
+     },
+     24
+    ]
+   ],
+   "task_id": "t-29",
+   "tier": "hard",
+   "tree": [
+    "max",
+    [
+     "min",
+     [
+      "max",
+      [
+       "var",
+       "oa"
+      ],
+      [
+       "var",
+       "ob"
+      ]
+     ],
+     [
+      "max",
+      [
+       "var",
+       "oc"
+      ],
+      [
+       "var",
+       "od"
+      ]
+     ]
+    ],
+    [
+     "max",
+     [
+      "min",
+      [
+       "var",
+       "oa"
+      ],
+      [
+       "var",
+       "ob"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "oc"
+      ],
+      [
+       "var",
+       "od"
+      ]
+     ]
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "int",
+ "schema": "nomad.novel-suite.v1",
+ "seed": 20270613,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 2,
+  "families": 30,
+  "hard": 26,
+  "lookup_dropped": [
+   {
+    "easy_twin": [],
+    "family": "nv_c_dot",
+    "memory_lookup": [
+     "add(mul(px, qx), mul(py, qy))",
+     "add(mul(px, qx), mul(qy, py))",
+     "add(mul(py, qy), mul(px, qx))",
+     "add(mul(py, qy), mul(qx, px))",
+     "add(mul(qx, px), mul(py, qy))"
+    ]
+   },
+   {
+    "easy_twin": [],
+    "family": "nv_c_cross",
+    "memory_lookup": [
+     "add(mul(py, sub(px, qx)), mul(sub(qy, py), px))",
+     "add(mul(py, sub(qy, qx)), mul(sub(px, py), qy))",
+     "add(mul(qx, sub(px, py)), mul(sub(qy, qx), px))",
+     "add(mul(qx, sub(qy, py)), mul(sub(px, qx), qy))",
+     "add(add(mul(py, sub(px, qx)), mul(sub(qy, py), px)), 0)"
+    ]
+   }
+  ]
+ },
+ "trained_on_by_any_arm": false
+}
