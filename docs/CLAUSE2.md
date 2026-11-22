@@ -174,4 +174,29 @@ can wait until main has earned enough.
 - Credits: a hit needed 1 to 66 new values (median about 7) and landed at the normal search's
   evaluation 1 to 578; on the four misses CLAUSE2 spent 44-236 credits and the reported counts equal off.
 
-Criteria 5 and 6 (existing judges, LOFO, tests) follow in part 2.
+## Sealed result part 2: existing judges, LOFO, tests
+
+`SWITCH=NOMAD_CLAUSE2 scripts/switch_regress.py` over all 24 earlier judges (every judge in
+`switch_regress.JUDGES` but `clause2`; the "25" above miscounted by one), run once from f5b8631
+(code identical to this commit). Outputs: `results/clause2/regress/`, comparison
+`results/clause2/regress_compare.json`.
+
+- 23 of 24 judges: 0 losses, and 22 of them have no per-task change at all (certified and evaluations
+  identical in every arm).
+- CLAUSE's sealed suite (secondary report): certified 35 -> 54 summed over arms, 0 losses, 23 gains
+  (for example cl_clock_left trained_off 5,645 -> 121 evaluations). COMBINE: 26 -> 29, 0 losses.
+- ROLES: the raw run showed 3 evaluation increases and 1 decrease, all in the report-only
+  shuffled-lexicon arms of two tasks (rs_wine_savings shuffled_1 101 -> 103, shuffled_3 105 -> 103;
+  rs_paint_lodges shuffled_1 and shuffled_3 131 -> 132); every trained, empty, cold and off arm was
+  identical. This is the hash-seed-dependent ordering documented in `docs/INTEGRITY.md` (the off and
+  on runs were separate interpreters with different random hash seeds). Controlled rerun of ROLES with
+  the hash seed fixed: under `PYTHONHASHSEED=0`, `1` and `2` the off and on outputs are byte-identical
+  (`results/clause2/roles_hashseed{0,1,2}/`), while off itself differs between seeds. So CLAUSE2 causes
+  0 ROLES changes. Note for the record: criterion 5 as written did not say how to treat this known
+  noise; it is counted here as 0 losses on the strength of the fixed-seed reruns and the INTEGRITY
+  precedent, and the raw numbers are reported above.
+- Criterion 5 PASS (0 losses on all 24 judges, ROLES under fixed hash seeds).
+- Criterion 6 PASS: LOFO 5,883 off and on (cold 5,883, trained 5,883, trained_port_off 5,883), worst
+  ratio 1.0x; full test suite 598 passed, 6 skipped.
+
+**Verdict: PASS on all six criteria.** Default ON follows in a separate commit.

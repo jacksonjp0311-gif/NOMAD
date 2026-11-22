@@ -1,0 +1,5155 @@
+{
+ "deep": {
+  "tasks": 40,
+  "certified": {
+   "cold": 0,
+   "empty": 25,
+   "trained": 27,
+   "trained_invent": 27
+  },
+  "evaluations": {
+   "cold": 284839,
+   "empty": 240553,
+   "trained": 235421,
+   "trained_invent": 235421
+  },
+  "by_domain": {
+   "cold": {
+    "all": [
+     0,
+     40
+    ]
+   },
+   "empty": {
+    "all": [
+     25,
+     40
+    ]
+   },
+   "trained": {
+    "all": [
+     27,
+     40
+    ]
+   },
+   "trained_invent": {
+    "all": [
+     27,
+     40
+    ]
+   }
+  },
+  "worse_than_cold": {
+   "cold": [],
+   "empty": [],
+   "trained": [],
+   "trained_invent": []
+  },
+  "trained_wins_lost": {
+   "cold": [
+    "deep_01",
+    "deep_02",
+    "deep_03",
+    "deep_06",
+    "deep_07",
+    "deep_09",
+    "deep_12",
+    "deep_13",
+    "deep_14",
+    "deep_15",
+    "deep_16",
+    "deep_18",
+    "deep_22",
+    "deep_23",
+    "deep_24",
+    "deep_25",
+    "deep_26",
+    "deep_27",
+    "deep_28",
+    "deep_30",
+    "deep_31",
+    "deep_32",
+    "deep_34",
+    "deep_35",
+    "deep_36",
+    "deep_37",
+    "deep_39"
+   ],
+   "empty": [
+    "deep_03",
+    "deep_24"
+   ],
+   "trained": [],
+   "trained_invent": []
+  },
+  "per_task[certified, evals, via, candidate]": {
+   "deep_00": {
+    "cold": [
+     false,
+     59,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     1489,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     1489,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     1489,
+     null,
+     null
+    ]
+   },
+   "deep_01": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5579,
+     "sense:mul",
+     "mul(sub(x, 3), mul(x, 3))"
+    ],
+    "trained": [
+     true,
+     5579,
+     "sense:mul",
+     "mul(sub(x, 3), mul(x, 3))"
+    ],
+    "trained_invent": [
+     true,
+     5579,
+     "sense:mul",
+     "mul(sub(x, 3), mul(x, 3))"
+    ]
+   },
+   "deep_02": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5733,
+     "sense:sub",
+     "sub(y, mul(add(x, 3), y))"
+    ],
+    "trained": [
+     true,
+     5733,
+     "sense:sub",
+     "sub(y, mul(add(x, 3), y))"
+    ],
+    "trained_invent": [
+     true,
+     5733,
+     "sense:sub",
+     "sub(y, mul(add(x, 3), y))"
+    ]
+   },
+   "deep_03": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5512,
+     "port:anchor",
+     "add(mul(y, y), sub(2, add(y, y)))"
+    ],
+    "trained_invent": [
+     true,
+     5512,
+     "port:anchor",
+     "add(mul(y, y), sub(2, add(y, y)))"
+    ]
+   },
+   "deep_04": {
+    "cold": [
+     false,
+     1078,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     9301,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     9301,
+     "casesplit:d1",
+     null
+    ],
+    "trained_invent": [
+     false,
+     9301,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_05": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_06": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5448,
+     "casesplit:d1",
+     "ite(mod(x, 2), sub(3, x), mul(mod(x, y), x))"
+    ],
+    "trained": [
+     true,
+     5448,
+     "casesplit:d1",
+     "ite(mod(x, 2), sub(3, x), mul(mod(x, y), x))"
+    ],
+    "trained_invent": [
+     true,
+     5448,
+     "casesplit:d1",
+     "ite(mod(x, 2), sub(3, x), mul(mod(x, y), x))"
+    ]
+   },
+   "deep_07": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     6450,
+     "sense:mul",
+     "mul(mul(3, y), sub(y, 1))"
+    ],
+    "trained": [
+     true,
+     6450,
+     "sense:mul",
+     "mul(mul(3, y), sub(y, 1))"
+    ],
+    "trained_invent": [
+     true,
+     6450,
+     "sense:mul",
+     "mul(mul(3, y), sub(y, 1))"
+    ]
+   },
+   "deep_08": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "deep_09": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     4160,
+     "sense:mul",
+     "mul(x, add(x, add(3, 3)))"
+    ],
+    "trained": [
+     true,
+     4160,
+     "sense:mul",
+     "mul(x, add(x, add(3, 3)))"
+    ],
+    "trained_invent": [
+     true,
+     4160,
+     "sense:mul",
+     "mul(x, add(x, add(3, 3)))"
+    ]
+   },
+   "deep_10": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_11": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "deep_12": {
+    "cold": [
+     false,
+     1520,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     1710,
+     null,
+     "div(add(2, y), 3)"
+    ],
+    "trained": [
+     true,
+     1710,
+     null,
+     "div(add(2, y), 3)"
+    ],
+    "trained_invent": [
+     true,
+     1710,
+     null,
+     "div(add(2, y), 3)"
+    ]
+   },
+   "deep_13": {
+    "cold": [
+     false,
+     58,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     345,
+     null,
+     "add(sub(3, y), 3)"
+    ],
+    "trained": [
+     true,
+     345,
+     null,
+     "add(sub(3, y), 3)"
+    ],
+    "trained_invent": [
+     true,
+     345,
+     null,
+     "add(sub(3, y), 3)"
+    ]
+   },
+   "deep_14": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5151,
+     "sense:mul",
+     "mul(3, sub(mul(x, y), 2))"
+    ],
+    "trained": [
+     true,
+     5151,
+     "sense:mul",
+     "mul(3, sub(mul(x, y), 2))"
+    ],
+    "trained_invent": [
+     true,
+     5151,
+     "sense:mul",
+     "mul(3, sub(mul(x, y), 2))"
+    ]
+   },
+   "deep_15": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     4296,
+     "casesplit:d1",
+     "ite(sub(y, 1), add(y, y), 0)"
+    ],
+    "trained": [
+     true,
+     4296,
+     "casesplit:d1",
+     "ite(sub(y, 1), add(y, y), 0)"
+    ],
+    "trained_invent": [
+     true,
+     4296,
+     "casesplit:d1",
+     "ite(sub(y, 1), add(y, y), 0)"
+    ]
+   },
+   "deep_16": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     9128,
+     "casesplit:d1",
+     "ite(sub(x, 2), mul(sub(3, x), x), 0)"
+    ],
+    "trained": [
+     true,
+     9128,
+     "casesplit:d1",
+     "ite(sub(x, 2), mul(sub(3, x), x), 0)"
+    ],
+    "trained_invent": [
+     true,
+     9128,
+     "casesplit:d1",
+     "ite(sub(x, 2), mul(sub(3, x), x), 0)"
+    ]
+   },
+   "deep_17": {
+    "cold": [
+     false,
+     768,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "deep_18": {
+    "cold": [
+     false,
+     2891,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     4302,
+     "casesplit:d1",
+     "ite(sub(x, 2), x, add(x, x))"
+    ],
+    "trained": [
+     true,
+     4302,
+     "casesplit:d1",
+     "ite(sub(x, 2), x, add(x, x))"
+    ],
+    "trained_invent": [
+     true,
+     4302,
+     "casesplit:d1",
+     "ite(sub(x, 2), x, add(x, x))"
+    ]
+   },
+   "deep_19": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_20": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     9297,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     9297,
+     "casesplit:d1",
+     null
+    ],
+    "trained_invent": [
+     false,
+     9297,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_21": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "deep_22": {
+    "cold": [
+     false,
+     2671,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     3323,
+     null,
+     "ite(sub(x, 2), y, 3)"
+    ],
+    "trained": [
+     true,
+     3323,
+     null,
+     "ite(sub(x, 2), y, 3)"
+    ],
+    "trained_invent": [
+     true,
+     3323,
+     null,
+     "ite(sub(x, 2), y, 3)"
+    ]
+   },
+   "deep_23": {
+    "cold": [
+     false,
+     2465,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     2682,
+     null,
+     "min(sub(x, 1), y)"
+    ],
+    "trained": [
+     true,
+     2682,
+     null,
+     "min(sub(x, 1), y)"
+    ],
+    "trained_invent": [
+     true,
+     2682,
+     null,
+     "min(sub(x, 1), y)"
+    ]
+   },
+   "deep_24": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     9356,
+     "port:anchor",
+     "mul(sub(mul(y, y), x), y)"
+    ],
+    "trained_invent": [
+     true,
+     9356,
+     "port:anchor",
+     "mul(sub(mul(y, y), x), y)"
+    ]
+   },
+   "deep_25": {
+    "cold": [
+     false,
+     80,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     2478,
+     null,
+     "mod(max(x, y), 3)"
+    ],
+    "trained": [
+     true,
+     2478,
+     null,
+     "mod(max(x, y), 3)"
+    ],
+    "trained_invent": [
+     true,
+     2478,
+     null,
+     "mod(max(x, y), 3)"
+    ]
+   },
+   "deep_26": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     7445,
+     "sense:mul",
+     "mul(max(x, 3), add(3, y))"
+    ],
+    "trained": [
+     true,
+     7445,
+     "sense:mul",
+     "mul(max(x, 3), add(3, y))"
+    ],
+    "trained_invent": [
+     true,
+     7445,
+     "sense:mul",
+     "mul(max(x, 3), add(3, y))"
+    ]
+   },
+   "deep_27": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5448,
+     "casesplit:d1",
+     "ite(sub(y, 1), mul(sub(3, x), 3), mul(sub(3, x), 2))"
+    ],
+    "trained": [
+     true,
+     5448,
+     "casesplit:d1",
+     "ite(sub(y, 1), mul(sub(3, x), 3), mul(sub(3, x), 2))"
+    ],
+    "trained_invent": [
+     true,
+     5448,
+     "casesplit:d1",
+     "ite(sub(y, 1), mul(sub(3, x), 3), mul(sub(3, x), 2))"
+    ]
+   },
+   "deep_28": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5102,
+     "sense:sub",
+     "sub(x, max(x, add(2, 3)))"
+    ],
+    "trained": [
+     true,
+     5102,
+     "sense:sub",
+     "sub(x, max(x, add(2, 3)))"
+    ],
+    "trained_invent": [
+     true,
+     5102,
+     "sense:sub",
+     "sub(x, max(x, add(2, 3)))"
+    ]
+   },
+   "deep_29": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_30": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     4296,
+     "casesplit:d1",
+     "ite(sub(x, 2), sub(2, y), sub(1, y))"
+    ],
+    "trained": [
+     true,
+     4296,
+     "casesplit:d1",
+     "ite(sub(x, 2), sub(2, y), sub(1, y))"
+    ],
+    "trained_invent": [
+     true,
+     4296,
+     "casesplit:d1",
+     "ite(sub(x, 2), sub(2, y), sub(1, y))"
+    ]
+   },
+   "deep_31": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5462,
+     "casesplit:d1",
+     "ite(sub(y, 2), sub(y, add(1, 3)), sub(1, y))"
+    ],
+    "trained": [
+     true,
+     5462,
+     "casesplit:d1",
+     "ite(sub(y, 2), sub(y, add(1, 3)), sub(1, y))"
+    ],
+    "trained_invent": [
+     true,
+     5462,
+     "casesplit:d1",
+     "ite(sub(y, 2), sub(y, add(1, 3)), sub(1, y))"
+    ]
+   },
+   "deep_32": {
+    "cold": [
+     false,
+     94,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     2100,
+     null,
+     "mod(2, sub(x, 1))"
+    ],
+    "trained": [
+     true,
+     2100,
+     null,
+     "mod(2, sub(x, 1))"
+    ],
+    "trained_invent": [
+     true,
+     2100,
+     null,
+     "mod(2, sub(x, 1))"
+    ]
+   },
+   "deep_33": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     5283,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     5283,
+     "casesplit:d1",
+     null
+    ],
+    "trained_invent": [
+     false,
+     5283,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_34": {
+    "cold": [
+     false,
+     572,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     2773,
+     null,
+     "min(mul(x, x), y)"
+    ],
+    "trained": [
+     true,
+     2773,
+     null,
+     "min(mul(x, x), y)"
+    ],
+    "trained_invent": [
+     true,
+     2773,
+     null,
+     "min(mul(x, x), y)"
+    ]
+   },
+   "deep_35": {
+    "cold": [
+     false,
+     71,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     75,
+     null,
+     "div(3, x)"
+    ],
+    "trained": [
+     true,
+     75,
+     null,
+     "div(3, x)"
+    ],
+    "trained_invent": [
+     true,
+     75,
+     null,
+     "div(3, x)"
+    ]
+   },
+   "deep_36": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     6797,
+     "sense:sub",
+     "sub(0, mul(mod(y, x), 3))"
+    ],
+    "trained": [
+     true,
+     6797,
+     "sense:sub",
+     "sub(0, mul(mod(y, x), 3))"
+    ],
+    "trained_invent": [
+     true,
+     6797,
+     "sense:sub",
+     "sub(0, mul(mod(y, x), 3))"
+    ]
+   },
+   "deep_37": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5150,
+     "sense:sub",
+     "sub(y, add(x, mul(3, 3)))"
+    ],
+    "trained": [
+     true,
+     5150,
+     "sense:sub",
+     "sub(y, add(x, mul(3, 3)))"
+    ],
+    "trained_invent": [
+     true,
+     5150,
+     "sense:sub",
+     "sub(y, add(x, mul(3, 3)))"
+    ]
+   },
+   "deep_38": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     5448,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     5448,
+     "casesplit:d1",
+     null
+    ],
+    "trained_invent": [
+     false,
+     5448,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_39": {
+    "cold": [
+     false,
+     2512,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     4302,
+     "casesplit:d1",
+     "ite(sub(y, 3), x, max(2, y))"
+    ],
+    "trained": [
+     true,
+     4302,
+     "casesplit:d1",
+     "ite(sub(y, 3), x, max(2, y))"
+    ],
+    "trained_invent": [
+     true,
+     4302,
+     "casesplit:d1",
+     "ite(sub(y, 3), x, max(2, y))"
+    ]
+   }
+  },
+  "sha256": "da3ae9bf3a984afb1584153f2fe6044c94d955037086c73ae036049537966fbd"
+ },
+ "science_hard": {
+  "tasks": 14,
+  "certified": {
+   "cold": 0,
+   "empty": 0,
+   "trained": 12,
+   "trained_invent": 12
+  },
+  "evaluations": {
+   "cold": 140000,
+   "empty": 140000,
+   "trained": 91987,
+   "trained_invent": 91987
+  },
+  "by_domain": {
+   "cold": {
+    "science": [
+     0,
+     14
+    ]
+   },
+   "empty": {
+    "science": [
+     0,
+     14
+    ]
+   },
+   "trained": {
+    "science": [
+     12,
+     14
+    ]
+   },
+   "trained_invent": {
+    "science": [
+     12,
+     14
+    ]
+   }
+  },
+  "worse_than_cold": {
+   "cold": [],
+   "empty": [],
+   "trained": [],
+   "trained_invent": []
+  },
+  "trained_wins_lost": {
+   "cold": [
+    "sci_d_rest",
+    "sci_displacement",
+    "sci_vmean_uat",
+    "sci_vsq",
+    "sci_d_uvt",
+    "sci_ke_v",
+    "sci_ke_u",
+    "sci_dke",
+    "sci_energy",
+    "sci_hm_to_s",
+    "sci_hms_to_s",
+    "sci_water_mol"
+   ],
+   "empty": [
+    "sci_d_rest",
+    "sci_displacement",
+    "sci_vmean_uat",
+    "sci_vsq",
+    "sci_d_uvt",
+    "sci_ke_v",
+    "sci_ke_u",
+    "sci_dke",
+    "sci_energy",
+    "sci_hm_to_s",
+    "sci_hms_to_s",
+    "sci_water_mol"
+   ],
+   "trained": [],
+   "trained_invent": []
+  },
+  "per_task[certified, evals, via, candidate]": {
+   "sci_d_rest": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5683,
+     "port:scale:div2",
+     "div(add(mul(t, mul(t, a)), 0), 2)"
+    ],
+    "trained_invent": [
+     true,
+     5683,
+     "port:scale:div2",
+     "div(add(mul(t, mul(t, a)), 0), 2)"
+    ]
+   },
+   "sci_displacement": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5797,
+     "port:scale:div2",
+     "div(add(mul(t, mul(t, a)), mul(u, add(t, t))), 2)"
+    ],
+    "trained_invent": [
+     true,
+     5797,
+     "port:scale:div2",
+     "div(add(mul(t, mul(t, a)), mul(u, add(t, t))), 2)"
+    ]
+   },
+   "sci_vmean_uat": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5135,
+     "port:anchor",
+     "sub(add(mul(a, t), u), div(mul(a, t), 2))"
+    ],
+    "trained_invent": [
+     true,
+     5135,
+     "port:anchor",
+     "sub(add(mul(a, t), u), div(mul(a, t), 2))"
+    ]
+   },
+   "sci_vsq": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5134,
+     "port:anchor",
+     "add(mul(add(d, d), a), mul(u, u))"
+    ],
+    "trained_invent": [
+     true,
+     5134,
+     "port:anchor",
+     "add(mul(add(d, d), a), mul(u, u))"
+    ]
+   },
+   "sci_d_uvt": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6130,
+     "port:scale:div2",
+     "div(add(add(mul(t, v), u), sub(mul(u, t), u)), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6130,
+     "port:scale:div2",
+     "div(add(add(mul(t, v), u), sub(mul(u, t), u)), 2)"
+    ]
+   },
+   "sci_ke_v": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6354,
+     "port:scale:div2",
+     "div(add(mul(v, mul(v, m)), 0), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6354,
+     "port:scale:div2",
+     "div(add(mul(v, mul(v, m)), 0), 2)"
+    ]
+   },
+   "sci_ke_u": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6350,
+     "port:scale:div2",
+     "div(add(mul(u, mul(u, m)), 0), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6350,
+     "port:scale:div2",
+     "div(add(mul(u, mul(u, m)), 0), 2)"
+    ]
+   },
+   "sci_dke": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5727,
+     "port:scale:div2",
+     "div(sub(mul(v, mul(v, m)), mul(m, mul(u, u))), 2)"
+    ],
+    "trained_invent": [
+     true,
+     5727,
+     "port:scale:div2",
+     "div(sub(mul(v, mul(v, m)), mul(m, mul(u, u))), 2)"
+    ]
+   },
+   "sci_energy": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5133,
+     "port:anchor",
+     "mul(mul(I, mul(I, t)), R)"
+    ],
+    "trained_invent": [
+     true,
+     5133,
+     "port:anchor",
+     "mul(mul(I, mul(I, t)), R)"
+    ]
+   },
+   "sci_hm_to_s": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5329,
+     "port:anchor",
+     "add(mul(k, m), mul(mul(k, h), k))"
+    ],
+    "trained_invent": [
+     true,
+     5329,
+     "port:anchor",
+     "add(mul(k, m), mul(mul(k, h), k))"
+    ]
+   },
+   "sci_hms_to_s": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5325,
+     "port:anchor",
+     "add(add(s, mul(k, m)), mul(mul(k, h), k))"
+    ],
+    "trained_invent": [
+     true,
+     5325,
+     "port:anchor",
+     "add(add(s, mul(k, m)), mul(mul(k, h), k))"
+    ]
+   },
+   "sci_dist_m": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     "blockprobe",
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     "blockprobe",
+     null
+    ]
+   },
+   "sci_water_mol": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     9890,
+     "port:probe",
+     "min(mul(kH, div(gO, kO)), div(gH, kH))"
+    ],
+    "trained_invent": [
+     true,
+     9890,
+     "port:probe",
+     "min(mul(kH, div(gO, kO)), div(gH, kH))"
+    ]
+   },
+   "sci_water_g": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   }
+  },
+  "sha256": "4517167f150ef9cfcff5ae947f82d4bd93b9b6ecf5843c2f2976f7b95d54868d"
+ },
+ "transfer2": {
+  "tasks": 35,
+  "certified": {
+   "cold": 0,
+   "empty": 2,
+   "trained": 30,
+   "trained_invent": 32
+  },
+  "evaluations": {
+   "cold": 343470,
+   "empty": 343394,
+   "trained": 214873,
+   "trained_invent": 209252
+  },
+  "by_domain": {
+   "cold": {
+    "geometry": [
+     0,
+     21
+    ],
+    "finance": [
+     0,
+     14
+    ]
+   },
+   "empty": {
+    "geometry": [
+     1,
+     21
+    ],
+    "finance": [
+     1,
+     14
+    ]
+   },
+   "trained": {
+    "geometry": [
+     17,
+     21
+    ],
+    "finance": [
+     13,
+     14
+    ]
+   },
+   "trained_invent": {
+    "geometry": [
+     19,
+     21
+    ],
+    "finance": [
+     13,
+     14
+    ]
+   }
+  },
+  "worse_than_cold": {
+   "cold": [],
+   "empty": [],
+   "trained": [],
+   "trained_invent": []
+  },
+  "trained_wins_lost": {
+   "cold": [
+    "g2_cube_surface",
+    "g2_three_faces",
+    "g2_square_ring",
+    "g2_corner_cut",
+    "g2_path_around",
+    "g2_ribbon",
+    "g2_rect_pyramid",
+    "g2_space_diag_sq",
+    "g2_two_squares",
+    "g2_trap_prism",
+    "g2_tri_prism_surface",
+    "g2_rect_prism_pair",
+    "g2_tri_area_diff",
+    "g2_kite",
+    "g2_trap_plus_rect",
+    "g2_handshakes",
+    "g2_triangular",
+    "f2_extra_interest",
+    "f2_markup_markdown",
+    "f2_savings",
+    "f2_double_rate",
+    "f2_rate_gap",
+    "f2_two_lines",
+    "f2_margin_after_fee",
+    "f2_restock",
+    "f2_bulk_order",
+    "f2_profit_two_prices",
+    "f2_wage_ot",
+    "f2_wage_double",
+    "f2_wage_gap"
+   ],
+   "empty": [
+    "g2_cube_surface",
+    "g2_three_faces",
+    "g2_square_ring",
+    "g2_corner_cut",
+    "g2_path_around",
+    "g2_ribbon",
+    "g2_rect_pyramid",
+    "g2_space_diag_sq",
+    "g2_two_squares",
+    "g2_trap_prism",
+    "g2_tri_prism_surface",
+    "g2_rect_prism_pair",
+    "g2_tri_area_diff",
+    "g2_trap_plus_rect",
+    "g2_handshakes",
+    "g2_triangular",
+    "f2_extra_interest",
+    "f2_markup_markdown",
+    "f2_savings",
+    "f2_double_rate",
+    "f2_rate_gap",
+    "f2_two_lines",
+    "f2_margin_after_fee",
+    "f2_restock",
+    "f2_bulk_order",
+    "f2_profit_two_prices",
+    "f2_wage_ot",
+    "f2_wage_gap"
+   ],
+   "trained": [],
+   "trained_invent": []
+  },
+  "per_task[certified, evals, via, candidate]": {
+   "g2_cube_surface": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5149,
+     "port:anchor",
+     "mul(mul(E, E), add(3, 3))"
+    ],
+    "trained_invent": [
+     true,
+     5149,
+     "port:anchor",
+     "mul(mul(E, E), add(3, 3))"
+    ]
+   },
+   "g2_three_faces": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5246,
+     "port:anchor",
+     "add(mul(F, G), mul(add(F, G), E))"
+    ],
+    "trained_invent": [
+     true,
+     5246,
+     "port:anchor",
+     "add(mul(F, G), mul(add(F, G), E))"
+    ]
+   },
+   "g2_box_minus_cube": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     6837,
+     "port:invent:r1",
+     "sub(mul(E, mul(F, G)), mul(mul(G, G), G))"
+    ]
+   },
+   "g2_square_ring": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5134,
+     "port:anchor",
+     "add(sub(mul(E, E), F), sub(F, mul(F, F)))"
+    ],
+    "trained_invent": [
+     true,
+     5134,
+     "port:anchor",
+     "add(sub(mul(E, E), F), sub(F, mul(F, F)))"
+    ]
+   },
+   "g2_corner_cut": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5132,
+     "port:anchor",
+     "sub(add(E, mul(F, E)), add(mul(G, G), E))"
+    ],
+    "trained_invent": [
+     true,
+     5132,
+     "port:anchor",
+     "sub(add(E, mul(F, E)), add(mul(G, G), E))"
+    ]
+   },
+   "g2_path_around": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5130,
+     "port:anchor",
+     "add(add(F, F), mul(add(E, 2), 2))"
+    ],
+    "trained_invent": [
+     true,
+     5130,
+     "port:anchor",
+     "add(add(F, F), mul(add(E, 2), 2))"
+    ]
+   },
+   "g2_ribbon": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5647,
+     "port:anchor2",
+     "add(add(add(G, G), add(G, G)), mul(2, add(E, F)))"
+    ],
+    "trained_invent": [
+     true,
+     5647,
+     "port:anchor2",
+     "add(add(add(G, G), add(G, G)), mul(2, add(E, F)))"
+    ]
+   },
+   "g2_cuboid_edges_diff": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "g2_rect_pyramid": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     "sense:mul",
+     null
+    ],
+    "trained": [
+     true,
+     7186,
+     "port:scale:div3",
+     "div(mul(min(F, E), mul(max(F, E), G)), 3)"
+    ],
+    "trained_invent": [
+     true,
+     7186,
+     "port:scale:div3",
+     "div(mul(min(F, E), mul(max(F, E), G)), 3)"
+    ]
+   },
+   "g2_space_diag_sq": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5406,
+     "port:anchor",
+     "add(mul(F, F), mul(3, mul(E, E)))"
+    ],
+    "trained_invent": [
+     true,
+     5406,
+     "port:anchor",
+     "add(mul(F, F), mul(3, mul(E, E)))"
+    ]
+   },
+   "g2_two_squares": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5258,
+     "port:anchor",
+     "add(add(mul(F, F), G), add(mul(E, E), G))"
+    ],
+    "trained_invent": [
+     true,
+     5258,
+     "port:anchor",
+     "add(add(mul(F, F), G), add(mul(E, E), G))"
+    ]
+   },
+   "g2_trap_prism": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5420,
+     "port:anchor",
+     "mul(add(A, D), div(mul(J, Lz), 2))"
+    ],
+    "trained_invent": [
+     true,
+     5420,
+     "port:anchor",
+     "mul(add(A, D), div(mul(J, Lz), 2))"
+    ]
+   },
+   "g2_tri_prism_surface": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5445,
+     "port:anchor",
+     "add(mul(Lz, D), mul(Lz, add(J, A)))"
+    ],
+    "trained_invent": [
+     true,
+     5445,
+     "port:anchor",
+     "add(mul(Lz, D), mul(Lz, add(J, A)))"
+    ]
+   },
+   "g2_rect_prism_pair": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5328,
+     "port:anchor",
+     "mul(add(mul(Lz, A), D), J)"
+    ],
+    "trained_invent": [
+     true,
+     5328,
+     "port:anchor",
+     "mul(add(mul(Lz, A), D), J)"
+    ]
+   },
+   "g2_tri_area_diff": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6131,
+     "port:scale:div2",
+     "div(add(mul(sub(A, D), J), 0), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6131,
+     "port:scale:div2",
+     "div(add(mul(sub(A, D), J), 0), 2)"
+    ]
+   },
+   "g2_kite": {
+    "cold": [
+     false,
+     3470,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5455,
+     null,
+     "div(mul(D, A), 2)"
+    ],
+    "trained": [
+     true,
+     6547,
+     "port:scale:div2",
+     "div(add(mul(A, D), 0), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6547,
+     "port:scale:div2",
+     "div(add(mul(A, D), 0), 2)"
+    ]
+   },
+   "g2_trap_plus_rect": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6713,
+     "port:scale:div2",
+     "div(add(mul(add(J, J), Lz), mul(J, add(A, D))), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6713,
+     "port:scale:div2",
+     "div(add(mul(add(J, J), Lz), mul(J, add(A, D))), 2)"
+    ]
+   },
+   "g2_handshakes": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6514,
+     "port:scale:div2",
+     "div(add(mul(cnt, cnt), sub(0, cnt)), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6514,
+     "port:scale:div2",
+     "div(add(mul(cnt, cnt), sub(0, cnt)), 2)"
+    ]
+   },
+   "g2_triangular": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     3416,
+     "port:scale:div2",
+     "div(add(mul(cnt, cnt), cnt), 2)"
+    ],
+    "trained_invent": [
+     true,
+     3416,
+     "port:scale:div2",
+     "div(add(mul(cnt, cnt), cnt), 2)"
+    ]
+   },
+   "g2_hex_number": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "g2_square_pyr_number": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     7542,
+     "port:invent:r2:div3",
+     "div(add(div(add(cnt, mul(cnt, cnt)), 2), mul(cnt, add(cnt, mul(cnt, cnt)))), 3)"
+    ]
+   },
+   "f2_extra_interest": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5508,
+     "port:anchor",
+     "mul(mul(i, div(M, O)), sub(yrs, 1))"
+    ],
+    "trained_invent": [
+     true,
+     5508,
+     "port:anchor",
+     "mul(mul(i, div(M, O)), sub(yrs, 1))"
+    ]
+   },
+   "f2_markup_markdown": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5556,
+     "port:anchor",
+     "mul(div(M, O), add(i, sub(O, yrs)))"
+    ],
+    "trained_invent": [
+     true,
+     5556,
+     "port:anchor",
+     "mul(div(M, O), add(i, sub(O, yrs)))"
+    ]
+   },
+   "f2_split_bill": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "f2_savings": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5612,
+     "port:anchor",
+     "mul(mul(yrs, div(M, O)), add(O, i))"
+    ],
+    "trained_invent": [
+     true,
+     5612,
+     "port:anchor",
+     "mul(mul(yrs, div(M, O)), add(O, i))"
+    ]
+   },
+   "f2_double_rate": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5332,
+     "port:anchor",
+     "mul(mul(i, div(M, O)), add(yrs, yrs))"
+    ],
+    "trained_invent": [
+     true,
+     5332,
+     "port:anchor",
+     "mul(mul(i, div(M, O)), add(yrs, yrs))"
+    ]
+   },
+   "f2_rate_gap": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5346,
+     "port:anchor",
+     "sub(mul(i, div(M, O)), mul(div(M, O), yrs))"
+    ],
+    "trained_invent": [
+     true,
+     5346,
+     "port:anchor",
+     "sub(mul(i, div(M, O)), mul(div(M, O), yrs))"
+    ]
+   },
+   "f2_two_lines": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5325,
+     "port:anchor",
+     "add(mul(sub(pr, fee), qty), mul(add(qty, cs), fee))"
+    ],
+    "trained_invent": [
+     true,
+     5325,
+     "port:anchor",
+     "add(mul(sub(pr, fee), qty), mul(add(qty, cs), fee))"
+    ]
+   },
+   "f2_margin_after_fee": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5325,
+     "port:anchor",
+     "add(mul(sub(pr, cs), qty), sub(0, mul(qty, fee)))"
+    ],
+    "trained_invent": [
+     true,
+     5325,
+     "port:anchor",
+     "add(mul(sub(pr, cs), qty), sub(0, mul(qty, fee)))"
+    ]
+   },
+   "f2_restock": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5345,
+     "port:anchor",
+     "add(mul(sub(pr, cs), qty), sub(0, mul(cs, fee)))"
+    ],
+    "trained_invent": [
+     true,
+     5345,
+     "port:anchor",
+     "add(mul(sub(pr, cs), qty), sub(0, mul(cs, fee)))"
+    ]
+   },
+   "f2_bulk_order": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5341,
+     "port:anchor",
+     "add(mul(qty, cs), add(mul(fee, qty), pr))"
+    ],
+    "trained_invent": [
+     true,
+     5341,
+     "port:anchor",
+     "add(mul(qty, cs), add(mul(fee, qty), pr))"
+    ]
+   },
+   "f2_profit_two_prices": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5377,
+     "port:anchor",
+     "add(mul(sub(pr, cs), qty), sub(0, mul(fee, pr)))"
+    ],
+    "trained_invent": [
+     true,
+     5377,
+     "port:anchor",
+     "add(mul(sub(pr, cs), qty), sub(0, mul(fee, pr)))"
+    ]
+   },
+   "f2_wage_ot": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5595,
+     "port:anchor2",
+     "add(add(mul(rate, hr), mul(rate, ot)), div(mul(rate, ot), 2))"
+    ],
+    "trained_invent": [
+     true,
+     5595,
+     "port:anchor2",
+     "add(add(mul(rate, hr), mul(rate, ot)), div(mul(rate, ot), 2))"
+    ]
+   },
+   "f2_wage_double": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     7939,
+     "sense:mul",
+     "mul(rate, add(ot, add(ot, hr)))"
+    ],
+    "trained": [
+     true,
+     5194,
+     "port:anchor",
+     "add(mul(rate, ot), mul(rate, add(ot, hr)))"
+    ],
+    "trained_invent": [
+     true,
+     5194,
+     "port:anchor",
+     "add(mul(rate, ot), mul(rate, add(ot, hr)))"
+    ]
+   },
+   "f2_wage_gap": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5215,
+     "port:anchor",
+     "sub(mul(sub(hr, ot), rate), div(mul(rate, ot), 2))"
+    ],
+    "trained_invent": [
+     true,
+     5215,
+     "port:anchor",
+     "sub(mul(sub(hr, ot), rate), div(mul(rate, ot), 2))"
+    ]
+   }
+  },
+  "sha256": "d8de7508d8d500abef5233ed9f56abd3c1b50e2797fd3aee097d6bb3c4e1f19b"
+ },
+ "text": {
+  "tasks": 24,
+  "certified": {
+   "cold": 0,
+   "empty": 0,
+   "trained": 3,
+   "trained_invent": 17
+  },
+  "evaluations": {
+   "cold": 240000,
+   "empty": 240000,
+   "trained": 225995,
+   "trained_invent": 155440
+  },
+  "by_domain": {
+   "cold": {
+    "language": [
+     0,
+     24
+    ]
+   },
+   "empty": {
+    "language": [
+     0,
+     24
+    ]
+   },
+   "trained": {
+    "language": [
+     3,
+     24
+    ]
+   },
+   "trained_invent": {
+    "language": [
+     17,
+     24
+    ]
+   }
+  },
+  "worse_than_cold": {
+   "cold": [],
+   "empty": [],
+   "trained": [],
+   "trained_invent": []
+  },
+  "trained_wins_lost": {
+   "cold": [
+    "t_ends_both",
+    "t_card_len",
+    "t_ends_upper_both"
+   ],
+   "empty": [
+    "t_ends_both",
+    "t_card_len",
+    "t_ends_upper_both"
+   ],
+   "trained": [],
+   "trained_invent": []
+  },
+  "per_task[certified, evals, via, candidate]": {
+   "t_initials_dot": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     5026,
+     "port:invent:text:chain",
+     "concat(concat(first(fn), dt), concat(first(ln), dt))"
+    ]
+   },
+   "t_initials_dot_upper": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     5026,
+     "port:invent:text:chain",
+     "concat(upper(concat(first(fn), dt)), concat(upper(first(ln)), dt))"
+    ]
+   },
+   "t_short_name": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     5026,
+     "port:invent:text:chain",
+     "concat(first(fn), concat(dt, concat(sp, ln)))"
+    ]
+   },
+   "t_ends_both": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5277,
+     "port:probe",
+     "concat(concat(first(fn), last(fn)), concat(first(ln), last(ln)))"
+    ],
+    "trained_invent": [
+     true,
+     5026,
+     "port:invent:text:suf",
+     "concat(concat(first(fn), last(fn)), concat(first(ln), last(ln)))"
+    ]
+   },
+   "t_last_first": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     5026,
+     "port:invent:text:chain",
+     "concat(concat(ln, concat(cm, sp)), concat(first(fn), rest(fn)))"
+    ]
+   },
+   "t_quiet_last_first": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     5026,
+     "port:invent:text:chain",
+     "concat(lower(concat(ln, concat(cm, sp))), concat(lower(first(fn)), lower(rest(fn))))"
+    ]
+   },
+   "t_shout_rev_both": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     5026,
+     "port:invent:text:suf",
+     "concat(upper(srev(concat(sp, fn))), upper(srev(ln)))"
+    ]
+   },
+   "t_card_len": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5034,
+     "port:anchor",
+     "add(strlen(concat(cm, cm)), strlen(concat(fn, ln)))"
+    ],
+    "trained_invent": [
+     true,
+     5034,
+     "port:anchor",
+     "add(strlen(concat(cm, cm)), strlen(concat(fn, ln)))"
+    ]
+   },
+   "t_capitalize": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     "blockprobe",
+     null
+    ]
+   },
+   "t_title_name": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     "blockprobe",
+     null
+    ]
+   },
+   "t_rotate_both": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     5016,
+     "port:invent:text:chain",
+     "concat(concat(rest(w), first(w)), concat(concat(sp, rest(w2)), first(w2)))"
+    ]
+   },
+   "t_formal_cap": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     5026,
+     "port:invent:text:chain",
+     "concat(upper(first(ln)), concat(lower(rest(ln)), concat(concat(cm, sp), upper(concat(first(fn), dt)))))"
+    ]
+   },
+   "t_initial_upper_last": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     5026,
+     "port:invent:text:chain",
+     "concat(first(fn), concat(dt, upper(concat(sp, ln))))"
+    ]
+   },
+   "t_shout_last_first": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     5026,
+     "port:invent:text:chain",
+     "concat(upper(concat(ln, concat(cm, sp))), concat(upper(first(fn)), upper(rest(fn))))"
+    ]
+   },
+   "t_quiet_initials_dot": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     5026,
+     "port:invent:text:chain",
+     "concat(lower(concat(first(fn), dt)), concat(lower(first(ln)), dt))"
+    ]
+   },
+   "t_ends_upper_both": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5684,
+     "port:probe",
+     "upper(concat(concat(first(fn), last(fn)), concat(first(ln), last(ln))))"
+    ],
+    "trained_invent": [
+     true,
+     5026,
+     "port:invent:text:chain",
+     "concat(upper(first(fn)), concat(upper(last(fn)), upper(concat(first(ln), last(ln)))))"
+    ]
+   },
+   "t_double_first": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     5026,
+     "port:invent:text:pre",
+     "concat(lower(concat(fn, fn)), concat(sp, ln))"
+    ]
+   },
+   "t_ends_name": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     5026,
+     "port:invent:text:pre",
+     "concat(concat(first(fn), last(fn)), concat(sp, ln))"
+    ]
+   },
+   "t_rev_upper_first": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     5026,
+     "port:invent:text:pre",
+     "concat(upper(srev(fn)), concat(dt, ln))"
+    ]
+   },
+   "t_badge_len": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "t_line_len": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "t_pyramid_len": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "t_sq_plus_len": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "t_half_len_rep": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   }
+  },
+  "sha256": "08a826a38fab20dca5897edaf732db84a68a43ace4ec67386e796ad26cb64a02"
+ },
+ "transfer": {
+  "tasks": 20,
+  "certified": {
+   "cold": 0,
+   "empty": 2,
+   "trained": 19,
+   "trained_invent": 19
+  },
+  "evaluations": {
+   "cold": 190918,
+   "empty": 188241,
+   "trained": 113467,
+   "trained_invent": 113467
+  },
+  "by_domain": {
+   "cold": {
+    "geometry": [
+     0,
+     14
+    ],
+    "finance": [
+     0,
+     6
+    ]
+   },
+   "empty": {
+    "geometry": [
+     2,
+     14
+    ],
+    "finance": [
+     0,
+     6
+    ]
+   },
+   "trained": {
+    "geometry": [
+     13,
+     14
+    ],
+    "finance": [
+     6,
+     6
+    ]
+   },
+   "trained_invent": {
+    "geometry": [
+     13,
+     14
+    ],
+    "finance": [
+     6,
+     6
+    ]
+   }
+  },
+  "worse_than_cold": {
+   "cold": [],
+   "empty": [],
+   "trained": [],
+   "trained_invent": []
+  },
+  "trained_wins_lost": {
+   "cold": [
+    "geo_box_lateral",
+    "geo_box_surface",
+    "geo_open_box",
+    "geo_box_edges",
+    "geo_diag2",
+    "geo_diag3",
+    "geo_square_pyramid",
+    "geo_trap_area",
+    "geo_tri_prism",
+    "geo_trap_diff",
+    "geo_diagonals",
+    "geo_tri_count",
+    "geo_ext_angle",
+    "fin_simple_interest",
+    "fin_amount",
+    "fin_discounted",
+    "fin_taxed",
+    "fin_installment",
+    "fin_net_profit"
+   ],
+   "empty": [
+    "geo_box_lateral",
+    "geo_box_surface",
+    "geo_open_box",
+    "geo_box_edges",
+    "geo_diag2",
+    "geo_diag3",
+    "geo_trap_area",
+    "geo_tri_prism",
+    "geo_trap_diff",
+    "geo_diagonals",
+    "geo_tri_count",
+    "fin_simple_interest",
+    "fin_amount",
+    "fin_discounted",
+    "fin_taxed",
+    "fin_installment",
+    "fin_net_profit"
+   ],
+   "trained": [],
+   "trained_invent": []
+  },
+  "per_task[certified, evals, via, candidate]": {
+   "geo_box_lateral": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5194,
+     "port:anchor",
+     "add(mul(add(W, W), H), mul(add(L, L), H))"
+    ],
+    "trained_invent": [
+     true,
+     5194,
+     "port:anchor",
+     "add(mul(add(W, W), H), mul(add(L, L), H))"
+    ]
+   },
+   "geo_box_surface": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5768,
+     "port:anchor2",
+     "add(add(mul(add(H, H), L), mul(add(W, W), H)), mul(L, add(W, W)))"
+    ],
+    "trained_invent": [
+     true,
+     5768,
+     "port:anchor2",
+     "add(add(mul(add(H, H), L), mul(add(W, W), H)), mul(L, add(W, W)))"
+    ]
+   },
+   "geo_open_box": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5762,
+     "port:anchor2",
+     "add(add(mul(add(H, H), L), mul(W, L)), mul(H, add(W, W)))"
+    ],
+    "trained_invent": [
+     true,
+     5762,
+     "port:anchor2",
+     "add(add(mul(add(H, H), L), mul(W, L)), mul(H, add(W, W)))"
+    ]
+   },
+   "geo_box_edges": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6762,
+     "port:scale:mul2",
+     "mul(add(add(L, L), mul(add(W, H), 2)), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6762,
+     "port:scale:mul2",
+     "mul(add(add(L, L), mul(add(W, H), 2)), 2)"
+    ]
+   },
+   "geo_diag2": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5222,
+     "port:anchor",
+     "add(add(mul(W, W), H), sub(mul(L, L), H))"
+    ],
+    "trained_invent": [
+     true,
+     5222,
+     "port:anchor",
+     "add(add(mul(W, W), H), sub(mul(L, L), H))"
+    ]
+   },
+   "geo_diag3": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5738,
+     "port:anchor2",
+     "add(add(add(mul(W, W), L), mul(H, H)), sub(mul(L, L), L))"
+    ],
+    "trained_invent": [
+     true,
+     5738,
+     "port:anchor2",
+     "add(add(add(mul(W, W), L), mul(H, H)), sub(mul(L, L), L))"
+    ]
+   },
+   "geo_frame": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "geo_square_pyramid": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     6940,
+     "sense:mul",
+     "mul(L, div(mul(L, H), 3))"
+    ],
+    "trained": [
+     true,
+     6425,
+     "port:scale:div2",
+     "div(mul(add(L, L), div(mul(L, H), 3)), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6425,
+     "port:scale:div2",
+     "div(mul(add(L, L), div(mul(L, H), 3)), 2)"
+    ]
+   },
+   "geo_trap_area": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6366,
+     "port:scale:div2",
+     "div(add(add(mul(B, Z), T), sub(mul(Z, T), T)), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6366,
+     "port:scale:div2",
+     "div(add(add(mul(B, Z), T), sub(mul(Z, T), T)), 2)"
+    ]
+   },
+   "geo_tri_prism": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6372,
+     "port:scale:div2",
+     "div(mul(mul(Z, B), T), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6372,
+     "port:scale:div2",
+     "div(mul(mul(Z, B), T), 2)"
+    ]
+   },
+   "geo_trap_diff": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5881,
+     "port:scale:div2",
+     "div(add(mul(sub(B, T), Z), 0), 2)"
+    ],
+    "trained_invent": [
+     true,
+     5881,
+     "port:scale:div2",
+     "div(add(mul(sub(B, T), Z), 0), 2)"
+    ]
+   },
+   "geo_diagonals": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     3668,
+     "port:scale:div2",
+     "div(sub(mul(sub(n, 2), n), min(n, q)), 2)"
+    ],
+    "trained_invent": [
+     true,
+     3668,
+     "port:scale:div2",
+     "div(sub(mul(sub(n, 2), n), min(n, q)), 2)"
+    ]
+   },
+   "geo_tri_count": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6615,
+     "port:scale:div2",
+     "div(sub(mul(sub(n, 2), add(2, n)), min(n, q)), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6615,
+     "port:scale:div2",
+     "div(sub(mul(sub(n, 2), add(2, n)), min(n, q)), 2)"
+    ]
+   },
+   "geo_ext_angle": {
+    "cold": [
+     false,
+     918,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     1301,
+     null,
+     "div(add(q, q), n)"
+    ],
+    "trained": [
+     true,
+     1301,
+     null,
+     "div(add(q, q), n)"
+    ],
+    "trained_invent": [
+     true,
+     1301,
+     null,
+     "div(add(q, q), n)"
+    ]
+   },
+   "fin_simple_interest": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5372,
+     "port:anchor",
+     "mul(mul(r, div(P, C)), Y)"
+    ],
+    "trained_invent": [
+     true,
+     5372,
+     "port:anchor",
+     "mul(mul(r, div(P, C)), Y)"
+    ]
+   },
+   "fin_amount": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5572,
+     "port:anchor",
+     "mul(div(P, C), add(C, mul(r, Y)))"
+    ],
+    "trained_invent": [
+     true,
+     5572,
+     "port:anchor",
+     "mul(div(P, C), add(C, mul(r, Y)))"
+    ]
+   },
+   "fin_discounted": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5370,
+     "port:anchor",
+     "sub(max(C, P), mul(r, div(P, C)))"
+    ],
+    "trained_invent": [
+     true,
+     5370,
+     "port:anchor",
+     "sub(max(C, P), mul(r, div(P, C)))"
+    ]
+   },
+   "fin_taxed": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5369,
+     "port:anchor",
+     "add(max(C, P), mul(r, div(P, C)))"
+    ],
+    "trained_invent": [
+     true,
+     5369,
+     "port:anchor",
+     "add(max(C, P), mul(r, div(P, C)))"
+    ]
+   },
+   "fin_installment": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5349,
+     "port:anchor",
+     "add(div(P, Y), mul(r, div(P, C)))"
+    ],
+    "trained_invent": [
+     true,
+     5349,
+     "port:anchor",
+     "add(div(P, Y), mul(r, div(P, C)))"
+    ]
+   },
+   "fin_net_profit": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5361,
+     "port:anchor",
+     "add(mul(sub(S, K), N), sub(0, X))"
+    ],
+    "trained_invent": [
+     true,
+     5361,
+     "port:anchor",
+     "add(mul(sub(S, K), N), sub(0, X))"
+    ]
+   }
+  },
+  "sha256": "f27adf3cbe3dbec76b7904c5311de6cc46e453ba1426706281f895e0104e872c"
+ },
+ "transfer3": {
+  "tasks": 40,
+  "certified": {
+   "cold": 0,
+   "empty": 1,
+   "trained": 20,
+   "trained_invent": 27
+  },
+  "evaluations": {
+   "cold": 392886,
+   "empty": 395311,
+   "trained": 309010,
+   "trained_invent": 273063
+  },
+  "by_domain": {
+   "cold": {
+    "building": [
+     0,
+     15
+    ],
+    "games": [
+     0,
+     11
+    ],
+    "travel": [
+     0,
+     14
+    ]
+   },
+   "empty": {
+    "building": [
+     0,
+     15
+    ],
+    "games": [
+     0,
+     11
+    ],
+    "travel": [
+     1,
+     14
+    ]
+   },
+   "trained": {
+    "building": [
+     8,
+     15
+    ],
+    "games": [
+     4,
+     11
+    ],
+    "travel": [
+     8,
+     14
+    ]
+   },
+   "trained_invent": {
+    "building": [
+     11,
+     15
+    ],
+    "games": [
+     8,
+     11
+    ],
+    "travel": [
+     8,
+     14
+    ]
+   }
+  },
+  "worse_than_cold": {
+   "cold": [],
+   "empty": [],
+   "trained": [],
+   "trained_invent": []
+  },
+  "trained_wins_lost": {
+   "cold": [
+    "b3_walls",
+    "b3_walls_ceiling",
+    "b3_box_surface_open",
+    "b3_diag_sq",
+    "b3_sq_pyramid",
+    "b3_frame_edges",
+    "b3_square_room_tiles",
+    "b3_fence_border",
+    "g3_round_robin",
+    "g3_cross_handshakes",
+    "g3_league_points_max",
+    "g3_points_behind",
+    "t3_fuel_return",
+    "t3_family_fare",
+    "t3_group_discount",
+    "t3_return_family",
+    "t3_fare_third_off_kids",
+    "t3_round_trip_minutes",
+    "t3_hire_cost",
+    "t3_last_vehicle"
+   ],
+   "empty": [
+    "b3_walls",
+    "b3_walls_ceiling",
+    "b3_box_surface_open",
+    "b3_diag_sq",
+    "b3_sq_pyramid",
+    "b3_frame_edges",
+    "b3_square_room_tiles",
+    "b3_fence_border",
+    "g3_round_robin",
+    "g3_cross_handshakes",
+    "g3_league_points_max",
+    "g3_points_behind",
+    "t3_fuel_return",
+    "t3_family_fare",
+    "t3_group_discount",
+    "t3_return_family",
+    "t3_fare_third_off_kids",
+    "t3_round_trip_minutes",
+    "t3_hire_cost"
+   ],
+   "trained": [],
+   "trained_invent": []
+  },
+  "per_task[certified, evals, via, candidate]": {
+   "b3_walls": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5178,
+     "port:anchor",
+     "add(mul(add(ht, ht), ln), mul(ht, add(wd, wd)))"
+    ],
+    "trained_invent": [
+     true,
+     5178,
+     "port:anchor",
+     "add(mul(add(ht, ht), ln), mul(ht, add(wd, wd)))"
+    ]
+   },
+   "b3_walls_ceiling": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5615,
+     "port:anchor2",
+     "add(add(mul(ln, wd), mul(add(wd, wd), ht)), mul(ln, add(ht, ht)))"
+    ],
+    "trained_invent": [
+     true,
+     5615,
+     "port:anchor2",
+     "add(add(mul(ln, wd), mul(add(wd, wd), ht)), mul(ln, add(ht, ht)))"
+    ]
+   },
+   "b3_box_surface_open": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6000,
+     "port:anchor2",
+     "add(add(mul(add(wd, wd), ht), mul(ln, wd)), mul(ln, add(ht, ht)))"
+    ],
+    "trained_invent": [
+     true,
+     6000,
+     "port:anchor2",
+     "add(add(mul(add(wd, wd), ht), mul(ln, wd)), mul(ln, add(ht, ht)))"
+    ]
+   },
+   "b3_diag_sq": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5746,
+     "port:anchor2",
+     "add(add(add(mul(ln, ln), wd), mul(wd, wd)), sub(mul(ht, ht), wd))"
+    ],
+    "trained_invent": [
+     true,
+     5746,
+     "port:anchor2",
+     "add(add(add(mul(ln, ln), wd), mul(wd, wd)), sub(mul(ht, ht), wd))"
+    ]
+   },
+   "b3_two_cubes": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     8128,
+     "port:invent:r1",
+     "add(mul(wd, mul(wd, wd)), mul(mul(ht, ht), ht))"
+    ]
+   },
+   "b3_room_minus_cube": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     8129,
+     "port:invent:r1",
+     "sub(mul(ht, mul(ln, wd)), mul(mul(ht, ht), ht))"
+    ]
+   },
+   "b3_sq_pyramid": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6397,
+     "port:scale:div2",
+     "div(mul(add(wd, wd), div(mul(ht, wd), 3)), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6397,
+     "port:scale:div2",
+     "div(mul(add(wd, wd), div(mul(ht, wd), 3)), 2)"
+    ]
+   },
+   "b3_wedge": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     5329,
+     "port:anchor",
+     null
+    ],
+    "trained_invent": [
+     false,
+     5329,
+     "port:anchor",
+     null
+    ]
+   },
+   "b3_frame_edges": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6770,
+     "port:scale:mul2",
+     "mul(add(add(ht, ht), mul(2, add(wd, ln))), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6770,
+     "port:scale:mul2",
+     "mul(add(add(ht, ht), mul(2, add(wd, ln))), 2)"
+    ]
+   },
+   "b3_square_room_tiles": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6424,
+     "port:scale:div2",
+     "div(mul(add(wd, ht), div(wd, 2)), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6424,
+     "port:scale:div2",
+     "div(mul(add(wd, ht), div(wd, 2)), 2)"
+    ]
+   },
+   "b3_path_around": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "b3_fence_border": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5858,
+     "port:anchor2",
+     "add(add(add(pb, pb), mul(pc, mul(3, 3))), add(sub(pa, pc), pa))"
+    ],
+    "trained_invent": [
+     true,
+     5858,
+     "port:anchor2",
+     "add(add(add(pb, pb), mul(pc, mul(3, 3))), add(sub(pa, pc), pa))"
+    ]
+   },
+   "b3_slab": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     "blockprobe",
+     null
+    ],
+    "trained_invent": [
+     true,
+     8055,
+     "port:invent:r1:div4",
+     "div(mul(pa, mul(pb, pc)), mul(2, 2))"
+    ]
+   },
+   "b3_two_beds": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "b3_cube_shell": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "g3_tetra_stack": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     2463,
+     "port:invent:r2:div3",
+     "div(mul(div(add(nl, mul(nl, nl)), 2), add(2, nl)), 3)"
+    ]
+   },
+   "g3_pentagonal": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     2365,
+     "port:invent:r2",
+     "add(div(add(nl, mul(nl, nl)), 2), sub(mul(nl, nl), nl))"
+    ]
+   },
+   "g3_star_number": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     2555,
+     "port:invent:r2",
+     "add(add(1, mul(add(nl, nl), add(nl, nl))), mul(nl, mul(2, sub(nl, 3))))"
+    ]
+   },
+   "g3_squares_on_board": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     true,
+     2358,
+     "port:invent:r2:div3",
+     "div(add(div(add(nl, mul(nl, nl)), 2), mul(mul(nl, nl), sub(nl, 2))), 3)"
+    ]
+   },
+   "g3_round_robin": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     7151,
+     "port:scale:div2",
+     "div(mul(max(rd, nt), sub(mul(nt, rd), rd)), 2)"
+    ],
+    "trained_invent": [
+     true,
+     7151,
+     "port:scale:div2",
+     "div(mul(max(rd, nt), sub(mul(nt, rd), rd)), 2)"
+    ]
+   },
+   "g3_cross_handshakes": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     9118,
+     "port:scale:div2",
+     "div(mul(mul(rd, nt), sub(mul(nt, rd), rd)), 2)"
+    ],
+    "trained_invent": [
+     true,
+     9118,
+     "port:scale:div2",
+     "div(mul(mul(rd, nt), sub(mul(nt, rd), rd)), 2)"
+    ]
+   },
+   "g3_league_points_max": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     7723,
+     "port:anchor",
+     "mul(mul(rd, nt), sub(mul(nt, 3), 3))"
+    ],
+    "trained_invent": [
+     true,
+     7723,
+     "port:anchor",
+     "mul(mul(rd, nt), sub(mul(nt, 3), 3))"
+    ]
+   },
+   "g3_groups_then_final": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "g3_points_pct": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "g3_win_pct": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "g3_points_behind": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5409,
+     "port:anchor",
+     "add(add(dr, dr), mul(ls, 3))"
+    ],
+    "trained_invent": [
+     true,
+     5409,
+     "port:anchor",
+     "add(add(dr, dr), mul(ls, 3))"
+    ]
+   },
+   "t3_fuel_cost": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     5336,
+     "port:anchor",
+     null
+    ],
+    "trained_invent": [
+     false,
+     5336,
+     "port:anchor",
+     null
+    ]
+   },
+   "t3_fuel_return": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5356,
+     "port:anchor",
+     "mul(mul(lp, pl), div(km, div(hc, 2)))"
+    ],
+    "trained_invent": [
+     true,
+     5356,
+     "port:anchor",
+     "mul(mul(lp, pl), div(km, div(hc, 2)))"
+    ]
+   },
+   "t3_fuel_plus_toll": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "t3_litres_two_legs": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "t3_family_fare": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5174,
+     "port:anchor",
+     "add(mul(fr, ad), mul(div(fr, 2), ch))"
+    ],
+    "trained_invent": [
+     true,
+     5174,
+     "port:anchor",
+     "add(mul(fr, ad), mul(div(fr, 2), ch))"
+    ]
+   },
+   "t3_group_discount": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6385,
+     "port:scale:div2",
+     "div(mul(add(ch, ad), add(div(fr, 2), fr)), 2)"
+    ],
+    "trained_invent": [
+     true,
+     6385,
+     "port:scale:div2",
+     "div(mul(add(ch, ad), add(div(fr, 2), fr)), 2)"
+    ]
+   },
+   "t3_return_family": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5130,
+     "port:anchor",
+     "add(mul(add(ad, ad), fr), mul(fr, ch))"
+    ],
+    "trained_invent": [
+     true,
+     5130,
+     "port:anchor",
+     "add(mul(add(ad, ad), fr), mul(fr, ch))"
+    ]
+   },
+   "t3_fare_third_off_kids": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     7378,
+     "port:scale:div3",
+     "div(add(mul(add(ch, ch), fr), mul(ad, mul(fr, 3))), 3)"
+    ],
+    "trained_invent": [
+     true,
+     7378,
+     "port:scale:div3",
+     "div(add(mul(add(ch, ch), fr), mul(ad, mul(fr, 3))), 3)"
+    ]
+   },
+   "t3_distance": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     "blockprobe",
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     "blockprobe",
+     null
+    ]
+   },
+   "t3_round_trip_minutes": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5916,
+     "port:anchor2",
+     "add(add(mul(hh, sx), add(mul(hh, sx), mm)), add(div(sx, 2), mm))"
+    ],
+    "trained_invent": [
+     true,
+     5916,
+     "port:anchor2",
+     "add(add(mul(hh, sx), add(mul(hh, sx), mm)), add(div(sx, 2), mm))"
+    ]
+   },
+   "t3_arrival_hour": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     5325,
+     "port:anchor",
+     null
+    ],
+    "trained_invent": [
+     false,
+     5325,
+     "port:anchor",
+     null
+    ]
+   },
+   "t3_hire_cost": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5162,
+     "port:anchor",
+     "add(mul(hire, div(pax, cap)), hire)"
+    ],
+    "trained_invent": [
+     true,
+     5162,
+     "port:anchor",
+     "add(mul(hire, div(pax, cap)), hire)"
+    ]
+   },
+   "t3_last_vehicle": {
+    "cold": [
+     false,
+     2886,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5311,
+     "casesplit:d1",
+     "ite(mod(pax, cap), mod(pax, cap), cap)"
+    ],
+    "trained": [
+     true,
+     5130,
+     "port:anchor",
+     "add(mod(pax, cap), ite(mod(pax, cap), 0, cap))"
+    ],
+    "trained_invent": [
+     true,
+     5130,
+     "port:anchor",
+     "add(mod(pax, cap), ite(mod(pax, cap), 0, cap))"
+    ]
+   },
+   "t3_cost_per_head": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     "blockprobe",
+     null
+    ],
+    "trained_invent": [
+     false,
+     10000,
+     "blockprobe",
+     null
+    ]
+   }
+  },
+  "sha256": "5a8dab572468551d557558bea6ba2c004b90b254aa68c2878f3e91a9bb4f10e9"
+ },
+ "verdict": {
+  "deep": {
+   "trained": 27,
+   "trained_invent": 27,
+   "floor": 27,
+   "lost": [],
+   "worse_than_cold": {},
+   "no_loss": true
+  },
+  "science_hard": {
+   "trained": 12,
+   "trained_invent": 12,
+   "floor": 12,
+   "lost": [],
+   "worse_than_cold": {},
+   "no_loss": true
+  },
+  "transfer": {
+   "trained": 19,
+   "trained_invent": 19,
+   "floor": 0,
+   "lost": [],
+   "worse_than_cold": {},
+   "no_loss": true
+  },
+  "transfer2": {
+   "trained": 30,
+   "trained_invent": 32,
+   "floor": 30,
+   "lost": [],
+   "worse_than_cold": {},
+   "no_loss": true
+  },
+  "text": {
+   "trained": 3,
+   "trained_invent": 17,
+   "floor": 3,
+   "lost": [],
+   "worse_than_cold": {},
+   "no_loss": true
+  },
+  "transfer3": {
+   "trained": 20,
+   "trained_invent": 27,
+   "floor": 0,
+   "lost": [],
+   "worse_than_cold": {},
+   "no_loss": true
+  },
+  "all_no_loss": true
+ }
+}

@@ -1,0 +1,1293 @@
+{
+ "tasks": 24,
+ "certified": {
+  "cold": 0,
+  "empty": 0,
+  "lang": 17,
+  "math_sci": 2,
+  "all_sci": 20,
+  "all_port_off": 0,
+  "all_grow_off": 17
+ },
+ "evaluations": {
+  "cold": 240000,
+  "empty": 240000,
+  "lang": 155440,
+  "math_sci": 226152,
+  "all_sci": 135530,
+  "all_port_off": 240000,
+  "all_grow_off": 155440
+ },
+ "by_kind": {
+  "cold": {
+   "initials": [
+    0,
+    6
+   ],
+   "joining": [
+    0,
+    4
+   ],
+   "casing": [
+    0,
+    4
+   ],
+   "lengths": [
+    0,
+    1
+   ],
+   "slicing": [
+    0,
+    4
+   ],
+   "mixed": [
+    0,
+    5
+   ]
+  },
+  "empty": {
+   "initials": [
+    0,
+    6
+   ],
+   "joining": [
+    0,
+    4
+   ],
+   "casing": [
+    0,
+    4
+   ],
+   "lengths": [
+    0,
+    1
+   ],
+   "slicing": [
+    0,
+    4
+   ],
+   "mixed": [
+    0,
+    5
+   ]
+  },
+  "lang": {
+   "initials": [
+    6,
+    6
+   ],
+   "joining": [
+    4,
+    4
+   ],
+   "casing": [
+    4,
+    4
+   ],
+   "lengths": [
+    1,
+    1
+   ],
+   "slicing": [
+    2,
+    4
+   ],
+   "mixed": [
+    0,
+    5
+   ]
+  },
+  "math_sci": {
+   "initials": [
+    0,
+    6
+   ],
+   "joining": [
+    0,
+    4
+   ],
+   "casing": [
+    0,
+    4
+   ],
+   "lengths": [
+    0,
+    1
+   ],
+   "slicing": [
+    0,
+    4
+   ],
+   "mixed": [
+    2,
+    5
+   ]
+  },
+  "all_sci": {
+   "initials": [
+    6,
+    6
+   ],
+   "joining": [
+    4,
+    4
+   ],
+   "casing": [
+    4,
+    4
+   ],
+   "lengths": [
+    1,
+    1
+   ],
+   "slicing": [
+    2,
+    4
+   ],
+   "mixed": [
+    3,
+    5
+   ]
+  },
+  "all_port_off": {
+   "initials": [
+    0,
+    6
+   ],
+   "joining": [
+    0,
+    4
+   ],
+   "casing": [
+    0,
+    4
+   ],
+   "lengths": [
+    0,
+    1
+   ],
+   "slicing": [
+    0,
+    4
+   ],
+   "mixed": [
+    0,
+    5
+   ]
+  },
+  "all_grow_off": {
+   "initials": [
+    6,
+    6
+   ],
+   "joining": [
+    4,
+    4
+   ],
+   "casing": [
+    4,
+    4
+   ],
+   "lengths": [
+    1,
+    1
+   ],
+   "slicing": [
+    2,
+    4
+   ],
+   "mixed": [
+    0,
+    5
+   ]
+  }
+ },
+ "worse_than_cold": {
+  "cold": [],
+  "empty": [],
+  "lang": [],
+  "math_sci": [],
+  "all_sci": [],
+  "all_port_off": [],
+  "all_grow_off": []
+ },
+ "per_task[certified, evals, via, candidate]": {
+  "t_initials_dot": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(concat(first(fn), dt), concat(first(ln), dt))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(concat(first(fn), dt), concat(first(ln), dt))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(concat(first(fn), dt), concat(first(ln), dt))"
+   ]
+  },
+  "t_initials_dot_upper": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(upper(concat(first(fn), dt)), concat(upper(first(ln)), dt))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(upper(concat(first(fn), dt)), concat(upper(first(ln)), dt))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(upper(concat(first(fn), dt)), concat(upper(first(ln)), dt))"
+   ]
+  },
+  "t_short_name": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(first(fn), concat(dt, concat(sp, ln)))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(first(fn), concat(dt, concat(sp, ln)))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(first(fn), concat(dt, concat(sp, ln)))"
+   ]
+  },
+  "t_ends_both": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5026,
+    "port:invent:text:suf",
+    "concat(concat(first(fn), last(fn)), concat(first(ln), last(ln)))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5026,
+    "port:invent:text:suf",
+    "concat(concat(first(fn), last(fn)), concat(first(ln), last(ln)))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5026,
+    "port:invent:text:suf",
+    "concat(concat(first(fn), last(fn)), concat(first(ln), last(ln)))"
+   ]
+  },
+  "t_last_first": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(concat(ln, concat(cm, sp)), concat(first(fn), rest(fn)))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(concat(ln, concat(cm, sp)), concat(first(fn), rest(fn)))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(concat(ln, concat(cm, sp)), concat(first(fn), rest(fn)))"
+   ]
+  },
+  "t_quiet_last_first": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(lower(concat(ln, concat(cm, sp))), concat(lower(first(fn)), lower(rest(fn))))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(lower(concat(ln, concat(cm, sp))), concat(lower(first(fn)), lower(rest(fn))))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(lower(concat(ln, concat(cm, sp))), concat(lower(first(fn)), lower(rest(fn))))"
+   ]
+  },
+  "t_shout_rev_both": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5026,
+    "port:invent:text:suf",
+    "concat(upper(srev(concat(sp, fn))), upper(srev(ln)))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5026,
+    "port:invent:text:suf",
+    "concat(upper(srev(concat(sp, fn))), upper(srev(ln)))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5026,
+    "port:invent:text:suf",
+    "concat(upper(srev(concat(sp, fn))), upper(srev(ln)))"
+   ]
+  },
+  "t_card_len": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5034,
+    "port:anchor",
+    "add(strlen(concat(cm, cm)), strlen(concat(fn, ln)))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5034,
+    "port:anchor",
+    "add(strlen(concat(cm, cm)), strlen(concat(fn, ln)))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5034,
+    "port:anchor",
+    "add(strlen(concat(cm, cm)), strlen(concat(fn, ln)))"
+   ]
+  },
+  "t_capitalize": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ]
+  },
+  "t_title_name": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    false,
+    10000,
+    "blockprobe",
+    null
+   ]
+  },
+  "t_rotate_both": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5016,
+    "port:invent:text:chain",
+    "concat(concat(rest(w), first(w)), concat(concat(sp, rest(w2)), first(w2)))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5016,
+    "port:invent:text:chain",
+    "concat(concat(rest(w), first(w)), concat(concat(sp, rest(w2)), first(w2)))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5016,
+    "port:invent:text:chain",
+    "concat(concat(rest(w), first(w)), concat(concat(sp, rest(w2)), first(w2)))"
+   ]
+  },
+  "t_formal_cap": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(upper(first(ln)), concat(lower(rest(ln)), concat(concat(cm, sp), upper(concat(first(fn), dt)))))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(upper(first(ln)), concat(lower(rest(ln)), concat(concat(cm, sp), upper(concat(first(fn), dt)))))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(upper(first(ln)), concat(lower(rest(ln)), concat(concat(cm, sp), upper(concat(first(fn), dt)))))"
+   ]
+  },
+  "t_initial_upper_last": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(first(fn), concat(dt, upper(concat(sp, ln))))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(first(fn), concat(dt, upper(concat(sp, ln))))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(first(fn), concat(dt, upper(concat(sp, ln))))"
+   ]
+  },
+  "t_shout_last_first": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(upper(concat(ln, concat(cm, sp))), concat(upper(first(fn)), upper(rest(fn))))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(upper(concat(ln, concat(cm, sp))), concat(upper(first(fn)), upper(rest(fn))))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(upper(concat(ln, concat(cm, sp))), concat(upper(first(fn)), upper(rest(fn))))"
+   ]
+  },
+  "t_quiet_initials_dot": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(lower(concat(first(fn), dt)), concat(lower(first(ln)), dt))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(lower(concat(first(fn), dt)), concat(lower(first(ln)), dt))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(lower(concat(first(fn), dt)), concat(lower(first(ln)), dt))"
+   ]
+  },
+  "t_ends_upper_both": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(upper(first(fn)), concat(upper(last(fn)), upper(concat(first(ln), last(ln)))))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(upper(first(fn)), concat(upper(last(fn)), upper(concat(first(ln), last(ln)))))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5026,
+    "port:invent:text:chain",
+    "concat(upper(first(fn)), concat(upper(last(fn)), upper(concat(first(ln), last(ln)))))"
+   ]
+  },
+  "t_double_first": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5026,
+    "port:invent:text:pre",
+    "concat(lower(concat(fn, fn)), concat(sp, ln))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5026,
+    "port:invent:text:pre",
+    "concat(lower(concat(fn, fn)), concat(sp, ln))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5026,
+    "port:invent:text:pre",
+    "concat(lower(concat(fn, fn)), concat(sp, ln))"
+   ]
+  },
+  "t_ends_name": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5026,
+    "port:invent:text:pre",
+    "concat(concat(first(fn), last(fn)), concat(sp, ln))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5026,
+    "port:invent:text:pre",
+    "concat(concat(first(fn), last(fn)), concat(sp, ln))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5026,
+    "port:invent:text:pre",
+    "concat(concat(first(fn), last(fn)), concat(sp, ln))"
+   ]
+  },
+  "t_rev_upper_first": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    true,
+    5026,
+    "port:invent:text:pre",
+    "concat(upper(srev(fn)), concat(dt, ln))"
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    5026,
+    "port:invent:text:pre",
+    "concat(upper(srev(fn)), concat(dt, ln))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    true,
+    5026,
+    "port:invent:text:pre",
+    "concat(upper(srev(fn)), concat(dt, ln))"
+   ]
+  },
+  "t_badge_len": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "t_line_len": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    true,
+    3817,
+    "port:invent:r1",
+    "sub(add(rep, mul(strlen(concat(w, w)), rep)), add(1, mul(rep, strlen(w))))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "t_pyramid_len": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci": [
+    true,
+    3123,
+    "port:invent:r2",
+    "mul(div(add(rep, mul(rep, rep)), 2), strlen(w))"
+   ],
+   "all_sci": [
+    true,
+    3189,
+    "port:invent:r2",
+    "mul(div(add(rep, mul(rep, rep)), 2), strlen(w))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "t_sq_plus_len": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_sci": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "t_half_len_rep": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "lang": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci": [
+    true,
+    3029,
+    "port:invent:r2",
+    "mul(div(add(rep, mul(rep, rep)), 2), strlen(w))"
+   ],
+   "all_sci": [
+    true,
+    3084,
+    "port:invent:r2",
+    "mul(div(add(rep, mul(rep, rep)), 2), strlen(w))"
+   ],
+   "all_port_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "all_grow_off": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  }
+ },
+ "sha256": "08a826a38fab20dca5897edaf732db84a68a43ace4ec67386e796ad26cb64a02",
+ "verdict": {
+  "lang": {
+   "minus_empty": 17,
+   "fewer_evals_vs_empty": 0.3523,
+   "beats_empty": true
+  },
+  "math_sci": {
+   "minus_empty": 2,
+   "fewer_evals_vs_empty": 0.0577,
+   "beats_empty": false
+  },
+  "all_sci": {
+   "minus_empty": 20,
+   "fewer_evals_vs_empty": 0.4353,
+   "beats_empty": true
+  },
+  "combine_all_minus_lang": 3,
+  "no_arm_worse_than_cold": true,
+  "pass": true
+ }
+}
