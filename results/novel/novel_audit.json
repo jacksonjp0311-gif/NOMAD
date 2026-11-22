@@ -1,0 +1,186 @@
+{
+ "nv_c_mid_sum": {
+  "trained_on": {
+   "program": "div(sub(add(px, add(px, qx)), sub(px, add(qy, py))), 2)",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_2": {
+   "program": "div(add(add(qx, sub(px, px)), add(py, add(qy, px))), 2)",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_3": {
+   "program": "div(add(add(add(py, qy), qx), px), 2)",
+   "rows_checked": 2000,
+   "wrong": 0
+  }
+ },
+ "nv_d_digit_sum3": {
+  "shuffled_3": {
+   "program": "add(add(mod(nn, tn), div(nn, mul(tn, tn))), mod(div(nn, tn), tn))",
+   "rows_checked": 2000,
+   "wrong": 0
+  }
+ },
+ "nv_d_reverse2": {
+  "trained_on": {
+   "program": "add(div(nn, tn), mul(mod(nn, tn), tn))",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_1": {
+   "program": "add(div(nn, tn), mul(mod(nn, tn), tn))",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_2": {
+   "program": "add(div(nn, tn), mul(mod(nn, tn), tn))",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_3": {
+   "program": "add(div(ite(sub(nn, tn), nn, 0), mod(tn, max(0, nn))), mul(mod(nn, tn), tn))",
+   "rows_checked": 2000,
+   "wrong": 17
+  }
+ },
+ "nv_d_swap_change": {
+  "trained_on": {
+   "program": "mul(add(mod(nn, tn), sub(0, div(nn, tn))), mul(3, 3))",
+   "rows_checked": 2000,
+   "wrong": 0
+  }
+ },
+ "nv_d_round10": {
+  "trained_on": {
+   "program": "mul(sub(0, tn), div(sub(1, nn), tn))",
+   "rows_checked": 2000,
+   "wrong": 613
+  },
+  "shuffled_1": {
+   "program": "add(sub(max(nn, tn), 3), mod(sub(3, nn), tn))",
+   "rows_checked": 2000,
+   "wrong": 196
+  },
+  "shuffled_2": {
+   "program": "add(add(sub(sub(nn, tn), 2), mod(add(tn, nn), nn)), mod(sub(2, nn), tn))",
+   "rows_checked": 2000,
+   "wrong": 403
+  },
+  "shuffled_3": {
+   "program": "mul(sub(0, tn), div(sub(1, nn), tn))",
+   "rows_checked": 2000,
+   "wrong": 613
+  }
+ },
+ "nv_d_ends_sum": {
+  "trained_on": {
+   "program": "add(mod(nn, tn), div(nn, mul(tn, tn)))",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_1": {
+   "program": "add(mod(mod(nn, tn), tn), div(nn, mul(tn, tn)))",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_2": {
+   "program": "add(mod(add(nn, tn), tn), div(nn, mul(tn, tn)))",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_3": {
+   "program": "add(div(nn, mul(tn, tn)), mod(nn, tn))",
+   "rows_checked": 2000,
+   "wrong": 0
+  }
+ },
+ "nv_d_digit_prod2": {
+  "trained_on": {
+   "program": "mul(div(nn, tn), mod(nn, tn))",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_1": {
+   "program": "mul(div(nn, tn), mod(nn, tn))",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_2": {
+   "program": "mul(div(nn, tn), mod(nn, tn))",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_3": {
+   "program": "mul(div(ite(sub(nn, tn), nn, 0), mod(tn, max(0, nn))), mod(nn, tn))",
+   "rows_checked": 2000,
+   "wrong": 30
+  }
+ },
+ "nv_o_top_two": {
+  "trained_on": {
+   "program": "add(add(max(oa, ob), sub(oc, min(oc, ob))), min(ob, max(oa, oc)))",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_3": {
+   "program": "add(max(oa, min(oc, ob)), max(ob, oc))",
+   "rows_checked": 2000,
+   "wrong": 0
+  }
+ },
+ "nv_o_range3": {
+  "trained_on": {
+   "program": "add(add(sub(oa, min(oa, ob)), sub(oc, min(oc, oa))), sub(ob, min(oc, ob)))",
+   "rows_checked": 2000,
+   "wrong": 0
+  }
+ },
+ "nv_o_gap_top": {
+  "trained_on": {
+   "program": "add(sub(0, oa), max(oa, max(ob, oc)))",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_1": {
+   "program": "max(0, sub(max(oc, ob), oa))",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_2": {
+   "program": "max(0, sub(max(oc, ob), oa))",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_3": {
+   "program": "add(sub(0, oa), max(oa, max(ob, oc)))",
+   "rows_checked": 2000,
+   "wrong": 0
+  }
+ },
+ "nv_o_max_pair_sum": {
+  "shuffled_1": {
+   "program": "max(add(ob, oa), add(oc, od))",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_3": {
+   "program": "max(max(oc, add(ob, oa)), max(oa, add(oc, od)))",
+   "rows_checked": 2000,
+   "wrong": 0
+  }
+ },
+ "nv_o_minmax4": {
+  "shuffled_2": {
+   "program": "min(max(oc, od), max(oa, ob))",
+   "rows_checked": 2000,
+   "wrong": 0
+  },
+  "shuffled_3": {
+   "program": "min(max(oc, od), max(oa, ob))",
+   "rows_checked": 2000,
+   "wrong": 0
+  }
+ }
+}
