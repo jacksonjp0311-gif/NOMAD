@@ -153,3 +153,70 @@ sha 55042ce2, 22 hard (`results/discrim/discrim_sealed.json`):
 Verdict so far: **FAIL** (criterion 4). `NOMAD_DISCRIM` stays **off**. Criterion 5 (the 22 earlier judges)
 is still measured and reported, because it answers the report-only question: does the guard remove LET2's
 losses there?
+
+## Sealed result, part 2: the 22 earlier judges (criterion 5) and the LET2 question
+
+`SWITCH=NOMAD_DISCRIM scripts/switch_regress.py` over 22 judges, 748 per-task blocks, measured once from
+the 7eeaf41 snapshot (`results/discrim/regress_compare.json`):
+
+- **48 judged per-task losses on 4 judges**, so criterion 5 **fails**:
+  - ceil `cl_h_rafts` (trained_on, rewired_1-3): **certification losses** (4).
+  - combine `cs_fuel_weeks` x4: evaluation increases (6,484 -> 9,672).
+  - meaning: 17 evaluation increases. Example: ms_two_terminals shuffled_1 goes from 4 to 5,360.
+  - roles: 23 evaluation increases.
+- **Zero losses** on bridge, discrim, inflect, learning (science hard incl. sci_water_mol), let, let2
+  (judged arms), merge, route5, secondary4, selfedit2, text_chain, text_invent, text, textpat, transfer1-4
+  and transfer6.
+- Certified totals rise on ceil 35 -> 43, combine 26 -> 41, let 51 -> 59, let2 97 -> 107, meaning
+  158 -> 164, selfedit2 44 -> 48, transfer4 61 -> 64 and transfer6 242 -> 247.
+- let2 judge, reported arms (`NOMAD_LET2=on`, so guarded vs unguarded): 10 records each need 3-5 more
+  evaluations (the guard's cost). No certification changes.
+
+**Report: DISCRIM + LET2 vs LET2 alone.**
+
+- **LET2's gain is fully kept.** On the LET2 sealed suite (the `*_off` arms with DISCRIM on):
+  - trained 9 -> **13** (LET2 alone: 13)
+  - math_sci 9 -> 13
+  - practice 8 -> 10
+  - 0 lost
+  - empty identical
+- **Its losses are only partly removed:** 53 losses on 6 judges become 48 on 4.
+  - Removed: all three LET2 certification losses outside CEIL (transfer2 `g2_kite`, selfedit2
+    `se2_g_square9` x2, meaning `ms_cake_split2`). For g2_kite, the experiment found the evidence-preserving
+    simplification `A * D / 2` of the wrong fit `max(A, Lz) * D / 2`, saw that the two disagree on a swapped
+    row, and returned the simpler one. It certifies in 5,521 evaluations (off: 5,900).
+  - Not removed:
+    - `cl_h_rafts` (diagnosed after the measurement): the wrong let fit is `t // 2 - t // 3` for
+      `ceil(t / 6)` (t = ld * le). It has **no surviving alternative** (no other fit for the same
+      intermediate, no evidence-preserving simplification), so the experiment had nothing to compare it
+      with. It was "confirmed" vacuously.
+    - The meaning, roles and combine evaluation increases look like the ones LET2 showed. These judges
+      train their fields with the switch's environment on (meaning_judge `train_words`, roles_judge
+      `train_stories`, the combine field). Extra certified training tasks change what is learned
+      (e.g. a different lexicon concept), and later tasks take a different path. This was not verified
+      task by task.
+
+## Verdict: FAIL (criteria 4 and 5). `NOMAD_DISCRIM` stays **off**.
+
+| criterion | result |
+|---|---|
+| 1 it helps (sealed, trained) | pass (7 -> 14) |
+| 2 empty identical, cold untouched | pass |
+| 3 no loss on the sealed suite | pass |
+| 4 the experiment carries it | **fail** vs blind (39 = 39); pass vs shuffled (39 vs 34) |
+| 5 no loss on 22 earlier judges | **fail** (48 losses on 4 judges, incl. cl_h_rafts certification) |
+| 6 LOFO, tests | pass (5,883, worst 1.0x; full suite passes) |
+
+What this tells the next attempt (not tuned on; for a future pre-registration):
+
+1. "No disagreeing survivor" is not the same as "confirmed". With zero survivors the experiment is
+   empty. A stricter guard would require **positive support**: at least one independently derived
+   survivor that agrees, or a fit no longer than its intermediate's cheapest alternative. With no support,
+   it would fall through to INVENT. That rule would have stopped `cl_h_rafts`. Its cost to the gains is
+   unknown.
+2. Alternatives should come from more than the stage itself: e.g. a small bounded enumeration of
+   programs over the same intermediate. That way a wrong fit has something to be compared with.
+3. The evaluation-increase losses on judges that train under the switch (meaning, roles, combine) are
+   probably a property of any switch that certifies more training tasks. Judging them task by task on
+   arms whose field itself changed may need its own pre-registered rule. Any such change has to be made
+   before a measurement, not after.
