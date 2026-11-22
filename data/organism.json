@@ -1,10 +1,10 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-22T06:47:58Z",
+  "ts": "2026-11-22T07:00:19Z",
   "sense": {
-    "last_pair": "2026-11-22T06:45:48Z",
-    "last_world_pair": "2026-11-22T06:45:48Z",
-    "last_sleep": "2026-11-22T06:47:58Z"
+    "last_pair": "2026-11-22T06:57:55Z",
+    "last_world_pair": "2026-11-22T06:57:55Z",
+    "last_sleep": "2026-11-22T07:00:14Z"
   },
   "think": {
     "curriculum_open_levels": {
@@ -26,7 +26,7 @@
       "informative_pairs": 0,
       "mean_treatment_advantage": null,
       "both_certified_pairs_with_cost": 128,
-      "mean_evaluations_saved": 40.078125,
+      "mean_evaluations_saved": 45.421875,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     },
     "world_twin": {
@@ -39,7 +39,7 @@
       "informative_pairs": 16,
       "mean_treatment_advantage": 1.0,
       "both_certified_pairs_with_cost": 106,
-      "mean_evaluations_saved": 1034.9245283018868,
+      "mean_evaluations_saved": 1037.0094339622642,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     }
   },
@@ -47,7 +47,7 @@
     "queued": 0,
     "inflight": 0,
     "certified_queued": 0,
-    "field_version": 1736,
+    "field_version": 1740,
     "genesis_heldout": {
       "field_certified": true,
       "cold_certified": false
@@ -62,46 +62,6 @@
   },
   "evolve": {
     "recent": [
-      {
-        "organ": "selfedit",
-        "seed": 1271231591,
-        "gene": "inv_const_depth",
-        "before": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 2,
-          "inv_const_depth": 1,
-          "inv_rounds": 2,
-          "inv_floor_fit": 0
-        },
-        "after": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 2,
-          "inv_const_depth": 2,
-          "inv_rounds": 2,
-          "inv_floor_fit": 0
-        },
-        "dev_before": {
-          "certified": 6,
-          "evaluations": 145260,
-          "tasks": 16
-        },
-        "dev_after": {
-          "certified": 6,
-          "evaluations": 145260,
-          "tasks": 16
-        },
-        "dev_losses": [],
-        "accepted": false,
-        "reason": "dev_not_better",
-        "ts": "2026-11-22T01:15:42Z",
-        "sandbox_clean": true
-      },
       {
         "organ": "selfedit",
         "seed": 3205927946,
@@ -377,6 +337,46 @@
         "reason": "dev_not_better",
         "ts": "2026-11-22T05:52:40Z",
         "sandbox_clean": true
+      },
+      {
+        "organ": "selfedit",
+        "seed": 2050086417,
+        "gene": "inv_max_constants",
+        "before": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "after": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 0,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "dev_before": {
+          "certified": 6,
+          "evaluations": 145260,
+          "tasks": 16
+        },
+        "dev_after": {
+          "certified": 6,
+          "evaluations": 145260,
+          "tasks": 16
+        },
+        "dev_losses": [],
+        "accepted": false,
+        "reason": "dev_not_better",
+        "ts": "2026-11-22T07:00:19Z",
+        "sandbox_clean": true
       }
     ]
   },
@@ -411,11 +411,11 @@
     ],
     "body_lease": {
       "host": "gh-44962453103",
-      "heartbeat": "2026-11-22T06:47:58Z",
-      "age_min": 0.0119255,
+      "heartbeat": "2026-11-22T07:00:19Z",
+      "age_min": 0.013655366666666667,
       "alive": true,
-      "cycles": 102,
-      "cycles_per_hour": 60.2,
+      "cycles": 114,
+      "cycles_per_hour": 60.0,
       "released": false
     }
   },
