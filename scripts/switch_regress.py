@@ -50,6 +50,7 @@ JUDGES = {
     "discrim": ["scripts/discrim_judge.py"],           # DISCRIM sealed suite (DISCRIM; not re-run by DISCRIM itself)
     "clause": ["scripts/clause_judge.py"],             # CLAUSE sealed suite (CLAUSE; not re-run by CLAUSE itself)
     "clause2": ["scripts/clause2_judge.py"],           # CLAUSE2 sealed suite (CLAUSE2; not re-run by CLAUSE2 itself)
+    "agree": ["scripts/agree_judge.py"],               # AGREE sealed suite (AGREE; not re-run by AGREE itself)
 }
 
 

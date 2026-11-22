@@ -1261,6 +1261,18 @@ def _discrim_on() -> bool:
     return _flag("NOMAD_DISCRIM", "off")
 
 
+def _agree_on() -> bool:
+    """NOMAD_AGREE (docs/AGREE.md): LET2's fallback let stage, each accepted fit returned early only when
+    an independently derived alternative agrees with it on distinguishing inputs (positive support);
+    NOMAD_LET2 (unguarded) and NOMAD_DISCRIM, when on, take precedence; default off."""
+    return _flag("NOMAD_AGREE", "off")
+
+
+def _D_evidence(task) -> list:
+    """The WITNESS evidence (public + challenge rows; never the final split)."""
+    return list(task.public) + list(task.challenge)
+
+
 def let_enabled() -> bool:
     """NOMAD_LET: let-bindings over a learned block (docs/LET.md); default off until the sealed judge passes."""
     return _flag("NOMAD_LET", "off")
@@ -1489,7 +1501,7 @@ def port_bank(prior: "WorldPrior", task: WorldTask, key: str | None = None,
     element, annotated for the probe with which blocks are probe-equivalent
     to an earlier one."""
     out = _port_bank_main(prior, task, key, rel, cut_key)
-    if not out or not (merge_enabled() or let2_enabled() or _discrim_on()) or task.out != "int":
+    if not out or not (merge_enabled() or let2_enabled() or _discrim_on() or _agree_on()) or task.out != "int":
         return out
     if rel is not None and key and route_enabled() and prior.route.get(key):
         return out
@@ -1840,11 +1852,12 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     pinfo["port"] = "let"
                     return hit
             if mstate["on"]:
-                if (let2_enabled() or _discrim_on()) and mstate["skips"] > mstate["spent"]:
+                if (let2_enabled() or _discrim_on() or _agree_on()) and mstate["skips"] > mstate["spent"]:
                     # LET2 (docs/LET2.md): LET's stage paid only from the unspent skips; on a miss
                     # the gate's rejection record is restored, so later stages see main's gate.
                     # NOMAD_DISCRIM on runs this stage with its distinguishing-experiment guard
-                    # (docs/DISCRIM.md); NOMAD_LET2 alone runs it unguarded
+                    # (docs/DISCRIM.md); NOMAD_LET2 alone runs it unguarded; NOMAD_AGREE alone runs it with
+                    # the agreement guard (docs/AGREE.md)
                     e0 = evals
                     g0 = (len(gate.rejected), len(gate.vias)) if gate is not None else None
                     hit = yield from let_stage(ranked, P, table, min(limit, evals + mstate["skips"] - mstate["spent"]), real=True)
@@ -2019,7 +2032,8 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             cands.append((size(t), tuple(-x for x in sc), t, v))
         cands.sort(key=lambda z: z[:2])
         tried: set = set()
-        for _sz, _sc, t, v in cands[:LET_N]:
+        agree_mode = bool(real and _agree_on() and not (let2_enabled() or _discrim_on()))
+        for ti, (_sz, _sc, t, v) in enumerate(cands[:LET_N]):
             if gate is not None and len(gate.rejected) - rej0 >= LET_REJECTS:
                 return None
             terms = let_terms(t, v, rows, atoms)
@@ -2030,24 +2044,12 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     return None
                 evals += 1          # a new term is one evaluation
                 yield evals
-            ut = {}
-            for tr, tv in terms:
-                ut.setdefault(_key(tv), tr)
-            fits = []
-            for tr, tv in terms:
-                if tv == goal and tr is not t:
-                    fits.append(tr)
-                for op in ("add", "sub", "rsub", "mul"):
-                    need = _residual(op, tv, goal)
-                    b = ut.get(_key(need)) if need is not None else None
-                    if b is not None:
-                        fits.append(["sub", b, tr] if op == "rsub" else [op, tr, b])
-                for k, kt in scales:
-                    if all(x // k == g for x, g in zip(tv, goal)):
-                        fits.append(["div", tr, kt])
+            fits = let_fits(t, terms, scales)
             for hit in fits:
                 if (evals if real else vev()) >= limit or (gate is not None and len(gate.rejected) - rej0 >= LET_REJECTS):
                     return None
+                if agree_mode and evals + 2 > limit:
+                    return None     # AGREE: the candidate and a possible rejection must both fit the budget
                 key = json.dumps(hit)
                 if key in tried:
                     continue
@@ -2055,6 +2057,21 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 evals += 1      # an assembled program is one candidate evaluation
                 yield evals
                 if stop_on(hit):
+                    if agree_mode:
+                        # AGREE guard (docs/AGREE.md): the accepted let fit returns early only when an
+                        # independently derived alternative agrees with it; otherwise the stage is a miss
+                        ok = yield from agree_guard(hit, t, v, fits, cands[ti + 1:LET_N], limit, atoms, scales, table)
+                        if ok is None:
+                            return None
+                        if ok is not hit:
+                            # the smallest agreeing explanation is shown to WITNESS like any fit (1 evaluation)
+                            if evals + 2 > limit:
+                                return None
+                            evals += 1
+                            yield evals
+                            if not stop_on(ok):
+                                return None
+                        return ok
                     if real and _discrim_on():
                         # DISCRIM guard (docs/DISCRIM.md): the accepted let fit returns only when no
                         # surviving alternative disagrees with it on distinguishing inputs
@@ -2067,6 +2084,145 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     return hit
                 yield evals
         return None
+
+    def let_fits(t, terms, scales):
+        """LET's assembled fits over one intermediate ``t`` (no evaluation: lookups among its terms)."""
+        ut = {}
+        for tr, tv in terms:
+            ut.setdefault(_key(tv), tr)
+        fits = []
+        for tr, tv in terms:
+            if tv == goal and tr is not t:
+                fits.append(tr)
+            for op in ("add", "sub", "rsub", "mul"):
+                need = _residual(op, tv, goal)
+                b = ut.get(_key(need)) if need is not None else None
+                if b is not None:
+                    fits.append(["sub", b, tr] if op == "rsub" else [op, tr, b])
+            for k, kt in scales:
+                if all(x // k == g for x, g in zip(tv, goal)):
+                    fits.append(["div", tr, kt])
+        return fits
+
+    def agree_fits(terms):
+        """AGREE's further decompositions over one intermediate's one-step terms (no evaluation: exact
+        arithmetic on values already computed, like the residual lookups): a scaled residual
+        ``a op (b * k)`` (k = 2, 3) and ``max(a, b)`` / ``min(a, b)`` of two terms."""
+        from . import agree as _A
+        ut = {}
+        for tr, tv in terms:
+            ut.setdefault(_key(tv), (tr, tv))
+        out = []
+        for tr, tv in terms:
+            for op in ("add", "sub", "rsub"):
+                need = _residual(op, tv, goal)
+                if need is None:
+                    continue
+                for k in _A.AGREE_SCALES:
+                    if all(x % k == 0 for x in need):
+                        b = ut.get(_key(tuple(x // k for x in need)))
+                        if b is not None:
+                            bk = ["mul", b[0], ["const", k]]
+                            out.append(["sub", bk, tr] if op == "rsub" else [op, tr, bk])
+        lo = [(tr, tv) for tr, tv in terms if all(x <= g for x, g in zip(tv, goal))]
+        hi = [(tr, tv) for tr, tv in terms if all(x >= g for x, g in zip(tv, goal))]
+        for op, side in (("max", lo), ("min", hi)):
+            for i, (ta, va) in enumerate(side):
+                for tb, vb in side[i + 1:]:
+                    if all((x == g or y == g) for x, y, g in zip(va, vb, goal)):
+                        out.append([op, ta, tb])
+                        if len(out) >= 4 * _A.AGREE_ALT:
+                            return out
+        return out
+
+    def agree_guard(hit, hit_t, hit_v, fits, later, limit, atoms, scales, table):
+        """AGREE (docs/AGREE.md) for one WITNESS-accepted fallback let fit. Independent alternatives: the
+        stage's other fits for the same intermediate (a different decomposition) and the fits over the next
+        AGREE_T intermediates of the same bounded let search (each new term 1 evaluation, as in the stage).
+        Also the offset quotients (t +- c) // k (1 evaluation each) and further decompositions over
+        values already computed (agree_fits). Veto-only alternatives: the hit's evidence-preserving
+        simplifications. Each alternative checked on the evidence costs 1 evaluation, each signature on the
+        distinguishing inputs 1. Everything is paid from the same LET2 budget (the unspent skips); out of
+        budget = unsupported. Reads only the public and challenge rows (never task.final). Returns the
+        program to return early (the hit, or the smallest member of its agreement class), or None: the
+        stage is a miss."""
+        nonlocal evals
+        from . import agree as _A
+        _A.BUDGET[:] = [limit - evals]
+        ev_rows = _D_evidence(task)
+        seen = {_A.canon(hit)}
+        indep, simp = [], []
+        hterms = let_terms(hit_t, hit_v, rows, atoms)
+        for a in list(fits) + agree_fits(hterms):
+            k = _A.canon(a)
+            if k not in seen:
+                seen.add(k)
+                indep.append(a)
+        # offset quotients: (t + c) // k and (t - c) // k (c = 0..3, k = 2, 3 and the field's scales), each
+        # 1 evaluation; a fit when the goal is the quotient, or the quotient plus / minus a constant 1-3
+        bases = [(tr, tv) for tr, tv in hterms
+                 if tr is hit_t or (tr[0] in ("add", "sub") and tr[1] is hit_t and tr[2][0] == "const")]
+        divs = [(k, ["const", k]) for k in _A.AGREE_SCALES] + [(k, kt) for k, kt in scales if k not in _A.AGREE_SCALES]
+        for tr, tv in bases:
+            for k, kt in divs[:_A.AGREE_DIVS]:
+                if evals >= limit:
+                    return None
+                evals += 1
+                yield evals
+                q = tuple(x // k for x in tv)
+                qt = ["div", tr, kt]
+                for c in (0, 1, 2, 3):
+                    for op, sgn in (("add", 1), ("sub", -1)):
+                        if c == 0 and op == "sub":
+                            continue
+                        if all(x + sgn * c == g for x, g in zip(q, goal)):
+                            a = qt if c == 0 else [op, qt, ["const", c]]
+                            kk = _A.canon(a)
+                            if kk not in seen:
+                                seen.add(kk)
+                                indep.append(a)
+        for _sz, _sc, t2, v2 in later[:_A.AGREE_T]:
+            terms = let_terms(t2, v2, rows, atoms)
+            new = sum(1 for i, (_tr, tv) in enumerate(terms) if i and _key(tv) not in table)
+            if evals + new > limit:
+                return None
+            if new:
+                evals += new
+                yield evals
+            for a in let_fits(t2, terms, scales) + agree_fits(terms):
+                k = _A.canon(a)
+                if k not in seen:
+                    seen.add(k)
+                    indep.append(a)
+        from . import discrim as _Dm
+        for a in _Dm.simplifications(hit, task.inputs, ev_rows):
+            k = _A.canon(a)
+            if k not in seen:
+                seen.add(k)
+                simp.append(a)
+        indep, simp = indep[:_A.AGREE_ALT], simp[:max(0, _A.AGREE_ALT - len(indep))]
+        si, ss = [], []
+        for lst, out in ((indep, si), (simp, ss)):
+            for a in lst:
+                if evals >= limit:
+                    return None
+                evals += 1
+                yield evals
+                if _Dm.fits(a, ev_rows):
+                    out.append(a)
+        if not si:
+            _A.note(task, hit, si, ss, {"verdict": "unsupported", "support": 0, "veto": 0, "rows": 0})
+            return None
+        need = len(si) + len(ss) + 1
+        if evals + need > limit:
+            return None
+        evals += need
+        yield evals
+        d = _A.decide(hit, si, ss, task.inputs, ev_rows)
+        _A.note(task, hit, si, ss, d)
+        if d["verdict"] != "supported":
+            return None
+        return d["pick"]
 
     def discrim_guard(hit, fits, limit):
         """DISCRIM (docs/DISCRIM.md) for one WITNESS-accepted fallback fit. Alternatives: the stage's

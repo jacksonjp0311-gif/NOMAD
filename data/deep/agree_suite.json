@@ -1,0 +1,3680 @@
+{
+ "budget": 10000,
+ "domains": [
+  "canal",
+  "saltworks",
+  "kiteworks"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 207,
+   "cold_reason": null,
+   "domain": "canal",
+   "family": "ag_ctl_one_step",
+   "formula": "control: gb gc + ga",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 25,
+      "gb": 12,
+      "gc": 7
+     },
+     109
+    ],
+    [
+     {
+      "ga": 15,
+      "gb": 8,
+      "gc": 4
+     },
+     47
+    ],
+    [
+     {
+      "ga": 5,
+      "gb": 10,
+      "gc": 3
+     },
+     35
+    ],
+    [
+     {
+      "ga": 20,
+      "gb": 6,
+      "gc": 1
+     },
+     26
+    ],
+    [
+     {
+      "ga": 24,
+      "gb": 11,
+      "gc": 10
+     },
+     134
+    ],
+    [
+     {
+      "ga": 13,
+      "gb": 1,
+      "gc": 3
+     },
+     16
+    ],
+    [
+     {
+      "ga": 7,
+      "gb": 11,
+      "gc": 12
+     },
+     139
+    ],
+    [
+     {
+      "ga": 12,
+      "gb": 11,
+      "gc": 8
+     },
+     100
+    ],
+    [
+     {
+      "ga": 9,
+      "gb": 7,
+      "gc": 7
+     },
+     58
+    ],
+    [
+     {
+      "ga": 14,
+      "gb": 3,
+      "gc": 9
+     },
+     41
+    ],
+    [
+     {
+      "ga": 10,
+      "gb": 12,
+      "gc": 3
+     },
+     46
+    ]
+   ],
+   "task_id": "t-22",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "gb"
+     ],
+     [
+      "var",
+      "gc"
+     ]
+    ],
+    [
+     "var",
+     "ga"
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "canal",
+   "family": "ag_lock_spare_third",
+   "formula": "lock fills t = gb gc; t plus a third spare",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 26,
+      "gb": 7,
+      "gc": 6
+     },
+     56
+    ],
+    [
+     {
+      "ga": 3,
+      "gb": 2,
+      "gc": 9
+     },
+     24
+    ],
+    [
+     {
+      "ga": 5,
+      "gb": 7,
+      "gc": 2
+     },
+     18
+    ],
+    [
+     {
+      "ga": 22,
+      "gb": 10,
+      "gc": 3
+     },
+     40
+    ],
+    [
+     {
+      "ga": 21,
+      "gb": 5,
+      "gc": 8
+     },
+     53
+    ],
+    [
+     {
+      "ga": 14,
+      "gb": 8,
+      "gc": 9
+     },
+     96
+    ],
+    [
+     {
+      "ga": 22,
+      "gb": 11,
+      "gc": 9
+     },
+     132
+    ],
+    [
+     {
+      "ga": 15,
+      "gb": 9,
+      "gc": 3
+     },
+     36
+    ],
+    [
+     {
+      "ga": 17,
+      "gb": 2,
+      "gc": 1
+     },
+     2
+    ],
+    [
+     {
+      "ga": 3,
+      "gb": 2,
+      "gc": 12
+     },
+     32
+    ],
+    [
+     {
+      "ga": 4,
+      "gb": 4,
+      "gc": 11
+     },
+     58
+    ]
+   ],
+   "task_id": "t-00",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "gb"
+     ],
+     [
+      "var",
+      "gc"
+     ]
+    ],
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gc"
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "canal",
+   "family": "ag_barge_sq_less",
+   "formula": "barge t = ga + gb; t squared minus gc",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 10,
+      "gb": 3,
+      "gc": 9
+     },
+     160
+    ],
+    [
+     {
+      "ga": 6,
+      "gb": 10,
+      "gc": 2
+     },
+     254
+    ],
+    [
+     {
+      "ga": 21,
+      "gb": 1,
+      "gc": 7
+     },
+     477
+    ],
+    [
+     {
+      "ga": 23,
+      "gb": 10,
+      "gc": 10
+     },
+     1079
+    ],
+    [
+     {
+      "ga": 1,
+      "gb": 3,
+      "gc": 3
+     },
+     13
+    ],
+    [
+     {
+      "ga": 11,
+      "gb": 3,
+      "gc": 4
+     },
+     192
+    ],
+    [
+     {
+      "ga": 11,
+      "gb": 7,
+      "gc": 11
+     },
+     313
+    ],
+    [
+     {
+      "ga": 19,
+      "gb": 8,
+      "gc": 10
+     },
+     719
+    ],
+    [
+     {
+      "ga": 28,
+      "gb": 1,
+      "gc": 10
+     },
+     831
+    ],
+    [
+     {
+      "ga": 3,
+      "gb": 4,
+      "gc": 9
+     },
+     40
+    ],
+    [
+     {
+      "ga": 25,
+      "gb": 4,
+      "gc": 7
+     },
+     834
+    ]
+   ],
+   "task_id": "t-01",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "ga"
+      ],
+      [
+       "var",
+       "gb"
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "ga"
+      ],
+      [
+       "var",
+       "gb"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "gc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "canal",
+   "family": "ag_toll_two_rates",
+   "formula": "boats t = gb + gc; tolls t ga + t gd",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc",
+    "gd"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 15,
+      "gb": 1,
+      "gc": 9,
+      "gd": 8
+     },
+     230
+    ],
+    [
+     {
+      "ga": 3,
+      "gb": 4,
+      "gc": 1,
+      "gd": 9
+     },
+     60
+    ],
+    [
+     {
+      "ga": 15,
+      "gb": 11,
+      "gc": 1,
+      "gd": 9
+     },
+     288
+    ],
+    [
+     {
+      "ga": 18,
+      "gb": 11,
+      "gc": 4,
+      "gd": 9
+     },
+     405
+    ],
+    [
+     {
+      "ga": 27,
+      "gb": 12,
+      "gc": 3,
+      "gd": 6
+     },
+     495
+    ],
+    [
+     {
+      "ga": 4,
+      "gb": 7,
+      "gc": 1,
+      "gd": 7
+     },
+     88
+    ],
+    [
+     {
+      "ga": 18,
+      "gb": 4,
+      "gc": 6,
+      "gd": 1
+     },
+     190
+    ],
+    [
+     {
+      "ga": 5,
+      "gb": 6,
+      "gc": 3,
+      "gd": 1
+     },
+     54
+    ],
+    [
+     {
+      "ga": 30,
+      "gb": 6,
+      "gc": 1,
+      "gd": 2
+     },
+     224
+    ],
+    [
+     {
+      "ga": 7,
+      "gb": 10,
+      "gc": 10,
+      "gd": 1
+     },
+     160
+    ],
+    [
+     {
+      "ga": 19,
+      "gb": 4,
+      "gc": 7,
+      "gd": 1
+     },
+     220
+    ]
+   ],
+   "task_id": "t-02",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gc"
+      ]
+     ],
+     [
+      "var",
+      "ga"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gc"
+      ]
+     ],
+     [
+      "var",
+      "gd"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "saltworks",
+   "family": "ag_pan_pairs",
+   "formula": "pans t = gb + gd; pairs of pans t (t - 1) // 2",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc",
+    "gd"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 13,
+      "gb": 9,
+      "gc": 8,
+      "gd": 6
+     },
+     105
+    ],
+    [
+     {
+      "ga": 19,
+      "gb": 10,
+      "gc": 12,
+      "gd": 5
+     },
+     105
+    ],
+    [
+     {
+      "ga": 30,
+      "gb": 5,
+      "gc": 8,
+      "gd": 7
+     },
+     66
+    ],
+    [
+     {
+      "ga": 12,
+      "gb": 7,
+      "gc": 6,
+      "gd": 2
+     },
+     36
+    ],
+    [
+     {
+      "ga": 9,
+      "gb": 2,
+      "gc": 2,
+      "gd": 4
+     },
+     15
+    ],
+    [
+     {
+      "ga": 28,
+      "gb": 9,
+      "gc": 5,
+      "gd": 8
+     },
+     136
+    ],
+    [
+     {
+      "ga": 29,
+      "gb": 8,
+      "gc": 9,
+      "gd": 8
+     },
+     120
+    ],
+    [
+     {
+      "ga": 13,
+      "gb": 8,
+      "gc": 5,
+      "gd": 7
+     },
+     105
+    ],
+    [
+     {
+      "ga": 3,
+      "gb": 3,
+      "gc": 4,
+      "gd": 2
+     },
+     10
+    ],
+    [
+     {
+      "ga": 8,
+      "gb": 5,
+      "gc": 9,
+      "gd": 9
+     },
+     91
+    ],
+    [
+     {
+      "ga": 20,
+      "gb": 11,
+      "gc": 10,
+      "gd": 3
+     },
+     91
+    ]
+   ],
+   "task_id": "t-03",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gd"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "add",
+       [
+        "var",
+        "gb"
+       ],
+       [
+        "var",
+        "gd"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kiteworks",
+   "family": "ag_kite_triple_half",
+   "formula": "spars t = gb gc + ga; 3 t plus half of t",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 21,
+      "gb": 2,
+      "gc": 8
+     },
+     129
+    ],
+    [
+     {
+      "ga": 21,
+      "gb": 7,
+      "gc": 3
+     },
+     147
+    ],
+    [
+     {
+      "ga": 25,
+      "gb": 12,
+      "gc": 4
+     },
+     255
+    ],
+    [
+     {
+      "ga": 6,
+      "gb": 12,
+      "gc": 6
+     },
+     273
+    ],
+    [
+     {
+      "ga": 9,
+      "gb": 10,
+      "gc": 6
+     },
+     241
+    ],
+    [
+     {
+      "ga": 29,
+      "gb": 8,
+      "gc": 12
+     },
+     437
+    ],
+    [
+     {
+      "ga": 28,
+      "gb": 4,
+      "gc": 2
+     },
+     126
+    ],
+    [
+     {
+      "ga": 4,
+      "gb": 6,
+      "gc": 5
+     },
+     119
+    ],
+    [
+     {
+      "ga": 13,
+      "gb": 12,
+      "gc": 1
+     },
+     87
+    ],
+    [
+     {
+      "ga": 1,
+      "gb": 4,
+      "gc": 2
+     },
+     31
+    ],
+    [
+     {
+      "ga": 8,
+      "gb": 5,
+      "gc": 3
+     },
+     80
+    ]
+   ],
+   "task_id": "t-04",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "gb"
+       ],
+       [
+        "var",
+        "gc"
+       ]
+      ],
+      [
+       "var",
+       "ga"
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "gb"
+       ],
+       [
+        "var",
+        "gc"
+       ]
+      ],
+      [
+       "var",
+       "ga"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "saltworks",
+   "family": "ag_brine_sq_plus",
+   "formula": "t = gb + gd; t t + t",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc",
+    "gd"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 17,
+      "gb": 11,
+      "gc": 3,
+      "gd": 7
+     },
+     342
+    ],
+    [
+     {
+      "ga": 18,
+      "gb": 1,
+      "gc": 12,
+      "gd": 9
+     },
+     110
+    ],
+    [
+     {
+      "ga": 26,
+      "gb": 9,
+      "gc": 7,
+      "gd": 5
+     },
+     210
+    ],
+    [
+     {
+      "ga": 11,
+      "gb": 9,
+      "gc": 11,
+      "gd": 5
+     },
+     210
+    ],
+    [
+     {
+      "ga": 13,
+      "gb": 6,
+      "gc": 6,
+      "gd": 6
+     },
+     156
+    ],
+    [
+     {
+      "ga": 28,
+      "gb": 11,
+      "gc": 4,
+      "gd": 6
+     },
+     306
+    ],
+    [
+     {
+      "ga": 2,
+      "gb": 2,
+      "gc": 7,
+      "gd": 3
+     },
+     30
+    ],
+    [
+     {
+      "ga": 24,
+      "gb": 6,
+      "gc": 7,
+      "gd": 4
+     },
+     110
+    ],
+    [
+     {
+      "ga": 15,
+      "gb": 7,
+      "gc": 10,
+      "gd": 4
+     },
+     132
+    ],
+    [
+     {
+      "ga": 7,
+      "gb": 12,
+      "gc": 10,
+      "gd": 3
+     },
+     240
+    ],
+    [
+     {
+      "ga": 30,
+      "gb": 3,
+      "gc": 6,
+      "gd": 8
+     },
+     132
+    ]
+   ],
+   "task_id": "t-05",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gd"
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gd"
+      ]
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "gb"
+     ],
+     [
+      "var",
+      "gd"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kiteworks",
+   "family": "ag_spool_sets_loose",
+   "formula": "string t = gb gc + ga; spools of 4 plus loose = t // 4 + t mod 4",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 6,
+      "gb": 1,
+      "gc": 9
+     },
+     6
+    ],
+    [
+     {
+      "ga": 23,
+      "gb": 4,
+      "gc": 10
+     },
+     18
+    ],
+    [
+     {
+      "ga": 22,
+      "gb": 3,
+      "gc": 9
+     },
+     13
+    ],
+    [
+     {
+      "ga": 12,
+      "gb": 2,
+      "gc": 7
+     },
+     8
+    ],
+    [
+     {
+      "ga": 13,
+      "gb": 2,
+      "gc": 3
+     },
+     7
+    ],
+    [
+     {
+      "ga": 10,
+      "gb": 7,
+      "gc": 4
+     },
+     11
+    ],
+    [
+     {
+      "ga": 27,
+      "gb": 10,
+      "gc": 3
+     },
+     15
+    ],
+    [
+     {
+      "ga": 2,
+      "gb": 6,
+      "gc": 10
+     },
+     17
+    ],
+    [
+     {
+      "ga": 4,
+      "gb": 10,
+      "gc": 5
+     },
+     15
+    ],
+    [
+     {
+      "ga": 11,
+      "gb": 6,
+      "gc": 4
+     },
+     11
+    ],
+    [
+     {
+      "ga": 15,
+      "gb": 10,
+      "gc": 3
+     },
+     12
+    ]
+   ],
+   "task_id": "t-06",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "div",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "gb"
+       ],
+       [
+        "var",
+        "gc"
+       ]
+      ],
+      [
+       "var",
+       "ga"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "mod",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "gb"
+       ],
+       [
+        "var",
+        "gc"
+       ]
+      ],
+      [
+       "var",
+       "ga"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 1741,
+   "cold_reason": null,
+   "domain": "canal",
+   "family": "ag_canal_gap",
+   "formula": "t = gb gc; gap to depth ga = |t - ga|",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 6,
+      "gb": 2,
+      "gc": 12
+     },
+     18
+    ],
+    [
+     {
+      "ga": 15,
+      "gb": 7,
+      "gc": 7
+     },
+     34
+    ],
+    [
+     {
+      "ga": 7,
+      "gb": 12,
+      "gc": 8
+     },
+     89
+    ],
+    [
+     {
+      "ga": 16,
+      "gb": 5,
+      "gc": 10
+     },
+     34
+    ],
+    [
+     {
+      "ga": 17,
+      "gb": 7,
+      "gc": 3
+     },
+     4
+    ],
+    [
+     {
+      "ga": 16,
+      "gb": 2,
+      "gc": 1
+     },
+     14
+    ],
+    [
+     {
+      "ga": 3,
+      "gb": 1,
+      "gc": 10
+     },
+     7
+    ],
+    [
+     {
+      "ga": 27,
+      "gb": 12,
+      "gc": 3
+     },
+     9
+    ],
+    [
+     {
+      "ga": 22,
+      "gb": 7,
+      "gc": 10
+     },
+     48
+    ],
+    [
+     {
+      "ga": 28,
+      "gb": 9,
+      "gc": 6
+     },
+     26
+    ],
+    [
+     {
+      "ga": 23,
+      "gb": 3,
+      "gc": 7
+     },
+     2
+    ]
+   ],
+   "task_id": "t-07",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "max",
+     [
+      "mul",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gc"
+      ]
+     ],
+     [
+      "var",
+      "ga"
+     ]
+    ],
+    [
+     "min",
+     [
+      "mul",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gc"
+      ]
+     ],
+     [
+      "var",
+      "ga"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "saltworks",
+   "family": "ag_salt_bags_left",
+   "formula": "salt t = gb gc; bags of gd plus salt left = t // gd + t mod gd",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc",
+    "gd"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 30,
+      "gb": 1,
+      "gc": 12,
+      "gd": 5
+     },
+     4
+    ],
+    [
+     {
+      "ga": 30,
+      "gb": 5,
+      "gc": 1,
+      "gd": 5
+     },
+     1
+    ],
+    [
+     {
+      "ga": 23,
+      "gb": 5,
+      "gc": 9,
+      "gd": 8
+     },
+     10
+    ],
+    [
+     {
+      "ga": 30,
+      "gb": 3,
+      "gc": 9,
+      "gd": 7
+     },
+     9
+    ],
+    [
+     {
+      "ga": 25,
+      "gb": 10,
+      "gc": 10,
+      "gd": 8
+     },
+     16
+    ],
+    [
+     {
+      "ga": 27,
+      "gb": 7,
+      "gc": 9,
+      "gd": 5
+     },
+     15
+    ],
+    [
+     {
+      "ga": 16,
+      "gb": 2,
+      "gc": 3,
+      "gd": 9
+     },
+     6
+    ],
+    [
+     {
+      "ga": 15,
+      "gb": 4,
+      "gc": 9,
+      "gd": 6
+     },
+     6
+    ],
+    [
+     {
+      "ga": 20,
+      "gb": 8,
+      "gc": 2,
+      "gd": 6
+     },
+     6
+    ],
+    [
+     {
+      "ga": 25,
+      "gb": 7,
+      "gc": 10,
+      "gd": 8
+     },
+     14
+    ],
+    [
+     {
+      "ga": 5,
+      "gb": 9,
+      "gc": 5,
+      "gd": 6
+     },
+     10
+    ]
+   ],
+   "task_id": "t-08",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gc"
+      ]
+     ],
+     [
+      "var",
+      "gd"
+     ]
+    ],
+    [
+     "mod",
+     [
+      "mul",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gc"
+      ]
+     ],
+     [
+      "var",
+      "gd"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kiteworks",
+   "family": "ag_tail_double_less",
+   "formula": "tails t = ga + gb gc; 2 t minus a third of t",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 5,
+      "gb": 2,
+      "gc": 4
+     },
+     22
+    ],
+    [
+     {
+      "ga": 17,
+      "gb": 5,
+      "gc": 9
+     },
+     104
+    ],
+    [
+     {
+      "ga": 6,
+      "gb": 3,
+      "gc": 2
+     },
+     20
+    ],
+    [
+     {
+      "ga": 25,
+      "gb": 1,
+      "gc": 12
+     },
+     62
+    ],
+    [
+     {
+      "ga": 18,
+      "gb": 3,
+      "gc": 3
+     },
+     45
+    ],
+    [
+     {
+      "ga": 19,
+      "gb": 9,
+      "gc": 8
+     },
+     152
+    ],
+    [
+     {
+      "ga": 5,
+      "gb": 3,
+      "gc": 9
+     },
+     54
+    ],
+    [
+     {
+      "ga": 11,
+      "gb": 12,
+      "gc": 7
+     },
+     159
+    ],
+    [
+     {
+      "ga": 26,
+      "gb": 11,
+      "gc": 10
+     },
+     227
+    ],
+    [
+     {
+      "ga": 15,
+      "gb": 9,
+      "gc": 9
+     },
+     160
+    ],
+    [
+     {
+      "ga": 6,
+      "gb": 7,
+      "gc": 1
+     },
+     22
+    ]
+   ],
+   "task_id": "t-09",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "ga"
+      ],
+      [
+       "mul",
+       [
+        "var",
+        "gb"
+       ],
+       [
+        "var",
+        "gc"
+       ]
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "var",
+       "ga"
+      ],
+      [
+       "mul",
+       [
+        "var",
+        "gb"
+       ],
+       [
+        "var",
+        "gc"
+       ]
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "saltworks",
+   "family": "ag_crate_six",
+   "formula": "crates of 6 for t = gb gc sacks = ceil(t / 6)",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 4,
+      "gb": 9,
+      "gc": 1
+     },
+     2
+    ],
+    [
+     {
+      "ga": 10,
+      "gb": 10,
+      "gc": 5
+     },
+     9
+    ],
+    [
+     {
+      "ga": 26,
+      "gb": 12,
+      "gc": 6
+     },
+     12
+    ],
+    [
+     {
+      "ga": 5,
+      "gb": 3,
+      "gc": 2
+     },
+     1
+    ],
+    [
+     {
+      "ga": 15,
+      "gb": 7,
+      "gc": 11
+     },
+     13
+    ],
+    [
+     {
+      "ga": 3,
+      "gb": 6,
+      "gc": 7
+     },
+     7
+    ],
+    [
+     {
+      "ga": 10,
+      "gb": 6,
+      "gc": 11
+     },
+     11
+    ],
+    [
+     {
+      "ga": 18,
+      "gb": 10,
+      "gc": 6
+     },
+     10
+    ],
+    [
+     {
+      "ga": 11,
+      "gb": 1,
+      "gc": 3
+     },
+     1
+    ],
+    [
+     {
+      "ga": 27,
+      "gb": 4,
+      "gc": 7
+     },
+     5
+    ],
+    [
+     {
+      "ga": 3,
+      "gb": 4,
+      "gc": 2
+     },
+     2
+    ]
+   ],
+   "task_id": "t-10",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gc"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "canal",
+   "family": "ag_boat_four",
+   "formula": "boats of 4 for t = ga + gb travelers = ceil(t / 4)",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 10,
+      "gb": 10,
+      "gc": 11
+     },
+     5
+    ],
+    [
+     {
+      "ga": 18,
+      "gb": 4,
+      "gc": 3
+     },
+     6
+    ],
+    [
+     {
+      "ga": 20,
+      "gb": 1,
+      "gc": 12
+     },
+     6
+    ],
+    [
+     {
+      "ga": 4,
+      "gb": 2,
+      "gc": 8
+     },
+     2
+    ],
+    [
+     {
+      "ga": 9,
+      "gb": 11,
+      "gc": 3
+     },
+     5
+    ],
+    [
+     {
+      "ga": 9,
+      "gb": 9,
+      "gc": 4
+     },
+     5
+    ],
+    [
+     {
+      "ga": 21,
+      "gb": 7,
+      "gc": 8
+     },
+     7
+    ],
+    [
+     {
+      "ga": 2,
+      "gb": 8,
+      "gc": 6
+     },
+     3
+    ],
+    [
+     {
+      "ga": 15,
+      "gb": 3,
+      "gc": 5
+     },
+     5
+    ],
+    [
+     {
+      "ga": 26,
+      "gb": 11,
+      "gc": 2
+     },
+     10
+    ],
+    [
+     {
+      "ga": 12,
+      "gb": 8,
+      "gc": 7
+     },
+     5
+    ]
+   ],
+   "task_id": "t-11",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "var",
+       "ga"
+      ],
+      [
+       "var",
+       "gb"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kiteworks",
+   "family": "ag_roll_five",
+   "formula": "rolls of 5 for t = gb gc panels = ceil(t / 5)",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 21,
+      "gb": 8,
+      "gc": 4
+     },
+     7
+    ],
+    [
+     {
+      "ga": 3,
+      "gb": 4,
+      "gc": 9
+     },
+     8
+    ],
+    [
+     {
+      "ga": 27,
+      "gb": 3,
+      "gc": 8
+     },
+     5
+    ],
+    [
+     {
+      "ga": 11,
+      "gb": 6,
+      "gc": 9
+     },
+     11
+    ],
+    [
+     {
+      "ga": 20,
+      "gb": 1,
+      "gc": 1
+     },
+     1
+    ],
+    [
+     {
+      "ga": 6,
+      "gb": 6,
+      "gc": 6
+     },
+     8
+    ],
+    [
+     {
+      "ga": 22,
+      "gb": 9,
+      "gc": 7
+     },
+     13
+    ],
+    [
+     {
+      "ga": 4,
+      "gb": 1,
+      "gc": 11
+     },
+     3
+    ],
+    [
+     {
+      "ga": 21,
+      "gb": 3,
+      "gc": 5
+     },
+     3
+    ],
+    [
+     {
+      "ga": 2,
+      "gb": 4,
+      "gc": 7
+     },
+     6
+    ],
+    [
+     {
+      "ga": 18,
+      "gb": 7,
+      "gc": 6
+     },
+     9
+    ]
+   ],
+   "task_id": "t-12",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gc"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "add",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "canal",
+   "family": "ag_trip_three",
+   "formula": "trips of 3 for t = gb gc + gd loads = ceil(t / 3)",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc",
+    "gd"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 9,
+      "gb": 12,
+      "gc": 3,
+      "gd": 4
+     },
+     14
+    ],
+    [
+     {
+      "ga": 13,
+      "gb": 10,
+      "gc": 7,
+      "gd": 6
+     },
+     26
+    ],
+    [
+     {
+      "ga": 19,
+      "gb": 6,
+      "gc": 4,
+      "gd": 8
+     },
+     11
+    ],
+    [
+     {
+      "ga": 13,
+      "gb": 7,
+      "gc": 5,
+      "gd": 7
+     },
+     14
+    ],
+    [
+     {
+      "ga": 30,
+      "gb": 10,
+      "gc": 11,
+      "gd": 6
+     },
+     39
+    ],
+    [
+     {
+      "ga": 10,
+      "gb": 2,
+      "gc": 6,
+      "gd": 6
+     },
+     6
+    ],
+    [
+     {
+      "ga": 21,
+      "gb": 1,
+      "gc": 5,
+      "gd": 4
+     },
+     3
+    ],
+    [
+     {
+      "ga": 28,
+      "gb": 6,
+      "gc": 12,
+      "gd": 9
+     },
+     27
+    ],
+    [
+     {
+      "ga": 5,
+      "gb": 5,
+      "gc": 2,
+      "gd": 3
+     },
+     5
+    ],
+    [
+     {
+      "ga": 20,
+      "gb": 11,
+      "gc": 9,
+      "gd": 8
+     },
+     36
+    ],
+    [
+     {
+      "ga": 14,
+      "gb": 6,
+      "gc": 1,
+      "gd": 5
+     },
+     4
+    ]
+   ],
+   "task_id": "t-13",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "gb"
+       ],
+       [
+        "var",
+        "gc"
+       ]
+      ],
+      [
+       "var",
+       "gd"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "const",
+       3
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     3
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "saltworks",
+   "family": "ag_bin_eight",
+   "formula": "bins of 8 for t = gb gd + gc scoops = ceil(t / 8)",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc",
+    "gd"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 25,
+      "gb": 7,
+      "gc": 10,
+      "gd": 5
+     },
+     6
+    ],
+    [
+     {
+      "ga": 12,
+      "gb": 6,
+      "gc": 6,
+      "gd": 8
+     },
+     7
+    ],
+    [
+     {
+      "ga": 13,
+      "gb": 11,
+      "gc": 11,
+      "gd": 6
+     },
+     10
+    ],
+    [
+     {
+      "ga": 18,
+      "gb": 10,
+      "gc": 11,
+      "gd": 8
+     },
+     12
+    ],
+    [
+     {
+      "ga": 2,
+      "gb": 5,
+      "gc": 11,
+      "gd": 3
+     },
+     4
+    ],
+    [
+     {
+      "ga": 4,
+      "gb": 4,
+      "gc": 2,
+      "gd": 3
+     },
+     2
+    ],
+    [
+     {
+      "ga": 20,
+      "gb": 9,
+      "gc": 10,
+      "gd": 2
+     },
+     4
+    ],
+    [
+     {
+      "ga": 10,
+      "gb": 3,
+      "gc": 5,
+      "gd": 7
+     },
+     4
+    ],
+    [
+     {
+      "ga": 26,
+      "gb": 12,
+      "gc": 11,
+      "gd": 2
+     },
+     5
+    ],
+    [
+     {
+      "ga": 10,
+      "gb": 10,
+      "gc": 12,
+      "gd": 7
+     },
+     11
+    ],
+    [
+     {
+      "ga": 21,
+      "gb": 3,
+      "gc": 9,
+      "gd": 8
+     },
+     5
+    ]
+   ],
+   "task_id": "t-14",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "gb"
+       ],
+       [
+        "var",
+        "gd"
+       ]
+      ],
+      [
+       "var",
+       "gc"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "mul",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         2
+        ]
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kiteworks",
+   "family": "ag_span_nine",
+   "formula": "spans of 9 for t = ga gd cords = ceil(t / 9)",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc",
+    "gd"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 22,
+      "gb": 2,
+      "gc": 6,
+      "gd": 2
+     },
+     5
+    ],
+    [
+     {
+      "ga": 4,
+      "gb": 2,
+      "gc": 5,
+      "gd": 5
+     },
+     3
+    ],
+    [
+     {
+      "ga": 16,
+      "gb": 5,
+      "gc": 7,
+      "gd": 6
+     },
+     11
+    ],
+    [
+     {
+      "ga": 6,
+      "gb": 11,
+      "gc": 8,
+      "gd": 7
+     },
+     5
+    ],
+    [
+     {
+      "ga": 10,
+      "gb": 2,
+      "gc": 11,
+      "gd": 4
+     },
+     5
+    ],
+    [
+     {
+      "ga": 9,
+      "gb": 6,
+      "gc": 7,
+      "gd": 9
+     },
+     9
+    ],
+    [
+     {
+      "ga": 6,
+      "gb": 6,
+      "gc": 9,
+      "gd": 1
+     },
+     1
+    ],
+    [
+     {
+      "ga": 13,
+      "gb": 12,
+      "gc": 5,
+      "gd": 4
+     },
+     6
+    ],
+    [
+     {
+      "ga": 23,
+      "gb": 8,
+      "gc": 2,
+      "gd": 9
+     },
+     23
+    ],
+    [
+     {
+      "ga": 12,
+      "gb": 3,
+      "gc": 6,
+      "gd": 9
+     },
+     12
+    ],
+    [
+     {
+      "ga": 11,
+      "gb": 6,
+      "gc": 10,
+      "gd": 8
+     },
+     10
+    ]
+   ],
+   "task_id": "t-15",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "ga"
+      ],
+      [
+       "var",
+       "gd"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        3
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      3
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "canal",
+   "family": "ag_overflow",
+   "formula": "inflow t = gb gc; overflow above ga = max(t - ga, 0)",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 27,
+      "gb": 1,
+      "gc": 4
+     },
+     0
+    ],
+    [
+     {
+      "ga": 4,
+      "gb": 6,
+      "gc": 5
+     },
+     26
+    ],
+    [
+     {
+      "ga": 6,
+      "gb": 1,
+      "gc": 11
+     },
+     5
+    ],
+    [
+     {
+      "ga": 7,
+      "gb": 1,
+      "gc": 11
+     },
+     4
+    ],
+    [
+     {
+      "ga": 26,
+      "gb": 9,
+      "gc": 11
+     },
+     73
+    ],
+    [
+     {
+      "ga": 22,
+      "gb": 6,
+      "gc": 9
+     },
+     32
+    ],
+    [
+     {
+      "ga": 29,
+      "gb": 5,
+      "gc": 5
+     },
+     0
+    ],
+    [
+     {
+      "ga": 1,
+      "gb": 12,
+      "gc": 5
+     },
+     59
+    ],
+    [
+     {
+      "ga": 23,
+      "gb": 11,
+      "gc": 9
+     },
+     76
+    ],
+    [
+     {
+      "ga": 25,
+      "gb": 10,
+      "gc": 10
+     },
+     75
+    ],
+    [
+     {
+      "ga": 2,
+      "gb": 7,
+      "gc": 8
+     },
+     54
+    ]
+   ],
+   "task_id": "t-16",
+   "tier": "hard",
+   "tree": [
+    "max",
+    [
+     "sub",
+     [
+      "mul",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gc"
+      ]
+     ],
+     [
+      "var",
+      "ga"
+     ]
+    ],
+    [
+     "const",
+     0
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "saltworks",
+   "family": "ag_cap_load",
+   "formula": "t = gb gc capped at ga, times gd",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc",
+    "gd"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 21,
+      "gb": 7,
+      "gc": 10,
+      "gd": 9
+     },
+     189
+    ],
+    [
+     {
+      "ga": 28,
+      "gb": 7,
+      "gc": 6,
+      "gd": 6
+     },
+     168
+    ],
+    [
+     {
+      "ga": 23,
+      "gb": 2,
+      "gc": 7,
+      "gd": 6
+     },
+     84
+    ],
+    [
+     {
+      "ga": 4,
+      "gb": 10,
+      "gc": 10,
+      "gd": 7
+     },
+     28
+    ],
+    [
+     {
+      "ga": 25,
+      "gb": 5,
+      "gc": 8,
+      "gd": 4
+     },
+     100
+    ],
+    [
+     {
+      "ga": 22,
+      "gb": 1,
+      "gc": 6,
+      "gd": 2
+     },
+     12
+    ],
+    [
+     {
+      "ga": 30,
+      "gb": 8,
+      "gc": 5,
+      "gd": 7
+     },
+     210
+    ],
+    [
+     {
+      "ga": 24,
+      "gb": 2,
+      "gc": 10,
+      "gd": 6
+     },
+     120
+    ],
+    [
+     {
+      "ga": 15,
+      "gb": 12,
+      "gc": 10,
+      "gd": 2
+     },
+     30
+    ],
+    [
+     {
+      "ga": 24,
+      "gb": 12,
+      "gc": 1,
+      "gd": 8
+     },
+     96
+    ],
+    [
+     {
+      "ga": 5,
+      "gb": 11,
+      "gc": 10,
+      "gd": 1
+     },
+     5
+    ]
+   ],
+   "task_id": "t-17",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "min",
+     [
+      "mul",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gc"
+      ]
+     ],
+     [
+      "var",
+      "ga"
+     ]
+    ],
+    [
+     "var",
+     "gd"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kiteworks",
+   "family": "ag_over_line",
+   "formula": "t = ga gd; over the line gb gc = max(t, gb gc) - gb gc",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc",
+    "gd"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 2,
+      "gb": 8,
+      "gc": 6,
+      "gd": 6
+     },
+     0
+    ],
+    [
+     {
+      "ga": 12,
+      "gb": 7,
+      "gc": 10,
+      "gd": 5
+     },
+     0
+    ],
+    [
+     {
+      "ga": 10,
+      "gb": 3,
+      "gc": 10,
+      "gd": 8
+     },
+     50
+    ],
+    [
+     {
+      "ga": 25,
+      "gb": 8,
+      "gc": 3,
+      "gd": 4
+     },
+     76
+    ],
+    [
+     {
+      "ga": 15,
+      "gb": 9,
+      "gc": 8,
+      "gd": 3
+     },
+     0
+    ],
+    [
+     {
+      "ga": 16,
+      "gb": 6,
+      "gc": 3,
+      "gd": 4
+     },
+     46
+    ],
+    [
+     {
+      "ga": 3,
+      "gb": 5,
+      "gc": 9,
+      "gd": 3
+     },
+     0
+    ],
+    [
+     {
+      "ga": 30,
+      "gb": 10,
+      "gc": 5,
+      "gd": 5
+     },
+     100
+    ],
+    [
+     {
+      "ga": 25,
+      "gb": 11,
+      "gc": 7,
+      "gd": 9
+     },
+     148
+    ],
+    [
+     {
+      "ga": 2,
+      "gb": 8,
+      "gc": 5,
+      "gd": 7
+     },
+     0
+    ],
+    [
+     {
+      "ga": 11,
+      "gb": 2,
+      "gc": 12,
+      "gd": 9
+     },
+     75
+    ]
+   ],
+   "task_id": "t-18",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "max",
+     [
+      "mul",
+      [
+       "var",
+       "ga"
+      ],
+      [
+       "var",
+       "gd"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gc"
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "gb"
+     ],
+     [
+      "var",
+      "gc"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kiteworks",
+   "family": "ag_pairs_and_odd",
+   "formula": "t = ga + gb; pairs of gd: 2 (t // gd) + t mod gd",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc",
+    "gd"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 2,
+      "gb": 8,
+      "gc": 1,
+      "gd": 2
+     },
+     10
+    ],
+    [
+     {
+      "ga": 10,
+      "gb": 5,
+      "gc": 12,
+      "gd": 1
+     },
+     30
+    ],
+    [
+     {
+      "ga": 26,
+      "gb": 10,
+      "gc": 3,
+      "gd": 6
+     },
+     12
+    ],
+    [
+     {
+      "ga": 30,
+      "gb": 5,
+      "gc": 1,
+      "gd": 1
+     },
+     70
+    ],
+    [
+     {
+      "ga": 7,
+      "gb": 9,
+      "gc": 9,
+      "gd": 7
+     },
+     6
+    ],
+    [
+     {
+      "ga": 13,
+      "gb": 6,
+      "gc": 10,
+      "gd": 4
+     },
+     11
+    ],
+    [
+     {
+      "ga": 2,
+      "gb": 3,
+      "gc": 4,
+      "gd": 8
+     },
+     5
+    ],
+    [
+     {
+      "ga": 6,
+      "gb": 6,
+      "gc": 10,
+      "gd": 2
+     },
+     12
+    ],
+    [
+     {
+      "ga": 7,
+      "gb": 4,
+      "gc": 1,
+      "gd": 4
+     },
+     7
+    ],
+    [
+     {
+      "ga": 20,
+      "gb": 2,
+      "gc": 9,
+      "gd": 5
+     },
+     10
+    ],
+    [
+     {
+      "ga": 26,
+      "gb": 1,
+      "gc": 1,
+      "gd": 3
+     },
+     18
+    ]
+   ],
+   "task_id": "t-19",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "div",
+      [
+       "add",
+       [
+        "var",
+        "ga"
+       ],
+       [
+        "var",
+        "gb"
+       ]
+      ],
+      [
+       "var",
+       "gd"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "mod",
+     [
+      "add",
+      [
+       "var",
+       "ga"
+      ],
+      [
+       "var",
+       "gb"
+      ]
+     ],
+     [
+      "var",
+      "gd"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "canal",
+   "family": "ag_least_plus",
+   "formula": "t = gb gc; min(t, ga gd) + t",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc",
+    "gd"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 6,
+      "gb": 2,
+      "gc": 1,
+      "gd": 9
+     },
+     4
+    ],
+    [
+     {
+      "ga": 9,
+      "gb": 9,
+      "gc": 10,
+      "gd": 6
+     },
+     144
+    ],
+    [
+     {
+      "ga": 8,
+      "gb": 10,
+      "gc": 5,
+      "gd": 6
+     },
+     98
+    ],
+    [
+     {
+      "ga": 16,
+      "gb": 11,
+      "gc": 6,
+      "gd": 9
+     },
+     132
+    ],
+    [
+     {
+      "ga": 6,
+      "gb": 4,
+      "gc": 5,
+      "gd": 8
+     },
+     40
+    ],
+    [
+     {
+      "ga": 17,
+      "gb": 2,
+      "gc": 4,
+      "gd": 7
+     },
+     16
+    ],
+    [
+     {
+      "ga": 14,
+      "gb": 5,
+      "gc": 11,
+      "gd": 5
+     },
+     110
+    ],
+    [
+     {
+      "ga": 11,
+      "gb": 11,
+      "gc": 8,
+      "gd": 2
+     },
+     110
+    ],
+    [
+     {
+      "ga": 11,
+      "gb": 10,
+      "gc": 1,
+      "gd": 2
+     },
+     20
+    ],
+    [
+     {
+      "ga": 18,
+      "gb": 1,
+      "gc": 1,
+      "gd": 2
+     },
+     2
+    ],
+    [
+     {
+      "ga": 13,
+      "gb": 4,
+      "gc": 4,
+      "gd": 1
+     },
+     29
+    ]
+   ],
+   "task_id": "t-20",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "min",
+     [
+      "mul",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gc"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "ga"
+      ],
+      [
+       "var",
+       "gd"
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "gb"
+     ],
+     [
+      "var",
+      "gc"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "saltworks",
+   "family": "ag_spill_mod",
+   "formula": "t = ga gd; spill t mod gc, plus gb",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc",
+    "gd"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 23,
+      "gb": 2,
+      "gc": 12,
+      "gd": 4
+     },
+     10
+    ],
+    [
+     {
+      "ga": 9,
+      "gb": 12,
+      "gc": 5,
+      "gd": 3
+     },
+     14
+    ],
+    [
+     {
+      "ga": 15,
+      "gb": 3,
+      "gc": 6,
+      "gd": 8
+     },
+     3
+    ],
+    [
+     {
+      "ga": 10,
+      "gb": 9,
+      "gc": 2,
+      "gd": 7
+     },
+     9
+    ],
+    [
+     {
+      "ga": 21,
+      "gb": 8,
+      "gc": 3,
+      "gd": 1
+     },
+     8
+    ],
+    [
+     {
+      "ga": 9,
+      "gb": 11,
+      "gc": 8,
+      "gd": 6
+     },
+     17
+    ],
+    [
+     {
+      "ga": 28,
+      "gb": 2,
+      "gc": 8,
+      "gd": 2
+     },
+     2
+    ],
+    [
+     {
+      "ga": 28,
+      "gb": 4,
+      "gc": 1,
+      "gd": 7
+     },
+     4
+    ],
+    [
+     {
+      "ga": 22,
+      "gb": 2,
+      "gc": 10,
+      "gd": 7
+     },
+     6
+    ],
+    [
+     {
+      "ga": 19,
+      "gb": 7,
+      "gc": 5,
+      "gd": 3
+     },
+     9
+    ],
+    [
+     {
+      "ga": 10,
+      "gb": 7,
+      "gc": 4,
+      "gd": 1
+     },
+     9
+    ]
+   ],
+   "task_id": "t-21",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mod",
+     [
+      "mul",
+      [
+       "var",
+       "ga"
+      ],
+      [
+       "var",
+       "gd"
+      ]
+     ],
+     [
+      "var",
+      "gc"
+     ]
+    ],
+    [
+     "var",
+     "gb"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "kiteworks",
+   "family": "ag_ctl_one_step2",
+   "formula": "control: ga + gb gc - gc",
+   "inputs": [
+    "ga",
+    "gb",
+    "gc"
+   ],
+   "kind": "agree",
+   "rows": [
+    [
+     {
+      "ga": 18,
+      "gb": 7,
+      "gc": 2
+     },
+     30
+    ],
+    [
+     {
+      "ga": 21,
+      "gb": 3,
+      "gc": 10
+     },
+     41
+    ],
+    [
+     {
+      "ga": 10,
+      "gb": 1,
+      "gc": 1
+     },
+     10
+    ],
+    [
+     {
+      "ga": 17,
+      "gb": 9,
+      "gc": 3
+     },
+     41
+    ],
+    [
+     {
+      "ga": 30,
+      "gb": 10,
+      "gc": 1
+     },
+     39
+    ],
+    [
+     {
+      "ga": 27,
+      "gb": 8,
+      "gc": 6
+     },
+     69
+    ],
+    [
+     {
+      "ga": 16,
+      "gb": 9,
+      "gc": 8
+     },
+     80
+    ],
+    [
+     {
+      "ga": 7,
+      "gb": 7,
+      "gc": 1
+     },
+     13
+    ],
+    [
+     {
+      "ga": 1,
+      "gb": 8,
+      "gc": 1
+     },
+     8
+    ],
+    [
+     {
+      "ga": 1,
+      "gb": 3,
+      "gc": 3
+     },
+     7
+    ],
+    [
+     {
+      "ga": 21,
+      "gb": 1,
+      "gc": 4
+     },
+     21
+    ]
+   ],
+   "task_id": "t-23",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "add",
+     [
+      "var",
+      "ga"
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "gb"
+      ],
+      [
+       "var",
+       "gc"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "gc"
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "int",
+ "schema": "nomad.agree-suite.v1",
+ "seed": 20270521,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 1,
+  "families": 24,
+  "hard": 23,
+  "lookup_dropped": []
+ },
+ "trained_on_by_any_arm": false
+}
