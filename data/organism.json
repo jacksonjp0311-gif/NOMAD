@@ -1,10 +1,10 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-22T10:06:35Z",
+  "ts": "2026-11-22T10:17:07Z",
   "sense": {
-    "last_pair": "2026-11-22T10:04:47Z",
-    "last_world_pair": "2026-11-22T10:04:47Z",
-    "last_sleep": "2026-11-22T10:06:34Z"
+    "last_pair": "2026-11-22T10:15:11Z",
+    "last_world_pair": "2026-11-22T10:15:11Z",
+    "last_sleep": "2026-11-22T10:17:02Z"
   },
   "think": {
     "curriculum_open_levels": {
@@ -32,14 +32,14 @@
     "world_twin": {
       "estimator": "rloo",
       "groups": 128,
-      "pass_rate": 1.0,
-      "all_pass_rate": 1.0,
+      "pass_rate": 0.99609375,
+      "all_pass_rate": 0.9921875,
       "all_fail_rate": 0.0,
-      "informative_rate": 0.0,
-      "informative_pairs": 0,
-      "mean_treatment_advantage": null,
-      "both_certified_pairs_with_cost": 128,
-      "mean_evaluations_saved": 508.25,
+      "informative_rate": 0.0078125,
+      "informative_pairs": 1,
+      "mean_treatment_advantage": 1.0,
+      "both_certified_pairs_with_cost": 127,
+      "mean_evaluations_saved": 542.7637795275591,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     }
   },
@@ -47,7 +47,7 @@
     "queued": 0,
     "inflight": 0,
     "certified_queued": 0,
-    "field_version": 1804,
+    "field_version": 1808,
     "genesis_heldout": {
       "field_certified": true,
       "cold_certified": false
@@ -62,46 +62,6 @@
   },
   "evolve": {
     "recent": [
-      {
-        "organ": "selfedit",
-        "seed": 949958424,
-        "gene": "inv_max_constants",
-        "before": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 2,
-          "inv_const_depth": 1,
-          "inv_rounds": 2,
-          "inv_floor_fit": 0
-        },
-        "after": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 3,
-          "inv_const_depth": 1,
-          "inv_rounds": 2,
-          "inv_floor_fit": 0
-        },
-        "dev_before": {
-          "certified": 6,
-          "evaluations": 145260,
-          "tasks": 16
-        },
-        "dev_after": {
-          "certified": 6,
-          "evaluations": 145260,
-          "tasks": 16
-        },
-        "dev_losses": [],
-        "accepted": false,
-        "reason": "dev_not_better",
-        "ts": "2026-11-22T04:45:33Z",
-        "sandbox_clean": true
-      },
       {
         "organ": "selfedit",
         "seed": 3951501086,
@@ -319,6 +279,46 @@
         "reason": "dev_not_better",
         "ts": "2026-11-22T09:12:59Z",
         "sandbox_clean": true
+      },
+      {
+        "organ": "selfedit",
+        "seed": 2060604420,
+        "gene": "inv_max_constants",
+        "before": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "after": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 6,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "dev_before": {
+          "certified": 6,
+          "evaluations": 145260,
+          "tasks": 16
+        },
+        "dev_after": {
+          "certified": 6,
+          "evaluations": 145260,
+          "tasks": 16
+        },
+        "dev_losses": [],
+        "accepted": false,
+        "reason": "dev_not_better",
+        "ts": "2026-11-22T10:17:07Z",
+        "sandbox_clean": true
       }
     ]
   },
@@ -353,11 +353,11 @@
     ],
     "body_lease": {
       "host": "gh-44962453103",
-      "heartbeat": "2026-11-22T10:06:35Z",
-      "age_min": 0.0010407833333333334,
+      "heartbeat": "2026-11-22T10:17:07Z",
+      "age_min": 0.0056249,
       "alive": true,
-      "cycles": 306,
-      "cycles_per_hour": 61.1,
+      "cycles": 318,
+      "cycles_per_hour": 61.4,
       "released": false
     }
   },
