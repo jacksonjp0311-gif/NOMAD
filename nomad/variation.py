@@ -50,7 +50,8 @@ import os
 from pathlib import Path
 from typing import Any, Iterable, Sequence
 
-from .world import (INT_CONSTANTS, OPS, OPSETS, Invalid, WorldTask, certify, opset_of, run, size, type_of)
+from .world import (INT_CONSTANTS, OPS, OPSETS, Invalid, WorldTask, certify, consult, opset_of, run, search_view,
+                    size, type_of)
 
 KINDS: tuple[str, ...] = ("op_swap", "const_flip", "var_swap", "reorder")
 
@@ -417,21 +418,29 @@ def explore(task: WorldTask, state: VariationState, library: Iterable[list] = ()
     """Bounded awake exploration on a *training* task. Reads state, writes nothing.
 
     Mutates certified patterns from other families, scores fitness on the
-    task's public rows, and WITNESS-attests any mutant that fits them all.
-    Returns a trace for the sleep learner. Its evaluations are reported
-    separately and never count toward the twin comparison.
+    task's public rows, and consults WITNESS (public + challenge rows only)
+    on any mutant that fits them all. Returns a trace for the sleep learner.
+    Its evaluations are reported separately and never count toward the twin
+    comparison.
+
+    INTEGRITY (docs/INTEGRITY.md): exploration never reads the final split.
+    It works on ``search_view(task)`` (final=()) and uses ``consult()``, so a
+    "paid" row means "supported on public + challenge rows". The sleep
+    learner (``apply_trace``) re-attests every paid row with ``certify()``,
+    including the final split, before anything is counted or learned.
     """
-    srcs = state.sources(task, library, exclude_family=task.family)
-    cands = state.candidates(task, srcs, budget, seed)
+    view = search_view(task)
+    srcs = state.sources(view, library, exclude_family=view.family)
+    cands = state.candidates(view, srcs, budget, seed)
     tried, paid = [], []
     for kind, t in cands:
-        fit = _fitness(t, task)
+        fit = _fitness(t, view)
         tried.append({"kind": kind, "tree": t, "fitness": round(fit, 4)})
         if fit == 1.0:
-            receipt, _, final_ok = certify(task, t)
-            if receipt is not None and receipt.supported and final_ok:
+            receipt = consult(view, t)
+            if receipt is not None and receipt.supported:
                 paid.append({"kind": kind, "tree": t})
-    return {"family": task.family, "situation": situation(task), "evaluations": len(cands),
+    return {"family": view.family, "situation": situation(view), "evaluations": len(cands),
             "tried": tried, "paid": paid}
 
 
