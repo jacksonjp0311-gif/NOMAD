@@ -1,10 +1,10 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-22T04:35:24Z",
+  "ts": "2026-11-22T04:45:33Z",
   "sense": {
-    "last_pair": "2026-11-22T04:33:47Z",
-    "last_world_pair": "2026-11-22T04:33:47Z",
-    "last_sleep": "2026-11-22T04:35:24Z"
+    "last_pair": "2026-11-22T04:45:28Z",
+    "last_world_pair": "2026-11-22T04:45:28Z",
+    "last_sleep": "2026-11-22T04:44:58Z"
   },
   "think": {
     "curriculum_open_levels": {
@@ -32,22 +32,22 @@
     "world_twin": {
       "estimator": "rloo",
       "groups": 128,
-      "pass_rate": 0.93359375,
-      "all_pass_rate": 0.8671875,
+      "pass_rate": 0.94140625,
+      "all_pass_rate": 0.8828125,
       "all_fail_rate": 0.0,
-      "informative_rate": 0.1328125,
-      "informative_pairs": 17,
-      "mean_treatment_advantage": 0.8823529411764706,
-      "both_certified_pairs_with_cost": 111,
-      "mean_evaluations_saved": 991.0990990990991,
+      "informative_rate": 0.1171875,
+      "informative_pairs": 15,
+      "mean_treatment_advantage": 0.8666666666666667,
+      "both_certified_pairs_with_cost": 113,
+      "mean_evaluations_saved": 853.0176991150443,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     }
   },
   "remember": {
-    "queued": 0,
+    "queued": 4,
     "inflight": 0,
-    "certified_queued": 0,
-    "field_version": 1690,
+    "certified_queued": 4,
+    "field_version": 1694,
     "genesis_heldout": {
       "field_certified": false,
       "cold_certified": false
@@ -62,46 +62,6 @@
   },
   "evolve": {
     "recent": [
-      {
-        "organ": "selfedit",
-        "seed": 3950938278,
-        "gene": "inv_rounds",
-        "before": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 2,
-          "inv_const_depth": 1,
-          "inv_rounds": 2,
-          "inv_floor_fit": 0
-        },
-        "after": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 2,
-          "inv_const_depth": 1,
-          "inv_rounds": 3,
-          "inv_floor_fit": 0
-        },
-        "dev_before": {
-          "certified": 6,
-          "evaluations": 145260,
-          "tasks": 16
-        },
-        "dev_after": {
-          "certified": 6,
-          "evaluations": 145260,
-          "tasks": 16
-        },
-        "dev_losses": [],
-        "accepted": false,
-        "reason": "dev_not_better",
-        "ts": "2026-11-21T23:01:28Z",
-        "sandbox_clean": true
-      },
       {
         "organ": "selfedit",
         "seed": 333713345,
@@ -435,6 +395,46 @@
         "reason": "tests_failed",
         "ts": "2026-11-22T03:38:44Z",
         "sandbox_clean": true
+      },
+      {
+        "organ": "selfedit",
+        "seed": 949958424,
+        "gene": "inv_max_constants",
+        "before": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "after": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 3,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "dev_before": {
+          "certified": 6,
+          "evaluations": 145260,
+          "tasks": 16
+        },
+        "dev_after": {
+          "certified": 6,
+          "evaluations": 145260,
+          "tasks": 16
+        },
+        "dev_losses": [],
+        "accepted": false,
+        "reason": "dev_not_better",
+        "ts": "2026-11-22T04:45:33Z",
+        "sandbox_clean": true
       }
     ]
   },
@@ -469,11 +469,11 @@
     ],
     "body_lease": {
       "host": "gh-44962419143",
-      "heartbeat": "2026-11-22T04:35:24Z",
-      "age_min": 0.0025128999999999998,
+      "heartbeat": "2026-11-22T04:45:33Z",
+      "age_min": 0.005591333333333334,
       "alive": true,
-      "cycles": 387,
-      "cycles_per_hour": 77.1,
+      "cycles": 401,
+      "cycles_per_hour": 77.3,
       "released": false
     }
   },
