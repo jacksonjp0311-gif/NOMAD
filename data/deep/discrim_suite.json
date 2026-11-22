@@ -1,0 +1,3573 @@
+{
+ "budget": 10000,
+ "domains": [
+  "lighthouse",
+  "glacier",
+  "pottery"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3506,
+   "cold_reason": null,
+   "domain": "glacier",
+   "family": "dx_floe_area_half",
+   "formula": "floe t = dj dl; half of t (diagonals)",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 8,
+      "dk": 11,
+      "dl": 1
+     },
+     4
+    ],
+    [
+     {
+      "dj": 12,
+      "dk": 5,
+      "dl": 1
+     },
+     6
+    ],
+    [
+     {
+      "dj": 9,
+      "dk": 5,
+      "dl": 6
+     },
+     27
+    ],
+    [
+     {
+      "dj": 9,
+      "dk": 1,
+      "dl": 8
+     },
+     36
+    ],
+    [
+     {
+      "dj": 6,
+      "dk": 7,
+      "dl": 10
+     },
+     30
+    ],
+    [
+     {
+      "dj": 14,
+      "dk": 2,
+      "dl": 7
+     },
+     49
+    ],
+    [
+     {
+      "dj": 26,
+      "dk": 10,
+      "dl": 3
+     },
+     39
+    ],
+    [
+     {
+      "dj": 30,
+      "dk": 4,
+      "dl": 12
+     },
+     180
+    ],
+    [
+     {
+      "dj": 20,
+      "dk": 9,
+      "dl": 11
+     },
+     110
+    ],
+    [
+     {
+      "dj": 29,
+      "dk": 9,
+      "dl": 4
+     },
+     58
+    ],
+    [
+     {
+      "dj": 30,
+      "dk": 4,
+      "dl": 10
+     },
+     150
+    ]
+   ],
+   "task_id": "t-15",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "var",
+      "dj"
+     ],
+     [
+      "var",
+      "dl"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 215,
+   "cold_reason": null,
+   "domain": "lighthouse",
+   "family": "dx_ctl_one_step",
+   "formula": "control: dk dl + dj",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 14,
+      "dk": 7,
+      "dl": 7
+     },
+     63
+    ],
+    [
+     {
+      "dj": 8,
+      "dk": 5,
+      "dl": 3
+     },
+     23
+    ],
+    [
+     {
+      "dj": 20,
+      "dk": 2,
+      "dl": 5
+     },
+     30
+    ],
+    [
+     {
+      "dj": 8,
+      "dk": 7,
+      "dl": 2
+     },
+     22
+    ],
+    [
+     {
+      "dj": 24,
+      "dk": 11,
+      "dl": 4
+     },
+     68
+    ],
+    [
+     {
+      "dj": 3,
+      "dk": 6,
+      "dl": 2
+     },
+     15
+    ],
+    [
+     {
+      "dj": 5,
+      "dk": 10,
+      "dl": 4
+     },
+     45
+    ],
+    [
+     {
+      "dj": 1,
+      "dk": 12,
+      "dl": 2
+     },
+     25
+    ],
+    [
+     {
+      "dj": 29,
+      "dk": 12,
+      "dl": 2
+     },
+     53
+    ],
+    [
+     {
+      "dj": 12,
+      "dk": 5,
+      "dl": 10
+     },
+     62
+    ],
+    [
+     {
+      "dj": 2,
+      "dk": 12,
+      "dl": 8
+     },
+     98
+    ]
+   ],
+   "task_id": "t-22",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "dk"
+     ],
+     [
+      "var",
+      "dl"
+     ]
+    ],
+    [
+     "var",
+     "dj"
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "lighthouse",
+   "family": "dx_lamp_hours_spare",
+   "formula": "lamp hours t = dk nights x dl hours; t plus a quarter spare",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 25,
+      "dk": 11,
+      "dl": 1
+     },
+     13
+    ],
+    [
+     {
+      "dj": 25,
+      "dk": 12,
+      "dl": 8
+     },
+     120
+    ],
+    [
+     {
+      "dj": 6,
+      "dk": 3,
+      "dl": 12
+     },
+     45
+    ],
+    [
+     {
+      "dj": 11,
+      "dk": 4,
+      "dl": 8
+     },
+     40
+    ],
+    [
+     {
+      "dj": 26,
+      "dk": 7,
+      "dl": 1
+     },
+     8
+    ],
+    [
+     {
+      "dj": 9,
+      "dk": 11,
+      "dl": 9
+     },
+     123
+    ],
+    [
+     {
+      "dj": 23,
+      "dk": 1,
+      "dl": 12
+     },
+     15
+    ],
+    [
+     {
+      "dj": 7,
+      "dk": 12,
+      "dl": 2
+     },
+     30
+    ],
+    [
+     {
+      "dj": 14,
+      "dk": 7,
+      "dl": 11
+     },
+     96
+    ],
+    [
+     {
+      "dj": 19,
+      "dk": 1,
+      "dl": 5
+     },
+     6
+    ],
+    [
+     {
+      "dj": 9,
+      "dk": 9,
+      "dl": 2
+     },
+     22
+    ]
+   ],
+   "task_id": "t-00",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "dk"
+     ],
+     [
+      "var",
+      "dl"
+     ]
+    ],
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "lighthouse",
+   "family": "dx_crew_pairs",
+   "formula": "crew t = dk + dl; watch pairs t (t - 1) // 2",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 8,
+      "dk": 11,
+      "dl": 10
+     },
+     210
+    ],
+    [
+     {
+      "dj": 23,
+      "dk": 3,
+      "dl": 10
+     },
+     78
+    ],
+    [
+     {
+      "dj": 10,
+      "dk": 9,
+      "dl": 7
+     },
+     120
+    ],
+    [
+     {
+      "dj": 27,
+      "dk": 10,
+      "dl": 6
+     },
+     120
+    ],
+    [
+     {
+      "dj": 7,
+      "dk": 8,
+      "dl": 4
+     },
+     66
+    ],
+    [
+     {
+      "dj": 6,
+      "dk": 8,
+      "dl": 10
+     },
+     153
+    ],
+    [
+     {
+      "dj": 13,
+      "dk": 3,
+      "dl": 4
+     },
+     21
+    ],
+    [
+     {
+      "dj": 11,
+      "dk": 7,
+      "dl": 9
+     },
+     120
+    ],
+    [
+     {
+      "dj": 11,
+      "dk": 4,
+      "dl": 1
+     },
+     10
+    ],
+    [
+     {
+      "dj": 6,
+      "dk": 9,
+      "dl": 2
+     },
+     55
+    ],
+    [
+     {
+      "dj": 1,
+      "dk": 2,
+      "dl": 3
+     },
+     10
+    ]
+   ],
+   "task_id": "t-01",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "add",
+       [
+        "var",
+        "dk"
+       ],
+       [
+        "var",
+        "dl"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "glacier",
+   "family": "dx_core_sq_less",
+   "formula": "core t = dj + dk; t squared minus dl",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 21,
+      "dk": 5,
+      "dl": 3
+     },
+     673
+    ],
+    [
+     {
+      "dj": 20,
+      "dk": 3,
+      "dl": 10
+     },
+     519
+    ],
+    [
+     {
+      "dj": 24,
+      "dk": 9,
+      "dl": 6
+     },
+     1083
+    ],
+    [
+     {
+      "dj": 25,
+      "dk": 6,
+      "dl": 9
+     },
+     952
+    ],
+    [
+     {
+      "dj": 4,
+      "dk": 7,
+      "dl": 9
+     },
+     112
+    ],
+    [
+     {
+      "dj": 2,
+      "dk": 10,
+      "dl": 9
+     },
+     135
+    ],
+    [
+     {
+      "dj": 23,
+      "dk": 12,
+      "dl": 1
+     },
+     1224
+    ],
+    [
+     {
+      "dj": 22,
+      "dk": 2,
+      "dl": 2
+     },
+     574
+    ],
+    [
+     {
+      "dj": 15,
+      "dk": 4,
+      "dl": 4
+     },
+     357
+    ],
+    [
+     {
+      "dj": 19,
+      "dk": 12,
+      "dl": 6
+     },
+     955
+    ],
+    [
+     {
+      "dj": 2,
+      "dk": 2,
+      "dl": 9
+     },
+     7
+    ]
+   ],
+   "task_id": "t-02",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "dj"
+      ],
+      [
+       "var",
+       "dk"
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "dj"
+      ],
+      [
+       "var",
+       "dk"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "dl"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "glacier",
+   "family": "dx_layers_and_third",
+   "formula": "layers t = dk dl + dj; 2 t plus a third of t",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 6,
+      "dk": 8,
+      "dl": 12
+     },
+     238
+    ],
+    [
+     {
+      "dj": 16,
+      "dk": 7,
+      "dl": 12
+     },
+     233
+    ],
+    [
+     {
+      "dj": 26,
+      "dk": 12,
+      "dl": 10
+     },
+     340
+    ],
+    [
+     {
+      "dj": 22,
+      "dk": 11,
+      "dl": 8
+     },
+     256
+    ],
+    [
+     {
+      "dj": 7,
+      "dk": 4,
+      "dl": 5
+     },
+     63
+    ],
+    [
+     {
+      "dj": 13,
+      "dk": 6,
+      "dl": 2
+     },
+     58
+    ],
+    [
+     {
+      "dj": 6,
+      "dk": 4,
+      "dl": 6
+     },
+     70
+    ],
+    [
+     {
+      "dj": 2,
+      "dk": 11,
+      "dl": 11
+     },
+     287
+    ],
+    [
+     {
+      "dj": 18,
+      "dk": 8,
+      "dl": 8
+     },
+     191
+    ],
+    [
+     {
+      "dj": 26,
+      "dk": 4,
+      "dl": 7
+     },
+     126
+    ],
+    [
+     {
+      "dj": 11,
+      "dk": 10,
+      "dl": 6
+     },
+     165
+    ]
+   ],
+   "task_id": "t-03",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "dk"
+       ],
+       [
+        "var",
+        "dl"
+       ]
+      ],
+      [
+       "var",
+       "dj"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "dk"
+       ],
+       [
+        "var",
+        "dl"
+       ]
+      ],
+      [
+       "var",
+       "dj"
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "pottery",
+   "family": "dx_kiln_two_rates",
+   "formula": "firings t = dk + dl; cost t dj + t dm",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl",
+    "dm"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 14,
+      "dk": 9,
+      "dl": 1,
+      "dm": 8
+     },
+     220
+    ],
+    [
+     {
+      "dj": 5,
+      "dk": 1,
+      "dl": 7,
+      "dm": 8
+     },
+     104
+    ],
+    [
+     {
+      "dj": 14,
+      "dk": 4,
+      "dl": 9,
+      "dm": 1
+     },
+     195
+    ],
+    [
+     {
+      "dj": 3,
+      "dk": 9,
+      "dl": 8,
+      "dm": 2
+     },
+     85
+    ],
+    [
+     {
+      "dj": 14,
+      "dk": 8,
+      "dl": 12,
+      "dm": 3
+     },
+     340
+    ],
+    [
+     {
+      "dj": 16,
+      "dk": 5,
+      "dl": 4,
+      "dm": 6
+     },
+     198
+    ],
+    [
+     {
+      "dj": 4,
+      "dk": 5,
+      "dl": 3,
+      "dm": 8
+     },
+     96
+    ],
+    [
+     {
+      "dj": 7,
+      "dk": 3,
+      "dl": 10,
+      "dm": 9
+     },
+     208
+    ],
+    [
+     {
+      "dj": 24,
+      "dk": 3,
+      "dl": 7,
+      "dm": 3
+     },
+     270
+    ],
+    [
+     {
+      "dj": 22,
+      "dk": 2,
+      "dl": 4,
+      "dm": 6
+     },
+     168
+    ],
+    [
+     {
+      "dj": 13,
+      "dk": 3,
+      "dl": 2,
+      "dm": 3
+     },
+     80
+    ]
+   ],
+   "task_id": "t-04",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ],
+     [
+      "var",
+      "dj"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ],
+     [
+      "var",
+      "dm"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "pottery",
+   "family": "dx_bowls_sets_loose",
+   "formula": "bowls t = dk dl + dj; sets of 4 plus loose = t // 4 + t mod 4",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 10,
+      "dk": 8,
+      "dl": 9
+     },
+     22
+    ],
+    [
+     {
+      "dj": 17,
+      "dk": 1,
+      "dl": 2
+     },
+     7
+    ],
+    [
+     {
+      "dj": 21,
+      "dk": 5,
+      "dl": 7
+     },
+     14
+    ],
+    [
+     {
+      "dj": 25,
+      "dk": 9,
+      "dl": 9
+     },
+     28
+    ],
+    [
+     {
+      "dj": 25,
+      "dk": 10,
+      "dl": 1
+     },
+     11
+    ],
+    [
+     {
+      "dj": 8,
+      "dk": 7,
+      "dl": 7
+     },
+     15
+    ],
+    [
+     {
+      "dj": 27,
+      "dk": 2,
+      "dl": 3
+     },
+     9
+    ],
+    [
+     {
+      "dj": 19,
+      "dk": 6,
+      "dl": 2
+     },
+     10
+    ],
+    [
+     {
+      "dj": 10,
+      "dk": 4,
+      "dl": 10
+     },
+     14
+    ],
+    [
+     {
+      "dj": 29,
+      "dk": 12,
+      "dl": 1
+     },
+     11
+    ],
+    [
+     {
+      "dj": 5,
+      "dk": 5,
+      "dl": 7
+     },
+     10
+    ]
+   ],
+   "task_id": "t-05",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "div",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "dk"
+       ],
+       [
+        "var",
+        "dl"
+       ]
+      ],
+      [
+       "var",
+       "dj"
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "mod",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "dk"
+       ],
+       [
+        "var",
+        "dl"
+       ]
+      ],
+      [
+       "var",
+       "dj"
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "lighthouse",
+   "family": "dx_beam_sq_minus",
+   "formula": "t = dk dl; t squared minus t dm",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl",
+    "dm"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 2,
+      "dk": 6,
+      "dl": 10,
+      "dm": 6
+     },
+     3240
+    ],
+    [
+     {
+      "dj": 13,
+      "dk": 6,
+      "dl": 12,
+      "dm": 4
+     },
+     4896
+    ],
+    [
+     {
+      "dj": 1,
+      "dk": 10,
+      "dl": 4,
+      "dm": 3
+     },
+     1480
+    ],
+    [
+     {
+      "dj": 26,
+      "dk": 8,
+      "dl": 6,
+      "dm": 5
+     },
+     2064
+    ],
+    [
+     {
+      "dj": 19,
+      "dk": 12,
+      "dl": 6,
+      "dm": 4
+     },
+     4896
+    ],
+    [
+     {
+      "dj": 18,
+      "dk": 4,
+      "dl": 5,
+      "dm": 8
+     },
+     240
+    ],
+    [
+     {
+      "dj": 4,
+      "dk": 12,
+      "dl": 7,
+      "dm": 5
+     },
+     6636
+    ],
+    [
+     {
+      "dj": 23,
+      "dk": 12,
+      "dl": 7,
+      "dm": 4
+     },
+     6720
+    ],
+    [
+     {
+      "dj": 30,
+      "dk": 11,
+      "dl": 5,
+      "dm": 7
+     },
+     2640
+    ],
+    [
+     {
+      "dj": 7,
+      "dk": 5,
+      "dl": 1,
+      "dm": 8
+     },
+     -15
+    ],
+    [
+     {
+      "dj": 21,
+      "dk": 1,
+      "dl": 9,
+      "dm": 9
+     },
+     0
+    ]
+   ],
+   "task_id": "t-06",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ],
+     [
+      "var",
+      "dm"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "glacier",
+   "family": "dx_melt_stack",
+   "formula": "t = dk + dm; 1 + 2 + ... + t = t (t + 1) // 2",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl",
+    "dm"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 13,
+      "dk": 11,
+      "dl": 4,
+      "dm": 3
+     },
+     105
+    ],
+    [
+     {
+      "dj": 9,
+      "dk": 1,
+      "dl": 6,
+      "dm": 3
+     },
+     10
+    ],
+    [
+     {
+      "dj": 6,
+      "dk": 12,
+      "dl": 11,
+      "dm": 3
+     },
+     120
+    ],
+    [
+     {
+      "dj": 25,
+      "dk": 7,
+      "dl": 5,
+      "dm": 5
+     },
+     78
+    ],
+    [
+     {
+      "dj": 26,
+      "dk": 3,
+      "dl": 3,
+      "dm": 8
+     },
+     66
+    ],
+    [
+     {
+      "dj": 23,
+      "dk": 12,
+      "dl": 10,
+      "dm": 1
+     },
+     91
+    ],
+    [
+     {
+      "dj": 3,
+      "dk": 5,
+      "dl": 1,
+      "dm": 4
+     },
+     45
+    ],
+    [
+     {
+      "dj": 22,
+      "dk": 6,
+      "dl": 11,
+      "dm": 9
+     },
+     120
+    ],
+    [
+     {
+      "dj": 1,
+      "dk": 4,
+      "dl": 11,
+      "dm": 9
+     },
+     91
+    ],
+    [
+     {
+      "dj": 18,
+      "dk": 11,
+      "dl": 10,
+      "dm": 9
+     },
+     210
+    ],
+    [
+     {
+      "dj": 22,
+      "dk": 1,
+      "dl": 8,
+      "dm": 2
+     },
+     6
+    ]
+   ],
+   "task_id": "t-07",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dm"
+      ]
+     ],
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "dk"
+       ],
+       [
+        "var",
+        "dm"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "pottery",
+   "family": "dx_glaze_half_more",
+   "formula": "t = dj dm; t + t // 2",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl",
+    "dm"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 5,
+      "dk": 9,
+      "dl": 5,
+      "dm": 2
+     },
+     15
+    ],
+    [
+     {
+      "dj": 7,
+      "dk": 3,
+      "dl": 3,
+      "dm": 6
+     },
+     63
+    ],
+    [
+     {
+      "dj": 6,
+      "dk": 12,
+      "dl": 1,
+      "dm": 1
+     },
+     9
+    ],
+    [
+     {
+      "dj": 26,
+      "dk": 5,
+      "dl": 12,
+      "dm": 7
+     },
+     273
+    ],
+    [
+     {
+      "dj": 9,
+      "dk": 9,
+      "dl": 11,
+      "dm": 7
+     },
+     94
+    ],
+    [
+     {
+      "dj": 10,
+      "dk": 5,
+      "dl": 11,
+      "dm": 8
+     },
+     120
+    ],
+    [
+     {
+      "dj": 6,
+      "dk": 9,
+      "dl": 9,
+      "dm": 8
+     },
+     72
+    ],
+    [
+     {
+      "dj": 2,
+      "dk": 12,
+      "dl": 3,
+      "dm": 1
+     },
+     3
+    ],
+    [
+     {
+      "dj": 29,
+      "dk": 4,
+      "dl": 8,
+      "dm": 8
+     },
+     348
+    ],
+    [
+     {
+      "dj": 17,
+      "dk": 10,
+      "dl": 7,
+      "dm": 6
+     },
+     153
+    ],
+    [
+     {
+      "dj": 4,
+      "dk": 10,
+      "dl": 5,
+      "dm": 9
+     },
+     54
+    ]
+   ],
+   "task_id": "t-08",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "dj"
+     ],
+     [
+      "var",
+      "dm"
+     ]
+    ],
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "dj"
+      ],
+      [
+       "var",
+       "dm"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "pottery",
+   "family": "dx_shelf_cube",
+   "formula": "t = dk + dl; t t dm",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl",
+    "dm"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 5,
+      "dk": 12,
+      "dl": 1,
+      "dm": 9
+     },
+     1521
+    ],
+    [
+     {
+      "dj": 26,
+      "dk": 2,
+      "dl": 12,
+      "dm": 9
+     },
+     1764
+    ],
+    [
+     {
+      "dj": 15,
+      "dk": 1,
+      "dl": 3,
+      "dm": 9
+     },
+     144
+    ],
+    [
+     {
+      "dj": 20,
+      "dk": 12,
+      "dl": 9,
+      "dm": 8
+     },
+     3528
+    ],
+    [
+     {
+      "dj": 20,
+      "dk": 5,
+      "dl": 8,
+      "dm": 5
+     },
+     845
+    ],
+    [
+     {
+      "dj": 2,
+      "dk": 11,
+      "dl": 12,
+      "dm": 4
+     },
+     2116
+    ],
+    [
+     {
+      "dj": 4,
+      "dk": 7,
+      "dl": 12,
+      "dm": 1
+     },
+     361
+    ],
+    [
+     {
+      "dj": 4,
+      "dk": 1,
+      "dl": 4,
+      "dm": 1
+     },
+     25
+    ],
+    [
+     {
+      "dj": 29,
+      "dk": 8,
+      "dl": 4,
+      "dm": 4
+     },
+     576
+    ],
+    [
+     {
+      "dj": 16,
+      "dk": 9,
+      "dl": 8,
+      "dm": 4
+     },
+     1156
+    ],
+    [
+     {
+      "dj": 6,
+      "dk": 9,
+      "dl": 12,
+      "dm": 9
+     },
+     3969
+    ]
+   ],
+   "task_id": "t-09",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "dm"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "lighthouse",
+   "family": "dx_trips_boat",
+   "formula": "t = dk dl; boat trips of dm needed = ceil(t / dm)",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl",
+    "dm"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 30,
+      "dk": 1,
+      "dl": 3,
+      "dm": 7
+     },
+     1
+    ],
+    [
+     {
+      "dj": 11,
+      "dk": 1,
+      "dl": 4,
+      "dm": 5
+     },
+     1
+    ],
+    [
+     {
+      "dj": 8,
+      "dk": 11,
+      "dl": 11,
+      "dm": 5
+     },
+     25
+    ],
+    [
+     {
+      "dj": 27,
+      "dk": 2,
+      "dl": 3,
+      "dm": 7
+     },
+     1
+    ],
+    [
+     {
+      "dj": 11,
+      "dk": 1,
+      "dl": 8,
+      "dm": 2
+     },
+     4
+    ],
+    [
+     {
+      "dj": 18,
+      "dk": 6,
+      "dl": 5,
+      "dm": 7
+     },
+     5
+    ],
+    [
+     {
+      "dj": 24,
+      "dk": 6,
+      "dl": 3,
+      "dm": 8
+     },
+     3
+    ],
+    [
+     {
+      "dj": 20,
+      "dk": 8,
+      "dl": 9,
+      "dm": 2
+     },
+     36
+    ],
+    [
+     {
+      "dj": 5,
+      "dk": 4,
+      "dl": 3,
+      "dm": 5
+     },
+     3
+    ],
+    [
+     {
+      "dj": 8,
+      "dk": 2,
+      "dl": 4,
+      "dm": 6
+     },
+     2
+    ],
+    [
+     {
+      "dj": 24,
+      "dk": 3,
+      "dl": 2,
+      "dm": 6
+     },
+     1
+    ]
+   ],
+   "task_id": "t-10",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "dm"
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "var",
+     "dm"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "glacier",
+   "family": "dx_ice_mean",
+   "formula": "t = dj dk; mean of t and dl dk = (t + dl dk) // 2",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 25,
+      "dk": 5,
+      "dl": 12
+     },
+     92
+    ],
+    [
+     {
+      "dj": 28,
+      "dk": 5,
+      "dl": 10
+     },
+     95
+    ],
+    [
+     {
+      "dj": 30,
+      "dk": 8,
+      "dl": 6
+     },
+     144
+    ],
+    [
+     {
+      "dj": 1,
+      "dk": 6,
+      "dl": 11
+     },
+     36
+    ],
+    [
+     {
+      "dj": 10,
+      "dk": 8,
+      "dl": 9
+     },
+     76
+    ],
+    [
+     {
+      "dj": 2,
+      "dk": 4,
+      "dl": 9
+     },
+     22
+    ],
+    [
+     {
+      "dj": 6,
+      "dk": 7,
+      "dl": 9
+     },
+     52
+    ],
+    [
+     {
+      "dj": 27,
+      "dk": 12,
+      "dl": 10
+     },
+     222
+    ],
+    [
+     {
+      "dj": 8,
+      "dk": 8,
+      "dl": 5
+     },
+     52
+    ],
+    [
+     {
+      "dj": 8,
+      "dk": 5,
+      "dl": 9
+     },
+     42
+    ],
+    [
+     {
+      "dj": 14,
+      "dk": 8,
+      "dl": 2
+     },
+     64
+    ]
+   ],
+   "task_id": "t-11",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "dj"
+      ],
+      [
+       "var",
+       "dk"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "dl"
+      ],
+      [
+       "var",
+       "dk"
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 2926,
+   "cold_reason": null,
+   "domain": "lighthouse",
+   "family": "dx_fuel_shortfall",
+   "formula": "need t = dk dm; shortfall below stock dj = max(t - dj, 0)",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl",
+    "dm"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 8,
+      "dk": 11,
+      "dl": 10,
+      "dm": 4
+     },
+     36
+    ],
+    [
+     {
+      "dj": 14,
+      "dk": 10,
+      "dl": 12,
+      "dm": 9
+     },
+     76
+    ],
+    [
+     {
+      "dj": 8,
+      "dk": 12,
+      "dl": 5,
+      "dm": 6
+     },
+     64
+    ],
+    [
+     {
+      "dj": 10,
+      "dk": 11,
+      "dl": 1,
+      "dm": 1
+     },
+     1
+    ],
+    [
+     {
+      "dj": 11,
+      "dk": 10,
+      "dl": 1,
+      "dm": 9
+     },
+     79
+    ],
+    [
+     {
+      "dj": 4,
+      "dk": 3,
+      "dl": 9,
+      "dm": 6
+     },
+     14
+    ],
+    [
+     {
+      "dj": 16,
+      "dk": 5,
+      "dl": 8,
+      "dm": 2
+     },
+     0
+    ],
+    [
+     {
+      "dj": 28,
+      "dk": 11,
+      "dl": 8,
+      "dm": 7
+     },
+     49
+    ],
+    [
+     {
+      "dj": 6,
+      "dk": 7,
+      "dl": 9,
+      "dm": 5
+     },
+     29
+    ],
+    [
+     {
+      "dj": 30,
+      "dk": 1,
+      "dl": 1,
+      "dm": 2
+     },
+     0
+    ],
+    [
+     {
+      "dj": 18,
+      "dk": 4,
+      "dl": 5,
+      "dm": 7
+     },
+     10
+    ]
+   ],
+   "task_id": "t-12",
+   "tier": "hard",
+   "tree": [
+    "max",
+    [
+     "sub",
+     [
+      "mul",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dm"
+      ]
+     ],
+     [
+      "var",
+      "dj"
+     ]
+    ],
+    [
+     "const",
+     0
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "lighthouse",
+   "family": "dx_tide_gap",
+   "formula": "t = dk dl; gap to height dj = |t - dj|",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 5,
+      "dk": 3,
+      "dl": 9
+     },
+     22
+    ],
+    [
+     {
+      "dj": 24,
+      "dk": 4,
+      "dl": 12
+     },
+     24
+    ],
+    [
+     {
+      "dj": 18,
+      "dk": 3,
+      "dl": 3
+     },
+     9
+    ],
+    [
+     {
+      "dj": 16,
+      "dk": 9,
+      "dl": 11
+     },
+     83
+    ],
+    [
+     {
+      "dj": 27,
+      "dk": 9,
+      "dl": 2
+     },
+     9
+    ],
+    [
+     {
+      "dj": 3,
+      "dk": 6,
+      "dl": 3
+     },
+     15
+    ],
+    [
+     {
+      "dj": 29,
+      "dk": 3,
+      "dl": 3
+     },
+     20
+    ],
+    [
+     {
+      "dj": 23,
+      "dk": 9,
+      "dl": 10
+     },
+     67
+    ],
+    [
+     {
+      "dj": 28,
+      "dk": 12,
+      "dl": 12
+     },
+     116
+    ],
+    [
+     {
+      "dj": 14,
+      "dk": 8,
+      "dl": 8
+     },
+     50
+    ],
+    [
+     {
+      "dj": 27,
+      "dk": 1,
+      "dl": 8
+     },
+     19
+    ]
+   ],
+   "task_id": "t-13",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "max",
+     [
+      "mul",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ],
+     [
+      "var",
+      "dj"
+     ]
+    ],
+    [
+     "min",
+     [
+      "mul",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ],
+     [
+      "var",
+      "dj"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "glacier",
+   "family": "dx_crevasse_cap",
+   "formula": "t = dj + dk; capped at 3 dl = min(t, 3 dl), doubled",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 28,
+      "dk": 6,
+      "dl": 2
+     },
+     12
+    ],
+    [
+     {
+      "dj": 16,
+      "dk": 1,
+      "dl": 9
+     },
+     34
+    ],
+    [
+     {
+      "dj": 10,
+      "dk": 7,
+      "dl": 3
+     },
+     18
+    ],
+    [
+     {
+      "dj": 26,
+      "dk": 7,
+      "dl": 1
+     },
+     6
+    ],
+    [
+     {
+      "dj": 5,
+      "dk": 3,
+      "dl": 1
+     },
+     6
+    ],
+    [
+     {
+      "dj": 17,
+      "dk": 4,
+      "dl": 5
+     },
+     30
+    ],
+    [
+     {
+      "dj": 1,
+      "dk": 11,
+      "dl": 9
+     },
+     24
+    ],
+    [
+     {
+      "dj": 3,
+      "dk": 2,
+      "dl": 3
+     },
+     10
+    ],
+    [
+     {
+      "dj": 8,
+      "dk": 1,
+      "dl": 4
+     },
+     18
+    ],
+    [
+     {
+      "dj": 27,
+      "dk": 5,
+      "dl": 5
+     },
+     30
+    ],
+    [
+     {
+      "dj": 15,
+      "dk": 10,
+      "dl": 2
+     },
+     12
+    ]
+   ],
+   "task_id": "t-14",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "min",
+     [
+      "add",
+      [
+       "var",
+       "dj"
+      ],
+      [
+       "var",
+       "dk"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       3
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "pottery",
+   "family": "dx_clay_left",
+   "formula": "t = dk dl; clay left after pots of dm = t mod dm, plus pots t // dm",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl",
+    "dm"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 11,
+      "dk": 5,
+      "dl": 7,
+      "dm": 8
+     },
+     7
+    ],
+    [
+     {
+      "dj": 24,
+      "dk": 6,
+      "dl": 12,
+      "dm": 6
+     },
+     12
+    ],
+    [
+     {
+      "dj": 11,
+      "dk": 8,
+      "dl": 4,
+      "dm": 4
+     },
+     8
+    ],
+    [
+     {
+      "dj": 26,
+      "dk": 4,
+      "dl": 8,
+      "dm": 5
+     },
+     8
+    ],
+    [
+     {
+      "dj": 18,
+      "dk": 2,
+      "dl": 10,
+      "dm": 3
+     },
+     8
+    ],
+    [
+     {
+      "dj": 7,
+      "dk": 4,
+      "dl": 8,
+      "dm": 2
+     },
+     16
+    ],
+    [
+     {
+      "dj": 25,
+      "dk": 3,
+      "dl": 3,
+      "dm": 7
+     },
+     3
+    ],
+    [
+     {
+      "dj": 11,
+      "dk": 7,
+      "dl": 8,
+      "dm": 7
+     },
+     8
+    ],
+    [
+     {
+      "dj": 23,
+      "dk": 6,
+      "dl": 7,
+      "dm": 1
+     },
+     42
+    ],
+    [
+     {
+      "dj": 10,
+      "dk": 10,
+      "dl": 11,
+      "dm": 6
+     },
+     20
+    ],
+    [
+     {
+      "dj": 17,
+      "dk": 1,
+      "dl": 3,
+      "dm": 9
+     },
+     3
+    ]
+   ],
+   "task_id": "t-16",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mod",
+     [
+      "mul",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ],
+     [
+      "var",
+      "dm"
+     ]
+    ],
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ],
+     [
+      "var",
+      "dm"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "pottery",
+   "family": "dx_wick_spare",
+   "formula": "t = dj - dm (when positive); t t // dk",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl",
+    "dm"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 27,
+      "dk": 6,
+      "dl": 10,
+      "dm": 1
+     },
+     112
+    ],
+    [
+     {
+      "dj": 9,
+      "dk": 6,
+      "dl": 11,
+      "dm": 4
+     },
+     4
+    ],
+    [
+     {
+      "dj": 4,
+      "dk": 9,
+      "dl": 4,
+      "dm": 3
+     },
+     0
+    ],
+    [
+     {
+      "dj": 18,
+      "dk": 6,
+      "dl": 8,
+      "dm": 8
+     },
+     16
+    ],
+    [
+     {
+      "dj": 12,
+      "dk": 9,
+      "dl": 12,
+      "dm": 9
+     },
+     1
+    ],
+    [
+     {
+      "dj": 7,
+      "dk": 8,
+      "dl": 7,
+      "dm": 6
+     },
+     0
+    ],
+    [
+     {
+      "dj": 17,
+      "dk": 10,
+      "dl": 1,
+      "dm": 2
+     },
+     22
+    ],
+    [
+     {
+      "dj": 29,
+      "dk": 12,
+      "dl": 10,
+      "dm": 4
+     },
+     52
+    ],
+    [
+     {
+      "dj": 9,
+      "dk": 3,
+      "dl": 12,
+      "dm": 3
+     },
+     12
+    ],
+    [
+     {
+      "dj": 20,
+      "dk": 10,
+      "dl": 6,
+      "dm": 2
+     },
+     32
+    ],
+    [
+     {
+      "dj": 7,
+      "dk": 8,
+      "dl": 3,
+      "dm": 7
+     },
+     0
+    ]
+   ],
+   "task_id": "t-17",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "sub",
+      [
+       "var",
+       "dj"
+      ],
+      [
+       "var",
+       "dm"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "dj"
+      ],
+      [
+       "var",
+       "dm"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "dk"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "lighthouse",
+   "family": "dx_beacon_least",
+   "formula": "t = dk dl; min(t, dj dm) + t",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl",
+    "dm"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 19,
+      "dk": 12,
+      "dl": 11,
+      "dm": 4
+     },
+     208
+    ],
+    [
+     {
+      "dj": 30,
+      "dk": 10,
+      "dl": 5,
+      "dm": 2
+     },
+     100
+    ],
+    [
+     {
+      "dj": 8,
+      "dk": 2,
+      "dl": 10,
+      "dm": 8
+     },
+     40
+    ],
+    [
+     {
+      "dj": 17,
+      "dk": 5,
+      "dl": 11,
+      "dm": 7
+     },
+     110
+    ],
+    [
+     {
+      "dj": 14,
+      "dk": 4,
+      "dl": 7,
+      "dm": 2
+     },
+     56
+    ],
+    [
+     {
+      "dj": 5,
+      "dk": 3,
+      "dl": 3,
+      "dm": 2
+     },
+     18
+    ],
+    [
+     {
+      "dj": 2,
+      "dk": 12,
+      "dl": 10,
+      "dm": 3
+     },
+     126
+    ],
+    [
+     {
+      "dj": 1,
+      "dk": 10,
+      "dl": 12,
+      "dm": 1
+     },
+     121
+    ],
+    [
+     {
+      "dj": 30,
+      "dk": 3,
+      "dl": 11,
+      "dm": 2
+     },
+     66
+    ],
+    [
+     {
+      "dj": 22,
+      "dk": 8,
+      "dl": 11,
+      "dm": 8
+     },
+     176
+    ],
+    [
+     {
+      "dj": 19,
+      "dk": 7,
+      "dl": 2,
+      "dm": 8
+     },
+     28
+    ]
+   ],
+   "task_id": "t-18",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "min",
+     [
+      "mul",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "dj"
+      ],
+      [
+       "var",
+       "dm"
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "dk"
+     ],
+     [
+      "var",
+      "dl"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "glacier",
+   "family": "dx_snow_over",
+   "formula": "t = dj dm; over the line dk dl = max(t, dk dl) - dk dl",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl",
+    "dm"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 6,
+      "dk": 11,
+      "dl": 9,
+      "dm": 7
+     },
+     0
+    ],
+    [
+     {
+      "dj": 21,
+      "dk": 8,
+      "dl": 1,
+      "dm": 8
+     },
+     160
+    ],
+    [
+     {
+      "dj": 24,
+      "dk": 4,
+      "dl": 3,
+      "dm": 8
+     },
+     180
+    ],
+    [
+     {
+      "dj": 27,
+      "dk": 4,
+      "dl": 12,
+      "dm": 7
+     },
+     141
+    ],
+    [
+     {
+      "dj": 24,
+      "dk": 8,
+      "dl": 3,
+      "dm": 3
+     },
+     48
+    ],
+    [
+     {
+      "dj": 9,
+      "dk": 3,
+      "dl": 7,
+      "dm": 5
+     },
+     24
+    ],
+    [
+     {
+      "dj": 12,
+      "dk": 4,
+      "dl": 10,
+      "dm": 6
+     },
+     32
+    ],
+    [
+     {
+      "dj": 1,
+      "dk": 3,
+      "dl": 1,
+      "dm": 5
+     },
+     2
+    ],
+    [
+     {
+      "dj": 24,
+      "dk": 4,
+      "dl": 5,
+      "dm": 6
+     },
+     124
+    ],
+    [
+     {
+      "dj": 21,
+      "dk": 12,
+      "dl": 7,
+      "dm": 8
+     },
+     84
+    ],
+    [
+     {
+      "dj": 24,
+      "dk": 12,
+      "dl": 6,
+      "dm": 2
+     },
+     0
+    ]
+   ],
+   "task_id": "t-19",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "max",
+     [
+      "mul",
+      [
+       "var",
+       "dj"
+      ],
+      [
+       "var",
+       "dm"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "var",
+      "dk"
+     ],
+     [
+      "var",
+      "dl"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "pottery",
+   "family": "dx_kiln_change",
+   "formula": "change t = dj dm - dk dl (when not negative); bags of dk = t // dk",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl",
+    "dm"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 28,
+      "dk": 7,
+      "dl": 1,
+      "dm": 3
+     },
+     11
+    ],
+    [
+     {
+      "dj": 16,
+      "dk": 8,
+      "dl": 9,
+      "dm": 5
+     },
+     1
+    ],
+    [
+     {
+      "dj": 30,
+      "dk": 10,
+      "dl": 4,
+      "dm": 8
+     },
+     20
+    ],
+    [
+     {
+      "dj": 3,
+      "dk": 7,
+      "dl": 1,
+      "dm": 9
+     },
+     2
+    ],
+    [
+     {
+      "dj": 23,
+      "dk": 10,
+      "dl": 1,
+      "dm": 6
+     },
+     12
+    ],
+    [
+     {
+      "dj": 23,
+      "dk": 9,
+      "dl": 12,
+      "dm": 9
+     },
+     11
+    ],
+    [
+     {
+      "dj": 24,
+      "dk": 12,
+      "dl": 9,
+      "dm": 6
+     },
+     3
+    ],
+    [
+     {
+      "dj": 18,
+      "dk": 2,
+      "dl": 1,
+      "dm": 1
+     },
+     8
+    ],
+    [
+     {
+      "dj": 19,
+      "dk": 8,
+      "dl": 3,
+      "dm": 4
+     },
+     6
+    ],
+    [
+     {
+      "dj": 20,
+      "dk": 3,
+      "dl": 11,
+      "dm": 4
+     },
+     15
+    ],
+    [
+     {
+      "dj": 25,
+      "dk": 7,
+      "dl": 6,
+      "dm": 7
+     },
+     19
+    ]
+   ],
+   "task_id": "t-20",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "sub",
+     [
+      "mul",
+      [
+       "var",
+       "dj"
+      ],
+      [
+       "var",
+       "dm"
+      ]
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "dk"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "lighthouse",
+   "family": "dx_rope_left",
+   "formula": "t = dj + dk; rope left when dl dm is cut t at a time = (dl dm) mod t",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl",
+    "dm"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 4,
+      "dk": 4,
+      "dl": 6,
+      "dm": 7
+     },
+     2
+    ],
+    [
+     {
+      "dj": 24,
+      "dk": 11,
+      "dl": 6,
+      "dm": 8
+     },
+     13
+    ],
+    [
+     {
+      "dj": 17,
+      "dk": 3,
+      "dl": 1,
+      "dm": 2
+     },
+     2
+    ],
+    [
+     {
+      "dj": 11,
+      "dk": 11,
+      "dl": 2,
+      "dm": 5
+     },
+     10
+    ],
+    [
+     {
+      "dj": 17,
+      "dk": 1,
+      "dl": 12,
+      "dm": 1
+     },
+     12
+    ],
+    [
+     {
+      "dj": 6,
+      "dk": 6,
+      "dl": 1,
+      "dm": 9
+     },
+     9
+    ],
+    [
+     {
+      "dj": 18,
+      "dk": 1,
+      "dl": 1,
+      "dm": 1
+     },
+     1
+    ],
+    [
+     {
+      "dj": 6,
+      "dk": 7,
+      "dl": 9,
+      "dm": 7
+     },
+     11
+    ],
+    [
+     {
+      "dj": 3,
+      "dk": 7,
+      "dl": 8,
+      "dm": 5
+     },
+     0
+    ],
+    [
+     {
+      "dj": 11,
+      "dk": 3,
+      "dl": 1,
+      "dm": 8
+     },
+     8
+    ],
+    [
+     {
+      "dj": 17,
+      "dk": 6,
+      "dl": 6,
+      "dm": 6
+     },
+     13
+    ]
+   ],
+   "task_id": "t-21",
+   "tier": "hard",
+   "tree": [
+    "mod",
+    [
+     "mul",
+     [
+      "var",
+      "dl"
+     ],
+     [
+      "var",
+      "dm"
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "dj"
+     ],
+     [
+      "var",
+      "dk"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "glacier",
+   "family": "dx_ctl_one_step2",
+   "formula": "control: dj + dk dl - dl",
+   "inputs": [
+    "dj",
+    "dk",
+    "dl"
+   ],
+   "kind": "discrim",
+   "rows": [
+    [
+     {
+      "dj": 24,
+      "dk": 7,
+      "dl": 3
+     },
+     42
+    ],
+    [
+     {
+      "dj": 21,
+      "dk": 2,
+      "dl": 12
+     },
+     33
+    ],
+    [
+     {
+      "dj": 14,
+      "dk": 3,
+      "dl": 3
+     },
+     20
+    ],
+    [
+     {
+      "dj": 30,
+      "dk": 10,
+      "dl": 8
+     },
+     102
+    ],
+    [
+     {
+      "dj": 3,
+      "dk": 8,
+      "dl": 10
+     },
+     73
+    ],
+    [
+     {
+      "dj": 5,
+      "dk": 6,
+      "dl": 2
+     },
+     15
+    ],
+    [
+     {
+      "dj": 10,
+      "dk": 7,
+      "dl": 8
+     },
+     58
+    ],
+    [
+     {
+      "dj": 24,
+      "dk": 9,
+      "dl": 2
+     },
+     40
+    ],
+    [
+     {
+      "dj": 18,
+      "dk": 1,
+      "dl": 6
+     },
+     18
+    ],
+    [
+     {
+      "dj": 24,
+      "dk": 12,
+      "dl": 2
+     },
+     46
+    ],
+    [
+     {
+      "dj": 29,
+      "dk": 2,
+      "dl": 5
+     },
+     34
+    ]
+   ],
+   "task_id": "t-23",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "add",
+     [
+      "var",
+      "dj"
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "dk"
+      ],
+      [
+       "var",
+       "dl"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "dl"
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "int",
+ "schema": "nomad.discrim-suite.v1",
+ "seed": 20270419,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 2,
+  "families": 24,
+  "hard": 22,
+  "lookup_dropped": []
+ },
+ "trained_on_by_any_arm": false
+}

@@ -47,6 +47,7 @@ JUDGES = {
     "ceil": ["scripts/ceil_judge.py"],                 # CEIL sealed suite (CEIL; not re-run by CEIL itself)
     "merge": ["scripts/merge_judge.py"],               # MERGE sealed suite (MERGE; not re-run by MERGE itself)
     "let2": ["scripts/let2_judge.py"],                 # LET2 sealed suite (LET2; not re-run by LET2 itself)
+    "discrim": ["scripts/discrim_judge.py"],           # DISCRIM sealed suite (DISCRIM; not re-run by DISCRIM itself)
 }
 
 
