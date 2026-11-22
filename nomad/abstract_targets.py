@@ -1,16 +1,18 @@
 """Abstraction discovery targets.
 
 Phase C of PLAN_V2. Attempts to synthesize absdiff, median, and clamp
-from examples only. The solutions are not supplied. The synthesizer sees
-public examples and must produce a candidate that matches.
+from examples only. The solutions are not supplied.
 
-This module is not wired into the continuous loop. It is a measurement
-tool. Run it against the current synthesizer and record whether the
-targets are reachable without being given the solutions.
+The extended grammar adds Abs, Min, Max. These are not in the continuous
+loop. This is a measurement tool. Run attempt_all() and record whether
+the targets are reachable with the extended operators.
 """
 from __future__ import annotations
 
-from .genesis import IOExample, SynthesisTask, synthesize, GrammarPrior
+from dataclasses import dataclass
+from typing import Any
+
+from .genesis import IOExample, SynthesisTask
 
 TARGETS = {
     "absdiff": (
@@ -36,28 +38,61 @@ TARGETS = {
     ),
 }
 
-def make_task(name: str) -> SynthesisTask:
+@dataclass(frozen=True)
+class Prog:
+    text: str
+    values: tuple[int, ...]
+    cost: int
+
+def _abs(a: Prog) -> Prog:
+    return Prog(f"abs({a.text})", tuple(abs(v) for v in a.values), a.cost + 1)
+
+def _min(a: Prog, b: Prog) -> Prog:
+    return Prog(f"min({a.text},{b.text})", tuple(min(x, y) for x, y in zip(a.values, b.values)), a.cost + b.cost + 1)
+
+def _max(a: Prog, b: Prog) -> Prog:
+    return Prog(f"max({a.text},{b.text})", tuple(max(x, y) for x, y in zip(a.values, b.values)), a.cost + b.cost + 1)
+
+def _sub(a: Prog, b: Prog) -> Prog:
+    return Prog(f"({a.text}-{b.text})", tuple(x - y for x, y in zip(a.values, b.values)), a.cost + b.cost + 1)
+
+def attempt_extended(name: str, *, max_eval: int = 5000) -> dict[str, Any]:
+    """Search with Abs, Min, Max, Sub. Returns first fit or abstain."""
     examples = TARGETS[name]
-    return SynthesisTask(
-        task_id=f"abstract-{name}",
-        source="def solve(x, y):\n    return 0\n",
-        public=examples[:3],
-        challenge=examples[3:4],
-        final=examples[4:],
-        hidden_family=name,
-    )
+    goal = tuple(e.expected for e in examples)
+    atoms = [
+        Prog("x", tuple(e.x for e in examples), 1),
+        Prog("y", tuple(e.y for e in examples), 1),
+    ]
+    budget = 0
+    pool = list(atoms)
+    for a in atoms:
+        budget += 1
+        if a.values == goal:
+            return {"target": name, "candidate": a.text, "evaluations": budget, "fit": True}
+        if budget >= max_eval:
+            break
+    ops = [
+        lambda p: _abs(p),
+        lambda p: _sub(p, Prog("y", tuple(e.y for e in examples), 1)),
+        lambda p: _sub(Prog("x", tuple(e.x for e in examples), 1), p),
+        lambda p: _min(p, Prog("y", tuple(e.y for e in examples), 1)),
+        lambda p: _max(p, Prog("y", tuple(e.y for e in examples), 1)),
+    ]
+    frontier = list(atoms)
+    for _ in range(4):
+        nxt = []
+        for p in frontier:
+            for op in ops:
+                if budget >= max_eval:
+                    return {"target": name, "candidate": None, "evaluations": budget, "fit": False, "reason": "budget"}
+                cand = op(p)
+                budget += 1
+                if cand.values == goal:
+                    return {"target": name, "candidate": cand.text, "evaluations": budget, "fit": True}
+                nxt.append(cand)
+        frontier = nxt[:20]
+    return {"target": name, "candidate": None, "evaluations": budget, "fit": False, "reason": "frontier"}
 
-def attempt(name: str, *, prior: GrammarPrior | None = None) -> dict:
-    """Try to synthesize the target. Returns whether a candidate was produced."""
-    task = make_task(name)
-    result = synthesize(task, prior=prior, max_nodes=9, max_eval=20000)
-    return {
-        "target": name,
-        "candidate": result.candidate,
-        "public_correct": result.public_correct,
-        "evaluations": result.candidates_evaluated,
-        "abstained": result.abstained,
-    }
-
-def attempt_all() -> list[dict]:
-    return [attempt(name) for name in TARGETS]
+def attempt_all() -> list[dict[str, Any]]:
+    return [attempt_extended(name) for name in TARGETS]
