@@ -8,19 +8,12 @@ never counted as learning, and never updates the field.
 Acting domain is the proposer's domain. Orbit is logged but cannot
 redirect the cycle to a different domain.
 
-Actor/learner split (ideas credited to NVIDIA Molt, see
-docs/MOLT_EXTRACTION.md): awake is an actor. It reads the field version,
-attempts, and enqueues a versioned packet. A treatment packet carries the
-WITNESS receipt only after a supported receipt and a passing final split.
-Sleep is the single learner: it re-verifies each receipt, rejects stale
-packets, and only then calls GrammarPrior.add_witnessed, which is what
-moves synthesis order. Control never enqueues and never writes packets,
-prior, or fitness. NOMAD_LEARNER=inline consolidates right after each
-treatment awake (the old synchronous behaviour, same code path).
+Version space: when orbit returns domain packets with conflicting operators,
+the outcome records an abstain. Certification still requires WITNESS and final.
 
-Sleep: consolidate the queue, prune stale unpaired scoreboard rows,
-evaluate CA rules, propose a rewrite (no commit).
-No transformers. Search and memory do not certify.
+Actor/learner split: awake is an actor. It reads the field version,
+attempts, and enqueues a versioned packet. Sleep is the single learner.
+Control never enqueues and never writes packets, prior, or fitness.
 """
 from __future__ import annotations
 
@@ -58,6 +51,7 @@ from .consolidate import consolidate
 from .advantage import twin_summary
 from .scoreboard import prune_pending, recent as board_recent
 from .paths import data_root
+from .versionspace import decide as version_decide
 
 BITS = 4096
 
@@ -125,8 +119,6 @@ def _splits_for_bias(bias: dict[str, Any]) -> dict[str, Any]:
         if path.exists():
             loaded = load_examples(path)
             if loaded:
-                # External files currently provide public rows only.
-                # Challenge and final stay the domain withheld splits.
                 splits = dict(splits)
                 splits["public"] = loaded
                 splits["source"] = "external"
@@ -134,7 +126,6 @@ def _splits_for_bias(bias: dict[str, Any]) -> dict[str, Any]:
         splits = dict(splits)
         splits["source"] = "domain"
         return splits
-    # Non-domain fallback: addition, still with withheld splits.
     splits = dict(splits_for("meta"))
     splits["source"] = "default"
     return splits
@@ -153,12 +144,7 @@ def awake(
     proposal: dict[str, Any] | None = None,
     pair_id: str | None = None,
 ) -> dict[str, Any]:
-    """One awake cycle on a single arm.
-
-    Control uses a cold prior and never writes the field. Treatment uses
-    the saved field prior and may update it only after WITNESS + final.
-    When the proposer names a domain, that domain is the acting domain.
-    """
+    """One awake cycle on a single arm."""
     _ensure()
     snap = telemetry()
     if proposal is None:
@@ -167,6 +153,7 @@ def awake(
     domain = _acting_domain(proposal)
     query_bits = _hash_bits(task_text)
     context = orbit(query_bits)
+    vs = version_decide(context)
     if domain:
         bias = _bias_for_domain(domain)
     else:
@@ -187,12 +174,6 @@ def awake(
         final=tuple(splits["final"]),
         hidden_family=domain or "default",
     )
-    context_sig = 0
-    # Order is read from the prior *before* this cycle's witness update.
-    # For treatment this is the field; for control it is always default.
-    # Signature is computed inside evaluate_task/synthesize.
-    # Treatment reads the field through the acting domain's own evidence
-    # (balance): an untrained domain keeps the cold order.
     family = domain if arm == "treatment" else None
     evaluated, receipt = evaluate_task(task, prior=prior, family=family)
     context_sig = evaluated.learned_context
@@ -207,6 +188,7 @@ def awake(
         "proposal": proposal,
         "acting_domain": domain,
         "context": context,
+        "version_space": vs,
         "bias": bias,
         "tool": tool,
         "example_source": splits.get("source"),
@@ -220,7 +202,7 @@ def awake(
         "final_correct": evaluated.final_correct,
         "certified": certified,
         "evaluations": evaluated.candidate_evaluations,
-        "abstained": evaluated.abstained,
+        "abstained": evaluated.abstained or vs.get("abstain"),
         "telemetry": snap,
         "ts": _now(),
     }
@@ -236,9 +218,9 @@ def awake(
         edit=f"packet:{task_text}",
         predicted=predicted,
         measured=measured,
-        context={"task": task_text, "arm": arm, "bias": bias, "tool": tool, "certified": certified},
+        context={"task": task_text, "arm": arm, "bias": bias, "tool": tool, "certified": certified, "version_space": vs},
     )
-    if arm == "treatment":
+    if arm == "treatment" and not vs.get("abstain"):
         update_fitness(bool(decision.get("pass")))
         if decision.get("pass") and receipt is not None and should_reinforce(predicted):
             packet = field_queue.make_packet(
@@ -319,17 +301,12 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
         from .dreamlog import safe_publish
         safe_publish(source="sleep")
     except Exception:
-        pass  # the body must not die on a journal failure
+        pass
     return row
 
 
 def pair(task_text: str = "cycle") -> dict[str, Any]:
-    """Run control then treatment on one proposed task and record the twin delta.
-
-    Control is evaluated first so treatment field updates cannot leak into it.
-    A held-out live comparison is written afterward and never trains on the
-    held-out family.
-    """
+    """Run control then treatment on one proposed task and record the twin delta."""
     proposal = propose(task_text)
     pair_id = hashlib.sha256(f"{_now()}:{proposal.get('task')}:{os.urandom(8).hex()}".encode()).hexdigest()[:12]
     control = awake(task_text, arm="control", proposal=proposal, pair_id=pair_id)
