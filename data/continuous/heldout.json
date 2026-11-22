@@ -21,22 +21,22 @@
     "context": 1216
   },
   "field": {
-    "candidate": null,
-    "public_correct": false,
-    "witness_supported": false,
-    "final_correct": false,
-    "certified": false,
-    "evaluations": 2000,
-    "abstained": "frontier_or_candidate_budget",
+    "candidate": "((x*x)*(y*y))",
+    "public_correct": true,
+    "witness_supported": true,
+    "final_correct": true,
+    "certified": true,
+    "evaluations": 999,
+    "abstained": null,
     "order": [
-      "Add",
       "Mult",
+      "Add",
       "Sub"
     ],
-    "witnessed": 5185,
+    "witnessed": 5194,
     "context": 1216
   },
-  "advantage": false,
-  "advantage_kind": "none",
+  "advantage": true,
+  "advantage_kind": "certified_correctness",
   "note": "Advantage is a matched-budget result on this frozen family only. It is not unrestricted coding and not a general learning claim."
 }
