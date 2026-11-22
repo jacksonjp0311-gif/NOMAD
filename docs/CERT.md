@@ -30,3 +30,8 @@ zero losses; controls (shuffled, rewired) must not match on; LOFO 5,883 worst 1.
 No sealed verdict. Dev says the property language is too weak. Next session should either add a richer
 label-free property family (e.g., symmetry/permutation relations mined as output-equality classes across
 evidence rows, piecewise-linear regularity of one-input sweeps) and test on dev first, or retire CERT.
+
+## Known weakness found at the end
+Evidence whose inputs all share a residue (e.g., all multiples of 3) makes the `mod` property veto the
+*true* function on generated inputs off that residue class (false veto on `x -> x + 1`). `mod` must only be
+adopted when it is explained by the output structure, not by an input-residue coincidence. Fix before any seal.

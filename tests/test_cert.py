@@ -16,7 +16,7 @@ class CertTests(unittest.TestCase):
 
     def test_bound_veto(self):
         inputs = (("x", "int"),)
-        ev = [({"x": 3 * i}, 3 * i + 1) for i in range(1, 12)]
+        ev = [({"x": 3 * i + i % 3}, 3 * i + i % 3 + 1) for i in range(1, 12)]
         self.assertEqual(cert.check(["add", ["var", "x"], ["const", 1]], inputs, ev)["verdict"] != "veto", True)
         self.assertEqual(cert.check(["mul", ["var", "x"], ["const", 5]], inputs, ev)["verdict"], "veto")
 
