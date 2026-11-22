@@ -5,7 +5,7 @@ CLAUSE (docs/CLAUSE.md, fe71ce6) certified 11 / 16 of its sealed suite against 2
 evaluation increases on COMBINE and ROLES, because a CLAUSE miss spent up to 512 evaluations *before* the
 normal search ran. Its misses also showed that "the average of the three ..." stories give their numbers
 in the NEXT clause, while CLAUSE only bound backward. CLAUSE2 fixes both. Everything is behind
-**`NOMAD_CLAUSE2`, default OFF**. No neural nets, no embeddings, no language model: MEANING's counts and
+**`NOMAD_CLAUSE2`, default ON since the sealed PASS (01aa803); off switch `NOMAD_CLAUSE2=off`**. No neural nets, no embeddings, no language model: MEANING's counts and
 search, WITNESS-gated, deterministic.
 
 ## What is built

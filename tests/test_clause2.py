@@ -49,11 +49,11 @@ def _rank_miss_entry():
 
 
 class Clause2Tests(unittest.TestCase):
-    def test_default_off(self):
+    def test_default_on(self):
         os.environ.pop("NOMAD_CLAUSE2", None)
-        self.assertFalse(Q.enabled())
-        with _Env(NOMAD_CLAUSE2="on"):
-            self.assertTrue(Q.enabled())
+        self.assertTrue(Q.enabled())
+        with _Env(NOMAD_CLAUSE2="off"):
+            self.assertFalse(Q.enabled())
 
     def test_forward_pool_borrows_from_the_next_clause_first(self):
         items = [{"inputs": ["p", "q"]}, {"inputs": []}, {"inputs": ["r", "s", "t"]}]

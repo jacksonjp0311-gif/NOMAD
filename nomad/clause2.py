@@ -70,7 +70,7 @@ LAST = None            # the most recent task's ledger (judges report its credit
 
 
 def enabled() -> bool:
-    return os.environ.get("NOMAD_CLAUSE2", "off").strip().lower() in ("on", "1", "true", "yes")
+    return os.environ.get("NOMAD_CLAUSE2", "on").strip().lower() not in ("off", "0", "false", "no")   # default ON since the sealed PASS
 
 
 def control() -> str:
