@@ -55,6 +55,9 @@ inputs) as arguments and has no access to the task object's final split. `discri
 `certify` (which computes `final_ok`). The distinguishing inputs carry **no expected outputs**: they are
 only used to compare candidates with each other. `tests/test_discrim.py` checks that a task whose final
 rows are poisoned gives an identical evidence set, identical distinguishing rows and an identical decision.
+Since INTEGRITY defect 3 (6e9f733, landed concurrently, rebased under this work) search itself receives a
+task view with `final=()`, so the guard could not read the final rows even by mistake; results with and
+without that view are the same for this guard (it never read them).
 
 ### Controls (judge-only)
 
