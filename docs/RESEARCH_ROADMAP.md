@@ -45,3 +45,11 @@ The target is not a claim of unrestricted intelligence. It is a reproducible dem
 ### GENESIS checkpoint (v0.10, 2026-11-13)
 
 Typed expression synthesis beyond v0.9's fixed one-edit vocabulary passed a frozen synthetic benchmark. The contextual Bitwork failure-state learner improves candidate search order while WITNESS owns held-back acceptance. The next frontier is generated multi-file software transformations, independently authored tasks, and end-to-end cost accounting, **not** broader intelligence claims.
+
+## GENERATION-FIRST (proposed, 2026-11-22)
+
+Draft candidate programs from the problem statement alone, before touching memory. Score the drafts against the examples, and fall back to recall only if nothing fits. Generation leads; retrieval becomes the backup.
+
+Why: retrieval has a ceiling, because it cannot cross into unmapped territory. On NOVEL, every win went through PORT, the score plateaued at 8-10 as experience grew, and shuffled memory tracked real memory. NOMAD has to propose, not just recall.
+
+Gate: switch default OFF; a fresh sealed suite of unseen domains with an unused seed; on/off, cold, empty, and real-vs-shuffled memory arms; zero per-task losses, so a generation stage that misses must not tax recall; LOFO unchanged. Drafts are trusted only under a judge that brings new evidence, not the same rows checked twice.
