@@ -1,0 +1,2825 @@
+{
+ "blocks": [
+  {
+   "block_id": "L78674ed3",
+   "certified_in": [
+    "w-ysq"
+   ],
+   "rendered": "mul(y, y)",
+   "signature": [
+    [
+     "x",
+     "int"
+    ],
+    [
+     "y",
+     "int"
+    ]
+   ],
+   "tree": [
+    "mul",
+    [
+     "var",
+     "y"
+    ],
+    [
+     "var",
+     "y"
+    ]
+   ],
+   "tree_sha256": "38c83dccb9474914589294137aed5283870393402bb187e82d3254ac6449ead7",
+   "uses": 1.5812
+  },
+  {
+   "block_id": "L915ba1af",
+   "certified_in": [
+    "w-second"
+   ],
+   "rendered": "tail(sort(xs))",
+   "signature": [
+    [
+     "xs",
+     "list"
+    ]
+   ],
+   "tree": [
+    "tail",
+    [
+     "sort",
+     [
+      "var",
+      "xs"
+     ]
+    ]
+   ],
+   "tree_sha256": "a47c202ae79fb40749db9ed656d9912cb6819ff6790e6cbad909a647703d9df9",
+   "uses": 1.5338
+  },
+  {
+   "block_id": "Lda56c88a",
+   "certified_in": [
+    "w-echo",
+    "w-len2"
+   ],
+   "rendered": "concat(s, s)",
+   "signature": [
+    [
+     "s",
+     "str"
+    ]
+   ],
+   "tree": [
+    "concat",
+    [
+     "var",
+     "s"
+    ],
+    [
+     "var",
+     "s"
+    ]
+   ],
+   "tree_sha256": "56030449b1887958364397ace9ab393d7dbfddc7b48557a1ff02062bbc679144",
+   "uses": 2.6738
+  },
+  {
+   "block_id": "Le41f5b00",
+   "certified_in": [
+    "w-relu",
+    "w-pick"
+   ],
+   "rendered": "sub(x, y)",
+   "signature": [
+    [
+     "x",
+     "int"
+    ],
+    [
+     "y",
+     "int"
+    ]
+   ],
+   "tree": [
+    "sub",
+    [
+     "var",
+     "x"
+    ],
+    [
+     "var",
+     "y"
+    ]
+   ],
+   "tree_sha256": "1ef9aa7d777db2360b92d31c7eeedbfeea87b86cbbe3f616c40a1451dc742f52",
+   "uses": 2.9821
+  },
+  {
+   "block_id": "Lfd47622b",
+   "certified_in": [
+    "w-sqp"
+   ],
+   "rendered": "mul(x, x)",
+   "signature": [
+    [
+     "x",
+     "int"
+    ],
+    [
+     "y",
+     "int"
+    ]
+   ],
+   "tree": [
+    "mul",
+    [
+     "var",
+     "x"
+    ],
+    [
+     "var",
+     "x"
+    ]
+   ],
+   "tree_sha256": "8f2e0e2ed308f492019fab9ffe14f676f17b4c65fbc98777c1834d7d53f125c7",
+   "uses": 1.5721
+  }
+ ],
+ "boundaries": "Tiny typed programs (<= 7 nodes). Certified on frozen rows only; not general coding.",
+ "evidence": [
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 117
+   },
+   "domain": "mathematics",
+   "final_correct": true,
+   "program": [
+    "max",
+    [
+     "var",
+     "x"
+    ],
+    [
+     "var",
+     "y"
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "958826a8e924528e5845886de083b54fc4edae6ae8f6e077f4be6ac6ce1a98cb",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 9.746794344808963,
+    "claim_kind": "matches_target",
+    "effect_digest": "b07f69a32fd197e38412ab9d4a959e1d9ab07cc0c58c67444f752bc106e28058",
+    "public_evidence_digest": "b5ec31fcd856bc038b4fa55b7c6b21e069a924127483f282e2db20f8bc24a732",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 7.362064927722384,
+    "receipt_hash": "db158bc3cfb422121a162081385e7c7faf64eb97de5302d92be6ceb74c604694",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-max",
+    "tolerance": 1e-09,
+    "transmission_id": "6d66ab5a3bac99398ad256bd6b1c1a28927268140395d0587c1f4e82d93e4e28",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "max(x, y)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "selection",
+    "schema": "nomad.sense.v1",
+    "sense_id": "de9d35316bc41cd9",
+    "shape": "bounded",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "x": 11,
+       "y": 6
+      },
+      11
+     ],
+     [
+      {
+       "x": 3,
+       "y": 10
+      },
+      10
+     ],
+     [
+      {
+       "x": 8,
+       "y": 8
+      },
+      8
+     ]
+    ],
+    "family": "max_pair",
+    "final": [
+     [
+      {
+       "x": 13,
+       "y": 4
+      },
+      13
+     ],
+     [
+      {
+       "x": 5,
+       "y": 12
+      },
+      12
+     ],
+     [
+      {
+       "x": 6,
+       "y": 1
+      },
+      6
+     ]
+    ],
+    "inputs": [
+     [
+      "x",
+      "int"
+     ],
+     [
+      "y",
+      "int"
+     ]
+    ],
+    "level": 1,
+    "opset": "int",
+    "out": "int",
+    "public": [
+     [
+      {
+       "x": 2,
+       "y": 5
+      },
+      5
+     ],
+     [
+      {
+       "x": 7,
+       "y": 3
+      },
+      7
+     ],
+     [
+      {
+       "x": 4,
+       "y": 4
+      },
+      4
+     ],
+     [
+      {
+       "x": 9,
+       "y": 2
+      },
+      9
+     ],
+     [
+      {
+       "x": 10,
+       "y": 1
+      },
+      10
+     ]
+    ],
+    "task_id": "w-max"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 7,
+    "library_used": []
+   }
+  },
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 102
+   },
+   "domain": "mathematics",
+   "final_correct": true,
+   "program": [
+    "min",
+    [
+     "var",
+     "x"
+    ],
+    [
+     "var",
+     "y"
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "58d14cc68b90f49b024db236ff8c64bd280a72cf9c77f2dca1d8d761f40b81d4",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 6.027713773341708,
+    "claim_kind": "matches_target",
+    "effect_digest": "c9871e9d05c9e453c165a011a6b8a9ed8614d86c95478fd3b10da08fe84a5990",
+    "public_evidence_digest": "251f6d91e99d05311687dee7c2c02e84c07d5ff830014d2008e2642833d74177",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 2.6076809620810595,
+    "receipt_hash": "2d3a71ee4dde5771944eaead1ca49587eabf94c5b88cb64f19166aca8ae29fce",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-min",
+    "tolerance": 1e-09,
+    "transmission_id": "36395ad5616542afcad272b48e6ebe45930f8c585d17ccb42a185195a76ebb19",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "min(x, y)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "selection",
+    "schema": "nomad.sense.v1",
+    "sense_id": "ba3a29ed69e8bd8b",
+    "shape": "bounded",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "x": 11,
+       "y": 6
+      },
+      6
+     ],
+     [
+      {
+       "x": 3,
+       "y": 10
+      },
+      3
+     ],
+     [
+      {
+       "x": 8,
+       "y": 8
+      },
+      8
+     ]
+    ],
+    "family": "min_pair",
+    "final": [
+     [
+      {
+       "x": 13,
+       "y": 4
+      },
+      4
+     ],
+     [
+      {
+       "x": 5,
+       "y": 12
+      },
+      5
+     ],
+     [
+      {
+       "x": 6,
+       "y": 1
+      },
+      1
+     ]
+    ],
+    "inputs": [
+     [
+      "x",
+      "int"
+     ],
+     [
+      "y",
+      "int"
+     ]
+    ],
+    "level": 1,
+    "opset": "int",
+    "out": "int",
+    "public": [
+     [
+      {
+       "x": 2,
+       "y": 5
+      },
+      2
+     ],
+     [
+      {
+       "x": 7,
+       "y": 3
+      },
+      3
+     ],
+     [
+      {
+       "x": 4,
+       "y": 4
+      },
+      4
+     ],
+     [
+      {
+       "x": 9,
+       "y": 2
+      },
+      2
+     ],
+     [
+      {
+       "x": 10,
+       "y": 1
+      },
+      1
+     ]
+    ],
+    "task_id": "w-min"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 7,
+    "library_used": []
+   }
+  },
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 77
+   },
+   "domain": "mathematics",
+   "final_correct": true,
+   "program": [
+    "mod",
+    [
+     "var",
+     "x"
+    ],
+    [
+     "var",
+     "y"
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "a7c055352d34b41c534f288b988a5833fc5a3901ef8b08605f8d2625b5a9f888",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 3.366501646120693,
+    "claim_kind": "matches_target",
+    "effect_digest": "317e5d611aae5c5c4796dc7d48c464d2e20dce6ec7bd0dc7573690ee6bfb0db1",
+    "public_evidence_digest": "25e7169cbddd81ab6de2815a4be41f3bfb7b11bf3cc41f681c7f47cf3561cb5f",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 1.0954451150103321,
+    "receipt_hash": "4b67e15de1f1d95dfa8c025cffa45e2a34e69051bf2d4a90fd27fc4431a05fc9",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-mod",
+    "tolerance": 1e-09,
+    "transmission_id": "94106eb4f811553625eec01073bb2b779695a850da05705efebb2f31ccb1e758",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "mod(x, y)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "quotient",
+    "schema": "nomad.sense.v1",
+    "sense_id": "49248cc14768f182",
+    "shape": "bounded",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "x": 11,
+       "y": 6
+      },
+      5
+     ],
+     [
+      {
+       "x": 3,
+       "y": 10
+      },
+      3
+     ],
+     [
+      {
+       "x": 8,
+       "y": 8
+      },
+      0
+     ]
+    ],
+    "family": "mod_pair",
+    "final": [
+     [
+      {
+       "x": 13,
+       "y": 4
+      },
+      1
+     ],
+     [
+      {
+       "x": 5,
+       "y": 12
+      },
+      5
+     ],
+     [
+      {
+       "x": 6,
+       "y": 1
+      },
+      0
+     ]
+    ],
+    "inputs": [
+     [
+      "x",
+      "int"
+     ],
+     [
+      "y",
+      "int"
+     ]
+    ],
+    "level": 1,
+    "opset": "int",
+    "out": "int",
+    "public": [
+     [
+      {
+       "x": 2,
+       "y": 5
+      },
+      2
+     ],
+     [
+      {
+       "x": 7,
+       "y": 3
+      },
+      1
+     ],
+     [
+      {
+       "x": 4,
+       "y": 4
+      },
+      0
+     ],
+     [
+      {
+       "x": 9,
+       "y": 2
+      },
+      1
+     ],
+     [
+      {
+       "x": 10,
+       "y": 1
+      },
+      0
+     ]
+    ],
+    "task_id": "w-mod"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 7,
+    "library_used": []
+   }
+  },
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 57
+   },
+   "domain": "mathematics",
+   "final_correct": true,
+   "program": [
+    "div",
+    [
+     "var",
+     "x"
+    ],
+    [
+     "var",
+     "y"
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "bcc7844e7bf86e1c411d99b324182e61a05af44f36c4b5e57969d5a80f12bdb6",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 0.816496580927726,
+    "claim_kind": "matches_target",
+    "effect_digest": "a495ec0bbb1a8ffe6a274bec9b0a88776393fc88af29aa7562844f9b9a46534c",
+    "public_evidence_digest": "bba3f65b7e5bf8d92a00b531d3fc5a434455e30542ed520c287bf4ab21d7430b",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 4.919349550499537,
+    "receipt_hash": "2fb9dbd10e030350db7dd394b23de0d535bf499e8f3b9556b9924be0582427f0",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-div",
+    "tolerance": 1e-09,
+    "transmission_id": "e8bedc78f2924ccdd497ac56312597d6b94ba488a01db019dab747fe6509cdd7",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "div(x, y)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "quotient",
+    "schema": "nomad.sense.v1",
+    "sense_id": "0e1b5fe48ffc2f2e",
+    "shape": "bounded",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "x": 11,
+       "y": 6
+      },
+      1
+     ],
+     [
+      {
+       "x": 3,
+       "y": 10
+      },
+      0
+     ],
+     [
+      {
+       "x": 8,
+       "y": 8
+      },
+      1
+     ]
+    ],
+    "family": "div_pair",
+    "final": [
+     [
+      {
+       "x": 13,
+       "y": 4
+      },
+      3
+     ],
+     [
+      {
+       "x": 5,
+       "y": 12
+      },
+      0
+     ],
+     [
+      {
+       "x": 6,
+       "y": 1
+      },
+      6
+     ]
+    ],
+    "inputs": [
+     [
+      "x",
+      "int"
+     ],
+     [
+      "y",
+      "int"
+     ]
+    ],
+    "level": 1,
+    "opset": "int",
+    "out": "int",
+    "public": [
+     [
+      {
+       "x": 2,
+       "y": 5
+      },
+      0
+     ],
+     [
+      {
+       "x": 7,
+       "y": 3
+      },
+      2
+     ],
+     [
+      {
+       "x": 4,
+       "y": 4
+      },
+      1
+     ],
+     [
+      {
+       "x": 9,
+       "y": 2
+      },
+      4
+     ],
+     [
+      {
+       "x": 10,
+       "y": 1
+      },
+      10
+     ]
+    ],
+    "task_id": "w-div"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 7,
+    "library_used": []
+   }
+  },
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 520
+   },
+   "domain": "mathematics",
+   "final_correct": true,
+   "program": [
+    "max",
+    [
+     "sub",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    [
+     "const",
+     0
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "e0e7e70a5b32694b0bccc981b754ec32b3c7f2e7d9736445643322b63b0c8d42",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 2.886751345948129,
+    "claim_kind": "matches_target",
+    "effect_digest": "7f954d476fc682440078cdbd5c5d310d6d3f889a8627319abc419b9c03a33b28",
+    "public_evidence_digest": "d8dc752215d948c6d1ca10a131ff5a110a0e25d2cd004928af39dc80524bc97f",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 5.403702434442518,
+    "receipt_hash": "920246b1258f1b4673c653063e360dcb485084d94d3ceb2c7b5085cf1c6411d2",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-relu",
+    "tolerance": 1e-09,
+    "transmission_id": "58917399879bc8fa87cb8b708d7996672f444a8dc31934eab4c6c3c8cd37da4a",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "max(sub(x, y), 0)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "piecewise",
+    "schema": "nomad.sense.v1",
+    "sense_id": "7719317e820072e3",
+    "shape": "bounded",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "x": 11,
+       "y": 6
+      },
+      5
+     ],
+     [
+      {
+       "x": 3,
+       "y": 10
+      },
+      0
+     ],
+     [
+      {
+       "x": 8,
+       "y": 8
+      },
+      0
+     ]
+    ],
+    "family": "relu_diff",
+    "final": [
+     [
+      {
+       "x": 13,
+       "y": 4
+      },
+      9
+     ],
+     [
+      {
+       "x": 5,
+       "y": 12
+      },
+      0
+     ],
+     [
+      {
+       "x": 6,
+       "y": 1
+      },
+      5
+     ]
+    ],
+    "inputs": [
+     [
+      "x",
+      "int"
+     ],
+     [
+      "y",
+      "int"
+     ]
+    ],
+    "level": 2,
+    "opset": "int",
+    "out": "int",
+    "public": [
+     [
+      {
+       "x": 2,
+       "y": 5
+      },
+      0
+     ],
+     [
+      {
+       "x": 7,
+       "y": 3
+      },
+      4
+     ],
+     [
+      {
+       "x": 4,
+       "y": 4
+      },
+      0
+     ],
+     [
+      {
+       "x": 9,
+       "y": 2
+      },
+      7
+     ],
+     [
+      {
+       "x": 10,
+       "y": 1
+      },
+      9
+     ]
+    ],
+    "task_id": "w-relu"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 100,
+    "library_used": [
+     "Le41f5b00"
+    ]
+   }
+  },
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 3283
+   },
+   "domain": "mathematics",
+   "final_correct": true,
+   "program": [
+    "ite",
+    [
+     "sub",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    [
+     "var",
+     "x"
+    ],
+    [
+     "const",
+     0
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "7df95741183d46d22221f17f562b77dee87f3d2e036244ff255091c8bf50e555",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 6.3508529610858835,
+    "claim_kind": "matches_target",
+    "effect_digest": "1f5c6ccc43409c1be1d0378f9efab4ba3df8ab00f0d9e549549af90c47e935d5",
+    "public_evidence_digest": "3341971de6a3e4c2f789b7cc6913970ac9ac1dd3a443dcff73e276fe53d7c215",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 6.782329983125268,
+    "receipt_hash": "da2178ea4f7d4c69bdae2afdc4ae295db997f630c8941d61d9989a699a7cc678",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-pick",
+    "tolerance": 1e-09,
+    "transmission_id": "8ad59a03a3f2f5b121d3872192e5565d250130b5fcbda703b7ae820bc417c0ba",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "ite(sub(x, y), x, 0)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "piecewise",
+    "schema": "nomad.sense.v1",
+    "sense_id": "bf94526f68af7243",
+    "shape": "bounded",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "x": 11,
+       "y": 6
+      },
+      11
+     ],
+     [
+      {
+       "x": 3,
+       "y": 10
+      },
+      0
+     ],
+     [
+      {
+       "x": 8,
+       "y": 8
+      },
+      0
+     ]
+    ],
+    "family": "pick_gt",
+    "final": [
+     [
+      {
+       "x": 13,
+       "y": 4
+      },
+      13
+     ],
+     [
+      {
+       "x": 5,
+       "y": 12
+      },
+      0
+     ],
+     [
+      {
+       "x": 6,
+       "y": 1
+      },
+      6
+     ]
+    ],
+    "inputs": [
+     [
+      "x",
+      "int"
+     ],
+     [
+      "y",
+      "int"
+     ]
+    ],
+    "level": 2,
+    "opset": "int",
+    "out": "int",
+    "public": [
+     [
+      {
+       "x": 2,
+       "y": 5
+      },
+      0
+     ],
+     [
+      {
+       "x": 7,
+       "y": 3
+      },
+      7
+     ],
+     [
+      {
+       "x": 4,
+       "y": 4
+      },
+      0
+     ],
+     [
+      {
+       "x": 9,
+       "y": 2
+      },
+      9
+     ],
+     [
+      {
+       "x": 10,
+       "y": 1
+      },
+      10
+     ]
+    ],
+    "task_id": "w-pick"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 315,
+    "library_used": [
+     "Le41f5b00"
+    ]
+   }
+  },
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 231
+   },
+   "domain": "mathematics",
+   "final_correct": true,
+   "program": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "var",
+      "x"
+     ]
+    ],
+    [
+     "var",
+     "y"
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "4f463e77fc81e116c4cdb70db8319449ee5411c6a016fdeaa450844f0c430846",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 84.99803919307001,
+    "claim_kind": "matches_target",
+    "effect_digest": "64c073ce75ab7711a1a5f4bc7010e7aa508b800fca9f1259b5884591f6f50101",
+    "public_evidence_digest": "3afc432a4d430209103f3f6ad9c658b57079430e15cd0c673865dc7805810a47",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 63.67888189973188,
+    "receipt_hash": "3173698ec2be358be7f6cdcd628cd10a63a3092e9698519b5090072c3a7b51f4",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-sqp",
+    "tolerance": 1e-09,
+    "transmission_id": "a190d20ed9cd7869e9bf6dbafe744ebc91432fa15177276f35f29ebe5f74cc62",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "add(mul(x, x), y)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "polynomial",
+    "schema": "nomad.sense.v1",
+    "sense_id": "b36205d450efb0bd",
+    "shape": "growth",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "x": 11,
+       "y": 6
+      },
+      127
+     ],
+     [
+      {
+       "x": 3,
+       "y": 10
+      },
+      19
+     ],
+     [
+      {
+       "x": 8,
+       "y": 8
+      },
+      72
+     ]
+    ],
+    "family": "square_plus_y",
+    "final": [
+     [
+      {
+       "x": 13,
+       "y": 4
+      },
+      173
+     ],
+     [
+      {
+       "x": 5,
+       "y": 12
+      },
+      37
+     ],
+     [
+      {
+       "x": 6,
+       "y": 1
+      },
+      37
+     ]
+    ],
+    "inputs": [
+     [
+      "x",
+      "int"
+     ],
+     [
+      "y",
+      "int"
+     ]
+    ],
+    "level": 2,
+    "opset": "genesis",
+    "out": "int",
+    "public": [
+     [
+      {
+       "x": 2,
+       "y": 5
+      },
+      9
+     ],
+     [
+      {
+       "x": 7,
+       "y": 3
+      },
+      52
+     ],
+     [
+      {
+       "x": 4,
+       "y": 4
+      },
+      20
+     ],
+     [
+      {
+       "x": 9,
+       "y": 2
+      },
+      83
+     ],
+     [
+      {
+       "x": 10,
+       "y": 1
+      },
+      101
+     ]
+    ],
+    "task_id": "w-sqp"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 44,
+    "library_used": [
+     "Lfd47622b"
+    ]
+   }
+  },
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 634
+   },
+   "domain": "mathematics",
+   "final_correct": true,
+   "program": [
+    "sub",
+    [
+     "mul",
+     [
+      "var",
+      "y"
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    [
+     "var",
+     "x"
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "2bc73186c554703501b0d50976879b318d0f9cd63b3fd4625c6031e5f54c7a3c",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 66.25707509390978,
+    "claim_kind": "matches_target",
+    "effect_digest": "cf71649ec445ba0b5c2270859764b5f144bc0a1281dc22ff1a80df01f683102c",
+    "public_evidence_digest": "31efd591d1799f7890cbfc5a974eaadcca01217e2dd89470e50146c05a6f8161",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 12.513992168768526,
+    "receipt_hash": "42e9ad090f2303eb3877729671f7e2d0fc9f51f9987a1b0d7b22ae39bb63af03",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-ysq",
+    "tolerance": 1e-09,
+    "transmission_id": "66c8ee2645e45d0ba888a2d22bc9b013a0b7fc7562acbad5ba0ec04076e43c52",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "sub(mul(y, y), x)",
+   "sense": {
+    "domain": "mathematics",
+    "kind": "polynomial",
+    "schema": "nomad.sense.v1",
+    "sense_id": "3c23b20920672dd2",
+    "shape": "growth",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "x": 11,
+       "y": 6
+      },
+      25
+     ],
+     [
+      {
+       "x": 3,
+       "y": 10
+      },
+      97
+     ],
+     [
+      {
+       "x": 8,
+       "y": 8
+      },
+      56
+     ]
+    ],
+    "family": "ysquare_minus_x",
+    "final": [
+     [
+      {
+       "x": 13,
+       "y": 4
+      },
+      3
+     ],
+     [
+      {
+       "x": 5,
+       "y": 12
+      },
+      139
+     ],
+     [
+      {
+       "x": 6,
+       "y": 1
+      },
+      -5
+     ]
+    ],
+    "inputs": [
+     [
+      "x",
+      "int"
+     ],
+     [
+      "y",
+      "int"
+     ]
+    ],
+    "level": 2,
+    "opset": "genesis",
+    "out": "int",
+    "public": [
+     [
+      {
+       "x": 2,
+       "y": 5
+      },
+      23
+     ],
+     [
+      {
+       "x": 7,
+       "y": 3
+      },
+      2
+     ],
+     [
+      {
+       "x": 4,
+       "y": 4
+      },
+      12
+     ],
+     [
+      {
+       "x": 9,
+       "y": 2
+      },
+      -5
+     ],
+     [
+      {
+       "x": 10,
+       "y": 1
+      },
+      -9
+     ]
+    ],
+    "task_id": "w-ysq"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 60,
+    "library_used": [
+     "L78674ed3"
+    ]
+   }
+  },
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 14
+   },
+   "domain": "language",
+   "final_correct": true,
+   "program": [
+    "upper",
+    [
+     "srev",
+     [
+      "var",
+      "s"
+     ]
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "560e8e942009882ba1c1e374ec4d73b92a065fa6a2918a1fc305a772d29dd119",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 89840220412588.69,
+    "claim_kind": "matches_target",
+    "effect_digest": "d14f8ca66902f5898e30161bc13f4541afe2b72f344c746815cd6ecd14b23345",
+    "public_evidence_digest": "63ec27709291508385fea12a41f7449f326c37001ff35ef930c4b1de55eebf74",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 84926713282087.53,
+    "receipt_hash": "f7f7bb92495a24462c9b7a77392a79d8aeb3dff18779d5005fb060513da09005",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-shout-rev",
+    "tolerance": 1e-09,
+    "transmission_id": "d5e549b679fc2e74be19b7cc22ce96ce5d14cb7ca93892e4785dc5bc3da8114e",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "upper(srev(s))",
+   "sense": {
+    "domain": "language",
+    "kind": "reorder",
+    "schema": "nomad.sense.v1",
+    "sense_id": "d54a3c7f6ff8b2de",
+    "shape": "n/a",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "s": "river"
+      },
+      "REVIR"
+     ],
+     [
+      {
+       "s": "Grok"
+      },
+      "KORG"
+     ],
+     [
+      {
+       "s": "desert"
+      },
+      "TRESED"
+     ]
+    ],
+    "family": "rev_upper",
+    "final": [
+     [
+      {
+       "s": "camel"
+      },
+      "LEMAC"
+     ],
+     [
+      {
+       "s": "wind"
+      },
+      "DNIW"
+     ],
+     [
+      {
+       "s": "Atlas"
+      },
+      "SALTA"
+     ]
+    ],
+    "inputs": [
+     [
+      "s",
+      "str"
+     ]
+    ],
+    "level": 1,
+    "opset": "str",
+    "out": "str",
+    "public": [
+     [
+      {
+       "s": "abc"
+      },
+      "CBA"
+     ],
+     [
+      {
+       "s": "hello"
+      },
+      "OLLEH"
+     ],
+     [
+      {
+       "s": "Xy"
+      },
+      "YX"
+     ],
+     [
+      {
+       "s": "nomad"
+      },
+      "DAMON"
+     ]
+    ],
+    "task_id": "w-shout-rev"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 13,
+    "library_used": []
+   }
+  },
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 178
+   },
+   "domain": "language",
+   "final_correct": true,
+   "program": [
+    "concat",
+    [
+     "first",
+     [
+      "var",
+      "s"
+     ]
+    ],
+    [
+     "last",
+     [
+      "var",
+      "s"
+     ]
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "b3bf863892443a8801dfa3ba528cfb9e771c37f2f8765f8f8649dde726f39e92",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 79673411372290.81,
+    "claim_kind": "matches_target",
+    "effect_digest": "42d75e6220ceac5f3670a4240efb020fd69c2968a0aba229f3ba36da419aebc7",
+    "public_evidence_digest": "f907d2b9eb72047a8bc65b4a350f6ee8f6915e11a821fc6a9248e07b31da7a07",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 39162625967862.875,
+    "receipt_hash": "7fdb3c1d1198556674334b8035a9e104acc18b356c03d6356dd99903209172ac",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-ends",
+    "tolerance": 1e-09,
+    "transmission_id": "429b8f0897ef978e23645eadfa3077db71ea070eec737d4516e3c2bbeb2a755c",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "concat(first(s), last(s))",
+   "sense": {
+    "domain": "language",
+    "kind": "reorder",
+    "schema": "nomad.sense.v1",
+    "sense_id": "05be5a3ea7a2548a",
+    "shape": "n/a",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "s": "river"
+      },
+      "rr"
+     ],
+     [
+      {
+       "s": "Grok"
+      },
+      "Gk"
+     ],
+     [
+      {
+       "s": "desert"
+      },
+      "dt"
+     ]
+    ],
+    "family": "first_last",
+    "final": [
+     [
+      {
+       "s": "camel"
+      },
+      "cl"
+     ],
+     [
+      {
+       "s": "wind"
+      },
+      "wd"
+     ],
+     [
+      {
+       "s": "Atlas"
+      },
+      "As"
+     ]
+    ],
+    "inputs": [
+     [
+      "s",
+      "str"
+     ]
+    ],
+    "level": 1,
+    "opset": "str",
+    "out": "str",
+    "public": [
+     [
+      {
+       "s": "abc"
+      },
+      "ac"
+     ],
+     [
+      {
+       "s": "hello"
+      },
+      "ho"
+     ],
+     [
+      {
+       "s": "Xy"
+      },
+      "Xy"
+     ],
+     [
+      {
+       "s": "nomad"
+      },
+      "nd"
+     ]
+    ],
+    "task_id": "w-ends"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 121,
+    "library_used": []
+   }
+  },
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 69
+   },
+   "domain": "language",
+   "final_correct": true,
+   "program": [
+    "lower",
+    [
+     "concat",
+     [
+      "var",
+      "s"
+     ],
+     [
+      "var",
+      "s"
+     ]
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "2b8c3fb4253b29b3c4f610ed70e6f0e83a25201378db04202b37d5aa63575265",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 65889058039841.45,
+    "claim_kind": "matches_target",
+    "effect_digest": "280722cfc45af2df2c416912c1aea7de7a6ef06a3ef1a81a950fa9cd6d1cb917",
+    "public_evidence_digest": "44d9a67a0baf2940424d8de4ff33492c90f199977acfea80625494c1735b4e14",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 81635234304409.16,
+    "receipt_hash": "d5dac4887b3df04230df6a6af72e298eda15e499d20e5f7e047d9596d9dd67c3",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-echo",
+    "tolerance": 1e-09,
+    "transmission_id": "b34f8445afb4c3bf4487087c75c50178fa21186e8f2fdff501f50c5477058dd8",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "lower(concat(s, s))",
+   "sense": {
+    "domain": "language",
+    "kind": "text_shaping",
+    "schema": "nomad.sense.v1",
+    "sense_id": "2009f01a457c3433",
+    "shape": "n/a",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "s": "river"
+      },
+      "riverriver"
+     ],
+     [
+      {
+       "s": "Grok"
+      },
+      "grokgrok"
+     ],
+     [
+      {
+       "s": "desert"
+      },
+      "desertdesert"
+     ]
+    ],
+    "family": "double_lower",
+    "final": [
+     [
+      {
+       "s": "camel"
+      },
+      "camelcamel"
+     ],
+     [
+      {
+       "s": "wind"
+      },
+      "windwind"
+     ],
+     [
+      {
+       "s": "Atlas"
+      },
+      "atlasatlas"
+     ]
+    ],
+    "inputs": [
+     [
+      "s",
+      "str"
+     ]
+    ],
+    "level": 2,
+    "opset": "str",
+    "out": "str",
+    "public": [
+     [
+      {
+       "s": "abc"
+      },
+      "abcabc"
+     ],
+     [
+      {
+       "s": "hello"
+      },
+      "hellohello"
+     ],
+     [
+      {
+       "s": "Xy"
+      },
+      "xyxy"
+     ],
+     [
+      {
+       "s": "nomad"
+      },
+      "nomadnomad"
+     ]
+    ],
+    "task_id": "w-echo"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 8,
+    "library_used": [
+     "Lda56c88a"
+    ]
+   }
+  },
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 103
+   },
+   "domain": "language",
+   "final_correct": true,
+   "program": [
+    "strlen",
+    [
+     "concat",
+     [
+      "var",
+      "s"
+     ],
+     [
+      "var",
+      "s"
+     ]
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "fa41201b8015e40a9e4c29a92bfb974d893c58de4dda0bbde2c51ae65f27002f",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 10.132456102380443,
+    "claim_kind": "matches_target",
+    "effect_digest": "a71b2c74ca9565b28495a6c04e9e2ffdffd0fc634462a04fa04ac82f1a7c5653",
+    "public_evidence_digest": "243abc28bd02bc69714df8b7563efe636e74d415dcbf19ce467b99db4be62315",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 7.937253933193772,
+    "receipt_hash": "38aed7ab2b0436597fc5859cfc0d7e22077cbc7a5dd81440f6019f9fe3f9375f",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-len2",
+    "tolerance": 1e-09,
+    "transmission_id": "f97a298e194e86525beec0aac48635a8a3e5735da33bf9eb73954c65bf54f756",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "strlen(concat(s, s))",
+   "sense": {
+    "domain": "language",
+    "kind": "measure",
+    "schema": "nomad.sense.v1",
+    "sense_id": "7ff0666a935c816d",
+    "shape": "n/a",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "s": "river"
+      },
+      10
+     ],
+     [
+      {
+       "s": "Grok"
+      },
+      8
+     ],
+     [
+      {
+       "s": "desert"
+      },
+      12
+     ]
+    ],
+    "family": "len_plus_len",
+    "final": [
+     [
+      {
+       "s": "camel"
+      },
+      10
+     ],
+     [
+      {
+       "s": "wind"
+      },
+      8
+     ],
+     [
+      {
+       "s": "Atlas"
+      },
+      10
+     ]
+    ],
+    "inputs": [
+     [
+      "s",
+      "str"
+     ]
+    ],
+    "level": 2,
+    "opset": "str",
+    "out": "int",
+    "public": [
+     [
+      {
+       "s": "abc"
+      },
+      6
+     ],
+     [
+      {
+       "s": "hello"
+      },
+      10
+     ],
+     [
+      {
+       "s": "Xy"
+      },
+      4
+     ],
+     [
+      {
+       "s": "nomad"
+      },
+      10
+     ]
+    ],
+    "task_id": "w-len2"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 8,
+    "library_used": [
+     "Lda56c88a"
+    ]
+   }
+  },
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 361
+   },
+   "domain": "coding",
+   "final_correct": true,
+   "program": [
+    "sub",
+    [
+     "lmax",
+     [
+      "var",
+      "xs"
+     ]
+    ],
+    [
+     "lmin",
+     [
+      "var",
+      "xs"
+     ]
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "c0e2900a2ed7ebc3b23c7058b5305012edda9684233b83ca0606c8a0436596cb",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 6.0553007081949835,
+    "claim_kind": "matches_target",
+    "effect_digest": "d0b7db01f11f228d709219d67e9dac935ad5c350dd8a00771c1106239c7082e1",
+    "public_evidence_digest": "adda82f0224b53c6eab5ed0e253710505386bf6b19aff182f79b49741a46e815",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 4.847679857416329,
+    "receipt_hash": "5d0be80b4889e3cfb4aabe8c0e0f36b5f3ea4f5edf28d82a314e21b5dec79756",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-range",
+    "tolerance": 1e-09,
+    "transmission_id": "a0292745204ddb9611007b39bf69ac3595162a8f26b645c41607fa3976bf5efd",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "sub(lmax(xs), lmin(xs))",
+   "sense": {
+    "domain": "coding",
+    "kind": "aggregation",
+    "schema": "nomad.sense.v1",
+    "sense_id": "56ed8ea1b14fb4f3",
+    "shape": "n/a",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "xs": [
+        10,
+        4,
+        7
+       ]
+      },
+      6
+     ],
+     [
+      {
+       "xs": [
+        6,
+        6,
+        1,
+        3
+       ]
+      },
+      5
+     ],
+     [
+      {
+       "xs": [
+        2,
+        9
+       ]
+      },
+      7
+     ]
+    ],
+    "family": "range",
+    "final": [
+     [
+      {
+       "xs": [
+        8,
+        2,
+        5
+       ]
+      },
+      6
+     ],
+     [
+      {
+       "xs": [
+        4,
+        4,
+        4,
+        9
+       ]
+      },
+      5
+     ],
+     [
+      {
+       "xs": [
+        12,
+        3
+       ]
+      },
+      9
+     ]
+    ],
+    "inputs": [
+     [
+      "xs",
+      "list"
+     ]
+    ],
+    "level": 1,
+    "opset": "list",
+    "out": "int",
+    "public": [
+     [
+      {
+       "xs": [
+        3,
+        1,
+        4
+       ]
+      },
+      3
+     ],
+     [
+      {
+       "xs": [
+        9,
+        5,
+        2,
+        6
+       ]
+      },
+      7
+     ],
+     [
+      {
+       "xs": [
+        1,
+        1
+       ]
+      },
+      0
+     ],
+     [
+      {
+       "xs": [
+        2,
+        7,
+        8
+       ]
+      },
+      6
+     ]
+    ],
+    "task_id": "w-range"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 234,
+    "library_used": []
+   }
+  },
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 25
+   },
+   "domain": "coding",
+   "final_correct": true,
+   "program": [
+    "sum",
+    [
+     "tail",
+     [
+      "var",
+      "xs"
+     ]
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "0144ce0ae318a3cf0536daeb12943fb4751904bc1e744eac543feb3f46034b7a",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 10.03327796219494,
+    "claim_kind": "matches_target",
+    "effect_digest": "6a823fb0914a6a02c3cc5469ac80676b3dde44a215ed07b86e47010132ce8aaa",
+    "public_evidence_digest": "909d1a1e46b3414fad4210d1daa99ecd3ae9d66e47a0b78980730cc3257b65da",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 10.246950765959598,
+    "receipt_hash": "57a6526ff370c5b8372167365448c7cde42330a1549a89ad561fb48ceed30217",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-sumtail",
+    "tolerance": 1e-09,
+    "transmission_id": "d0e4950bcaa72407a86d843c0a6918c0952fa9fd23c69ad77469a6ad1cd99763",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "sum(tail(xs))",
+   "sense": {
+    "domain": "coding",
+    "kind": "aggregation",
+    "schema": "nomad.sense.v1",
+    "sense_id": "56ed8ea1b14fb4f3",
+    "shape": "n/a",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "xs": [
+        10,
+        4,
+        7
+       ]
+      },
+      11
+     ],
+     [
+      {
+       "xs": [
+        6,
+        6,
+        1,
+        3
+       ]
+      },
+      10
+     ],
+     [
+      {
+       "xs": [
+        2,
+        9
+       ]
+      },
+      9
+     ]
+    ],
+    "family": "sum_tail",
+    "final": [
+     [
+      {
+       "xs": [
+        8,
+        2,
+        5
+       ]
+      },
+      7
+     ],
+     [
+      {
+       "xs": [
+        4,
+        4,
+        4,
+        9
+       ]
+      },
+      17
+     ],
+     [
+      {
+       "xs": [
+        12,
+        3
+       ]
+      },
+      3
+     ]
+    ],
+    "inputs": [
+     [
+      "xs",
+      "list"
+     ]
+    ],
+    "level": 1,
+    "opset": "list",
+    "out": "int",
+    "public": [
+     [
+      {
+       "xs": [
+        3,
+        1,
+        4
+       ]
+      },
+      5
+     ],
+     [
+      {
+       "xs": [
+        9,
+        5,
+        2,
+        6
+       ]
+      },
+      13
+     ],
+     [
+      {
+       "xs": [
+        1,
+        1
+       ]
+      },
+      1
+     ],
+     [
+      {
+       "xs": [
+        2,
+        7,
+        8
+       ]
+      },
+      15
+     ]
+    ],
+    "task_id": "w-sumtail"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 17,
+    "library_used": []
+   }
+  },
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 95
+   },
+   "domain": "coding",
+   "final_correct": true,
+   "program": [
+    "lmin",
+    [
+     "tail",
+     [
+      "sort",
+      [
+       "var",
+       "xs"
+      ]
+     ]
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "c235bab1cde6e7717a5651655d3a4d39a139e8975cf7d393d7c43db194280998",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 6.8068592855540455,
+    "claim_kind": "matches_target",
+    "effect_digest": "e91ffc8d5c1c9b593041e6ba21b95ffc13c1b134841f73223172406107892709",
+    "public_evidence_digest": "672115c33a5a6eeb0a552c75a8dae8c2e04047a00e9683eb0ad1a2827034e787",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 4.58257569495584,
+    "receipt_hash": "1470cad569fae189f1cbf1e9b275a561dccc602663c2b83f0bacbe69582c7b7f",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-second",
+    "tolerance": 1e-09,
+    "transmission_id": "157e4cc98c63a302fa6f30a8f750c34764260799060bbd4ed5ed263af6874dae",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "lmin(tail(sort(xs)))",
+   "sense": {
+    "domain": "coding",
+    "kind": "aggregation",
+    "schema": "nomad.sense.v1",
+    "sense_id": "56ed8ea1b14fb4f3",
+    "shape": "n/a",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "xs": [
+        10,
+        4,
+        7
+       ]
+      },
+      7
+     ],
+     [
+      {
+       "xs": [
+        6,
+        6,
+        1,
+        3
+       ]
+      },
+      3
+     ],
+     [
+      {
+       "xs": [
+        2,
+        9
+       ]
+      },
+      9
+     ]
+    ],
+    "family": "second_smallest",
+    "final": [
+     [
+      {
+       "xs": [
+        8,
+        2,
+        5
+       ]
+      },
+      5
+     ],
+     [
+      {
+       "xs": [
+        4,
+        4,
+        4,
+        9
+       ]
+      },
+      4
+     ],
+     [
+      {
+       "xs": [
+        12,
+        3
+       ]
+      },
+      12
+     ]
+    ],
+    "inputs": [
+     [
+      "xs",
+      "list"
+     ]
+    ],
+    "level": 2,
+    "opset": "list",
+    "out": "int",
+    "public": [
+     [
+      {
+       "xs": [
+        3,
+        1,
+        4
+       ]
+      },
+      3
+     ],
+     [
+      {
+       "xs": [
+        9,
+        5,
+        2,
+        6
+       ]
+      },
+      5
+     ],
+     [
+      {
+       "xs": [
+        1,
+        1
+       ]
+      },
+      1
+     ],
+     [
+      {
+       "xs": [
+        2,
+        7,
+        8
+       ]
+      },
+      7
+     ]
+    ],
+    "task_id": "w-second"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 12,
+    "library_used": [
+     "L915ba1af"
+    ]
+   }
+  },
+  {
+   "budget": 20000,
+   "control": {
+    "certified": true,
+    "evaluations": 17
+   },
+   "domain": "coding",
+   "final_correct": true,
+   "program": [
+    "lrev",
+    [
+     "sort",
+     [
+      "var",
+      "xs"
+     ]
+    ]
+   ],
+   "receipt": {
+    "challenge_evidence_digest": "4d843afc1b92bcc6ef108d7b5a67ddd203812e35d132d161273b696c9c3828c6",
+    "challenge_match": true,
+    "challenge_rmse_after": 0.0,
+    "challenge_rmse_before": 110874403076843.73,
+    "claim_kind": "matches_target",
+    "effect_digest": "a2622f968ed6905dd316ef70540e8743758baa7fbd5a0f475605a05fef407505",
+    "public_evidence_digest": "a742e1b5d50f3350e8b0e71206d83e5d63f1925fb842e7c0df15cdf7360e7095",
+    "public_match": true,
+    "public_rmse_after": 0.0,
+    "public_rmse_before": 167593065154878.62,
+    "receipt_hash": "2581d255962d00848313d32f596791c52e7ac42b6e3da8fb951e6a012e0cbb37",
+    "schema": "nomad.v0.6.witness-receipt.v1",
+    "task_id": "w-sorted-rev",
+    "tolerance": 1e-09,
+    "transmission_id": "0459d39e055644cde16ac05e58851ca42ff1db21bf6ece3a60df3c429f48937b",
+    "verdict": "supported",
+    "witness_id": "nomad-witness-world-v1",
+    "world_epoch": 0
+   },
+   "rendered": "lrev(sort(xs))",
+   "sense": {
+    "domain": "coding",
+    "kind": "ordering",
+    "schema": "nomad.sense.v1",
+    "sense_id": "369800f2a2765422",
+    "shape": "n/a",
+    "source": "features"
+   },
+   "task": {
+    "challenge": [
+     [
+      {
+       "xs": [
+        10,
+        4,
+        7
+       ]
+      },
+      [
+       10,
+       7,
+       4
+      ]
+     ],
+     [
+      {
+       "xs": [
+        6,
+        6,
+        1,
+        3
+       ]
+      },
+      [
+       6,
+       6,
+       3,
+       1
+      ]
+     ],
+     [
+      {
+       "xs": [
+        2,
+        9
+       ]
+      },
+      [
+       9,
+       2
+      ]
+     ]
+    ],
+    "family": "sort_desc",
+    "final": [
+     [
+      {
+       "xs": [
+        8,
+        2,
+        5
+       ]
+      },
+      [
+       8,
+       5,
+       2
+      ]
+     ],
+     [
+      {
+       "xs": [
+        4,
+        4,
+        4,
+        9
+       ]
+      },
+      [
+       9,
+       4,
+       4,
+       4
+      ]
+     ],
+     [
+      {
+       "xs": [
+        12,
+        3
+       ]
+      },
+      [
+       12,
+       3
+      ]
+     ]
+    ],
+    "inputs": [
+     [
+      "xs",
+      "list"
+     ]
+    ],
+    "level": 2,
+    "opset": "list",
+    "out": "list",
+    "public": [
+     [
+      {
+       "xs": [
+        3,
+        1,
+        4
+       ]
+      },
+      [
+       4,
+       3,
+       1
+      ]
+     ],
+     [
+      {
+       "xs": [
+        9,
+        5,
+        2,
+        6
+       ]
+      },
+      [
+       9,
+       6,
+       5,
+       2
+      ]
+     ],
+     [
+      {
+       "xs": [
+        1,
+        1
+       ]
+      },
+      [
+       1,
+       1
+      ]
+     ],
+     [
+      {
+       "xs": [
+        2,
+        7,
+        8
+       ]
+      },
+      [
+       8,
+       7,
+       2
+      ]
+     ]
+    ],
+    "task_id": "w-sorted-rev"
+   },
+   "treatment": {
+    "certified": true,
+    "evaluations": 17,
+    "library_used": []
+   }
+  }
+ ],
+ "feed_version": 12,
+ "language": {
+  "ast": "nomad.world DSL v1: [op, *children] | ['var', name] | ['const', value]",
+  "interpreter": "nomad.world.run",
+  "witness": "nomad-witness-world-v1"
+ },
+ "packet_sha256": "096784e9cc03687397e7617c1c6795d37b97b3b7b6abacd0cebc37c383441263",
+ "prev_sha256": "8f53ccd56a5c7f0b3954ba09f56f2f7ae7ae3e9b014b056b1485dcd48559ff30",
+ "published": "2026-11-22T07:24:36Z",
+ "schema": "nomad.feed.packet.v1",
+ "scores": {
+  "genesis_twin": {
+   "all_fail_rate": 0.0,
+   "all_pass_rate": 0.9998093785741518,
+   "both_certified_pairs_with_cost": 5242,
+   "control_evaluations": 146822,
+   "estimator": "rloo",
+   "groups": 5246,
+   "informative_pairs": 1,
+   "informative_rate": 0.00019062142584826535,
+   "mean_evaluations_saved": 19.964135826020602,
+   "mean_treatment_advantage": 1.0,
+   "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage.",
+   "pairs_with_cost": 5242,
+   "pass_rate": 0.9999046892870759,
+   "treatment_evaluations": 42170,
+   "treatment_over_control": 0.2872
+  },
+  "heldout": {
+   "absdiff": {
+    "cold": {
+     "certified": false,
+     "evaluations": 10000
+    },
+    "field": {
+     "candidate": "ite(sub(x, y), sub(x, y), sub(y, x))",
+     "certified": true,
+     "evaluations": 4300
+    },
+    "field_beats_control": true,
+    "max_eval": 10000
+   },
+   "last_first_upper": {
+    "cold": {
+     "certified": true,
+     "evaluations": 332
+    },
+    "field": {
+     "candidate": "upper(concat(last(s), first(s)))",
+     "certified": true,
+     "evaluations": 332
+    },
+    "field_beats_control": false,
+    "max_eval": 5000
+   },
+   "quartic_sum": {
+    "cold": {
+     "certified": false,
+     "evaluations": 8414
+    },
+    "field": {
+     "candidate": "add(mul(mul(x, x), mul(x, x)), mul(mul(y, y), mul(y, y)))",
+     "certified": true,
+     "evaluations": 90174
+    },
+    "field_beats_control": true,
+    "max_eval": 150000
+   },
+   "sum_minus_max": {
+    "cold": {
+     "certified": true,
+     "evaluations": 203
+    },
+    "field": {
+     "candidate": "sum(tail(lrev(sort(xs))))",
+     "certified": true,
+     "evaluations": 203
+    },
+    "field_beats_control": false,
+    "max_eval": 5000
+   }
+  },
+  "note": "Copied from the live scoreboard and the last held-out probe; descriptive, not certified.",
+  "world_twin": {
+   "all_fail_rate": 0.0064860740175505536,
+   "all_pass_rate": 0.9807325448302174,
+   "both_certified_pairs_with_cost": 5141,
+   "control_evaluations": 2862520,
+   "estimator": "rloo",
+   "groups": 5242,
+   "informative_pairs": 67,
+   "informative_rate": 0.012781381152231973,
+   "mean_evaluations_saved": 447.50904493289244,
+   "mean_treatment_advantage": 0.9701492537313433,
+   "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage.",
+   "pairs_with_cost": 5141,
+   "pass_rate": 0.9871232354063335,
+   "treatment_evaluations": 561876,
+   "treatment_over_control": 0.1963
+  }
+ },
+ "source": {
+  "commit": "e0431feee6a0e395f4b61f0136dbb3ba427a8c96",
+  "field_version": 1748,
+  "host": null,
+  "repo": "jacksonjp0311-gif/NOMAD",
+  "world_witnessed": 5207
+ },
+ "verification": {
+  "blocks": "each block must be a subtree of a program in certified_in",
+  "cli": "python -m nomad.feed verify <packet.json>",
+  "control": "consumers compare blocks against their own cold control on their own tasks",
+  "evidence": "re-run program on public/challenge/final rows; re-attest with WITNESS; receipt_hash must match",
+  "packet": "sha256 of canonical JSON (sorted keys, no spaces) of the packet without packet_sha256",
+  "standalone": "python3 feed/nomad_feed_check.py <packet.json> --manifest feed/manifest.json (stdlib only: checks hash, chain, rows, blocks; no WITNESS re-attest)"
+ }
+}
