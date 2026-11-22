@@ -95,3 +95,62 @@ exact arithmetic filter; it is not language understanding. The stories are templ
 the same agent as the training stories. The concepts that can be retrieved are those the field
 certified (in 41 variants; the same function sits under up to five keys, which dilutes ranks). Expect
 the sealed margin to be smaller than dev's; misses cost up to 512 evaluations.
+
+## Sealed result (measured once from the e833a49 snapshot; code unchanged on main since)
+
+`python3 scripts/clause_judge.py` was run once on `data/deep/clause_suite.json` (sha256 `8e5bfc57...b85a`,
+seed 20270415) right after e833a49 was pushed; the run was interrupted before it could be committed and is
+committed here unchanged as `results/clause/clause_sealed.json` (not re-measured). Field: 813 tokens, 41
+concepts.
+
+| arm | certified / 16 | evaluations |
+|---|---|---|
+| cold | 0 | 160,000 |
+| empty_off / empty_on | 0 / 0 | 160,000 / 160,000 (identical) |
+| trained_off | 2 | 151,112 |
+| **trained_on** | **11** | **52,739** |
+| shuffled_1 / 2 / 3 | 2 / 2 / 2 | 151,555 / 151,554 / 151,592 |
+| rewired | 4 | 131,848 |
+| combine_report (report only) | 12 | 45,465 |
+
+- Criterion 1 PASS: +9 (2 -> 11).
+- Criterion 2 PASS: +9 over the best shuffled lexicon, +7 over rewired.
+- Criterion 3 PASS: empty_on = empty_off (0, 160,000); cold untouched (0).
+- Criterion 4 PASS: no task certified off and lost on (cl_clock_left 5,645 -> 127 and cl_hide_left
+  5,467 -> 103 evaluations); nothing worse than cold.
+- Misses on: cl_quarry_left, cl_ferry_change, cl_quarry_loose (no arm certifies them), and the two "average"
+  stories cl_dome_mean and cl_orchard_mean, which the **rewired** control certifies (98 and 156
+  evaluations) and the correct binding does not: in "the average of the three" the numbers sit in the next
+  clause, which is exactly the wrong binding. The look-back rule (previous numbered clause) is the wrong
+  direction for this phrasing. COMBINE's report arm certifies 12 (both averages, not cl_dome_crates);
+  CLAUSE certifies cl_dome_crates, which COMBINE does not, and is cheaper on 9 of the 10 tasks both certify
+  (COMBINE is cheaper on cl_greenhouse_crates, 296 vs 317).
+
+## Existing suites (criterion 5) and LOFO (criterion 6)
+
+`SWITCH=NOMAD_CLAUSE scripts/switch_regress.py run` over all 24 earlier judges (every judge but `clause`),
+same e833a49 snapshot; `compare` output in `results/clause/regress_compare.json`.
+
+- 22 judges byte-identical per task (no losses, no gains).
+- **COMBINE: 25 per-task losses**, all evaluation increases, no certification lost: cs_stairs_legs,
+  cs_hose_legs, cs_suits_used, cs_hose_used, cs_fuel_weeks, each in trained_off, trained_on and
+  shuffled_1..3 (+101 to +256 evaluations: a CLAUSE miss spent its budget before the normal search found
+  the program). Gains: cs_lamp_boxes certified (trained_off, trained_on), cs_jar_left certified
+  (trained_off, shuffled_3) and 323 -> 180 in trained_on; certified total 26 -> 30.
+- **ROLES: 7 per-task losses**, all evaluation increases: rs_star_plates 141 -> 494 (trained_off,
+  trained_on, shuffled_1..3) and rs_wine_savings 5,630 -> 5,886 (trained_off, shuffled_2). Certified
+  total 178 = 178.
+- 32 losses in total on 2 judges, the risk named in criterion 5 before measuring.
+- LOFO (learning judge, switch off and on): 5,883 / 5,883, worst 1.0x (`results/clause/lofo.json`).
+  Criterion 6 PASS; full test suite passes (588 passed, 6 skipped on main).
+
+## Verdict: FAIL (criterion 5). `NOMAD_CLAUSE` stays OFF.
+
+Criteria 1-4 and 6 pass; criterion 5 fails on 32 evaluation increases (no certification lost) on COMBINE
+and ROLES, caused by CLAUSE misses paying up to 512 evaluations before the normal search. Not gated away
+after the fact. What the result does show: clause-wise retrieval is the bottleneck COMBINE and ROLES
+diagnosed (sealed 2 -> 11, +9 over shuffled, +7 over rewired, about 65% fewer evaluations), and it even
+certifies 4 more COMBINE-suite tasks. Next candidates, each needing its own new sealed suite: bind a
+numberless "average of the ..." clause forward as well as back; and pay for CLAUSE only from savings
+(e.g. charge a miss only when it is refunded by a later cheaper find), so a miss can never cost the
+normal search evaluations.
