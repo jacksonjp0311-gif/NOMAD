@@ -1221,6 +1221,12 @@ def let2_enabled() -> bool:
 LET2_RESTORE = True  # LET2: forget the stage's WITNESS rejections on a miss (later stages see main's gate)
 
 
+def _discrim_on() -> bool:
+    """NOMAD_DISCRIM (docs/DISCRIM.md): LET2's fallback let stage, each accepted fit guarded by a
+    distinguishing experiment (confirmed / MDL pick / keep searching); default off."""
+    return _flag("NOMAD_DISCRIM", "off")
+
+
 def let_enabled() -> bool:
     """NOMAD_LET: let-bindings over a learned block (docs/LET.md); default off until the sealed judge passes."""
     return _flag("NOMAD_LET", "off")
@@ -1449,7 +1455,7 @@ def port_bank(prior: "WorldPrior", task: WorldTask, key: str | None = None,
     element, annotated for the probe with which blocks are probe-equivalent
     to an earlier one."""
     out = _port_bank_main(prior, task, key, rel, cut_key)
-    if not out or not (merge_enabled() or let2_enabled()) or task.out != "int":
+    if not out or not (merge_enabled() or let2_enabled() or _discrim_on()) or task.out != "int":
         return out
     if rel is not None and key and route_enabled() and prior.route.get(key):
         return out
@@ -1795,9 +1801,11 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     pinfo["port"] = "let"
                     return hit
             if mstate["on"]:
-                if let2_enabled() and mstate["skips"] > mstate["spent"]:
+                if (let2_enabled() or _discrim_on()) and mstate["skips"] > mstate["spent"]:
                     # LET2 (docs/LET2.md): LET's stage paid only from the unspent skips; on a miss
-                    # the gate's rejection record is restored, so later stages see main's gate
+                    # the gate's rejection record is restored, so later stages see main's gate.
+                    # NOMAD_DISCRIM on runs this stage with its distinguishing-experiment guard
+                    # (docs/DISCRIM.md); NOMAD_LET2 alone runs it unguarded
                     e0 = evals
                     g0 = (len(gate.rejected), len(gate.vias)) if gate is not None else None
                     hit = yield from let_stage(ranked, P, table, min(limit, evals + mstate["skips"] - mstate["spent"]), real=True)
@@ -2008,9 +2016,55 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 evals += 1      # an assembled program is one candidate evaluation
                 yield evals
                 if stop_on(hit):
+                    if real and _discrim_on():
+                        # DISCRIM guard (docs/DISCRIM.md): the accepted let fit returns only when no
+                        # surviving alternative disagrees with it on distinguishing inputs
+                        ok = yield from discrim_guard(hit, fits, limit)
+                        if ok is None:
+                            return None
+                        if ok is not hit and not stop_on(ok):
+                            return None
+                        return ok
                     return hit
                 yield evals
         return None
+
+    def discrim_guard(hit, fits, limit):
+        """DISCRIM (docs/DISCRIM.md) for one WITNESS-accepted fallback fit. Alternatives: the stage's
+        other fits for the same intermediate and the hit's evidence-preserving simplifications. Each
+        alternative checked on the evidence costs 1 evaluation and each signature on the distinguishing
+        inputs costs 1 (paid from the same budget; out of budget = not confirmed). Reads only the
+        public and challenge rows (never task.final)."""
+        nonlocal evals
+        from . import discrim as _D
+        ev_rows = _D.evidence(task)
+        hk = json.dumps(hit)
+        alts, keys = [], {hk}
+        for a in list(fits) + _D.simplifications(hit, task.inputs, ev_rows):
+            k = json.dumps(a)
+            if k not in keys:
+                keys.add(k)
+                alts.append(a)
+        alts = alts[:_D.DISCRIM_ALT]
+        surv = []
+        for a in alts:
+            if evals >= limit:
+                return None
+            evals += 1
+            yield evals
+            if _D.fits(a, ev_rows):
+                surv.append(a)
+        need = len(surv) + 1 if surv else 0
+        if evals + need > limit:
+            return None
+        evals += need
+        if need:
+            yield evals
+        d = _D.decide(hit, surv, task.inputs, ev_rows)
+        _D.note(task, hit, surv, d)
+        if d["verdict"] == "confirmed":
+            return hit
+        return d["pick"]    # ambiguous: the unique simplest explanation (MDL), or None (keep searching)
 
     grow_rej = [None]
 
