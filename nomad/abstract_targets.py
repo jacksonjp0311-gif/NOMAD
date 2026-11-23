@@ -3,16 +3,15 @@
 Phase C of PLAN_V2. Attempts to synthesize absdiff, median, and clamp
 from examples only. The solutions are not supplied.
 
-The extended grammar adds Abs, Min, Max. These are not in the continuous
-loop. This is a measurement tool. Run attempt_all() and record whether
-the targets are reachable with the extended operators.
+Extended grammar: Abs, Min, Max, Sub, FloorDiv. FloorDiv is for the
+median remeasure (PLAN_V3). Not in the continuous loop.
 """
 from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Any
 
-from .genesis import IOExample, SynthesisTask
+from .genesis import IOExample
 
 TARGETS = {
     "absdiff": (
@@ -56,28 +55,31 @@ def _max(a: Prog, b: Prog) -> Prog:
 def _sub(a: Prog, b: Prog) -> Prog:
     return Prog(f"({a.text}-{b.text})", tuple(x - y for x, y in zip(a.values, b.values)), a.cost + b.cost + 1)
 
+def _add(a: Prog, b: Prog) -> Prog:
+    return Prog(f"({a.text}+{b.text})", tuple(x + y for x, y in zip(a.values, b.values)), a.cost + b.cost + 1)
+
+def _floordiv(a: Prog, k: int) -> Prog:
+    return Prog(f"({a.text}//{k})", tuple(x // k for x in a.values), a.cost + 1)
+
 def attempt_extended(name: str, *, max_eval: int = 5000) -> dict[str, Any]:
-    """Search with Abs, Min, Max, Sub. Returns first fit or abstain."""
     examples = TARGETS[name]
     goal = tuple(e.expected for e in examples)
-    atoms = [
-        Prog("x", tuple(e.x for e in examples), 1),
-        Prog("y", tuple(e.y for e in examples), 1),
-    ]
+    x = Prog("x", tuple(e.x for e in examples), 1)
+    y = Prog("y", tuple(e.y for e in examples), 1)
+    atoms = [x, y]
     budget = 0
-    pool = list(atoms)
     for a in atoms:
         budget += 1
         if a.values == goal:
             return {"target": name, "candidate": a.text, "evaluations": budget, "fit": True}
-        if budget >= max_eval:
-            break
     ops = [
         lambda p: _abs(p),
-        lambda p: _sub(p, Prog("y", tuple(e.y for e in examples), 1)),
-        lambda p: _sub(Prog("x", tuple(e.x for e in examples), 1), p),
-        lambda p: _min(p, Prog("y", tuple(e.y for e in examples), 1)),
-        lambda p: _max(p, Prog("y", tuple(e.y for e in examples), 1)),
+        lambda p: _sub(p, y),
+        lambda p: _sub(x, p),
+        lambda p: _min(p, y),
+        lambda p: _max(p, y),
+        lambda p: _add(p, y),
+        lambda p: _floordiv(_add(p, y), 2),
     ]
     frontier = list(atoms)
     for _ in range(4):
