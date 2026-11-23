@@ -1,10 +1,10 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-23T10:05:36Z",
+  "ts": "2026-11-23T10:21:30Z",
   "sense": {
-    "last_pair": "2026-11-23T10:02:21Z",
-    "last_world_pair": "2026-11-23T10:02:21Z",
-    "last_sleep": "2026-11-23T10:05:36Z"
+    "last_pair": "2026-11-23T10:14:23Z",
+    "last_world_pair": "2026-11-23T10:14:23Z",
+    "last_sleep": "2026-11-23T10:17:35Z"
   },
   "think": {
     "curriculum_open_levels": {
@@ -32,14 +32,14 @@
     "world_twin": {
       "estimator": "rloo",
       "groups": 128,
-      "pass_rate": 0.90234375,
-      "all_pass_rate": 0.8359375,
+      "pass_rate": 0.91015625,
+      "all_pass_rate": 0.8515625,
       "all_fail_rate": 0.03125,
-      "informative_rate": 0.1328125,
-      "informative_pairs": 17,
+      "informative_rate": 0.1171875,
+      "informative_pairs": 15,
       "mean_treatment_advantage": 1.0,
-      "both_certified_pairs_with_cost": 107,
-      "mean_evaluations_saved": 1054.0467289719627,
+      "both_certified_pairs_with_cost": 109,
+      "mean_evaluations_saved": 886.6880733944954,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     }
   },
@@ -47,7 +47,7 @@
     "queued": 0,
     "inflight": 0,
     "certified_queued": 0,
-    "field_version": 2223,
+    "field_version": 2226,
     "genesis_heldout": {
       "field_certified": true,
       "cold_certified": false
@@ -62,104 +62,6 @@
   },
   "evolve": {
     "recent": [
-      {
-        "organ": "selfedit",
-        "seed": 909484844,
-        "gene": "inv_floor_fit",
-        "before": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 2,
-          "inv_const_depth": 1,
-          "inv_rounds": 2,
-          "inv_floor_fit": 0
-        },
-        "after": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 2,
-          "inv_const_depth": 1,
-          "inv_rounds": 2,
-          "inv_floor_fit": 1
-        },
-        "dev_before": {
-          "certified": 6,
-          "evaluations": 145260,
-          "tasks": 16
-        },
-        "dev_after": {
-          "certified": 8,
-          "evaluations": 134908,
-          "tasks": 16
-        },
-        "dev_losses": [],
-        "keep_before": {
-          "certified": 95,
-          "evaluations": 636283,
-          "tasks": 122
-        },
-        "keep_after": {
-          "certified": 95,
-          "evaluations": 636283,
-          "tasks": 122
-        },
-        "keep_losses": [],
-        "window_families": [
-          "pick_gt",
-          "relu_diff",
-          "ysquare_minus_x",
-          "div_pair",
-          "first_last",
-          "wt_avg_heights",
-          "wt_avg_scores",
-          "wt_avg_temps",
-          "wt_berries_pool",
-          "wt_bulbs_left",
-          "wt_cookies_share",
-          "wt_crayons_pool",
-          "wt_eggs_left",
-          "wt_lawn_pond",
-          "wt_mat_hole",
-          "wt_pupils_left",
-          "wt_seed_split",
-          "wt_soup_bowls",
-          "wt_sticker_share",
-          "wt_two_beds",
-          "second_smallest",
-          "sort_desc",
-          "square_plus_y",
-          "max_pair"
-        ],
-        "window_pairs": 45,
-        "recorded": {
-          "certified": 24,
-          "evaluations": 726,
-          "tasks": 24
-        },
-        "replay_before": {
-          "certified": 24,
-          "evaluations": 32892,
-          "tasks": 24
-        },
-        "replay_after": {
-          "certified": 24,
-          "evaluations": 32892,
-          "tasks": 24
-        },
-        "replay_losses": [],
-        "replay_vs_recorded": {
-          "certified_recorded": 24,
-          "certified_replay_after": 24
-        },
-        "accepted": false,
-        "reason": "tests_failed",
-        "ts": "2026-11-23T04:16:20Z",
-        "sandbox_clean": true
-      },
       {
         "organ": "selfedit",
         "seed": 2833268659,
@@ -547,6 +449,104 @@
         "reason": "tests_failed",
         "ts": "2026-11-23T09:05:41Z",
         "sandbox_clean": true
+      },
+      {
+        "organ": "selfedit",
+        "seed": 2885686526,
+        "gene": "inv_floor_fit",
+        "before": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "after": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 1
+        },
+        "dev_before": {
+          "certified": 6,
+          "evaluations": 145260,
+          "tasks": 16
+        },
+        "dev_after": {
+          "certified": 8,
+          "evaluations": 134908,
+          "tasks": 16
+        },
+        "dev_losses": [],
+        "keep_before": {
+          "certified": 95,
+          "evaluations": 636283,
+          "tasks": 122
+        },
+        "keep_after": {
+          "certified": 95,
+          "evaluations": 636283,
+          "tasks": 122
+        },
+        "keep_losses": [],
+        "window_families": [
+          "len_plus_len",
+          "pick_gt",
+          "relu_diff",
+          "second_smallest",
+          "sort_desc",
+          "square_plus_y",
+          "wt_avg_loaves",
+          "wt_avg_marks",
+          "wt_avg_tomatoes",
+          "wt_bus_trips",
+          "wt_cook_weeks",
+          "wt_hose_trips",
+          "wt_jar_savings",
+          "wt_mow_weeks",
+          "wt_paint_boards",
+          "wt_paint_cupboards",
+          "wt_paint_sheds",
+          "wt_pizza_split",
+          "wt_pocket_savings",
+          "wt_seed_savings",
+          "wt_shop_trips",
+          "ysquare_minus_x",
+          "div_pair",
+          "first_last"
+        ],
+        "window_pairs": 54,
+        "recorded": {
+          "certified": 20,
+          "evaluations": 80929,
+          "tasks": 24
+        },
+        "replay_before": {
+          "certified": 19,
+          "evaluations": 60515,
+          "tasks": 24
+        },
+        "replay_after": {
+          "certified": 19,
+          "evaluations": 60515,
+          "tasks": 24
+        },
+        "replay_losses": [],
+        "replay_vs_recorded": {
+          "certified_recorded": 20,
+          "certified_replay_after": 19
+        },
+        "accepted": false,
+        "reason": "tests_failed",
+        "ts": "2026-11-23T10:21:30Z",
+        "sandbox_clean": true
       }
     ]
   },
@@ -581,11 +581,11 @@
     ],
     "body_lease": {
       "host": "gh-45104759295",
-      "heartbeat": "2026-11-23T10:05:36Z",
-      "age_min": 0.003467466666666667,
+      "heartbeat": "2026-11-23T10:21:30Z",
+      "age_min": 0.0024161833333333333,
       "alive": true,
-      "cycles": 54,
-      "cycles_per_hour": 42.7,
+      "cycles": 63,
+      "cycles_per_hour": 43.0,
       "released": false
     }
   },
