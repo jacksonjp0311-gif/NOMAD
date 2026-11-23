@@ -1,74 +1,56 @@
 {
-  "arms": {
-    "cold": [
-      {
-        "target": "absdiff",
-        "fit": true,
-        "candidate": "abs((x-y))",
-        "evaluations": 24,
-        "prior_witnessed": 0
-      },
-      {
-        "target": "median",
-        "fit": true,
-        "candidate": "((x+y)//2)",
-        "evaluations": 9,
-        "prior_witnessed": 0
-      },
-      {
-        "target": "clamp",
-        "fit": true,
-        "candidate": "min(x,y)",
-        "evaluations": 6,
-        "prior_witnessed": 0
-      }
-    ],
-    "empty": [
-      {
-        "target": "absdiff",
-        "fit": true,
-        "candidate": "abs((x-y))",
-        "evaluations": 24,
-        "prior_witnessed": 0
-      },
-      {
-        "target": "median",
-        "fit": true,
-        "candidate": "((x+y)//2)",
-        "evaluations": 9,
-        "prior_witnessed": 0
-      },
-      {
-        "target": "clamp",
-        "fit": true,
-        "candidate": "min(x,y)",
-        "evaluations": 6,
-        "prior_witnessed": 0
-      }
-    ],
-    "field": [
-      {
-        "target": "absdiff",
-        "fit": true,
-        "candidate": "abs((x-y))",
-        "evaluations": 24,
-        "prior_witnessed": 6668
-      },
-      {
-        "target": "median",
-        "fit": true,
-        "candidate": "((x+y)//2)",
-        "evaluations": 9,
-        "prior_witnessed": 6668
-      },
-      {
-        "target": "clamp",
-        "fit": true,
-        "candidate": "min(x,y)",
-        "evaluations": 6,
-        "prior_witnessed": 6668
-      }
-    ]
-  },
-  "note": "Operators available to all arms. Prior difference is recorded but not yet causal."
+  "cold": [
+    {
+      "target": "absdiff",
+      "candidate": "abs((x-y))",
+      "evaluations": 24,
+      "fit": true,
+      "prior_witnessed": 0,
+      "extended": true
+    },
+    {
+      "target": "median",
+      "candidate": "((x+y)//2)",
+      "evaluations": 9,
+      "fit": true,
+      "prior_witnessed": 0,
+      "extended": true
+    },
+    {
+      "target": "clamp",
+      "candidate": "min(x,y)",
+      "evaluations": 6,
+      "fit": true,
+      "prior_witnessed": 0,
+      "extended": true
+    }
+  ],
+  "field": [
+    {
+      "target": "absdiff",
+      "candidate": "abs((x-y))",
+      "evaluations": 24,
+      "fit": true,
+      "prior_witnessed": 7155,
+      "extended": true
+    },
+    {
+      "target": "median",
+      "candidate": "((x+y)//2)",
+      "evaluations": 9,
+      "fit": true,
+      "prior_witnessed": 7155,
+      "extended": true
+    },
+    {
+      "target": "clamp",
+      "candidate": "min(x,y)",
+      "evaluations": 6,
+      "fit": true,
+      "prior_witnessed": 7155,
+      "extended": true
+    }
+  ],
+  "extended": true,
+  "note": "Operators available. Prior is recorded. Causal order change requires operators inside enumerator."
 }
