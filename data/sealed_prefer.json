@@ -1,0 +1,49 @@
+{
+  "cold": [
+    {
+      "target": "absdiff",
+      "candidate": "abs((x-y))",
+      "evaluations": 21,
+      "fit": true,
+      "prior_witnessed": 0
+    },
+    {
+      "target": "median",
+      "candidate": "((x+y)//2)",
+      "evaluations": 8,
+      "fit": true,
+      "prior_witnessed": 0
+    },
+    {
+      "target": "clamp",
+      "candidate": "min(x,y)",
+      "evaluations": 5,
+      "fit": true,
+      "prior_witnessed": 0
+    }
+  ],
+  "prefer": [
+    {
+      "target": "absdiff",
+      "candidate": "abs((x-y))",
+      "evaluations": 23,
+      "fit": true,
+      "prior_witnessed": 6
+    },
+    {
+      "target": "median",
+      "candidate": "((x+y)//2)",
+      "evaluations": 8,
+      "fit": true,
+      "prior_witnessed": 6
+    },
+    {
+      "target": "clamp",
+      "candidate": "min(x,y)",
+      "evaluations": 6,
+      "fit": true,
+      "prior_witnessed": 6
+    }
+  ],
+  "note": "Prefer prior built to favor operators that reach the goal fastest. Causal if prefer evaluations are lower than cold."
+}
