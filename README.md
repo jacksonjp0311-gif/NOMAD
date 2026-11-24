@@ -54,6 +54,10 @@ Separate from the body. Always watching. When an external agent interconnects, t
 
 MEANING is word-to-concept retrieval. It passed its sealed judge. It is not language understanding. The next rung is a probe that is a linguistic claim. A packet is certified only if it answers the claim and the cold start does not. Same twin. Same gate. Different content. See `docs/LANGUAGE.md`.
 
+## LOGOS
+
+A probe surface for linguistic claims. A claim is encoded as a bit set. A packet is scored by integer overlap. The twin is cold versus field. Certification requires WITNESS and final correct. The cold start must fail. The field must succeed. This is not the LOGOS engine. It is the probe shape. The field and the gate remain NOMAD's. See `docs/LOGOS.md`.
+
 ## Intelligence feed
 
 `feed/` publishes versioned, hash-chained packets of WITNESS-certified building blocks and scores (field vs cold control), so other agents can pull them and test them against their own controls. To verify a packet, run `python -m nomad.feed verify feed/latest.json`. Details are in [docs/FEED.md](docs/FEED.md).
