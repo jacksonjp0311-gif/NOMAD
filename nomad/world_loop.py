@@ -5,6 +5,10 @@ evidence, no library) and never writes anything; treatment reads the field
 (its family's operator evidence plus library primitives); only a
 WITNESS-certified, final-correct treatment becomes a versioned packet for the
 sleep learner. Held-out families are probed, never trained.
+
+Probe-failure receipt: when a held-out probe returns none, the result records
+which library primitives were available and which were tried. The none stays
+visible.
 """
 from __future__ import annotations
 
@@ -66,11 +70,8 @@ def world_pair(domain: str | None = None) -> dict[str, Any]:
                field_version=version, evaluations=control.evaluations)
     field = load_world_prior()
     vstate = variation.load_state() if variation.enabled() else None
-    # LIVE_WORDS (docs/LIVE_WORDS.md): a live word family's story goes to the treatment only
     words = words_of(task.family)
     treat, receipt = evaluate(task, prior=field, variation=vstate, words=words)
-    # Awake exploration (actor): bounded mutants of other families' certified
-    # patterns on this training task. Reported separately; never part of the twin.
     explored = (variation.explore(task, vstate, variation.library_trees(field, task.inputs))
                 if vstate is not None else None)
     trace = None
@@ -108,9 +109,6 @@ def world_pair(domain: str | None = None) -> dict[str, Any]:
         )
         out["enqueued"] = {"packet_id": packet["packet_id"], **field_queue.enqueue(packet)}
     elif trace and trace["tried"]:
-        # Uncertified treatment: the trace alone goes to the learner. It can
-        # only lower payoff rates or add novelty stepping stones; the learner
-        # re-attests every "paid" row itself.
         packet = field_queue.make_packet(
             task=key, arm="treatment", field_version=version, certified=False, candidate=None,
             context_sig=0, pair_id=pair_id, measured="variation_trace",
@@ -129,13 +127,14 @@ def world_pair(domain: str | None = None) -> dict[str, Any]:
 def probe_heldout(field: WorldPrior | None = None, write: bool = True, vstate: Any = None) -> dict[str, Any]:
     """Cold vs field on every never-trained family at its fixed budget.
 
-    With no field given, the live field and the live variation state are used
-    (read-only). Probe results are never enqueued: held-outs never train.
+    When kind is none, a failure receipt lists available library primitives
+    and which were tried. The none stays visible.
     """
     if field is None:
         field = load_world_prior()
         if vstate is None and variation.enabled():
             vstate = variation.load_state()
+    available = [p.name for p in field.library] if field and field.library else []
     rows = {}
     for name, h in HELDOUT.items():
         t = h["task"]
@@ -144,14 +143,24 @@ def probe_heldout(field: WorldPrior | None = None, write: bool = True, vstate: A
                         variation=vstate)
         win_cert = f.certified and not c.certified
         win_cost = f.certified and c.certified and f.evaluations < c.evaluations
-        rows[name] = {
+        kind = "certified_correctness" if win_cert else "evaluations" if win_cost else "none"
+        row = {
             "needs": h["needs"], "max_eval": h["max_eval"],
             "cold": {"certified": c.certified, "evaluations": c.evaluations},
             "field": {"certified": f.certified, "evaluations": f.evaluations, "candidate": f.candidate,
                       "library_used": list(f.library_used), "via": f.via},
             "field_beats_control": bool(win_cert or win_cost),
-            "kind": "certified_correctness" if win_cert else "evaluations" if win_cost else "none",
+            "kind": kind,
         }
+        if kind == "none":
+            tried = list(f.library_used)
+            row["failure_receipt"] = {
+                "available_primitives": available,
+                "tried": tried,
+                "not_tried": [p for p in available if p not in tried],
+                "note": "Probe returned none. Primitives listed. Not a capability claim.",
+            }
+        rows[name] = row
     result = {"probes": rows, "field_witnessed": field.witnessed, "library_size": len(field.library),
               "note": "Never-trained families, fixed budgets. Not a general capability claim.", "ts": _now()}
     if write:
