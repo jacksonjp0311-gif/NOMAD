@@ -124,6 +124,21 @@ def world_pair(domain: str | None = None) -> dict[str, Any]:
     return out
 
 
+def _lib_names(field: WorldPrior | None) -> list[str]:
+    """Library entries may be strings or objects with .name."""
+    if not field or not field.library:
+        return []
+    out = []
+    for p in field.library:
+        if isinstance(p, str):
+            out.append(p)
+        elif hasattr(p, "name"):
+            out.append(p.name)
+        else:
+            out.append(str(p))
+    return out
+
+
 def probe_heldout(field: WorldPrior | None = None, write: bool = True, vstate: Any = None) -> dict[str, Any]:
     """Cold vs field on every never-trained family at its fixed budget.
 
@@ -134,7 +149,7 @@ def probe_heldout(field: WorldPrior | None = None, write: bool = True, vstate: A
         field = load_world_prior()
         if vstate is None and variation.enabled():
             vstate = variation.load_state()
-    available = [p.name for p in field.library] if field and field.library else []
+    available = _lib_names(field)
     rows = {}
     for name, h in HELDOUT.items():
         t = h["task"]
