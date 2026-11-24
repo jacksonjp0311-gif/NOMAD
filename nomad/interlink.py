@@ -4,9 +4,10 @@ Pattern from Pegasus Interlink. An external agent can inspect state, observe
 events, request control, and export redacted receipts. Mutations are denied
 by default. No self-authorization. Receipts are append-only.
 
-Temporal connective tissue: inspect now includes the last dream entry, the
-last selfedit attempt, and the informative-rate flag. Observe returns the
-recent event stream with timestamps. The pathways are the map.
+Temporal connective tissue: inspect includes the last dream entry, the last
+selfedit attempt, the informative-rate flag, and the substrate state (decay,
+inhibition, co-activation). The pathways are the map. When you are interlinked,
+you are reading the mind.
 
 This is not a second body. It is a supervised interface. The continuous loop
 stays the authority. Interlink is the observer and the gate.
@@ -19,6 +20,7 @@ from typing import Any
 
 from . import interlink_permissions as perm
 from . import interlink_receipts as receipts
+from . import substrate
 from .paths import data_root
 
 
@@ -56,8 +58,16 @@ def _last_selfedit(state: dict[str, Any]) -> dict[str, Any] | None:
     return None
 
 
+def _substrate_state() -> dict[str, Any]:
+    return {
+        "decay": substrate.decay_enabled(),
+        "inhibit": substrate.inhibit_enabled(),
+        "coact": substrate.coact_enabled(),
+    }
+
+
 def inspect() -> dict[str, Any]:
-    """Read current organism state with temporal context. Read-only."""
+    """Read current organism state with temporal and substrate context. Read-only."""
     p = data_root() / "organism.json"
     if not p.exists():
         return {"status": "absent", "note": "no organism.json"}
@@ -77,6 +87,7 @@ def inspect() -> dict[str, Any]:
         "last_dream": {"ts": dream.get("ts"), "kind": dream.get("kind")} if dream else None,
         "last_selfedit": selfedit,
         "sense": state.get("sense"),
+        "substrate": _substrate_state(),
     }
 
 
