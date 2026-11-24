@@ -6,6 +6,10 @@ workflow are appended to ``data/organism_events.jsonl``.
 
 Informative-rate flag: when world twin informative_rate drops below 0.10,
 the organism records a flag. Descriptive only. Not a learning claim.
+
+Interlink presence: the organism records whether an external agent has
+inspected in the last 10 minutes and how many feedback suggestions are
+pending. A suggestion is not a mutation.
 """
 from __future__ import annotations
 
@@ -65,6 +69,16 @@ def _lease_view() -> dict[str, Any] | None:
             "released": cur.get("released")}
 
 
+def _interlink_view() -> dict[str, Any]:
+    from . import interlink_feedback as feedback
+    from . import interlink_presence as presence
+    return {
+        "observed": presence.is_observed(),
+        "presence_recent": presence.recent(3),
+        "feedback_pending": len(feedback.unapplied()),
+    }
+
+
 def status(write: bool = True) -> dict[str, Any]:
     from . import field_queue
     from .advantage import twin_summary
@@ -110,6 +124,7 @@ def status(write: bool = True) -> dict[str, Any]:
                      "world_library_size": world_heldout.get("library_size")},
         "evolve": {"recent": evolve},
         "heartbeat": {"recent_events": events, "body_lease": _lease_view()},
+        "interlink": _interlink_view(),
         "boundaries": "No transformers. WITNESS certifies; search and memory never do. Bounded programs only.",
     }
     if write:
