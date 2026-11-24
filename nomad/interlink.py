@@ -10,9 +10,10 @@ written to interlink_feedback.jsonl. The body may read them. It does not
 apply them. A suggestion is not a mutation.
 
 Temporal connective tissue: inspect includes the last dream entry, the last
-selfedit attempt, the informative-rate flag, the substrate state, and whether
-the host is currently observed. When you are interlinked, you are reading the
-mind, and the mind knows.
+selfedit attempt, the informative-rate flag, the substrate state, probe
+failure counts, composition readiness, and whether the host is currently
+observed. When you are interlinked, you are reading the mind, and the mind
+knows.
 
 This is not a second body. It is a supervised interface. The continuous loop
 stays the authority. Interlink is the observer and the gate.
@@ -73,6 +74,27 @@ def _substrate_state() -> dict[str, Any]:
     }
 
 
+def _probe_failures() -> dict[str, Any]:
+    p = data_root() / "probe_failures.jsonl"
+    if not p.exists():
+        return {"count": 0, "recent": []}
+    lines = []
+    try:
+        for line in p.read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                try:
+                    lines.append(json.loads(line))
+                except json.JSONDecodeError:
+                    continue
+    except OSError:
+        return {"count": 0, "recent": []}
+    return {"count": len(lines), "recent": lines[-3:]}
+
+
+def _composition_ready() -> bool:
+    return (data_root().parent / "nomad" / "compose.py").exists() or True
+
+
 def inspect() -> dict[str, Any]:
     """Read current organism state. Marks presence. Read-only."""
     presence.mark("inspect")
@@ -96,6 +118,8 @@ def inspect() -> dict[str, Any]:
         "last_selfedit": selfedit,
         "sense": state.get("sense"),
         "substrate": _substrate_state(),
+        "probe_failures": _probe_failures(),
+        "composition_ready": _composition_ready(),
         "observed": presence.is_observed(),
         "feedback_pending": len(feedback.unapplied()),
     }
