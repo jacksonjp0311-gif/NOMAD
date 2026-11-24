@@ -1,10 +1,10 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-24T12:37:52Z",
+  "ts": "2026-11-24T12:50:20Z",
   "sense": {
-    "last_pair": "2026-11-24T12:36:51Z",
-    "last_world_pair": "2026-11-24T12:36:51Z",
-    "last_sleep": null
+    "last_pair": "2026-11-24T12:44:46Z",
+    "last_world_pair": "2026-11-24T12:44:46Z",
+    "last_sleep": "2026-11-24T12:50:20Z"
   },
   "think": {
     "curriculum_open_levels": {
@@ -32,22 +32,27 @@
     "world_twin": {
       "estimator": "rloo",
       "groups": 128,
-      "pass_rate": 0.97265625,
-      "all_pass_rate": 0.9453125,
+      "pass_rate": 0.96484375,
+      "all_pass_rate": 0.9296875,
       "all_fail_rate": 0.0,
-      "informative_rate": 0.0546875,
-      "informative_pairs": 7,
+      "informative_rate": 0.0703125,
+      "informative_pairs": 9,
       "mean_treatment_advantage": 1.0,
-      "both_certified_pairs_with_cost": 121,
-      "mean_evaluations_saved": 710.7438016528926,
+      "both_certified_pairs_with_cost": 119,
+      "mean_evaluations_saved": 677.0252100840336,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
+    },
+    "informative_rate_flag": {
+      "below_threshold": true,
+      "rate": 0.0703125,
+      "threshold": 0.1
     }
   },
   "remember": {
     "queued": 0,
     "inflight": 0,
     "certified_queued": 0,
-    "field_version": 2664,
+    "field_version": 2666,
     "genesis_heldout": {
       "field_certified": true,
       "cold_certified": false
@@ -263,13 +268,13 @@
       }
     ],
     "body_lease": {
-      "host": "gh-45305362917",
-      "heartbeat": "2026-11-24T12:37:52Z",
-      "age_min": 0.011770233333333333,
-      "alive": false,
-      "cycles": 533,
-      "cycles_per_hour": 97.1,
-      "released": true
+      "host": "gh-45345673675",
+      "heartbeat": "2026-11-24T12:50:20Z",
+      "age_min": 0.014718966666666666,
+      "alive": true,
+      "cycles": 6,
+      "cycles_per_hour": 30.5,
+      "released": false
     }
   },
   "boundaries": "No transformers. WITNESS certifies; search and memory never do. Bounded programs only."
