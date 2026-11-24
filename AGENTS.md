@@ -23,14 +23,18 @@ Goal: learn as much as possible. Expand the grammar from certified programs. Tra
 
 ## Module Map
 
-See `data/INDEX.md` Key Modules table. Core: body.py, world.py, genesis.py, invent.py, selfedit.py, dreamlog.py, organism.py.
+See `data/INDEX.md` Key Modules table. Core: body.py, world.py, genesis.py, invent.py, selfedit.py, dreamlog.py, organism.py, interlink.py.
+
+## Interlink
+
+External control surface. Inspect, observe, control, evidence. Mutations denied by default. No self-authorization. See `docs/INTERLINK.md` and `nomad/interlink.py`.
 
 ## Current Open Signals
 
 - Genesis held-out: field certified, cold failed (first win, unconfirmed)
 - last_first_upper and sum_minus_max: none, no probe-failure receipt yet
 - Selfedit: 5 consecutive no_change
-- World twin informative rate: 0.109, trending down
+- World twin informative rate: 0.078, flag set
 - Genesis twin: entirely uniform
 
 ## How to Run Measurements
