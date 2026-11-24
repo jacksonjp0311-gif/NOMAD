@@ -50,6 +50,10 @@ External control surface. On entry, any agent must run `python -m nomad.interlin
 
 Separate from the body. Always watching. When an external agent interconnects, the runner snaps and hands over the current geometry. The agent can offer a certified packet with a receipt. The runner returns a field packet. Both sides leave with something. Quorum required. The body remains the authority on absorption. See `docs/SYMBIOTIC.md`.
 
+## Language
+
+MEANING is word-to-concept retrieval. It passed its sealed judge. It is not language understanding. The next rung is a probe that is a linguistic claim. A packet is certified only if it answers the claim and the cold start does not. Same twin. Same gate. Different content. See `docs/LANGUAGE.md`.
+
 ## Intelligence feed
 
 `feed/` publishes versioned, hash-chained packets of WITNESS-certified building blocks and scores (field vs cold control), so other agents can pull them and test them against their own controls. To verify a packet, run `python -m nomad.feed verify feed/latest.json`. Details are in [docs/FEED.md](docs/FEED.md).
