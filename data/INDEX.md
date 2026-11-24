@@ -2,7 +2,7 @@
 
 Single entry point for any agent entering this repository. Every measurement maps to its file, timestamp, result, and status. If a number is not in this index, it does not exist for reporting purposes.
 
-Last updated: 2026-11-24 19:06 UTC
+Last updated: 2026-11-24 19:17 UTC
 
 ## Core State
 
@@ -89,6 +89,9 @@ Last updated: 2026-11-24 19:06 UTC
 | Selfedit | nomad/selfedit.py | bounded scalar tweaks, test-gated, revert guard, journal-biased propose |
 | Dreamlog | nomad/dreamlog.py | write-only journal; NOW readable by selfedit.propose |
 | Organism | nomad/organism.py | status aggregator; NOW computes informative_rate_flag |
+| Interlink | nomad/interlink.py | external control surface: inspect/observe/control/evidence; mutations deny-by-default |
+| Interlink permissions | nomad/interlink_permissions.py | three-layer gate; no self-authorization |
+| Interlink receipts | nomad/interlink_receipts.py | append-only redacted export |
 | Extended enum | nomad/extended_enum.py | Abs/Min/Max/Sub/Add/FloorDiv, prior-ordered | default OFF |
 | Extended genesis | nomad/extended_genesis.py | NOMAD_EXTENDED=on | default OFF |
 | Prefer ops | nomad/prefer_ops.py | prior preferring fastest operators | measured, not causal |
