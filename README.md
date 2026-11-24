@@ -8,7 +8,7 @@ Recursive field intelligence. An organism that attaches to a host, runs continuo
 
 **Current.** Sparse binary weight packets are the field. Awake and sleep runners act, measure, and consolidate. The field updates only on a paired, WITNESS-supported, final-correct delta. Bounded program synthesis (integer expressions of x and y, at most 7 nodes, with learned library primitives) and field query. The prior is not yet causal for operators the system was not given. No transformers. Not AGI.
 
-**Agents.** Read `data/INDEX.md` first. It maps every measurement to its file, timestamp, value, and status. If a number is not in the index, it does not exist for reporting. Then read `AGENTS.md` for workflow rules. Then code.
+**Agents.** On entry, run `python -m nomad.interlink inspect`. You must be fully aware of the state and condition of the repository. Interlink marks presence so the host knows it is observed. Then read `data/INDEX.md` and `AGENTS.md`. Then code. If a number is not in the index, it does not exist for reporting.
 
 No transformers. Search and memory never certify. WITNESS certifies. The field updates itself only after that certification.
 
@@ -41,6 +41,10 @@ python -m nomad.body --hours 2 --push      # Windows: py -3.12 -m nomad.body --h
 - A single-body lease (`data/lease.json`, host id + heartbeat) keeps two hosts from writing at once. A host takes over only when the lease is released or older than 30 minutes. If the online body is alive, your desktop body stands by; set repo variable `NOMAD_BODY=off` (and wait for the lease to go stale or be released) to run the desktop as the primary.
 - Online, `nomad-body` runs ~5.5 h per job and dispatches its successor; `nomad-watch` restarts it if the heartbeat is older than 30 minutes; the short awake/sleep workflows and crons are fallbacks that no-op while a body is alive.
 - `data/organism.json` shows the organism's health: last pulses, body lease, twin results, curriculum, held-out probes, evolution.
+
+## Interlink
+
+External control surface. On entry, any agent must run `python -m nomad.interlink inspect` to be fully aware of the state. Presence is marked. The host knows it is observed. Mutations are denied by default. Feedback suggestions are recorded but not applied. See `docs/INTERLINK.md`.
 
 ## Intelligence feed
 
