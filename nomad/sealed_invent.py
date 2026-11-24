@@ -1,7 +1,7 @@
 """Sealed comparison with inventions inside the enumerator.
 
 PLAN_V5. Measures whether the field certifies absdiff, median, and clamp
-with fewer evaluations than cold when inventions are available.
+with fewer evaluations than cold when the prior changes search order.
 Does not modify the continuous loop.
 
 Set NOMAD_INVENT_ENUM=on. Default OFF.
@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 from typing import Any
 
-from .invent_enum import compare, enabled
+from .extended_enum import compare, enabled
 from .genesis import GrammarPrior, load_prior_file
 
 def _prior_path() -> Path:
@@ -31,7 +31,7 @@ def sealed() -> dict[str, Any]:
         "cold": compare(cold),
         "field": compare(field),
         "inventions": True,
-        "note": "Inventions available. Prior recorded. Causal order change requires inventions inside enumerator.",
+        "note": "Extended enumerator. Prior changes operator order. Causal if field evaluations differ from cold.",
     }
 
 def main() -> int:
