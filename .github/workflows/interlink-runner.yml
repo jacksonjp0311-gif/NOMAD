@@ -1,0 +1,27 @@
+name: interlink-runner
+# Separate from the body. Watches for interconnects. Writes a snap when a new
+# presence mark is detected. Does not touch the body. Cron every 15 minutes.
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Snap if new presence
+        run: |
+          python -c "
+          from nomad.route.agent import snap
+          from nomad.interlink_presence import recent
+          if recent(1):
+              print(snap())
+          else:
+              print('no presence')
+          "
