@@ -8,6 +8,8 @@ Recursive field intelligence. An organism that attaches to a host, runs continuo
 
 **Current.** Sparse binary weight packets are the field. Awake and sleep runners act, measure, and consolidate. The field updates only on a paired, WITNESS-supported, final-correct delta. Bounded program synthesis (integer expressions of x and y, at most 7 nodes, with learned library primitives) and field query. The prior is not yet causal for operators the system was not given. No transformers. Not AGI.
 
+**Agents.** Read `data/INDEX.md` first. It maps every measurement to its file, timestamp, value, and status. If a number is not in the index, it does not exist for reporting. Then read `AGENTS.md` for workflow rules. Then code.
+
 No transformers. Search and memory never certify. WITNESS certifies. The field updates itself only after that certification.
 
 ---
