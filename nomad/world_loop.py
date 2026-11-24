@@ -8,7 +8,7 @@ sleep learner. Held-out families are probed, never trained.
 
 Probe-failure receipt: when a held-out probe returns none, the result records
 which library primitives were available and which were tried. The none stays
-visible.
+visible. An append-only log is written via probe_receipt.
 """
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from . import field_queue, sense, variation
+from . import field_queue, probe_receipt, sense, variation
 from .curriculum import choose
 from .paths import data_root
 from .scoreboard import record_arm, recent as board_recent
@@ -128,7 +128,7 @@ def probe_heldout(field: WorldPrior | None = None, write: bool = True, vstate: A
     """Cold vs field on every never-trained family at its fixed budget.
 
     When kind is none, a failure receipt lists available library primitives
-    and which were tried. The none stays visible.
+    and which were tried. The none stays visible. Append-only log via probe_receipt.
     """
     if field is None:
         field = load_world_prior()
@@ -160,6 +160,8 @@ def probe_heldout(field: WorldPrior | None = None, write: bool = True, vstate: A
                 "not_tried": [p for p in available if p not in tried],
                 "note": "Probe returned none. Primitives listed. Not a capability claim.",
             }
+            if write:
+                probe_receipt.write_failure(name, kind, available, tried)
         rows[name] = row
     result = {"probes": rows, "field_witnessed": field.witnessed, "library_size": len(field.library),
               "note": "Never-trained families, fixed budgets. Not a general capability claim.", "ts": _now()}
