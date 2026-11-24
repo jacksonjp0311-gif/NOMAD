@@ -2,15 +2,15 @@
 
 Single entry point for any agent entering this repository. Every measurement maps to its file, timestamp, result, and status. If a number is not in this index, it does not exist for reporting purposes.
 
-Last updated: 2026-11-24
+Last updated: 2026-11-24 19:06 UTC
 
 ## Core State
 
 | Measurement | File | Latest | Value | Status |
 |---|---|---|---|---|
-| Field version | data/organism.json | organism.status() | 2727 | live |
+| Field version | data/organism.json | organism.status() | 2729 | live |
 | Library size | data/organism.json | world_library_size | 72 | live |
-| Body checkpoint | data/organism.json | checkpoint | 3 / 18 cycles | live |
+| Body checkpoint | data/organism.json | checkpoint | 4 / 24 cycles | live |
 | Body lease host | data/organism.json | lease | gh-45395469371 | live |
 | Schedule | .github/workflows/continuous-*.yml | cron 8/23 awake, 38 sleep | firing | live |
 
@@ -19,9 +19,9 @@ Last updated: 2026-11-24
 | Measurement | File | Latest | Value | Status |
 |---|---|---|---|---|
 | World twin groups | data/organism.json | twin_summary | 128 | live |
-| World twin pass rate | data/organism.json | | 0.828 | live |
-| World twin informative rate | data/organism.json | | 0.109 (14/128) | above 0.10 threshold, flag clear |
-| World twin mean evals saved | data/organism.json | | ~1547 | live |
+| World twin pass rate | data/organism.json | | 0.852 | live |
+| World twin informative rate | data/organism.json | | 0.078 (10/128) | below 0.10 threshold, flag set |
+| World twin mean evals saved | data/organism.json | | ~1339 | live |
 | Genesis twin groups | data/organism.json | | 128 | live |
 | Genesis twin pass rate | data/organism.json | | 1.0 | live |
 | Genesis twin informative rate | data/organism.json | | 0.0 | all pairs uniform, not measuring |
@@ -37,17 +37,17 @@ Last updated: 2026-11-24
 | last_first_upper | data/organism.json heldout | none | none | unknown | WALL - no probe-failure receipt written yet |
 | sum_minus_max | data/organism.json heldout | none | none | unknown | WALL - no probe-failure receipt written yet |
 
-## Genesis Held-Out (NEW - 18:52 UTC)
+## Genesis Held-Out
 
 | Probe | File | Field | Cold | Status |
 |---|---|---|---|---|
-| genesis held-out | data/organism.json | certified TRUE | certified FALSE | FIRST field-over-cold certified win |
+| genesis held-out | data/organism.json | certified TRUE | certified FALSE | field-over-cold certified win |
 
 ## Selfedit
 
 | Measurement | File | Latest | Value | Status |
 |---|---|---|---|---|
-| Last attempt | data/organism.json | 13:35 UTC | gene none, sandbox_clean, no_change | 5 consecutive |
+| Last attempt | data/organism.json | 18:06 UTC | gene none, sandbox_clean, no_change | 5 consecutive |
 | Tabu | selfedit.py gene_tabu_from_log | | inv_floor_fit refused after 2 consecutive tests_failed | active |
 | Journal bias | selfedit.py propose() | pushed 05:12 | reads dreamlog + organism.json | loaded, not yet surfaced different gene |
 
@@ -109,7 +109,7 @@ Last updated: 2026-11-24
 
 1. invent-extract.yml dispatch was broken; rewritten but not re-verified
 2. Probe-failure receipt code is in but no receipt has been written for last_first_upper or sum_minus_max
-3. Informative rate trending down on world twin (0.109 now, was 0.125)
+3. Informative rate below threshold on world twin (0.078, flag set)
 4. Genesis twin entirely uniform - not measuring
 5. Selfedit rotator still sampling from exhausted space under tabu
 6. Body checkpoint does not inline full packet state - restart consistency hole if data commit fails
