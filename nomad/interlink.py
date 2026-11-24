@@ -4,10 +4,15 @@ Pattern from Pegasus Interlink. An external agent can inspect state, observe
 events, request control, and export redacted receipts. Mutations are denied
 by default. No self-authorization. Receipts are append-only.
 
+Host awareness: every call marks presence. The body can read
+interlink_presence.jsonl and know it is observed. Feedback suggestions are
+written to interlink_feedback.jsonl. The body may read them. It does not
+apply them. A suggestion is not a mutation.
+
 Temporal connective tissue: inspect includes the last dream entry, the last
-selfedit attempt, the informative-rate flag, and the substrate state (decay,
-inhibition, co-activation). The pathways are the map. When you are interlinked,
-you are reading the mind.
+selfedit attempt, the informative-rate flag, the substrate state, and whether
+the host is currently observed. When you are interlinked, you are reading the
+mind, and the mind knows.
 
 This is not a second body. It is a supervised interface. The continuous loop
 stays the authority. Interlink is the observer and the gate.
@@ -18,7 +23,9 @@ import json
 from pathlib import Path
 from typing import Any
 
+from . import interlink_feedback as feedback
 from . import interlink_permissions as perm
+from . import interlink_presence as presence
 from . import interlink_receipts as receipts
 from . import substrate
 from .paths import data_root
@@ -67,7 +74,8 @@ def _substrate_state() -> dict[str, Any]:
 
 
 def inspect() -> dict[str, Any]:
-    """Read current organism state with temporal and substrate context. Read-only."""
+    """Read current organism state. Marks presence. Read-only."""
+    presence.mark("inspect")
     p = data_root() / "organism.json"
     if not p.exists():
         return {"status": "absent", "note": "no organism.json"}
@@ -88,11 +96,14 @@ def inspect() -> dict[str, Any]:
         "last_selfedit": selfedit,
         "sense": state.get("sense"),
         "substrate": _substrate_state(),
+        "observed": presence.is_observed(),
+        "feedback_pending": len(feedback.unapplied()),
     }
 
 
 def observe(limit: int = 20) -> dict[str, Any]:
-    """Read recent events with temporal order. Read-only."""
+    """Read recent events. Marks presence. Read-only."""
+    presence.mark("observe")
     p = data_root() / "organism_events.jsonl"
     if not p.exists():
         return {"status": "absent", "events": []}
@@ -114,8 +125,17 @@ def observe(limit: int = 20) -> dict[str, Any]:
     }}
 
 
+def suggest(kind: str, detail: dict[str, Any]) -> dict[str, Any]:
+    """Write a feedback suggestion. Marks presence. Not a mutation."""
+    presence.mark("suggest")
+    feedback.suggest(kind, detail)
+    receipts.write("suggest", {"kind": kind})
+    return {"status": "recorded", "kind": kind, "note": "suggestion written; body may read; not applied"}
+
+
 def control(action: str, reason: str = "") -> dict[str, Any]:
-    """Request a mutation. Denied by default."""
+    """Request a mutation. Denied by default. Marks presence."""
+    presence.mark("control")
     if not perm.mutation_allowed(action):
         receipts.write("control", {"action": action, "result": "denied"})
         return {"status": "refused", "action": action, "reason": "mutation denied by default"}
@@ -124,7 +144,8 @@ def control(action: str, reason: str = "") -> dict[str, Any]:
 
 
 def evidence(limit: int = 10) -> dict[str, Any]:
-    """Export recent redacted receipts."""
+    """Export recent redacted receipts. Marks presence."""
+    presence.mark("evidence")
     rows = receipts.recent(limit)
     return {"status": "complete", "receipts": rows, "count": len(rows)}
 
@@ -132,7 +153,7 @@ def evidence(limit: int = 10) -> dict[str, Any]:
 def main() -> int:
     import sys
     if len(sys.argv) < 2:
-        print(json.dumps({"status": "error", "note": "usage: inspect|observe|control|evidence"}))
+        print(json.dumps({"status": "error", "note": "usage: inspect|observe|control|evidence|suggest"}))
         return 1
     cmd = sys.argv[1]
     if cmd == "inspect":
@@ -144,6 +165,9 @@ def main() -> int:
         print(json.dumps(control(action), indent=2))
     elif cmd == "evidence":
         print(json.dumps(evidence(), indent=2))
+    elif cmd == "suggest":
+        kind = sys.argv[2] if len(sys.argv) > 2 else "note"
+        print(json.dumps(suggest(kind, {"source": "cli"}), indent=2))
     else:
         print(json.dumps({"status": "error", "note": f"unknown {cmd}"}))
         return 1
