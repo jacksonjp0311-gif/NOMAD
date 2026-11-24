@@ -1,10 +1,10 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-24T08:01:30Z",
+  "ts": "2026-11-24T08:12:22Z",
   "sense": {
-    "last_pair": "2026-11-24T08:00:29Z",
-    "last_world_pair": "2026-11-24T08:00:29Z",
-    "last_sleep": "2026-11-24T07:03:42Z"
+    "last_pair": "2026-11-24T08:11:21Z",
+    "last_world_pair": "2026-11-24T08:11:21Z",
+    "last_sleep": null
   },
   "think": {
     "curriculum_open_levels": {
@@ -32,14 +32,14 @@
     "world_twin": {
       "estimator": "rloo",
       "groups": 128,
-      "pass_rate": 0.953125,
-      "all_pass_rate": 0.90625,
-      "all_fail_rate": 0.0,
-      "informative_rate": 0.09375,
-      "informative_pairs": 12,
+      "pass_rate": 0.91015625,
+      "all_pass_rate": 0.84375,
+      "all_fail_rate": 0.0234375,
+      "informative_rate": 0.1328125,
+      "informative_pairs": 17,
       "mean_treatment_advantage": 1.0,
-      "both_certified_pairs_with_cost": 116,
-      "mean_evaluations_saved": 1001.1810344827586,
+      "both_certified_pairs_with_cost": 108,
+      "mean_evaluations_saved": 1016.6018518518518,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     }
   },
@@ -47,7 +47,7 @@
     "queued": 0,
     "inflight": 0,
     "certified_queued": 0,
-    "field_version": 2516,
+    "field_version": 2522,
     "genesis_heldout": {
       "field_certified": true,
       "cold_certified": false
@@ -62,103 +62,6 @@
   },
   "evolve": {
     "recent": [
-      {
-        "organ": "selfedit",
-        "seed": 361008265,
-        "gene": "inv_floor_fit",
-        "before": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 2,
-          "inv_const_depth": 1,
-          "inv_rounds": 2,
-          "inv_floor_fit": 0
-        },
-        "after": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 2,
-          "inv_const_depth": 1,
-          "inv_rounds": 2,
-          "inv_floor_fit": 1
-        },
-        "dev_before": {
-          "certified": 6,
-          "evaluations": 145260,
-          "tasks": 16
-        },
-        "dev_after": {
-          "certified": 8,
-          "evaluations": 134908,
-          "tasks": 16
-        },
-        "dev_losses": [],
-        "keep_before": {
-          "certified": 95,
-          "evaluations": 636283,
-          "tasks": 122
-        },
-        "keep_after": {
-          "certified": 95,
-          "evaluations": 636283,
-          "tasks": 122
-        },
-        "keep_losses": [],
-        "window_families": [
-          "br_drop",
-          "br_head_rep",
-          "br_itos_len",
-          "br_len_tag",
-          "br_num_first",
-          "br_rep",
-          "br_rot_rev",
-          "br_rot_up",
-          "br_rotate",
-          "br_up_take",
-          "br_at",
-          "br_chop",
-          "br_digits",
-          "br_tail",
-          "br_take",
-          "br_sum_len",
-          "wt_absent_class",
-          "wt_book_carts",
-          "wt_bulb_packs",
-          "wt_crate_jars",
-          "wt_desk_grid",
-          "wt_eggs_loose",
-          "wt_fence_bed"
-        ],
-        "window_pairs": 42,
-        "recorded": {
-          "certified": 23,
-          "evaluations": 4684,
-          "tasks": 23
-        },
-        "replay_before": {
-          "certified": 23,
-          "evaluations": 12956,
-          "tasks": 23
-        },
-        "replay_after": {
-          "certified": 23,
-          "evaluations": 12956,
-          "tasks": 23
-        },
-        "replay_losses": [],
-        "replay_vs_recorded": {
-          "certified_recorded": 23,
-          "certified_replay_after": 23
-        },
-        "accepted": false,
-        "reason": "tests_failed",
-        "ts": "2026-11-24T02:36:10Z",
-        "sandbox_clean": true
-      },
       {
         "organ": "selfedit",
         "seed": 3808589956,
@@ -547,41 +450,40 @@
         "reason": "tests_failed",
         "ts": "2026-11-24T07:07:38Z",
         "sandbox_clean": true
+      },
+      {
+        "organ": "selfedit",
+        "seed": 3499308566,
+        "gene": "none",
+        "before": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "after": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "accepted": false,
+        "reason": "no_change",
+        "ts": "2026-11-24T08:12:22Z",
+        "sandbox_clean": true
       }
     ]
   },
   "heartbeat": {
     "recent_events": [
-      {
-        "ts": "2026-11-24T07:45:25Z",
-        "kind": "body_cycle_error",
-        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
-      },
-      {
-        "ts": "2026-11-24T07:47:11Z",
-        "kind": "body_cycle_error",
-        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
-      },
-      {
-        "ts": "2026-11-24T07:48:59Z",
-        "kind": "body_cycle_error",
-        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
-      },
-      {
-        "ts": "2026-11-24T07:50:46Z",
-        "kind": "body_cycle_error",
-        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
-      },
-      {
-        "ts": "2026-11-24T07:52:35Z",
-        "kind": "body_cycle_error",
-        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
-      },
-      {
-        "ts": "2026-11-24T07:54:21Z",
-        "kind": "body_cycle_error",
-        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
-      },
       {
         "ts": "2026-11-24T07:56:08Z",
         "kind": "body_cycle_error",
@@ -601,15 +503,45 @@
         "ts": "2026-11-24T08:01:30Z",
         "kind": "body_cycle_error",
         "note": "AttributeError(\"'str' object has no attribute 'name'\")"
+      },
+      {
+        "ts": "2026-11-24T08:03:20Z",
+        "kind": "body_cycle_error",
+        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
+      },
+      {
+        "ts": "2026-11-24T08:05:07Z",
+        "kind": "body_cycle_error",
+        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
+      },
+      {
+        "ts": "2026-11-24T08:06:55Z",
+        "kind": "body_cycle_error",
+        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
+      },
+      {
+        "ts": "2026-11-24T08:08:43Z",
+        "kind": "body_cycle_error",
+        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
+      },
+      {
+        "ts": "2026-11-24T08:10:34Z",
+        "kind": "body_cycle_error",
+        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
+      },
+      {
+        "ts": "2026-11-24T08:12:22Z",
+        "kind": "body_cycle_error",
+        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
       }
     ],
     "body_lease": {
       "host": "gh-45305362917",
-      "heartbeat": "2026-11-24T08:01:30Z",
-      "age_min": 0.009319866666666668,
+      "heartbeat": "2026-11-24T08:12:22Z",
+      "age_min": 0.00686405,
       "alive": true,
-      "cycles": 90,
-      "cycles_per_hour": 101.6,
+      "cycles": 108,
+      "cycles_per_hour": 101.3,
       "released": false
     }
   },
