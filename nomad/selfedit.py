@@ -2,6 +2,10 @@
 
 Same-gene refuse: after two consecutive test failures on the same gene from
 the same genome, that gene is tabu until a different gene is accepted.
+
+Journal bias: propose() reads the latest dream entry and organism.json to
+tilt gene sampling. Soft prior over the existing discrete gene set. The
+journal stays observational; this is proposal ordering, not learning.
 """
 from __future__ import annotations
 
@@ -61,13 +65,81 @@ def _key(genes: dict[str, Any]) -> str:
     return json.dumps({k: genes[k] for k in genome.INVENT_GENES}, sort_keys=True)
 
 
+def _journal_context() -> dict[str, Any]:
+    """Read the latest dream entry for held-out misses. Observational."""
+    p = data_root() / "dreams" / "journal.jsonl"
+    if not p.exists():
+        return {"heldout_none": [], "latest_ts": None}
+    last = None
+    try:
+        for line in p.read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                try:
+                    last = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+    except OSError:
+        return {"heldout_none": [], "latest_ts": None}
+    if not isinstance(last, dict):
+        return {"heldout_none": [], "latest_ts": None}
+    ev = last.get("evidence") or last.get("heldout") or {}
+    none = []
+    if isinstance(ev, dict):
+        for k, v in ev.items():
+            if v == "none":
+                none.append(str(k))
+        ho = ev.get("heldout_none")
+        if isinstance(ho, list):
+            none.extend(str(x) for x in ho)
+    return {"heldout_none": sorted(set(none)), "latest_ts": last.get("ts")}
+
+
+def _organism_context() -> dict[str, Any]:
+    """Read organism.json for informative-rate flag and held-out state."""
+    p = data_root() / "organism.json"
+    if not p.exists():
+        return {"info_flag": False, "heldout_none": []}
+    try:
+        org = json.loads(p.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {"info_flag": False, "heldout_none": []}
+    act = org.get("act_verify") or {}
+    flag = (act.get("informative_rate_flag") or {}).get("below_threshold", False)
+    rem = org.get("remember") or {}
+    ho = rem.get("world_heldout") or rem.get("genesis_heldout") or {}
+    none = sorted(k for k, v in ho.items() if v == "none")
+    return {"info_flag": bool(flag), "heldout_none": none}
+
+
+def _biased_order(rng: random.Random) -> list[str]:
+    """Gene order: journal and organism tilt first picks, then uniform."""
+    base = list(genome.INVENT_GENES)
+    ctx_j = _journal_context()
+    ctx_o = _organism_context()
+    preferred: list[str] = []
+    # Held-out misses tilt toward floor_fit and rounds.
+    if ctx_j["heldout_none"] or ctx_o["heldout_none"]:
+        for g in ("inv_floor_fit", "inv_rounds"):
+            if g in base and g not in preferred:
+                preferred.append(g)
+    # Low informative rate tilts toward widening constants.
+    if ctx_o["info_flag"]:
+        g = "inv_max_constants"
+        if g in base and g not in preferred:
+            preferred.append(g)
+    rest = [g for g in base if g not in preferred]
+    rng.shuffle(rest)
+    return preferred + rest
+
+
 def propose(genes: dict[str, Any], seed: int, tabu: set | None = None,
             gene_tabu: set | None = None) -> tuple[dict[str, Any], str]:
     rng = random.Random(f"selfedit:{seed}")
     tabu = tabu or set()
     gene_tabu = gene_tabu or set()
+    order = _biased_order(rng)
     for _ in range(64):
-        gene = rng.choice(genome.INVENT_GENES)
+        gene = rng.choice(order)
         if gene in gene_tabu:
             continue
         cand = dict(genes)
