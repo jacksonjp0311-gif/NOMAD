@@ -4,6 +4,10 @@ Pattern from Pegasus Interlink. An external agent can inspect state, observe
 events, request control, and export redacted receipts. Mutations are denied
 by default. No self-authorization. Receipts are append-only.
 
+Temporal connective tissue: inspect now includes the last dream entry, the
+last selfedit attempt, and the informative-rate flag. Observe returns the
+recent event stream with timestamps. The pathways are the map.
+
 This is not a second body. It is a supervised interface. The continuous loop
 stays the authority. Interlink is the observer and the gate.
 """
@@ -18,15 +22,50 @@ from . import interlink_receipts as receipts
 from .paths import data_root
 
 
+def _read_json(path: Path) -> dict[str, Any] | None:
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text())
+    except (json.JSONDecodeError, OSError):
+        return None
+
+
+def _last_dream() -> dict[str, Any] | None:
+    p = data_root() / "dreams" / "journal.jsonl"
+    if not p.exists():
+        return None
+    last = None
+    try:
+        for line in p.read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                try:
+                    last = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+    except OSError:
+        return None
+    return last if isinstance(last, dict) else None
+
+
+def _last_selfedit(state: dict[str, Any]) -> dict[str, Any] | None:
+    recent = state.get("evolve", {}).get("recent") or []
+    for r in reversed(recent):
+        if r.get("organ") == "selfedit":
+            return {"gene": r.get("gene"), "reason": r.get("reason"), "ts": r.get("ts"), "accepted": r.get("accepted")}
+    return None
+
+
 def inspect() -> dict[str, Any]:
-    """Read current organism state. Read-only."""
+    """Read current organism state with temporal context. Read-only."""
     p = data_root() / "organism.json"
     if not p.exists():
         return {"status": "absent", "note": "no organism.json"}
-    try:
-        state = json.loads(p.read_text())
-    except (json.JSONDecodeError, OSError) as e:
-        return {"status": "error", "note": str(e)[:200]}
+    state = _read_json(p)
+    if state is None:
+        return {"status": "error", "note": "organism.json unreadable"}
+    dream = _last_dream()
+    selfedit = _last_selfedit(state)
     receipts.write("inspect", {"field_version": state.get("remember", {}).get("field_version")})
     return {
         "status": "complete",
@@ -35,11 +74,14 @@ def inspect() -> dict[str, Any]:
         "lease": state.get("heartbeat", {}).get("body_lease", {}),
         "heldout": state.get("remember", {}).get("world_heldout"),
         "informative_rate_flag": state.get("act_verify", {}).get("informative_rate_flag"),
+        "last_dream": {"ts": dream.get("ts"), "kind": dream.get("kind")} if dream else None,
+        "last_selfedit": selfedit,
+        "sense": state.get("sense"),
     }
 
 
 def observe(limit: int = 20) -> dict[str, Any]:
-    """Read recent events. Read-only."""
+    """Read recent events with temporal order. Read-only."""
     p = data_root() / "organism_events.jsonl"
     if not p.exists():
         return {"status": "absent", "events": []}
@@ -55,7 +97,10 @@ def observe(limit: int = 20) -> dict[str, Any]:
         return {"status": "error", "events": []}
     recent = lines[-limit:]
     receipts.write("observe", {"count": len(recent)})
-    return {"status": "complete", "events": recent, "total": len(lines)}
+    return {"status": "complete", "events": recent, "total": len(lines), "span": {
+        "first": recent[0].get("ts") if recent else None,
+        "last": recent[-1].get("ts") if recent else None,
+    }}
 
 
 def control(action: str, reason: str = "") -> dict[str, Any]:
