@@ -3,6 +3,9 @@
 Writes ``data/organism.json``. Reads every organ's own records; it computes
 nothing new and certifies nothing. Heartbeat gaps found by the watch
 workflow are appended to ``data/organism_events.jsonl``.
+
+Informative-rate flag: when world twin informative_rate drops below 0.10,
+the organism records a flag. Descriptive only. Not a learning claim.
 """
 from __future__ import annotations
 
@@ -13,6 +16,8 @@ from pathlib import Path
 from typing import Any
 
 from .paths import data_root
+
+INFORMATIVE_THRESHOLD = 0.10
 
 
 def _now() -> str:
@@ -82,6 +87,10 @@ def status(write: bool = True) -> dict[str, Any]:
     evolve = _jsonl_tail(root / "evolution.jsonl", 5)
     events = _jsonl_tail(events_path(), 10)
     probes = (world_heldout.get("probes") or {})
+    world_twin = twin_summary(world_rows)
+    genesis_twin = twin_summary(genesis_rows)
+    info_rate = world_twin.get("informative_rate") or 0
+    info_flag = info_rate < INFORMATIVE_THRESHOLD
     report = {
         "schema": "nomad.organism.v1",
         "ts": _now(),
@@ -89,8 +98,10 @@ def status(write: bool = True) -> dict[str, Any]:
                   "last_sleep": last.get("sleep")},
         "think": {"curriculum_open_levels": open_levels(family_records(world_rows))},
         "act_verify": {
-            "genesis_twin": twin_summary(genesis_rows),
-            "world_twin": twin_summary(world_rows),
+            "genesis_twin": genesis_twin,
+            "world_twin": world_twin,
+            "informative_rate_flag": {"below_threshold": info_flag, "rate": info_rate,
+                                      "threshold": INFORMATIVE_THRESHOLD},
         },
         "remember": {**field_queue.stats(),
                      "genesis_heldout": {"field_certified": (heldout.get("field") or {}).get("certified"),
@@ -124,7 +135,6 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(log_event(a.kind, minutes=a.minutes, action=a.action, note=a.note)))
         status()
     return 0
-
 
 if __name__ == "__main__":
     raise SystemExit(main())
