@@ -14,6 +14,9 @@ the outcome records an abstain. Certification still requires WITNESS and final.
 Actor/learner split: awake is an actor. It reads the field version,
 attempts, and enqueues a versioned packet. Sleep is the single learner.
 Control never enqueues and never writes packets, prior, or fitness.
+
+Interlink apply: sleep checks for unapplied substrate suggestions, sets the
+flag for that cycle only, runs, records, and clears. One variable. Reversible.
 """
 from __future__ import annotations
 
@@ -266,11 +269,16 @@ def awake(
 
 
 def sleep(*, arm: str = "treatment") -> dict[str, Any]:
-    """Consolidation, independent CA evaluation, rewrite proposal. Control freezes."""
+    """Consolidation, independent CA evaluation, rewrite proposal. Control freezes.
+
+    Applies one unapplied Interlink substrate suggestion for this cycle only.
+    """
     _ensure()
     snap = telemetry()
     if arm != "treatment":
         return {"mode": "sleep", "arm": arm, "status": "frozen", "telemetry": snap, "ts": _now()}
+    from .interlink_apply import apply_pending, clear
+    applied = apply_pending()
     learned = consolidate()
     pruned = prune_pending()
     from .retention import trim
@@ -280,6 +288,7 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
     merged = merge_similar()
     rules = try_rules(steps=1)
     rewrite_result = rewrite()
+    clear()
     row = {
         "mode": "sleep",
         "arm": arm,
@@ -291,6 +300,7 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
         "merged": merged,
         "rules": rules,
         "rewrite": rewrite_result,
+        "interlink_applied": applied,
         "telemetry": snap,
         "ts": _now(),
     }
