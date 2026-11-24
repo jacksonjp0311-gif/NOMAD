@@ -1,9 +1,9 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-24T12:34:22Z",
+  "ts": "2026-11-24T12:37:52Z",
   "sense": {
-    "last_pair": "2026-11-24T12:33:13Z",
-    "last_world_pair": "2026-11-24T12:33:13Z",
+    "last_pair": "2026-11-24T12:36:51Z",
+    "last_world_pair": "2026-11-24T12:36:51Z",
     "last_sleep": null
   },
   "think": {
@@ -32,14 +32,14 @@
     "world_twin": {
       "estimator": "rloo",
       "groups": 128,
-      "pass_rate": 0.95703125,
-      "all_pass_rate": 0.9140625,
+      "pass_rate": 0.97265625,
+      "all_pass_rate": 0.9453125,
       "all_fail_rate": 0.0,
-      "informative_rate": 0.0859375,
-      "informative_pairs": 11,
+      "informative_rate": 0.0546875,
+      "informative_pairs": 7,
       "mean_treatment_advantage": 1.0,
-      "both_certified_pairs_with_cost": 117,
-      "mean_evaluations_saved": 795.6923076923077,
+      "both_certified_pairs_with_cost": 121,
+      "mean_evaluations_saved": 710.7438016528926,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     }
   },
@@ -47,7 +47,7 @@
     "queued": 0,
     "inflight": 0,
     "certified_queued": 0,
-    "field_version": 2662,
+    "field_version": 2664,
     "genesis_heldout": {
       "field_certified": true,
       "cold_certified": false
@@ -212,16 +212,6 @@
   "heartbeat": {
     "recent_events": [
       {
-        "ts": "2026-11-24T12:17:03Z",
-        "kind": "body_cycle_error",
-        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
-      },
-      {
-        "ts": "2026-11-24T12:18:58Z",
-        "kind": "body_cycle_error",
-        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
-      },
-      {
         "ts": "2026-11-24T12:20:53Z",
         "kind": "body_cycle_error",
         "note": "AttributeError(\"'str' object has no attribute 'name'\")"
@@ -260,16 +250,26 @@
         "ts": "2026-11-24T12:34:22Z",
         "kind": "body_cycle_error",
         "note": "AttributeError(\"'str' object has no attribute 'name'\")"
+      },
+      {
+        "ts": "2026-11-24T12:36:20Z",
+        "kind": "body_cycle_error",
+        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
+      },
+      {
+        "ts": "2026-11-24T12:37:52Z",
+        "kind": "body_cycle_error",
+        "note": "AttributeError(\"'str' object has no attribute 'name'\")"
       }
     ],
     "body_lease": {
       "host": "gh-45305362917",
-      "heartbeat": "2026-11-24T12:34:22Z",
-      "age_min": 0.0043848333333333335,
-      "alive": true,
-      "cycles": 528,
-      "cycles_per_hour": 97.2,
-      "released": false
+      "heartbeat": "2026-11-24T12:37:52Z",
+      "age_min": 0.011770233333333333,
+      "alive": false,
+      "cycles": 533,
+      "cycles_per_hour": 97.1,
+      "released": true
     }
   },
   "boundaries": "No transformers. WITNESS certifies; search and memory never do. Bounded programs only."
