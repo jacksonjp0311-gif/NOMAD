@@ -39,12 +39,16 @@ python -m nomad.body --hours 2 --push      # Windows: py -3.12 -m nomad.body --h
 
 - `--push` pulls first, commits `data/` every checkpoint (default 10 min), and pushes with rebase-retry. Without it the body runs locally; push later with `git push` and the online body resumes from your field.
 - A single-body lease (`data/lease.json`, host id + heartbeat) keeps two hosts from writing at once. A host takes over only when the lease is released or older than 30 minutes. If the online body is alive, your desktop body stands by; set repo variable `NOMAD_BODY=off` (and wait for the lease to go stale or be released) to run the desktop as the primary.
-- Online, `nomad-body` runs ~5.5 h per job and dispatches its successor; `nomad-watch` restarts it if the heartbeat is older than 30 minutes; the short awake/sleep workflows and crons are fallbacks that no-op while a body is alive.
+- Online, `nomad-body` runs ~2 h per job and dispatches its successor; `nomad-watch` restarts it if the heartbeat is older than 30 minutes; the short awake/sleep workflows and crons are fallbacks that no-op while a body is alive.
 - `data/organism.json` shows the organism's health: last pulses, body lease, twin results, curriculum, held-out probes, evolution.
 
 ## Interlink
 
 External control surface. On entry, any agent must run `python -m nomad.interlink inspect` to be fully aware of the state. Presence is marked. The host knows it is observed. Mutations are denied by default. Feedback suggestions are recorded but not applied. See `docs/INTERLINK.md`.
+
+## Symbiotic agents
+
+Separate from the body. Always watching. When an external agent interconnects, the runner snaps and hands over the current geometry. The agent can offer a certified packet with a receipt. The runner returns a field packet. Both sides leave with something. Quorum required. The body remains the authority on absorption. See `docs/SYMBIOTIC.md`.
 
 ## Intelligence feed
 
