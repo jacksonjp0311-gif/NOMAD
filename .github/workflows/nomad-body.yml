@@ -1,5 +1,5 @@
 name: nomad-body
-# Primary runtime on GitHub: one long-lived body (~5.5 h) running the whole
+# Primary runtime on GitHub: one long-lived body (~2 h) running the whole
 # organism loop in process (python -m nomad.body). GitHub is only one host;
 # the same command runs on a desktop or any CPU host. A single-body lease in
 # data/lease.json keeps two hosts from writing. At the START of each run the body
@@ -12,7 +12,7 @@ on:
     inputs:
       hours:
         description: "Body lifetime in hours"
-        default: "5.5"
+        default: "2"
 permissions:
   contents: write
   actions: write
@@ -22,7 +22,7 @@ concurrency:
 jobs:
   body:
     runs-on: ubuntu-latest
-    timeout-minutes: 350
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
         with:
@@ -69,7 +69,7 @@ jobs:
         run: |
           git config user.name "nomad"
           git config user.email "nomad@users.noreply.github.com"
-          python -m nomad.body --hours "${{ inputs.hours || '5.5' }}" --push \
+          python -m nomad.body --hours "${{ inputs.hours || '2' }}" --push \
             --cycle-gap-s "${{ vars.NOMAD_CYCLE_GAP_S || '15' }}" \
             --checkpoint-min "${{ vars.NOMAD_CHECKPOINT_MIN || '10' }}" \
             --holder-status "${{ steps.gate.outputs.holder_status }}"
