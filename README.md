@@ -2,9 +2,11 @@
 
 # NOMAD
 
-Recursive field intelligence.
+Recursive field intelligence. An organism that attaches to a host, runs continuous runners, and expands its field by measured, certified deltas.
 
-Sparse binary weight packets are the field. The field is the mind. Awake and sleep runners act, measure, and consolidate. Agents propose, select tools, and write outcomes back into the packets. The system improves only when a paired twin measurement shows a certified difference: WITNESS-supported, final-correct treatment versus a cold control on the same task.
+**Goal.** Learn language, science, mathematics, physics, reasoning, and meaning. Expand the grammar from its own certified programs. Transfer a learned abstraction to a new domain under sealed evidence. Answer questions that are not domain names or hash hits.
+
+**Current.** Sparse binary weight packets are the field. Awake and sleep runners act, measure, and consolidate. The field updates only on a paired, WITNESS-supported, final-correct delta. Bounded program synthesis (integer expressions of x and y, at most 7 nodes, with learned library primitives) and field query. The prior is not yet causal for operators the system was not given. No transformers. Not AGI.
 
 No transformers. Search and memory never certify. WITNESS certifies. The field updates itself only after that certification.
 
@@ -48,7 +50,7 @@ In sleep, NOMAD writes a short, evidence-grounded entry to a message board — o
 
 ## Boundaries
 
-Architecture is recursive field intelligence. Current capability is bounded program synthesis (GENESIS integer expressions plus the WORLD typed table of integer, string, and list operators, at most 7 nodes, with learned library primitives) and field query. Not unrestricted coding. Not free-form generation. Not AGI.
+Architecture is recursive field intelligence. Current capability is bounded program synthesis and field query. The goal is the expansion. The measurement is how you know it happened. Not unrestricted coding. Not free-form generation. Not AGI.
 
 The field grows by append, reinforce, and merge only on WITNESS-supported and final-correct treatment outcomes. Public-only success is recorded and is not learning. The readout is fixed. The gate decides. The twin scoreboard measures the difference only when both arms are present.
 
