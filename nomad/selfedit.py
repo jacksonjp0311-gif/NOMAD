@@ -1,35 +1,5 @@
 """SELFEDIT: the self-edit sandbox (docs/SELFEDIT.md). Switch ``NOMAD_SELFEDIT``.
 
-At the body's checkpoint cadence (never inside a sleep) the sandbox:
-
-1. **records** the last window: the world twin pairs the live body ran since
-   the previous self-edit attempt (task ids and the recorded treatment
-   outcome, from data/scoreboard.jsonl);
-2. **proposes** one tiny bounded change to one *invention gene* (never one it
-   already rejected from the same genome: a tabu list read from its log)
-   (``genome.INVENT_GENES``: how many derived constants are promoted, the
-   depth of their product closure, the invention rounds, the floor-division
-   fit by learned constants) -- seeded, replayable;
-3. **tests** the candidate on the committed dev benchmark
-   (``nomad.selfedit_tasks.DEV_CATALOGUE``, dev seed, reference field = the
-   16 WORLD families + the easy science curriculum) against the current
-   genome;
-4. **replays** the same window's tasks under the current and the candidate
-   genome on a deep copy of the live field (the live field and every file
-   under data/ are never written; a hash check enforces it);
-5. **analyses**: advance only if the dev benchmark is strictly better (more
-   certified, or as many with fewer evaluations) with no dev task lost, the
-   no-loss keep set (TRANSFER-4 catalogue at the dev seed) loses no task, the
-   replay loses no task
-   (certified -> not, or more evaluations), and the full unit-test suite
-   passes with the candidate genome; else roll back.
-
-Advance = data/genome.json + a log row (the body commits them as
-``nomad-evolve: <id> selfedit ...``), so the existing guard (every sleep, live
-twin cost ratio) still git-reverts it on a live regression. Every attempt is
-logged to data/evolution.jsonl with ``"organ": "selfedit"``. The sandbox edits
-genome data only, never code; WITNESS certifies every program.
-
 Same-gene refuse: after two consecutive test failures on the same gene from
 the same genome, that gene is tabu until a different gene is accepted.
 """
@@ -93,8 +63,6 @@ def _key(genes: dict[str, Any]) -> str:
 
 def propose(genes: dict[str, Any], seed: int, tabu: set | None = None,
             gene_tabu: set | None = None) -> tuple[dict[str, Any], str]:
-    """One bounded step of one invention gene. Skips tabu candidates and genes
-    that have failed tests twice consecutively from this genome."""
     rng = random.Random(f"selfedit:{seed}")
     tabu = tabu or set()
     gene_tabu = gene_tabu or set()
@@ -109,14 +77,19 @@ def propose(genes: dict[str, Any], seed: int, tabu: set | None = None,
     return dict(genes), "none"
 
 
-def tabu_from_log(current: dict[str, Any], hist: list[dict] | None = None) -> tuple[set, set]:
-    """Return (candidate_tabu, gene_tabu). Gene tabu includes genes with two
-    consecutive test failures from this genome."""
+def tabu_from_log(current: dict[str, Any], hist: list[dict] | None = None) -> set:
+    """Candidates the sandbox already rejected from ``current``."""
     hist = evolve.history() if hist is None else hist
     cur = _key(current)
-    cand_tabu = {_key(r["after"]) for r in hist
-                 if r.get("organ") == "selfedit" and not r.get("accepted") and r.get("before") and r.get("after")
-                 and _key(r["before"]) == cur and r.get("reason") not in ("tests_failed", "sandbox_wrote_live_data")}
+    return {_key(r["after"]) for r in hist
+            if r.get("organ") == "selfedit" and not r.get("accepted") and r.get("before") and r.get("after")
+            and _key(r["before"]) == cur and r.get("reason") not in ("tests_failed", "sandbox_wrote_live_data")}
+
+
+def gene_tabu_from_log(current: dict[str, Any], hist: list[dict] | None = None) -> set:
+    """Genes with two consecutive test failures from this genome."""
+    hist = evolve.history() if hist is None else hist
+    cur = _key(current)
     gene_fails: dict[str, int] = {}
     for r in reversed(hist):
         if r.get("organ") != "selfedit" or not r.get("before") or _key(r["before"]) != cur:
@@ -125,8 +98,7 @@ def tabu_from_log(current: dict[str, Any], hist: list[dict] | None = None) -> tu
             break
         if r.get("reason") == "tests_failed" and r.get("gene"):
             gene_fails[r["gene"]] = gene_fails.get(r["gene"], 0) + 1
-    gene_tabu = {g for g, n in gene_fails.items() if n >= SAME_GENE_REFUSE}
-    return cand_tabu, gene_tabu
+    return {g for g, n in gene_fails.items() if n >= SAME_GENE_REFUSE}
 
 
 _FIELD: dict[str, Any] = {}
@@ -333,8 +305,8 @@ def attempt(*, seed: int | None = None, tests: bool = True) -> dict[str, Any]:
     fp0 = _data_fingerprint()
     win = window(last_attempt_ts())
     live = load_world_prior()
-    cand_tabu, gene_tabu = tabu_from_log(current)
-    row = step(current, seed, live_prior=live, win=win, tests=tests, tabu=cand_tabu, gene_tabu=gene_tabu)
+    row = step(current, seed, live_prior=live, win=win, tests=tests,
+               tabu=tabu_from_log(current), gene_tabu=gene_tabu_from_log(current))
     fp1 = _data_fingerprint()
     row["ts"] = _now()
     row["sandbox_clean"] = fp0 == fp1
