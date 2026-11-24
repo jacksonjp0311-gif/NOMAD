@@ -1,0 +1,23 @@
+name: invent-extract
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Extract inventions
+        run: python3 scripts/invent2_judge.py --inventions > data/invent_extract.json || echo '{"error": "extract failed"}' > data/invent_extract.json
+      - name: Commit result
+        run: |
+          git config user.name "nomad"
+          git config user.email "nomad@users.noreply.github.com"
+          git add data/invent_extract.json || true
+          git diff --staged --quiet || git commit -m "invent extraction from field"
+          git pull --rebase origin main || true
+          git push || true
