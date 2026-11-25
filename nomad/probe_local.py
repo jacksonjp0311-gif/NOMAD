@@ -2,8 +2,8 @@
 
 Loads the current field snapshot and runs cold vs field vs attended on the
 held-out probes. When a probe returns none, a composition stage tries short
-binary compositions of library trees that share the probe input type.
-Causal only if a composition certifies and plain does not.
+programs built from the probe opset primitives. Causal only if a composition
+certifies and plain does not.
 
 Results are local. The body remains the authority for any field write.
 """
@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Any
 
 from .attend import attend, is_causal, tree_bits, _bits_of
-from .world import Invalid, consult
+from .world import Invalid, OPSETS, consult
 from .world import run as world_run
 from .world_loop import load_world_prior, probe_heldout
 from .world_tasks import HELDOUT
@@ -55,15 +55,36 @@ def _tree_certifies(task: Any, tree: list, library: dict | None = None) -> bool:
     return receipt is not None and receipt.supported
 
 
-def _compose_stage(task: Any, packets: list[dict[str, Any]], max_try: int = 64) -> list | None:
-    """Try short binary compositions of library trees."""
-    trees = [p["tree"] for p in packets if p.get("tree")][:16]
-    ops = ("concat", "sub", "add", "mul")
+def _compose_stage(task: Any, max_try: int = 256) -> list | None:
+    """Try short programs from the probe opset primitives."""
+    if not task.inputs:
+        return None
+    kind = task.inputs[0][1]
+    var = task.inputs[0][0]
+    ops = OPSETS.get(kind, ())
+    base = ["var", var]
     count = 0
-    for op, a, b in itertools.product(ops, trees, trees):
+    # unary
+    for op in ops:
         if count >= max_try:
             break
-        tree = [op, a, b]
+        tree = [op, base]
+        count += 1
+        if _tree_certifies(task, tree):
+            return tree
+    # binary of unaries
+    for op, a, b in itertools.product(ops, ops, ops):
+        if count >= max_try:
+            break
+        tree = [op, [a, base], [b, base]]
+        count += 1
+        if _tree_certifies(task, tree):
+            return tree
+    # nested unary then binary
+    for op1, op2, op3 in itertools.product(ops, ops, ops):
+        if count >= max_try:
+            break
+        tree = [op1, [op2, [op3, base]]]
         count += 1
         if _tree_certifies(task, tree):
             return tree
@@ -91,7 +112,7 @@ def run() -> dict[str, Any]:
                     attended_cert = True
                     break
             if not attended_cert:
-                composed = _compose_stage(t, packets)
+                composed = _compose_stage(t)
         results.append({
             "probe": name,
             "plain": plain,
