@@ -1,10 +1,10 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-25T10:35:05Z",
+  "ts": "2026-11-25T10:48:44Z",
   "sense": {
-    "last_pair": "2026-11-25T10:29:41Z",
-    "last_world_pair": "2026-11-25T10:29:41Z",
-    "last_sleep": "2026-11-25T10:35:05Z"
+    "last_pair": "2026-11-25T10:42:32Z",
+    "last_world_pair": "2026-11-25T10:42:32Z",
+    "last_sleep": "2026-11-25T10:48:44Z"
   },
   "think": {
     "curriculum_open_levels": {
@@ -32,19 +32,19 @@
     "world_twin": {
       "estimator": "rloo",
       "groups": 128,
-      "pass_rate": 0.77734375,
-      "all_pass_rate": 0.6953125,
+      "pass_rate": 0.7734375,
+      "all_pass_rate": 0.6875,
       "all_fail_rate": 0.140625,
-      "informative_rate": 0.1640625,
-      "informative_pairs": 21,
+      "informative_rate": 0.171875,
+      "informative_pairs": 22,
       "mean_treatment_advantage": 1.0,
-      "both_certified_pairs_with_cost": 89,
-      "mean_evaluations_saved": 1556.258426966292,
+      "both_certified_pairs_with_cost": 88,
+      "mean_evaluations_saved": 1771.7386363636363,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     },
     "informative_rate_flag": {
       "below_threshold": false,
-      "rate": 0.1640625,
+      "rate": 0.171875,
       "threshold": 0.1
     }
   },
@@ -52,7 +52,7 @@
     "queued": 0,
     "inflight": 0,
     "certified_queued": 0,
-    "field_version": 2881,
+    "field_version": 2883,
     "genesis_heldout": {
       "field_certified": true,
       "cold_certified": false
@@ -67,35 +67,6 @@
   },
   "evolve": {
     "recent": [
-      {
-        "organ": "selfedit",
-        "seed": 3045948980,
-        "gene": "none",
-        "before": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 2,
-          "inv_const_depth": 1,
-          "inv_rounds": 2,
-          "inv_floor_fit": 0
-        },
-        "after": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 2,
-          "inv_const_depth": 1,
-          "inv_rounds": 2,
-          "inv_floor_fit": 0
-        },
-        "accepted": false,
-        "reason": "no_change",
-        "ts": "2026-11-25T05:20:22Z",
-        "sandbox_clean": true
-      },
       {
         "organ": "selfedit",
         "seed": 2992695749,
@@ -211,6 +182,35 @@
         "reason": "no_change",
         "ts": "2026-11-25T09:43:19Z",
         "sandbox_clean": true
+      },
+      {
+        "organ": "selfedit",
+        "seed": 148390266,
+        "gene": "none",
+        "before": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "after": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "accepted": false,
+        "reason": "no_change",
+        "ts": "2026-11-25T10:48:44Z",
+        "sandbox_clean": true
       }
     ]
   },
@@ -269,11 +269,11 @@
     ],
     "body_lease": {
       "host": "gh-45568956235",
-      "heartbeat": "2026-11-25T10:35:05Z",
-      "age_min": 0.01636825,
+      "heartbeat": "2026-11-25T10:48:44Z",
+      "age_min": 0.004673466666666667,
       "alive": true,
-      "cycles": 24,
-      "cycles_per_hour": 28.2,
+      "cycles": 30,
+      "cycles_per_hour": 27.8,
       "released": false
     }
   },
