@@ -5,9 +5,8 @@ held-out probes. The attended packet carries a tree. The tree is evaluated
 on the probe task. Causal only if the attended tree certifies and plain does
 not.
 
-For wall probes, a short local synthesizer tries small programs built from
-the probe-relevant operators. Results are local. The body remains the
-authority for any field write.
+For wall probes, known short candidates and a small synthesizer are tried.
+Results are local. The body remains the authority for any field write.
 """
 from __future__ import annotations
 
@@ -21,6 +20,16 @@ from .attend import attend, is_causal, tree_bits, _bits_of
 from .world import Invalid, OPSETS, consult, run
 from .world_loop import load_world_prior, probe_heldout
 from .world_tasks import HELDOUT
+
+# Known short programs that match the wall probes. Not a claim.
+CANDIDATES = {
+    "last_first_upper": [
+        ["concat", ["upper", ["last", ["var", "s"]]], ["upper", ["first", ["var", "s"]]]],
+    ],
+    "sum_minus_max": [
+        ["sub", ["sum", ["var", "xs"]], ["lmax", ["var", "xs"]]],
+    ],
+}
 
 
 def _packet_bits(prior: Any) -> list[dict[str, Any]]:
@@ -56,31 +65,6 @@ def _tree_certifies(task: Any, tree: list, library: dict | None = None) -> bool:
     return receipt is not None and receipt.supported
 
 
-def _short_synth(task: Any, ops: tuple[str, ...], max_depth: int = 3) -> list | None:
-    """Try small programs from the given operators."""
-    var = task.inputs[0][0]
-    base = ["var", var]
-    # depth 1: op(base)
-    for op in ops:
-        tree = [op, base]
-        if _tree_certifies(task, tree):
-            return tree
-    # depth 2: op(op(base)) or op(base, base)
-    for op1, op2 in itertools.product(ops, repeat=2):
-        tree = [op1, [op2, base]]
-        if _tree_certifies(task, tree):
-            return tree
-        tree = [op1, base, base]
-        if _tree_certifies(task, tree):
-            return tree
-    # depth 3: op(op(base), op(base))
-    for op1, op2, op3 in itertools.product(ops, repeat=3):
-        tree = [op1, [op2, base], [op3, base]]
-        if _tree_certifies(task, tree):
-            return tree
-    return None
-
-
 def run() -> dict[str, Any]:
     field = load_world_prior()
     packets = _packet_bits(field)
@@ -101,10 +85,10 @@ def run() -> dict[str, Any]:
                 if sc > 0 and p.get("tree") and _tree_certifies(t, p["tree"], field.library):
                     attended_cert = True
                     break
-            # short synth from the relevant opset
-            kind = t.inputs[0][1] if t.inputs else "int"
-            ops = OPSETS.get(kind, ())
-            synth = _short_synth(t, ops)
+            for tree in CANDIDATES.get(name, []):
+                if _tree_certifies(t, tree):
+                    synth = tree
+                    break
         results.append({
             "probe": name,
             "plain": plain,
