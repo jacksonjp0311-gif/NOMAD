@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from .attend import attend, is_causal
+from .attend import attend, is_causal, tree_bits, _bits_of
 from .world_loop import load_world_prior, probe_heldout
 from .world_tasks import HELDOUT
 
@@ -20,13 +20,11 @@ def _packet_bits(prior: Any) -> list[dict[str, Any]]:
     out = []
     if not prior or not getattr(prior, "library", None):
         return out
-    for p in prior.library:
-        bits = []
-        if isinstance(p, str):
-            bits = [hash(p) % 4096]
-        elif hasattr(p, "name"):
-            bits = [hash(p.name) % 4096]
-        out.append({"bits": bits, "count": 1, "name": str(p)})
+    lib = prior.library
+    items = lib.items() if isinstance(lib, dict) else enumerate(lib)
+    for name, tree in items:
+        bits = tree_bits(tree) if tree else _bits_of(str(name))
+        out.append({"bits": bits, "count": 1, "name": str(name)})
     return out
 
 
@@ -38,15 +36,17 @@ def run() -> dict[str, Any]:
     for name, h in HELDOUT.items():
         row = base["probes"].get(name, {})
         plain = row.get("kind") == "certified_correctness" or row.get("field_beats_control")
-        # attended query is the probe name hashed to bits
-        qbits = {hash(name) % 4096}
-        att = attend(qbits, packets, k=4)
-        # attended is a candidate; we only mark causal if plain did not certify
+        t = h["task"]
+        qbits = _bits_of(name)
+        for inp in getattr(t, "inputs", []) or []:
+            qbits |= _bits_of(str(inp[1]) if isinstance(inp, (list, tuple)) else str(inp))
+        att = attend(qbits, packets, k=8)
         attended_cert = bool(att.get("bits")) and not plain
         results.append({
             "probe": name,
             "plain": plain,
             "attended_bits": len(att.get("bits") or []),
+            "attended_k": att.get("k", 0),
             "causal": is_causal(attended_cert, plain),
         })
     return {
