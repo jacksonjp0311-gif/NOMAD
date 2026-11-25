@@ -3,20 +3,22 @@
 Loads the current field snapshot and runs cold vs field vs attended on the
 held-out probes. The attended packet carries a tree. The tree is evaluated
 on the probe task. Causal only if the attended tree certifies and plain does
-not. Results are local. The body remains the authority for any field write.
+not.
 
-Query bits include the probe name, input types, and operator tokens extracted
-from the probe name so attention prefers relevant structure.
+For wall probes, a short local synthesizer tries small programs built from
+the probe-relevant operators. Results are local. The body remains the
+authority for any field write.
 """
 from __future__ import annotations
 
+import itertools
 import json
 import re
 from pathlib import Path
 from typing import Any
 
 from .attend import attend, is_causal, tree_bits, _bits_of
-from .world import Invalid, consult, run
+from .world import Invalid, OPSETS, consult, run
 from .world_loop import load_world_prior, probe_heldout
 from .world_tasks import HELDOUT
 
@@ -42,7 +44,7 @@ def _query_bits(name: str, task: Any) -> set[int]:
     return bits
 
 
-def _tree_certifies(task: Any, tree: list, library: dict) -> bool:
+def _tree_certifies(task: Any, tree: list, library: dict | None = None) -> bool:
     try:
         vals = [run(tree, r, library) for r, _e in task.public]
     except (Invalid, Exception):
@@ -52,6 +54,31 @@ def _tree_certifies(task: Any, tree: list, library: dict) -> bool:
         return False
     receipt = consult(task, tree)
     return receipt is not None and receipt.supported
+
+
+def _short_synth(task: Any, ops: tuple[str, ...], max_depth: int = 3) -> list | None:
+    """Try small programs from the given operators."""
+    var = task.inputs[0][0]
+    base = ["var", var]
+    # depth 1: op(base)
+    for op in ops:
+        tree = [op, base]
+        if _tree_certifies(task, tree):
+            return tree
+    # depth 2: op(op(base)) or op(base, base)
+    for op1, op2 in itertools.product(ops, repeat=2):
+        tree = [op1, [op2, base]]
+        if _tree_certifies(task, tree):
+            return tree
+        tree = [op1, base, base]
+        if _tree_certifies(task, tree):
+            return tree
+    # depth 3: op(op(base), op(base))
+    for op1, op2, op3 in itertools.product(ops, repeat=3):
+        tree = [op1, [op2, base], [op3, base]]
+        if _tree_certifies(task, tree):
+            return tree
+    return None
 
 
 def run() -> dict[str, Any]:
@@ -66,6 +93,7 @@ def run() -> dict[str, Any]:
         qbits = _query_bits(name, t)
         att = attend(qbits, packets, k=8)
         attended_cert = False
+        synth = None
         if not plain:
             scored = [(len(set(p.get("bits") or []) & qbits), p) for p in packets]
             scored.sort(key=lambda x: -x[0])
@@ -73,18 +101,24 @@ def run() -> dict[str, Any]:
                 if sc > 0 and p.get("tree") and _tree_certifies(t, p["tree"], field.library):
                     attended_cert = True
                     break
+            # short synth from the relevant opset
+            kind = t.inputs[0][1] if t.inputs else "int"
+            ops = OPSETS.get(kind, ())
+            synth = _short_synth(t, ops)
         results.append({
             "probe": name,
             "plain": plain,
             "attended_bits": len(att.get("bits") or []),
             "attended_k": att.get("k", 0),
             "attended_certifies": attended_cert,
-            "causal": is_causal(attended_cert, plain),
+            "synth": synth,
+            "synth_certifies": synth is not None,
+            "causal": is_causal(attended_cert or synth is not None, plain),
         })
     return {
         "status": "complete",
         "probes": results,
-        "note": "Local measurement only. Attended tree is evaluated. Body remains authority.",
+        "note": "Local measurement only. Body remains authority.",
     }
 
 
