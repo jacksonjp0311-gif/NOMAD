@@ -1,15 +1,15 @@
 """Local probe runner. Does not take the lease. Does not write the field.
 
 Loads the current field snapshot and runs cold vs field vs attended on the
-held-out probes. The attended packet carries a tree. The tree is evaluated
-on the probe task. Causal only if the attended tree certifies and plain does
-not.
+held-out probes. When a probe returns none, a composition stage tries short
+binary compositions of library trees that share the probe input type.
+Causal only if a composition certifies and plain does not.
 
-For wall probes, known short candidates are tried. Results are local.
-The body remains the authority for any field write.
+Results are local. The body remains the authority for any field write.
 """
 from __future__ import annotations
 
+import itertools
 import json
 import re
 from pathlib import Path
@@ -20,16 +20,6 @@ from .world import Invalid, consult
 from .world import run as world_run
 from .world_loop import load_world_prior, probe_heldout
 from .world_tasks import HELDOUT
-
-# Known short programs that match the wall probes. Not a claim.
-CANDIDATES = {
-    "last_first_upper": [
-        ["concat", ["upper", ["last", ["var", "s"]]], ["upper", ["first", ["var", "s"]]]],
-    ],
-    "sum_minus_max": [
-        ["sub", ["sum", ["var", "xs"]], ["lmax", ["var", "xs"]]],
-    ],
-}
 
 
 def _packet_bits(prior: Any) -> list[dict[str, Any]]:
@@ -65,6 +55,21 @@ def _tree_certifies(task: Any, tree: list, library: dict | None = None) -> bool:
     return receipt is not None and receipt.supported
 
 
+def _compose_stage(task: Any, packets: list[dict[str, Any]], max_try: int = 64) -> list | None:
+    """Try short binary compositions of library trees."""
+    trees = [p["tree"] for p in packets if p.get("tree")][:16]
+    ops = ("concat", "sub", "add", "mul")
+    count = 0
+    for op, a, b in itertools.product(ops, trees, trees):
+        if count >= max_try:
+            break
+        tree = [op, a, b]
+        count += 1
+        if _tree_certifies(task, tree):
+            return tree
+    return None
+
+
 def run() -> dict[str, Any]:
     field = load_world_prior()
     packets = _packet_bits(field)
@@ -77,7 +82,7 @@ def run() -> dict[str, Any]:
         qbits = _query_bits(name, t)
         att = attend(qbits, packets, k=8)
         attended_cert = False
-        synth = None
+        composed = None
         if not plain:
             scored = [(len(set(p.get("bits") or []) & qbits), p) for p in packets]
             scored.sort(key=lambda x: -x[0])
@@ -85,19 +90,17 @@ def run() -> dict[str, Any]:
                 if sc > 0 and p.get("tree") and _tree_certifies(t, p["tree"], field.library):
                     attended_cert = True
                     break
-            for tree in CANDIDATES.get(name, []):
-                if _tree_certifies(t, tree):
-                    synth = tree
-                    break
+            if not attended_cert:
+                composed = _compose_stage(t, packets)
         results.append({
             "probe": name,
             "plain": plain,
             "attended_bits": len(att.get("bits") or []),
             "attended_k": att.get("k", 0),
             "attended_certifies": attended_cert,
-            "synth": synth,
-            "synth_certifies": synth is not None,
-            "causal": is_causal(attended_cert or synth is not None, plain),
+            "composed": composed,
+            "composed_certifies": composed is not None,
+            "causal": is_causal(attended_cert or composed is not None, plain),
         })
     return {
         "status": "complete",
