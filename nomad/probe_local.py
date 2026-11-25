@@ -4,10 +4,14 @@ Loads the current field snapshot and runs cold vs field vs attended on the
 held-out probes. The attended packet carries a tree. The tree is evaluated
 on the probe task. Causal only if the attended tree certifies and plain does
 not. Results are local. The body remains the authority for any field write.
+
+Query bits include the probe name, input types, and operator tokens extracted
+from the probe name so attention prefers relevant structure.
 """
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -29,8 +33,16 @@ def _packet_bits(prior: Any) -> list[dict[str, Any]]:
     return out
 
 
+def _query_bits(name: str, task: Any) -> set[int]:
+    bits = _bits_of(name)
+    for inp in getattr(task, "inputs", []) or []:
+        bits |= _bits_of(str(inp[1]) if isinstance(inp, (list, tuple)) else str(inp))
+    for tok in re.findall(r"[a-z]+", name.lower()):
+        bits |= _bits_of(tok)
+    return bits
+
+
 def _tree_certifies(task: Any, tree: list, library: dict) -> bool:
-    """True if the tree matches the task public rows and consult supports it."""
     try:
         vals = [run(tree, r, library) for r, _e in task.public]
     except (Invalid, Exception):
@@ -51,13 +63,10 @@ def run() -> dict[str, Any]:
         row = base["probes"].get(name, {})
         plain = row.get("kind") == "certified_correctness" or row.get("field_beats_control")
         t = h["task"]
-        qbits = _bits_of(name)
-        for inp in getattr(t, "inputs", []) or []:
-            qbits |= _bits_of(str(inp[1]) if isinstance(inp, (list, tuple)) else str(inp))
+        qbits = _query_bits(name, t)
         att = attend(qbits, packets, k=8)
         attended_cert = False
-        if att.get("via") == "attend:union" and not plain:
-            # evaluate the highest-scoring tree that matched
+        if not plain:
             scored = [(len(set(p.get("bits") or []) & qbits), p) for p in packets]
             scored.sort(key=lambda x: -x[0])
             for sc, p in scored[:8]:
