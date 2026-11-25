@@ -2,9 +2,9 @@
 
 Loads the current field snapshot and runs cold vs field vs attended on the
 held-out probes. When a probe returns none, a composition stage tries short
-programs built from the probe opset primitives, with name tokens tried first
-in the nested pattern. Causal only if a composition certifies and plain does
-not.
+programs built from the probe opset primitives, with name tokens and binary
+ops tried first in the nested pattern. Causal only if a composition certifies
+and plain does not.
 
 Results are local. The body remains the authority for any field write.
 """
@@ -21,6 +21,8 @@ from .world import Invalid, OPSETS, consult
 from .world import run as world_run
 from .world_loop import load_world_prior, probe_heldout
 from .world_tasks import HELDOUT
+
+BINARY = {"concat", "sub", "add", "mul"}
 
 
 def _packet_bits(prior: Any) -> list[dict[str, Any]]:
@@ -64,7 +66,7 @@ def _compose_stage(task: Any, name: str, max_try: int = 2048) -> list | None:
     var = task.inputs[0][0]
     ops = list(OPSETS.get(kind, ()))
     tokens = set(re.findall(r"[a-z]+", name.lower()))
-    preferred = [o for o in ops if o in tokens or any(t in o for t in tokens)]
+    preferred = [o for o in ops if o in tokens or any(t in o for t in tokens) or o in BINARY]
     rest = [o for o in ops if o not in preferred]
     ordered = preferred + rest
     base = ["var", var]
@@ -83,7 +85,6 @@ def _compose_stage(task: Any, name: str, max_try: int = 2048) -> list | None:
         count += 1
         if _tree_certifies(task, tree):
             return tree
-    # nested with preferred first
     for op, a, b, c, d in itertools.product(ordered, ordered, ordered, ordered, ordered):
         if count >= max_try:
             break
