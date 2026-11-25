@@ -2,8 +2,9 @@
 
 Loads the current field snapshot and runs cold vs field vs attended on the
 held-out probes. When a probe returns none, a composition stage tries short
-programs built from the probe opset primitives. Name-token nested patterns
-are tried first. Causal only if a composition certifies and plain does not.
+programs built from the probe opset primitives. Both binary-of-unaries and
+name-token nested patterns are tried. Causal only if a composition certifies
+and plain does not.
 
 Results are local. The body remains the authority for any field write.
 """
@@ -55,7 +56,7 @@ def _tree_certifies(task: Any, tree: list, library: dict | None = None) -> bool:
     return receipt is not None and receipt.supported
 
 
-def _compose_stage(task: Any, name: str, max_try: int = 512) -> list | None:
+def _compose_stage(task: Any, name: str) -> list | None:
     """Try short programs from the probe opset primitives."""
     if not task.inputs:
         return None
@@ -65,26 +66,20 @@ def _compose_stage(task: Any, name: str, max_try: int = 512) -> list | None:
     tokens = set(re.findall(r"[a-z]+", name.lower()))
     preferred = [o for o in ops if o in tokens or any(t in o for t in tokens)]
     base = ["var", var]
-    # try the name-token nested form first: binary(unary(token(base)), unary(token(base)))
-    binaries = [o for o in ops if o in ("concat", "sub", "add", "mul")]
-    count = 0
-    for bop in binaries:
-        for a, c in itertools.product(preferred or ops, repeat=2):
-            for x, y in itertools.product(preferred or ops, repeat=2):
-                if count >= max_try:
-                    break
-                tree = [bop, [a, [x, base]], [c, [y, base]]]
-                count += 1
-                if _tree_certifies(task, tree):
-                    return tree
-    # then binary of unaries
+    # binary of unaries
     for op, a, b in itertools.product(ops, ops, ops):
-        if count >= max_try:
-            break
         tree = [op, [a, base], [b, base]]
-        count += 1
         if _tree_certifies(task, tree):
             return tree
+    # name-token nested
+    binaries = [o for o in ops if o in ("concat", "sub", "add", "mul")]
+    prefs = preferred or ops
+    for bop in binaries:
+        for a, c in itertools.product(prefs, repeat=2):
+            for x, y in itertools.product(prefs, repeat=2):
+                tree = [bop, [a, [x, base]], [c, [y, base]]]
+                if _tree_certifies(task, tree):
+                    return tree
     return None
 
 
