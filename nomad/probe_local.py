@@ -56,14 +56,13 @@ def _tree_certifies(task: Any, tree: list, library: dict | None = None) -> bool:
     return receipt is not None and receipt.supported
 
 
-def _compose_stage(task: Any, name: str, max_try: int = 2048) -> list | None:
+def _compose_stage(task: Any, name: str, max_try: int = 4096) -> list | None:
     """Try short programs from the probe opset primitives."""
     if not task.inputs:
         return None
     kind = task.inputs[0][1]
     var = task.inputs[0][0]
     ops = list(OPSETS.get(kind, ()))
-    # bias operators that appear in the probe name
     tokens = set(re.findall(r"[a-z]+", name.lower()))
     ops.sort(key=lambda o: (0 if o in tokens or any(t in o for t in tokens) else 1, o))
     base = ["var", var]
@@ -79,6 +78,14 @@ def _compose_stage(task: Any, name: str, max_try: int = 2048) -> list | None:
         if count >= max_try:
             break
         tree = [op, [a, base], [b, base]]
+        count += 1
+        if _tree_certifies(task, tree):
+            return tree
+    # nested: op(op(a(base)), op(b(base)))
+    for op, a, b, c, d in itertools.product(ops, ops, ops, ops, ops):
+        if count >= max_try:
+            break
+        tree = [op, [a, [b, base]], [c, [d, base]]]
         count += 1
         if _tree_certifies(task, tree):
             return tree
