@@ -5,19 +5,19 @@ held-out probes. The attended packet carries a tree. The tree is evaluated
 on the probe task. Causal only if the attended tree certifies and plain does
 not.
 
-For wall probes, known short candidates and a small synthesizer are tried.
-Results are local. The body remains the authority for any field write.
+For wall probes, known short candidates are tried. Results are local.
+The body remains the authority for any field write.
 """
 from __future__ import annotations
 
-import itertools
 import json
 import re
 from pathlib import Path
 from typing import Any
 
 from .attend import attend, is_causal, tree_bits, _bits_of
-from .world import Invalid, OPSETS, consult, run
+from .world import Invalid, consult
+from .world import run as world_run
 from .world_loop import load_world_prior, probe_heldout
 from .world_tasks import HELDOUT
 
@@ -55,7 +55,7 @@ def _query_bits(name: str, task: Any) -> set[int]:
 
 def _tree_certifies(task: Any, tree: list, library: dict | None = None) -> bool:
     try:
-        vals = [run(tree, r, library) for r, _e in task.public]
+        vals = [world_run(tree, r, library) for r, _e in task.public]
     except (Invalid, Exception):
         return False
     goal = [e for _r, e in task.public]
