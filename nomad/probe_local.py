@@ -1,7 +1,8 @@
 """Local probe runner. Does not take the lease. Does not write the field.
 
 Loads the current field snapshot and runs cold vs field vs attended on the
-held-out probes. Prints whether attention certifies where plain overlap does
+held-out probes. The attended packet carries a tree. The tree is evaluated
+on the probe task. Causal only if the attended tree certifies and plain does
 not. Results are local. The body remains the authority for any field write.
 """
 from __future__ import annotations
@@ -11,12 +12,12 @@ from pathlib import Path
 from typing import Any
 
 from .attend import attend, is_causal, tree_bits, _bits_of
+from .world import Invalid, consult, run
 from .world_loop import load_world_prior, probe_heldout
 from .world_tasks import HELDOUT
 
 
 def _packet_bits(prior: Any) -> list[dict[str, Any]]:
-    """Extract packet-like entries from the prior library for attention."""
     out = []
     if not prior or not getattr(prior, "library", None):
         return out
@@ -24,8 +25,21 @@ def _packet_bits(prior: Any) -> list[dict[str, Any]]:
     items = lib.items() if isinstance(lib, dict) else enumerate(lib)
     for name, tree in items:
         bits = tree_bits(tree) if tree else _bits_of(str(name))
-        out.append({"bits": bits, "count": 1, "name": str(name)})
+        out.append({"bits": bits, "count": 1, "name": str(name), "tree": tree})
     return out
+
+
+def _tree_certifies(task: Any, tree: list, library: dict) -> bool:
+    """True if the tree matches the task public rows and consult supports it."""
+    try:
+        vals = [run(tree, r, library) for r, _e in task.public]
+    except (Invalid, Exception):
+        return False
+    goal = [e for _r, e in task.public]
+    if vals != goal:
+        return False
+    receipt = consult(task, tree)
+    return receipt is not None and receipt.supported
 
 
 def run() -> dict[str, Any]:
@@ -41,18 +55,27 @@ def run() -> dict[str, Any]:
         for inp in getattr(t, "inputs", []) or []:
             qbits |= _bits_of(str(inp[1]) if isinstance(inp, (list, tuple)) else str(inp))
         att = attend(qbits, packets, k=8)
-        attended_cert = bool(att.get("bits")) and not plain
+        attended_cert = False
+        if att.get("via") == "attend:union" and not plain:
+            # evaluate the highest-scoring tree that matched
+            scored = [(len(set(p.get("bits") or []) & qbits), p) for p in packets]
+            scored.sort(key=lambda x: -x[0])
+            for sc, p in scored[:8]:
+                if sc > 0 and p.get("tree") and _tree_certifies(t, p["tree"], field.library):
+                    attended_cert = True
+                    break
         results.append({
             "probe": name,
             "plain": plain,
             "attended_bits": len(att.get("bits") or []),
             "attended_k": att.get("k", 0),
+            "attended_certifies": attended_cert,
             "causal": is_causal(attended_cert, plain),
         })
     return {
         "status": "complete",
         "probes": results,
-        "note": "Local measurement only. Does not write the field. Body remains authority.",
+        "note": "Local measurement only. Attended tree is evaluated. Body remains authority.",
     }
 
 
