@@ -2,8 +2,9 @@
 
 Loads the current field snapshot and runs cold vs field vs attended on the
 held-out probes. When a probe returns none, a composition stage tries short
-programs built from the probe opset primitives. Causal only if a composition
-certifies and plain does not.
+programs built from the probe opset primitives, biased toward operators that
+appear in the probe name. Causal only if a composition certifies and plain
+does not.
 
 Results are local. The body remains the authority for any field write.
 """
@@ -55,16 +56,18 @@ def _tree_certifies(task: Any, tree: list, library: dict | None = None) -> bool:
     return receipt is not None and receipt.supported
 
 
-def _compose_stage(task: Any, max_try: int = 256) -> list | None:
+def _compose_stage(task: Any, name: str, max_try: int = 2048) -> list | None:
     """Try short programs from the probe opset primitives."""
     if not task.inputs:
         return None
     kind = task.inputs[0][1]
     var = task.inputs[0][0]
-    ops = OPSETS.get(kind, ())
+    ops = list(OPSETS.get(kind, ()))
+    # bias operators that appear in the probe name
+    tokens = set(re.findall(r"[a-z]+", name.lower()))
+    ops.sort(key=lambda o: (0 if o in tokens or any(t in o for t in tokens) else 1, o))
     base = ["var", var]
     count = 0
-    # unary
     for op in ops:
         if count >= max_try:
             break
@@ -72,19 +75,10 @@ def _compose_stage(task: Any, max_try: int = 256) -> list | None:
         count += 1
         if _tree_certifies(task, tree):
             return tree
-    # binary of unaries
     for op, a, b in itertools.product(ops, ops, ops):
         if count >= max_try:
             break
         tree = [op, [a, base], [b, base]]
-        count += 1
-        if _tree_certifies(task, tree):
-            return tree
-    # nested unary then binary
-    for op1, op2, op3 in itertools.product(ops, ops, ops):
-        if count >= max_try:
-            break
-        tree = [op1, [op2, [op3, base]]]
         count += 1
         if _tree_certifies(task, tree):
             return tree
@@ -112,7 +106,7 @@ def run() -> dict[str, Any]:
                     attended_cert = True
                     break
             if not attended_cert:
-                composed = _compose_stage(t)
+                composed = _compose_stage(t, name)
         results.append({
             "probe": name,
             "plain": plain,
