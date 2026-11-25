@@ -2,9 +2,9 @@
 
 Loads the current field snapshot and runs cold vs field vs attended on the
 held-out probes. When a probe returns none, a composition stage tries short
-programs built from the probe opset primitives, biased toward operators that
-appear in the probe name. Causal only if a composition certifies and plain
-does not.
+programs built from the probe opset primitives, with name tokens tried first
+in the nested pattern. Causal only if a composition certifies and plain does
+not.
 
 Results are local. The body remains the authority for any field write.
 """
@@ -56,7 +56,7 @@ def _tree_certifies(task: Any, tree: list, library: dict | None = None) -> bool:
     return receipt is not None and receipt.supported
 
 
-def _compose_stage(task: Any, name: str, max_try: int = 4096) -> list | None:
+def _compose_stage(task: Any, name: str, max_try: int = 2048) -> list | None:
     """Try short programs from the probe opset primitives."""
     if not task.inputs:
         return None
@@ -64,25 +64,27 @@ def _compose_stage(task: Any, name: str, max_try: int = 4096) -> list | None:
     var = task.inputs[0][0]
     ops = list(OPSETS.get(kind, ()))
     tokens = set(re.findall(r"[a-z]+", name.lower()))
-    ops.sort(key=lambda o: (0 if o in tokens or any(t in o for t in tokens) else 1, o))
+    preferred = [o for o in ops if o in tokens or any(t in o for t in tokens)]
+    rest = [o for o in ops if o not in preferred]
+    ordered = preferred + rest
     base = ["var", var]
     count = 0
-    for op in ops:
+    for op in ordered:
         if count >= max_try:
             break
         tree = [op, base]
         count += 1
         if _tree_certifies(task, tree):
             return tree
-    for op, a, b in itertools.product(ops, ops, ops):
+    for op, a, b in itertools.product(ordered, ordered, ordered):
         if count >= max_try:
             break
         tree = [op, [a, base], [b, base]]
         count += 1
         if _tree_certifies(task, tree):
             return tree
-    # nested: op(op(a(base)), op(b(base)))
-    for op, a, b, c, d in itertools.product(ops, ops, ops, ops, ops):
+    # nested with preferred first
+    for op, a, b, c, d in itertools.product(ordered, ordered, ordered, ordered, ordered):
         if count >= max_try:
             break
         tree = [op, [a, [b, base]], [c, [d, base]]]
