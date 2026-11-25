@@ -24,6 +24,7 @@ def tree_bits(tree: Any) -> set[int]:
     """Encode a program tree by its operator nodes."""
     bits: set[int] = set()
     def walk(t):
+        nonlocal bits
         if isinstance(t, list) and t:
             bits |= _bits_of(str(t[0]))
             for c in t[1:]:
