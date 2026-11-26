@@ -1,10 +1,10 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-26T03:26:24Z",
+  "ts": "2026-11-26T03:41:52Z",
   "sense": {
-    "last_pair": "2026-11-26T03:19:34Z",
-    "last_world_pair": "2026-11-26T03:19:34Z",
-    "last_sleep": "2026-11-26T03:26:24Z"
+    "last_pair": "2026-11-26T03:34:59Z",
+    "last_world_pair": "2026-11-26T03:34:59Z",
+    "last_sleep": "2026-11-26T03:41:52Z"
   },
   "think": {
     "curriculum_open_levels": {
@@ -32,19 +32,19 @@
     "world_twin": {
       "estimator": "rloo",
       "groups": 128,
-      "pass_rate": 0.84375,
-      "all_pass_rate": 0.7734375,
-      "all_fail_rate": 0.0859375,
-      "informative_rate": 0.140625,
-      "informative_pairs": 18,
+      "pass_rate": 0.80078125,
+      "all_pass_rate": 0.734375,
+      "all_fail_rate": 0.1328125,
+      "informative_rate": 0.1328125,
+      "informative_pairs": 17,
       "mean_treatment_advantage": 1.0,
-      "both_certified_pairs_with_cost": 99,
-      "mean_evaluations_saved": 1023.2020202020202,
+      "both_certified_pairs_with_cost": 94,
+      "mean_evaluations_saved": 941.7659574468086,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     },
     "informative_rate_flag": {
       "below_threshold": false,
-      "rate": 0.140625,
+      "rate": 0.1328125,
       "threshold": 0.1
     }
   },
@@ -52,7 +52,7 @@
     "queued": 0,
     "inflight": 0,
     "certified_queued": 0,
-    "field_version": 3031,
+    "field_version": 3033,
     "genesis_heldout": {
       "field_certified": true,
       "cold_certified": false
@@ -67,35 +67,6 @@
   },
   "evolve": {
     "recent": [
-      {
-        "organ": "selfedit",
-        "seed": 1150510940,
-        "gene": "none",
-        "before": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 2,
-          "inv_const_depth": 1,
-          "inv_rounds": 2,
-          "inv_floor_fit": 0
-        },
-        "after": {
-          "decay": 0.97,
-          "library_k": 6,
-          "patience": 4,
-          "max_lag": 2,
-          "inv_max_constants": 2,
-          "inv_const_depth": 1,
-          "inv_rounds": 2,
-          "inv_floor_fit": 0
-        },
-        "accepted": false,
-        "reason": "no_change",
-        "ts": "2026-11-25T22:16:46Z",
-        "sandbox_clean": true
-      },
       {
         "organ": "selfedit",
         "seed": 1759404784,
@@ -211,6 +182,35 @@
         "reason": "no_change",
         "ts": "2026-11-26T02:36:14Z",
         "sandbox_clean": true
+      },
+      {
+        "organ": "selfedit",
+        "seed": 649695960,
+        "gene": "none",
+        "before": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "after": {
+          "decay": 0.97,
+          "library_k": 6,
+          "patience": 4,
+          "max_lag": 2,
+          "inv_max_constants": 2,
+          "inv_const_depth": 1,
+          "inv_rounds": 2,
+          "inv_floor_fit": 0
+        },
+        "accepted": false,
+        "reason": "no_change",
+        "ts": "2026-11-26T03:41:52Z",
+        "sandbox_clean": true
       }
     ]
   },
@@ -271,11 +271,11 @@
     ],
     "body_lease": {
       "host": "gh-45730029376",
-      "heartbeat": "2026-11-26T03:26:24Z",
-      "age_min": 0.0035724333333333335,
+      "heartbeat": "2026-11-26T03:41:52Z",
+      "age_min": 0.011409866666666666,
       "alive": true,
-      "cycles": 18,
-      "cycles_per_hour": 23.7,
+      "cycles": 24,
+      "cycles_per_hour": 23.6,
       "released": false
     }
   },
