@@ -1,0 +1,2885 @@
+{
+ "tasks": 22,
+ "certified": {
+  "cold": 0,
+  "empty_off": 0,
+  "empty_on": 0,
+  "trained_off": 6,
+  "trained_on": 9,
+  "trained_let2": 9,
+  "trained_shuf": 8,
+  "trained_rw": 8,
+  "math_sci_off": 6,
+  "math_sci_on": 9,
+  "math_sci_let2": 9,
+  "math_sci_shuf": 8,
+  "math_sci_rw": 8,
+  "practice_off": 4,
+  "practice_on": 6,
+  "practice_let2": 7,
+  "practice_shuf": 4,
+  "practice_rw": 4,
+  "shufmem_off": 3,
+  "shufmem_on": 5
+ },
+ "evaluations": {
+  "cold": 220000,
+  "empty_off": 220000,
+  "empty_on": 220000,
+  "trained_off": 188581,
+  "trained_on": 179078,
+  "trained_let2": 178435,
+  "trained_shuf": 183385,
+  "trained_rw": 183385,
+  "math_sci_off": 188581,
+  "math_sci_on": 179078,
+  "math_sci_let2": 178435,
+  "math_sci_shuf": 183385,
+  "math_sci_rw": 183385,
+  "practice_off": 188227,
+  "practice_on": 183670,
+  "practice_let2": 179804,
+  "practice_shuf": 187448,
+  "practice_rw": 187448,
+  "shufmem_off": 206072,
+  "shufmem_on": 200619
+ },
+ "worse_than_cold": {
+  "cold": [],
+  "empty_off": [],
+  "empty_on": [],
+  "trained_off": [],
+  "trained_on": [],
+  "trained_let2": [],
+  "trained_shuf": [],
+  "trained_rw": [],
+  "math_sci_off": [],
+  "math_sci_on": [],
+  "math_sci_let2": [],
+  "math_sci_shuf": [],
+  "math_sci_rw": [],
+  "practice_off": [],
+  "practice_on": [],
+  "practice_let2": [],
+  "practice_shuf": [],
+  "practice_rw": [],
+  "shufmem_off": [],
+  "shufmem_on": []
+ },
+ "per_task[certified, evals, via, candidate]": {
+  "ds_row_spare_half": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    5147,
+    "port:anchor",
+    "sub(mul(add(fc, fc), fb), mul(div(fc, 2), fb))"
+   ],
+   "trained_on": [
+    false,
+    5116,
+    "port:anchor",
+    "sub(mul(add(fc, fc), fb), mul(div(fc, 2), fb))"
+   ],
+   "trained_let2": [
+    false,
+    5116,
+    "port:anchor",
+    "sub(mul(add(fc, fc), fb), mul(div(fc, 2), fb))"
+   ],
+   "trained_shuf": [
+    false,
+    5116,
+    "port:anchor",
+    "sub(mul(add(fc, fc), fb), mul(div(fc, 2), fb))"
+   ],
+   "trained_rw": [
+    false,
+    5116,
+    "port:anchor",
+    "sub(mul(add(fc, fc), fb), mul(div(fc, 2), fb))"
+   ],
+   "math_sci_off": [
+    false,
+    5147,
+    "port:anchor",
+    "sub(mul(add(fc, fc), fb), mul(div(fc, 2), fb))"
+   ],
+   "math_sci_on": [
+    false,
+    5116,
+    "port:anchor",
+    "sub(mul(add(fc, fc), fb), mul(div(fc, 2), fb))"
+   ],
+   "math_sci_let2": [
+    false,
+    5116,
+    "port:anchor",
+    "sub(mul(add(fc, fc), fb), mul(div(fc, 2), fb))"
+   ],
+   "math_sci_shuf": [
+    false,
+    5116,
+    "port:anchor",
+    "sub(mul(add(fc, fc), fb), mul(div(fc, 2), fb))"
+   ],
+   "math_sci_rw": [
+    false,
+    5116,
+    "port:anchor",
+    "sub(mul(add(fc, fc), fb), mul(div(fc, 2), fb))"
+   ],
+   "practice_off": [
+    false,
+    5408,
+    "port:anchor",
+    "mul(mul(fb, 3), div(fc, 2))"
+   ],
+   "practice_on": [
+    false,
+    5378,
+    "port:anchor",
+    "mul(mul(fb, 3), div(fc, 2))"
+   ],
+   "practice_let2": [
+    false,
+    5378,
+    "port:anchor",
+    "mul(mul(fb, 3), div(fc, 2))"
+   ],
+   "practice_shuf": [
+    false,
+    5378,
+    "port:anchor",
+    "mul(mul(fb, 3), div(fc, 2))"
+   ],
+   "practice_rw": [
+    false,
+    5378,
+    "port:anchor",
+    "mul(mul(fb, 3), div(fc, 2))"
+   ],
+   "shufmem_off": [
+    false,
+    5150,
+    "port:anchor",
+    "add(mul(fb, fc), mul(div(fc, 2), fb))"
+   ],
+   "shufmem_on": [
+    false,
+    5119,
+    "port:anchor",
+    "add(mul(fb, fc), mul(div(fc, 2), fb))"
+   ]
+  },
+  "ds_crate_sq_less": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5653,
+    "port:anchor2",
+    "add(add(mul(fb, fa), sub(mul(fa, fa), fc)), mul(add(fb, fa), fb))"
+   ],
+   "trained_on": [
+    true,
+    5514,
+    "port:anchor2",
+    "add(add(mul(fb, fa), sub(mul(fa, fa), fc)), mul(add(fb, fa), fb))"
+   ],
+   "trained_let2": [
+    true,
+    5514,
+    "port:anchor2",
+    "add(add(mul(fb, fa), sub(mul(fa, fa), fc)), mul(add(fb, fa), fb))"
+   ],
+   "trained_shuf": [
+    true,
+    5514,
+    "port:anchor2",
+    "add(add(mul(fb, fa), sub(mul(fa, fa), fc)), mul(add(fb, fa), fb))"
+   ],
+   "trained_rw": [
+    true,
+    5514,
+    "port:anchor2",
+    "add(add(mul(fb, fa), sub(mul(fa, fa), fc)), mul(add(fb, fa), fb))"
+   ],
+   "math_sci_off": [
+    true,
+    5653,
+    "port:anchor2",
+    "add(add(mul(fb, fa), sub(mul(fa, fa), fc)), mul(add(fb, fa), fb))"
+   ],
+   "math_sci_on": [
+    true,
+    5514,
+    "port:anchor2",
+    "add(add(mul(fb, fa), sub(mul(fa, fa), fc)), mul(add(fb, fa), fb))"
+   ],
+   "math_sci_let2": [
+    true,
+    5514,
+    "port:anchor2",
+    "add(add(mul(fb, fa), sub(mul(fa, fa), fc)), mul(add(fb, fa), fb))"
+   ],
+   "math_sci_shuf": [
+    true,
+    5514,
+    "port:anchor2",
+    "add(add(mul(fb, fa), sub(mul(fa, fa), fc)), mul(add(fb, fa), fb))"
+   ],
+   "math_sci_rw": [
+    true,
+    5514,
+    "port:anchor2",
+    "add(add(mul(fb, fa), sub(mul(fa, fa), fc)), mul(add(fb, fa), fb))"
+   ],
+   "practice_off": [
+    true,
+    6130,
+    "port:anchor2",
+    "add(add(mul(fa, add(sub(fb, 1), fb)), add(mul(fa, fa), fa)), sub(mul(fb, fb), fc))"
+   ],
+   "practice_on": [
+    true,
+    5992,
+    "port:anchor2",
+    "add(add(mul(fa, add(sub(fb, 1), fb)), add(mul(fa, fa), fa)), sub(mul(fb, fb), fc))"
+   ],
+   "practice_let2": [
+    true,
+    5992,
+    "port:anchor2",
+    "add(add(mul(fa, add(sub(fb, 1), fb)), add(mul(fa, fa), fa)), sub(mul(fb, fb), fc))"
+   ],
+   "practice_shuf": [
+    true,
+    5992,
+    "port:anchor2",
+    "add(add(mul(fa, add(sub(fb, 1), fb)), add(mul(fa, fa), fa)), sub(mul(fb, fb), fc))"
+   ],
+   "practice_rw": [
+    true,
+    5992,
+    "port:anchor2",
+    "add(add(mul(fa, add(sub(fb, 1), fb)), add(mul(fa, fa), fa)), sub(mul(fb, fb), fc))"
+   ],
+   "shufmem_off": [
+    true,
+    7615,
+    "port:invent:r2",
+    "add(mul(add(fa, fb), add(fa, fb)), sub(0, fc))"
+   ],
+   "shufmem_on": [
+    true,
+    7615,
+    "port:invent:r2",
+    "add(mul(add(fa, fb), add(fa, fb)), sub(0, fc))"
+   ]
+  },
+  "ds_cast_two_rates": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5488,
+    "port:anchor",
+    "mul(add(fd, fa), add(fb, fc))"
+   ],
+   "trained_on": [
+    true,
+    5376,
+    "port:anchor",
+    "mul(add(fd, fa), add(fb, fc))"
+   ],
+   "trained_let2": [
+    true,
+    5376,
+    "port:anchor",
+    "mul(add(fd, fa), add(fb, fc))"
+   ],
+   "trained_shuf": [
+    true,
+    5376,
+    "port:anchor",
+    "mul(add(fd, fa), add(fb, fc))"
+   ],
+   "trained_rw": [
+    true,
+    5376,
+    "port:anchor",
+    "mul(add(fd, fa), add(fb, fc))"
+   ],
+   "math_sci_off": [
+    true,
+    5488,
+    "port:anchor",
+    "mul(add(fd, fa), add(fb, fc))"
+   ],
+   "math_sci_on": [
+    true,
+    5376,
+    "port:anchor",
+    "mul(add(fd, fa), add(fb, fc))"
+   ],
+   "math_sci_let2": [
+    true,
+    5376,
+    "port:anchor",
+    "mul(add(fd, fa), add(fb, fc))"
+   ],
+   "math_sci_shuf": [
+    true,
+    5376,
+    "port:anchor",
+    "mul(add(fd, fa), add(fb, fc))"
+   ],
+   "math_sci_rw": [
+    true,
+    5376,
+    "port:anchor",
+    "mul(add(fd, fa), add(fb, fc))"
+   ],
+   "practice_off": [
+    true,
+    5500,
+    "port:anchor",
+    "mul(add(max(fa, 3), fd), add(fb, fc))"
+   ],
+   "practice_on": [
+    true,
+    5450,
+    "port:anchor",
+    "mul(add(max(fa, 3), fd), add(fb, fc))"
+   ],
+   "practice_let2": [
+    true,
+    5450,
+    "port:anchor",
+    "mul(add(max(fa, 3), fd), add(fb, fc))"
+   ],
+   "practice_shuf": [
+    true,
+    5450,
+    "port:anchor",
+    "mul(add(max(fa, 3), fd), add(fb, fc))"
+   ],
+   "practice_rw": [
+    true,
+    5450,
+    "port:anchor",
+    "mul(add(max(fa, 3), fd), add(fb, fc))"
+   ],
+   "shufmem_off": [
+    true,
+    5432,
+    "port:anchor",
+    "mul(add(fd, max(fa, fb)), add(fb, fc))"
+   ],
+   "shufmem_on": [
+    true,
+    5330,
+    "port:anchor",
+    "mul(add(fd, max(fa, fb)), add(fb, fc))"
+   ]
+  },
+  "ds_hive_twice_less_third": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    7958,
+    "port:let2",
+    "sub(mul(add(fa, mul(fc, fb)), 2), div(add(fa, mul(fc, fb)), 3))"
+   ],
+   "trained_let2": [
+    true,
+    7755,
+    "port:let2",
+    "sub(mul(add(fa, mul(fc, fb)), 2), div(add(fa, mul(fc, fb)), 3))"
+   ],
+   "trained_shuf": [
+    true,
+    7958,
+    "port:let2",
+    "sub(mul(add(fa, mul(fc, fb)), 2), div(add(fa, mul(fc, fb)), 3))"
+   ],
+   "trained_rw": [
+    true,
+    7958,
+    "port:let2",
+    "sub(mul(add(fa, mul(fc, fb)), 2), div(add(fa, mul(fc, fb)), 3))"
+   ],
+   "math_sci_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_on": [
+    true,
+    7958,
+    "port:let2",
+    "sub(mul(add(fa, mul(fc, fb)), 2), div(add(fa, mul(fc, fb)), 3))"
+   ],
+   "math_sci_let2": [
+    true,
+    7755,
+    "port:let2",
+    "sub(mul(add(fa, mul(fc, fb)), 2), div(add(fa, mul(fc, fb)), 3))"
+   ],
+   "math_sci_shuf": [
+    true,
+    7958,
+    "port:let2",
+    "sub(mul(add(fa, mul(fc, fb)), 2), div(add(fa, mul(fc, fb)), 3))"
+   ],
+   "math_sci_rw": [
+    true,
+    7958,
+    "port:let2",
+    "sub(mul(add(fa, mul(fc, fb)), 2), div(add(fa, mul(fc, fb)), 3))"
+   ],
+   "practice_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_let2": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_on": [
+    true,
+    7504,
+    "port:let2",
+    "sub(mul(add(mul(fb, fc), fa), 2), div(add(mul(fb, fc), fa), 3))"
+   ]
+  },
+  "ds_ingot_sets_loose": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_let2": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_let2": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_let2": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "ds_comb_sq_plus": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5372,
+    "port:anchor",
+    "mul(add(fd, fb), add(fd, add(1, fb)))"
+   ],
+   "trained_on": [
+    true,
+    5280,
+    "port:anchor",
+    "mul(add(fd, fb), add(fd, add(1, fb)))"
+   ],
+   "trained_let2": [
+    true,
+    5280,
+    "port:anchor",
+    "mul(add(fd, fb), add(fd, add(1, fb)))"
+   ],
+   "trained_shuf": [
+    true,
+    5280,
+    "port:anchor",
+    "mul(add(fd, fb), add(fd, add(1, fb)))"
+   ],
+   "trained_rw": [
+    true,
+    5280,
+    "port:anchor",
+    "mul(add(fd, fb), add(fd, add(1, fb)))"
+   ],
+   "math_sci_off": [
+    true,
+    5372,
+    "port:anchor",
+    "mul(add(fd, fb), add(fd, add(1, fb)))"
+   ],
+   "math_sci_on": [
+    true,
+    5280,
+    "port:anchor",
+    "mul(add(fd, fb), add(fd, add(1, fb)))"
+   ],
+   "math_sci_let2": [
+    true,
+    5280,
+    "port:anchor",
+    "mul(add(fd, fb), add(fd, add(1, fb)))"
+   ],
+   "math_sci_shuf": [
+    true,
+    5280,
+    "port:anchor",
+    "mul(add(fd, fb), add(fd, add(1, fb)))"
+   ],
+   "math_sci_rw": [
+    true,
+    5280,
+    "port:anchor",
+    "mul(add(fd, fb), add(fd, add(1, fb)))"
+   ],
+   "practice_off": [
+    false,
+    5404,
+    "port:anchor",
+    "mul(add(max(fb, 3), fd), add(fd, add(1, fb)))"
+   ],
+   "practice_on": [
+    false,
+    5366,
+    "port:anchor",
+    "mul(add(max(fb, 3), fd), add(fd, add(1, fb)))"
+   ],
+   "practice_let2": [
+    false,
+    5366,
+    "port:anchor",
+    "mul(add(max(fb, 3), fd), add(fd, add(1, fb)))"
+   ],
+   "practice_shuf": [
+    false,
+    5366,
+    "port:anchor",
+    "mul(add(max(fb, 3), fd), add(fd, add(1, fb)))"
+   ],
+   "practice_rw": [
+    false,
+    5366,
+    "port:anchor",
+    "mul(add(max(fb, 3), fd), add(fd, add(1, fb)))"
+   ],
+   "shufmem_off": [
+    true,
+    7875,
+    "port:invent:r2",
+    "add(mul(add(fb, fd), add(fb, fd)), add(fd, fb))"
+   ],
+   "shufmem_on": [
+    true,
+    7875,
+    "port:invent:r2",
+    "add(mul(add(fb, fd), add(fb, fd)), add(fd, fb))"
+   ]
+  },
+  "ds_orchard_gap": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    true,
+    7675,
+    "port:let2",
+    "sub(max(mul(fb, fc), fa), min(mul(fb, fc), fa))"
+   ],
+   "trained_let2": [
+    true,
+    7604,
+    "port:let2",
+    "sub(max(mul(fb, fc), fa), min(mul(fb, fc), fa))"
+   ],
+   "trained_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_on": [
+    true,
+    7675,
+    "port:let2",
+    "sub(max(mul(fb, fc), fa), min(mul(fb, fc), fa))"
+   ],
+   "math_sci_let2": [
+    true,
+    7604,
+    "port:let2",
+    "sub(max(mul(fb, fc), fa), min(mul(fb, fc), fa))"
+   ],
+   "math_sci_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_on": [
+    true,
+    8152,
+    "port:let2",
+    "sub(max(mul(fb, fc), fa), min(mul(fb, fc), fa))"
+   ],
+   "practice_let2": [
+    true,
+    8074,
+    "port:let2",
+    "sub(max(mul(fb, fc), fa), min(mul(fb, fc), fa))"
+   ],
+   "practice_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_on": [
+    true,
+    7176,
+    "port:let2",
+    "sub(max(mul(fb, fc), fa), min(mul(fb, fc), fa))"
+   ]
+  },
+  "ds_mold_bags_left": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(div(fd, div(fa, fc)), min(fb, fd)), sub(max(fd, fc), 3))"
+   ],
+   "trained_on": [
+    true,
+    7770,
+    "port:let2",
+    "add(div(mul(fb, fc), fd), mod(mul(fb, fc), fd))"
+   ],
+   "trained_let2": [
+    true,
+    7659,
+    "port:let2",
+    "add(div(mul(fb, fc), fd), mod(mul(fb, fc), fd))"
+   ],
+   "trained_shuf": [
+    true,
+    7770,
+    "port:let2",
+    "add(div(mul(fb, fc), fd), mod(mul(fb, fc), fd))"
+   ],
+   "trained_rw": [
+    true,
+    7770,
+    "port:let2",
+    "add(div(mul(fb, fc), fd), mod(mul(fb, fc), fd))"
+   ],
+   "math_sci_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(div(fd, div(fa, fc)), min(fb, fd)), sub(max(fd, fc), 3))"
+   ],
+   "math_sci_on": [
+    true,
+    7770,
+    "port:let2",
+    "add(div(mul(fb, fc), fd), mod(mul(fb, fc), fd))"
+   ],
+   "math_sci_let2": [
+    true,
+    7659,
+    "port:let2",
+    "add(div(mul(fb, fc), fd), mod(mul(fb, fc), fd))"
+   ],
+   "math_sci_shuf": [
+    true,
+    7770,
+    "port:let2",
+    "add(div(mul(fb, fc), fd), mod(mul(fb, fc), fd))"
+   ],
+   "math_sci_rw": [
+    true,
+    7770,
+    "port:let2",
+    "add(div(mul(fb, fc), fd), mod(mul(fb, fc), fd))"
+   ],
+   "practice_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(sub(fd, 1), ite(mod(fb, 2), 2, fc)), sub(mod(fc, 3), 2))"
+   ],
+   "practice_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(sub(fd, 1), ite(mod(fb, 2), 2, fc)), sub(mod(fc, 3), 2))"
+   ],
+   "practice_let2": [
+    true,
+    6274,
+    "port:let2",
+    "add(div(mul(fb, fc), fd), mod(mul(fb, fc), fd))"
+   ],
+   "practice_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(sub(fd, 1), ite(mod(fb, 2), 2, fc)), sub(mod(fc, 3), 2))"
+   ],
+   "practice_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(sub(fd, 1), ite(mod(fb, 2), 2, fc)), sub(mod(fc, 3), 2))"
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(min(fd, max(fb, fc)), mod(max(fd, fb), fc)), div(1, sub(fb, fd)))"
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(min(fd, max(fb, fc)), mod(max(fd, fb), fc)), div(1, sub(fb, fd)))"
+   ]
+  },
+  "ds_box_six": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    "casesplit:d1",
+    "ite(mod(fb, 2), add(fb, fb), add(fc, add(1, 3)))"
+   ],
+   "empty_on": [
+    false,
+    10000,
+    "casesplit:d1",
+    "ite(mod(fb, 2), add(fb, fb), add(fc, add(1, 3)))"
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_let2": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_let2": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(min(add(2, fc), fb), min(fc, fb)), mod(fc, sub(0, 3)))"
+   ],
+   "practice_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(min(add(2, fc), fb), min(fc, fb)), mod(fc, sub(0, 3)))"
+   ],
+   "practice_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(min(add(2, fc), fb), min(fc, fb)), mod(fc, sub(0, 3)))"
+   ],
+   "practice_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(min(add(2, fc), fb), min(fc, fb)), mod(fc, sub(0, 3)))"
+   ],
+   "practice_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(min(add(2, fc), fb), min(fc, fb)), mod(fc, sub(0, 3)))"
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(min(fb, sub(fa, fc)), min(fc, fb)), mod(fc, sub(0, 3)))"
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(min(fb, sub(fa, fc)), min(fc, fb)), mod(fc, sub(0, 3)))"
+   ]
+  },
+  "ds_cart_four": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    "casesplit:d1",
+    "ite(mod(fc, fb), max(div(fa, 3), fc), add(1, mul(3, 3)))"
+   ],
+   "empty_on": [
+    false,
+    10000,
+    "casesplit:d1",
+    "ite(mod(fc, fb), max(div(fa, 3), fc), add(1, mul(3, 3)))"
+   ],
+   "trained_off": [
+    false,
+    10000,
+    "blockprobe",
+    "div(add(div(add(fa, fb), 2), div(fc, add(fb, fb))), 2)"
+   ],
+   "trained_on": [
+    false,
+    8018,
+    "port:let2",
+    "div(add(div(add(fa, fb), 2), 1), 2)"
+   ],
+   "trained_let2": [
+    false,
+    7760,
+    "port:let2",
+    "sub(div(add(fa, fb), 2), div(div(add(fa, fb), 2), 2))"
+   ],
+   "trained_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "div(add(div(add(fa, fb), 2), div(fc, add(fb, fb))), 2)"
+   ],
+   "trained_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "div(add(div(add(fa, fb), 2), div(fc, add(fb, fb))), 2)"
+   ],
+   "math_sci_off": [
+    false,
+    10000,
+    "blockprobe",
+    "div(add(div(add(fa, fb), 2), div(fc, add(fb, fb))), 2)"
+   ],
+   "math_sci_on": [
+    false,
+    8018,
+    "port:let2",
+    "div(add(div(add(fa, fb), 2), 1), 2)"
+   ],
+   "math_sci_let2": [
+    false,
+    7760,
+    "port:let2",
+    "sub(div(add(fa, fb), 2), div(div(add(fa, fb), 2), 2))"
+   ],
+   "math_sci_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "div(add(div(add(fa, fb), 2), div(fc, add(fb, fb))), 2)"
+   ],
+   "math_sci_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "div(add(div(add(fa, fb), 2), div(fc, add(fb, fb))), 2)"
+   ],
+   "practice_off": [
+    false,
+    5836,
+    "port:anchor2",
+    "add(add(div(fa, add(1, 3)), div(fc, add(1, 3))), sub(2, div(fc, fb)))"
+   ],
+   "practice_on": [
+    false,
+    5702,
+    "port:anchor2",
+    "add(add(div(fa, add(1, 3)), div(fc, add(1, 3))), sub(2, div(fc, fb)))"
+   ],
+   "practice_let2": [
+    false,
+    5702,
+    "port:anchor2",
+    "add(add(div(fa, add(1, 3)), div(fc, add(1, 3))), sub(2, div(fc, fb)))"
+   ],
+   "practice_shuf": [
+    false,
+    5702,
+    "port:anchor2",
+    "add(add(div(fa, add(1, 3)), div(fc, add(1, 3))), sub(2, div(fc, fb)))"
+   ],
+   "practice_rw": [
+    false,
+    5702,
+    "port:anchor2",
+    "add(add(div(fa, add(1, 3)), div(fc, add(1, 3))), sub(2, div(fc, fb)))"
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "ds_jar_five": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(fa, fc), mod(fc, fb)), mod(mul(fa, fa), fb))"
+   ],
+   "trained_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(fa, fc), mod(fc, fb)), mod(mul(fa, fa), fb))"
+   ],
+   "trained_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(fa, fc), mod(fc, fb)), mod(mul(fa, fa), fb))"
+   ],
+   "trained_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(fa, fc), mod(fc, fb)), mod(mul(fa, fa), fb))"
+   ],
+   "trained_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(fa, fc), mod(fc, fb)), mod(mul(fa, fa), fb))"
+   ],
+   "math_sci_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(fa, fc), mod(fc, fb)), mod(mul(fa, fa), fb))"
+   ],
+   "math_sci_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(fa, fc), mod(fc, fb)), mod(mul(fa, fa), fb))"
+   ],
+   "math_sci_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(fa, fc), mod(fc, fb)), mod(mul(fa, fa), fb))"
+   ],
+   "math_sci_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(fa, fc), mod(fc, fb)), mod(mul(fa, fa), fb))"
+   ],
+   "math_sci_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(fa, fc), mod(fc, fb)), mod(mul(fa, fa), fb))"
+   ],
+   "practice_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(sub(fc, min(2, fc)), mod(fc, fb)), div(mul(3, fb), fa))"
+   ],
+   "practice_on": [
+    true,
+    8070,
+    "port:let2",
+    "div(add(mul(fb, fc), 3), add(2, 3))"
+   ],
+   "practice_let2": [
+    true,
+    8008,
+    "port:let2",
+    "div(add(mul(fb, fc), 3), add(2, 3))"
+   ],
+   "practice_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(sub(fc, min(2, fc)), mod(fc, fb)), div(mul(3, fb), fa))"
+   ],
+   "practice_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(sub(fc, min(2, fc)), mod(fc, fb)), div(mul(3, fb), fa))"
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(mod(fa, fc), fb), mod(fc, fb)), mod(mul(fa, fa), fb))"
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(mod(fa, fc), fb), mod(fc, fb)), mod(mul(fa, fa), fb))"
+   ]
+  },
+  "ds_trip_seven": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(mod(fb, fa), div(fd, sub(fb, fd)))"
+   ],
+   "trained_on": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(mod(fb, fa), div(fd, sub(fb, fd)))"
+   ],
+   "trained_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(mod(fb, fa), div(fd, sub(fb, fd)))"
+   ],
+   "trained_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(mod(fb, fa), div(fd, sub(fb, fd)))"
+   ],
+   "trained_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(mod(fb, fa), div(fd, sub(fb, fd)))"
+   ],
+   "math_sci_off": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(mod(fb, fa), div(fd, sub(fb, fd)))"
+   ],
+   "math_sci_on": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(mod(fb, fa), div(fd, sub(fb, fd)))"
+   ],
+   "math_sci_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(mod(fb, fa), div(fd, sub(fb, fd)))"
+   ],
+   "math_sci_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(mod(fb, fa), div(fd, sub(fb, fd)))"
+   ],
+   "math_sci_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(mod(fb, fa), div(fd, sub(fb, fd)))"
+   ],
+   "practice_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(3, fc), ite(sub(fd, 3), 1, fd)), sub(1, div(2, fb)))"
+   ],
+   "practice_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(3, fc), ite(sub(fd, 3), 1, fd)), sub(1, div(2, fb)))"
+   ],
+   "practice_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(3, fc), ite(sub(fd, 3), 1, fd)), sub(1, div(2, fb)))"
+   ],
+   "practice_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(3, fc), ite(sub(fd, 3), 1, fd)), sub(1, div(2, fb)))"
+   ],
+   "practice_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(mod(3, fc), ite(sub(fd, 3), 1, fd)), sub(1, div(2, fb)))"
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(mod(fb, fa), div(fd, sub(fb, fd)))"
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(mod(fb, fa), div(fd, sub(fb, fd)))"
+   ]
+  },
+  "ds_round_ten": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_let2": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_let2": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_let2": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "ds_round_four": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "trained_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "trained_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "trained_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "trained_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "math_sci_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "math_sci_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "math_sci_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "math_sci_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "math_sci_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "practice_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "practice_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "practice_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "practice_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "practice_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(fa, fd), mul(mod(fa, 2), 2))"
+   ]
+  },
+  "ds_round_six": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_let2": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_let2": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_let2": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "ds_hive_pairs": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    6628,
+    "port:scale:div2",
+    "div(mul(add(fd, fb), add(fd, sub(fb, 1))), 2)"
+   ],
+   "trained_on": [
+    true,
+    6392,
+    "port:scale:div2",
+    "div(mul(add(fd, fb), add(fd, sub(fb, 1))), 2)"
+   ],
+   "trained_let2": [
+    true,
+    6392,
+    "port:scale:div2",
+    "div(mul(add(fd, fb), add(fd, sub(fb, 1))), 2)"
+   ],
+   "trained_shuf": [
+    true,
+    6392,
+    "port:scale:div2",
+    "div(mul(add(fd, fb), add(fd, sub(fb, 1))), 2)"
+   ],
+   "trained_rw": [
+    true,
+    6392,
+    "port:scale:div2",
+    "div(mul(add(fd, fb), add(fd, sub(fb, 1))), 2)"
+   ],
+   "math_sci_off": [
+    true,
+    6628,
+    "port:scale:div2",
+    "div(mul(add(fd, fb), add(fd, sub(fb, 1))), 2)"
+   ],
+   "math_sci_on": [
+    true,
+    6392,
+    "port:scale:div2",
+    "div(mul(add(fd, fb), add(fd, sub(fb, 1))), 2)"
+   ],
+   "math_sci_let2": [
+    true,
+    6392,
+    "port:scale:div2",
+    "div(mul(add(fd, fb), add(fd, sub(fb, 1))), 2)"
+   ],
+   "math_sci_shuf": [
+    true,
+    6392,
+    "port:scale:div2",
+    "div(mul(add(fd, fb), add(fd, sub(fb, 1))), 2)"
+   ],
+   "math_sci_rw": [
+    true,
+    6392,
+    "port:scale:div2",
+    "div(mul(add(fd, fb), add(fd, sub(fb, 1))), 2)"
+   ],
+   "practice_off": [
+    true,
+    6657,
+    "port:scale:div2",
+    "div(mul(add(fd, fb), add(fd, sub(fb, 1))), 2)"
+   ],
+   "practice_on": [
+    true,
+    6488,
+    "port:scale:div2",
+    "div(mul(add(fd, fb), add(fd, sub(fb, 1))), 2)"
+   ],
+   "practice_let2": [
+    true,
+    6488,
+    "port:scale:div2",
+    "div(mul(add(fd, fb), add(fd, sub(fb, 1))), 2)"
+   ],
+   "practice_shuf": [
+    true,
+    6488,
+    "port:scale:div2",
+    "div(mul(add(fd, fb), add(fd, sub(fb, 1))), 2)"
+   ],
+   "practice_rw": [
+    true,
+    6488,
+    "port:scale:div2",
+    "div(mul(add(fd, fb), add(fd, sub(fb, 1))), 2)"
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "ds_tree_pairs": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    5923,
+    "port:scale:div2",
+    "div(mul(mul(fb, fc), sub(mul(fb, fc), 1)), 2)"
+   ],
+   "trained_on": [
+    true,
+    5780,
+    "port:scale:div2",
+    "div(mul(mul(fb, fc), sub(mul(fb, fc), 1)), 2)"
+   ],
+   "trained_let2": [
+    true,
+    5780,
+    "port:scale:div2",
+    "div(mul(mul(fb, fc), sub(mul(fb, fc), 1)), 2)"
+   ],
+   "trained_shuf": [
+    true,
+    5780,
+    "port:scale:div2",
+    "div(mul(mul(fb, fc), sub(mul(fb, fc), 1)), 2)"
+   ],
+   "trained_rw": [
+    true,
+    5780,
+    "port:scale:div2",
+    "div(mul(mul(fb, fc), sub(mul(fb, fc), 1)), 2)"
+   ],
+   "math_sci_off": [
+    true,
+    5923,
+    "port:scale:div2",
+    "div(mul(mul(fb, fc), sub(mul(fb, fc), 1)), 2)"
+   ],
+   "math_sci_on": [
+    true,
+    5780,
+    "port:scale:div2",
+    "div(mul(mul(fb, fc), sub(mul(fb, fc), 1)), 2)"
+   ],
+   "math_sci_let2": [
+    true,
+    5780,
+    "port:scale:div2",
+    "div(mul(mul(fb, fc), sub(mul(fb, fc), 1)), 2)"
+   ],
+   "math_sci_shuf": [
+    true,
+    5780,
+    "port:scale:div2",
+    "div(mul(mul(fb, fc), sub(mul(fb, fc), 1)), 2)"
+   ],
+   "math_sci_rw": [
+    true,
+    5780,
+    "port:scale:div2",
+    "div(mul(mul(fb, fc), sub(mul(fb, fc), 1)), 2)"
+   ],
+   "practice_off": [
+    true,
+    6644,
+    "port:scale:div2",
+    "div(mul(mul(fb, fc), sub(mul(fb, fc), 1)), 2)"
+   ],
+   "practice_on": [
+    true,
+    6574,
+    "port:scale:div2",
+    "div(mul(mul(fb, fc), sub(mul(fb, fc), 1)), 2)"
+   ],
+   "practice_let2": [
+    true,
+    6574,
+    "port:scale:div2",
+    "div(mul(mul(fb, fc), sub(mul(fb, fc), 1)), 2)"
+   ],
+   "practice_shuf": [
+    true,
+    6574,
+    "port:scale:div2",
+    "div(mul(mul(fb, fc), sub(mul(fb, fc), 1)), 2)"
+   ],
+   "practice_rw": [
+    true,
+    6574,
+    "port:scale:div2",
+    "div(mul(mul(fb, fc), sub(mul(fb, fc), 1)), 2)"
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "ds_quarter_load": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    "blockprobe",
+    "div(mul(mul(fd, fc), div(fb, 2)), 2)"
+   ],
+   "trained_on": [
+    false,
+    10000,
+    "blockprobe",
+    "div(mul(mul(fd, fc), div(fb, 2)), 2)"
+   ],
+   "trained_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "div(mul(mul(fd, fc), div(fb, 2)), 2)"
+   ],
+   "trained_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "div(mul(mul(fd, fc), div(fb, 2)), 2)"
+   ],
+   "trained_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "div(mul(mul(fd, fc), div(fb, 2)), 2)"
+   ],
+   "math_sci_off": [
+    false,
+    10000,
+    "blockprobe",
+    "div(mul(mul(fd, fc), div(fb, 2)), 2)"
+   ],
+   "math_sci_on": [
+    false,
+    10000,
+    "blockprobe",
+    "div(mul(mul(fd, fc), div(fb, 2)), 2)"
+   ],
+   "math_sci_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "div(mul(mul(fd, fc), div(fb, 2)), 2)"
+   ],
+   "math_sci_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "div(mul(mul(fd, fc), div(fb, 2)), 2)"
+   ],
+   "math_sci_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "div(mul(mul(fd, fc), div(fb, 2)), 2)"
+   ],
+   "practice_off": [
+    false,
+    10000,
+    "blockprobe",
+    "div(mul(mul(fd, fc), div(fb, 2)), 2)"
+   ],
+   "practice_on": [
+    false,
+    10000,
+    "blockprobe",
+    "div(mul(mul(fd, fc), div(fb, 2)), 2)"
+   ],
+   "practice_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "div(mul(mul(fd, fc), div(fb, 2)), 2)"
+   ],
+   "practice_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "div(mul(mul(fd, fc), div(fb, 2)), 2)"
+   ],
+   "practice_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "div(mul(mul(fd, fc), div(fb, 2)), 2)"
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "ds_steps_sum": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    true,
+    6369,
+    "port:scale:div2",
+    "div(mul(add(fc, fb), add(fc, add(1, fb))), 2)"
+   ],
+   "trained_on": [
+    true,
+    6198,
+    "port:scale:div2",
+    "div(mul(add(fc, fb), add(fc, add(1, fb))), 2)"
+   ],
+   "trained_let2": [
+    true,
+    6198,
+    "port:scale:div2",
+    "div(mul(add(fc, fb), add(fc, add(1, fb))), 2)"
+   ],
+   "trained_shuf": [
+    true,
+    6198,
+    "port:scale:div2",
+    "div(mul(add(fc, fb), add(fc, add(1, fb))), 2)"
+   ],
+   "trained_rw": [
+    true,
+    6198,
+    "port:scale:div2",
+    "div(mul(add(fc, fb), add(fc, add(1, fb))), 2)"
+   ],
+   "math_sci_off": [
+    true,
+    6369,
+    "port:scale:div2",
+    "div(mul(add(fc, fb), add(fc, add(1, fb))), 2)"
+   ],
+   "math_sci_on": [
+    true,
+    6198,
+    "port:scale:div2",
+    "div(mul(add(fc, fb), add(fc, add(1, fb))), 2)"
+   ],
+   "math_sci_let2": [
+    true,
+    6198,
+    "port:scale:div2",
+    "div(mul(add(fc, fb), add(fc, add(1, fb))), 2)"
+   ],
+   "math_sci_shuf": [
+    true,
+    6198,
+    "port:scale:div2",
+    "div(mul(add(fc, fb), add(fc, add(1, fb))), 2)"
+   ],
+   "math_sci_rw": [
+    true,
+    6198,
+    "port:scale:div2",
+    "div(mul(add(fc, fb), add(fc, add(1, fb))), 2)"
+   ],
+   "practice_off": [
+    false,
+    6648,
+    "port:scale:div2",
+    "div(mul(add(max(fc, 3), fb), add(fc, add(1, fb))), 2)"
+   ],
+   "practice_on": [
+    false,
+    6498,
+    "port:scale:div2",
+    "div(mul(add(max(fc, 3), fb), add(fc, add(1, fb))), 2)"
+   ],
+   "practice_let2": [
+    false,
+    6498,
+    "port:scale:div2",
+    "div(mul(add(max(fc, 3), fb), add(fc, add(1, fb))), 2)"
+   ],
+   "practice_shuf": [
+    false,
+    6498,
+    "port:scale:div2",
+    "div(mul(add(max(fc, 3), fb), add(fc, add(1, fb))), 2)"
+   ],
+   "practice_rw": [
+    false,
+    6498,
+    "port:scale:div2",
+    "div(mul(add(max(fc, 3), fb), add(fc, add(1, fb))), 2)"
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "ds_overflow": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    "casesplit:d1",
+    "ite(sub(fa, fb), 0, mul(fa, fa))"
+   ],
+   "empty_on": [
+    false,
+    10000,
+    "casesplit:d1",
+    "ite(sub(fa, fb), 0, mul(fa, fa))"
+   ],
+   "trained_off": [
+    false,
+    8001,
+    "port:probe",
+    "ite(ite(sub(fb, fa), fb, 0), mul(fc, mul(fc, fa)), mul(fc, div(fb, fa)))"
+   ],
+   "trained_on": [
+    false,
+    8001,
+    "port:probe",
+    "ite(ite(sub(fb, fa), fb, 0), mul(fc, mul(fc, fa)), mul(fc, div(fb, fa)))"
+   ],
+   "trained_let2": [
+    false,
+    8001,
+    "port:probe",
+    "ite(ite(sub(fb, fa), fb, 0), mul(fc, mul(fc, fa)), mul(fc, div(fb, fa)))"
+   ],
+   "trained_shuf": [
+    false,
+    8001,
+    "port:probe",
+    "ite(ite(sub(fb, fa), fb, 0), mul(fc, mul(fc, fa)), mul(fc, div(fb, fa)))"
+   ],
+   "trained_rw": [
+    false,
+    8001,
+    "port:probe",
+    "ite(ite(sub(fb, fa), fb, 0), mul(fc, mul(fc, fa)), mul(fc, div(fb, fa)))"
+   ],
+   "math_sci_off": [
+    false,
+    8001,
+    "port:probe",
+    "ite(ite(sub(fb, fa), fb, 0), mul(fc, mul(fc, fa)), mul(fc, div(fb, fa)))"
+   ],
+   "math_sci_on": [
+    false,
+    8001,
+    "port:probe",
+    "ite(ite(sub(fb, fa), fb, 0), mul(fc, mul(fc, fa)), mul(fc, div(fb, fa)))"
+   ],
+   "math_sci_let2": [
+    false,
+    8001,
+    "port:probe",
+    "ite(ite(sub(fb, fa), fb, 0), mul(fc, mul(fc, fa)), mul(fc, div(fb, fa)))"
+   ],
+   "math_sci_shuf": [
+    false,
+    8001,
+    "port:probe",
+    "ite(ite(sub(fb, fa), fb, 0), mul(fc, mul(fc, fa)), mul(fc, div(fb, fa)))"
+   ],
+   "math_sci_rw": [
+    false,
+    8001,
+    "port:probe",
+    "ite(ite(sub(fb, fa), fb, 0), mul(fc, mul(fc, fa)), mul(fc, div(fb, fa)))"
+   ],
+   "practice_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(div(fb, fa), 3), div(fb, sub(fa, 3)))"
+   ],
+   "practice_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(div(fb, fa), 3), div(fb, sub(fa, 3)))"
+   ],
+   "practice_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(div(fb, fa), 3), div(fb, sub(fa, 3)))"
+   ],
+   "practice_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(div(fb, fa), 3), div(fb, sub(fa, 3)))"
+   ],
+   "practice_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "add(mul(div(fb, fa), 3), div(fb, sub(fa, 3)))"
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    "blockprobe",
+    "mul(max(mul(fa, fa), fc), sub(mod(fc, 3), 1))"
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    "blockprobe",
+    "mul(max(mul(fa, fa), fc), sub(mod(fc, 3), 1))"
+   ]
+  },
+  "ds_cap_load": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_let2": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_let2": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "math_sci_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_let2": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_shuf": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "practice_rw": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    null,
+    null
+   ]
+  },
+  "ds_spill_mod": {
+   "cold": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_off": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "empty_on": [
+    false,
+    10000,
+    null,
+    null
+   ],
+   "trained_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(ite(sub(fb, fc), fb, 0), div(sub(fb, fd), fc)), sub(fc, min(fb, 3)))"
+   ],
+   "trained_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(ite(sub(fb, fc), fb, 0), div(sub(fb, fd), fc)), sub(fc, min(fb, 3)))"
+   ],
+   "trained_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(ite(sub(fb, fc), fb, 0), div(sub(fb, fd), fc)), sub(fc, min(fb, 3)))"
+   ],
+   "trained_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(ite(sub(fb, fc), fb, 0), div(sub(fb, fd), fc)), sub(fc, min(fb, 3)))"
+   ],
+   "trained_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(ite(sub(fb, fc), fb, 0), div(sub(fb, fd), fc)), sub(fc, min(fb, 3)))"
+   ],
+   "math_sci_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(ite(sub(fb, fc), fb, 0), div(sub(fb, fd), fc)), sub(fc, min(fb, 3)))"
+   ],
+   "math_sci_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(ite(sub(fb, fc), fb, 0), div(sub(fb, fd), fc)), sub(fc, min(fb, 3)))"
+   ],
+   "math_sci_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(ite(sub(fb, fc), fb, 0), div(sub(fb, fd), fc)), sub(fc, min(fb, 3)))"
+   ],
+   "math_sci_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(ite(sub(fb, fc), fb, 0), div(sub(fb, fd), fc)), sub(fc, min(fb, 3)))"
+   ],
+   "math_sci_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(ite(sub(fb, fc), fb, 0), div(sub(fb, fd), fc)), sub(fc, min(fb, 3)))"
+   ],
+   "practice_off": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(sub(fb, mod(fa, 3)), div(fd, sub(3, fd)))"
+   ],
+   "practice_on": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(sub(fb, mod(fa, 3)), div(fd, sub(3, fd)))"
+   ],
+   "practice_let2": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(sub(fb, mod(fa, 3)), div(fd, sub(3, fd)))"
+   ],
+   "practice_shuf": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(sub(fb, mod(fa, 3)), div(fd, sub(3, fd)))"
+   ],
+   "practice_rw": [
+    false,
+    10000,
+    "blockprobe",
+    "sub(sub(fb, mod(fa, 3)), div(fd, sub(3, fd)))"
+   ],
+   "shufmem_off": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(sub(fb, fd), min(fc, sub(fb, fd))), sub(fd, mod(fa, 3)))"
+   ],
+   "shufmem_on": [
+    false,
+    10000,
+    "blockprobe",
+    "add(add(sub(fb, fd), min(fc, sub(fb, fd))), sub(fd, mod(fa, 3)))"
+   ]
+  }
+ },
+ "sha256": "fbaf5cf756c012e822d617021c815a5ee746902f8f2dc879740b0a1b16b11c43",
+ "verdict": {
+  "fields": {
+   "trained": {
+    "off": 6,
+    "on": 9,
+    "let2_unguarded": 9,
+    "shuffled_control": 8,
+    "rewired_control": 8,
+    "lost_on": [],
+    "lost_let2": [],
+    "lost_shuf": [],
+    "lost_rw": [],
+    "more_evals_on": [],
+    "wrong_let2_returns": {
+     "on": [
+      "ds_cart_four"
+     ],
+     "let2": [
+      "ds_cart_four"
+     ],
+     "shuf": [],
+     "rw": []
+    },
+    "evals": {
+     "off": 188581,
+     "on": 179078,
+     "let2": 178435,
+     "shuf": 183385,
+     "rw": 183385
+    },
+    "new_worse_than_cold": []
+   },
+   "math_sci": {
+    "off": 6,
+    "on": 9,
+    "let2_unguarded": 9,
+    "shuffled_control": 8,
+    "rewired_control": 8,
+    "lost_on": [],
+    "lost_let2": [],
+    "lost_shuf": [],
+    "lost_rw": [],
+    "more_evals_on": [],
+    "wrong_let2_returns": {
+     "on": [
+      "ds_cart_four"
+     ],
+     "let2": [
+      "ds_cart_four"
+     ],
+     "shuf": [],
+     "rw": []
+    },
+    "evals": {
+     "off": 188581,
+     "on": 179078,
+     "let2": 178435,
+     "shuf": 183385,
+     "rw": 183385
+    },
+    "new_worse_than_cold": []
+   },
+   "practice": {
+    "off": 4,
+    "on": 6,
+    "let2_unguarded": 7,
+    "shuffled_control": 4,
+    "rewired_control": 4,
+    "lost_on": [],
+    "lost_let2": [],
+    "lost_shuf": [],
+    "lost_rw": [],
+    "more_evals_on": [],
+    "wrong_let2_returns": {
+     "on": [],
+     "let2": [],
+     "shuf": [],
+     "rw": []
+    },
+    "evals": {
+     "off": 188227,
+     "on": 183670,
+     "let2": 179804,
+     "shuf": 187448,
+     "rw": 187448
+    },
+    "new_worse_than_cold": []
+   }
+  },
+  "c1_trained_gain": 3,
+  "criterion_1": true,
+  "criterion_2_empty_identical": true,
+  "criterion_3_no_loss": true,
+  "c4_shuf": {
+   "on_sum": 24,
+   "control_sum": 20,
+   "control_losses_on_keeps": [],
+   "pass": true
+  },
+  "c4_rw": {
+   "on_sum": 24,
+   "control_sum": 20,
+   "control_losses_on_keeps": [],
+   "pass": true
+  },
+  "criterion_4_refutation_carries_it": true,
+  "report_memory_control": {
+   "shufmem_off": 3,
+   "shufmem_on": 5,
+   "lost_shufmem_on": []
+  },
+  "report_let2_unguarded": {
+   "trained": {
+    "let2": 9,
+    "on": 9,
+    "lost_let2": []
+   },
+   "math_sci": {
+    "let2": 9,
+    "on": 9,
+    "lost_let2": []
+   },
+   "practice": {
+    "let2": 7,
+    "on": 6,
+    "lost_let2": []
+   }
+  }
+ }
+}

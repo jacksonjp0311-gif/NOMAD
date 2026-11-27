@@ -1,0 +1,1517 @@
+{
+ "lofo": {
+  "totals": {
+   "cold": 5883,
+   "trained": 5782,
+   "trained_port_off": 5782
+  },
+  "worst_ratio": {
+   "trained": 1.0,
+   "trained_port_off": 1.0
+  }
+ },
+ "deep": {
+  "tasks": 40,
+  "certified": {
+   "cold": 0,
+   "empty": 25,
+   "trained": 27,
+   "trained_port_off": 25
+  },
+  "evaluations": {
+   "cold": 284839,
+   "empty": 240553,
+   "trained": 235421,
+   "trained_port_off": 240553
+  },
+  "trained_minus_empty": 2,
+  "worse_than_cold": {
+   "cold": [],
+   "empty": [],
+   "trained": [],
+   "trained_port_off": []
+  },
+  "port_off_wins_lost": {
+   "cold": [
+    "deep_01",
+    "deep_02",
+    "deep_06",
+    "deep_07",
+    "deep_09",
+    "deep_12",
+    "deep_13",
+    "deep_14",
+    "deep_15",
+    "deep_16",
+    "deep_18",
+    "deep_22",
+    "deep_23",
+    "deep_25",
+    "deep_26",
+    "deep_27",
+    "deep_28",
+    "deep_30",
+    "deep_31",
+    "deep_32",
+    "deep_34",
+    "deep_35",
+    "deep_36",
+    "deep_37",
+    "deep_39"
+   ],
+   "empty": [],
+   "trained": [],
+   "trained_port_off": []
+  },
+  "per_task[certified, evals, via, candidate]": {
+   "deep_00": {
+    "cold": [
+     false,
+     59,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     1489,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     1489,
+     null,
+     null
+    ],
+    "trained_port_off": [
+     false,
+     1489,
+     null,
+     null
+    ]
+   },
+   "deep_01": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5579,
+     "sense:mul",
+     "mul(sub(x, 3), mul(x, 3))"
+    ],
+    "trained": [
+     true,
+     5579,
+     "sense:mul",
+     "mul(sub(x, 3), mul(x, 3))"
+    ],
+    "trained_port_off": [
+     true,
+     5579,
+     "sense:mul",
+     "mul(sub(x, 3), mul(x, 3))"
+    ]
+   },
+   "deep_02": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5733,
+     "sense:sub",
+     "sub(y, mul(add(x, 3), y))"
+    ],
+    "trained": [
+     true,
+     5733,
+     "sense:sub",
+     "sub(y, mul(add(x, 3), y))"
+    ],
+    "trained_port_off": [
+     true,
+     5733,
+     "sense:sub",
+     "sub(y, mul(add(x, 3), y))"
+    ]
+   },
+   "deep_03": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5512,
+     "port:anchor",
+     "add(mul(y, y), sub(2, add(y, y)))"
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "deep_04": {
+    "cold": [
+     false,
+     1078,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     9301,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     9301,
+     "casesplit:d1",
+     null
+    ],
+    "trained_port_off": [
+     false,
+     9301,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_05": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_06": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5448,
+     "casesplit:d1",
+     "ite(mod(x, 2), sub(3, x), mul(mod(x, y), x))"
+    ],
+    "trained": [
+     true,
+     5448,
+     "casesplit:d1",
+     "ite(mod(x, 2), sub(3, x), mul(mod(x, y), x))"
+    ],
+    "trained_port_off": [
+     true,
+     5448,
+     "casesplit:d1",
+     "ite(mod(x, 2), sub(3, x), mul(mod(x, y), x))"
+    ]
+   },
+   "deep_07": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     6450,
+     "sense:mul",
+     "mul(mul(3, y), sub(y, 1))"
+    ],
+    "trained": [
+     true,
+     6450,
+     "sense:mul",
+     "mul(mul(3, y), sub(y, 1))"
+    ],
+    "trained_port_off": [
+     true,
+     6450,
+     "sense:mul",
+     "mul(mul(3, y), sub(y, 1))"
+    ]
+   },
+   "deep_08": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "deep_09": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     4160,
+     "sense:mul",
+     "mul(x, add(x, add(3, 3)))"
+    ],
+    "trained": [
+     true,
+     4160,
+     "sense:mul",
+     "mul(x, add(x, add(3, 3)))"
+    ],
+    "trained_port_off": [
+     true,
+     4160,
+     "sense:mul",
+     "mul(x, add(x, add(3, 3)))"
+    ]
+   },
+   "deep_10": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_11": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "deep_12": {
+    "cold": [
+     false,
+     1520,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     1710,
+     null,
+     "div(add(2, y), 3)"
+    ],
+    "trained": [
+     true,
+     1710,
+     null,
+     "div(add(2, y), 3)"
+    ],
+    "trained_port_off": [
+     true,
+     1710,
+     null,
+     "div(add(2, y), 3)"
+    ]
+   },
+   "deep_13": {
+    "cold": [
+     false,
+     58,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     345,
+     null,
+     "add(sub(3, y), 3)"
+    ],
+    "trained": [
+     true,
+     345,
+     null,
+     "add(sub(3, y), 3)"
+    ],
+    "trained_port_off": [
+     true,
+     345,
+     null,
+     "add(sub(3, y), 3)"
+    ]
+   },
+   "deep_14": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5151,
+     "sense:mul",
+     "mul(3, sub(mul(x, y), 2))"
+    ],
+    "trained": [
+     true,
+     5151,
+     "sense:mul",
+     "mul(3, sub(mul(x, y), 2))"
+    ],
+    "trained_port_off": [
+     true,
+     5151,
+     "sense:mul",
+     "mul(3, sub(mul(x, y), 2))"
+    ]
+   },
+   "deep_15": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     4296,
+     "casesplit:d1",
+     "ite(sub(y, 1), add(y, y), 0)"
+    ],
+    "trained": [
+     true,
+     4296,
+     "casesplit:d1",
+     "ite(sub(y, 1), add(y, y), 0)"
+    ],
+    "trained_port_off": [
+     true,
+     4296,
+     "casesplit:d1",
+     "ite(sub(y, 1), add(y, y), 0)"
+    ]
+   },
+   "deep_16": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     9128,
+     "casesplit:d1",
+     "ite(sub(x, 2), mul(sub(3, x), x), 0)"
+    ],
+    "trained": [
+     true,
+     9128,
+     "casesplit:d1",
+     "ite(sub(x, 2), mul(sub(3, x), x), 0)"
+    ],
+    "trained_port_off": [
+     true,
+     9128,
+     "casesplit:d1",
+     "ite(sub(x, 2), mul(sub(3, x), x), 0)"
+    ]
+   },
+   "deep_17": {
+    "cold": [
+     false,
+     768,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "deep_18": {
+    "cold": [
+     false,
+     2891,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     4302,
+     "casesplit:d1",
+     "ite(sub(x, 2), x, add(x, x))"
+    ],
+    "trained": [
+     true,
+     4302,
+     "casesplit:d1",
+     "ite(sub(x, 2), x, add(x, x))"
+    ],
+    "trained_port_off": [
+     true,
+     4302,
+     "casesplit:d1",
+     "ite(sub(x, 2), x, add(x, x))"
+    ]
+   },
+   "deep_19": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_20": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     9297,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     9297,
+     "casesplit:d1",
+     null
+    ],
+    "trained_port_off": [
+     false,
+     9297,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_21": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "deep_22": {
+    "cold": [
+     false,
+     2671,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     3323,
+     null,
+     "ite(sub(x, 2), y, 3)"
+    ],
+    "trained": [
+     true,
+     3323,
+     null,
+     "ite(sub(x, 2), y, 3)"
+    ],
+    "trained_port_off": [
+     true,
+     3323,
+     null,
+     "ite(sub(x, 2), y, 3)"
+    ]
+   },
+   "deep_23": {
+    "cold": [
+     false,
+     2465,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     2682,
+     null,
+     "min(sub(x, 1), y)"
+    ],
+    "trained": [
+     true,
+     2682,
+     null,
+     "min(sub(x, 1), y)"
+    ],
+    "trained_port_off": [
+     true,
+     2682,
+     null,
+     "min(sub(x, 1), y)"
+    ]
+   },
+   "deep_24": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     9356,
+     "port:anchor",
+     "mul(sub(mul(y, y), x), y)"
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "deep_25": {
+    "cold": [
+     false,
+     80,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     2478,
+     null,
+     "mod(max(x, y), 3)"
+    ],
+    "trained": [
+     true,
+     2478,
+     null,
+     "mod(max(x, y), 3)"
+    ],
+    "trained_port_off": [
+     true,
+     2478,
+     null,
+     "mod(max(x, y), 3)"
+    ]
+   },
+   "deep_26": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     7445,
+     "sense:mul",
+     "mul(max(x, 3), add(3, y))"
+    ],
+    "trained": [
+     true,
+     7445,
+     "sense:mul",
+     "mul(max(x, 3), add(3, y))"
+    ],
+    "trained_port_off": [
+     true,
+     7445,
+     "sense:mul",
+     "mul(max(x, 3), add(3, y))"
+    ]
+   },
+   "deep_27": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5448,
+     "casesplit:d1",
+     "ite(sub(y, 1), mul(sub(3, x), 3), mul(sub(3, x), 2))"
+    ],
+    "trained": [
+     true,
+     5448,
+     "casesplit:d1",
+     "ite(sub(y, 1), mul(sub(3, x), 3), mul(sub(3, x), 2))"
+    ],
+    "trained_port_off": [
+     true,
+     5448,
+     "casesplit:d1",
+     "ite(sub(y, 1), mul(sub(3, x), 3), mul(sub(3, x), 2))"
+    ]
+   },
+   "deep_28": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5102,
+     "sense:sub",
+     "sub(x, max(x, add(2, 3)))"
+    ],
+    "trained": [
+     true,
+     5102,
+     "sense:sub",
+     "sub(x, max(x, add(2, 3)))"
+    ],
+    "trained_port_off": [
+     true,
+     5102,
+     "sense:sub",
+     "sub(x, max(x, add(2, 3)))"
+    ]
+   },
+   "deep_29": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_30": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     4296,
+     "casesplit:d1",
+     "ite(sub(x, 2), sub(2, y), sub(1, y))"
+    ],
+    "trained": [
+     true,
+     4296,
+     "casesplit:d1",
+     "ite(sub(x, 2), sub(2, y), sub(1, y))"
+    ],
+    "trained_port_off": [
+     true,
+     4296,
+     "casesplit:d1",
+     "ite(sub(x, 2), sub(2, y), sub(1, y))"
+    ]
+   },
+   "deep_31": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5462,
+     "casesplit:d1",
+     "ite(sub(y, 2), sub(y, add(1, 3)), sub(1, y))"
+    ],
+    "trained": [
+     true,
+     5462,
+     "casesplit:d1",
+     "ite(sub(y, 2), sub(y, add(1, 3)), sub(1, y))"
+    ],
+    "trained_port_off": [
+     true,
+     5462,
+     "casesplit:d1",
+     "ite(sub(y, 2), sub(y, add(1, 3)), sub(1, y))"
+    ]
+   },
+   "deep_32": {
+    "cold": [
+     false,
+     94,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     2100,
+     null,
+     "mod(2, sub(x, 1))"
+    ],
+    "trained": [
+     true,
+     2100,
+     null,
+     "mod(2, sub(x, 1))"
+    ],
+    "trained_port_off": [
+     true,
+     2100,
+     null,
+     "mod(2, sub(x, 1))"
+    ]
+   },
+   "deep_33": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     5283,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     5283,
+     "casesplit:d1",
+     null
+    ],
+    "trained_port_off": [
+     false,
+     5283,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_34": {
+    "cold": [
+     false,
+     572,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     2773,
+     null,
+     "min(mul(x, x), y)"
+    ],
+    "trained": [
+     true,
+     2773,
+     null,
+     "min(mul(x, x), y)"
+    ],
+    "trained_port_off": [
+     true,
+     2773,
+     null,
+     "min(mul(x, x), y)"
+    ]
+   },
+   "deep_35": {
+    "cold": [
+     false,
+     71,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     75,
+     null,
+     "div(3, x)"
+    ],
+    "trained": [
+     true,
+     75,
+     null,
+     "div(3, x)"
+    ],
+    "trained_port_off": [
+     true,
+     75,
+     null,
+     "div(3, x)"
+    ]
+   },
+   "deep_36": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     6797,
+     "sense:sub",
+     "sub(0, mul(mod(y, x), 3))"
+    ],
+    "trained": [
+     true,
+     6797,
+     "sense:sub",
+     "sub(0, mul(mod(y, x), 3))"
+    ],
+    "trained_port_off": [
+     true,
+     6797,
+     "sense:sub",
+     "sub(0, mul(mod(y, x), 3))"
+    ]
+   },
+   "deep_37": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     5150,
+     "sense:sub",
+     "sub(y, add(x, mul(3, 3)))"
+    ],
+    "trained": [
+     true,
+     5150,
+     "sense:sub",
+     "sub(y, add(x, mul(3, 3)))"
+    ],
+    "trained_port_off": [
+     true,
+     5150,
+     "sense:sub",
+     "sub(y, add(x, mul(3, 3)))"
+    ]
+   },
+   "deep_38": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     5448,
+     "casesplit:d1",
+     null
+    ],
+    "trained": [
+     false,
+     5448,
+     "casesplit:d1",
+     null
+    ],
+    "trained_port_off": [
+     false,
+     5448,
+     "casesplit:d1",
+     null
+    ]
+   },
+   "deep_39": {
+    "cold": [
+     false,
+     2512,
+     null,
+     null
+    ],
+    "empty": [
+     true,
+     4302,
+     "casesplit:d1",
+     "ite(sub(y, 3), x, max(2, y))"
+    ],
+    "trained": [
+     true,
+     4302,
+     "casesplit:d1",
+     "ite(sub(y, 3), x, max(2, y))"
+    ],
+    "trained_port_off": [
+     true,
+     4302,
+     "casesplit:d1",
+     "ite(sub(y, 3), x, max(2, y))"
+    ]
+   }
+  },
+  "sha256": "da3ae9bf3a984afb1584153f2fe6044c94d955037086c73ae036049537966fbd"
+ },
+ "science_hard": {
+  "tasks": 14,
+  "certified": {
+   "cold": 0,
+   "empty": 0,
+   "trained": 12,
+   "trained_port_off": 5
+  },
+  "evaluations": {
+   "cold": 140000,
+   "empty": 140000,
+   "trained": 91987,
+   "trained_port_off": 122365
+  },
+  "trained_minus_empty": 12,
+  "worse_than_cold": {
+   "cold": [],
+   "empty": [],
+   "trained": [],
+   "trained_port_off": []
+  },
+  "port_off_wins_lost": {
+   "cold": [
+    "sci_d_rest",
+    "sci_vmean_uat",
+    "sci_d_uvt",
+    "sci_energy",
+    "sci_hm_to_s"
+   ],
+   "empty": [
+    "sci_d_rest",
+    "sci_vmean_uat",
+    "sci_d_uvt",
+    "sci_energy",
+    "sci_hm_to_s"
+   ],
+   "trained": [],
+   "trained_port_off": []
+  },
+  "per_task[certified, evals, via, candidate]": {
+   "sci_d_rest": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5683,
+     "port:scale:div2",
+     "div(add(mul(t, mul(t, a)), 0), 2)"
+    ],
+    "trained_port_off": [
+     true,
+     6544,
+     "blockprobe",
+     "mul(div(mul(a, t), 2), t)"
+    ]
+   },
+   "sci_displacement": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5797,
+     "port:scale:div2",
+     "div(add(mul(t, mul(t, a)), mul(u, add(t, t))), 2)"
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "sci_vmean_uat": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5135,
+     "port:anchor",
+     "sub(add(mul(a, t), u), div(mul(a, t), 2))"
+    ],
+    "trained_port_off": [
+     true,
+     5139,
+     "blockprobe",
+     "add(u, div(mul(a, t), 2))"
+    ]
+   },
+   "sci_vsq": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5134,
+     "port:anchor",
+     "add(mul(add(d, d), a), mul(u, u))"
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "sci_d_uvt": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6130,
+     "port:scale:div2",
+     "div(add(add(mul(t, v), u), sub(mul(u, t), u)), 2)"
+    ],
+    "trained_port_off": [
+     true,
+     9067,
+     "blockprobe",
+     "div(mul(add(v, u), t), 2)"
+    ]
+   },
+   "sci_ke_v": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6354,
+     "port:scale:div2",
+     "div(add(mul(v, mul(v, m)), 0), 2)"
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "sci_ke_u": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     6350,
+     "port:scale:div2",
+     "div(add(mul(u, mul(u, m)), 0), 2)"
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "sci_dke": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5727,
+     "port:scale:div2",
+     "div(sub(mul(v, mul(v, m)), mul(m, mul(u, u))), 2)"
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "sci_energy": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5133,
+     "port:anchor",
+     "mul(mul(I, mul(I, t)), R)"
+    ],
+    "trained_port_off": [
+     true,
+     6172,
+     "blockprobe",
+     "mul(I, mul(mul(I, R), t))"
+    ]
+   },
+   "sci_hm_to_s": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5329,
+     "port:anchor",
+     "add(mul(k, m), mul(mul(k, h), k))"
+    ],
+    "trained_port_off": [
+     true,
+     5443,
+     "blockprobe",
+     "add(mul(m, k), mul(mul(k, h), k))"
+    ]
+   },
+   "sci_hms_to_s": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     5325,
+     "port:anchor",
+     "add(add(s, mul(k, m)), mul(mul(k, h), k))"
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "sci_dist_m": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     "blockprobe",
+     null
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "sci_water_mol": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     true,
+     9890,
+     "port:probe",
+     "min(mul(kH, div(gO, kO)), div(gH, kH))"
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   },
+   "sci_water_g": {
+    "cold": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "empty": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained": [
+     false,
+     10000,
+     null,
+     null
+    ],
+    "trained_port_off": [
+     false,
+     10000,
+     null,
+     null
+    ]
+   }
+  },
+  "sha256": "4517167f150ef9cfcff5ae947f82d4bd93b9b6ecf5843c2f2976f7b95d54868d"
+ }
+}

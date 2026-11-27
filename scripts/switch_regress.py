@@ -52,6 +52,7 @@ JUDGES = {
     "clause2": ["scripts/clause2_judge.py"],           # CLAUSE2 sealed suite (CLAUSE2; not re-run by CLAUSE2 itself)
     "agree": ["scripts/agree_judge.py"],               # AGREE sealed suite (AGREE; not re-run by AGREE itself)
     "distin": ["scripts/distin_judge.py"],             # DISTIN sealed suite (DISTIN; not re-run by DISTIN itself)
+    "curric": ["scripts/curric_judge.py"],             # CURRIC sealed suite (CURRIC; not re-run by CURRIC itself)
 }
 
 

@@ -1,8 +1,8 @@
-# CURRIC: a multi-family concept curriculum (switch OFF; sealed suite and criteria pre-registered)
+# CURRIC: a multi-family concept curriculum (sealed PASS on all six criteria)
 
-Status (2026-11-27, ET): code landed with `NOMAD_CURRIC` **default off**. Dev separated real memory from
-scrambled memory with zero per-task losses, so the sealed suite and the criteria below are committed
-**before** any field arm is measured on it. Measured once, after this commit is pushed.
+Status (2026-11-27, ET): code, sealed suite and criteria landed in 8513887a with `NOMAD_CURRIC` default
+off. The sealed suite was measured once from that commit: **PASS on C1-C6** (results below). Default ON
+follows in a separate commit.
 
 ## Why
 
@@ -115,6 +115,53 @@ counts, the concept list, the audit table, the easy section.
 
 Decision rule: C1-C6 all hold -> default ON in a separate commit; otherwise it stays OFF with an honest
 write-up here and in `results/curric/`. If C1-C4 fail, C5 / C6 are not run.
+
+## Sealed result, part 1 (measured once from 8513887a, 2026-11-27 12:10 ET)
+
+`PYTHONHASHSEED=0 python3 scripts/curric_judge.py`, suite sha256 `69d40493...6e7f` (hash-checked), output
+committed unchanged as `results/curric/curric_sealed.json`. 23 hard tasks.
+
+| arm | certified / 23 | truly correct | evaluations |
+|---|---|---|---|
+| cold | 0 | 0 | |
+| empty_off / empty_on | 0 / 0 (per task identical) | 0 / 0 | |
+| trained_off | 4 | 4 | 205,308 |
+| studied_off (concept memory present, switch off) | 4 | | |
+| **trained_on** | **13** | **12** | **164,977** |
+| shuffled_1..5 (switch on) | 5 6 5 5 6 | 5 5 4 5 6 | |
+| shuffled_1..5_off | 5 6 5 5 6 | | |
+| rewired (report) | 13 | | |
+| gate1 / gate1 shuffled (report) | 13 / 5 6 5 5 6 | | |
+
+- **C1 PASS**: real beats every shuffle by +8 +7 +8 +8 +7 (needed +3). **C1b PASS**: truly correct +7 +7 +8 +7 +6.
+- **C2 PASS**: +9 over off (4 -> 13).
+- **C3 PASS**: empty_on = empty_off per task; cold 0, untouched.
+- **C4 PASS**: no task lost, none costlier, nothing worse than cold.
+- Field check: trained_on equals trained_off except the concept memory (19 entries); every shuffled field
+  has 0 concepts. Studied 14 / 15 curriculum families (`cu_absdiff_swap` not certified). Concepts:
+  `max(a-b,0)` (5 families), `(a+b) div 2`, `(a-b)^2`, `|a-b|` (3 each).
+- By domain (off -> on): sport 0 -> 2 / 7, weather 2 -> 5 / 6, pitch 1 -> 1 / 4, stock 1 -> 5 / 6.
+  New solves are compositions of a concept over the domain's own inputs, e.g. `mx_w_change_max` =
+  `max(|wh-vh|, |wl-vl|)`, `mx_k_short_total` = `posdiff(rl, sl) + posdiff(rk, sk)`.
+- Honest caveat: `mx_s_aggregate` is certified by `trained_on` with a sum of two `|a-b|` terms and fails
+  833 of 2,000 audit rows (a lucky fit on the 8 visible rows); it is counted in "certified" and not in
+  "truly correct". Pitch (octaves / pitch classes) gains nothing: its families need `mod` / `div`
+  concepts the curriculum does not teach. Rewired and gate1 equal real here, as on dev; the content
+  control (shuffled) is what separates.
+
+## Sealed result, part 2: existing judges, LOFO, tests
+
+`SWITCH=NOMAD_CURRIC PYTHONHASHSEED=0 scripts/switch_regress.py run` over all 27 judges in
+`switch_regress.JUDGES` (outputs `results/curric/regress/`, comparison `results/curric/regress_compare.json`).
+
+- **C5 PASS**: 0 losses, 0 gains over 825 per-task records; every off / on output pair is byte-identical
+  (expected: none of those judges' fields has studied the concept curriculum, so the stage never runs).
+- **C6 PASS**: LOFO identical off and on: cold 5,883, trained 5,782, trained_port_off 5,782, worst ratio
+  1.0x. Note: on current main the trained LOFO totals are 5,782 with the switch off too (below the 5,883
+  quoted by earlier docs; LOFO counts evaluations, so this is not a regression, and the earlier
+  criteria were written "<= 5,883"). CURRIC changes none of it. Full test suite: 668 passed, 6 skipped.
+
+**Verdict: PASS on all six criteria.** Default ON follows in a separate commit.
 
 ## Not done (scope of this push)
 
