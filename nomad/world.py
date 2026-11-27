@@ -2122,6 +2122,8 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         n_before = len(got)
         for e in midx[:MEMIDX_L2_FUNCS]:
             k = e["k"]
+            if k > 2:   # second order composes at most two instances
+                continue
             combos = ([(x,) for x in args] if k == 1 else
                       [(x, y) for i, x in enumerate(args) for j, y in enumerate(args)
                        if i != j and (not e.get("sym") or i < j)])

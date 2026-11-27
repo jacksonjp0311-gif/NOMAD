@@ -46,6 +46,69 @@ def prim_enabled() -> bool:
     return os.environ.get("NOMAD_PRIM", "off").strip().lower() not in ("off", "0", "false", "no")
 
 
+def primrec_enabled() -> bool:
+    """NOMAD_PRIMREC (docs/PRIMREC.md, default off; needs MEMIDX): primitives learned by recurrence."""
+    return os.environ.get("NOMAD_PRIMREC", "off").strip().lower() not in ("off", "0", "false", "no")
+
+
+REC_MIN_SIZE = 5     # a recurring primitive is a composite: at least two operators
+REC_ARITY = 2        # most parameters of a recurring primitive (dev: 3 lets shuffled fields recur more)
+REC_FAMILIES = 2     # distinct certified families a behavior must recur in
+REC_WEIGHT = 1.0     # weight per supporting family
+
+
+def recurring(prior) -> list[dict]:
+    """PRIMREC: behavior classes of composite subtrees (size REC_MIN_SIZE..MAX_SIZE, 1..REC_ARITY int
+    variables) found inside certified memory (library blocks and programs) of at least REC_FAMILIES
+    distinct source families (``library_src`` / ``programs_src``). Nothing is closed by a rule: a
+    primitive exists only because the field certified the same behavior, under any input names and any
+    tree shape, in different families. Under the rewired control the family labels are permuted over
+    the memory slots, so recurrence is counted against the wrong families."""
+    from .world import _canon_vars, _var_names, size, subtrees, OPS
+    slots = []
+    for mem, sig, src in ((prior.library, prior.library_sig, getattr(prior, "library_src", {}) or {}),
+                          (prior.programs, prior.programs_sig, getattr(prior, "programs_src", {}) or {})):
+        for n in sorted(mem):
+            slots.append((mem[n], sig.get(n) or [], src.get(n)))
+    ctl = control()
+    if ctl is not None and slots:
+        labels = [s[2] for s in slots]
+        random.Random(f"primrec-rewired-{ctl}").shuffle(labels)
+        slots = [(t, g, l) for (t, g, _), l in zip(slots, labels)]
+    classes: dict[tuple, dict] = {}
+    for t, sig, fam in slots:
+        if not fam:
+            continue
+        types = {a: b for a, b in sig}
+        for x in subtrees(t):
+            if x[0] in ("var", "const", "lib") or not (REC_MIN_SIZE <= size(x) <= MAX_SIZE):
+                continue
+            sub = subtrees(x)
+            if any(y[0] == "lib" for y in sub):
+                continue
+            if any(y[0] in OPS and OPS[y[0]].out != "int" for y in sub if y[0] not in ("var", "const")):
+                continue
+            vs = _var_names(x, [])
+            if not vs or len(vs) > REC_ARITY or any(types.get(v) != "int" for v in vs):
+                continue
+            c = _canon_vars(x)
+            k = len(vs)
+            fp = _fp(c, k)
+            if _trivial(fp, k):
+                continue
+            e = classes.setdefault((k, fp), {"tree": c, "k": k, "fp": fp, "fams": set()})
+            e["fams"].add(fam)
+            if (size(c), json.dumps(c)) < (size(e["tree"]), json.dumps(e["tree"])):
+                e["tree"] = c
+    out = []
+    for e in classes.values():
+        if len(e["fams"]) >= REC_FAMILIES:
+            out.append({"tree": e["tree"], "k": e["k"], "fp": e["fp"], "origin": "recur",
+                        "weight": REC_WEIGHT * len(e["fams"]), "families": sorted(e["fams"])})
+    out.sort(key=lambda e: (-e["weight"], size(e["tree"]), json.dumps(e["tree"])))
+    return out
+
+
 def control() -> int | None:
     v = os.environ.get("NOMAD_MEMIDX_CONTROL", "").strip().lower()
     if v.startswith("rewired:"):
@@ -119,6 +182,14 @@ def build(prior) -> list[dict]:
         rng.shuffle(w)
         for e, x in zip(out, w):
             e["weight"] = x
+    if primrec_enabled():
+        for r in recurring(prior):
+            have = classes.get((r["k"], r["fp"]))
+            if have is not None:          # already a learned function: recurrence adds support
+                have["weight"] += r["weight"]
+                continue
+            classes[(r["k"], r["fp"])] = r
+            out.append(r)
     for e in out:
         e["sym"] = e["k"] == 2 and _fp(_swap(e["tree"]), 2) == e["fp"]
     if prim_enabled():
