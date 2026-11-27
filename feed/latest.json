@@ -28,7 +28,7 @@
     ]
    ],
    "tree_sha256": "38c83dccb9474914589294137aed5283870393402bb187e82d3254ac6449ead7",
-   "uses": 2.8375
+   "uses": 2.6469
   },
   {
    "block_id": "L915ba1af",
@@ -53,7 +53,7 @@
     ]
    ],
    "tree_sha256": "a47c202ae79fb40749db9ed656d9912cb6819ff6790e6cbad909a647703d9df9",
-   "uses": 2.6603
+   "uses": 2.5327
   },
   {
    "block_id": "Lda56c88a",
@@ -80,7 +80,7 @@
     ]
    ],
    "tree_sha256": "56030449b1887958364397ace9ab393d7dbfddc7b48557a1ff02062bbc679144",
-   "uses": 7.2188
+   "uses": 4.2068
   },
   {
    "block_id": "Le41f5b00",
@@ -111,7 +111,7 @@
     ]
    ],
    "tree_sha256": "1ef9aa7d777db2360b92d31c7eeedbfeea87b86cbbe3f616c40a1451dc742f52",
-   "uses": 6.7397
+   "uses": 4.6741
   },
   {
    "block_id": "Lfd47622b",
@@ -141,7 +141,7 @@
     ]
    ],
    "tree_sha256": "8f2e0e2ed308f492019fab9ffe14f676f17b4c65fbc98777c1834d7d53f125c7",
-   "uses": 2.7443
+   "uses": 2.5823
   }
  ],
  "boundaries": "Tiny typed programs (<= 7 nodes). Certified on frozen rows only; not general coding.",
@@ -2706,33 +2706,33 @@
    }
   }
  ],
- "feed_version": 39,
+ "feed_version": 40,
  "language": {
   "ast": "nomad.world DSL v1: [op, *children] | ['var', name] | ['const', value]",
   "interpreter": "nomad.world.run",
   "witness": "nomad-witness-world-v1"
  },
- "packet_sha256": "7d32ef87474309abefc4e00dab3f0923fcb2189b0a3612b2672926ee78acbe46",
- "prev_sha256": "80b8a70c58b075ff10cde40885bb214527aa520d9ab7b1e36d0659550c79e218",
- "published": "2026-11-26T22:26:51Z",
+ "packet_sha256": "6d479821410dee447a1bfdc41e6cce22352cf3372cced862eca66230ef751370",
+ "prev_sha256": "7d32ef87474309abefc4e00dab3f0923fcb2189b0a3612b2672926ee78acbe46",
+ "published": "2026-11-27T02:32:57Z",
  "schema": "nomad.feed.packet.v1",
  "scores": {
   "genesis_twin": {
    "all_fail_rate": 0.0,
-   "all_pass_rate": 0.9998947922146239,
-   "both_certified_pairs_with_cost": 9501,
-   "control_evaluations": 423657,
+   "all_pass_rate": 0.999895974201602,
+   "both_certified_pairs_with_cost": 9609,
+   "control_evaluations": 430677,
    "estimator": "rloo",
-   "groups": 9505,
+   "groups": 9613,
    "informative_pairs": 1,
-   "informative_rate": 0.00010520778537611783,
-   "mean_evaluations_saved": 36.5661509314809,
+   "informative_rate": 0.00010402579839800271,
+   "mean_evaluations_saved": 36.79581642210428,
    "mean_treatment_advantage": 1.0,
    "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage.",
-   "pairs_with_cost": 9501,
-   "pass_rate": 0.999947396107312,
-   "treatment_evaluations": 76242,
-   "treatment_over_control": 0.18
+   "pairs_with_cost": 9609,
+   "pass_rate": 0.999947987100801,
+   "treatment_evaluations": 77106,
+   "treatment_over_control": 0.179
   },
   "heldout": {
    "absdiff": {
@@ -2790,29 +2790,29 @@
   },
   "note": "Copied from the live scoreboard and the last held-out probe; descriptive, not certified.",
   "world_twin": {
-   "all_fail_rate": 0.01873487001368277,
-   "all_pass_rate": 0.9310598884327965,
-   "both_certified_pairs_with_cost": 8846,
-   "control_evaluations": 7373691,
+   "all_fail_rate": 0.020293474867311895,
+   "all_pass_rate": 0.9284004579040482,
+   "both_certified_pairs_with_cost": 8921,
+   "control_evaluations": 7482053,
    "estimator": "rloo",
-   "groups": 9501,
-   "informative_pairs": 477,
-   "informative_rate": 0.050205241553520685,
-   "mean_evaluations_saved": 696.1484286683246,
-   "mean_treatment_advantage": 0.9958071278825996,
+   "groups": 9609,
+   "informative_pairs": 493,
+   "informative_rate": 0.05130606722863982,
+   "mean_evaluations_saved": 699.6097971079475,
+   "mean_treatment_advantage": 0.9959432048681541,
    "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage.",
-   "pairs_with_cost": 8846,
-   "pass_rate": 0.9561625092095569,
-   "treatment_evaluations": 1215562,
-   "treatment_over_control": 0.1649
+   "pairs_with_cost": 8921,
+   "pass_rate": 0.9540534915183682,
+   "treatment_evaluations": 1240834,
+   "treatment_over_control": 0.1658
   }
  },
  "source": {
-  "commit": "715763cb8ef9f357f3ea28c21e2dab8dbbd7c5fe",
-  "field_version": 3171,
+  "commit": "df1d76783d8a1a7c71b6026083ac80997052c8e9",
+  "field_version": 3207,
   "host": null,
   "repo": "jacksonjp0311-gif/NOMAD",
-  "world_witnessed": 9322
+  "world_witnessed": 9413
  },
  "verification": {
   "blocks": "each block must be a subtree of a program in certified_in",
