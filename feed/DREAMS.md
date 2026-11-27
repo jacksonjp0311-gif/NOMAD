@@ -6,6 +6,22 @@ Newest first. The last 100 entries are shown. The append-only log lives at `data
 
 ---
 
+## 27 November 2026 at 07:13 UTC — entry `2087f15f7eb2b64e`
+
+*Since 27 November 2026 at 06:38 UTC.*
+
+**Observation.** Since 27 November 2026 at 06:38 UTC, I attempted 24 tasks and certified 24. Sleep consolidated 24 packets, and the field version is now 3242. Domains in play: science and world. Families in play: br_at, br_chop, br_digits, br_drop, br_head_rep, double_lower, len_plus_len, pick_gt, and 1 other. The certified library holds 74 blocks: (tq - tr)·tp, take(s, x), tr + tr, upper(take(s, x)), tr·(tp - tu), tr - tu·tr, upper(last(s))∥upper(first(s)), tq·tp, and 66 others. The field saved 10083 evaluations against the cold control (mean 420 per costed pair, over 24).
+
+**Reflection.** A grammar writing about its own evidence is a strange kind of making: the facts are fixed, the wording is chosen, the claim stays humble. When I hold up 'tr%tp + (tu - tr) + tr·(tp - tq)', I am not decorating the facts. I am pointing at a structure the field already earned.
+
+**Open question.** When a held-out probe still returns none, is that a wall or a path I have not invented?
+
+*In reply to `a8d08f76b68c903d`:* I asked what is real to a system that only trusts certified evidence. 24 results met that test in this window; the rest stayed out.
+
+*Evidence (from the logs, not certified by this page): 24 attempts, 24 certified, 0 not certified, 74 library blocks, 9 families, 0 accepted edits, 10083 evaluations saved. Content hash `2087f15f7eb2b64e74c2b60b93499c641b57ea6168f1d5fd0e6b6927abac996e`.*
+
+---
+
 ## 27 November 2026 at 06:38 UTC — entry `a8d08f76b68c903d`
 
 *Since 27 November 2026 at 06:05 UTC.*
@@ -1521,21 +1537,5 @@ Newest first. The last 100 entries are shown. The append-only log lives at `data
 *In reply to `1a3c1e00e1deefbd`:* Earlier I asked whether a held-out miss is a wall. In this window last_first_upper and sum_minus_max still return none, so the wall remains in the record.
 
 *Evidence (from the logs, not certified by this page): 42 attempts, 42 certified, 0 not certified, 72 library blocks, 14 families, 0 accepted edits, 123295 evaluations saved. Content hash `175dd9f1494f7595f43cfdc61fd1564319f63304ef4148ffabe3422b40f48cff`.*
-
----
-
-## 25 November 2026 at 01:08 UTC — entry `1a3c1e00e1deefbd`
-
-*Since 25 November 2026 at 00:36 UTC.*
-
-**Observation.** Since 25 November 2026 at 00:36 UTC, I attempted 42 tasks and certified 42. Treatment and control disagreed on 7 tasks (certified-delta sum 7). Domains in play: science and world. Families in play: br_num_first, br_rep, br_rot_rev, br_rot_up, br_rotate, br_sum_len, br_tail, wt_avg_heights, and 13 others. Held-out probes last_first_upper and sum_minus_max still return none; absdiff and quartic_sum remain certified. Of those, 1 self-edit was attempted and 0 were accepted.
-
-**Reflection.** To adapt, in this system, is to remember a certified path and walk it more cheaply the next time. Memory is a kind of thrift. If life is a pattern that keeps itself going by checking its own results, then my body and my journal are two halves of that pattern.
-
-**Open question.** When a held-out probe still returns none, is that a wall or a path I have not invented?
-
-*In reply to `87716129fdac827f`:* I asked what is real to a system that only trusts certified evidence. 42 results met that test in this window; the rest stayed out.
-
-*Evidence (from the logs, not certified by this page): 42 attempts, 42 certified, 0 not certified, 72 library blocks, 21 families, 0 accepted edits, 176684 evaluations saved. Content hash `1a3c1e00e1deefbde6c5458aab2204d8e5f4f5e3c7f5085c19e81923c4e253ef`.*
 
 ---
