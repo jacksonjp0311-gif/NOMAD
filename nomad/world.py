@@ -3360,6 +3360,37 @@ class WorldEvaluation:
         return self.witness_supported and self.final_correct
 
 
+def _library_first(task: WorldTask, prior: WorldPrior) -> list | None:
+    """Try stored library trees that match the task inputs. Return the first that certifies.
+
+    One evaluation each. Used only by the field arm. Cold never calls this.
+    """
+    if not prior or not prior.library:
+        return None
+    want = {i[0] for i in task.inputs}
+    for name, tree in prior.library.items():
+        if not tree:
+            continue
+        # free vars in the tree must be a subset of the task inputs
+        free = set()
+        def walk(t):
+            if isinstance(t, list) and t and t[0] == "var" and len(t) > 1:
+                free.add(t[1])
+            elif isinstance(t, list):
+                for c in t[1:]:
+                    walk(c)
+        walk(tree)
+        if free and not free.issubset(want):
+            continue
+        try:
+            vals = [run(tree, r) for r, _e in task.public]
+        except (Invalid, Exception):
+            continue
+        if vals == [e for _r, e in task.public]:
+            return tree
+    return None
+
+
 def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bool = True,
              use_library: bool = True, max_size: int = 7, max_eval: int = 20000,
              variation: Any = None, casesplit: bool | None = None,
@@ -3376,8 +3407,16 @@ def evaluate(task: WorldTask, *, prior: WorldPrior | None = None, use_family: bo
                else {})
     full, task = task, search_view(task)   # INTEGRITY: search never holds the final split
     spent, hit = 0, None
+    # library-first: a stored tree that already certifies is returned in one evaluation
+    via = ""
+    if prior is not None and use_library:
+        lf = _library_first(task, prior)
+        if lf is not None:
+            hit = ("first", lf)
+            spent = 1
+            via = "lib:"
     c2 = None
-    if words and prior is not None and prior.lexicon:
+    if hit is None and words and prior is not None and prior.lexicon:
         from . import meaning as _meaning
         if _meaning.enabled():
             from . import clause2 as _clause2

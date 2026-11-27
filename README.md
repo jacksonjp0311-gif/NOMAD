@@ -6,7 +6,7 @@ Recursive field intelligence. An organism that attaches to a host, runs continuo
 
 **Goal.** Learn as much as possible. Expand the grammar from its own certified programs. Transfer a learned abstraction to a new domain under sealed evidence. Answer questions that are not domain names or hash hits.
 
-**Current.** Sparse binary weight packets are the field. Awake and sleep runners act, measure, and consolidate. The field updates only on a paired, WITNESS-supported, final-correct delta. Bounded program synthesis (integer expressions of x and y, at most 7 nodes, with learned library primitives) and field query. The prior is not yet causal for operators the system was not given. No transformers. Not AGI.
+**Current.** Sparse binary weight packets are the field. Library-first: a stored tree that certifies is returned in one evaluation (field arm only). Awake and sleep runners act, measure, and consolidate. The field updates only on a paired, WITNESS-supported, final-correct delta. Bounded program synthesis (integer expressions of x and y, at most 7 nodes, with learned library primitives) and field query. The prior is not yet causal for operators the system was not given. No transformers. Not AGI.
 
 **Agents.** On entry, run `python -m nomad.interlink inspect`. You must be fully aware of the state and condition of the repository. Interlink marks presence so the host knows it is observed. Then read `data/INDEX.md` and `AGENTS.md`. Then code. If a number is not in the index, it does not exist for reporting.
 
