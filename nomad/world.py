@@ -1043,9 +1043,13 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
         if _TP.enabled():
             pats = _TP.prepare(prior, task)
     gate = _WitnessGate(task, library) if witness_continue_enabled() else None
+    midx = None
+    if bank and getattr(bank, "merged", False) and _memidx_on():
+        from . import memidx as _MI
+        midx = _MI.build(prior) or None   # MEMIDX (docs/MEMIDX.md): no task rows read here
     s = _drive_main(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split, aim,
                                 probe_on, gate, bank, inv, rel or None,
-                                prior if (graph_enabled() and prior.graph_edges) else None, pats), cold_order)
+                                prior if (graph_enabled() and prior.graph_edges) else None, pats, midx), cold_order)
     if s.via and s.via.startswith("clause2:"):
         return _with_sense(s, rec)
     s = _drain_c2(s)
@@ -1293,6 +1297,17 @@ def _agree_on() -> bool:
     return _flag("NOMAD_AGREE", "off")
 
 
+def _memidx_on() -> bool:
+    """NOMAD_MEMIDX (docs/MEMIDX.md): behavior-indexed function memory, paid only from MERGE's skips."""
+    return _flag("NOMAD_MEMIDX", "off")
+
+
+MEMIDX_REJECTS = 4   # WITNESS rejections the MEMIDX stage may cause per task (restored on a miss)
+MEMIDX_LOOKUP_N = 10**6  # instances whose residuals are looked up (dev: a cap of 24 lost tasks; no cap)
+MEMIDX_L2_FUNCS = 8  # functions applied to instances in the second-order step (dev-chosen)
+MEMIDX_L2_ARGS = 8   # best instances they are applied to (dev-chosen)
+
+
 def _D_evidence(task) -> list:
     """The WITNESS evidence (public + challenge rows; never the final split)."""
     return list(task.public) + list(task.challenge)
@@ -1526,7 +1541,8 @@ def port_bank(prior: "WorldPrior", task: WorldTask, key: str | None = None,
     element, annotated for the probe with which blocks are probe-equivalent
     to an earlier one."""
     out = _port_bank_main(prior, task, key, rel, cut_key)
-    if not out or not (merge_enabled() or let2_enabled() or _discrim_on() or _agree_on() or _cert_on()) or task.out != "int":
+    if not out or not (merge_enabled() or let2_enabled() or _discrim_on() or _agree_on() or _cert_on()
+                       or _memidx_on()) or task.out != "int":
         return out
     if rel is not None and key and route_enabled() and prior.route.get(key):
         return out
@@ -1674,7 +1690,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 split: bool = False, aim: tuple[str, ...] | None = None, blockprobe: bool = False,
                 gate: "_WitnessGate | None" = None, bank: list | None = None, inv=None,
                 rel: dict | None = None, graph: "WorldPrior | None" = None,
-                pats=None):
+                pats=None, midx: list | None = None):
     """Staged transfer as one incremental search (a generator, like _search_gen).
 
     Stage 1 is exactly the cold search below ``max_size`` (same order, same
@@ -1893,6 +1909,19 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     if g0 is not None and LET2_RESTORE:
                         del gate.rejected[g0[0]:]
                         del gate.vias[g0[1]:]
+                if midx and mstate["skips"] > mstate["spent"]:
+                    # MEMIDX (docs/MEMIDX.md): behavior-indexed functions bound to this task's inputs, paid
+                    # only from the unspent skips; on a miss the gate's rejection record is restored
+                    e0 = evals
+                    g0 = (len(gate.rejected), len(gate.vias)) if gate is not None else None
+                    hit = yield from memidx_stage(table, min(limit, evals + mstate["skips"] - mstate["spent"]))
+                    mstate["spent"] += evals - e0
+                    if hit is not None:
+                        pinfo["port"] = "memidx"
+                        return hit
+                    if g0 is not None:
+                        del gate.rejected[g0[0]:]
+                        del gate.vias[g0[1]:]
                 if merge_enabled():
                     hit = yield from merge_extra(ranked, table, limit)
                     if hit is not None:
@@ -1941,6 +1970,184 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             if hit is not None:
                 return hit
         return None
+
+    def memidx_stage(table, limit):
+        """MEMIDX (docs/MEMIDX.md): the field's functions, indexed by behavior and bound to this task's
+        int inputs (``memidx.instances``), each run once on the public rows (1 evaluation). Then, in order,
+        every step 1 evaluation and every fit WITNESS-gated:
+
+        1. an instance equal to the goal (or to a learned-scale target, wrapped) is a fit;
+        2. best block_score first, the residual the goal leaves for add / sub / reversed sub / mul is
+           looked up among the instances' and the probe's values;
+        3. max / min of two instances: an instance bounded by the goal on every row (1 evaluation to check)
+           is a candidate; candidate pairs that reach the goal on every row are fits;
+        4. the lookups of step 2 on each learned-scale target (GROW's ``bank_scales``), wrapped;
+        5. second order: the MEMIDX_L2_FUNCS best functions applied to the MEMIDX_L2_ARGS best instances
+           (function of instances, 1 evaluation each), each checked against the goal and by lookups.
+
+        A candidate is made only when it and a possible rejection both fit ``limit`` (the unspent skips).
+        At most MEMIDX_REJECTS rejections; skipped when the task's rejection cap could be spent."""
+        nonlocal evals
+        from . import memidx as _MI
+        if gate is not None and len(gate.rejected) + MEMIDX_REJECTS > gate.max_rejects:
+            return None
+        rej0 = len(gate.rejected) if gate is not None else 0
+        allowed = set(OPSETS.get(task.opset, ()))
+        itab: dict[str, list] = {}
+        got = []
+        targets = [(goal, None)]
+        for k, kt in bank_scales(bank):
+            targets.append((tuple(g * k for g in goal), (lambda h, kt=kt: ["div", h, kt])))
+            if all(g % k == 0 for g in goal):
+                targets.append((tuple(g // k for g in goal), (lambda h, kt=kt: ["mul", h, kt])))
+        targets = [z for z in targets if all(abs(x) <= MAX_INT for x in z[0])]
+        tkeys = {_key(g2): wrap for g2, wrap in targets}
+
+        def ok_ops(t):
+            return not allowed or all(x[0] in ("var", "const") or x[0] in allowed for x in subtrees(t))
+
+        def fit(hit):
+            """'stop' (budget or rejection cap), True (accepted) or False (rejected, charged)."""
+            nonlocal evals
+            if evals + 2 > limit or (gate is not None and len(gate.rejected) - rej0 >= MEMIDX_REJECTS):
+                return "stop"
+            evals += 1          # the assembled program is one candidate evaluation
+            return stop_on(hit)
+
+        def keep(t, v):
+            """Record a value; a fit when it is the goal or a scale target. None / hit / 'stop'."""
+            if not v or any(type_of(x) != "int" for x in v):
+                return None
+            k = _key(v)
+            if k in itab:
+                return None
+            itab[k] = t
+            got.append((block_score(v, goal, "int"), t, v))
+            if k in tkeys:
+                w = tkeys[k]
+                hit = t if w is None else w(t)
+                r = fit(hit)
+                if r == "stop":
+                    return "stop"
+                if r:
+                    return hit
+            return None
+
+        def lookups(items, tg):
+            nonlocal evals
+            for _sc, t, v in items[:MEMIDX_LOOKUP_N]:
+                for g2, wrap in tg:
+                    for op in ("add", "sub", "rsub", "mul"):
+                        if evals + 1 > limit:
+                            return "stop"
+                        evals += 1
+                        yield evals
+                        need = _residual(op, v, g2)
+                        if need is None:
+                            continue
+                        b = itab.get(_key(need)) or table.get(_key(need))
+                        if b is None:
+                            continue
+                        hit = ["sub", b, t] if op == "rsub" else [op, t, b]
+                        hit = hit if wrap is None else wrap(hit)
+                        r = fit(hit)
+                        if r == "stop":
+                            return "stop"
+                        if r:
+                            return hit
+                        yield evals
+            return None
+
+        # 1. first-order instances
+        for t, _e in _MI.instances(midx, task.inputs):
+            if not ok_ops(t):
+                continue
+            if evals + 1 > limit:
+                return None
+            evals += 1
+            yield evals
+            try:
+                v = tuple(run(t, r) for r in rows)
+            except Invalid:
+                continue
+            h = keep(t, v)
+            if h == "stop":
+                return None
+            if h is not None:
+                return h
+        first = sorted(got, key=lambda z: (z[0], -size(z[1])), reverse=True)
+        # 2. residual lookups on the goal
+        h = yield from lookups(first, targets[:1])
+        if h == "stop":
+            return None
+        if h is not None:
+            return h
+        # 3. max / min pairs
+        for op, below in (("max", True), ("min", False)):
+            if allowed and op not in allowed:
+                continue
+            cand = []
+            for z in first:
+                if evals + 1 > limit:
+                    return None
+                evals += 1          # checking the bound on every row
+                yield evals
+                if all((x <= g) if below else (x >= g) for x, g in zip(z[2], goal)) and any(
+                        x == g for x, g in zip(z[2], goal)):
+                    cand.append(z)
+            for i in range(len(cand)):
+                for j in range(i + 1, len(cand)):
+                    if evals + 1 > limit:
+                        return None
+                    evals += 1
+                    yield evals
+                    a, b = cand[i][2], cand[j][2]
+                    if tuple(OPS[op].fn(x, y) for x, y in zip(a, b)) != goal:
+                        continue
+                    hit = [op, cand[i][1], cand[j][1]]
+                    r = fit(hit)
+                    if r == "stop":
+                        return None
+                    if r:
+                        return hit
+                    yield evals
+        # 4. residual lookups on the learned-scale targets
+        h = yield from lookups(first, targets[1:])
+        if h == "stop":
+            return None
+        if h is not None:
+            return h
+        # 5. second order: functions of instances
+        args = [z for z in first[:MEMIDX_L2_ARGS]]
+        n_before = len(got)
+        for e in midx[:MEMIDX_L2_FUNCS]:
+            k = e["k"]
+            combos = ([(x,) for x in args] if k == 1 else
+                      [(x, y) for i, x in enumerate(args) for j, y in enumerate(args)
+                       if i != j and (not e.get("sym") or i < j)])
+            for c in combos:
+                m = {f"_v{i}": c[i][1] for i in range(k)}
+                t = _MI.substitute(e["tree"], m)
+                if not ok_ops(t):
+                    continue
+                if evals + 1 > limit:
+                    return None
+                evals += 1
+                yield evals
+                try:
+                    v = tuple(run(t, r) for r in rows)
+                except Invalid:
+                    continue
+                h = keep(t, v)
+                if h == "stop":
+                    return None
+                if h is not None:
+                    return h
+        second = sorted(got[n_before:], key=lambda z: (z[0], -size(z[1])), reverse=True)
+        h = yield from lookups(second, targets)
+        if h == "stop" or h is None:
+            return None
+        return h
 
     def merge_extra(ranked, table, limit):
         """MERGE (docs/MERGE.md), after every one of main's int anchors missed.
