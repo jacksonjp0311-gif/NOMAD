@@ -28,7 +28,7 @@
     ]
    ],
    "tree_sha256": "38c83dccb9474914589294137aed5283870393402bb187e82d3254ac6449ead7",
-   "uses": 1.696
+   "uses": 0.8165
   },
   {
    "block_id": "L915ba1af",
@@ -53,7 +53,7 @@
     ]
    ],
    "tree_sha256": "a47c202ae79fb40749db9ed656d9912cb6819ff6790e6cbad909a647703d9df9",
-   "uses": 1.6034
+   "uses": 0.7719
   },
   {
    "block_id": "Lda56c88a",
@@ -80,7 +80,7 @@
     ]
    ],
    "tree_sha256": "56030449b1887958364397ace9ab393d7dbfddc7b48557a1ff02062bbc679144",
-   "uses": 2.7394
+   "uses": 5.0294
   },
   {
    "block_id": "Le41f5b00",
@@ -111,7 +111,7 @@
     ]
    ],
    "tree_sha256": "1ef9aa7d777db2360b92d31c7eeedbfeea87b86cbbe3f616c40a1451dc742f52",
-   "uses": 3.031
+   "uses": 3.2845
   },
   {
    "block_id": "Lfd47622b",
@@ -141,7 +141,7 @@
     ]
    ],
    "tree_sha256": "8f2e0e2ed308f492019fab9ffe14f676f17b4c65fbc98777c1834d7d53f125c7",
-   "uses": 1.634
+   "uses": 0.7866
   }
  ],
  "boundaries": "Tiny typed programs (<= 7 nodes). Certified on frozen rows only; not general coding.",
@@ -2706,33 +2706,33 @@
    }
   }
  ],
- "feed_version": 43,
+ "feed_version": 44,
  "language": {
   "ast": "nomad.world DSL v1: [op, *children] | ['var', name] | ['const', value]",
   "interpreter": "nomad.world.run",
   "witness": "nomad-witness-world-v1"
  },
- "packet_sha256": "d9ffe281ca1db2bc5262c45f7d9b114b2f81f6f6674c06274f230e8bd2a81c0a",
- "prev_sha256": "133e7c162f27ee935d70942b7ebf55c0ed70bcaf958cccc18968c570608c0a21",
- "published": "2026-11-27T14:53:45Z",
+ "packet_sha256": "1ed824d494cd16ab2caa56571e8e8096c575274e687c4380a20f029443ab770e",
+ "prev_sha256": "d9ffe281ca1db2bc5262c45f7d9b114b2f81f6f6674c06274f230e8bd2a81c0a",
+ "published": "2026-11-27T18:54:50Z",
  "schema": "nomad.feed.packet.v1",
  "scores": {
   "genesis_twin": {
    "all_fail_rate": 0.0,
-   "all_pass_rate": 0.9998990103009493,
-   "both_certified_pairs_with_cost": 9898,
-   "control_evaluations": 449462,
+   "all_pass_rate": 0.9998997393222379,
+   "both_certified_pairs_with_cost": 9970,
+   "control_evaluations": 454142,
    "estimator": "rloo",
-   "groups": 9902,
+   "groups": 9974,
    "informative_pairs": 1,
-   "informative_rate": 0.00010098969905069682,
-   "mean_evaluations_saved": 37.38573449181653,
+   "informative_rate": 0.00010026067776218167,
+   "mean_evaluations_saved": 37.527382146439315,
    "mean_treatment_advantage": 1.0,
    "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage.",
-   "pairs_with_cost": 9898,
-   "pass_rate": 0.9999495051504746,
-   "treatment_evaluations": 79418,
-   "treatment_over_control": 0.1767
+   "pairs_with_cost": 9970,
+   "pass_rate": 0.9999498696611189,
+   "treatment_evaluations": 79994,
+   "treatment_over_control": 0.1761
   },
   "heldout": {
    "absdiff": {
@@ -2754,11 +2754,11 @@
      "evaluations": 332
     },
     "field": {
-     "candidate": "upper(concat(last(s), first(s)))",
+     "candidate": "concat(upper(last(s)), upper(first(s)))",
      "certified": true,
-     "evaluations": 332
+     "evaluations": 1
     },
-    "field_beats_control": false,
+    "field_beats_control": true,
     "max_eval": 5000
    },
    "quartic_sum": {
@@ -2780,39 +2780,39 @@
      "evaluations": 203
     },
     "field": {
-     "candidate": "sum(tail(lrev(sort(xs))))",
+     "candidate": "sub(sum(xs), lmax(xs))",
      "certified": true,
-     "evaluations": 203
+     "evaluations": 1
     },
-    "field_beats_control": false,
+    "field_beats_control": true,
     "max_eval": 5000
    }
   },
   "note": "Copied from the live scoreboard and the last held-out probe; descriptive, not certified.",
   "world_twin": {
-   "all_fail_rate": 0.019700949686805417,
-   "all_pass_rate": 0.9279652455041423,
-   "both_certified_pairs_with_cost": 9185,
-   "control_evaluations": 7782794,
+   "all_fail_rate": 0.019558676028084254,
+   "all_pass_rate": 0.9275827482447342,
+   "both_certified_pairs_with_cost": 9248,
+   "control_evaluations": 7886304,
    "estimator": "rloo",
-   "groups": 9898,
-   "informative_pairs": 518,
-   "informative_rate": 0.05233380480905234,
-   "mean_evaluations_saved": 707.3957539466521,
-   "mean_treatment_advantage": 0.9961389961389961,
+   "groups": 9970,
+   "informative_pairs": 527,
+   "informative_rate": 0.05285857572718154,
+   "mean_evaluations_saved": 712.9965397923876,
+   "mean_treatment_advantage": 0.9924098671726755,
    "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage.",
-   "pairs_with_cost": 9185,
-   "pass_rate": 0.9541321479086684,
-   "treatment_evaluations": 1285364,
-   "treatment_over_control": 0.1652
+   "pairs_with_cost": 9248,
+   "pass_rate": 0.954012036108325,
+   "treatment_evaluations": 1292512,
+   "treatment_over_control": 0.1639
   }
  },
  "source": {
-  "commit": "951aa98a1e08b56554ee07e70a78b9d109238246",
-  "field_version": 3304,
+  "commit": "6975fe2825cc816b56c5dd5b0cbe141bba83baaa",
+  "field_version": 3328,
   "host": null,
   "repo": "jacksonjp0311-gif/NOMAD",
-  "world_witnessed": 9702
+  "world_witnessed": 9773
  },
  "verification": {
   "blocks": "each block must be a subtree of a program in certified_in",
