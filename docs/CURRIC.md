@@ -1,8 +1,9 @@
 # CURRIC: a multi-family concept curriculum (sealed PASS on all six criteria)
 
 Status (2026-11-27, ET): code, sealed suite and criteria landed in 8513887a with `NOMAD_CURRIC` default
-off. The sealed suite was measured once from that commit: **PASS on C1-C6** (results below). Default ON
-follows in a separate commit.
+off. The sealed suite was measured once from that commit: **PASS on C1-C6** (results below), committed in
+c846b871. `NOMAD_CURRIC` now defaults to **on** (`NOMAD_CURRIC=off` restores the old behavior exactly).
+In practice this changes only fields that have studied the concept curriculum (see "Not done").
 
 ## Why
 
@@ -161,7 +162,7 @@ committed unchanged as `results/curric/curric_sealed.json`. 23 hard tasks.
   quoted by earlier docs; LOFO counts evaluations, so this is not a regression, and the earlier
   criteria were written "<= 5,883"). CURRIC changes none of it. Full test suite: 668 passed, 6 skipped.
 
-**Verdict: PASS on all six criteria.** Default ON follows in a separate commit.
+**Verdict: PASS on all six criteria.** `NOMAD_CURRIC` defaults to **on** (separate commit after the result).
 
 ## Not done (scope of this push)
 
@@ -171,7 +172,7 @@ committed unchanged as `results/curric/curric_sealed.json`. 23 hard tasks.
 - String / list contexts: in the current opsets `|a-b|` over two string lengths is size 11 and out of
   the training search's reach, and the list opset has no int `max`; only int contexts are used.
 
-## Switch off = old behavior
+## Switch off = old behavior (default on)
 
 With `NOMAD_CURRIC` off: `study` and `record` return immediately, `index` is never called by search,
 `port_bank` asks for the merged bank exactly as before, snapshots are unchanged. Tests:

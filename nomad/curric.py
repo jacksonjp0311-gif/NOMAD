@@ -1,7 +1,8 @@
 """CURRIC (docs/CURRIC.md): a multi-family concept curriculum, and concepts promoted only after the field
 certified them in several families.
 
-Switch ``NOMAD_CURRIC`` (default off). Two parts, both inert when the switch is off:
+Switch ``NOMAD_CURRIC`` (default on since its sealed PASS, docs/CURRIC.md; ``off`` restores the old
+behavior exactly). Two parts, both inert when the switch is off:
 
 1. **Curriculum generator** (``tasks``). Each *concept* is a small reference function of two integers
    (``CONCEPTS``). Each *context* (``CONTEXTS``) is a different task family that presents its two
@@ -71,7 +72,7 @@ LEVEL = 3
 
 
 def enabled() -> bool:
-    return os.environ.get("NOMAD_CURRIC", "off").strip().lower() not in ("off", "0", "false", "no")
+    return os.environ.get("NOMAD_CURRIC", "on").strip().lower() not in ("off", "0", "false", "no")
 
 
 def control() -> int | None:

@@ -1326,8 +1326,8 @@ def _memidx_on() -> bool:
 
 def _curric_on() -> bool:
     """NOMAD_CURRIC (docs/CURRIC.md): concepts certified in several curriculum families, searched by
-    MEMIDX's stage (paid only from MERGE's skips); default off."""
-    return _flag("NOMAD_CURRIC", "off")
+    MEMIDX's stage (paid only from MERGE's skips); default on since its sealed PASS (docs/CURRIC.md)."""
+    return _flag("NOMAD_CURRIC", "on")
 
 
 def _curric_bank(prior) -> bool:

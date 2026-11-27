@@ -1,4 +1,4 @@
-"""CURRIC (docs/CURRIC.md): multi-family concept curriculum; switch default off.
+"""CURRIC (docs/CURRIC.md): multi-family concept curriculum; switch default on (sealed PASS).
 
 The generator presents every concept in every context as its own family; a behavior certified in at least
 FAMILIES families becomes a concept, fewer is not enough; study changes only the concept memory; the
@@ -57,8 +57,11 @@ def _logged(fams):
 
 
 class CurricTests(unittest.TestCase):
-    def test_default_off(self):
+    def test_default_on_and_off_is_inert(self):
         with _Env():
+            self.assertTrue(CU.enabled())
+            self.assertTrue(W._curric_on())
+        with _Env(NOMAD_CURRIC="off"):
             self.assertFalse(CU.enabled())
             self.assertFalse(W._curric_on())
             p = W.WorldPrior()
@@ -129,13 +132,13 @@ class CurricTests(unittest.TestCase):
         rows = [({"g": g, "h": h}, abs(g - h) + 1) for g, h in ((3, 9), (12, 4), (7, 7), (0, 5), (20, 1), (6, 2),
                                                                  (2, 15), (9, 9), (11, 3), (5, 8), (14, 0))]
         t = W.make_task("t-cu", "cu_test", "int", {"g": "int", "h": "int"}, "int", rows[:5], rows[5:8], rows[8:])
-        with _Env():
-            off = W.evaluate(t, prior=p, max_eval=3000)[0]
         with _Env(NOMAD_CURRIC="off"):
+            off = W.evaluate(t, prior=p, max_eval=3000)[0]
+        with _Env(NOMAD_CURRIC="0"):
             off2 = W.evaluate(t, prior=p, max_eval=3000)[0]
         self.assertEqual((off.certified, off.evaluations, off.tree), (off2.certified, off2.evaluations, off2.tree))
         e = W.WorldPrior()
-        with _Env():
+        with _Env(NOMAD_CURRIC="off"):
             e_off = W.evaluate(t, prior=e, max_eval=3000)[0]
         with _Env(NOMAD_CURRIC="on"):
             e_on = W.evaluate(t, prior=e, max_eval=3000)[0]
