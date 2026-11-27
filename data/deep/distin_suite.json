@@ -1,0 +1,3719 @@
+{
+ "budget": 10000,
+ "domains": [
+  "orchard",
+  "foundry",
+  "apiary"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 216,
+   "cold_reason": null,
+   "domain": "orchard",
+   "family": "ds_ctl_one_step",
+   "formula": "control: fb fc + fa",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 14,
+      "fb": 5,
+      "fc": 3
+     },
+     29
+    ],
+    [
+     {
+      "fa": 23,
+      "fb": 7,
+      "fc": 9
+     },
+     86
+    ],
+    [
+     {
+      "fa": 27,
+      "fb": 11,
+      "fc": 4
+     },
+     71
+    ],
+    [
+     {
+      "fa": 32,
+      "fb": 4,
+      "fc": 12
+     },
+     80
+    ],
+    [
+     {
+      "fa": 39,
+      "fb": 7,
+      "fc": 6
+     },
+     81
+    ],
+    [
+     {
+      "fa": 2,
+      "fb": 10,
+      "fc": 5
+     },
+     52
+    ],
+    [
+     {
+      "fa": 35,
+      "fb": 3,
+      "fc": 7
+     },
+     56
+    ],
+    [
+     {
+      "fa": 25,
+      "fb": 5,
+      "fc": 4
+     },
+     45
+    ],
+    [
+     {
+      "fa": 34,
+      "fb": 7,
+      "fc": 3
+     },
+     55
+    ],
+    [
+     {
+      "fa": 13,
+      "fb": 9,
+      "fc": 10
+     },
+     103
+    ],
+    [
+     {
+      "fa": 5,
+      "fb": 12,
+      "fc": 3
+     },
+     41
+    ]
+   ],
+   "task_id": "t-22",
+   "tier": "easy",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "fb"
+     ],
+     [
+      "var",
+      "fc"
+     ]
+    ],
+    [
+     "var",
+     "fa"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 8829,
+   "cold_reason": null,
+   "domain": "apiary",
+   "family": "ds_ctl_one_step2",
+   "formula": "control: fa + fb fc - fc",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 14,
+      "fb": 8,
+      "fc": 7
+     },
+     63
+    ],
+    [
+     {
+      "fa": 37,
+      "fb": 1,
+      "fc": 1
+     },
+     37
+    ],
+    [
+     {
+      "fa": 29,
+      "fb": 9,
+      "fc": 1
+     },
+     37
+    ],
+    [
+     {
+      "fa": 12,
+      "fb": 3,
+      "fc": 8
+     },
+     28
+    ],
+    [
+     {
+      "fa": 3,
+      "fb": 7,
+      "fc": 7
+     },
+     45
+    ],
+    [
+     {
+      "fa": 39,
+      "fb": 7,
+      "fc": 8
+     },
+     87
+    ],
+    [
+     {
+      "fa": 30,
+      "fb": 7,
+      "fc": 6
+     },
+     66
+    ],
+    [
+     {
+      "fa": 18,
+      "fb": 9,
+      "fc": 8
+     },
+     82
+    ],
+    [
+     {
+      "fa": 14,
+      "fb": 12,
+      "fc": 9
+     },
+     113
+    ],
+    [
+     {
+      "fa": 1,
+      "fb": 5,
+      "fc": 8
+     },
+     33
+    ],
+    [
+     {
+      "fa": 15,
+      "fb": 10,
+      "fc": 7
+     },
+     78
+    ]
+   ],
+   "task_id": "t-23",
+   "tier": "easy",
+   "tree": [
+    "sub",
+    [
+     "add",
+     [
+      "var",
+      "fa"
+     ],
+     [
+      "mul",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fc"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "fc"
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "orchard",
+   "family": "ds_row_spare_half",
+   "formula": "trees t = fb fc; t plus half of t spare",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 26,
+      "fb": 12,
+      "fc": 2
+     },
+     36
+    ],
+    [
+     {
+      "fa": 22,
+      "fb": 1,
+      "fc": 6
+     },
+     9
+    ],
+    [
+     {
+      "fa": 31,
+      "fb": 10,
+      "fc": 8
+     },
+     120
+    ],
+    [
+     {
+      "fa": 6,
+      "fb": 3,
+      "fc": 8
+     },
+     36
+    ],
+    [
+     {
+      "fa": 13,
+      "fb": 8,
+      "fc": 2
+     },
+     24
+    ],
+    [
+     {
+      "fa": 11,
+      "fb": 6,
+      "fc": 4
+     },
+     36
+    ],
+    [
+     {
+      "fa": 6,
+      "fb": 8,
+      "fc": 4
+     },
+     48
+    ],
+    [
+     {
+      "fa": 28,
+      "fb": 8,
+      "fc": 12
+     },
+     144
+    ],
+    [
+     {
+      "fa": 23,
+      "fb": 3,
+      "fc": 11
+     },
+     49
+    ],
+    [
+     {
+      "fa": 36,
+      "fb": 3,
+      "fc": 5
+     },
+     22
+    ],
+    [
+     {
+      "fa": 15,
+      "fb": 7,
+      "fc": 7
+     },
+     73
+    ]
+   ],
+   "task_id": "t-00",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "var",
+      "fb"
+     ],
+     [
+      "var",
+      "fc"
+     ]
+    ],
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fc"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "orchard",
+   "family": "ds_crate_sq_less",
+   "formula": "crates t = fa + fb; t squared minus fc",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 5,
+      "fb": 5,
+      "fc": 10
+     },
+     90
+    ],
+    [
+     {
+      "fa": 20,
+      "fb": 1,
+      "fc": 10
+     },
+     431
+    ],
+    [
+     {
+      "fa": 18,
+      "fb": 9,
+      "fc": 11
+     },
+     718
+    ],
+    [
+     {
+      "fa": 14,
+      "fb": 9,
+      "fc": 4
+     },
+     525
+    ],
+    [
+     {
+      "fa": 33,
+      "fb": 9,
+      "fc": 6
+     },
+     1758
+    ],
+    [
+     {
+      "fa": 2,
+      "fb": 1,
+      "fc": 1
+     },
+     8
+    ],
+    [
+     {
+      "fa": 39,
+      "fb": 11,
+      "fc": 2
+     },
+     2498
+    ],
+    [
+     {
+      "fa": 17,
+      "fb": 2,
+      "fc": 12
+     },
+     349
+    ],
+    [
+     {
+      "fa": 33,
+      "fb": 4,
+      "fc": 8
+     },
+     1361
+    ],
+    [
+     {
+      "fa": 29,
+      "fb": 1,
+      "fc": 8
+     },
+     892
+    ],
+    [
+     {
+      "fa": 14,
+      "fb": 7,
+      "fc": 3
+     },
+     438
+    ]
+   ],
+   "task_id": "t-01",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "fa"
+      ],
+      [
+       "var",
+       "fb"
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "fa"
+      ],
+      [
+       "var",
+       "fb"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "fc"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "foundry",
+   "family": "ds_cast_two_rates",
+   "formula": "casts t = fb + fc; t fa + t fd",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc",
+    "fd"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 6,
+      "fb": 6,
+      "fc": 9,
+      "fd": 4
+     },
+     150
+    ],
+    [
+     {
+      "fa": 27,
+      "fb": 7,
+      "fc": 1,
+      "fd": 7
+     },
+     272
+    ],
+    [
+     {
+      "fa": 33,
+      "fb": 1,
+      "fc": 12,
+      "fd": 8
+     },
+     533
+    ],
+    [
+     {
+      "fa": 38,
+      "fb": 4,
+      "fc": 2,
+      "fd": 9
+     },
+     282
+    ],
+    [
+     {
+      "fa": 19,
+      "fb": 4,
+      "fc": 5,
+      "fd": 5
+     },
+     216
+    ],
+    [
+     {
+      "fa": 37,
+      "fb": 3,
+      "fc": 12,
+      "fd": 4
+     },
+     615
+    ],
+    [
+     {
+      "fa": 3,
+      "fb": 2,
+      "fc": 6,
+      "fd": 2
+     },
+     40
+    ],
+    [
+     {
+      "fa": 35,
+      "fb": 7,
+      "fc": 5,
+      "fd": 7
+     },
+     504
+    ],
+    [
+     {
+      "fa": 26,
+      "fb": 12,
+      "fc": 6,
+      "fd": 2
+     },
+     504
+    ],
+    [
+     {
+      "fa": 24,
+      "fb": 5,
+      "fc": 6,
+      "fd": 8
+     },
+     352
+    ],
+    [
+     {
+      "fa": 7,
+      "fb": 2,
+      "fc": 12,
+      "fd": 9
+     },
+     224
+    ]
+   ],
+   "task_id": "t-02",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fc"
+      ]
+     ],
+     [
+      "var",
+      "fa"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fc"
+      ]
+     ],
+     [
+      "var",
+      "fd"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "apiary",
+   "family": "ds_hive_twice_less_third",
+   "formula": "frames t = fb fc + fa; 2 t minus a third of t",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 15,
+      "fb": 1,
+      "fc": 1
+     },
+     27
+    ],
+    [
+     {
+      "fa": 14,
+      "fb": 8,
+      "fc": 2
+     },
+     50
+    ],
+    [
+     {
+      "fa": 7,
+      "fb": 9,
+      "fc": 1
+     },
+     27
+    ],
+    [
+     {
+      "fa": 8,
+      "fb": 7,
+      "fc": 9
+     },
+     119
+    ],
+    [
+     {
+      "fa": 30,
+      "fb": 4,
+      "fc": 6
+     },
+     90
+    ],
+    [
+     {
+      "fa": 7,
+      "fb": 1,
+      "fc": 11
+     },
+     30
+    ],
+    [
+     {
+      "fa": 29,
+      "fb": 8,
+      "fc": 8
+     },
+     155
+    ],
+    [
+     {
+      "fa": 9,
+      "fb": 8,
+      "fc": 1
+     },
+     29
+    ],
+    [
+     {
+      "fa": 20,
+      "fb": 3,
+      "fc": 1
+     },
+     39
+    ],
+    [
+     {
+      "fa": 1,
+      "fb": 5,
+      "fc": 9
+     },
+     77
+    ],
+    [
+     {
+      "fa": 35,
+      "fb": 2,
+      "fc": 5
+     },
+     75
+    ]
+   ],
+   "task_id": "t-03",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "fb"
+       ],
+       [
+        "var",
+        "fc"
+       ]
+      ],
+      [
+       "var",
+       "fa"
+      ]
+     ],
+     [
+      "const",
+      2
+     ]
+    ],
+    [
+     "div",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "fb"
+       ],
+       [
+        "var",
+        "fc"
+       ]
+      ],
+      [
+       "var",
+       "fa"
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "foundry",
+   "family": "ds_ingot_sets_loose",
+   "formula": "ingots t = fb fc + fa; sets of 5 plus loose = t // 5 + t mod 5",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 40,
+      "fb": 11,
+      "fc": 4
+     },
+     20
+    ],
+    [
+     {
+      "fa": 3,
+      "fb": 7,
+      "fc": 2
+     },
+     5
+    ],
+    [
+     {
+      "fa": 5,
+      "fb": 8,
+      "fc": 8
+     },
+     17
+    ],
+    [
+     {
+      "fa": 6,
+      "fb": 2,
+      "fc": 6
+     },
+     6
+    ],
+    [
+     {
+      "fa": 25,
+      "fb": 1,
+      "fc": 7
+     },
+     8
+    ],
+    [
+     {
+      "fa": 1,
+      "fb": 9,
+      "fc": 12
+     },
+     25
+    ],
+    [
+     {
+      "fa": 33,
+      "fb": 3,
+      "fc": 10
+     },
+     15
+    ],
+    [
+     {
+      "fa": 40,
+      "fb": 5,
+      "fc": 2
+     },
+     10
+    ],
+    [
+     {
+      "fa": 31,
+      "fb": 6,
+      "fc": 1
+     },
+     9
+    ],
+    [
+     {
+      "fa": 13,
+      "fb": 2,
+      "fc": 7
+     },
+     7
+    ],
+    [
+     {
+      "fa": 23,
+      "fb": 9,
+      "fc": 3
+     },
+     10
+    ]
+   ],
+   "task_id": "t-04",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "div",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "fb"
+       ],
+       [
+        "var",
+        "fc"
+       ]
+      ],
+      [
+       "var",
+       "fa"
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ],
+    [
+     "mod",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "fb"
+       ],
+       [
+        "var",
+        "fc"
+       ]
+      ],
+      [
+       "var",
+       "fa"
+      ]
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "apiary",
+   "family": "ds_comb_sq_plus",
+   "formula": "t = fb + fd; t t + t",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc",
+    "fd"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 28,
+      "fb": 6,
+      "fc": 5,
+      "fd": 3
+     },
+     90
+    ],
+    [
+     {
+      "fa": 40,
+      "fb": 4,
+      "fc": 10,
+      "fd": 9
+     },
+     182
+    ],
+    [
+     {
+      "fa": 39,
+      "fb": 8,
+      "fc": 9,
+      "fd": 8
+     },
+     272
+    ],
+    [
+     {
+      "fa": 35,
+      "fb": 3,
+      "fc": 6,
+      "fd": 9
+     },
+     156
+    ],
+    [
+     {
+      "fa": 16,
+      "fb": 11,
+      "fc": 9,
+      "fd": 7
+     },
+     342
+    ],
+    [
+     {
+      "fa": 17,
+      "fb": 3,
+      "fc": 5,
+      "fd": 5
+     },
+     72
+    ],
+    [
+     {
+      "fa": 19,
+      "fb": 10,
+      "fc": 7,
+      "fd": 3
+     },
+     182
+    ],
+    [
+     {
+      "fa": 29,
+      "fb": 3,
+      "fc": 3,
+      "fd": 1
+     },
+     20
+    ],
+    [
+     {
+      "fa": 39,
+      "fb": 12,
+      "fc": 2,
+      "fd": 1
+     },
+     182
+    ],
+    [
+     {
+      "fa": 7,
+      "fb": 1,
+      "fc": 9,
+      "fd": 6
+     },
+     56
+    ],
+    [
+     {
+      "fa": 19,
+      "fb": 8,
+      "fc": 2,
+      "fd": 4
+     },
+     156
+    ]
+   ],
+   "task_id": "t-05",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fd"
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fd"
+      ]
+     ]
+    ],
+    [
+     "add",
+     [
+      "var",
+      "fb"
+     ],
+     [
+      "var",
+      "fd"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "orchard",
+   "family": "ds_orchard_gap",
+   "formula": "t = fb fc; gap to the quota fa = |t - fa|",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 19,
+      "fb": 10,
+      "fc": 7
+     },
+     51
+    ],
+    [
+     {
+      "fa": 4,
+      "fb": 1,
+      "fc": 1
+     },
+     3
+    ],
+    [
+     {
+      "fa": 6,
+      "fb": 4,
+      "fc": 8
+     },
+     26
+    ],
+    [
+     {
+      "fa": 1,
+      "fb": 7,
+      "fc": 2
+     },
+     13
+    ],
+    [
+     {
+      "fa": 22,
+      "fb": 10,
+      "fc": 12
+     },
+     98
+    ],
+    [
+     {
+      "fa": 35,
+      "fb": 1,
+      "fc": 5
+     },
+     30
+    ],
+    [
+     {
+      "fa": 8,
+      "fb": 3,
+      "fc": 4
+     },
+     4
+    ],
+    [
+     {
+      "fa": 24,
+      "fb": 5,
+      "fc": 11
+     },
+     31
+    ],
+    [
+     {
+      "fa": 8,
+      "fb": 4,
+      "fc": 7
+     },
+     20
+    ],
+    [
+     {
+      "fa": 13,
+      "fb": 3,
+      "fc": 8
+     },
+     11
+    ],
+    [
+     {
+      "fa": 8,
+      "fb": 8,
+      "fc": 2
+     },
+     8
+    ]
+   ],
+   "task_id": "t-06",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "max",
+     [
+      "mul",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fc"
+      ]
+     ],
+     [
+      "var",
+      "fa"
+     ]
+    ],
+    [
+     "min",
+     [
+      "mul",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fc"
+      ]
+     ],
+     [
+      "var",
+      "fa"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "foundry",
+   "family": "ds_mold_bags_left",
+   "formula": "sand t = fb fc; molds of fd plus sand left = t // fd + t mod fd",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc",
+    "fd"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 16,
+      "fb": 6,
+      "fc": 8,
+      "fd": 5
+     },
+     12
+    ],
+    [
+     {
+      "fa": 11,
+      "fb": 7,
+      "fc": 2,
+      "fd": 4
+     },
+     5
+    ],
+    [
+     {
+      "fa": 33,
+      "fb": 7,
+      "fc": 1,
+      "fd": 3
+     },
+     3
+    ],
+    [
+     {
+      "fa": 34,
+      "fb": 1,
+      "fc": 5,
+      "fd": 2
+     },
+     3
+    ],
+    [
+     {
+      "fa": 36,
+      "fb": 1,
+      "fc": 6,
+      "fd": 7
+     },
+     6
+    ],
+    [
+     {
+      "fa": 8,
+      "fb": 11,
+      "fc": 10,
+      "fd": 9
+     },
+     14
+    ],
+    [
+     {
+      "fa": 16,
+      "fb": 6,
+      "fc": 4,
+      "fd": 2
+     },
+     12
+    ],
+    [
+     {
+      "fa": 30,
+      "fb": 11,
+      "fc": 12,
+      "fd": 6
+     },
+     22
+    ],
+    [
+     {
+      "fa": 1,
+      "fb": 4,
+      "fc": 4,
+      "fd": 6
+     },
+     6
+    ],
+    [
+     {
+      "fa": 37,
+      "fb": 7,
+      "fc": 9,
+      "fd": 2
+     },
+     32
+    ],
+    [
+     {
+      "fa": 27,
+      "fb": 10,
+      "fc": 5,
+      "fd": 5
+     },
+     10
+    ]
+   ],
+   "task_id": "t-07",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "div",
+     [
+      "mul",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fc"
+      ]
+     ],
+     [
+      "var",
+      "fd"
+     ]
+    ],
+    [
+     "mod",
+     [
+      "mul",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fc"
+      ]
+     ],
+     [
+      "var",
+      "fd"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "orchard",
+   "family": "ds_box_six",
+   "formula": "boxes of 6 for t = fb fc apples = ceil(t / 6)",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 20,
+      "fb": 8,
+      "fc": 11
+     },
+     15
+    ],
+    [
+     {
+      "fa": 18,
+      "fb": 1,
+      "fc": 9
+     },
+     2
+    ],
+    [
+     {
+      "fa": 10,
+      "fb": 12,
+      "fc": 4
+     },
+     8
+    ],
+    [
+     {
+      "fa": 40,
+      "fb": 9,
+      "fc": 12
+     },
+     18
+    ],
+    [
+     {
+      "fa": 40,
+      "fb": 8,
+      "fc": 12
+     },
+     16
+    ],
+    [
+     {
+      "fa": 28,
+      "fb": 1,
+      "fc": 7
+     },
+     2
+    ],
+    [
+     {
+      "fa": 10,
+      "fb": 1,
+      "fc": 7
+     },
+     2
+    ],
+    [
+     {
+      "fa": 31,
+      "fb": 12,
+      "fc": 9
+     },
+     18
+    ],
+    [
+     {
+      "fa": 4,
+      "fb": 10,
+      "fc": 8
+     },
+     14
+    ],
+    [
+     {
+      "fa": 25,
+      "fb": 7,
+      "fc": 1
+     },
+     2
+    ],
+    [
+     {
+      "fa": 29,
+      "fb": 12,
+      "fc": 6
+     },
+     12
+    ]
+   ],
+   "task_id": "t-08",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fc"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "foundry",
+   "family": "ds_cart_four",
+   "formula": "carts of 4 for t = fa + fb bars = ceil(t / 4)",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 38,
+      "fb": 2,
+      "fc": 2
+     },
+     10
+    ],
+    [
+     {
+      "fa": 23,
+      "fb": 5,
+      "fc": 7
+     },
+     7
+    ],
+    [
+     {
+      "fa": 23,
+      "fb": 5,
+      "fc": 1
+     },
+     7
+    ],
+    [
+     {
+      "fa": 33,
+      "fb": 5,
+      "fc": 10
+     },
+     10
+    ],
+    [
+     {
+      "fa": 5,
+      "fb": 11,
+      "fc": 4
+     },
+     4
+    ],
+    [
+     {
+      "fa": 29,
+      "fb": 2,
+      "fc": 4
+     },
+     8
+    ],
+    [
+     {
+      "fa": 14,
+      "fb": 6,
+      "fc": 6
+     },
+     5
+    ],
+    [
+     {
+      "fa": 19,
+      "fb": 12,
+      "fc": 9
+     },
+     8
+    ],
+    [
+     {
+      "fa": 9,
+      "fb": 1,
+      "fc": 9
+     },
+     3
+    ],
+    [
+     {
+      "fa": 18,
+      "fb": 9,
+      "fc": 3
+     },
+     7
+    ],
+    [
+     {
+      "fa": 30,
+      "fb": 7,
+      "fc": 10
+     },
+     10
+    ]
+   ],
+   "task_id": "t-09",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "var",
+       "fa"
+      ],
+      [
+       "var",
+       "fb"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        2
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "apiary",
+   "family": "ds_jar_five",
+   "formula": "jars of 5 for t = fb fc pours = ceil(t / 5)",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 19,
+      "fb": 9,
+      "fc": 7
+     },
+     13
+    ],
+    [
+     {
+      "fa": 37,
+      "fb": 2,
+      "fc": 4
+     },
+     2
+    ],
+    [
+     {
+      "fa": 39,
+      "fb": 8,
+      "fc": 6
+     },
+     10
+    ],
+    [
+     {
+      "fa": 24,
+      "fb": 2,
+      "fc": 1
+     },
+     1
+    ],
+    [
+     {
+      "fa": 7,
+      "fb": 11,
+      "fc": 10
+     },
+     22
+    ],
+    [
+     {
+      "fa": 21,
+      "fb": 8,
+      "fc": 11
+     },
+     18
+    ],
+    [
+     {
+      "fa": 19,
+      "fb": 8,
+      "fc": 1
+     },
+     2
+    ],
+    [
+     {
+      "fa": 2,
+      "fb": 6,
+      "fc": 12
+     },
+     15
+    ],
+    [
+     {
+      "fa": 37,
+      "fb": 5,
+      "fc": 4
+     },
+     4
+    ],
+    [
+     {
+      "fa": 9,
+      "fb": 11,
+      "fc": 12
+     },
+     27
+    ],
+    [
+     {
+      "fa": 30,
+      "fb": 5,
+      "fc": 3
+     },
+     3
+    ]
+   ],
+   "task_id": "t-10",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "mul",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fc"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "add",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "orchard",
+   "family": "ds_trip_seven",
+   "formula": "trips of 7 for t = fb fc + fd bins = ceil(t / 7)",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc",
+    "fd"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 27,
+      "fb": 7,
+      "fc": 6,
+      "fd": 3
+     },
+     7
+    ],
+    [
+     {
+      "fa": 12,
+      "fb": 2,
+      "fc": 12,
+      "fd": 4
+     },
+     4
+    ],
+    [
+     {
+      "fa": 40,
+      "fb": 1,
+      "fc": 12,
+      "fd": 6
+     },
+     3
+    ],
+    [
+     {
+      "fa": 37,
+      "fb": 2,
+      "fc": 3,
+      "fd": 1
+     },
+     1
+    ],
+    [
+     {
+      "fa": 6,
+      "fb": 6,
+      "fc": 2,
+      "fd": 9
+     },
+     3
+    ],
+    [
+     {
+      "fa": 12,
+      "fb": 12,
+      "fc": 1,
+      "fd": 6
+     },
+     3
+    ],
+    [
+     {
+      "fa": 29,
+      "fb": 1,
+      "fc": 6,
+      "fd": 4
+     },
+     2
+    ],
+    [
+     {
+      "fa": 2,
+      "fb": 3,
+      "fc": 12,
+      "fd": 2
+     },
+     6
+    ],
+    [
+     {
+      "fa": 3,
+      "fb": 7,
+      "fc": 10,
+      "fd": 6
+     },
+     11
+    ],
+    [
+     {
+      "fa": 14,
+      "fb": 1,
+      "fc": 2,
+      "fd": 5
+     },
+     1
+    ],
+    [
+     {
+      "fa": 17,
+      "fb": 1,
+      "fc": 8,
+      "fd": 9
+     },
+     3
+    ]
+   ],
+   "task_id": "t-11",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "fb"
+       ],
+       [
+        "var",
+        "fc"
+       ]
+      ],
+      [
+       "var",
+       "fd"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "add",
+       [
+        "mul",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         2
+        ]
+       ],
+       [
+        "const",
+        3
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "add",
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "foundry",
+   "family": "ds_round_ten",
+   "formula": "t = fb fc + fa kilograms rounded to the nearest ten",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 34,
+      "fb": 9,
+      "fc": 11
+     },
+     130
+    ],
+    [
+     {
+      "fa": 37,
+      "fb": 4,
+      "fc": 3
+     },
+     50
+    ],
+    [
+     {
+      "fa": 33,
+      "fb": 12,
+      "fc": 2
+     },
+     60
+    ],
+    [
+     {
+      "fa": 10,
+      "fb": 2,
+      "fc": 11
+     },
+     30
+    ],
+    [
+     {
+      "fa": 17,
+      "fb": 3,
+      "fc": 1
+     },
+     20
+    ],
+    [
+     {
+      "fa": 5,
+      "fb": 7,
+      "fc": 4
+     },
+     30
+    ],
+    [
+     {
+      "fa": 12,
+      "fb": 11,
+      "fc": 4
+     },
+     60
+    ],
+    [
+     {
+      "fa": 17,
+      "fb": 4,
+      "fc": 8
+     },
+     50
+    ],
+    [
+     {
+      "fa": 9,
+      "fb": 7,
+      "fc": 12
+     },
+     90
+    ],
+    [
+     {
+      "fa": 17,
+      "fb": 7,
+      "fc": 12
+     },
+     100
+    ],
+    [
+     {
+      "fa": 39,
+      "fb": 12,
+      "fc": 7
+     },
+     120
+    ]
+   ],
+   "task_id": "t-12",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "div",
+     [
+      "add",
+      [
+       "add",
+       [
+        "mul",
+        [
+         "var",
+         "fb"
+        ],
+        [
+         "var",
+         "fc"
+        ]
+       ],
+       [
+        "var",
+        "fa"
+       ]
+      ],
+      [
+       "div",
+       [
+        "mul",
+        [
+         "const",
+         2
+        ],
+        [
+         "add",
+         [
+          "const",
+          2
+         ],
+         [
+          "const",
+          3
+         ]
+        ]
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "add",
+       [
+        "const",
+        2
+       ],
+       [
+        "const",
+        3
+       ]
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "add",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "apiary",
+   "family": "ds_round_four",
+   "formula": "t = fa fd grams rounded to the nearest four",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc",
+    "fd"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 31,
+      "fb": 3,
+      "fc": 12,
+      "fd": 2
+     },
+     64
+    ],
+    [
+     {
+      "fa": 40,
+      "fb": 7,
+      "fc": 12,
+      "fd": 1
+     },
+     40
+    ],
+    [
+     {
+      "fa": 35,
+      "fb": 6,
+      "fc": 4,
+      "fd": 6
+     },
+     212
+    ],
+    [
+     {
+      "fa": 22,
+      "fb": 7,
+      "fc": 5,
+      "fd": 2
+     },
+     44
+    ],
+    [
+     {
+      "fa": 4,
+      "fb": 11,
+      "fc": 10,
+      "fd": 5
+     },
+     20
+    ],
+    [
+     {
+      "fa": 26,
+      "fb": 12,
+      "fc": 1,
+      "fd": 9
+     },
+     236
+    ],
+    [
+     {
+      "fa": 15,
+      "fb": 4,
+      "fc": 7,
+      "fd": 4
+     },
+     60
+    ],
+    [
+     {
+      "fa": 27,
+      "fb": 3,
+      "fc": 1,
+      "fd": 4
+     },
+     108
+    ],
+    [
+     {
+      "fa": 13,
+      "fb": 9,
+      "fc": 3,
+      "fd": 9
+     },
+     116
+    ],
+    [
+     {
+      "fa": 32,
+      "fb": 8,
+      "fc": 11,
+      "fd": 6
+     },
+     192
+    ],
+    [
+     {
+      "fa": 27,
+      "fb": 3,
+      "fc": 1,
+      "fd": 9
+     },
+     244
+    ]
+   ],
+   "task_id": "t-13",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "div",
+     [
+      "add",
+      [
+       "mul",
+       [
+        "var",
+        "fa"
+       ],
+       [
+        "var",
+        "fd"
+       ]
+      ],
+      [
+       "div",
+       [
+        "mul",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         2
+        ]
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       2
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "orchard",
+   "family": "ds_round_six",
+   "formula": "t = fb fc + fd rounded to the nearest six",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc",
+    "fd"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 31,
+      "fb": 3,
+      "fc": 12,
+      "fd": 7
+     },
+     42
+    ],
+    [
+     {
+      "fa": 22,
+      "fb": 8,
+      "fc": 3,
+      "fd": 8
+     },
+     30
+    ],
+    [
+     {
+      "fa": 38,
+      "fb": 4,
+      "fc": 5,
+      "fd": 1
+     },
+     24
+    ],
+    [
+     {
+      "fa": 28,
+      "fb": 9,
+      "fc": 11,
+      "fd": 4
+     },
+     102
+    ],
+    [
+     {
+      "fa": 23,
+      "fb": 3,
+      "fc": 2,
+      "fd": 3
+     },
+     12
+    ],
+    [
+     {
+      "fa": 21,
+      "fb": 5,
+      "fc": 6,
+      "fd": 2
+     },
+     30
+    ],
+    [
+     {
+      "fa": 36,
+      "fb": 1,
+      "fc": 11,
+      "fd": 2
+     },
+     12
+    ],
+    [
+     {
+      "fa": 39,
+      "fb": 12,
+      "fc": 10,
+      "fd": 4
+     },
+     126
+    ],
+    [
+     {
+      "fa": 26,
+      "fb": 11,
+      "fc": 10,
+      "fd": 1
+     },
+     114
+    ],
+    [
+     {
+      "fa": 39,
+      "fb": 8,
+      "fc": 10,
+      "fd": 7
+     },
+     90
+    ],
+    [
+     {
+      "fa": 8,
+      "fb": 11,
+      "fc": 5,
+      "fd": 7
+     },
+     60
+    ]
+   ],
+   "task_id": "t-14",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "div",
+     [
+      "add",
+      [
+       "add",
+       [
+        "mul",
+        [
+         "var",
+         "fb"
+        ],
+        [
+         "var",
+         "fc"
+        ]
+       ],
+       [
+        "var",
+        "fd"
+       ]
+      ],
+      [
+       "div",
+       [
+        "mul",
+        [
+         "const",
+         2
+        ],
+        [
+         "const",
+         3
+        ]
+       ],
+       [
+        "const",
+        2
+       ]
+      ]
+     ],
+     [
+      "mul",
+      [
+       "const",
+       2
+      ],
+      [
+       "const",
+       3
+      ]
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      3
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "apiary",
+   "family": "ds_hive_pairs",
+   "formula": "bees t = fb + fd; pairs among them t (t - 1) / 2",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc",
+    "fd"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 15,
+      "fb": 4,
+      "fc": 7,
+      "fd": 2
+     },
+     15
+    ],
+    [
+     {
+      "fa": 11,
+      "fb": 4,
+      "fc": 9,
+      "fd": 8
+     },
+     66
+    ],
+    [
+     {
+      "fa": 10,
+      "fb": 3,
+      "fc": 12,
+      "fd": 7
+     },
+     45
+    ],
+    [
+     {
+      "fa": 1,
+      "fb": 8,
+      "fc": 5,
+      "fd": 7
+     },
+     105
+    ],
+    [
+     {
+      "fa": 34,
+      "fb": 11,
+      "fc": 10,
+      "fd": 8
+     },
+     171
+    ],
+    [
+     {
+      "fa": 5,
+      "fb": 9,
+      "fc": 8,
+      "fd": 6
+     },
+     105
+    ],
+    [
+     {
+      "fa": 8,
+      "fb": 2,
+      "fc": 10,
+      "fd": 3
+     },
+     10
+    ],
+    [
+     {
+      "fa": 7,
+      "fb": 1,
+      "fc": 3,
+      "fd": 7
+     },
+     28
+    ],
+    [
+     {
+      "fa": 40,
+      "fb": 2,
+      "fc": 7,
+      "fd": 3
+     },
+     10
+    ],
+    [
+     {
+      "fa": 12,
+      "fb": 3,
+      "fc": 8,
+      "fd": 7
+     },
+     45
+    ],
+    [
+     {
+      "fa": 13,
+      "fb": 7,
+      "fc": 10,
+      "fd": 1
+     },
+     28
+    ]
+   ],
+   "task_id": "t-15",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fd"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "add",
+       [
+        "var",
+        "fb"
+       ],
+       [
+        "var",
+        "fd"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "orchard",
+   "family": "ds_tree_pairs",
+   "formula": "trees t = fb fc; pairs t (t - 1) / 2",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 36,
+      "fb": 11,
+      "fc": 7
+     },
+     2926
+    ],
+    [
+     {
+      "fa": 7,
+      "fb": 10,
+      "fc": 1
+     },
+     45
+    ],
+    [
+     {
+      "fa": 38,
+      "fb": 1,
+      "fc": 7
+     },
+     21
+    ],
+    [
+     {
+      "fa": 40,
+      "fb": 7,
+      "fc": 2
+     },
+     91
+    ],
+    [
+     {
+      "fa": 18,
+      "fb": 8,
+      "fc": 9
+     },
+     2556
+    ],
+    [
+     {
+      "fa": 28,
+      "fb": 10,
+      "fc": 4
+     },
+     780
+    ],
+    [
+     {
+      "fa": 24,
+      "fb": 11,
+      "fc": 8
+     },
+     3828
+    ],
+    [
+     {
+      "fa": 39,
+      "fb": 10,
+      "fc": 12
+     },
+     7140
+    ],
+    [
+     {
+      "fa": 19,
+      "fb": 7,
+      "fc": 8
+     },
+     1540
+    ],
+    [
+     {
+      "fa": 18,
+      "fb": 11,
+      "fc": 8
+     },
+     3828
+    ],
+    [
+     {
+      "fa": 4,
+      "fb": 4,
+      "fc": 12
+     },
+     1128
+    ]
+   ],
+   "task_id": "t-16",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fc"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "mul",
+       [
+        "var",
+        "fb"
+       ],
+       [
+        "var",
+        "fc"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "foundry",
+   "family": "ds_quarter_load",
+   "formula": "load t = fb fc; a quarter of t times fd, whole units",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc",
+    "fd"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 22,
+      "fb": 2,
+      "fc": 8,
+      "fd": 6
+     },
+     24
+    ],
+    [
+     {
+      "fa": 40,
+      "fb": 10,
+      "fc": 2,
+      "fd": 4
+     },
+     20
+    ],
+    [
+     {
+      "fa": 11,
+      "fb": 6,
+      "fc": 6,
+      "fd": 2
+     },
+     18
+    ],
+    [
+     {
+      "fa": 15,
+      "fb": 2,
+      "fc": 1,
+      "fd": 6
+     },
+     3
+    ],
+    [
+     {
+      "fa": 39,
+      "fb": 2,
+      "fc": 10,
+      "fd": 1
+     },
+     5
+    ],
+    [
+     {
+      "fa": 21,
+      "fb": 12,
+      "fc": 12,
+      "fd": 1
+     },
+     36
+    ],
+    [
+     {
+      "fa": 17,
+      "fb": 7,
+      "fc": 9,
+      "fd": 5
+     },
+     78
+    ],
+    [
+     {
+      "fa": 13,
+      "fb": 11,
+      "fc": 10,
+      "fd": 2
+     },
+     55
+    ],
+    [
+     {
+      "fa": 8,
+      "fb": 7,
+      "fc": 9,
+      "fd": 8
+     },
+     126
+    ],
+    [
+     {
+      "fa": 16,
+      "fb": 7,
+      "fc": 7,
+      "fd": 9
+     },
+     110
+    ],
+    [
+     {
+      "fa": 24,
+      "fb": 10,
+      "fc": 6,
+      "fd": 6
+     },
+     90
+    ]
+   ],
+   "task_id": "t-17",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "mul",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fc"
+      ]
+     ],
+     [
+      "var",
+      "fd"
+     ]
+    ],
+    [
+     "mul",
+     [
+      "const",
+      2
+     ],
+     [
+      "const",
+      2
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "apiary",
+   "family": "ds_steps_sum",
+   "formula": "cells t = fb + fc; 1 + 2 + .. + t = t (t + 1) / 2",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 24,
+      "fb": 4,
+      "fc": 11
+     },
+     120
+    ],
+    [
+     {
+      "fa": 11,
+      "fb": 7,
+      "fc": 6
+     },
+     91
+    ],
+    [
+     {
+      "fa": 23,
+      "fb": 9,
+      "fc": 7
+     },
+     136
+    ],
+    [
+     {
+      "fa": 24,
+      "fb": 7,
+      "fc": 7
+     },
+     105
+    ],
+    [
+     {
+      "fa": 33,
+      "fb": 8,
+      "fc": 9
+     },
+     153
+    ],
+    [
+     {
+      "fa": 11,
+      "fb": 8,
+      "fc": 6
+     },
+     105
+    ],
+    [
+     {
+      "fa": 13,
+      "fb": 6,
+      "fc": 3
+     },
+     45
+    ],
+    [
+     {
+      "fa": 16,
+      "fb": 7,
+      "fc": 8
+     },
+     120
+    ],
+    [
+     {
+      "fa": 16,
+      "fb": 5,
+      "fc": 8
+     },
+     91
+    ],
+    [
+     {
+      "fa": 18,
+      "fb": 3,
+      "fc": 2
+     },
+     15
+    ],
+    [
+     {
+      "fa": 34,
+      "fb": 8,
+      "fc": 10
+     },
+     171
+    ]
+   ],
+   "task_id": "t-18",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "mul",
+     [
+      "add",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fc"
+      ]
+     ],
+     [
+      "add",
+      [
+       "add",
+       [
+        "var",
+        "fb"
+       ],
+       [
+        "var",
+        "fc"
+       ]
+      ],
+      [
+       "const",
+       1
+      ]
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "orchard",
+   "family": "ds_overflow",
+   "formula": "harvest t = fb fc; overflow above fa = max(t - fa, 0)",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 6,
+      "fb": 1,
+      "fc": 4
+     },
+     0
+    ],
+    [
+     {
+      "fa": 35,
+      "fb": 6,
+      "fc": 1
+     },
+     0
+    ],
+    [
+     {
+      "fa": 16,
+      "fb": 2,
+      "fc": 1
+     },
+     0
+    ],
+    [
+     {
+      "fa": 13,
+      "fb": 1,
+      "fc": 4
+     },
+     0
+    ],
+    [
+     {
+      "fa": 4,
+      "fb": 10,
+      "fc": 2
+     },
+     16
+    ],
+    [
+     {
+      "fa": 32,
+      "fb": 6,
+      "fc": 2
+     },
+     0
+    ],
+    [
+     {
+      "fa": 20,
+      "fb": 12,
+      "fc": 7
+     },
+     64
+    ],
+    [
+     {
+      "fa": 32,
+      "fb": 5,
+      "fc": 2
+     },
+     0
+    ],
+    [
+     {
+      "fa": 33,
+      "fb": 9,
+      "fc": 11
+     },
+     66
+    ],
+    [
+     {
+      "fa": 10,
+      "fb": 1,
+      "fc": 8
+     },
+     0
+    ],
+    [
+     {
+      "fa": 38,
+      "fb": 5,
+      "fc": 5
+     },
+     0
+    ]
+   ],
+   "task_id": "t-19",
+   "tier": "hard",
+   "tree": [
+    "max",
+    [
+     "sub",
+     [
+      "mul",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fc"
+      ]
+     ],
+     [
+      "var",
+      "fa"
+     ]
+    ],
+    [
+     "const",
+     0
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "foundry",
+   "family": "ds_cap_load",
+   "formula": "t = fb fc capped at fa, times fd",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc",
+    "fd"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 7,
+      "fb": 5,
+      "fc": 2,
+      "fd": 9
+     },
+     63
+    ],
+    [
+     {
+      "fa": 38,
+      "fb": 5,
+      "fc": 1,
+      "fd": 5
+     },
+     25
+    ],
+    [
+     {
+      "fa": 28,
+      "fb": 7,
+      "fc": 12,
+      "fd": 7
+     },
+     196
+    ],
+    [
+     {
+      "fa": 25,
+      "fb": 11,
+      "fc": 9,
+      "fd": 9
+     },
+     225
+    ],
+    [
+     {
+      "fa": 31,
+      "fb": 5,
+      "fc": 2,
+      "fd": 1
+     },
+     10
+    ],
+    [
+     {
+      "fa": 11,
+      "fb": 4,
+      "fc": 11,
+      "fd": 6
+     },
+     66
+    ],
+    [
+     {
+      "fa": 12,
+      "fb": 1,
+      "fc": 6,
+      "fd": 9
+     },
+     54
+    ],
+    [
+     {
+      "fa": 16,
+      "fb": 5,
+      "fc": 7,
+      "fd": 1
+     },
+     16
+    ],
+    [
+     {
+      "fa": 33,
+      "fb": 10,
+      "fc": 9,
+      "fd": 8
+     },
+     264
+    ],
+    [
+     {
+      "fa": 39,
+      "fb": 3,
+      "fc": 11,
+      "fd": 8
+     },
+     264
+    ],
+    [
+     {
+      "fa": 33,
+      "fb": 12,
+      "fc": 8,
+      "fd": 8
+     },
+     264
+    ]
+   ],
+   "task_id": "t-20",
+   "tier": "hard",
+   "tree": [
+    "mul",
+    [
+     "min",
+     [
+      "mul",
+      [
+       "var",
+       "fb"
+      ],
+      [
+       "var",
+       "fc"
+      ]
+     ],
+     [
+      "var",
+      "fa"
+     ]
+    ],
+    [
+     "var",
+     "fd"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "apiary",
+   "family": "ds_spill_mod",
+   "formula": "t = fa fd; spill t mod fc, plus fb",
+   "inputs": [
+    "fa",
+    "fb",
+    "fc",
+    "fd"
+   ],
+   "kind": "distin",
+   "rows": [
+    [
+     {
+      "fa": 8,
+      "fb": 11,
+      "fc": 2,
+      "fd": 8
+     },
+     11
+    ],
+    [
+     {
+      "fa": 29,
+      "fb": 8,
+      "fc": 12,
+      "fd": 5
+     },
+     9
+    ],
+    [
+     {
+      "fa": 1,
+      "fb": 12,
+      "fc": 3,
+      "fd": 5
+     },
+     14
+    ],
+    [
+     {
+      "fa": 6,
+      "fb": 1,
+      "fc": 2,
+      "fd": 1
+     },
+     1
+    ],
+    [
+     {
+      "fa": 9,
+      "fb": 8,
+      "fc": 6,
+      "fd": 5
+     },
+     11
+    ],
+    [
+     {
+      "fa": 21,
+      "fb": 5,
+      "fc": 10,
+      "fd": 8
+     },
+     13
+    ],
+    [
+     {
+      "fa": 39,
+      "fb": 12,
+      "fc": 9,
+      "fd": 3
+     },
+     12
+    ],
+    [
+     {
+      "fa": 20,
+      "fb": 4,
+      "fc": 12,
+      "fd": 7
+     },
+     12
+    ],
+    [
+     {
+      "fa": 4,
+      "fb": 8,
+      "fc": 4,
+      "fd": 5
+     },
+     8
+    ],
+    [
+     {
+      "fa": 8,
+      "fb": 4,
+      "fc": 6,
+      "fd": 2
+     },
+     8
+    ],
+    [
+     {
+      "fa": 24,
+      "fb": 3,
+      "fc": 1,
+      "fd": 5
+     },
+     3
+    ]
+   ],
+   "task_id": "t-21",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mod",
+     [
+      "mul",
+      [
+       "var",
+       "fa"
+      ],
+      [
+       "var",
+       "fd"
+      ]
+     ],
+     [
+      "var",
+      "fc"
+     ]
+    ],
+    [
+     "var",
+     "fb"
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "int",
+ "schema": "nomad.distin-suite.v1",
+ "seed": 20271019,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 2,
+  "families": 24,
+  "hard": 22,
+  "lookup_dropped": []
+ },
+ "trained_on_by_any_arm": false
+}

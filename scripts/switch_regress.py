@@ -51,6 +51,7 @@ JUDGES = {
     "clause": ["scripts/clause_judge.py"],             # CLAUSE sealed suite (CLAUSE; not re-run by CLAUSE itself)
     "clause2": ["scripts/clause2_judge.py"],           # CLAUSE2 sealed suite (CLAUSE2; not re-run by CLAUSE2 itself)
     "agree": ["scripts/agree_judge.py"],               # AGREE sealed suite (AGREE; not re-run by AGREE itself)
+    "distin": ["scripts/distin_judge.py"],             # DISTIN sealed suite (DISTIN; not re-run by DISTIN itself)
 }
 
 

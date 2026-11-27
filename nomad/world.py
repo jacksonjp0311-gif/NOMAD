@@ -1297,6 +1297,14 @@ def _agree_on() -> bool:
     return _flag("NOMAD_AGREE", "off")
 
 
+def _distin_on() -> bool:
+    """NOMAD_DISTIN (docs/DISTIN.md): LET2's budget-neutral fallback let stage (AGREE's frame), each accepted
+    fit returned early unless refuted on in-domain distinguishing inputs (an unoutvoted disagreeing rival, or
+    a broken evidence relation); NOMAD_LET2, NOMAD_DISCRIM, NOMAD_AGREE and NOMAD_CERT take precedence;
+    default off."""
+    return _flag("NOMAD_DISTIN", "off")
+
+
 def _memidx_on() -> bool:
     """NOMAD_MEMIDX (docs/MEMIDX.md): behavior-indexed function memory, paid only from MERGE's skips."""
     return _flag("NOMAD_MEMIDX", "off")
@@ -1542,7 +1550,7 @@ def port_bank(prior: "WorldPrior", task: WorldTask, key: str | None = None,
     to an earlier one."""
     out = _port_bank_main(prior, task, key, rel, cut_key)
     if not out or not (merge_enabled() or let2_enabled() or _discrim_on() or _agree_on() or _cert_on()
-                       or _memidx_on()) or task.out != "int":
+                       or _distin_on() or _memidx_on()) or task.out != "int":
         return out
     if rel is not None and key and route_enabled() and prior.route.get(key):
         return out
@@ -1893,7 +1901,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                     pinfo["port"] = "let"
                     return hit
             if mstate["on"]:
-                if (let2_enabled() or _discrim_on() or _agree_on() or _cert_on()) and mstate["skips"] > mstate["spent"]:
+                if (let2_enabled() or _discrim_on() or _agree_on() or _cert_on() or _distin_on()) and mstate["skips"] > mstate["spent"]:
                     # LET2 (docs/LET2.md): LET's stage paid only from the unspent skips; on a miss
                     # the gate's rejection record is restored, so later stages see main's gate.
                     # NOMAD_DISCRIM on runs this stage with its distinguishing-experiment guard
@@ -2271,6 +2279,8 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
         # when CERT *verified* it (no violation, >= CERT_MIN_PROPS properties derived from the evidence);
         # otherwise the stage is a budget-neutral miss. LET2 / DISCRIM / AGREE take precedence when on.
         cert_mode = bool(real and _cert_on() and not (let2_enabled() or _discrim_on() or _agree_on()))
+        # DISTIN (docs/DISTIN.md): AGREE's frame and alternatives, refutation on in-domain inputs decides
+        distin_mode = bool(real and _distin_on() and not (let2_enabled() or _discrim_on() or _agree_on() or _cert_on()))
         for ti, (_sz, _sc, t, v) in enumerate(cands[:LET_N]):
             if gate is not None and len(gate.rejected) - rej0 >= LET_REJECTS:
                 return None
@@ -2286,7 +2296,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             for hit in fits:
                 if (evals if real else vev()) >= limit or (gate is not None and len(gate.rejected) - rej0 >= LET_REJECTS):
                     return None
-                if (agree_mode or cert_mode) and evals + 2 > limit:
+                if (agree_mode or cert_mode or distin_mode) and evals + 2 > limit:
                     return None     # AGREE / CERT: the candidate and a possible rejection must both fit the budget
                 key = json.dumps(hit)
                 if key in tried:
@@ -2301,10 +2311,11 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                         if c["verdict"] != "verified":
                             return None
                         return hit
-                    if agree_mode:
+                    if agree_mode or distin_mode:
                         # AGREE guard (docs/AGREE.md): the accepted let fit returns early only when an
                         # independently derived alternative agrees with it; otherwise the stage is a miss
-                        ok = yield from agree_guard(hit, t, v, fits, cands[ti + 1:LET_N], limit, atoms, scales, table)
+                        ok = yield from agree_guard(hit, t, v, fits, cands[ti + 1:LET_N], limit, atoms, scales, table,
+                                                   "distin" if distin_mode else "agree")
                         if ok is None:
                             return None
                         if ok is not hit:
@@ -2379,7 +2390,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                             return out
         return out
 
-    def agree_guard(hit, hit_t, hit_v, fits, later, limit, atoms, scales, table):
+    def agree_guard(hit, hit_t, hit_v, fits, later, limit, atoms, scales, table, mode="agree"):
         """AGREE (docs/AGREE.md) for one WITNESS-accepted fallback let fit. Independent alternatives: the
         stage's other fits for the same intermediate (a different decomposition) and the fits over the next
         AGREE_T intermediates of the same bounded let search (each new term 1 evaluation, as in the stage).
@@ -2444,6 +2455,13 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             if k not in seen:
                 seen.add(k)
                 simp.append(a)
+        if mode == "distin":
+            from . import distin as _Ds
+            for a in _Ds.regroupings(hit):
+                k = _A.canon(a)
+                if k not in seen:
+                    seen.add(k)
+                    simp.append(a)
         indep, simp = indep[:_A.AGREE_ALT], simp[:max(0, _A.AGREE_ALT - len(indep))]
         si, ss = [], []
         for lst, out in ((indep, si), (simp, ss)):
@@ -2454,7 +2472,7 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
                 yield evals
                 if _Dm.fits(a, ev_rows):
                     out.append(a)
-        if not si:
+        if not si and mode != "distin":
             _A.note(task, hit, si, ss, {"verdict": "unsupported", "support": 0, "veto": 0, "rows": 0})
             return None
         need = len(si) + len(ss) + 1
@@ -2462,6 +2480,12 @@ def _staged_gen(task: WorldTask, order: tuple[str, ...], library: dict[str, list
             return None
         evals += need
         yield evals
+        if mode == "distin":
+            # DISTIN (docs/DISTIN.md): returned early unless refuted on in-domain distinguishing inputs
+            from . import distin as _Ds
+            d = _Ds.decide(hit, si, ss, task.inputs, ev_rows, task.out)
+            _Ds.note(task, hit, d)
+            return d["pick"] if d["verdict"] == "kept" else None
         d = _A.decide(hit, si, ss, task.inputs, ev_rows)
         _A.note(task, hit, si, ss, d)
         if d["verdict"] != "supported":
