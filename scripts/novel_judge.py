@@ -147,6 +147,8 @@ def shuffled(field, seed: int):
             vals = [table[o] for o in have]
             for o, v in zip(perm, vals):
                 table[o] = v
+    for e in getattr(p, "curric_log", None) or []:   # CURRIC (docs/CURRIC.md): logged concept trees
+        e[1] = rewire_tree(e[1], rng)
     return p, vs
 
 

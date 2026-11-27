@@ -1,0 +1,4161 @@
+{
+ "budget": 10000,
+ "domains": [
+  "sport",
+  "weather",
+  "pitch",
+  "stock"
+ ],
+ "easy": [
+  {
+   "cold_certified": true,
+   "cold_evaluations": 6440,
+   "cold_reason": null,
+   "domain": "weather",
+   "family": "mx_w_mid1",
+   "formula": "day 1's mid-range (wh + wl) / 2",
+   "inputs": [
+    "wh",
+    "wl",
+    "vh",
+    "vl"
+   ],
+   "kind": "mean",
+   "rows": [
+    [
+     {
+      "vh": 12,
+      "vl": -6,
+      "wh": 2,
+      "wl": -8
+     },
+     -3
+    ],
+    [
+     {
+      "vh": 33,
+      "vl": 1,
+      "wh": -2,
+      "wl": -14
+     },
+     -8
+    ],
+    [
+     {
+      "vh": 12,
+      "vl": 2,
+      "wh": 23,
+      "wl": 11
+     },
+     17
+    ],
+    [
+     {
+      "vh": -1,
+      "vl": -8,
+      "wh": 32,
+      "wl": -12
+     },
+     10
+    ],
+    [
+     {
+      "vh": 18,
+      "vl": 11,
+      "wh": 19,
+      "wl": -3
+     },
+     8
+    ],
+    [
+     {
+      "vh": 38,
+      "vl": 14,
+      "wh": 35,
+      "wl": -15
+     },
+     10
+    ],
+    [
+     {
+      "vh": 16,
+      "vl": 13,
+      "wh": 20,
+      "wl": -10
+     },
+     5
+    ],
+    [
+     {
+      "vh": 25,
+      "vl": 10,
+      "wh": 27,
+      "wl": 13
+     },
+     20
+    ],
+    [
+     {
+      "vh": -1,
+      "vl": -13,
+      "wh": 28,
+      "wl": 8
+     },
+     18
+    ],
+    [
+     {
+      "vh": 30,
+      "vl": 10,
+      "wh": 30,
+      "wl": 28
+     },
+     29
+    ],
+    [
+     {
+      "vh": 29,
+      "vl": 10,
+      "wh": 36,
+      "wl": 10
+     },
+     23
+    ]
+   ],
+   "task_id": "t-14",
+   "tier": "easy",
+   "tree": [
+    "div",
+    [
+     "add",
+     [
+      "var",
+      "wh"
+     ],
+     [
+      "var",
+      "wl"
+     ]
+    ],
+    [
+     "const",
+     2
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 111,
+   "cold_reason": null,
+   "domain": "pitch",
+   "family": "mx_p_class_a",
+   "formula": "pitch class of za (za mod 12)",
+   "inputs": [
+    "za",
+    "zb",
+    "zo"
+   ],
+   "kind": "class",
+   "rows": [
+    [
+     {
+      "za": 78,
+      "zb": 84,
+      "zo": 12
+     },
+     6
+    ],
+    [
+     {
+      "za": 66,
+      "zb": 67,
+      "zo": 12
+     },
+     6
+    ],
+    [
+     {
+      "za": 44,
+      "zb": 86,
+      "zo": 12
+     },
+     8
+    ],
+    [
+     {
+      "za": 60,
+      "zb": 82,
+      "zo": 12
+     },
+     0
+    ],
+    [
+     {
+      "za": 94,
+      "zb": 45,
+      "zo": 12
+     },
+     10
+    ],
+    [
+     {
+      "za": 39,
+      "zb": 76,
+      "zo": 12
+     },
+     3
+    ],
+    [
+     {
+      "za": 44,
+      "zb": 64,
+      "zo": 12
+     },
+     8
+    ],
+    [
+     {
+      "za": 92,
+      "zb": 58,
+      "zo": 12
+     },
+     8
+    ],
+    [
+     {
+      "za": 89,
+      "zb": 50,
+      "zo": 12
+     },
+     5
+    ],
+    [
+     {
+      "za": 95,
+      "zb": 90,
+      "zo": 12
+     },
+     11
+    ],
+    [
+     {
+      "za": 81,
+      "zb": 72,
+      "zo": 12
+     },
+     9
+    ]
+   ],
+   "task_id": "t-17",
+   "tier": "easy",
+   "tree": [
+    "mod",
+    [
+     "var",
+     "za"
+    ],
+    [
+     "var",
+     "zo"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 3367,
+   "cold_reason": null,
+   "domain": "pitch",
+   "family": "mx_p_up_class",
+   "formula": "ascending interval class from zb up to za: (za - zb) mod 12",
+   "inputs": [
+    "za",
+    "zb",
+    "zo"
+   ],
+   "kind": "class",
+   "rows": [
+    [
+     {
+      "za": 43,
+      "zb": 53,
+      "zo": 12
+     },
+     2
+    ],
+    [
+     {
+      "za": 58,
+      "zb": 95,
+      "zo": 12
+     },
+     11
+    ],
+    [
+     {
+      "za": 46,
+      "zb": 71,
+      "zo": 12
+     },
+     11
+    ],
+    [
+     {
+      "za": 91,
+      "zb": 72,
+      "zo": 12
+     },
+     7
+    ],
+    [
+     {
+      "za": 70,
+      "zb": 62,
+      "zo": 12
+     },
+     8
+    ],
+    [
+     {
+      "za": 59,
+      "zb": 80,
+      "zo": 12
+     },
+     3
+    ],
+    [
+     {
+      "za": 41,
+      "zb": 45,
+      "zo": 12
+     },
+     8
+    ],
+    [
+     {
+      "za": 83,
+      "zb": 72,
+      "zo": 12
+     },
+     11
+    ],
+    [
+     {
+      "za": 37,
+      "zb": 65,
+      "zo": 12
+     },
+     8
+    ],
+    [
+     {
+      "za": 88,
+      "zb": 66,
+      "zo": 12
+     },
+     10
+    ],
+    [
+     {
+      "za": 93,
+      "zb": 56,
+      "zo": 12
+     },
+     1
+    ]
+   ],
+   "task_id": "t-20",
+   "tier": "easy",
+   "tree": [
+    "mod",
+    [
+     "sub",
+     [
+      "var",
+      "za"
+     ],
+     [
+      "var",
+      "zb"
+     ]
+    ],
+    [
+     "var",
+     "zo"
+    ]
+   ]
+  },
+  {
+   "cold_certified": true,
+   "cold_evaluations": 1686,
+   "cold_reason": null,
+   "domain": "stock",
+   "family": "mx_k_short1",
+   "formula": "shortfall at depot 1 max(0, rk - sk)",
+   "inputs": [
+    "sk",
+    "sl",
+    "rk",
+    "rl"
+   ],
+   "kind": "short",
+   "rows": [
+    [
+     {
+      "rk": 35,
+      "rl": 20,
+      "sk": 24,
+      "sl": 35
+     },
+     11
+    ],
+    [
+     {
+      "rk": 40,
+      "rl": 27,
+      "sk": 19,
+      "sl": 19
+     },
+     21
+    ],
+    [
+     {
+      "rk": 0,
+      "rl": 20,
+      "sk": 18,
+      "sl": 28
+     },
+     0
+    ],
+    [
+     {
+      "rk": 5,
+      "rl": 38,
+      "sk": 3,
+      "sl": 39
+     },
+     2
+    ],
+    [
+     {
+      "rk": 8,
+      "rl": 6,
+      "sk": 1,
+      "sl": 20
+     },
+     7
+    ],
+    [
+     {
+      "rk": 9,
+      "rl": 38,
+      "sk": 29,
+      "sl": 13
+     },
+     0
+    ],
+    [
+     {
+      "rk": 6,
+      "rl": 23,
+      "sk": 15,
+      "sl": 24
+     },
+     0
+    ],
+    [
+     {
+      "rk": 2,
+      "rl": 37,
+      "sk": 13,
+      "sl": 23
+     },
+     0
+    ],
+    [
+     {
+      "rk": 6,
+      "rl": 32,
+      "sk": 1,
+      "sl": 18
+     },
+     5
+    ],
+    [
+     {
+      "rk": 27,
+      "rl": 38,
+      "sk": 18,
+      "sl": 32
+     },
+     9
+    ],
+    [
+     {
+      "rk": 38,
+      "rl": 9,
+      "sk": 5,
+      "sl": 24
+     },
+     33
+    ]
+   ],
+   "task_id": "t-23",
+   "tier": "easy",
+   "tree": [
+    "max",
+    [
+     "const",
+     0
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "rk"
+     ],
+     [
+      "var",
+      "sk"
+     ]
+    ]
+   ]
+  }
+ ],
+ "hard": [
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "mx_s_margin_sum",
+   "formula": "sum of the two matches' margins",
+   "inputs": [
+    "gw",
+    "gx",
+    "gy",
+    "gz"
+   ],
+   "kind": "margin",
+   "rows": [
+    [
+     {
+      "gw": 9,
+      "gx": 7,
+      "gy": 1,
+      "gz": 7
+     },
+     8
+    ],
+    [
+     {
+      "gw": 4,
+      "gx": 8,
+      "gy": 3,
+      "gz": 0
+     },
+     7
+    ],
+    [
+     {
+      "gw": 8,
+      "gx": 3,
+      "gy": 4,
+      "gz": 2
+     },
+     7
+    ],
+    [
+     {
+      "gw": 5,
+      "gx": 7,
+      "gy": 7,
+      "gz": 9
+     },
+     4
+    ],
+    [
+     {
+      "gw": 0,
+      "gx": 3,
+      "gy": 0,
+      "gz": 6
+     },
+     9
+    ],
+    [
+     {
+      "gw": 7,
+      "gx": 0,
+      "gy": 4,
+      "gz": 5
+     },
+     8
+    ],
+    [
+     {
+      "gw": 2,
+      "gx": 5,
+      "gy": 0,
+      "gz": 9
+     },
+     12
+    ],
+    [
+     {
+      "gw": 2,
+      "gx": 1,
+      "gy": 1,
+      "gz": 0
+     },
+     2
+    ],
+    [
+     {
+      "gw": 7,
+      "gx": 0,
+      "gy": 0,
+      "gz": 2
+     },
+     9
+    ],
+    [
+     {
+      "gw": 2,
+      "gx": 0,
+      "gy": 4,
+      "gz": 7
+     },
+     5
+    ],
+    [
+     {
+      "gw": 6,
+      "gx": 0,
+      "gy": 7,
+      "gz": 7
+     },
+     6
+    ]
+   ],
+   "task_id": "t-01",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "gw"
+      ],
+      [
+       "var",
+       "gx"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "gw"
+      ],
+      [
+       "var",
+       "gx"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "gy"
+      ],
+      [
+       "var",
+       "gz"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "gy"
+      ],
+      [
+       "var",
+       "gz"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "mx_s_margin_max",
+   "formula": "the larger of the two margins",
+   "inputs": [
+    "gw",
+    "gx",
+    "gy",
+    "gz"
+   ],
+   "kind": "margin",
+   "rows": [
+    [
+     {
+      "gw": 0,
+      "gx": 7,
+      "gy": 7,
+      "gz": 9
+     },
+     7
+    ],
+    [
+     {
+      "gw": 2,
+      "gx": 3,
+      "gy": 1,
+      "gz": 0
+     },
+     1
+    ],
+    [
+     {
+      "gw": 9,
+      "gx": 8,
+      "gy": 7,
+      "gz": 3
+     },
+     4
+    ],
+    [
+     {
+      "gw": 9,
+      "gx": 4,
+      "gy": 6,
+      "gz": 6
+     },
+     5
+    ],
+    [
+     {
+      "gw": 4,
+      "gx": 9,
+      "gy": 0,
+      "gz": 5
+     },
+     5
+    ],
+    [
+     {
+      "gw": 2,
+      "gx": 6,
+      "gy": 8,
+      "gz": 5
+     },
+     4
+    ],
+    [
+     {
+      "gw": 8,
+      "gx": 1,
+      "gy": 7,
+      "gz": 2
+     },
+     7
+    ],
+    [
+     {
+      "gw": 5,
+      "gx": 3,
+      "gy": 0,
+      "gz": 1
+     },
+     2
+    ],
+    [
+     {
+      "gw": 0,
+      "gx": 4,
+      "gy": 8,
+      "gz": 9
+     },
+     4
+    ],
+    [
+     {
+      "gw": 5,
+      "gx": 9,
+      "gy": 6,
+      "gz": 7
+     },
+     4
+    ],
+    [
+     {
+      "gw": 9,
+      "gx": 0,
+      "gy": 8,
+      "gz": 3
+     },
+     9
+    ]
+   ],
+   "task_id": "t-02",
+   "tier": "hard",
+   "tree": [
+    "max",
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "gw"
+      ],
+      [
+       "var",
+       "gx"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "gw"
+      ],
+      [
+       "var",
+       "gx"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "gy"
+      ],
+      [
+       "var",
+       "gz"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "gy"
+      ],
+      [
+       "var",
+       "gz"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "mx_s_margin_min",
+   "formula": "the closer match's margin",
+   "inputs": [
+    "gw",
+    "gx",
+    "gy",
+    "gz"
+   ],
+   "kind": "margin",
+   "rows": [
+    [
+     {
+      "gw": 0,
+      "gx": 5,
+      "gy": 3,
+      "gz": 1
+     },
+     2
+    ],
+    [
+     {
+      "gw": 8,
+      "gx": 0,
+      "gy": 4,
+      "gz": 2
+     },
+     2
+    ],
+    [
+     {
+      "gw": 3,
+      "gx": 4,
+      "gy": 8,
+      "gz": 4
+     },
+     1
+    ],
+    [
+     {
+      "gw": 5,
+      "gx": 0,
+      "gy": 0,
+      "gz": 5
+     },
+     5
+    ],
+    [
+     {
+      "gw": 0,
+      "gx": 9,
+      "gy": 1,
+      "gz": 0
+     },
+     1
+    ],
+    [
+     {
+      "gw": 7,
+      "gx": 4,
+      "gy": 3,
+      "gz": 4
+     },
+     1
+    ],
+    [
+     {
+      "gw": 8,
+      "gx": 1,
+      "gy": 1,
+      "gz": 4
+     },
+     3
+    ],
+    [
+     {
+      "gw": 9,
+      "gx": 2,
+      "gy": 6,
+      "gz": 1
+     },
+     5
+    ],
+    [
+     {
+      "gw": 9,
+      "gx": 8,
+      "gy": 6,
+      "gz": 2
+     },
+     1
+    ],
+    [
+     {
+      "gw": 8,
+      "gx": 9,
+      "gy": 3,
+      "gz": 1
+     },
+     1
+    ],
+    [
+     {
+      "gw": 4,
+      "gx": 4,
+      "gy": 1,
+      "gz": 5
+     },
+     0
+    ]
+   ],
+   "task_id": "t-03",
+   "tier": "hard",
+   "tree": [
+    "min",
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "gw"
+      ],
+      [
+       "var",
+       "gx"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "gw"
+      ],
+      [
+       "var",
+       "gx"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "gy"
+      ],
+      [
+       "var",
+       "gz"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "gy"
+      ],
+      [
+       "var",
+       "gz"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "mx_s_margin_gap",
+   "formula": "match 1's margin minus match 2's",
+   "inputs": [
+    "gw",
+    "gx",
+    "gy",
+    "gz"
+   ],
+   "kind": "margin",
+   "rows": [
+    [
+     {
+      "gw": 9,
+      "gx": 6,
+      "gy": 5,
+      "gz": 5
+     },
+     3
+    ],
+    [
+     {
+      "gw": 2,
+      "gx": 6,
+      "gy": 5,
+      "gz": 2
+     },
+     1
+    ],
+    [
+     {
+      "gw": 7,
+      "gx": 2,
+      "gy": 8,
+      "gz": 2
+     },
+     -1
+    ],
+    [
+     {
+      "gw": 7,
+      "gx": 6,
+      "gy": 9,
+      "gz": 2
+     },
+     -6
+    ],
+    [
+     {
+      "gw": 5,
+      "gx": 1,
+      "gy": 9,
+      "gz": 7
+     },
+     2
+    ],
+    [
+     {
+      "gw": 9,
+      "gx": 8,
+      "gy": 1,
+      "gz": 5
+     },
+     -3
+    ],
+    [
+     {
+      "gw": 4,
+      "gx": 4,
+      "gy": 8,
+      "gz": 4
+     },
+     -4
+    ],
+    [
+     {
+      "gw": 8,
+      "gx": 0,
+      "gy": 2,
+      "gz": 6
+     },
+     4
+    ],
+    [
+     {
+      "gw": 2,
+      "gx": 7,
+      "gy": 3,
+      "gz": 6
+     },
+     2
+    ],
+    [
+     {
+      "gw": 4,
+      "gx": 8,
+      "gy": 1,
+      "gz": 5
+     },
+     0
+    ],
+    [
+     {
+      "gw": 8,
+      "gx": 9,
+      "gy": 9,
+      "gz": 4
+     },
+     -4
+    ]
+   ],
+   "task_id": "t-04",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "gw"
+      ],
+      [
+       "var",
+       "gx"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "gw"
+      ],
+      [
+       "var",
+       "gx"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "gy"
+      ],
+      [
+       "var",
+       "gz"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "gy"
+      ],
+      [
+       "var",
+       "gz"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "sport",
+   "family": "mx_s_aggregate",
+   "formula": "two-leg aggregate margin |(gw + gz) - (gx + gy)| (gw, gz: team A)",
+   "inputs": [
+    "gw",
+    "gx",
+    "gy",
+    "gz"
+   ],
+   "kind": "aggregate",
+   "rows": [
+    [
+     {
+      "gw": 8,
+      "gx": 6,
+      "gy": 7,
+      "gz": 8
+     },
+     3
+    ],
+    [
+     {
+      "gw": 7,
+      "gx": 1,
+      "gy": 1,
+      "gz": 4
+     },
+     9
+    ],
+    [
+     {
+      "gw": 1,
+      "gx": 9,
+      "gy": 8,
+      "gz": 6
+     },
+     10
+    ],
+    [
+     {
+      "gw": 2,
+      "gx": 2,
+      "gy": 7,
+      "gz": 7
+     },
+     0
+    ],
+    [
+     {
+      "gw": 0,
+      "gx": 0,
+      "gy": 0,
+      "gz": 2
+     },
+     2
+    ],
+    [
+     {
+      "gw": 9,
+      "gx": 9,
+      "gy": 5,
+      "gz": 2
+     },
+     3
+    ],
+    [
+     {
+      "gw": 1,
+      "gx": 3,
+      "gy": 7,
+      "gz": 5
+     },
+     4
+    ],
+    [
+     {
+      "gw": 0,
+      "gx": 5,
+      "gy": 9,
+      "gz": 3
+     },
+     11
+    ],
+    [
+     {
+      "gw": 3,
+      "gx": 3,
+      "gy": 9,
+      "gz": 2
+     },
+     7
+    ],
+    [
+     {
+      "gw": 1,
+      "gx": 5,
+      "gy": 5,
+      "gz": 5
+     },
+     4
+    ],
+    [
+     {
+      "gw": 2,
+      "gx": 2,
+      "gy": 9,
+      "gz": 0
+     },
+     9
+    ]
+   ],
+   "task_id": "t-05",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "max",
+     [
+      "add",
+      [
+       "var",
+       "gw"
+      ],
+      [
+       "var",
+       "gz"
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "gx"
+      ],
+      [
+       "var",
+       "gy"
+      ]
+     ]
+    ],
+    [
+     "min",
+     [
+      "add",
+      [
+       "var",
+       "gw"
+      ],
+      [
+       "var",
+       "gz"
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "gx"
+      ],
+      [
+       "var",
+       "gy"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 7146,
+   "cold_reason": "invalid_on_rows",
+   "domain": "sport",
+   "family": "mx_s_points",
+   "formula": "home points in match 1: 3 for a win, 1 for a draw, 0 for a loss",
+   "inputs": [
+    "gw",
+    "gx",
+    "gy",
+    "gz"
+   ],
+   "kind": "points",
+   "rows": [
+    [
+     {
+      "gw": 3,
+      "gx": 1,
+      "gy": 6,
+      "gz": 6
+     },
+     3
+    ],
+    [
+     {
+      "gw": 9,
+      "gx": 1,
+      "gy": 0,
+      "gz": 0
+     },
+     3
+    ],
+    [
+     {
+      "gw": 2,
+      "gx": 2,
+      "gy": 6,
+      "gz": 7
+     },
+     1
+    ],
+    [
+     {
+      "gw": 2,
+      "gx": 8,
+      "gy": 6,
+      "gz": 5
+     },
+     0
+    ],
+    [
+     {
+      "gw": 7,
+      "gx": 7,
+      "gy": 8,
+      "gz": 7
+     },
+     1
+    ],
+    [
+     {
+      "gw": 5,
+      "gx": 0,
+      "gy": 9,
+      "gz": 4
+     },
+     3
+    ],
+    [
+     {
+      "gw": 1,
+      "gx": 2,
+      "gy": 2,
+      "gz": 0
+     },
+     0
+    ],
+    [
+     {
+      "gw": 7,
+      "gx": 0,
+      "gy": 0,
+      "gz": 4
+     },
+     3
+    ],
+    [
+     {
+      "gw": 6,
+      "gx": 9,
+      "gy": 2,
+      "gz": 3
+     },
+     0
+    ],
+    [
+     {
+      "gw": 2,
+      "gx": 5,
+      "gy": 4,
+      "gz": 9
+     },
+     0
+    ],
+    [
+     {
+      "gw": 5,
+      "gx": 0,
+      "gy": 1,
+      "gz": 8
+     },
+     3
+    ]
+   ],
+   "task_id": "t-06",
+   "tier": "hard",
+   "tree": [
+    "ite",
+    [
+     "sub",
+     [
+      "var",
+      "gw"
+     ],
+     [
+      "var",
+      "gx"
+     ]
+    ],
+    [
+     "const",
+     3
+    ],
+    [
+     "ite",
+     [
+      "sub",
+      [
+       "var",
+       "gx"
+      ],
+      [
+       "var",
+       "gw"
+      ]
+     ],
+     [
+      "const",
+      0
+     ],
+     [
+      "const",
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 1270,
+   "cold_reason": null,
+   "domain": "sport",
+   "family": "mx_s_winners_goals",
+   "formula": "goals scored by the winner (or either side in a draw) of each match, summed",
+   "inputs": [
+    "gw",
+    "gx",
+    "gy",
+    "gz"
+   ],
+   "kind": "aggregate",
+   "rows": [
+    [
+     {
+      "gw": 2,
+      "gx": 7,
+      "gy": 9,
+      "gz": 4
+     },
+     16
+    ],
+    [
+     {
+      "gw": 8,
+      "gx": 5,
+      "gy": 7,
+      "gz": 4
+     },
+     15
+    ],
+    [
+     {
+      "gw": 2,
+      "gx": 2,
+      "gy": 6,
+      "gz": 0
+     },
+     8
+    ],
+    [
+     {
+      "gw": 3,
+      "gx": 7,
+      "gy": 2,
+      "gz": 1
+     },
+     9
+    ],
+    [
+     {
+      "gw": 7,
+      "gx": 9,
+      "gy": 9,
+      "gz": 6
+     },
+     18
+    ],
+    [
+     {
+      "gw": 2,
+      "gx": 5,
+      "gy": 9,
+      "gz": 6
+     },
+     14
+    ],
+    [
+     {
+      "gw": 4,
+      "gx": 2,
+      "gy": 4,
+      "gz": 4
+     },
+     8
+    ],
+    [
+     {
+      "gw": 7,
+      "gx": 1,
+      "gy": 9,
+      "gz": 4
+     },
+     16
+    ],
+    [
+     {
+      "gw": 8,
+      "gx": 0,
+      "gy": 6,
+      "gz": 8
+     },
+     16
+    ],
+    [
+     {
+      "gw": 2,
+      "gx": 6,
+      "gy": 6,
+      "gz": 2
+     },
+     12
+    ],
+    [
+     {
+      "gw": 0,
+      "gx": 8,
+      "gy": 7,
+      "gz": 5
+     },
+     15
+    ]
+   ],
+   "task_id": "t-07",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "max",
+     [
+      "var",
+      "gw"
+     ],
+     [
+      "var",
+      "gx"
+     ]
+    ],
+    [
+     "max",
+     [
+      "var",
+      "gy"
+     ],
+     [
+      "var",
+      "gz"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "weather",
+   "family": "mx_w_swing_sum",
+   "formula": "the two days' high-low swings added",
+   "inputs": [
+    "wh",
+    "wl",
+    "vh",
+    "vl"
+   ],
+   "kind": "swing",
+   "rows": [
+    [
+     {
+      "vh": 10,
+      "vl": 2,
+      "wh": 3,
+      "wl": 2
+     },
+     9
+    ],
+    [
+     {
+      "vh": 38,
+      "vl": -11,
+      "wh": 9,
+      "wl": -10
+     },
+     68
+    ],
+    [
+     {
+      "vh": 16,
+      "vl": 14,
+      "wh": 18,
+      "wl": -14
+     },
+     34
+    ],
+    [
+     {
+      "vh": 26,
+      "vl": 7,
+      "wh": 3,
+      "wl": -3
+     },
+     25
+    ],
+    [
+     {
+      "vh": 34,
+      "vl": 18,
+      "wh": 14,
+      "wl": -9
+     },
+     39
+    ],
+    [
+     {
+      "vh": -1,
+      "vl": -13,
+      "wh": 22,
+      "wl": 15
+     },
+     19
+    ],
+    [
+     {
+      "vh": 14,
+      "vl": 0,
+      "wh": 17,
+      "wl": 17
+     },
+     14
+    ],
+    [
+     {
+      "vh": 32,
+      "vl": 18,
+      "wh": 24,
+      "wl": -5
+     },
+     43
+    ],
+    [
+     {
+      "vh": 10,
+      "vl": 4,
+      "wh": 35,
+      "wl": 2
+     },
+     39
+    ],
+    [
+     {
+      "vh": 12,
+      "vl": -3,
+      "wh": 28,
+      "wl": -7
+     },
+     50
+    ],
+    [
+     {
+      "vh": 27,
+      "vl": -14,
+      "wh": 22,
+      "wl": -11
+     },
+     74
+    ]
+   ],
+   "task_id": "t-08",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "sub",
+     [
+      "var",
+      "wh"
+     ],
+     [
+      "var",
+      "wl"
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "vh"
+     ],
+     [
+      "var",
+      "vl"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "weather",
+   "family": "mx_w_change_total",
+   "formula": "|wh - vh| + |wl - vl|",
+   "inputs": [
+    "wh",
+    "wl",
+    "vh",
+    "vl"
+   ],
+   "kind": "change",
+   "rows": [
+    [
+     {
+      "vh": 34,
+      "vl": -11,
+      "wh": 20,
+      "wl": -4
+     },
+     21
+    ],
+    [
+     {
+      "vh": 27,
+      "vl": 14,
+      "wh": 6,
+      "wl": 0
+     },
+     35
+    ],
+    [
+     {
+      "vh": 9,
+      "vl": -6,
+      "wh": 31,
+      "wl": 24
+     },
+     52
+    ],
+    [
+     {
+      "vh": 13,
+      "vl": 7,
+      "wh": 2,
+      "wl": -11
+     },
+     29
+    ],
+    [
+     {
+      "vh": 29,
+      "vl": -12,
+      "wh": 17,
+      "wl": -13
+     },
+     13
+    ],
+    [
+     {
+      "vh": 26,
+      "vl": -8,
+      "wh": 37,
+      "wl": 24
+     },
+     43
+    ],
+    [
+     {
+      "vh": 20,
+      "vl": -14,
+      "wh": 21,
+      "wl": 12
+     },
+     27
+    ],
+    [
+     {
+      "vh": 24,
+      "vl": 16,
+      "wh": 22,
+      "wl": 0
+     },
+     18
+    ],
+    [
+     {
+      "vh": 5,
+      "vl": 4,
+      "wh": 22,
+      "wl": -13
+     },
+     34
+    ],
+    [
+     {
+      "vh": 24,
+      "vl": 11,
+      "wh": 29,
+      "wl": 8
+     },
+     8
+    ],
+    [
+     {
+      "vh": 37,
+      "vl": 22,
+      "wh": 28,
+      "wl": -5
+     },
+     36
+    ]
+   ],
+   "task_id": "t-10",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "wh"
+      ],
+      [
+       "var",
+       "vh"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "wh"
+      ],
+      [
+       "var",
+       "vh"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "wl"
+      ],
+      [
+       "var",
+       "vl"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "wl"
+      ],
+      [
+       "var",
+       "vl"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "weather",
+   "family": "mx_w_change_max",
+   "formula": "the larger of the high's and the low's change",
+   "inputs": [
+    "wh",
+    "wl",
+    "vh",
+    "vl"
+   ],
+   "kind": "change",
+   "rows": [
+    [
+     {
+      "vh": 26,
+      "vl": 12,
+      "wh": 14,
+      "wl": 9
+     },
+     12
+    ],
+    [
+     {
+      "vh": 38,
+      "vl": -6,
+      "wh": 3,
+      "wl": -7
+     },
+     35
+    ],
+    [
+     {
+      "vh": 32,
+      "vl": 25,
+      "wh": 2,
+      "wl": -5
+     },
+     30
+    ],
+    [
+     {
+      "vh": 26,
+      "vl": 17,
+      "wh": 29,
+      "wl": 20
+     },
+     3
+    ],
+    [
+     {
+      "vh": 23,
+      "vl": 10,
+      "wh": 21,
+      "wl": 20
+     },
+     10
+    ],
+    [
+     {
+      "vh": 5,
+      "vl": -11,
+      "wh": 38,
+      "wl": 0
+     },
+     33
+    ],
+    [
+     {
+      "vh": 26,
+      "vl": 1,
+      "wh": 12,
+      "wl": 9
+     },
+     14
+    ],
+    [
+     {
+      "vh": 23,
+      "vl": -14,
+      "wh": 30,
+      "wl": 21
+     },
+     35
+    ],
+    [
+     {
+      "vh": 26,
+      "vl": 1,
+      "wh": 18,
+      "wl": 11
+     },
+     10
+    ],
+    [
+     {
+      "vh": 25,
+      "vl": 18,
+      "wh": 4,
+      "wl": 2
+     },
+     21
+    ],
+    [
+     {
+      "vh": 5,
+      "vl": -2,
+      "wh": 10,
+      "wl": 0
+     },
+     5
+    ]
+   ],
+   "task_id": "t-11",
+   "tier": "hard",
+   "tree": [
+    "max",
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "wh"
+      ],
+      [
+       "var",
+       "vh"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "wh"
+      ],
+      [
+       "var",
+       "vh"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "wl"
+      ],
+      [
+       "var",
+       "vl"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "wl"
+      ],
+      [
+       "var",
+       "vl"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "weather",
+   "family": "mx_w_big_swing",
+   "formula": "the bigger of the two days' swings",
+   "inputs": [
+    "wh",
+    "wl",
+    "vh",
+    "vl"
+   ],
+   "kind": "swing",
+   "rows": [
+    [
+     {
+      "vh": -5,
+      "vl": -8,
+      "wh": 12,
+      "wl": 2
+     },
+     10
+    ],
+    [
+     {
+      "vh": 32,
+      "vl": 17,
+      "wh": 30,
+      "wl": 30
+     },
+     15
+    ],
+    [
+     {
+      "vh": 33,
+      "vl": -10,
+      "wh": 31,
+      "wl": 12
+     },
+     43
+    ],
+    [
+     {
+      "vh": 12,
+      "vl": -10,
+      "wh": 17,
+      "wl": -8
+     },
+     25
+    ],
+    [
+     {
+      "vh": 12,
+      "vl": 12,
+      "wh": 25,
+      "wl": -9
+     },
+     34
+    ],
+    [
+     {
+      "vh": 20,
+      "vl": 0,
+      "wh": 24,
+      "wl": -9
+     },
+     33
+    ],
+    [
+     {
+      "vh": 9,
+      "vl": -5,
+      "wh": 33,
+      "wl": -13
+     },
+     46
+    ],
+    [
+     {
+      "vh": 25,
+      "vl": 3,
+      "wh": 33,
+      "wl": 20
+     },
+     22
+    ],
+    [
+     {
+      "vh": 11,
+      "vl": -2,
+      "wh": 19,
+      "wl": -8
+     },
+     27
+    ],
+    [
+     {
+      "vh": 32,
+      "vl": 21,
+      "wh": 31,
+      "wl": 0
+     },
+     31
+    ],
+    [
+     {
+      "vh": 17,
+      "vl": -5,
+      "wh": 18,
+      "wl": 6
+     },
+     22
+    ]
+   ],
+   "task_id": "t-12",
+   "tier": "hard",
+   "tree": [
+    "max",
+    [
+     "sub",
+     [
+      "var",
+      "wh"
+     ],
+     [
+      "var",
+      "wl"
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "vh"
+     ],
+     [
+      "var",
+      "vl"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "weather",
+   "family": "mx_w_span",
+   "formula": "two-day span: highest high minus lowest low",
+   "inputs": [
+    "wh",
+    "wl",
+    "vh",
+    "vl"
+   ],
+   "kind": "swing",
+   "rows": [
+    [
+     {
+      "vh": 3,
+      "vl": -10,
+      "wh": 18,
+      "wl": 0
+     },
+     28
+    ],
+    [
+     {
+      "vh": 15,
+      "vl": -1,
+      "wh": 31,
+      "wl": 22
+     },
+     32
+    ],
+    [
+     {
+      "vh": 28,
+      "vl": 6,
+      "wh": 24,
+      "wl": 18
+     },
+     22
+    ],
+    [
+     {
+      "vh": 38,
+      "vl": 25,
+      "wh": 16,
+      "wl": -10
+     },
+     48
+    ],
+    [
+     {
+      "vh": 30,
+      "vl": -9,
+      "wh": 7,
+      "wl": -3
+     },
+     39
+    ],
+    [
+     {
+      "vh": 18,
+      "vl": -5,
+      "wh": 26,
+      "wl": 10
+     },
+     31
+    ],
+    [
+     {
+      "vh": 33,
+      "vl": -6,
+      "wh": 6,
+      "wl": -4
+     },
+     39
+    ],
+    [
+     {
+      "vh": 11,
+      "vl": -3,
+      "wh": 25,
+      "wl": -3
+     },
+     28
+    ],
+    [
+     {
+      "vh": -5,
+      "vl": -11,
+      "wh": 27,
+      "wl": 8
+     },
+     38
+    ],
+    [
+     {
+      "vh": 22,
+      "vl": -13,
+      "wh": 24,
+      "wl": -6
+     },
+     37
+    ],
+    [
+     {
+      "vh": 32,
+      "vl": -7,
+      "wh": 30,
+      "wl": 1
+     },
+     39
+    ]
+   ],
+   "task_id": "t-13",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "max",
+     [
+      "var",
+      "wh"
+     ],
+     [
+      "var",
+      "vh"
+     ]
+    ],
+    [
+     "min",
+     [
+      "var",
+      "wl"
+     ],
+     [
+      "var",
+      "vl"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "weather",
+   "family": "mx_w_swing_diff",
+   "formula": "how different the two swings are |(wh - wl) - (vh - vl)|",
+   "inputs": [
+    "wh",
+    "wl",
+    "vh",
+    "vl"
+   ],
+   "kind": "swing",
+   "rows": [
+    [
+     {
+      "vh": 25,
+      "vl": -13,
+      "wh": 15,
+      "wl": 11
+     },
+     34
+    ],
+    [
+     {
+      "vh": 15,
+      "vl": 5,
+      "wh": 32,
+      "wl": 4
+     },
+     18
+    ],
+    [
+     {
+      "vh": 17,
+      "vl": -6,
+      "wh": 28,
+      "wl": 11
+     },
+     6
+    ],
+    [
+     {
+      "vh": 23,
+      "vl": 15,
+      "wh": 29,
+      "wl": -11
+     },
+     32
+    ],
+    [
+     {
+      "vh": 31,
+      "vl": 11,
+      "wh": 34,
+      "wl": 5
+     },
+     9
+    ],
+    [
+     {
+      "vh": 17,
+      "vl": -4,
+      "wh": 32,
+      "wl": -6
+     },
+     17
+    ],
+    [
+     {
+      "vh": 33,
+      "vl": -14,
+      "wh": 26,
+      "wl": -5
+     },
+     16
+    ],
+    [
+     {
+      "vh": 32,
+      "vl": -11,
+      "wh": 32,
+      "wl": -14
+     },
+     3
+    ],
+    [
+     {
+      "vh": 12,
+      "vl": 11,
+      "wh": 17,
+      "wl": -10
+     },
+     26
+    ],
+    [
+     {
+      "vh": -1,
+      "vl": -9,
+      "wh": 38,
+      "wl": 6
+     },
+     24
+    ],
+    [
+     {
+      "vh": 35,
+      "vl": -14,
+      "wh": 15,
+      "wl": -1
+     },
+     33
+    ]
+   ],
+   "task_id": "t-15",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "max",
+     [
+      "sub",
+      [
+       "var",
+       "wh"
+      ],
+      [
+       "var",
+       "wl"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "vh"
+      ],
+      [
+       "var",
+       "vl"
+      ]
+     ]
+    ],
+    [
+     "min",
+     [
+      "sub",
+      [
+       "var",
+       "wh"
+      ],
+      [
+       "var",
+       "wl"
+      ]
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "vh"
+      ],
+      [
+       "var",
+       "vl"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "pitch",
+   "family": "mx_p_octave_gap",
+   "formula": "how many octave numbers apart the notes are |za div 12 - zb div 12|",
+   "inputs": [
+    "za",
+    "zb",
+    "zo"
+   ],
+   "kind": "octave",
+   "rows": [
+    [
+     {
+      "za": 76,
+      "zb": 71,
+      "zo": 12
+     },
+     1
+    ],
+    [
+     {
+      "za": 92,
+      "zb": 68,
+      "zo": 12
+     },
+     2
+    ],
+    [
+     {
+      "za": 89,
+      "zb": 72,
+      "zo": 12
+     },
+     1
+    ],
+    [
+     {
+      "za": 51,
+      "zb": 78,
+      "zo": 12
+     },
+     2
+    ],
+    [
+     {
+      "za": 77,
+      "zb": 63,
+      "zo": 12
+     },
+     1
+    ],
+    [
+     {
+      "za": 43,
+      "zb": 92,
+      "zo": 12
+     },
+     4
+    ],
+    [
+     {
+      "za": 45,
+      "zb": 51,
+      "zo": 12
+     },
+     1
+    ],
+    [
+     {
+      "za": 84,
+      "zb": 93,
+      "zo": 12
+     },
+     0
+    ],
+    [
+     {
+      "za": 86,
+      "zb": 48,
+      "zo": 12
+     },
+     3
+    ],
+    [
+     {
+      "za": 80,
+      "zb": 68,
+      "zo": 12
+     },
+     1
+    ],
+    [
+     {
+      "za": 47,
+      "zb": 83,
+      "zo": 12
+     },
+     3
+    ]
+   ],
+   "task_id": "t-18",
+   "tier": "hard",
+   "tree": [
+    "sub",
+    [
+     "max",
+     [
+      "div",
+      [
+       "var",
+       "za"
+      ],
+      [
+       "var",
+       "zo"
+      ]
+     ],
+     [
+      "div",
+      [
+       "var",
+       "zb"
+      ],
+      [
+       "var",
+       "zo"
+      ]
+     ]
+    ],
+    [
+     "min",
+     [
+      "div",
+      [
+       "var",
+       "za"
+      ],
+      [
+       "var",
+       "zo"
+      ]
+     ],
+     [
+      "div",
+      [
+       "var",
+       "zb"
+      ],
+      [
+       "var",
+       "zo"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 3411,
+   "cold_reason": null,
+   "domain": "pitch",
+   "family": "mx_p_simple",
+   "formula": "simple interval: |za - zb| mod 12",
+   "inputs": [
+    "za",
+    "zb",
+    "zo"
+   ],
+   "kind": "interval",
+   "rows": [
+    [
+     {
+      "za": 86,
+      "zb": 51,
+      "zo": 12
+     },
+     11
+    ],
+    [
+     {
+      "za": 43,
+      "zb": 39,
+      "zo": 12
+     },
+     4
+    ],
+    [
+     {
+      "za": 50,
+      "zb": 40,
+      "zo": 12
+     },
+     10
+    ],
+    [
+     {
+      "za": 90,
+      "zb": 49,
+      "zo": 12
+     },
+     5
+    ],
+    [
+     {
+      "za": 42,
+      "zb": 84,
+      "zo": 12
+     },
+     6
+    ],
+    [
+     {
+      "za": 90,
+      "zb": 54,
+      "zo": 12
+     },
+     0
+    ],
+    [
+     {
+      "za": 96,
+      "zb": 55,
+      "zo": 12
+     },
+     5
+    ],
+    [
+     {
+      "za": 46,
+      "zb": 63,
+      "zo": 12
+     },
+     5
+    ],
+    [
+     {
+      "za": 40,
+      "zb": 93,
+      "zo": 12
+     },
+     5
+    ],
+    [
+     {
+      "za": 53,
+      "zb": 83,
+      "zo": 12
+     },
+     6
+    ],
+    [
+     {
+      "za": 74,
+      "zb": 38,
+      "zo": 12
+     },
+     0
+    ]
+   ],
+   "task_id": "t-19",
+   "tier": "hard",
+   "tree": [
+    "mod",
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "za"
+      ],
+      [
+       "var",
+       "zb"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "za"
+      ],
+      [
+       "var",
+       "zb"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "zo"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "pitch",
+   "family": "mx_p_octaves",
+   "formula": "whole octaves in the interval |za - zb| div 12",
+   "inputs": [
+    "za",
+    "zb",
+    "zo"
+   ],
+   "kind": "octave",
+   "rows": [
+    [
+     {
+      "za": 86,
+      "zb": 96,
+      "zo": 12
+     },
+     0
+    ],
+    [
+     {
+      "za": 71,
+      "zb": 74,
+      "zo": 12
+     },
+     0
+    ],
+    [
+     {
+      "za": 52,
+      "zb": 37,
+      "zo": 12
+     },
+     1
+    ],
+    [
+     {
+      "za": 68,
+      "zb": 94,
+      "zo": 12
+     },
+     2
+    ],
+    [
+     {
+      "za": 52,
+      "zb": 95,
+      "zo": 12
+     },
+     3
+    ],
+    [
+     {
+      "za": 40,
+      "zb": 83,
+      "zo": 12
+     },
+     3
+    ],
+    [
+     {
+      "za": 40,
+      "zb": 61,
+      "zo": 12
+     },
+     1
+    ],
+    [
+     {
+      "za": 52,
+      "zb": 70,
+      "zo": 12
+     },
+     1
+    ],
+    [
+     {
+      "za": 87,
+      "zb": 45,
+      "zo": 12
+     },
+     3
+    ],
+    [
+     {
+      "za": 93,
+      "zb": 96,
+      "zo": 12
+     },
+     0
+    ],
+    [
+     {
+      "za": 59,
+      "zb": 73,
+      "zo": 12
+     },
+     1
+    ]
+   ],
+   "task_id": "t-21",
+   "tier": "hard",
+   "tree": [
+    "div",
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "za"
+      ],
+      [
+       "var",
+       "zb"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "za"
+      ],
+      [
+       "var",
+       "zb"
+      ]
+     ]
+    ],
+    [
+     "var",
+     "zo"
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "pitch",
+   "family": "mx_p_class_sum",
+   "formula": "pitch class of za plus pitch class of zb",
+   "inputs": [
+    "za",
+    "zb",
+    "zo"
+   ],
+   "kind": "class",
+   "rows": [
+    [
+     {
+      "za": 66,
+      "zb": 85,
+      "zo": 12
+     },
+     7
+    ],
+    [
+     {
+      "za": 36,
+      "zb": 85,
+      "zo": 12
+     },
+     1
+    ],
+    [
+     {
+      "za": 41,
+      "zb": 96,
+      "zo": 12
+     },
+     5
+    ],
+    [
+     {
+      "za": 71,
+      "zb": 51,
+      "zo": 12
+     },
+     14
+    ],
+    [
+     {
+      "za": 43,
+      "zb": 52,
+      "zo": 12
+     },
+     11
+    ],
+    [
+     {
+      "za": 40,
+      "zb": 73,
+      "zo": 12
+     },
+     5
+    ],
+    [
+     {
+      "za": 88,
+      "zb": 41,
+      "zo": 12
+     },
+     9
+    ],
+    [
+     {
+      "za": 92,
+      "zb": 69,
+      "zo": 12
+     },
+     17
+    ],
+    [
+     {
+      "za": 61,
+      "zb": 49,
+      "zo": 12
+     },
+     2
+    ],
+    [
+     {
+      "za": 40,
+      "zb": 48,
+      "zo": 12
+     },
+     4
+    ],
+    [
+     {
+      "za": 87,
+      "zb": 88,
+      "zo": 12
+     },
+     7
+    ]
+   ],
+   "task_id": "t-22",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "mod",
+     [
+      "var",
+      "za"
+     ],
+     [
+      "var",
+      "zo"
+     ]
+    ],
+    [
+     "mod",
+     [
+      "var",
+      "zb"
+     ],
+     [
+      "var",
+      "zo"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "stock",
+   "family": "mx_k_short_total",
+   "formula": "total shortfall over both depots",
+   "inputs": [
+    "sk",
+    "sl",
+    "rk",
+    "rl"
+   ],
+   "kind": "short",
+   "rows": [
+    [
+     {
+      "rk": 2,
+      "rl": 8,
+      "sk": 10,
+      "sl": 32
+     },
+     0
+    ],
+    [
+     {
+      "rk": 19,
+      "rl": 28,
+      "sk": 40,
+      "sl": 4
+     },
+     24
+    ],
+    [
+     {
+      "rk": 32,
+      "rl": 16,
+      "sk": 39,
+      "sl": 8
+     },
+     8
+    ],
+    [
+     {
+      "rk": 30,
+      "rl": 31,
+      "sk": 20,
+      "sl": 21
+     },
+     20
+    ],
+    [
+     {
+      "rk": 37,
+      "rl": 8,
+      "sk": 33,
+      "sl": 6
+     },
+     6
+    ],
+    [
+     {
+      "rk": 0,
+      "rl": 1,
+      "sk": 10,
+      "sl": 33
+     },
+     0
+    ],
+    [
+     {
+      "rk": 16,
+      "rl": 11,
+      "sk": 10,
+      "sl": 33
+     },
+     6
+    ],
+    [
+     {
+      "rk": 24,
+      "rl": 31,
+      "sk": 11,
+      "sl": 26
+     },
+     18
+    ],
+    [
+     {
+      "rk": 14,
+      "rl": 26,
+      "sk": 14,
+      "sl": 28
+     },
+     0
+    ],
+    [
+     {
+      "rk": 33,
+      "rl": 34,
+      "sk": 29,
+      "sl": 35
+     },
+     4
+    ],
+    [
+     {
+      "rk": 27,
+      "rl": 15,
+      "sk": 26,
+      "sl": 4
+     },
+     12
+    ]
+   ],
+   "task_id": "t-24",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "max",
+     [
+      "const",
+      0
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "rk"
+      ],
+      [
+       "var",
+       "sk"
+      ]
+     ]
+    ],
+    [
+     "max",
+     [
+      "const",
+      0
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "rl"
+      ],
+      [
+       "var",
+       "sl"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "stock",
+   "family": "mx_k_filled",
+   "formula": "units shipped: min(sk, rk) + min(sl, rl)",
+   "inputs": [
+    "sk",
+    "sl",
+    "rk",
+    "rl"
+   ],
+   "kind": "fill",
+   "rows": [
+    [
+     {
+      "rk": 37,
+      "rl": 22,
+      "sk": 28,
+      "sl": 8
+     },
+     36
+    ],
+    [
+     {
+      "rk": 31,
+      "rl": 22,
+      "sk": 30,
+      "sl": 23
+     },
+     52
+    ],
+    [
+     {
+      "rk": 36,
+      "rl": 16,
+      "sk": 36,
+      "sl": 26
+     },
+     52
+    ],
+    [
+     {
+      "rk": 2,
+      "rl": 35,
+      "sk": 39,
+      "sl": 14
+     },
+     16
+    ],
+    [
+     {
+      "rk": 25,
+      "rl": 27,
+      "sk": 10,
+      "sl": 2
+     },
+     12
+    ],
+    [
+     {
+      "rk": 38,
+      "rl": 1,
+      "sk": 31,
+      "sl": 27
+     },
+     32
+    ],
+    [
+     {
+      "rk": 12,
+      "rl": 18,
+      "sk": 0,
+      "sl": 29
+     },
+     18
+    ],
+    [
+     {
+      "rk": 4,
+      "rl": 33,
+      "sk": 2,
+      "sl": 39
+     },
+     35
+    ],
+    [
+     {
+      "rk": 35,
+      "rl": 27,
+      "sk": 23,
+      "sl": 16
+     },
+     39
+    ],
+    [
+     {
+      "rk": 28,
+      "rl": 22,
+      "sk": 1,
+      "sl": 22
+     },
+     23
+    ],
+    [
+     {
+      "rk": 29,
+      "rl": 0,
+      "sk": 5,
+      "sl": 23
+     },
+     5
+    ]
+   ],
+   "task_id": "t-25",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "min",
+     [
+      "var",
+      "sk"
+     ],
+     [
+      "var",
+      "rk"
+     ]
+    ],
+    [
+     "min",
+     [
+      "var",
+      "sl"
+     ],
+     [
+      "var",
+      "rl"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 1325,
+   "cold_reason": null,
+   "domain": "stock",
+   "family": "mx_k_left",
+   "formula": "units left over at both depots",
+   "inputs": [
+    "sk",
+    "sl",
+    "rk",
+    "rl"
+   ],
+   "kind": "fill",
+   "rows": [
+    [
+     {
+      "rk": 24,
+      "rl": 36,
+      "sk": 9,
+      "sl": 9
+     },
+     0
+    ],
+    [
+     {
+      "rk": 10,
+      "rl": 5,
+      "sk": 37,
+      "sl": 5
+     },
+     27
+    ],
+    [
+     {
+      "rk": 8,
+      "rl": 23,
+      "sk": 34,
+      "sl": 4
+     },
+     26
+    ],
+    [
+     {
+      "rk": 7,
+      "rl": 30,
+      "sk": 11,
+      "sl": 18
+     },
+     4
+    ],
+    [
+     {
+      "rk": 25,
+      "rl": 38,
+      "sk": 3,
+      "sl": 29
+     },
+     0
+    ],
+    [
+     {
+      "rk": 31,
+      "rl": 18,
+      "sk": 21,
+      "sl": 21
+     },
+     3
+    ],
+    [
+     {
+      "rk": 22,
+      "rl": 11,
+      "sk": 15,
+      "sl": 37
+     },
+     26
+    ],
+    [
+     {
+      "rk": 28,
+      "rl": 21,
+      "sk": 13,
+      "sl": 3
+     },
+     0
+    ],
+    [
+     {
+      "rk": 0,
+      "rl": 19,
+      "sk": 21,
+      "sl": 30
+     },
+     32
+    ],
+    [
+     {
+      "rk": 33,
+      "rl": 38,
+      "sk": 8,
+      "sl": 33
+     },
+     0
+    ],
+    [
+     {
+      "rk": 17,
+      "rl": 16,
+      "sk": 6,
+      "sl": 35
+     },
+     19
+    ]
+   ],
+   "task_id": "t-26",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "max",
+     [
+      "const",
+      0
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "sk"
+      ],
+      [
+       "var",
+       "rk"
+      ]
+     ]
+    ],
+    [
+     "max",
+     [
+      "const",
+      0
+     ],
+     [
+      "sub",
+      [
+       "var",
+       "sl"
+      ],
+      [
+       "var",
+       "rl"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "stock",
+   "family": "mx_k_mismatch",
+   "formula": "total mismatch |sk - rk| + |sl - rl|",
+   "inputs": [
+    "sk",
+    "sl",
+    "rk",
+    "rl"
+   ],
+   "kind": "fill",
+   "rows": [
+    [
+     {
+      "rk": 25,
+      "rl": 21,
+      "sk": 18,
+      "sl": 13
+     },
+     15
+    ],
+    [
+     {
+      "rk": 16,
+      "rl": 9,
+      "sk": 24,
+      "sl": 34
+     },
+     33
+    ],
+    [
+     {
+      "rk": 13,
+      "rl": 17,
+      "sk": 28,
+      "sl": 1
+     },
+     31
+    ],
+    [
+     {
+      "rk": 36,
+      "rl": 1,
+      "sk": 12,
+      "sl": 8
+     },
+     31
+    ],
+    [
+     {
+      "rk": 21,
+      "rl": 20,
+      "sk": 8,
+      "sl": 0
+     },
+     33
+    ],
+    [
+     {
+      "rk": 19,
+      "rl": 32,
+      "sk": 33,
+      "sl": 8
+     },
+     38
+    ],
+    [
+     {
+      "rk": 14,
+      "rl": 30,
+      "sk": 17,
+      "sl": 17
+     },
+     16
+    ],
+    [
+     {
+      "rk": 32,
+      "rl": 38,
+      "sk": 40,
+      "sl": 0
+     },
+     46
+    ],
+    [
+     {
+      "rk": 32,
+      "rl": 24,
+      "sk": 13,
+      "sl": 30
+     },
+     25
+    ],
+    [
+     {
+      "rk": 18,
+      "rl": 11,
+      "sk": 29,
+      "sl": 15
+     },
+     15
+    ],
+    [
+     {
+      "rk": 13,
+      "rl": 8,
+      "sk": 23,
+      "sl": 4
+     },
+     14
+    ]
+   ],
+   "task_id": "t-27",
+   "tier": "hard",
+   "tree": [
+    "add",
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "sk"
+      ],
+      [
+       "var",
+       "rk"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "sk"
+      ],
+      [
+       "var",
+       "rk"
+      ]
+     ]
+    ],
+    [
+     "sub",
+     [
+      "max",
+      [
+       "var",
+       "sl"
+      ],
+      [
+       "var",
+       "rl"
+      ]
+     ],
+     [
+      "min",
+      [
+       "var",
+       "sl"
+      ],
+      [
+       "var",
+       "rl"
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "stock",
+   "family": "mx_k_worst",
+   "formula": "worst net need max(rk - sk, rl - sl)",
+   "inputs": [
+    "sk",
+    "sl",
+    "rk",
+    "rl"
+   ],
+   "kind": "short",
+   "rows": [
+    [
+     {
+      "rk": 31,
+      "rl": 32,
+      "sk": 32,
+      "sl": 3
+     },
+     29
+    ],
+    [
+     {
+      "rk": 5,
+      "rl": 38,
+      "sk": 18,
+      "sl": 40
+     },
+     -2
+    ],
+    [
+     {
+      "rk": 34,
+      "rl": 9,
+      "sk": 29,
+      "sl": 22
+     },
+     5
+    ],
+    [
+     {
+      "rk": 37,
+      "rl": 16,
+      "sk": 2,
+      "sl": 37
+     },
+     35
+    ],
+    [
+     {
+      "rk": 16,
+      "rl": 28,
+      "sk": 2,
+      "sl": 36
+     },
+     14
+    ],
+    [
+     {
+      "rk": 8,
+      "rl": 5,
+      "sk": 22,
+      "sl": 27
+     },
+     -14
+    ],
+    [
+     {
+      "rk": 9,
+      "rl": 13,
+      "sk": 12,
+      "sl": 7
+     },
+     6
+    ],
+    [
+     {
+      "rk": 28,
+      "rl": 20,
+      "sk": 2,
+      "sl": 32
+     },
+     26
+    ],
+    [
+     {
+      "rk": 4,
+      "rl": 29,
+      "sk": 19,
+      "sl": 19
+     },
+     10
+    ],
+    [
+     {
+      "rk": 32,
+      "rl": 30,
+      "sk": 10,
+      "sl": 0
+     },
+     30
+    ],
+    [
+     {
+      "rk": 5,
+      "rl": 7,
+      "sk": 1,
+      "sl": 39
+     },
+     4
+    ]
+   ],
+   "task_id": "t-28",
+   "tier": "hard",
+   "tree": [
+    "max",
+    [
+     "sub",
+     [
+      "var",
+      "rk"
+     ],
+     [
+      "var",
+      "sk"
+     ]
+    ],
+    [
+     "sub",
+     [
+      "var",
+      "rl"
+     ],
+     [
+      "var",
+      "sl"
+     ]
+    ]
+   ]
+  },
+  {
+   "cold_certified": false,
+   "cold_evaluations": 10000,
+   "cold_reason": "candidate_budget",
+   "domain": "stock",
+   "family": "mx_k_pooled_short",
+   "formula": "shortfall if the depots pool stock max(0, rk + rl - sk - sl)",
+   "inputs": [
+    "sk",
+    "sl",
+    "rk",
+    "rl"
+   ],
+   "kind": "short",
+   "rows": [
+    [
+     {
+      "rk": 32,
+      "rl": 8,
+      "sk": 9,
+      "sl": 5
+     },
+     26
+    ],
+    [
+     {
+      "rk": 22,
+      "rl": 40,
+      "sk": 36,
+      "sl": 31
+     },
+     0
+    ],
+    [
+     {
+      "rk": 11,
+      "rl": 4,
+      "sk": 11,
+      "sl": 31
+     },
+     0
+    ],
+    [
+     {
+      "rk": 5,
+      "rl": 24,
+      "sk": 22,
+      "sl": 23
+     },
+     0
+    ],
+    [
+     {
+      "rk": 10,
+      "rl": 9,
+      "sk": 27,
+      "sl": 10
+     },
+     0
+    ],
+    [
+     {
+      "rk": 33,
+      "rl": 0,
+      "sk": 8,
+      "sl": 35
+     },
+     0
+    ],
+    [
+     {
+      "rk": 24,
+      "rl": 33,
+      "sk": 4,
+      "sl": 1
+     },
+     52
+    ],
+    [
+     {
+      "rk": 37,
+      "rl": 7,
+      "sk": 35,
+      "sl": 1
+     },
+     8
+    ],
+    [
+     {
+      "rk": 15,
+      "rl": 5,
+      "sk": 15,
+      "sl": 15
+     },
+     0
+    ],
+    [
+     {
+      "rk": 15,
+      "rl": 16,
+      "sk": 40,
+      "sl": 2
+     },
+     0
+    ],
+    [
+     {
+      "rk": 38,
+      "rl": 10,
+      "sk": 31,
+      "sl": 5
+     },
+     12
+    ]
+   ],
+   "task_id": "t-29",
+   "tier": "hard",
+   "tree": [
+    "max",
+    [
+     "const",
+     0
+    ],
+    [
+     "sub",
+     [
+      "add",
+      [
+       "var",
+       "rk"
+      ],
+      [
+       "var",
+       "rl"
+      ]
+     ],
+     [
+      "add",
+      [
+       "var",
+       "sk"
+      ],
+      [
+       "var",
+       "sl"
+      ]
+     ]
+    ]
+   ]
+  }
+ ],
+ "max_size": 7,
+ "opset": "int",
+ "schema": "nomad.curric-suite.v1",
+ "seed": 20271127,
+ "split": {
+  "challenge": 3,
+  "final": 3,
+  "public": 5
+ },
+ "stats": {
+  "easy": 4,
+  "families": 30,
+  "hard": 23,
+  "lookup_dropped": [
+   {
+    "easy_twin": [],
+    "family": "mx_s_margin1",
+    "memory_lookup": [
+     "ite(sub(gw, gx), sub(gw, gx), sub(gx, gw))",
+     "ite(sub(gx, gw), sub(gx, gw), sub(gw, gx))",
+     "sub(sub(gw, min(gw, gx)), sub(gw, max(gx, gw)))",
+     "sub(sub(gx, min(gx, gw)), sub(gx, max(gw, gx)))",
+     "add(sub(gw, min(gw, gx)), sub(gx, min(gx, gw)))"
+    ]
+   },
+   {
+    "easy_twin": [],
+    "family": "mx_w_high_change",
+    "memory_lookup": [
+     "ite(sub(wh, vh), sub(wh, vh), sub(vh, wh))",
+     "ite(sub(vh, wh), sub(vh, wh), sub(wh, vh))",
+     "sub(sub(wh, min(wh, vh)), sub(wh, max(vh, wh)))",
+     "sub(sub(vh, min(vh, wh)), sub(vh, max(wh, vh)))",
+     "add(sub(wh, min(wh, vh)), sub(vh, min(vh, wh)))"
+    ]
+   },
+   {
+    "easy_twin": [],
+    "family": "mx_p_interval",
+    "memory_lookup": [
+     "ite(sub(za, zb), sub(za, zb), sub(zb, za))",
+     "ite(sub(zb, za), sub(zb, za), sub(za, zb))",
+     "sub(sub(za, min(za, zb)), sub(za, max(zb, za)))",
+     "sub(sub(zb, min(zb, za)), sub(zb, max(za, zb)))",
+     "add(sub(za, min(za, zb)), sub(zb, min(zb, za)))"
+    ]
+   }
+  ]
+ },
+ "trained_on_by_any_arm": false
+}

@@ -746,7 +746,9 @@ class WorldPrior:
                 "route": self.route, "library_src": self.library_src, "programs_src": self.programs_src,
                 "graph_nodes": self.graph_nodes, "graph_edges": self.graph_edges,
                 # MEANING: present only once a lexicon exists (snapshots without words are unchanged)
-                **({"lexicon": self.lexicon, "concepts": self.concepts} if self.lexicon else {})}
+                **({"lexicon": self.lexicon, "concepts": self.concepts} if self.lexicon else {}),
+                # CURRIC: present only once the concept curriculum was studied (other snapshots unchanged)
+                **({"curric_log": self.curric_log} if getattr(self, "curric_log", None) else {})}
 
     @classmethod
     def from_snapshot(cls, snap: dict) -> "WorldPrior":
@@ -770,6 +772,8 @@ class WorldPrior:
         p.graph_edges = {k: float(v) for k, v in (snap.get("graph_edges") or {}).items()}
         p.lexicon = {t: {c: float(v) for c, v in row.items()} for t, row in (snap.get("lexicon") or {}).items()}
         p.concepts = {k: dict(v) for k, v in (snap.get("concepts") or {}).items()}
+        if snap.get("curric_log"):
+            p.curric_log = [[str(f), t] for f, t in snap["curric_log"]]
         return p
 
 
@@ -1047,6 +1051,16 @@ def synthesize(task: WorldTask, *, prior: WorldPrior | None = None, use_family: 
     if bank and getattr(bank, "merged", False) and _memidx_on():
         from . import memidx as _MI
         midx = _MI.build(prior) or None   # MEMIDX (docs/MEMIDX.md): no task rows read here
+    if bank and getattr(bank, "merged", False) and _curric_on():
+        from . import curric as _CU       # CURRIC (docs/CURRIC.md): cross-family concepts first
+        cidx = _CU.index(prior)
+        if cidx:
+            have = {(e["k"], e["fp"]) for e in cidx}
+            midx = cidx + [e for e in (midx or []) if (e["k"], e["fp"]) not in have]
+            from . import memidx as _MI
+            for e in midx:
+                if "sym" not in e:
+                    e["sym"] = e["k"] == 2 and _MI._fp(_MI._swap(e["tree"]), 2) == e["fp"]
     s = _drive_main(_staged_gen(task, cold_order, library, max_size, max_eval, mut, split, aim,
                                 probe_on, gate, bank, inv, rel or None,
                                 prior if (graph_enabled() and prior.graph_edges) else None, pats, midx), cold_order)
@@ -1310,6 +1324,21 @@ def _memidx_on() -> bool:
     return _flag("NOMAD_MEMIDX", "off")
 
 
+def _curric_on() -> bool:
+    """NOMAD_CURRIC (docs/CURRIC.md): concepts certified in several curriculum families, searched by
+    MEMIDX's stage (paid only from MERGE's skips); default off."""
+    return _flag("NOMAD_CURRIC", "off")
+
+
+def _curric_bank(prior) -> bool:
+    """CURRIC needs MERGE's annotated bank only when the field holds a cross-family concept (so an
+    empty or concept-free field searches exactly as with the switch off)."""
+    if not _curric_on():
+        return False
+    from . import curric as _CU
+    return bool(_CU.index(prior))
+
+
 MEMIDX_REJECTS = 4   # WITNESS rejections the MEMIDX stage may cause per task (restored on a miss)
 MEMIDX_LOOKUP_N = 10**6  # instances whose residuals are looked up (dev: a cap of 24 lost tasks; no cap)
 MEMIDX_L2_FUNCS = 8  # functions applied to instances in the second-order step (dev-chosen)
@@ -1550,7 +1579,7 @@ def port_bank(prior: "WorldPrior", task: WorldTask, key: str | None = None,
     to an earlier one."""
     out = _port_bank_main(prior, task, key, rel, cut_key)
     if not out or not (merge_enabled() or let2_enabled() or _discrim_on() or _agree_on() or _cert_on()
-                       or _distin_on() or _memidx_on()) or task.out != "int":
+                       or _distin_on() or _memidx_on() or _curric_bank(prior)) or task.out != "int":
         return out
     if rel is not None and key and route_enabled() and prior.route.get(key):
         return out
