@@ -28,7 +28,7 @@
     ]
    ],
    "tree_sha256": "38c83dccb9474914589294137aed5283870393402bb187e82d3254ac6449ead7",
-   "uses": 3.8936
+   "uses": 2.26
   },
   {
    "block_id": "L915ba1af",
@@ -53,7 +53,7 @@
     ]
    ],
    "tree_sha256": "a47c202ae79fb40749db9ed656d9912cb6819ff6790e6cbad909a647703d9df9",
-   "uses": 3.6919
+   "uses": 2.1537
   },
   {
    "block_id": "Lda56c88a",
@@ -80,7 +80,7 @@
     ]
    ],
    "tree_sha256": "56030449b1887958364397ace9ab393d7dbfddc7b48557a1ff02062bbc679144",
-   "uses": 7.1202
+   "uses": 3.6922
   },
   {
    "block_id": "Le41f5b00",
@@ -111,7 +111,7 @@
     ]
    ],
    "tree_sha256": "1ef9aa7d777db2360b92d31c7eeedbfeea87b86cbbe3f616c40a1451dc742f52",
-   "uses": 6.945
+   "uses": 4.0798
   },
   {
    "block_id": "Lfd47622b",
@@ -141,7 +141,7 @@
     ]
    ],
    "tree_sha256": "8f2e0e2ed308f492019fab9ffe14f676f17b4c65fbc98777c1834d7d53f125c7",
-   "uses": 3.7959
+   "uses": 2.2008
   }
  ],
  "boundaries": "Tiny typed programs (<= 7 nodes). Certified on frozen rows only; not general coding.",
@@ -2706,15 +2706,15 @@
    }
   }
  ],
- "feed_version": 45,
+ "feed_version": 46,
  "language": {
   "ast": "nomad.world DSL v1: [op, *children] | ['var', name] | ['const', value]",
   "interpreter": "nomad.world.run",
   "witness": "nomad-witness-world-v1"
  },
- "packet_sha256": "ec8648f969e65549459e56fbcefd3cdd38ced45a3a40f0dacc2896e21ccf598b",
- "prev_sha256": "1ed824d494cd16ab2caa56571e8e8096c575274e687c4380a20f029443ab770e",
- "published": "2026-11-27T23:03:52Z",
+ "packet_sha256": "9e52b5a847893d4c67ec3e45712558f7ba0d84ac6412378da390fa6c50935faa",
+ "prev_sha256": "ec8648f969e65549459e56fbcefd3cdd38ced45a3a40f0dacc2896e21ccf598b",
+ "published": "2026-11-28T03:13:49Z",
  "schema": "nomad.feed.packet.v1",
  "scores": {
   "genesis_twin": {
@@ -2748,6 +2748,19 @@
     "field_beats_control": true,
     "max_eval": 10000
    },
+   "ends_case": {
+    "cold": {
+     "certified": false,
+     "evaluations": 200
+    },
+    "field": {
+     "candidate": "concat(upper(last(s)), lower(first(s)))",
+     "certified": true,
+     "evaluations": 1
+    },
+    "field_beats_control": true,
+    "max_eval": 200
+   },
    "last_first_upper": {
     "cold": {
      "certified": true,
@@ -2760,6 +2773,19 @@
     },
     "field_beats_control": true,
     "max_eval": 5000
+   },
+   "list_gap": {
+    "cold": {
+     "certified": true,
+     "evaluations": 77
+    },
+    "field": {
+     "candidate": "sum(tail(sort(xs)))",
+     "certified": true,
+     "evaluations": 77
+    },
+    "field_beats_control": false,
+    "max_eval": 200
    },
    "quartic_sum": {
     "cold": {
@@ -2790,29 +2816,29 @@
   },
   "note": "Copied from the live scoreboard and the last held-out probe; descriptive, not certified.",
   "world_twin": {
-   "all_fail_rate": 0.0199,
-   "all_pass_rate": 0.9263,
-   "both_certified_pairs_with_cost": 9263,
-   "control_evaluations": 7879966,
+   "all_fail_rate": 0.0211,
+   "all_pass_rate": 0.9242,
+   "both_certified_pairs_with_cost": 9242,
+   "control_evaluations": 7893020,
    "estimator": "rloo",
    "groups": 10000,
-   "informative_pairs": 538,
-   "informative_rate": 0.0538,
-   "mean_evaluations_saved": 713.432905106337,
-   "mean_treatment_advantage": 0.9851301115241635,
+   "informative_pairs": 547,
+   "informative_rate": 0.0547,
+   "mean_evaluations_saved": 714.9180913222247,
+   "mean_treatment_advantage": 0.9780621572212066,
    "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage.",
-   "pairs_with_cost": 9263,
-   "pass_rate": 0.9532,
-   "treatment_evaluations": 1271437,
-   "treatment_over_control": 0.1614
+   "pairs_with_cost": 9242,
+   "pass_rate": 0.95155,
+   "treatment_evaluations": 1285747,
+   "treatment_over_control": 0.1629
   }
  },
  "source": {
-  "commit": "d1b1f788d3a2fc0fff74dbf3e201017c4e9dc35a",
-  "field_version": 3355,
+  "commit": "513282a389d36b52fb66678998e6739906d9a0ef",
+  "field_version": 3385,
   "host": null,
   "repo": "jacksonjp0311-gif/NOMAD",
-  "world_witnessed": 9846
+  "world_witnessed": 9922
  },
  "verification": {
   "blocks": "each block must be a subtree of a program in certified_in",
