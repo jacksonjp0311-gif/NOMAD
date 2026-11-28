@@ -1,10 +1,10 @@
 {
   "schema": "nomad.organism.v1",
-  "ts": "2026-11-28T01:42:07Z",
+  "ts": "2026-11-28T01:55:36Z",
   "sense": {
-    "last_pair": "2026-11-28T01:27:39Z",
-    "last_world_pair": "2026-11-28T01:27:39Z",
-    "last_sleep": "2026-11-28T01:42:07Z"
+    "last_pair": "2026-11-28T01:49:57Z",
+    "last_world_pair": "2026-11-28T01:49:57Z",
+    "last_sleep": "2026-11-28T01:55:36Z"
   },
   "think": {
     "curriculum_open_levels": {
@@ -39,7 +39,7 @@
       "informative_pairs": 16,
       "mean_treatment_advantage": 0.5,
       "both_certified_pairs_with_cost": 96,
-      "mean_evaluations_saved": 498.9375,
+      "mean_evaluations_saved": 464.125,
       "note": "Descriptive only. Uniform pairs carry no contrast and are excluded from the advantage."
     },
     "informative_rate_flag": {
@@ -52,7 +52,7 @@
     "queued": 0,
     "inflight": 0,
     "certified_queued": 0,
-    "field_version": 3371,
+    "field_version": 3373,
     "genesis_heldout": {
       "field_certified": true,
       "cold_certified": false
@@ -61,9 +61,11 @@
       "absdiff": "certified_correctness",
       "quartic_sum": "certified_correctness",
       "last_first_upper": "evaluations",
-      "sum_minus_max": "evaluations"
+      "sum_minus_max": "evaluations",
+      "ends_case": "certified_correctness",
+      "list_gap": "none"
     },
-    "world_library_size": 74
+    "world_library_size": 75
   },
   "evolve": {
     "recent": [
@@ -270,19 +272,19 @@
       }
     ],
     "body_lease": {
-      "host": "gh-46069827569",
-      "heartbeat": "2026-11-28T01:42:07Z",
-      "age_min": 0.007213633333333333,
-      "alive": false,
-      "cycles": 42,
-      "cycles_per_hour": 19.1,
-      "released": true
+      "host": "gh-46082831495",
+      "heartbeat": "2026-11-28T01:55:36Z",
+      "age_min": 0.014124833333333333,
+      "alive": true,
+      "cycles": 6,
+      "cycles_per_hour": 28.5,
+      "released": false
     }
   },
   "interlink": {
     "observed": false,
     "presence_recent": [],
-    "feedback_pending": 1
+    "feedback_pending": 0
   },
   "boundaries": "No transformers. WITNESS certifies; search and memory never do. Bounded programs only."
 }
