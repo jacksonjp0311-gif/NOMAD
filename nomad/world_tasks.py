@@ -104,6 +104,10 @@ HELDOUT: dict[str, dict[str, Any]] = {
         "task": _lst_task("h-smm", "sum_minus_max", lambda xs: sum(xs) - max(xs), 9),
         "max_eval": 5000, "max_size": 7, "needs": "list world",
     },
+    "ends_case": {   # nested ends: upper(last) + lower(first); cold fails within budget
+        "task": _str_task("h-ecu", "ends_case", lambda s: s[-1:].upper() + s[:1].lower(), 9),
+        "max_eval": 200, "max_size": 7, "needs": "nested string composition",
+    },
 }
 
 
