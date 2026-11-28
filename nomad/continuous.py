@@ -285,6 +285,8 @@ def sleep(*, arm: str = "treatment") -> dict[str, Any]:
     trim()
     from .world_loop import probe_heldout
     world_probe = probe_heldout()
+    from .compose_find import suggest_for_none
+    suggestions = suggest_for_none(world_probe.get("probes") or {})
     merged = merge_similar()
     rules = try_rules(steps=1)
     rewrite_result = rewrite()

@@ -108,6 +108,10 @@ HELDOUT: dict[str, dict[str, Any]] = {
         "task": _str_task("h-ecu", "ends_case", lambda s: s[-1:].upper() + s[:1].lower(), 9),
         "max_eval": 200, "max_size": 7, "needs": "nested string composition",
     },
+    "list_gap": {   # list: sum - min; cold fails within budget
+        "task": _lst_task("h-lg", "list_gap", lambda xs: sum(xs) - min(xs), 9),
+        "max_eval": 200, "max_size": 7, "needs": "nested list composition",
+    },
 }
 
 
